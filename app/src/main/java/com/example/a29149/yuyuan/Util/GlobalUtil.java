@@ -30,6 +30,7 @@ public class GlobalUtil {
     }
 
     private List<String> content;
+
     private String publicKey;
     private String AESKey;
     private String token;

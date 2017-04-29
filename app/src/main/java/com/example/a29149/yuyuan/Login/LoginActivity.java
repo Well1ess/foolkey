@@ -7,13 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.Secret.AESCoder;
+import com.example.a29149.yuyuan.Util.Secret.AESOperator;
+import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
+import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
+import com.example.a29149.yuyuan.Util.URL;
+import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,13 +43,17 @@ public class LoginActivity extends AppCompatActivity{
      * 第五步：{un， up， aeskey}发送
      */
 
-    String URL = "http://10.53.183.185:8080/rsa/login?";
+    private String strUserName;
+    private String strPassWord;
 
     @ViewInject(R.id.username)
     private EditText mUserNameView;
 
     @ViewInject(R.id.password)
     private EditText mPasswordView;
+
+    //获取用户配置
+    UserConfig userConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +62,21 @@ public class LoginActivity extends AppCompatActivity{
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
+        userConfig = new UserConfig(this);
+        if (userConfig.getBooleanInfo(UserConfig.xmlSAVE)) {
+            log.d(this, userConfig.getStringInfo(UserConfig.xmlPUBLIC_KEY));
+            log.d(this, userConfig.getStringInfo(UserConfig.xmlAES_KEY));
+            log.d(this, userConfig.getStringInfo(UserConfig.xmlUSER_NAME));
+            log.d(this, userConfig.getStringInfo(UserConfig.xmlPASSWORD));
+
+            //TODO：直接进行网络传输
+            LoginAction loginAction = new LoginAction();
+            loginAction.execute(userConfig.getStringInfo(UserConfig.xmlUSER_NAME),
+                    userConfig.getStringInfo(UserConfig.xmlPASSWORD));
+        }
+
     }
+
 
     @OnClick(R.id.modify_pwd)
     public void setModifyPwd(View view)
@@ -92,7 +120,11 @@ public class LoginActivity extends AppCompatActivity{
         if (cancel) {
             focusView.requestFocus();
         } else {
-          //TODO:网络传输
+            //TODO:网络传输
+            strUserName = userName;
+            strPassWord = password;
+            GetPublicKeyAction getPublicKeyAction = new GetPublicKeyAction();
+            getPublicKeyAction.execute();
             Intent startMainActivity = new Intent(this, MainActivity.class);
             startActivity(startMainActivity);
         }
@@ -100,11 +132,11 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     /**
-     * 登陆请求Action
+     * 获取公钥
      */
-    public class LoginAction extends AsyncTask<String, Integer, String> {
+    public class GetPublicKeyAction extends AsyncTask<String, Integer, String> {
 
-        public LoginAction() {
+        public GetPublicKeyAction() {
             super();
         }
 
@@ -116,9 +148,9 @@ public class LoginActivity extends AppCompatActivity{
             HttpURLConnection con = null;
 
             try {
-                java.net.URL url = new java.net.URL("");
+                java.net.URL url = new java.net.URL(URL.getPublicKeyURL());
                 con = (HttpURLConnection) url.openConnection();
-                log.d(this, "");
+                log.d(this, URL.getPublicKeyURL());
                 // 设置允许输出，默认为false
                 con.setDoOutput(true);
                 con.setDoInput(true);
@@ -158,8 +190,177 @@ public class LoginActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
             log.d(this, result);
+            if (result != null) {
+                try {
+
+                    JSONObject jsonObject = new JSONObject(result);
+
+                    String resultFlag = jsonObject.getString("result");
+                    String publicKey = jsonObject.getString("publicKey");
+
+                    if (resultFlag.equals("success")) {
+                        if (!publicKey.equals("")) {
+
+                            //对公钥的操作保存在单例类中
+                            GlobalUtil.getInstance().setPublicKey(publicKey);
+
+                            try {
+                                AESCoder coder = new AESCoder();
+
+                                //对AESKey的操作保存在单例中
+                                GlobalUtil.getInstance().setAESKey(coder.getRandomString(16));
+
+                                log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());
+                                log.d(this, "publicKey:" + GlobalUtil.getInstance().getPublicKey());
+
+                                //使用公钥对AES进行RSA加密
+                                String encrypt = RSAKeyBO.encryptByPub(GlobalUtil.getInstance().getAESKey(),
+                                        GlobalUtil.getInstance().getPublicKey());
+
+                                log.d(this, "encryptByPub:" + encrypt);
+
+                                //将回车进行字符替换
+                                String convert = encrypt.replaceAll("\n", "愚");
+
+                                log.d(this, "convertTo愚:" + convert);
+                                log.d(this, "convertToUTF-8:" + java.net.URLEncoder.encode(convert));
+
+                                //执行登陆动作
+                                LoginAction loginAction = new LoginAction();
+                                loginAction.execute(java.net.URLEncoder.encode(convert));
+
+                            } catch (Exception e) {
+                                Toast.makeText(LoginActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
+                            }
+                        } else
+                            Toast.makeText(LoginActivity.this, "公玥获取失败！", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(LoginActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(LoginActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+    }
+
+    /**
+     * 登陆请求Action
+     */
+    public class LoginAction extends AsyncTask<String, Integer, String> {
+
+        public LoginAction() {
+            super();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            StringBuffer sb = new StringBuffer();
+            BufferedReader reader = null;
+            HttpURLConnection con = null;
+
+            try {
+
+                //对密码进行SHA1加密
+                strPassWord = SHA1Coder.SHA1(strPassWord);
+
+                JSONObject target = new JSONObject();
+                //对账号，密码先进行RSA加密，再进行替换，随后是UTF-8编码
+                target.put("userName", java.net.URLEncoder.encode(
+                        RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
+                                .replaceAll("\n", "愚")));
+                target.put("passWord", java.net.URLEncoder.encode(
+                        RSAKeyBO.encryptByPub(strPassWord, GlobalUtil.getInstance().getPublicKey())
+                                .replaceAll("\n", "愚")));
+                target.put("AESKey", params[0]);
+
+                java.net.URL url = new java.net.URL(URL.getLoginURL(target.toString()));
+                con = (HttpURLConnection) url.openConnection();
+                log.d(this, URL.getLoginURL(target.toString()));
+
+                // 设置允许输出，默认为false
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setConnectTimeout(5 * 1000);
+                con.setReadTimeout(10 * 1000);
+
+                con.setRequestMethod("GET");
+                con.setRequestProperty("contentType", "GBK");
+
+                // 获得服务端的返回数据
+                InputStreamReader read = new InputStreamReader(con.getInputStream());
+                reader = new BufferedReader(read);
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (con != null) {
+                    con.disconnect();
+                }
+            }
+            return sb.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            log.d(this, result);
+
+            if (result != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String resultFlag = jsonObject.getString("result");
+                    String token = jsonObject.getString("tokenCipher");
+
+                    if (resultFlag.equals("success") && !token.equals("")) {
+                        log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());
+
+                        //进行解密
+                        String TOKEN = AESOperator.getInstance().decrypt(token);
+
+                        //保存Token
+                        GlobalUtil.getInstance().setToken(TOKEN);
+
+                        log.d(this, TOKEN + " ");
+                        Toast.makeText(LoginActivity.this, TOKEN, Toast.LENGTH_SHORT).show();
+
+                        //保存公钥到文件中
+                        userConfig.setUserInfo(UserConfig.xmlPUBLIC_KEY, GlobalUtil.getInstance().getPublicKey());
+                        //保存AES到文件中
+                        userConfig.setUserInfo(UserConfig.xmlAES_KEY, GlobalUtil.getInstance().getAESKey());
+                        //保存非加密的用户名和密码
+                        userConfig.setUserInfo(UserConfig.xmlUSER_NAME, strUserName);
+                        userConfig.setUserInfo(UserConfig.xmlPASSWORD, strPassWord);
+                        //设置标志位
+                        userConfig.setUserInfo(UserConfig.xmlSAVE, true);
+
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(LoginActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(LoginActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+            }
 
         }
 

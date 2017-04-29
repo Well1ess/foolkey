@@ -17,6 +17,8 @@ import com.example.a29149.yuyuan.Util.Secret.AESCoder;
 import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
+import com.example.a29149.yuyuan.Util.URL;
+import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
 
 import org.json.JSONObject;
@@ -27,15 +29,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
+
 public class RegisterActivity extends AppCompatActivity {
 
-    String address = "www.foopia.com";
-    String URL = "http://" + address +"/getKey?";
-    String URL2 = "http://" + address + "/rsa/register?cipherText=";
+    private String strUserName;
+    private String strPassword;
 
-    String strUserName;
-    String strPassword;
-
+    //用户配置
+    UserConfig userConfig;
 
     @ViewInject(R.id.username)
     private EditText mUserName;
@@ -55,6 +56,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         AnnotationUtil.setClickListener(this);
         AnnotationUtil.injectViews(this);
+
+        userConfig = new UserConfig(RegisterActivity.this);
     }
 
     @OnClick(R.id.bt_return)
@@ -106,17 +109,17 @@ public class RegisterActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             //TODO:网络传输
-            RegisterAction registerAction = new RegisterAction();
-            registerAction.execute();
+            GetPublicKeyAction getPublicKeyAction = new GetPublicKeyAction();
+            getPublicKeyAction.execute();
         }
     }
 
     /**
-     * 注册请求Action
+     * 获取公钥
      */
-    public class RegisterAction extends AsyncTask<String, Integer, String> {
+    public class GetPublicKeyAction extends AsyncTask<String, Integer, String> {
 
-        public RegisterAction() {
+        public GetPublicKeyAction() {
             super();
         }
 
@@ -128,9 +131,9 @@ public class RegisterActivity extends AppCompatActivity {
             HttpURLConnection con = null;
 
             try {
-                java.net.URL url = new java.net.URL(URL);
+                java.net.URL url = new java.net.URL(URL.getPublicKeyURL());
                 con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL);
+                log.d(this, URL.getPublicKeyURL());
                 // 设置允许输出，默认为false
                 con.setDoOutput(true);
                 con.setDoInput(true);
@@ -173,36 +176,42 @@ public class RegisterActivity extends AppCompatActivity {
             log.d(this, result);
             if (result != null) {
                 try {
+
                     JSONObject jsonObject = new JSONObject(result);
+
                     String resultFlag = jsonObject.getString("result");
                     String publicKey = jsonObject.getString("publicKey");
 
-
                     if (resultFlag.equals("success")) {
                         if (!publicKey.equals("")) {
+
+                            //对公钥的操作保存在单例类中
                             GlobalUtil.getInstance().setPublicKey(publicKey);
 
                             try {
                                 AESCoder coder = new AESCoder();
-                                //String AESKey = coder.getAESKeyBase64();
-                                //String AESKey = "smkldospdosldaaa";
+
+                                //对AESKey的操作保存在单例中
                                 GlobalUtil.getInstance().setAESKey(coder.getRandomString(16));
 
-                                String AESKey = GlobalUtil.getInstance().getAESKey();
-
-                                log.d(this, "AESKey:" + AESKey);
+                                log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());
                                 log.d(this, "publicKey:" + GlobalUtil.getInstance().getPublicKey());
 
-                                String encrypt = RSAKeyBO.encryptByPub(AESKey, GlobalUtil.getInstance().getPublicKey());
+                                //使用公钥对AES进行RSA加密
+                                String encrypt = RSAKeyBO.encryptByPub(GlobalUtil.getInstance().getAESKey(),
+                                        GlobalUtil.getInstance().getPublicKey());
 
                                 log.d(this, "encryptByPub:" + encrypt);
 
+                                //将回车进行字符替换
                                 String convert = encrypt.replaceAll("\n", "愚");
-                                log.d(this, "convert:" + convert);
-                                log.d(this, "convert2:" + java.net.URLEncoder.encode(convert));
 
-                                RegisterAction2 registerAction2 = new RegisterAction2();
-                                registerAction2.execute(java.net.URLEncoder.encode(convert));
+                                log.d(this, "convertTo愚:" + convert);
+                                log.d(this, "convertToUTF-8:" + java.net.URLEncoder.encode(convert));
+
+                                //执行注册动作
+                                RegisterAction registerAction = new RegisterAction();
+                                registerAction.execute(java.net.URLEncoder.encode(convert));
 
                             } catch (Exception e) {
                                 Toast.makeText(RegisterActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
@@ -230,9 +239,9 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * 注册请求Action
      */
-    public class RegisterAction2 extends AsyncTask<String, Integer, String> {
+    public class RegisterAction extends AsyncTask<String, Integer, String> {
 
-        public RegisterAction2() {
+        public RegisterAction() {
             super();
         }
 
@@ -248,6 +257,8 @@ public class RegisterActivity extends AppCompatActivity {
                 strPassword = SHA1Coder.SHA1(strPassword);
 
                 JSONObject target = new JSONObject();
+                //对账号，密码重复上述动作
+                //先进行加密，在进行替换，随后是UTF-8编码
                 target.put("userName", java.net.URLEncoder.encode(
                         RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
                                 .replaceAll("\n", "愚")));
@@ -256,12 +267,10 @@ public class RegisterActivity extends AppCompatActivity {
                                 .replaceAll("\n", "愚")));
                 target.put("AESKey", params[0]);
 
-
-                log.d(this, target.toString());
-
-                java.net.URL url = new java.net.URL(URL2 + target.toString());
+                java.net.URL url = new java.net.URL(URL.getRegisterURL(target.toString()));
                 con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL2 + target.toString());
+                log.d(this, URL.getRegisterURL(target.toString()));
+
                 // 设置允许输出，默认为false
                 con.setDoOutput(true);
                 con.setDoInput(true);
@@ -270,7 +279,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                 con.setRequestMethod("GET");
                 con.setRequestProperty("contentType", "GBK");
-
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());
@@ -309,14 +317,25 @@ public class RegisterActivity extends AppCompatActivity {
                     if (resultFlag.equals("success") && !token.equals("")) {
                         log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());
 
-                        //AESKeyBO aesKeyBO = new AESKeyBO();
-                        //String TOKEN = aesKeyBO.decrypt(token, GlobalUtil.getInstance().getAESKey());
-
+                        //进行解密
                         String TOKEN = AESOperator.getInstance().decrypt(token);
 
+                        //保存Token
                         GlobalUtil.getInstance().setToken(TOKEN);
+
                         log.d(this, TOKEN + " ");
                         Toast.makeText(RegisterActivity.this, TOKEN, Toast.LENGTH_SHORT).show();
+
+                        //保存公钥到文件中
+                        userConfig.setUserInfo(UserConfig.xmlPUBLIC_KEY, GlobalUtil.getInstance().getPublicKey());
+                        //保存AES到文件中
+                        userConfig.setUserInfo(UserConfig.xmlAES_KEY, GlobalUtil.getInstance().getAESKey());
+                        //保存非加密的用户名和密码
+                        userConfig.setUserInfo(UserConfig.xmlUSER_NAME, strUserName);
+                        userConfig.setUserInfo(UserConfig.xmlPASSWORD, strPassword);
+                        //设置标志位
+                        userConfig.setUserInfo(UserConfig.xmlSAVE, true);
+
                     }
                 } catch (Exception e) {
                     Toast.makeText(RegisterActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();

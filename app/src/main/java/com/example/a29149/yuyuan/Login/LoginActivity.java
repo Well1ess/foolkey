@@ -168,5 +168,6 @@ public class LoginActivity extends AppCompatActivity{
             super.onProgressUpdate(values);
         }
     }
+
 }
 

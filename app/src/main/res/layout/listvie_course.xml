@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_index_content"
+    android:layout_margin="20dp"
+    android:transitionName="shareContent">
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:transitionName="shareHead"
+        android:background="@color/grey"
+        android:id="@+id/head"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <TextView
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="+关注"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+        android:textSize="12dp"
+        android:background="@drawable/textview_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/head"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignTop="@id/head"
+        android:orientation="vertical">
+        <TextView
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:id="@+id/project_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="项目一"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:elevation="1.5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张丽华"/>
+
+        <TextView
+            android:id="@+id/project_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:clickable="false"
+            android:elevation="4dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="我是第一个" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryLight">#9bd558</color>
+
+    <color name="colorPrimary">#8BC34A</color>
+    <color name="colorPrimaryLimit">#9CCC65</color>
+    <color name="colorPrimaryDark">#7CB342</color>
+
+    <color name="colorAccent">#8BC34A</color>
+
+    <color name="orange">#FF9800</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="background">#F7F7F7</color>
+    <color name="infoBar">#E0E0E0</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+
+    <color name="head">#757575</color>
+    <color name="subhead">#808080</color>
+    <color name="menu">#AAAAAA</color>
+    <color name="submenu_text_color">#dddcdc</color>
+    <color name="text_color">#757575</color>
+
+    <color name="grey">#B8B8B8</color>
+    <color name="colorSky">#06baf5</color>
+</resources>

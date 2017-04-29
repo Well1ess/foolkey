@@ -1,0 +1,118 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/test_container2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal">
+
+            <com.example.a29149.yuyuan.Widget.MyEditText
+                android:transitionName="searchView"
+                android:focusable="false"
+                android:id="@+id/key_value"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_search"
+                android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
+                android:drawableRight="@mipmap/ic_clear"
+                android:drawableTint="@color/white"
+                android:ems="20"
+                android:hint="请输入关键字"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@drawable/cursor_white"
+                android:textSize="15sp" />
+
+            <ImageButton
+                android:id="@+id/project_search_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/ic_tongzhi"
+                android:backgroundTint="@color/white" />
+        </LinearLayout>
+
+        <com.example.a29149.yuyuan.Widget.SlideMenu
+            android:id="@+id/slide_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark">
+
+            <TextView
+                android:id="@+id/java"
+                style="@style/TextView.SlideMenu"
+                android:text="Java" />
+            <TextView
+                android:id="@+id/c"
+                style="@style/TextView.SlideMenu"
+                android:text="C/C++/C#" />
+            <TextView
+                android:id="@+id/js"
+                style="@style/TextView.SlideMenu"
+                android:text="JavaScript" />
+            <TextView
+                android:id="@+id/python"
+                style="@style/TextView.SlideMenu"
+                android:text="Python" />
+            <TextView
+                android:id="@+id/php"
+                style="@style/TextView.SlideMenu"
+                android:text="PHP" />
+            <TextView
+                android:id="@+id/h5"
+                style="@style/TextView.SlideMenu"
+                android:text="Html5" />
+            <TextView
+                android:id="@+id/android"
+                style="@style/TextView.SlideMenu"
+                android:text="Android" />
+            <TextView
+                android:id="@+id/ios"
+                style="@style/TextView.SlideMenu"
+                android:text="IOS" />
+            <TextView
+                android:id="@+id/mysql"
+                style="@style/TextView.SlideMenu"
+                android:text="My SQL" />
+            <TextView
+                android:id="@+id/font"
+                style="@style/TextView.SlideMenu"
+                android:text="前端" />
+            <TextView
+                android:id="@+id/below"
+                style="@style/TextView.SlideMenu"
+                android:text="后端" />
+            <TextView
+                android:id="@+id/other"
+                style="@style/TextView.SlideMenu"
+                android:text="其他" />
+
+        </com.example.a29149.yuyuan.Widget.SlideMenu>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/content_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/background"/>
+
+    </LinearLayout>
+
+</FrameLayout>

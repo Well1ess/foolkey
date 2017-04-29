@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/FrameLayout.Normal"
+    android:id="@+id/activity_main_root">
+
+    <LinearLayout
+        style="@style/LineLayout.Normal">
+
+        <FrameLayout
+            android:id="@+id/main_tab_fragment"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1" />
+
+        <android.support.v4.app.FragmentTabHost
+            android:id="@android:id/tabhost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0" />
+        </android.support.v4.app.FragmentTabHost>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="#DEDEDE"/>
+
+        <RadioGroup
+            android:id="@+id/tab_main_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                style="@style/RadioButton.Menu"
+                android:id="@+id/main_menu_index"
+                android:text="首页"
+                android:checked="true" />
+
+            <RadioButton
+                style="@style/RadioButton.Menu"
+                android:id="@+id/main_menu_discovery"
+                android:text="发现" />
+
+            <RadioButton
+                android:id="@+id/main_menu_publish"
+                style="@style/RadioButton.Menu"
+                android:drawableTint="@color/orange"
+                android:drawableTop="@android:drawable/ic_input_add"
+                android:text="发布"
+                android:textColor="@color/orange" />
+
+            <RadioButton
+                style="@style/RadioButton.Menu"
+                android:id="@+id/main_menu_order"
+                android:text="订单" />
+
+            <RadioButton
+                style="@style/RadioButton.Menu"
+                android:id="@+id/main_menu_me"
+                android:text="我的" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/alpha_publish_panel"
+        android:background="@color/background"
+        android:alpha="0.85"></FrameLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/publish_panel"
+        android:background="@color/transparent">
+
+        <FrameLayout
+            android:id="@+id/publish_panel_real"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="愚猿"
+                android:textColor="@color/orange"
+                android:textSize="80dp"/>
+        </FrameLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2.0px"
+            android:background="#DEDEDE"/>
+
+        <RadioGroup
+            android:id="@+id/close_publish_rg"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/close_publish_panel"
+                style="@style/RadioButton.Menu"
+                android:drawableTint="@color/orange"
+                android:drawableTop="@android:drawable/ic_delete"
+                android:text="关闭"
+                android:textColor="@color/orange" />
+
+        </RadioGroup>
+    </LinearLayout>
+</FrameLayout>

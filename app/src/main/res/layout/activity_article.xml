@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Model.Index.Course.CourseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/test_container2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/bt_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:rotation="180"
+                android:background="@mipmap/ic_return"
+                android:backgroundTint="@color/white" />
+
+            <com.example.a29149.yuyuan.Widget.MyEditText
+                android:transitionName="searchView"
+                android:focusable="false"
+                android:id="@+id/key_value"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_search"
+                android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
+                android:drawableRight="@mipmap/ic_clear"
+                android:drawableTint="@color/white"
+                android:ems="20"
+                android:hint="请输入关键字"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@drawable/cursor_white"
+                android:textSize="15sp" />
+
+            <ImageButton
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:background="?attr/actionModeShareDrawable"
+                android:backgroundTint="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:background="@color/background"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:transitionName="shareContent"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="文章标题"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"/>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1px"
+                            android:background="@color/black"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp" />
+
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:background="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp">
+
+                            <ImageView
+                                android:id="@+id/head"
+                                android:transitionName="shareHead"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:background="@color/grey"/>
+
+                            <TextView
+                                android:layout_alignParentRight="true"
+                                android:layout_alignBottom="@id/head"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginBottom="3dp"
+                                android:id="@+id/course"
+                                android:layout_marginRight="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="——华哥"
+                                android:gravity="right"
+                                android:layout_marginLeft="20dp"
+                                android:layout_below="@+id/label"
+                                android:layout_toEndOf="@+id/head" />
+
+                            <TextView
+                                android:id="@+id/reputation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimary"
+                                android:text="声望"
+                                android:textSize="12dp"
+                                android:layout_alignBottom="@id/head"
+                                android:layout_alignRight="@id/head"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="内容"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"/>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1px"
+                            android:background="@color/black"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginRight="60dp" />
+
+                        <TextView
+                            android:layout_margin="18dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="我大大苏打法发士大夫看见哈撒可怜见科技哈了开机速度发货可怜见可怜见啊哈岁的凯莉分解和看了觉得是"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="1px"
+                            android:background="@color/black"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginRight="60dp" />
+
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:text="创建时间："
+                                android:textSize="12sp"
+                                android:textColor="@color/submenu_text_color"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"/>
+
+                            <TextView
+                                android:text="2017年4月24日19:24:52"
+                                android:textSize="12sp"
+                                android:textColor="@color/submenu_text_color"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:text="备注："
+                                android:textSize="12sp"
+                                android:textColor="@color/submenu_text_color"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"/>
+
+                            <TextView
+                                android:text="最低购买半小时"
+                                android:textSize="12sp"
+                                android:textColor="@color/submenu_text_color"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"/>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="#DEDEDE"/>
+
+            <RadioGroup
+                android:id="@+id/tab_main_menu"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    style="@style/RadioButton.Menu"
+                    android:id="@+id/good"
+                    android:text="赞"
+                    android:checked="true" />
+
+                <RadioButton
+                    style="@style/RadioButton.Menu"
+                    android:id="@+id/mark"
+                    android:text="收藏" />
+
+                <RadioButton
+                    style="@style/RadioButton.Menu"
+                    android:id="@+id/talk"
+                    android:text="评论" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

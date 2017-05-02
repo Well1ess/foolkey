@@ -33,7 +33,7 @@ public class MyPagerAdapter extends PagerAdapter {
     {
         final View view=View.inflate(mContext, R.layout.fragment_viewpager_nopay,null);
         mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
-        mXuanShang = (MyListView) view.findViewById(R.id.lv_xuanshang);
+        mXuanShang = (MyListView) view.findViewById(R.id.lv_reward);
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
 
         MyListViewCourseAdapter myListViewCourseAdapter = new MyListViewCourseAdapter(mContext);

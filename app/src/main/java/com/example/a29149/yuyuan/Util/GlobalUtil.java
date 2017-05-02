@@ -97,6 +97,8 @@ public class GlobalUtil {
     }
 
     public List<CourseTeacherDTO> getCourseTeacherDTOs() {
+        if (courseTeacherDTOs == null)
+            courseTeacherDTOs = new ArrayList<>();
         return courseTeacherDTOs;
     }
 

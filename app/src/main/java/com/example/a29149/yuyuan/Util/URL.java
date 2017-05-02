@@ -6,7 +6,7 @@ package com.example.a29149.yuyuan.Util;
  */
 
 public class URL {
-    public static final String address = "192.168.1.102:8080";
+    public static final String address = "192.168.31.30:8080";
 
     //获取公钥
     public static final String publicKeyURL = "http://" + address + "/getKey?";
@@ -50,7 +50,6 @@ public class URL {
     }
 
     //注销
-
     /**
      * @param clearText  明文Object，包含token
      * @param validation 密文

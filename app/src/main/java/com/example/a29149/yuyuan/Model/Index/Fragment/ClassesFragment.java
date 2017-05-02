@@ -46,6 +46,9 @@ public class ClassesFragment extends Fragment {
     private DynamicListView mDynamicList;
     private IndexContentAdapter mContentAdapter;
 
+    //暂存当前的类别
+    TechnicTagEnum mTechnicTagEnum;
+
     private int pageNo = 1;
 
     public ClassesFragment() {
@@ -89,7 +92,7 @@ public class ClassesFragment extends Fragment {
                         pageNo = 1;
                         GlobalUtil.getInstance().getContent().clear();
                         GetHotCourseAction action = new GetHotCourseAction();
-                        action.execute();
+                        action.execute(mTechnicTagEnum.toString());
                     }
                 });
 
@@ -106,7 +109,7 @@ public class ClassesFragment extends Fragment {
                     @Override
                     public void run() {
                         GetHotCourseAction action = new GetHotCourseAction();
-                        action.execute();
+                        action.execute(mTechnicTagEnum.toString());
                     }
                 }, 200);
             }
@@ -116,7 +119,7 @@ public class ClassesFragment extends Fragment {
     }
 
     public void resetContent(TechnicTagEnum technicTagEnum) {
-
+        mTechnicTagEnum = technicTagEnum;
         //TODO：网络通信
         //获取主页的热门课程
         if (MainActivity.shapeLoadingDialog != null) {
@@ -173,7 +176,6 @@ public class ClassesFragment extends Fragment {
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("pageNo", pageNo + "");
-                pageNo++;
                 jsonObject.put("technicTagEnum", params[0]);
 
                 java.net.URL url = new java.net.URL(URL.getGetHotCourseURL(jsonObject.toString()));
@@ -229,10 +231,10 @@ public class ClassesFragment extends Fragment {
                         }.getType();
                         List<CourseTeacherDTO> courseTeacherDTOs = new Gson().fromJson(jsonObject.getString("courseTeacherDTOS"), type);
 
-                        //若>2则表示分页存取
-                        if (pageNo == 2) {
+                        //若>1则表示分页存取
+                        if (pageNo == 1) {
                             GlobalUtil.getInstance().setCourseTeacherDTOs(courseTeacherDTOs);
-                        } else if (pageNo > 2) {
+                        } else if (pageNo > 1) {
                             GlobalUtil.getInstance().getCourseTeacherDTOs().addAll(courseTeacherDTOs);
                             mDynamicList.onLoadFinish();
                         }
@@ -240,6 +242,7 @@ public class ClassesFragment extends Fragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                pageNo++;
                                 mContentAdapter.notifyDataSetChanged();
                                 MainActivity.shapeLoadingDialog.dismiss();
 

@@ -24,4 +24,35 @@
 
     <color name="grey">#B8B8B8</color>
     <color name="colorSky">#06baf5</color>
+
+
+    <color name="dodgerblue">#1e90ff</color>
+    <color name="deepskyblue">#00bfff</color>
+    <color name="cyan">#00FFFF</color>
+    <color name="orangered">#00FF7F</color>
+    <color name="darkorange">#FF4500</color>
+    <color name="lime">#00FF00</color>
+    <color name="lawngreen">#7CFC00</color>
+    <color name="mediumspringgreen">#00FA9A</color>
+    <color name="chocolatesaddlebrown">#C00EEB</color>
+    <color name="firerick">#B22222</color>
+    <color name="darkviolet">#9400D3</color>
+    <color name="navy">#000080</color>
+    <color name="crimson">#DC143C</color>
+
+    <color name="QQmusicYellow">#f8d11b</color>
+    <color name="QQmusicTipRed">#FC4C24</color>
+    <color name="QQmusicILikeRed">#EF6868</color>
+    <color name="QQmusicSQTipYellow">#FF6600</color>
+
+    <color name="triangle">#aa72d572</color>
+    <color name="circle">#aa738ffe</color>
+    <color name="rect">#aae84e40</color>
+    <color name="view_bg">#00000000</color>
+    <color name="shadow">#25808080</color>
+    <color name="dialog_bg">#f5f5f5</color>
+    <color name="divider">#D9D9D9</color>
+
+    <color name="color_error">#f44336</color>
+    <color name="tips_red">#FD0001</color>
 </resources>

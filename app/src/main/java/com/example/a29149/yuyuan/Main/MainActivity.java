@@ -24,6 +24,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -67,12 +68,22 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout mRealPublishPanel;
     private boolean mPublishPanelOpen = false;
 
+    public static ShapeLoadingDialog shapeLoadingDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
+
+        //全局Dialog的初始化
+        shapeLoadingDialog = new ShapeLoadingDialog(this);
+        shapeLoadingDialog.setLoadingText("加载中...");
+        shapeLoadingDialog.setCanceledOnTouchOutside(false);
+        shapeLoadingDialog.getDialog().setCancelable(false);
+
 
         mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.main_tab_fragment);
 

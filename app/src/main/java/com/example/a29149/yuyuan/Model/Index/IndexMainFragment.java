@@ -157,7 +157,6 @@ public class IndexMainFragment extends Fragment {
     @OnClick({R.id.java, R.id.c, R.id.python, R.id.js, R.id.php, R.id.ios,
             R.id.android, R.id.h5, R.id.mysql, R.id.font, R.id.below, R.id.other})
     public void setSlideClassClickListener(View view) {
-        //TODO:网络传输
         TextView textView = (TextView) view;
         if (mCurrentTextView != textView) {
             switch (textView.getId()) {
@@ -256,7 +255,46 @@ public class IndexMainFragment extends Fragment {
             mCurrentTextView.setTextColor(getResources().getColor(R.color.white));
             mSlideMenu.smoothScrollByChild(index);
 
-            //TODO:网络通信
+            //判断当前在那个View中
+            switch (index) {
+                case 0:
+                    mClassPager.setCurrentItem(0);
+                    break;
+                case 1:
+                    mClassPager.setCurrentItem(1);
+                    break;
+                case 2:
+                    mClassPager.setCurrentItem(2);
+                    break;
+                case 3:
+                    mClassPager.setCurrentItem(3);
+                    break;
+                case 4:
+                    mClassPager.setCurrentItem(4);
+                    break;
+                case 5:
+                    mClassPager.setCurrentItem(5);
+                    break;
+                case 6:
+                    mClassPager.setCurrentItem(6);
+                    break;
+                case 7:
+                    mClassPager.setCurrentItem(7);
+                    break;
+                case 8:
+                    mClassPager.setCurrentItem(8);
+                    break;
+                case 9:
+                    mClassPager.setCurrentItem(9);
+                    break;
+                case 10:
+                    mClassPager.setCurrentItem(10);
+                    break;
+                case 11:
+                    mClassPager.setCurrentItem(11);
+                    break;
+            }
+
             fragmentList.get(index).resetContent();
         }
     }

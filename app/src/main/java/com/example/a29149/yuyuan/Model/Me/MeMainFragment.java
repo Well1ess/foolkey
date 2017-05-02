@@ -1,14 +1,17 @@
 package com.example.a29149.yuyuan.Model.Me;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
+import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 
 public class MeMainFragment extends Fragment {
 
@@ -35,6 +38,14 @@ public class MeMainFragment extends Fragment {
 
         return view;
     }
+
+    @OnClick(R.id.setting)
+    public void setSettingListener(View view)
+    {
+        Intent intent = new Intent(getActivity(), SettingActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

@@ -55,12 +55,15 @@
             android:layout_marginBottom="5dp"/>
 
         <TextView
+            android:id="@+id/author"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="张丽华"/>
 
         <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
             android:id="@+id/project_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

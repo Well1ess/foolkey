@@ -73,11 +73,13 @@ public class IndexContentAdapter extends BaseAdapter {
 
     static class ViewHolder {
         public TextView title;
+        public TextView author;
         public TextView content;
         public ImageView head;
 
         ViewHolder(View view) {
             title = (TextView) view.findViewById(R.id.project_title);
+            author = (TextView) view.findViewById(R.id.author);
             content = (TextView) view.findViewById(R.id.project_content);
             head = (ImageView) view.findViewById(R.id.head);
         }

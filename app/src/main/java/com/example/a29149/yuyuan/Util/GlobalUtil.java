@@ -29,12 +29,14 @@ public class GlobalUtil {
         return globalUtil;
     }
 
+    //主页热门课程列表
     private List<String> content;
-
+    //公钥
     private String publicKey;
+    //ASE
     private String AESKey;
+    //Token
     private String token;
-
 
     public List<String> getContent() {
         if (content == null)

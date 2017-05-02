@@ -69,6 +69,13 @@ public class MeMainFragment extends Fragment {
         couponAction.execute();
     }
 
+    @OnClick(R.id.change_role)
+    public void setChangeRoleListener(View view){
+        //TODO:网络通信
+        ChangeRole changeRole = new ChangeRole();
+        changeRole.execute();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -81,6 +88,7 @@ public class MeMainFragment extends Fragment {
 
     }
 
+    //获取抵扣卷
     public class CouponAction extends AsyncTask<String, Integer, String> {
 
         public CouponAction() {
@@ -149,6 +157,90 @@ public class MeMainFragment extends Fragment {
                         GlobalUtil.getInstance().setCouponDTOList(couponDTOs);
 
                         startActivity(new Intent(getActivity(), CouponActivity.class));
+                    } else {
+                        Toast.makeText(getActivity(), "JSON解析异常！", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getActivity(), "返回结果异常！", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+    }
+
+    //切换身份
+    public class ChangeRole extends AsyncTask<String, Integer, String> {
+
+        public ChangeRole() {
+            super();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            StringBuffer sb = new StringBuffer();
+            BufferedReader reader = null;
+            HttpURLConnection con = null;
+
+            try {
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("token", GlobalUtil.getInstance().getToken());
+
+                java.net.URL url = new java.net.URL(URL.getSwitchToTeacher());
+                con = (HttpURLConnection) url.openConnection();
+                log.d(this, URL.getSwitchToTeacher());
+
+                // 设置允许输出，默认为false
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setConnectTimeout(5 * 1000);
+                con.setReadTimeout(10 * 1000);
+
+                con.setRequestMethod("GET");
+                con.setRequestProperty("contentType", "GBK");
+
+                // 获得服务端的返回数据
+                InputStreamReader read = new InputStreamReader(con.getInputStream());
+                reader = new BufferedReader(read);
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (Exception e) {
+
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (con != null) {
+                    con.disconnect();
+                }
+            }
+            return sb.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            log.d(this, result);
+            if (result != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String resultFlag = jsonObject.getString("result");
+                    if (resultFlag.equals("success")) {
+
                     } else {
                         Toast.makeText(getActivity(), "JSON解析异常！", Toast.LENGTH_SHORT).show();
                     }

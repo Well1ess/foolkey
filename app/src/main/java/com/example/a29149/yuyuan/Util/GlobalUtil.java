@@ -1,6 +1,7 @@
 package com.example.a29149.yuyuan.Util;
 
 import com.example.a29149.yuyuan.DTO.CouponDTO;
+import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,8 @@ public class GlobalUtil {
     private String token;
     //抵扣卷的List
     private List<CouponDTO> couponDTOList;
+    //课程列表
+    private List<CourseTeacherDTO> courseTeacherDTOs;
 
     public List<String> getContent() {
         if (content == null)
@@ -91,6 +94,14 @@ public class GlobalUtil {
 
     public void setCouponDTOList(List<CouponDTO> couponDTOList) {
         this.couponDTOList = couponDTOList;
+    }
+
+    public List<CourseTeacherDTO> getCourseTeacherDTOs() {
+        return courseTeacherDTOs;
+    }
+
+    public void setCourseTeacherDTOs(List<CourseTeacherDTO> courseTeacherDTOs) {
+        this.courseTeacherDTOs = courseTeacherDTOs;
     }
 }
 

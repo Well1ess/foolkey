@@ -222,6 +222,8 @@ public class DiscoveryMainFragment extends Fragment {
                     mSearchReward.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchReward;
+                    //TODO:网络通信
+
                 }
             }  else if (index == 1) {
                 mSearchQA.setChecked(true);

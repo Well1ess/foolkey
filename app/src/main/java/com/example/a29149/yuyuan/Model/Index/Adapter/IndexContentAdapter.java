@@ -30,17 +30,17 @@ public class IndexContentAdapter extends BaseAdapter {
 
     public void updateList() {
         this.notifyDataSetChanged();
-        log.d(this, GlobalUtil.getInstance().getContent().size());
+        log.d(this, GlobalUtil.getInstance().getCourseTeacherDTOs().size());
     }
 
     @Override
     public int getCount() {
-        return GlobalUtil.getInstance().getContent().size();
+        return GlobalUtil.getInstance().getCourseTeacherDTOs().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return GlobalUtil.getInstance().getContent().get(position);
+        return GlobalUtil.getInstance().getCourseTeacherDTOs().get(position);
     }
 
     @Override
@@ -58,8 +58,9 @@ public class IndexContentAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.title.setText(GlobalUtil.getInstance().getContent().get(position));
-        viewHolder.content.setText(GlobalUtil.getInstance().getContent().get(position));
+        viewHolder.title.setText(GlobalUtil.getInstance().getCourseTeacherDTOs().get(position).getTopic());
+        viewHolder.content.setText(GlobalUtil.getInstance().getCourseTeacherDTOs().get(position).getDescription());
+        viewHolder.author.setText(GlobalUtil.getInstance().getCourseTeacherDTOs().get(position).getCreatorId()+"");
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

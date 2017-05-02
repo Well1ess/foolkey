@@ -16,10 +16,10 @@ import com.example.a29149.yuyuan.R;
  * 购买的课程的listView的Adapter
  */
 
-public class MyListViewXuanshangAdapter extends BaseAdapter {
+public class MyListViewRewardAdapter extends BaseAdapter {
     private Context mContext;
 
-    public MyListViewXuanshangAdapter(Context context)
+    public MyListViewRewardAdapter(Context context)
     {
         this.mContext = context;
     }

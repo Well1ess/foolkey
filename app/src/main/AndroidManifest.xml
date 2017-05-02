@@ -47,7 +47,8 @@
         <activity android:name=".Model.Index.Course.BuyCourseActivity" />
         <activity android:name=".Model.Index.Course.NewCourseOrderActivity" />
         <activity android:name=".Model.Me.Coupon.CouponActivity"></activity>
-        <activity android:name=".Model.Publish.Activity.PublishXuanshangStudentActivity"></activity>
+        <activity android:name=".Model.Publish.Activity.PublishRewardStudentActivity"></activity>
+        <activity android:name=".Model.Publish.Activity.PublishQuestionStudentActivity"/>
     </application>
 
 </manifest>

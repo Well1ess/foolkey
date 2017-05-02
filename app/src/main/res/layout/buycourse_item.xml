@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         />
     <ImageView
+        android:id="@+id/iv_teacherPhone"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@mipmap/ic_launcher_round"/>
@@ -22,16 +23,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/tv_teacherNameAndCourseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="朱洪军： javaEE"/>
         <TextView
+            android:id="@+id/tv_buyTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="购买时长： 50h"/>
         <TextView
+            android:id="@+id/tv_courseCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_green"
@@ -44,12 +48,14 @@
         android:layout_marginLeft="30dp"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/tv_teacherState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
             android:textColor="@color/dark_green"
             android:text="老师已就绪"/>
         <TextView
+            android:id="@+id/tv_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

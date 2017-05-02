@@ -22,8 +22,19 @@
         android:background="@color/dark_gray"/>
 
     <include layout="@layout/item_publish_content_choose"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_gray"/>
 
-
+    <EditText
+        android:id="@+id/et_description"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:paddingLeft="10dp"
+        android:hint="描述：描述你的悬赏信息"
+        android:textColor="@color/light_gray"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -60,6 +71,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/dark_gray"/>
+
+    <include layout="@layout/item_publish_student_base"/>
 
 
 

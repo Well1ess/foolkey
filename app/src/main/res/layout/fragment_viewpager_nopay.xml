@@ -33,7 +33,7 @@
             android:text="我发布的悬赏"/>
 
         <com.example.a29149.yuyuan.Model.Order.view.MyListView
-            android:id="@+id/lv_xuanshang"
+            android:id="@+id/lv_reward"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

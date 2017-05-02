@@ -22,7 +22,7 @@ import com.example.a29149.yuyuan.Model.Discovery.DiscoveryMainFragment;
 import com.example.a29149.yuyuan.Model.Index.IndexMainFragment;
 import com.example.a29149.yuyuan.Model.Me.MeMainFragment;
 import com.example.a29149.yuyuan.Model.Order.fragment.OrderFragment;
-import com.example.a29149.yuyuan.Model.Publish.Activity.PublishXuanshangStudentActivity;
+import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardStudentActivity;
 import com.example.a29149.yuyuan.Model.PublishMainFragment;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         mPublishXuanshangStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PublishXuanshangStudentActivity.class);
+                Intent intent = new Intent(MainActivity.this, PublishRewardStudentActivity.class);
                 startActivity(intent);
             }
         });

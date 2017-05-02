@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewCourseAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewXuanshangAdapter;
+import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 
@@ -25,7 +25,7 @@ public class NoPayFragment extends Fragment {
 
     private Context mContext;
     private MyListView mBuyCourse;
-    private MyListView mXuanShang;
+    private MyListView mReward;
     private MyListView mRecommand;
 
 
@@ -35,14 +35,14 @@ public class NoPayFragment extends Fragment {
         mContext = getContext();
         View view = inflater.inflate(R.layout.fragment_viewpager_nopay, null);
         mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
-        mXuanShang = (MyListView) view.findViewById(R.id.lv_xuanshang);
+        mReward = (MyListView) view.findViewById(R.id.lv_reward);
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
 
         MyListViewCourseAdapter myListViewCourseAdapter = new MyListViewCourseAdapter(mContext);
-        MyListViewXuanshangAdapter myListViewXuanshangAdapter = new MyListViewXuanshangAdapter(mContext);
+        MyListViewRewardAdapter myListViewRewardAdapter = new MyListViewRewardAdapter(mContext);
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
         mBuyCourse.setAdapter(myListViewCourseAdapter);
-        mXuanShang.setAdapter(myListViewXuanshangAdapter);
+        mReward.setAdapter(myListViewRewardAdapter);
         mRecommand.setAdapter(myListViewRecommandAdapter);
         return view;
     }

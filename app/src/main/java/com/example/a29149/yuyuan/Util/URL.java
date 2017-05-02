@@ -6,7 +6,7 @@ package com.example.a29149.yuyuan.Util;
  */
 
 public class URL {
-    public static final String address = "192.168.1.102:8080";
+    public static final String address = "192.168.31.30:8080";
 
     //获取公钥
     public static final String publicKeyURL = "http://" + address + "/getKey?";
@@ -20,6 +20,12 @@ public class URL {
     public static final String couponURL = "http://" + address + "/aes/getMyCoupon?";
     //更新个人信息/获取个人信息
     public static final String selfInfoURL = "http://" + address + "/aes/getMyInfo?";
+    //获取悬赏任务
+    public static final String rewordURL = "http://" +address +"/aes/get";
+    //切换身份
+    public static final String switchToTeacher = "http://" +address + "/switchToTeacher?";
+    //获取课程
+    public static final String getHotCourseURL = "http://" +address +"/courseTeacher/getCourseTeacherPopular?";
 
     //获取公钥
     public static String getPublicKeyURL() {
@@ -58,5 +64,15 @@ public class URL {
     //获取个人信息
     public static String getSelfInfoURL() {
         return selfInfoURL + AESTransformResult.getResult("");
+    }
+
+    //切换身份
+    public static String getSwitchToTeacher()
+    {
+        return switchToTeacher + "token="+GlobalUtil.getInstance().getToken();
+    }
+    //获取热门课程
+    public static String getGetHotCourseURL(String str){
+        return getHotCourseURL + "clearText="+str;
     }
 }

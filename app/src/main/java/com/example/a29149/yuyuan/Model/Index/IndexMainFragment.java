@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Model.Index.Fragment.ClassesFragment;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.SearchActivity;
@@ -76,6 +77,9 @@ public class IndexMainFragment extends Fragment {
     private List<ClassesFragment> fragmentList = new ArrayList<>();
     private List<TextView> textViewList = new ArrayList<>();
 
+    //暂存选择的课程类型
+    private TechnicTagEnum technicTagEnum;
+
     public IndexMainFragment() {
     }
 
@@ -121,7 +125,7 @@ public class IndexMainFragment extends Fragment {
         }
 
         //默认首先在网络端获取一次数据
-        fragmentList.get(0).resetContent();
+        fragmentList.get(0).resetContent(TechnicTagEnum.values()[0]);
 
         mClassPager.setAdapter(new MenuAdapter(getFragmentManager()));
         mClassPager.setOffscreenPageLimit(5);
@@ -294,8 +298,8 @@ public class IndexMainFragment extends Fragment {
                     mClassPager.setCurrentItem(11);
                     break;
             }
-
-            fragmentList.get(index).resetContent();
+            technicTagEnum = TechnicTagEnum.values()[index];
+            fragmentList.get(index).resetContent(technicTagEnum);
         }
     }
 }

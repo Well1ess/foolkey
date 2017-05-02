@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
+import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.Model.Index.Adapter.IndexContentAdapter;
 import com.example.a29149.yuyuan.Model.Index.Course.CourseActivity;
@@ -24,6 +26,7 @@ import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -31,7 +34,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
+import java.util.List;
 
 
 public class ClassesFragment extends Fragment {
@@ -42,6 +45,8 @@ public class ClassesFragment extends Fragment {
     @ViewInject(R.id.content)
     private DynamicListView mDynamicList;
     private IndexContentAdapter mContentAdapter;
+
+    private int pageNo = 1;
 
     public ClassesFragment() {
     }
@@ -77,13 +82,12 @@ public class ClassesFragment extends Fragment {
                     public void onRefresh() {
                         //TODO:网络通信
                         //获取主页的热门课程
-                        if (MainActivity.shapeLoadingDialog != null)
-                        {
+                        if (MainActivity.shapeLoadingDialog != null) {
                             MainActivity.shapeLoadingDialog.show();
                         }
                         //由于是刷新，所以首先清空所有数据
+                        pageNo = 1;
                         GlobalUtil.getInstance().getContent().clear();
-                        mContentAdapter.notifyDataSetChanged();
                         GetHotCourseAction action = new GetHotCourseAction();
                         action.execute();
                     }
@@ -94,36 +98,37 @@ public class ClassesFragment extends Fragment {
             @Override
             public void setLoad() {
                 //TODO:网络通信
-
+                if (MainActivity.shapeLoadingDialog != null) {
+                    MainActivity.shapeLoadingDialog.show();
+                }
+                //不用清空数据
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        GlobalUtil.getInstance().getContent().add("延迟加载出的数据，只加载一个");
-                        mContentAdapter.notifyDataSetChanged();
-                        mDynamicList.onLoadFinish();
+                        GetHotCourseAction action = new GetHotCourseAction();
+                        action.execute();
                     }
-                }, 3000);
+                }, 200);
             }
         });
 
         return view;
     }
 
-    public void resetContent(){
+    public void resetContent(TechnicTagEnum technicTagEnum) {
 
         //TODO：网络通信
         //获取主页的热门课程
-        if (MainActivity.shapeLoadingDialog != null)
-        {
-            //MainActivity.shapeLoadingDialog.show();
+        if (MainActivity.shapeLoadingDialog != null) {
+            MainActivity.shapeLoadingDialog.show();
         }
         //首先清空数据
         GlobalUtil.getInstance().getContent().clear();
-        GlobalUtil.getInstance().getContent().add("tttt");
 
         //请求数据
+        pageNo = 1;
         GetHotCourseAction action = new GetHotCourseAction();
-        action.execute();
+        action.execute(technicTagEnum.toString());
     }
 
     private void setContentListListener() {
@@ -166,9 +171,14 @@ public class ClassesFragment extends Fragment {
             HttpURLConnection con = null;
 
             try {
-                java.net.URL url = new java.net.URL(URL.getPublicKeyURL());
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("pageNo", pageNo + "");
+                pageNo++;
+                jsonObject.put("technicTagEnum", params[0]);
+
+                java.net.URL url = new java.net.URL(URL.getGetHotCourseURL(jsonObject.toString()));
                 con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getPublicKeyURL());
+                log.d(this, URL.getGetHotCourseURL(jsonObject.toString()));
                 // 设置允许输出，默认为false
                 con.setDoOutput(true);
                 con.setDoInput(true);
@@ -186,9 +196,7 @@ public class ClassesFragment extends Fragment {
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);
                 }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 if (reader != null) {
@@ -217,16 +225,26 @@ public class ClassesFragment extends Fragment {
 
                     if (resultFlag.equals("success")) {
 
+                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<CourseTeacherDTO>>() {
+                        }.getType();
+                        List<CourseTeacherDTO> courseTeacherDTOs = new Gson().fromJson(jsonObject.getString("courseTeacherDTOS"), type);
+
+                        //若>2则表示分页存取
+                        if (pageNo == 2) {
+                            GlobalUtil.getInstance().setCourseTeacherDTOs(courseTeacherDTOs);
+                        } else if (pageNo > 2) {
+                            GlobalUtil.getInstance().getCourseTeacherDTOs().addAll(courseTeacherDTOs);
+                            mDynamicList.onLoadFinish();
+                        }
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                GlobalUtil.getInstance().getContent().add("从网络端获取的初始值");
                                 mContentAdapter.notifyDataSetChanged();
-
                                 MainActivity.shapeLoadingDialog.dismiss();
 
                             }
-                        }, 100);
+                        }, 1000);
 
                     } else {
                         Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();

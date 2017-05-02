@@ -16,7 +16,6 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
-import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
@@ -69,10 +68,21 @@ public class LoginActivity extends AppCompatActivity{
             log.d(this, userConfig.getStringInfo(UserConfig.xmlUSER_NAME));
             log.d(this, userConfig.getStringInfo(UserConfig.xmlPASSWORD));
 
+            strUserName = userConfig.getStringInfo(UserConfig.xmlUSER_NAME);
+            strPassWord = userConfig.getStringInfo(UserConfig.xmlPASSWORD);
+            GlobalUtil.getInstance().setPublicKey(userConfig.getStringInfo(UserConfig.xmlPUBLIC_KEY));
+            GlobalUtil.getInstance().setAESKey(userConfig.getStringInfo(UserConfig.xmlAES_KEY));
+            GlobalUtil.getInstance().setToken(userConfig.getStringInfo(UserConfig.xmlTOKEN));
+
+            mUserNameView.setText(strUserName);
+            mPasswordView.setText(strPassWord);
+
+            log.d(this, strUserName);
+            log.d(this, strPassWord);
+
             //TODO：直接进行网络传输
             LoginAction loginAction = new LoginAction();
-            loginAction.execute(userConfig.getStringInfo(UserConfig.xmlUSER_NAME),
-                    userConfig.getStringInfo(UserConfig.xmlPASSWORD));
+            loginAction.execute();
         }
 
     }
@@ -125,8 +135,6 @@ public class LoginActivity extends AppCompatActivity{
             strPassWord = password;
             GetPublicKeyAction getPublicKeyAction = new GetPublicKeyAction();
             getPublicKeyAction.execute();
-            Intent startMainActivity = new Intent(this, MainActivity.class);
-            startActivity(startMainActivity);
         }
 
     }
@@ -214,21 +222,9 @@ public class LoginActivity extends AppCompatActivity{
                                 log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());
                                 log.d(this, "publicKey:" + GlobalUtil.getInstance().getPublicKey());
 
-                                //使用公钥对AES进行RSA加密
-                                String encrypt = RSAKeyBO.encryptByPub(GlobalUtil.getInstance().getAESKey(),
-                                        GlobalUtil.getInstance().getPublicKey());
-
-                                log.d(this, "encryptByPub:" + encrypt);
-
-                                //将回车进行字符替换
-                                String convert = encrypt.replaceAll("\n", "愚");
-
-                                log.d(this, "convertTo愚:" + convert);
-                                log.d(this, "convertToUTF-8:" + java.net.URLEncoder.encode(convert));
-
                                 //执行登陆动作
                                 LoginAction loginAction = new LoginAction();
-                                loginAction.execute(java.net.URLEncoder.encode(convert));
+                                loginAction.execute();
 
                             } catch (Exception e) {
                                 Toast.makeText(LoginActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
@@ -272,7 +268,7 @@ public class LoginActivity extends AppCompatActivity{
             try {
 
                 //对密码进行SHA1加密
-                strPassWord = SHA1Coder.SHA1(strPassWord);
+                String password = SHA1Coder.SHA1(strPassWord);
 
                 JSONObject target = new JSONObject();
                 //对账号，密码先进行RSA加密，再进行替换，随后是UTF-8编码
@@ -280,9 +276,12 @@ public class LoginActivity extends AppCompatActivity{
                         RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
                                 .replaceAll("\n", "愚")));
                 target.put("passWord", java.net.URLEncoder.encode(
-                        RSAKeyBO.encryptByPub(strPassWord, GlobalUtil.getInstance().getPublicKey())
+                        RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
                                 .replaceAll("\n", "愚")));
-                target.put("AESKey", params[0]);
+                target.put("AESKey", java.net.URLEncoder.encode(
+                        RSAKeyBO.encryptByPub(GlobalUtil.getInstance().getAESKey(),
+                                GlobalUtil.getInstance().getPublicKey())
+                                .replaceAll("\n", "愚")));
 
                 java.net.URL url = new java.net.URL(URL.getLoginURL(target.toString()));
                 con = (HttpURLConnection) url.openConnection();
@@ -330,29 +329,34 @@ public class LoginActivity extends AppCompatActivity{
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
-                    String token = jsonObject.getString("tokenCipher");
+                    String token = jsonObject.getString("token");
 
                     if (resultFlag.equals("success") && !token.equals("")) {
                         log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());
 
-                        //进行解密
-                        String TOKEN = AESOperator.getInstance().decrypt(token);
-
                         //保存Token
-                        GlobalUtil.getInstance().setToken(TOKEN);
+                        GlobalUtil.getInstance().setToken(token);
 
-                        log.d(this, TOKEN + " ");
-                        Toast.makeText(LoginActivity.this, TOKEN, Toast.LENGTH_SHORT).show();
+                        log.d(this, token + " ");
+                        Toast.makeText(LoginActivity.this, "登陆成功！", Toast.LENGTH_SHORT).show();
+
+                        userConfig.clear();
 
                         //保存公钥到文件中
                         userConfig.setUserInfo(UserConfig.xmlPUBLIC_KEY, GlobalUtil.getInstance().getPublicKey());
                         //保存AES到文件中
                         userConfig.setUserInfo(UserConfig.xmlAES_KEY, GlobalUtil.getInstance().getAESKey());
+                        //保存Token
+                        userConfig.setUserInfo(UserConfig.xmlTOKEN, token);
                         //保存非加密的用户名和密码
                         userConfig.setUserInfo(UserConfig.xmlUSER_NAME, strUserName);
                         userConfig.setUserInfo(UserConfig.xmlPASSWORD, strPassWord);
                         //设置标志位
                         userConfig.setUserInfo(UserConfig.xmlSAVE, true);
+
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        LoginActivity.this.finish();
 
                     }
                 } catch (Exception e) {

@@ -10,7 +10,8 @@ import android.content.SharedPreferences;
 public class UserConfig {
 
     public static final String xmlPUBLIC_KEY = "publicKey";
-    public static final String xmlAES_KEY = "publicKey";
+    public static final String xmlAES_KEY = "aesKey";
+    public static final String xmlTOKEN = "token";
     public static final String xmlUSER_NAME = "username";
     public static final String xmlPASSWORD = "password";
     public static final String xmlSAVE = "save";

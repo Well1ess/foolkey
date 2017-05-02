@@ -25,13 +25,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
         <activity android:name=".Main.MainActivity">
+        </activity>
+        <activity android:name=".Login.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Login.RegisterActivity" />
         <activity android:name=".Login.ModifyPwdActivity" />
         <activity

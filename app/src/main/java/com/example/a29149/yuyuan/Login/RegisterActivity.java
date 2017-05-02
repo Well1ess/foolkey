@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.Login;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
@@ -253,8 +255,9 @@ public class RegisterActivity extends AppCompatActivity {
             HttpURLConnection con = null;
 
             try {
-
-                strPassword = SHA1Coder.SHA1(strPassword);
+                log.d(this, "P:"+strPassword);
+                log.d(this, "U:"+strUserName);
+                String password = SHA1Coder.SHA1(strPassword);
 
                 JSONObject target = new JSONObject();
                 //对账号，密码重复上述动作
@@ -263,7 +266,7 @@ public class RegisterActivity extends AppCompatActivity {
                         RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
                                 .replaceAll("\n", "愚")));
                 target.put("passWord", java.net.URLEncoder.encode(
-                        RSAKeyBO.encryptByPub(strPassword, GlobalUtil.getInstance().getPublicKey())
+                        RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
                                 .replaceAll("\n", "愚")));
                 target.put("AESKey", params[0]);
 
@@ -324,18 +327,22 @@ public class RegisterActivity extends AppCompatActivity {
                         GlobalUtil.getInstance().setToken(TOKEN);
 
                         log.d(this, TOKEN + " ");
-                        Toast.makeText(RegisterActivity.this, TOKEN, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
 
                         //保存公钥到文件中
                         userConfig.setUserInfo(UserConfig.xmlPUBLIC_KEY, GlobalUtil.getInstance().getPublicKey());
                         //保存AES到文件中
                         userConfig.setUserInfo(UserConfig.xmlAES_KEY, GlobalUtil.getInstance().getAESKey());
+                        //保存token
+                        userConfig.setUserInfo(UserConfig.xmlTOKEN, token);
                         //保存非加密的用户名和密码
                         userConfig.setUserInfo(UserConfig.xmlUSER_NAME, strUserName);
                         userConfig.setUserInfo(UserConfig.xmlPASSWORD, strPassword);
                         //设置标志位
                         userConfig.setUserInfo(UserConfig.xmlSAVE, true);
 
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }
                 } catch (Exception e) {
                     Toast.makeText(RegisterActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();

@@ -82,8 +82,6 @@ public class LoginActivity extends AppCompatActivity{
             log.d(this, strPassWord);
 
             //TODO：直接进行网络传输
-            //LoginAction loginAction = new LoginAction();
-            //loginAction.execute();
             RefreshSelfInfo refreshSelfInfo = new RefreshSelfInfo(this);
             refreshSelfInfo.execute();
         }

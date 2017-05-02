@@ -1,5 +1,7 @@
 package com.example.a29149.yuyuan.Util;
 
+import com.example.a29149.yuyuan.DTO.CouponDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,8 @@ public class GlobalUtil {
     private String AESKey;
     //Token
     private String token;
+    //抵扣卷的List
+    private List<CouponDTO> couponDTOList;
 
     public List<String> getContent() {
         if (content == null)
@@ -77,6 +81,16 @@ public class GlobalUtil {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public List<CouponDTO> getCouponDTOList() {
+        if (couponDTOList == null)
+            couponDTOList = new ArrayList<>();
+        return couponDTOList;
+    }
+
+    public void setCouponDTOList(List<CouponDTO> couponDTOList) {
+        this.couponDTOList = couponDTOList;
     }
 }
 

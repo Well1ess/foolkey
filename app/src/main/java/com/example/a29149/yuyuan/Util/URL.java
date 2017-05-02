@@ -6,7 +6,7 @@ package com.example.a29149.yuyuan.Util;
  */
 
 public class URL {
-    public static final String address = "10.53.179.207:8080";
+    public static final String address = "192.168.1.102:8080";
 
     //获取公钥
     public static final String publicKeyURL = "http://" + address + "/getKey?";
@@ -51,8 +51,8 @@ public class URL {
     }
 
     //优惠券
-    public static String getCouponURL(int pageNo, int pageSize) {
-        return couponURL + AESTransformResult.getResult("", "pageNo", pageNo+"", "pageSize", pageSize+"");
+    public static String getCouponURL(String pageNo, String pageSize) {
+        return couponURL + AESTransformResult.getResult("", "pageNo", pageNo, "pageSize", pageSize);
     }
 
     //获取个人信息

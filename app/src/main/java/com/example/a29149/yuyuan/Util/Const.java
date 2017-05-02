@@ -6,6 +6,7 @@ package com.example.a29149.yuyuan.Util;
  */
 
 public class Const {
+
     //授课方式
     public static final String[] TEACH_METHOD = {"线上", "线下", "不限"};
 

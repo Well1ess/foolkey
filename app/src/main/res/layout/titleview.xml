@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@color/light_gray"
+              android:layout_width="match_parent"
+              android:layout_height="50dp">
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        style="@style/textview_message_text"
+        android:clickable="true"
+        android:text="取消"
+        android:background="@drawable/background_white_textview"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:text="发布悬赏"/>
+
+    <TextView
+        android:id="@+id/tv_publish"
+        style="@style/textview_message_text"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:text="发布"
+        android:textColor="@color/white"
+        android:background="@drawable/background_green_textview"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/dark_gray"/>
+
+
+</RelativeLayout>

@@ -55,4 +55,12 @@
 
     <color name="color_error">#f44336</color>
     <color name="tips_red">#FD0001</color>
+
+    <color name="orange_line">#f7b72c</color>
+    <color name="dark_green">#7cb342</color>
+    <color name="light_green">#9ccc65</color>
+    <color name="mid_green">#8cb34a</color>
+    <color name="dark_gray">#919191</color>
+    <color name="light_gray">#bbbbbb</color>
+    <color name="alpha_light_gray">#ccdddddd</color>
 </resources>

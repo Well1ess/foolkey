@@ -10,19 +10,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.CouponDTO;
+import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.List;
 
 public class MeMainFragment extends Fragment {
 
@@ -51,15 +57,13 @@ public class MeMainFragment extends Fragment {
     }
 
     @OnClick(R.id.setting)
-    public void setSettingListener(View view)
-    {
+    public void setSettingListener(View view) {
         Intent intent = new Intent(getActivity(), SettingActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.check_coupon)
-    public void setCheckCouponListener(View view)
-    {
+    public void setCheckCouponListener(View view) {
         //TODO:网络通信
         CouponAction couponAction = new CouponAction();
         couponAction.execute();
@@ -92,9 +96,9 @@ public class MeMainFragment extends Fragment {
 
             try {
 
-                java.net.URL url = new java.net.URL(URL.getCouponURL(1,1));
+                java.net.URL url = new java.net.URL(URL.getCouponURL("1", "10"));
                 con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getCouponURL(1,1));
+                log.d(this, URL.getCouponURL("1", "1"));
 
                 // 设置允许输出，默认为false
                 con.setDoOutput(true);
@@ -138,10 +142,18 @@ public class MeMainFragment extends Fragment {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
                     if (resultFlag.equals("success")) {
+                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<CouponDTO>>() {
+                        }.getType();
+                        List<CouponDTO> couponDTOs = new Gson().fromJson(jsonObject.getString("couponList"), type);
 
+                        GlobalUtil.getInstance().setCouponDTOList(couponDTOs);
+
+                        startActivity(new Intent(getActivity(), CouponActivity.class));
+                    } else {
+                        Toast.makeText(getActivity(), "JSON解析异常！", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
-                    Toast.makeText(getActivity(), "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    Toast.makeText(getActivity(), "返回结果异常！", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();

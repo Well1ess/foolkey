@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/alpha_light_gray"
+        android:orientation="vertical">
+
+
+        <com.example.a29149.yuyuan.Model.Order.view.MyListView
+            android:id="@+id/lv_noStartCourse"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#888888"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="申请操作需要老师允许"
+            android:textSize="10sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#888888"
+            android:gravity="center"
+            android:text="建议跟老师协商后进行申请哦"
+            android:textSize="10sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:gravity="center"
+            android:background="@color/dark_green"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#888888"
+            android:gravity="center"
+            android:text="愚人精选"
+            android:textSize="16sp"/>
+
+        <com.example.a29149.yuyuan.Model.Order.view.MyListView
+            android:id="@+id/lv_recommend"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>

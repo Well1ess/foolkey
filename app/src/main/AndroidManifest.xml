@@ -24,7 +24,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
-        <activity android:name=".Main.MainActivity"></activity>
+        <activity android:name=".Main.MainActivity">
+        </activity>
         <activity android:name=".Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,6 +47,7 @@
         <activity android:name=".Model.Index.Course.BuyCourseActivity" />
         <activity android:name=".Model.Index.Course.NewCourseOrderActivity" />
         <activity android:name=".Model.Me.Coupon.CouponActivity"></activity>
+        <activity android:name=".Model.Publish.Activity.PublishXuanshangStudentActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.Main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a29149.yuyuan.Model.Discovery.DiscoveryMainFragment;
 import com.example.a29149.yuyuan.Model.Index.IndexMainFragment;
 import com.example.a29149.yuyuan.Model.Me.MeMainFragment;
-import com.example.a29149.yuyuan.Model.OrderMainFragment;
+import com.example.a29149.yuyuan.Model.Order.fragment.OrderFragment;
+import com.example.a29149.yuyuan.Model.Publish.Activity.PublishXuanshangStudentActivity;
 import com.example.a29149.yuyuan.Model.PublishMainFragment;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -65,11 +69,13 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mPublishPanel;
 
     @ViewInject(R.id.publish_panel_real)
-    private FrameLayout mRealPublishPanel;
+    private LinearLayout mRealPublishPanel;
     private boolean mPublishPanelOpen = false;
 
     public static ShapeLoadingDialog shapeLoadingDialog;
 
+    private TextView mPublishXuanshangStudent;
+    private TextView mPublishAskStudent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,11 +107,28 @@ public class MainActivity extends AppCompatActivity {
         mFragmentTabHost.addTab(tabSpec0, IndexMainFragment.class, null);
         mFragmentTabHost.addTab(tabSpec1, DiscoveryMainFragment.class, null);
         mFragmentTabHost.addTab(tabSpec2, PublishMainFragment.class, null);
-        mFragmentTabHost.addTab(tabSpec3, OrderMainFragment.class, null);
+        mFragmentTabHost.addTab(tabSpec3, OrderFragment.class, null);
         mFragmentTabHost.addTab(tabSpec4, MeMainFragment.class, null);
 
         mIndexButton.setTextColor(getResources().getColor(R.color.colorPrimary));
         initRadioGroupListener();
+
+        //悬赏页面的控件初始化
+        mPublishXuanshangStudent = (TextView) findViewById(R.id.tv_xuanshang);
+        mPublishAskStudent = (TextView) findViewById(R.id.tv_ask);
+        mPublishXuanshangStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PublishXuanshangStudentActivity.class);
+                startActivity(intent);
+            }
+        });
+        mPublishAskStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "发布问题", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @OnClick(R.id.main_menu_publish)

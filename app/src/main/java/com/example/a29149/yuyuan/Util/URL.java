@@ -17,9 +17,9 @@ public class URL {
     //注销
     public static final String logOutURL = "http://" + address + "/aes/logOut?";
     //获取折扣卷
-    public static final String couponURL = "http://" +address + "";
-
-
+    public static final String couponURL = "http://" + address + "/aes/getMyCoupon?";
+    //更新个人信息/获取个人信息
+    public static final String selfInfoURL = "http://" + address + "/aes/getMyInfo?";
 
     //获取公钥
     public static String getPublicKeyURL() {
@@ -37,8 +37,9 @@ public class URL {
     }
 
     //注销
+
     /**
-     * @param clearText 明文Object，包含token
+     * @param clearText  明文Object，包含token
      * @param validation 密文
      * @param cipherText 密文
      * @return
@@ -49,7 +50,13 @@ public class URL {
                 "&cipherText=" + cipherText;
     }
 
-    public static String getCouponURL() {
-        return couponURL;
+    //优惠券
+    public static String getCouponURL(int pageNo, int pageSize) {
+        return couponURL + AESTransformResult.getResult("", "pageNo", pageNo+"", "pageSize", pageSize+"");
+    }
+
+    //获取个人信息
+    public static String getSelfInfoURL() {
+        return selfInfoURL + AESTransformResult.getResult("");
     }
 }

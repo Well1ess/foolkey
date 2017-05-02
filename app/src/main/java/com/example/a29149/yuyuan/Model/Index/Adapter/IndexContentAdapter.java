@@ -52,7 +52,7 @@ public class IndexContentAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.listvie_course, null);
+            convertView = View.inflate(mContext, R.layout.listview_course, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {

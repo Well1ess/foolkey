@@ -74,6 +74,7 @@ public class SettingActivity extends AppCompatActivity {
 
                 con = (HttpURLConnection) url.openConnection();
                 log.d(this, AESOperator.getInstance().encrypt(jsonObject.toString()));
+                log.d(this, "解密："+AESOperator.getInstance().decrypt(AESOperator.getInstance().encrypt(jsonObject.toString())));
                 log.d(this, URL.getLogOutURL(jsonObject.toString(),
                         validation,
                         ""));

@@ -20,7 +20,8 @@ public class AESTransformResult {
             }
 
             result = "clearText=" + jsonObject.toString() +
-                    "&validation=" + AESOperator.getInstance().encrypt(jsonObject.toString()) +
+                    "&validation=" + java.net.URLEncoder.encode(
+                    AESOperator.getInstance().encrypt(jsonObject.toString()).replaceAll("\n", "愚")) +
                     "&cipherText=" + cipherText;
 
         } catch (Exception e) {

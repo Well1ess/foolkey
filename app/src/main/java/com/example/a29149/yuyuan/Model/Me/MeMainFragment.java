@@ -57,6 +57,14 @@ public class MeMainFragment extends Fragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.check_coupon)
+    public void setCheckCouponListener(View view)
+    {
+        //TODO:网络通信
+        CouponAction couponAction = new CouponAction();
+        couponAction.execute();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -84,9 +92,9 @@ public class MeMainFragment extends Fragment {
 
             try {
 
-                java.net.URL url = new java.net.URL("");
+                java.net.URL url = new java.net.URL(URL.getCouponURL(1,1));
                 con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getRegisterURL(""));
+                log.d(this, URL.getCouponURL(1,1));
 
                 // 设置允许输出，默认为false
                 con.setDoOutput(true);
@@ -129,9 +137,7 @@ public class MeMainFragment extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
-                    String token = jsonObject.getString("tokenCipher");
-
-                    if (resultFlag.equals("success") && !token.equals("")) {
+                    if (resultFlag.equals("success")) {
 
                     }
                 } catch (Exception e) {

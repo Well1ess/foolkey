@@ -21,7 +21,7 @@ public class MyPagerAdapter extends PagerAdapter {
     private List<String> mTags = Arrays.asList("购物车", "未付款", "未上课", "未评价", "全部订单");
     private Context mContext;
     private MyListView mBuyCourse;
-    private MyListView mXuanShang;
+    private MyListView mReward;
     private MyListView mRecommand;
 
     public MyPagerAdapter(List<View> views, Context context) {
@@ -33,12 +33,12 @@ public class MyPagerAdapter extends PagerAdapter {
     {
         final View view=View.inflate(mContext, R.layout.fragment_viewpager_nopay,null);
         mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
-        mXuanShang = (MyListView) view.findViewById(R.id.lv_reward);
+        mReward = (MyListView) view.findViewById(R.id.lv_reward);
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
 
         MyListViewCourseAdapter myListViewCourseAdapter = new MyListViewCourseAdapter(mContext);
         mBuyCourse.setAdapter(myListViewCourseAdapter);
-        mXuanShang.setAdapter(myListViewCourseAdapter);
+        mReward.setAdapter(myListViewCourseAdapter);
         mRecommand.setAdapter(myListViewCourseAdapter);
         return view;
     }

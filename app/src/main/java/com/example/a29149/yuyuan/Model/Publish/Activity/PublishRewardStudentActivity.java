@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,17 +41,15 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
     private TextView mPublish;//发布
     private EditText mRewardTitle;//悬赏标题
     private TextView mRewardTag;//悬赏标签
+    private  RelativeLayout mRewardTagChoose;//悬赏标签选择按钮
     private EditText mRewardDescription;//悬赏描述
-    private TextView mTagChoose;//悬赏标签选择按钮
     private  EditText mRewardCost;//悬赏费用
     private TextView mCourseType;//授课方式
-    private TextView mCourseTypeChoose;//选择授课方式按钮
-    private TextView mTeacherSex;//老师性别
-    private TextView mTeacherSexChoose;//选择老师性别按钮
+    private  RelativeLayout mCourseStyleChoose;//选择授课方式按钮
     private TextView mTeacherType;//老师类别
-    private TextView mTeacherTypeChoose;//选择老师类别按钮
+    private RelativeLayout mTeacherTypeChoose;//选择老师类别按钮
     private TextView mStudentBase;//学生基础
-    private TextView mStudentBaseChoose;//选择学生基础按钮
+    private RelativeLayout mStudentBaseChoose;//选择学生基础按钮
     private String[] mChooseContent;//保存用户选择的信息
 
     @Override
@@ -59,7 +58,7 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_publish_reward_student);
         initView();
-        mChooseContent = new String[8];
+        mChooseContent = new String[7];
     }
 
     private void initView() {
@@ -71,27 +70,23 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
         mRewardTitle = (EditText) findViewById(R.id.et_title);
         //悬赏标签
         mRewardTag = (TextView) findViewById(R.id.tv_tag);
-        mTagChoose = (TextView) findViewById(R.id.tv_tagChoose);
-        mTagChoose.setOnClickListener(this);
+        mRewardTagChoose = (RelativeLayout) findViewById(R.id.rl_tagItemChoose);
+        mRewardTagChoose.setOnClickListener(this);
         //悬赏描述
         mRewardDescription = (EditText) findViewById(R.id.et_description);
         //悬赏花费
         mRewardCost = (EditText) findViewById(R.id.et_cost);
         //授课方式
         mCourseType = (TextView) findViewById(R.id.tv_courseType);
-        mCourseTypeChoose = (TextView) findViewById(R.id.tv_courseTypeChoose);
-        mCourseTypeChoose.setOnClickListener(this);
-        //老师性别
-        mTeacherSex = (TextView) findViewById(R.id.tv_teacherSex);
-        mTeacherSexChoose = (TextView) findViewById(R.id.tv_teacherSexChoose);
-        mTeacherSexChoose.setOnClickListener(this);
+        mCourseStyleChoose = (RelativeLayout) findViewById(R.id.rl_courseStyleChoose);
+        mCourseStyleChoose.setOnClickListener(this);
         //老师类别
         mTeacherType = (TextView) findViewById(R.id.tv_teacherType);
-        mTeacherTypeChoose = (TextView) findViewById(R.id.tv_teacherTypeChoose);
+        mTeacherTypeChoose = (RelativeLayout) findViewById(R.id.rl_teacherTypeChoose);
         mTeacherTypeChoose.setOnClickListener(this);
         //学生基础
         mStudentBase = (TextView) findViewById(R.id.tv_StudentBase);
-        mStudentBaseChoose = (TextView) findViewById(R.id.tv_StudentBaseChoose);
+        mStudentBaseChoose = (RelativeLayout) findViewById(R.id.rl_studentBaseChoose);
         mStudentBaseChoose.setOnClickListener(this);
     }
 
@@ -106,19 +101,16 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
             case R.id.tv_cancel:
                 finish();
                 break;
-            case R.id.tv_tagChoose:
+            case R.id.rl_tagItemChoose:
                 chooseTag();
                 break;
-            case R.id.tv_courseTypeChoose:
+            case R.id.rl_courseStyleChoose:
                 chooseCourseType();
                 break;
-            case R.id.tv_teacherSexChoose:
-                chooseTeacherSex();
-                break;
-            case R.id.tv_teacherTypeChoose:
+            case R.id.rl_teacherTypeChoose:
                 chooseTeacherType();
                 break;
-            case R.id.tv_StudentBaseChoose:
+            case R.id.rl_studentBaseChoose:
                 chooseStudentBase();
                 break;
             default:
@@ -132,15 +124,16 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
         mChooseContent[0] = mRewardTitle.getText().toString();
         mChooseContent[2] = mRewardDescription.getText().toString();
         mChooseContent[3] = mRewardCost.getText().toString();
-        new PublishAction().execute();
+        //new PublishRewardAction().execute();
+        new PublishCourseAction().execute();
     }
 
     /**
-     * 发布请求Action
+     * 发布悬赏请求Action
      */
-    public class PublishAction extends AsyncTask<String, Integer, String> {
+    public class PublishRewardAction extends AsyncTask<String, Integer, String> {
 
-        public PublishAction() {
+        public PublishRewardAction() {
             super();
         }
 
@@ -161,10 +154,9 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
                 target.put("price",mChooseContent[3]);
                 target.put("courseTimeDayEnum","不限");
                 target.put("teachMethodEnum",mChooseContent[4]);
-                target.put("sexTagEnum",mChooseContent[5]);
-                target.put("teachRequirementEnum",mChooseContent[6]);
-                target.put("studentBaseEnum",mChooseContent[7]);
-                java.net.URL url = new java.net.URL(URL.getStudentPublishXuanshangURL(target.toString()));
+                target.put("teachRequirementEnum",mChooseContent[5]);
+                target.put("studentBaseEnum",mChooseContent[6]);
+                java.net.URL url = new java.net.URL(URL.getStudentPublishRewardURL(target.toString()));
                 Log.i("malei",target.toString());
                 con = (HttpURLConnection) url.openConnection();
                 // 设置允许输出，默认为false
@@ -288,35 +280,6 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
         alertDialogChooseCourseType.show();
     }
 
-    //弹出老师性别选择标签
-    private AlertDialog alertDialogChooseTeacherSex;
-    public void chooseTeacherSex(){
-        final String[] teacherSex = {"男","女"};
-        TextView customTitle = new TextView(this);
-        customTitle.setPadding(0, 20, 0, 0);
-        customTitle.setText("请选择内容标签");
-        customTitle.setTextColor(getResources().getColor(R.color.colorPrimary));
-        customTitle.setTextSize(18);
-        customTitle.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        customTitle.setGravity(Gravity.CENTER);
-
-
-        ArrayAdapter<String> teachTypeItem = new ArrayAdapter<>(this,
-                R.layout.dialog_team_project_item,
-                teacherSex);
-
-        alertDialogChooseTeacherSex = new AlertDialog.Builder(this)
-                .setCustomTitle(customTitle)
-                .setAdapter(teachTypeItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mTeacherSex.setText("老师性别："+teacherSex[which]);
-                        mChooseContent[5] = teacherSex[which];
-                        dialog.dismiss();
-                    }
-                }).create();
-        alertDialogChooseTeacherSex.show();
-    }
 
     //弹出老师类别选择标签
     private AlertDialog alertDialogChooseTeacherType;
@@ -341,7 +304,7 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mTeacherType.setText("老师类别："+teacherType[which]);
-                        mChooseContent[6] = teacherType[which];
+                        mChooseContent[5] = teacherType[which];
                         dialog.dismiss();
                     }
                 }).create();
@@ -371,11 +334,102 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mStudentBase.setText("学生基础："+studentBase[which]);
-                        mChooseContent[7] = studentBase[which];
+                        mChooseContent[6] = studentBase[which];
                         dialog.dismiss();
                     }
                 }).create();
         alertDialogChooseStudentBase.show();
+    }
+
+
+    /**
+     * 发布请求Action，发布课程
+     */
+    public class PublishCourseAction extends AsyncTask<String, Integer, String> {
+
+        public PublishCourseAction() {
+            super();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            StringBuffer sb = new StringBuffer();
+            BufferedReader reader = null;
+            HttpURLConnection con = null;
+
+            try {
+                JSONObject target = new JSONObject();
+                String token = GlobalUtil.getInstance().getToken();
+                target.put("token",token);
+                target.put("technicTagEnum","Java");
+                target.put("topic","topic");
+                target.put("description","description");
+                target.put("price","3");
+                target.put("courseTimeDayEnum","不限");
+                target.put("teachMethodEnum","线上");
+                target.put("duration","30.0");
+                target.put("classAmount","5");
+                java.net.URL url = new java.net.URL(URL.getTeacherPublishCoursedURL(target.toString()));
+                Log.i("malei",target.toString());
+                con = (HttpURLConnection) url.openConnection();
+                // 设置允许输出，默认为false
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setConnectTimeout(5 * 1000);
+                con.setReadTimeout(10 * 1000);
+
+                con.setRequestMethod("POST");
+                con.setRequestProperty("contentType", "GBK");
+
+                // 获得服务端的返回数据
+                InputStreamReader read = new InputStreamReader(con.getInputStream());
+                reader = new BufferedReader(read);
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (con != null) {
+                    con.disconnect();
+                }
+            }
+            return sb.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            log.d(this, result);
+            if (result != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String resultFlag = jsonObject.getString("result");
+                    if (resultFlag.equals("success")) {
+                        Toast.makeText(PublishRewardStudentActivity.this, "发布课程成功！", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(PublishRewardStudentActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(PublishRewardStudentActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
     }
 
 }

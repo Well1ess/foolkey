@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
@@ -15,6 +17,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 
 public class CourseActivity extends AppCompatActivity {
 
@@ -35,7 +38,7 @@ public class CourseActivity extends AppCompatActivity {
     private TextView mCourseLabel;
 
     //课程评价
-    @ViewInject(R.id.course)
+    @ViewInject(R.id.courseEvaluate)
     private TextView mCourseEvaluation;
 
     //教师个人评价
@@ -86,16 +89,25 @@ public class CourseActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        mAuthor.setText("付费课程·"+" ");
-        mCourseLabel.setText("Make Love");
+
+        if (mPosition == -1)
+        {
+            Toast.makeText(this, "数据获取失败", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        CourseTeacherDTO courseTeacherDTO = GlobalUtil.getInstance().getCourseTeacherDTOs().get(mPosition);
+
+        mAuthor.setText("付费课程·"+ courseTeacherDTO.getCreatorId());
+        mCourseLabel.setText(courseTeacherDTO.getTechnicTagEnum().toString());
         mCourseEvaluation.setText("s"+"/5");
         mTeacherEvaluation.setText("s"+"/5");
         mNumberEvaluation.setText("455");
         mReputation.setText("ssss");
-        mCourseTitle.setText("老母猪的幸福生活");
-        mCourseContent.setText("XXX");
-        mCoursePrice.setText("88");
-        mCreateTime.setText("2017年5月1日21:22:51");
+        mCourseTitle.setText(courseTeacherDTO.getTopic());
+        mCourseContent.setText(courseTeacherDTO.getDescription());
+        mCoursePrice.setText(courseTeacherDTO.getPrice()+"");
+        mCreateTime.setText("");
         mCourseRemark.setText("希望先和我联系和沟通一哈！！！");
     }
 

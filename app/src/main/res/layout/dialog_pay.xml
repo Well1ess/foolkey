@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="0dip" xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        style="@style/LineLayout.Normal"
+        android:background="@color/white">
+
+        <TextView
+            style="@style/TextView.DialogTitle"
+            android:text="付    款"
+            android:padding="15dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="订单金额"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/text_color"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:id="@+id/amount"
+                    android:text="29"
+                    android:gravity="left"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="虚拟币    "
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/text_color"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:id="@+id/virtual_money"
+                    android:text="29"
+                    android:gravity="left"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="密码        "
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/text_color"
+                    android:layout_gravity="center"/>
+                <EditText
+                    android:layout_marginLeft="40dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="textPassword"
+                    android:id="@+id/password"
+                    android:text=""
+                    android:layout_marginRight="80dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="#DEDEDE" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                style="@style/Button.DialogButton"
+                android:id="@+id/info_fragment2_new_msg_bt_giveup"
+                android:text="取     消" />
+
+            <View
+                android:layout_width="1.0px"
+                android:layout_height="match_parent"
+                android:background="#DEDEDE" />
+
+            <Button
+                style="@style/Button.DialogButton"
+                android:id="@+id/info_fragment2_new_msg_bt_commit"
+                android:text="确     定" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -128,7 +128,7 @@ public class IndexMainFragment extends Fragment {
         fragmentList.get(0).resetContent(TechnicTagEnum.values()[0]);
 
         mClassPager.setAdapter(new MenuAdapter(getFragmentManager()));
-        mClassPager.setOffscreenPageLimit(5);
+        mClassPager.setOffscreenPageLimit(12);
         mClassPager.setOnPageChangeListener(new ViewPagerListener());
 
         //将菜单添加至List便于管理

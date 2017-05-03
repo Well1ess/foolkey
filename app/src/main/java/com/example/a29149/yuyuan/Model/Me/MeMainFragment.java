@@ -8,14 +8,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
+import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
+import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
@@ -30,7 +33,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.List;
 
+import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
+
 public class MeMainFragment extends Fragment {
+
+    @ViewInject(R.id.virtual_money)
+    private TextView mVirtualMoney;
 
     public MeMainFragment() {
 
@@ -53,13 +61,35 @@ public class MeMainFragment extends Fragment {
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);
 
+        initView();
+
         return view;
+    }
+
+    private void initView()
+    {
+        int virtualMoney = DoubleParseInt(GlobalUtil.getInstance().getStudentDTO().getVirtualCurrency());
+        mVirtualMoney.setText(virtualMoney+"");
+    }
+
+    public int DoubleParseInt(Double d1) {
+        Double d2 = d1 % 1;
+        String str1 = new String((d1 - d2) + "");
+        str1 = str1.split("\\.")[0];
+        int i1 = Integer.parseInt(str1);
+        return i1;
     }
 
     @OnClick(R.id.setting)
     public void setSettingListener(View view) {
         Intent intent = new Intent(getActivity(), SettingActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.recharge)
+    public void setRechargeListener(View view)
+    {
+        startActivityForResult(new Intent(getActivity(), RechargeActivity.class), FROM_ME_FRAGMENT_TO_RECHARGE);
     }
 
     @OnClick(R.id.check_coupon)
@@ -86,6 +116,16 @@ public class MeMainFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode)
+        {
+            case FROM_ME_FRAGMENT_TO_RECHARGE:
+                initView();
+                break;
+        }
     }
 
     //获取抵扣卷

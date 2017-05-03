@@ -164,7 +164,7 @@ public class PublishQuestionStudentActivity extends Activity implements View.OnC
                 target.put("sexTagEnum",mChooseContent[5]);
                 target.put("teachRequirementEnum",mChooseContent[6]);
                 target.put("studentBaseEnum",mChooseContent[7]);
-                java.net.URL url = new java.net.URL(URL.getStudentPublishXuanshangURL(target.toString()));
+                java.net.URL url = new java.net.URL(URL.getStudentPublishRewardURL(target.toString()));
                 Log.i("malei",target.toString());
                 con = (HttpURLConnection) url.openConnection();
                 // 设置允许输出，默认为false

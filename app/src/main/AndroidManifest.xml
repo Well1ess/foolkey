@@ -25,13 +25,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
         <activity android:name=".Main.MainActivity">
+
         </activity>
         <activity android:name=".Login.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
         <activity android:name=".Login.RegisterActivity" />
         <activity android:name=".Login.ModifyPwdActivity" />
@@ -40,7 +41,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Model.Index.Course.CourseActivity" />
         <activity android:name=".OriginIndex.OriginIndexActivity" />
-        <activity android:name=".Model.Discovery.Activity.RewardActivity" />
+        <activity android:name=".Model.Discovery.Activity.RewardActivity" >
+        </activity>
         <activity android:name=".Model.Discovery.Activity.QAActivity" />
         <activity android:name=".Model.Discovery.Activity.ArticleActivity" />
         <activity android:name=".Model.Me.Setting.SettingActivity" />
@@ -49,6 +51,10 @@
         <activity android:name=".Model.Me.Coupon.CouponActivity"></activity>
         <activity android:name=".Model.Publish.Activity.PublishRewardStudentActivity"></activity>
         <activity android:name=".Model.Publish.Activity.PublishQuestionStudentActivity"/>
+        <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity"/>
+        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity">
+
+        </activity>
     </application>
 
 </manifest>

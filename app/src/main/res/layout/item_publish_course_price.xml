@@ -5,18 +5,17 @@
     android:layout_height="50dp">
 
     <TextView
-        android:id="@+id/tv_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="@color/dark_gray"
         android:paddingLeft="10dp"
         android:textSize="20sp"
-        android:text="费用："
+        android:text="收益："
         />
 
     <EditText
-        android:id="@+id/et_cost"
+        android:id="@+id/et_price"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/tv_unit"
         android:layout_width="60dp"
@@ -26,11 +25,11 @@
 
     <TextView
         android:id="@+id/tv_unit"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="30dp"
         android:textSize="20sp"
         android:textColor="@color/dark_gray"
-        android:text="元/小时"
+        android:text="元/半小时"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>

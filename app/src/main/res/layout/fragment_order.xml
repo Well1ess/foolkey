@@ -6,23 +6,46 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <LinearLayout
+        android:id="@+id/test_container2"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:elevation="5dp"
-        android:background="@color/colorPrimary">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:id="@+id/title"
-                android:layout_centerInParent="true"
-                android:textColor="@color/white"
-                android:text="我的订单"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textSize="16sp" />
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
+
+        <com.example.a29149.yuyuan.Widget.MyEditText
+            android:transitionName="searchView"
+            android:focusable="false"
+            android:id="@+id/key_value"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_search"
+            android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
+            android:drawableRight="@mipmap/ic_clear"
+            android:drawableTint="@color/white"
+            android:ems="20"
+            android:hint="请输入关键字"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@drawable/cursor_white"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/project_search_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/ic_tongzhi"
+            android:backgroundTint="@color/white" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,14 +64,6 @@
             >
         </android.support.design.widget.TabLayout>
 
-        <ImageButton
-            android:id="@+id/order_search_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:background="@mipmap/ic_tongzhi"
-            android:backgroundTint="@color/white" />
     </LinearLayout>
 
 

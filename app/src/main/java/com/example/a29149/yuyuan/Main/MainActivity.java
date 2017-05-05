@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static ShapeLoadingDialog shapeLoadingDialog;
 
-    private TextView mPublishXuanshangStudent;
+    private TextView mPublishRewardStudent;
     private TextView mPublishAskStudent;
 
     @Override
@@ -83,13 +83,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
-
         //全局Dialog的初始化
         shapeLoadingDialog = new ShapeLoadingDialog(this);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
         shapeLoadingDialog.getDialog().setCancelable(false);
-
 
         mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.main_tab_fragment);
 
@@ -114,9 +112,9 @@ public class MainActivity extends AppCompatActivity {
         initRadioGroupListener();
 
         //悬赏页面的控件初始化
-        mPublishXuanshangStudent = (TextView) findViewById(R.id.tv_xuanshang);
+        mPublishRewardStudent = (TextView) findViewById(R.id.tv_xuanshang);
         mPublishAskStudent = (TextView) findViewById(R.id.tv_ask);
-        mPublishXuanshangStudent.setOnClickListener(new View.OnClickListener() {
+        mPublishRewardStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PublishRewardStudentActivity.class);

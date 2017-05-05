@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -30,12 +29,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
 /**
- * Created by MaLei on 2017/5/1 0014.
+ * Created by MaLei on 2017/5/3 0014.
  * Email:ml1995@mail.ustc.edu.cn
- * 学生发布悬赏
+ * 老师发布文章
  */
 
-public class PublishRewardStudentActivity extends Activity implements View.OnClickListener {
+public class PublishArticalTeacherActivity extends Activity implements View.OnClickListener {
 
     private TextView mCancel;//取消
     private TextView mPublish;//发布
@@ -207,13 +206,13 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(PublishRewardStudentActivity.this, "发布成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PublishArticalTeacherActivity.this, "发布成功！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(PublishRewardStudentActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PublishArticalTeacherActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(PublishRewardStudentActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PublishArticalTeacherActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -375,6 +374,97 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
                     }
                 }).create();
         alertDialogChooseStudentTime.show();
+    }
+
+
+    /**
+     * 发布请求Action，发布课程
+     */
+    public class PublishCourseAction extends AsyncTask<String, Integer, String> {
+
+        public PublishCourseAction() {
+            super();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            StringBuffer sb = new StringBuffer();
+            BufferedReader reader = null;
+            HttpURLConnection con = null;
+
+            try {
+                JSONObject target = new JSONObject();
+                String token = GlobalUtil.getInstance().getToken();
+                target.put("token",token);
+                target.put("technicTagEnum","Java");
+                target.put("topic","topic");
+                target.put("description","description");
+                target.put("price","3");
+                target.put("courseTimeDayEnum","不限");
+                target.put("teachMethodEnum","线上");
+                target.put("duration","30.0");
+                target.put("classAmount","5");
+                java.net.URL url = new java.net.URL(URL.getTeacherPublishCoursedURL(target.toString()));
+                Log.i("malei",target.toString());
+                con = (HttpURLConnection) url.openConnection();
+                // 设置允许输出，默认为false
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setConnectTimeout(5 * 1000);
+                con.setReadTimeout(10 * 1000);
+
+                con.setRequestMethod("POST");
+                con.setRequestProperty("contentType", "GBK");
+
+                // 获得服务端的返回数据
+                InputStreamReader read = new InputStreamReader(con.getInputStream());
+                reader = new BufferedReader(read);
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (con != null) {
+                    con.disconnect();
+                }
+            }
+            return sb.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            log.d(this, result);
+            if (result != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String resultFlag = jsonObject.getString("result");
+                    if (resultFlag.equals("success")) {
+                        Toast.makeText(PublishArticalTeacherActivity.this, "发布课程成功！", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(PublishArticalTeacherActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(PublishArticalTeacherActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
     }
 
 }

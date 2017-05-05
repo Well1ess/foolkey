@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <include layout="@layout/publish_reward_title_view"/>
+    <include layout="@layout/publish_course_title_view"/>
 
     <EditText
         android:id="@+id/et_title"
@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         android:background="@null"
         android:paddingLeft="10dp"
-        android:hint="标题：一句话描述你的悬赏"
+        android:hint="标题：一句话描述你的课程"
         android:textColor="@color/light_gray"/>
 
     <View
@@ -33,14 +33,21 @@
         android:layout_height="50dp"
         android:background="@null"
         android:paddingLeft="10dp"
-        android:hint="描述：描述你的悬赏信息"
+        android:hint="描述：描述你的课程信息"
         android:textColor="@color/light_gray"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/dark_gray"/>
 
-    <include layout="@layout/item_publish_content_cost"/>
+    <include layout="@layout/item_publish_course_price"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_gray"/>
+
+    <include layout="@layout/item_publish_course_duration"/>
 
     <View
         android:layout_marginBottom="30dp"
@@ -53,21 +60,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/dark_gray"/>
+
     <include layout="@layout/item_publish_course_style"/>
 
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dark_gray"/>
-    <include layout="@layout/item_publish_teacher_type"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dark_gray"/>
-
-    <include layout="@layout/item_publish_student_base"/>
 
     <View
         android:layout_width="match_parent"

@@ -29,6 +29,7 @@
         android:layout_height="45dp"
         android:background="@color/dark_green"
         android:orientation="horizontal">
+
         <android.support.design.widget.TabLayout
             android:id="@+id/id_tl"
             android:layout_weight="1"

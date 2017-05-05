@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
-     /*   //全局Dialog的初始化
+        //全局Dialog的初始化
         shapeLoadingDialog = new ShapeLoadingDialog(this);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
-        shapeLoadingDialog.getDialog().setCancelable(false);*/
+        shapeLoadingDialog.getDialog().setCancelable(false);
 
         mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.main_tab_fragment);
 

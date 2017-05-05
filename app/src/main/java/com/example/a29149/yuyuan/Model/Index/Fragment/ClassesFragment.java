@@ -227,6 +227,8 @@ public class ClassesFragment extends Fragment {
 
                     if (resultFlag.equals("success")) {
 
+                        log.d(this, jsonObject.getString("courseTeacherDTOS"));
+
                         java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<CourseTeacherDTO>>() {
                         }.getType();
                         List<CourseTeacherDTO> courseTeacherDTOs = new Gson().fromJson(jsonObject.getString("courseTeacherDTOS"), type);

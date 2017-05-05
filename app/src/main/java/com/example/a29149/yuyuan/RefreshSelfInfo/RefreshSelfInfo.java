@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Main.MainActivity;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -91,6 +94,14 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
                     mContext.startActivity(new Intent(mContext, MainActivity.class));
                     Activity activity = (Activity)mContext;
                     activity.finish();
+
+                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
+                    }.getType();
+                    StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("studentDTO"), type);
+
+                    if (studentDTO != null)
+                        GlobalUtil.getInstance().setStudentDTO(studentDTO);
+
                 }
             } catch (Exception e) {
                 Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();

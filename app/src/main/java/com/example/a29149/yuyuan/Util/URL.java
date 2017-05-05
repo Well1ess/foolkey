@@ -7,6 +7,8 @@ package com.example.a29149.yuyuan.Util;
 
 public class URL {
     public static final String address = "172.29.23.90:8080";
+    public static final String address = "192.168.31.135:8080";
+    public static final String address = "10.53.179.207:8080";
 
     //获取公钥
     public static final String publicKeyURL = "http://" + address + "/getKey?";
@@ -31,6 +33,12 @@ public class URL {
     //老师发布课程
     public static final String teacherPublishCoursedURL = "http://" + address + "/courseTeacher/publishCourseTeacher?";
 
+
+    public static final String studentPublishXuanshangURL = "http://" + address + "/courseStudent/publishRewardCourse?";
+    //充值
+    public static final String rechargeURL = "http://" +address + "/aes/recharge?";
+    //提交订单
+    public static final String submitOrder = "http://" +address +"/aes/placeOrderTeacherCourse?";
 
 
     //获取公钥
@@ -88,5 +96,32 @@ public class URL {
     //获取热门课程
     public static String getGetHotCourseURL(String str){
         return getHotCourseURL + "clearText="+str;
+    }
+    //充值
+    public static String getRechargeURL(String amount)
+    {
+        return rechargeURL +AESTransformResult.getResult("", "amount", amount);
+    }
+
+    //提交订单
+    /**
+     * @param courseId 课程Id
+     * @param amount 定点金额
+     * @param number 购买数量
+     * @param cutOffPercent 金额
+     * @param teachMethod 教授方式
+     * @param courseType 课程类型
+     * @return
+     */
+    public static String getSubmitOrder(String courseId, String amount, String number, String cutOffPercent, String teachMethod, String courseType, String teacherId)
+    {
+        return submitOrder + AESTransformResult.getResult("",
+                "courseId", courseId,
+                "amount", amount,
+                "number",number,
+                "cutOffPercent",cutOffPercent,
+                "teachMethod",teachMethod,
+                "courseType",courseType,
+                "teacherId",teacherId);
     }
 }

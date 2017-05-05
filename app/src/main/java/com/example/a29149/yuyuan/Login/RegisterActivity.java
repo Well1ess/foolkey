@@ -14,6 +14,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
 import com.example.a29149.yuyuan.Util.Secret.AESOperator;
@@ -62,9 +63,16 @@ public class RegisterActivity extends AppCompatActivity {
         userConfig = new UserConfig(RegisterActivity.this);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        AppManager.getInstance().removeActivity(LoginActivity.class);
+    }
+
     @OnClick(R.id.bt_return)
     public void setCancelListener(View view) {
-        this.finish();
+
+        this.onBackPressed();
     }
 
     @OnClick(R.id.commit)
@@ -340,6 +348,9 @@ public class RegisterActivity extends AppCompatActivity {
                         userConfig.setUserInfo(UserConfig.xmlPASSWORD, strPassword);
                         //设置标志位
                         userConfig.setUserInfo(UserConfig.xmlSAVE, true);
+
+                        AppManager.getInstance().finishActivity(LoginActivity.class);
+                        RegisterActivity.this.finish();
 
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intent);

@@ -16,6 +16,7 @@ import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
 import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
@@ -101,6 +102,7 @@ public class LoginActivity extends AppCompatActivity{
     @OnClick(R.id.register)
     public void setRegisterListener(View view)
     {
+        AppManager.getInstance().addActivity(this);
         Intent register = new Intent(this, RegisterActivity.class);
         startActivity(register);
     }

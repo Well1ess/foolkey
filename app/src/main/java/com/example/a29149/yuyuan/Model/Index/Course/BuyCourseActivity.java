@@ -15,12 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.Enum.CourseTypeEnum;
+import com.example.a29149.yuyuan.Enum.TeachMethodEnum;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.Const;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 
@@ -41,7 +44,7 @@ public class BuyCourseActivity extends AppCompatActivity {
     private int mPosition;
 
     //用于保存购买的个数
-    private int mNum = 0;
+    private float mNum = 0;
 
     //购买的个数
     @ViewInject(R.id.num)
@@ -54,19 +57,16 @@ public class BuyCourseActivity extends AppCompatActivity {
     @ViewInject(R.id.teach_type)
     private TextView mTeachType;
 
-    //课程类型选择对话框
-    private Dialog mSelectCourseType;
-
-    //课程类型
-    @ViewInject(R.id.course_type)
-    private TextView mCourseType;
-
     //总的订单金额
     @ViewInject(R.id.money)
     private TextView mOrderMoney;
 
     //单价
-    private int mUnitPrice = 0;
+    private Double mUnitPrice = 0.0;
+    //总金额
+    private double sum;
+    //上课方式
+    private TeachMethodEnum teachMethodEnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +78,10 @@ public class BuyCourseActivity extends AppCompatActivity {
         //初始化
         intent = getIntent();
         mPosition = intent.getIntExtra("position", -1);
-        mUnitPrice = 20;
+        mUnitPrice = GlobalUtil.getInstance().getCourseTeacherDTOs().get(mPosition).getPrice();
 
         //创建授课方式选择的对话框
         createTeachTypeDialog();
-
-        //创建课程类型选择的对话框
-        createCourseTypeDialog();
 
     }
 
@@ -99,7 +96,7 @@ public class BuyCourseActivity extends AppCompatActivity {
         customTitle.setGravity(Gravity.CENTER);
 
 
-        ArrayAdapter<String> teachTypeItem = new ArrayAdapter<String>(this,
+        final ArrayAdapter<String> teachTypeItem = new ArrayAdapter<String>(this,
                 R.layout.dialog_team_project_item,
                 Const.TEACH_METHOD);
 
@@ -108,33 +105,8 @@ public class BuyCourseActivity extends AppCompatActivity {
                 .setAdapter(teachTypeItem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        teachMethodEnum = TeachMethodEnum.values()[which];
                         mTeachType.setText(Const.TEACH_METHOD[which]);
-                        dialog.dismiss();
-                    }
-                }).create();
-    }
-
-    //创建课程类型选择的对话框
-    public void createCourseTypeDialog(){
-        TextView customTitle = new TextView(this);
-        customTitle.setPadding(0, 20, 0, 0);
-        customTitle.setText("请选择课程类型");
-        customTitle.setTextColor(getResources().getColor(R.color.colorPrimary));
-        customTitle.setTextSize(18);
-        customTitle.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        customTitle.setGravity(Gravity.CENTER);
-
-
-        ArrayAdapter<String> teachTypeItem = new ArrayAdapter<String>(this,
-                R.layout.dialog_team_project_item,
-                Const.COURSE_TYPE);
-
-        mSelectCourseType = new AlertDialog.Builder(this)
-                .setCustomTitle(customTitle)
-                .setAdapter(teachTypeItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mCourseType.setText(Const.COURSE_TYPE[which]);
                         dialog.dismiss();
                     }
                 }).create();
@@ -152,22 +124,41 @@ public class BuyCourseActivity extends AppCompatActivity {
     @OnClick(R.id.confirm_buy)
     public void setConfirmBuyListener(View view)
     {
+        if (mPosition == -1)
+        {
+            Toast.makeText(this, "获取课程详细信息失败！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (teachMethodEnum == null)
+        {
+            Toast.makeText(this, "请选择授课方式！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //确定购买（生成订单）
         AppManager.getInstance().finishActivity(CourseActivity.class);
 
         //TODO:网络数据传输
         SubmitNewOrderAction submitNewOrderAction = new SubmitNewOrderAction();
-        submitNewOrderAction.execute();
+        submitNewOrderAction.execute(URL.getSubmitOrder(GlobalUtil.getInstance().getCourseTeacherDTOs().get(mPosition).getId()+"",
+                sum+"",
+                mNum+"",
+                1+"",
+                teachMethodEnum.toString(),
+                CourseTypeEnum.values()[0].toString(),
+                GlobalUtil.getInstance().getCourseTeacherDTOs().get(mPosition).getCreatorId()+""
+                ));
     }
 
     @OnClick(R.id.reduce_num)
     public void setReduceNumListener(View view){
-        if (mNum > 0)
-            mNum--;
+        if (mNum > 0.0)
+            mNum-=0.5;
         else
             mNum = 0;
 
-        float sum = mNum * mUnitPrice;
+        sum = mNum * mUnitPrice;
         mOrderMoney.setText("￥ " + sum);
         mCourseNum.setText(mNum+"");
     }
@@ -175,9 +166,9 @@ public class BuyCourseActivity extends AppCompatActivity {
     @OnClick(R.id.add_num)
     public void setAddNumListener(View view)
     {
-        mNum++;
+        mNum+=0.5;
 
-        float sum = mNum * mUnitPrice;
+        sum = mNum * mUnitPrice;
         mOrderMoney.setText("￥ " + sum);
         mCourseNum.setText(mNum+"");
     }
@@ -187,12 +178,6 @@ public class BuyCourseActivity extends AppCompatActivity {
     public void setTeachTypeListener(View view)
     {
         mSelectTeachType.show();
-    }
-
-    //课程类型的选择
-    @OnClick(R.id.course_type)
-    public void setCourseTypeListener(View view) {
-        mSelectCourseType.show();
     }
 
     public class SubmitNewOrderAction extends AsyncTask<String, Integer, String> {
@@ -208,9 +193,9 @@ public class BuyCourseActivity extends AppCompatActivity {
             HttpURLConnection con = null;
 
             try {
-                java.net.URL url = new java.net.URL(URL.getPublicKeyURL());
+                java.net.URL url = new java.net.URL(params[0]);
                 con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getPublicKeyURL());
+                log.d(this, params[0]);
                 // 设置允许输出，默认为false
                 con.setDoOutput(true);
                 con.setDoInput(true);
@@ -262,9 +247,8 @@ public class BuyCourseActivity extends AppCompatActivity {
 
                         Bundle orderDetail = new Bundle();
                         orderDetail.putString("teachType", mTeachType.getText().toString());
-                        orderDetail.putString("courseType", mCourseType.getText().toString());
                         orderDetail.putString("remark", "");
-                        orderDetail.putString("deduce", 0+"");
+                        orderDetail.putString("deduce", 1+"");
                         orderDetail.putString("num", mNum+"");
                         orderDetail.putString("orderMoney", mOrderMoney.getText().toString());
 

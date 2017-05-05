@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
 
@@ -331,6 +333,13 @@ public class LoginActivity extends AppCompatActivity{
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
                     String token = jsonObject.getString("token");
+                    //获取id,用以推送
+                    String id = jsonObject.getString("id");
+                    Log.i("malei",id);
+                    //设置用户账号用于小米推送
+                    if(!TextUtils.isEmpty(id))
+                         MiPushClient.setUserAccount(LoginActivity.this, id, null);
+
 
                     if (resultFlag.equals("success") && !token.equals("")) {
                         log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());

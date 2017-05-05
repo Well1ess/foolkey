@@ -73,6 +73,8 @@ public class MeMainFragment extends Fragment {
     }
 
     public int DoubleParseInt(Double d1) {
+        if(d1 == null)
+            return 0;
         Double d2 = d1 % 1;
         String str1 = new String((d1 - d2) + "");
         str1 = str1.split("\\.")[0];

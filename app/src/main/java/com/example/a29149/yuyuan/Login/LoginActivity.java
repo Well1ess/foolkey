@@ -338,12 +338,9 @@ public class LoginActivity extends AppCompatActivity{
                     //获取id,用以推送
                     String id = jsonObject.getString("id");
                     Log.i("malei",id);
-                    //设置用户账号用于小米推送
-                    if(!TextUtils.isEmpty(id))
-                         MiPushClient.setUserAccount(LoginActivity.this, id, null);
 
 
-                    if (resultFlag.equals("success") && !token.equals("")) {
+                    if (resultFlag.equals("success") && !token.equals("") && !id.equals("")) {
                         log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());
 
                         //保存Token
@@ -351,6 +348,12 @@ public class LoginActivity extends AppCompatActivity{
 
                         log.d(this, token + " ");
                         Toast.makeText(LoginActivity.this, "登陆成功！", Toast.LENGTH_SHORT).show();
+
+                        //保存id
+                        GlobalUtil.getInstance().setId(id);
+                        //注册用户账号用于小米推送
+                        if(!TextUtils.isEmpty(id))
+                            MiPushClient.setUserAccount(LoginActivity.this, id, null);
 
                         userConfig.clear();
 

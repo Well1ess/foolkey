@@ -33,7 +33,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
-        <activity android:name=".Main.MainActivity"></activity>
+
         <activity android:name=".Main.MainActivity">
 
         </activity>
@@ -62,9 +62,6 @@
         <activity android:name=".Model.Publish.Activity.PublishRewardStudentActivity" />
         <activity android:name=".Model.Publish.Activity.PublishQuestionStudentActivity" />
         <activity android:name=".Model.Me.Recharge.RechargeActivity"></activity>
-        <activity android:name=".Model.Me.Coupon.CouponActivity"></activity>
-        <activity android:name=".Model.Publish.Activity.PublishRewardStudentActivity"></activity>
-        <activity android:name=".Model.Publish.Activity.PublishQuestionStudentActivity"/>
         <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity"/>
         <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity">
 

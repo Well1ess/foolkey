@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by MaLei on 2017/5/4.
  * Email:ml1995@mail.ustc.edu.cn
- * 自定义application
+ * 自定义application，用以注册小米推送
  */
 
 public class MyApplication extends Application {
@@ -31,6 +31,11 @@ public class MyApplication extends Application {
             if(shouldInit()) {
                 MiPushClient.registerPush(this, APP_ID, APP_KEY);
             }
+           /* //设置用户账号用于小米推送
+            MiPushClient.setUserAccount(this, "com.example.a29149.yuyuan.Application", null);*/
+            //设置用户订阅topic
+            String topic = "Java";
+            MiPushClient.subscribe(this, topic, null);
             //打开Log
             LoggerInterface newLogger = new LoggerInterface() {
 
@@ -51,7 +56,7 @@ public class MyApplication extends Application {
             };
             Logger.setLogger(this, newLogger);
         }
-
+        //判断应用是否开启
         private boolean shouldInit() {
             ActivityManager am = ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE));
             List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();

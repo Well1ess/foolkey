@@ -16,6 +16,7 @@ import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
 
@@ -123,6 +124,10 @@ public class SettingActivity extends AppCompatActivity {
                     String resultFlag = jsonObject.getString("result");
 
                     if (resultFlag.equals("success")) {
+
+                        //注销账户时反注销推送id，用以不接受消息
+                        String id = GlobalUtil.getInstance().getId();
+                        MiPushClient.unsetUserAccount(SettingActivity.this, id, null);
 
                         UserConfig mUserConfig = new UserConfig(SettingActivity.this);
                         mUserConfig.clear();

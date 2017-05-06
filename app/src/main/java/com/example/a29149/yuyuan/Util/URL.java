@@ -6,6 +6,8 @@ package com.example.a29149.yuyuan.Util;
  */
 
 public class URL {
+    public static final String address = "172.29.23.90:8080";
+
     public static final String address = "10.53.179.207:8080";
 
     //获取公钥

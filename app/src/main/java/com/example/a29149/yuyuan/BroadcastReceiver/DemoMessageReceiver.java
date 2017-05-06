@@ -1,8 +1,10 @@
 package com.example.a29149.yuyuan.BroadcastReceiver;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
+import com.example.a29149.yuyuan.Main.MainActivity;
 import com.xiaomi.mipush.sdk.ErrorCode;
 import com.xiaomi.mipush.sdk.MiPushClient;
 import com.xiaomi.mipush.sdk.MiPushCommandMessage;
@@ -57,6 +59,12 @@ public class DemoMessageReceiver extends PushMessageReceiver {
     @Override
     public void onNotificationMessageClicked(Context context, MiPushMessage message) {
         mMessage = message.getContent();
+        //在此处做逻辑处理,用户点击后跳转到指定的activity中
+        Intent intent = new Intent();
+        intent.setClass(context.getApplicationContext(), MainActivity.class);
+        //百度云推送默认点击后跳转到指定页面 需加上下面代码才能跳转到指定位置
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.getApplicationContext().startActivity(intent);
         //打印消息方便测试
         System.out.println("用户点击了通知消息");
         System.out.println("通知消息是" + message.toString());

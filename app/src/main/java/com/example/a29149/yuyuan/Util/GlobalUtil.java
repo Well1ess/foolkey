@@ -47,6 +47,8 @@ public class GlobalUtil {
     private List<CourseTeacherDTO> courseTeacherDTOs;
     //学生信息
     private StudentDTO studentDTO;
+    //用户登录获取的id，用以小米推送
+    private String id;
 
     public List<String> getContent() {
         if (content == null)
@@ -118,6 +120,15 @@ public class GlobalUtil {
     public void setStudentDTO(StudentDTO studentDTO) {
         this.studentDTO = studentDTO;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }
 
 

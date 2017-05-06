@@ -6,7 +6,6 @@ package com.example.a29149.yuyuan.Util;
  */
 
 public class URL {
-    public static final String address = "192.168.31.135:8080";
     public static final String address = "10.53.179.207:8080";
 
     //获取公钥
@@ -54,6 +53,7 @@ public class URL {
     public static String getLoginURL(String cipherText) {
         return loginURL + "cipherText=" + cipherText;
     }
+
 
     //获取学生发布悬赏
     public static String getStudentPublishRewardURL(String clearText) {

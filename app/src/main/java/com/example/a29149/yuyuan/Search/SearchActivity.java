@@ -104,6 +104,9 @@ public class SearchActivity extends AppCompatActivity {
 
     private int screenWidth = 0;
 
+    //当前搜索什么
+    private String condition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,18 +142,23 @@ public class SearchActivity extends AppCompatActivity {
                 switch (checkedId) {
                     case R.id.search_course:
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FIRST_TAG);
+                        condition = "course";
                         break;
                     case R.id.search_reward:
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_SECOND_TAG);
+                        condition = "reward";
                         break;
                     case R.id.search_teacher:
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_THIRD_TAG);
+                        condition = "teacher";
                         break;
                     case R.id.search_QA:
                         mFragmentTabHost.setCurrentTabByTag(SEARCH_OF_FOUR_TAG);
+                        condition = "question";
                         break;
                     case R.id.search_article:
                         mFragmentTabHost.setCurrentTabByTag(SEARCH_OF_FIFTH_TAG);
+                        condition = "article";
                         break;
                     default:
                         break;
@@ -222,8 +230,9 @@ public class SearchActivity extends AppCompatActivity {
 
     //搜索方法
     private void search(String keyValue) {
-        //TODO:网络数据传输
-        Toast.makeText(this, keyValue, Toast.LENGTH_SHORT).show();
+        //TODO:网络传输, page恒为1
+        SearchAction searchAction = new SearchAction();
+        searchAction.execute(condition, "1", keyValue);
     }
 
     //对子菜单进行初始化

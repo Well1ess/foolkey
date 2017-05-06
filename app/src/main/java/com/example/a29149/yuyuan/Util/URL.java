@@ -6,7 +6,6 @@ package com.example.a29149.yuyuan.Util;
  */
 
 public class URL {
-    public static final String address = "172.29.23.90:8080";
 
     public static final String address = "10.53.179.207:8080";
 
@@ -23,22 +22,23 @@ public class URL {
     //更新个人信息/获取个人信息
     public static final String selfInfoURL = "http://" + address + "/aes/getMyInfo?";
     //获取悬赏任务
-    public static final String rewordURL = "http://" +address +"/aes/get";
+    public static final String rewordURL = "http://" + address + "/aes/get";
     //切换身份
-    public static final String switchToTeacher = "http://" +address + "/switchToTeacher?";
+    public static final String switchToTeacher = "http://" + address + "/switchToTeacher?";
     //获取课程
-    public static final String getHotCourseURL = "http://" +address +"/courseTeacher/getCourseTeacherPopular?";
+    public static final String getHotCourseURL = "http://" + address + "/courseTeacher/getCourseTeacherPopular?";
     //学生发布悬赏
     public static final String studentPublishRewardURL = "http://" + address + "/courseStudent/publishRewardCourse?";
     //老师发布课程
     public static final String teacherPublishCoursedURL = "http://" + address + "/courseTeacher/publishCourseTeacher?";
-
+    //搜索
+    public static final String searchURL = "http://" + address + "/search?";
 
     public static final String studentPublishXuanshangURL = "http://" + address + "/courseStudent/publishRewardCourse?";
     //充值
-    public static final String rechargeURL = "http://" +address + "/aes/recharge?";
+    public static final String rechargeURL = "http://" + address + "/aes/recharge?";
     //提交订单
-    public static final String submitOrder = "http://" +address +"/aes/placeOrderTeacherCourse?";
+    public static final String submitOrder = "http://" + address + "/aes/placeOrderTeacherCourse?";
 
 
     //获取公钥
@@ -61,12 +61,14 @@ public class URL {
     public static String getStudentPublishRewardURL(String clearText) {
         return studentPublishRewardURL + "clearText=" + clearText;
     }
+
     //获取老师发布课程
     public static String getTeacherPublishCoursedURL(String clearText) {
         return teacherPublishCoursedURL + "clearText=" + clearText;
     }
 
     //注销
+
     /**
      * @param clearText  明文Object，包含token
      * @param validation 密文
@@ -90,39 +92,44 @@ public class URL {
     }
 
     //切换身份
-    public static String getSwitchToTeacher()
-    {
-        return switchToTeacher + "token="+GlobalUtil.getInstance().getToken();
+    public static String getSwitchToTeacher() {
+        return switchToTeacher + "token=" + GlobalUtil.getInstance().getToken();
     }
+
     //获取热门课程
-    public static String getGetHotCourseURL(String str){
-        return getHotCourseURL + "clearText="+str;
+    public static String getGetHotCourseURL(String str) {
+        return getHotCourseURL + "clearText=" + str;
     }
+
     //充值
-    public static String getRechargeURL(String amount)
-    {
-        return rechargeURL +AESTransformResult.getResult("", "amount", amount);
+    public static String getRechargeURL(String amount) {
+        return rechargeURL + AESTransformResult.getResult("", "amount", amount);
     }
 
     //提交订单
+
     /**
-     * @param courseId 课程Id
-     * @param amount 定点金额
-     * @param number 购买数量
+     * @param courseId      课程Id
+     * @param amount        定点金额
+     * @param number        购买数量
      * @param cutOffPercent 金额
-     * @param teachMethod 教授方式
-     * @param courseType 课程类型
+     * @param teachMethod   教授方式
+     * @param courseType    课程类型
      * @return
      */
-    public static String getSubmitOrder(String courseId, String amount, String number, String cutOffPercent, String teachMethod, String courseType, String teacherId)
-    {
+    public static String getSubmitOrder(String courseId, String amount, String number, String cutOffPercent, String teachMethod, String courseType, String teacherId) {
         return submitOrder + AESTransformResult.getResult("",
                 "courseId", courseId,
                 "amount", amount,
-                "number",number,
-                "cutOffPercent",cutOffPercent,
-                "teachMethod",teachMethod,
-                "courseType",courseType,
-                "teacherId",teacherId);
+                "number", number,
+                "cutOffPercent", cutOffPercent,
+                "teachMethod", teachMethod,
+                "courseType", courseType,
+                "teacherId", teacherId);
+    }
+
+    public static String getSearchURL(String obj)
+    {
+        return searchURL + "clearText="+obj;
     }
 }

@@ -49,6 +49,62 @@ public class GlobalUtil {
     private StudentDTO studentDTO;
     //用户登录获取的id，用以小米推送
     private String id;
+    //搜索用的List
+    private List<Object> courseList;
+    private List<Object> rewardList;
+    private List<Object> articleList;
+    private List<Object> teacherList;
+    private List<Object> questionList;
+
+    public List<Object> getCourseList() {
+        if (courseList == null)
+            courseList = new ArrayList<>();
+        return courseList;
+    }
+
+    public void setCourseList(List<Object> courseList) {
+        this.courseList = courseList;
+    }
+
+    public List<Object> getRewardList() {
+        if (rewardList == null)
+            rewardList = new ArrayList<>();
+        return rewardList;
+    }
+
+    public void setRewardList(List<Object> rewardList) {
+        this.rewardList = rewardList;
+    }
+
+    public List<Object> getArticleList() {
+        if (articleList == null)
+            articleList = new ArrayList<>();
+        return articleList;
+    }
+
+    public void setArticleList(List<Object> articleList) {
+        this.articleList = articleList;
+    }
+
+    public List<Object> getTeacherList() {
+        if (teacherList == null)
+            teacherList = new ArrayList<>();
+        return teacherList;
+    }
+
+    public void setTeacherList(List<Object> teacherList) {
+        this.teacherList = teacherList;
+    }
+
+    public List<Object> getQuestionList() {
+        if (questionList == null)
+            questionList = new ArrayList<>();
+        return questionList;
+    }
+
+    public void setQuestionList(List<Object> questionList) {
+        this.questionList = questionList;
+    }
 
     public List<String> getContent() {
         if (content == null)

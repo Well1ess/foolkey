@@ -59,6 +59,13 @@ public class MeMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me_main, container, false);
+        view.findViewById(R.id.change_role).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ApplyAuthenticationTeacherActivity.ApplyAuthenticationTeacherAction.class);
+                startActivity(intent);
+            }
+        });
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);
 
@@ -107,8 +114,7 @@ public class MeMainFragment extends Fragment {
         //TODO:网络通信
         ChangeRole changeRole = new ChangeRole();
         changeRole.execute();
-        Intent intent = new Intent(getActivity(), ApplyAuthenticationTeacherActivity.ApplyAuthenticationTeacherAction.class);
-        startActivity(intent);
+
     }
 
     @Override

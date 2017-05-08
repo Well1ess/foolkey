@@ -49,6 +49,8 @@ public class GlobalUtil {
     private StudentDTO studentDTO;
     //用户登录获取的id，用以小米推送
     private String id;
+    //用户记录发布悬赏时填写的信息
+    private String[] rewardChooseContent = new String[7];
     //搜索用的List
     private List<Object> courseList;
     private List<Object> rewardList;
@@ -183,6 +185,14 @@ public class GlobalUtil {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String[] getRewardChooseContent() {
+        return rewardChooseContent;
+    }
+
+    public void setRewardChooseContent(String[] rewardChooseContent) {
+        this.rewardChooseContent = rewardChooseContent;
     }
 
 }

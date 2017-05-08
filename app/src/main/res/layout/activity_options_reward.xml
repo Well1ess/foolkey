@@ -99,6 +99,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:textColor="@color/grey"
             android:text="不限"/>
     </LinearLayout>
@@ -134,6 +135,7 @@
                 android:id="@+id/cb_whiteman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:textColor="@color/grey"
                 android:text="小白"/>
             <TextView
@@ -218,6 +220,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:textColor="@color/grey"
             android:text="不限"/>
     </LinearLayout>

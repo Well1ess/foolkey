@@ -39,6 +39,8 @@ public class URL {
     public static final String rechargeURL = "http://" + address + "/aes/recharge?";
     //提交订单
     public static final String submitOrder = "http://" + address + "/aes/placeOrderTeacherCourse?";
+    //申请认证
+    public static final String applyVerifyTeacher = "http://" + address + "/applyToVerifyTeacher?";
 
 
     //获取公钥
@@ -132,4 +134,10 @@ public class URL {
     {
         return searchURL + "clearText="+obj;
     }
+
+    //获取认证老师的url
+    public static String getApplyVerifyTeacher(String token) {
+        return applyVerifyTeacher + "clearText" + token;
+    }
+
 }

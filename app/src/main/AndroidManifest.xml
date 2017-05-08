@@ -72,7 +72,6 @@
         </activity>
         <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity"/>
         <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity"/>
-        <activity android:name=".Model.Publish.Activity.ApplyAuthenticationTeacherActivity"/>
 
         <!--小米推送所需服务-->
         <service

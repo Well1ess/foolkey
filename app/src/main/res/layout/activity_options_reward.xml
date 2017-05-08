@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -188,6 +194,45 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:focusable="false"
+        android:gravity="center"
+        android:text="上课方式"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_onLine"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:text="线上"/>
+        <CheckBox
+            android:id="@+id/cb_offLine"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:text="线下"/>
+        <CheckBox
+            android:id="@+id/cb_onAndOff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textColor="@color/grey"
+            android:text="不限"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:focusable="false"
         android:gravity="center"
@@ -224,12 +269,8 @@
             android:textColor="@color/grey"
             android:text="不限"/>
     </LinearLayout>
-
-
-
-
-
 </LinearLayout>
+</ScrollView>
 
 
 

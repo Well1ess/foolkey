@@ -50,7 +50,7 @@ public class GlobalUtil {
     //用户登录获取的id，用以小米推送
     private String id;
     //用户记录发布悬赏时填写的信息
-    private String[] rewardChooseContent = new String[7];
+    private String[] rewardChooseContent = new String[8];
     //搜索用的List
     private List<Object> courseList;
     private List<Object> rewardList;

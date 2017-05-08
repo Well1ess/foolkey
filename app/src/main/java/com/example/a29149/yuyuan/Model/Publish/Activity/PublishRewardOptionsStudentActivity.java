@@ -46,6 +46,9 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
     private CheckBox mMuchman;//熟练
     private CheckBox mOnlyTeacher;//仅老师
     private CheckBox mEverybaby;//不限
+    private CheckBox mOnLine;//线上
+    private CheckBox mOffLine;//线下
+    private CheckBox mOnAndOff;//不限
 
     private String[] rewardChooseContent;//保存用户填写的信息
 
@@ -80,6 +83,13 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
         mEverybaby = (CheckBox) findViewById(R.id.cb_everybady);
         mEverybaby.setOnClickListener(this);
 
+        mOnLine = (CheckBox) findViewById(R.id.cb_onLine);
+        mOnLine.setOnClickListener(this);
+        mOffLine = (CheckBox) findViewById(R.id.cb_offLine);
+        mOffLine.setOnClickListener(this);
+        mOnAndOff = (CheckBox) findViewById(R.id.cb_onAndOff);
+        mOnAndOff.setOnClickListener(this);
+
     }
 
     @Override
@@ -107,6 +117,15 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
             case R.id.cb_littleman:
                 chooseLittleMan();
                 break;
+            case R.id.cb_onLine:
+                chooseOnLine();
+                break;
+            case R.id.cb_offLine:
+                chooseOffLine();
+                break;
+            case R.id.cb_onAndOff:
+                chooseOnAndOff();
+                break;
             case R.id.cb_muchman:
                 chooseMuchMan();
                 break;
@@ -120,6 +139,8 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
                 break;
         }
     }
+
+
 
     private void goNext() {
         //提交用户的信息
@@ -178,16 +199,38 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
         mLittleman.setChecked(false);
     }
 
+    //选择线上
+    private void chooseOnLine() {
+        rewardChooseContent[6] = mOnLine.getText().toString();
+        //mWorkday.setTextColor(Integer.parseInt("9ccc65"));
+        mOffLine.setChecked(false);
+        mOnAndOff.setChecked(false);
+    }
+    //选择线下
+    private void chooseOnAndOff() {
+        rewardChooseContent[6] = mOnAndOff.getText().toString();
+        //mWorkday.setTextColor(Integer.parseInt("9ccc65"));
+        mOffLine.setChecked(false);
+        mOnLine.setChecked(false);
+    }
+    //选择线下或线上
+    private void chooseOffLine() {
+        rewardChooseContent[6] = mOffLine.getText().toString();
+        //mWorkday.setTextColor(Integer.parseInt("9ccc65"));
+        mOnLine.setChecked(false);
+        mOnAndOff.setChecked(false);
+    }
+
     //选择了仅老师
     private void chooseOnlyTeacher() {
-        rewardChooseContent[6] = mOnlyTeacher.getText().toString();
+        rewardChooseContent[7] = mOnlyTeacher.getText().toString();
         //mWorkday.setTextColor(Integer.parseInt("9ccc65"));
         mEverybaby.setChecked(false);
     }
 
     //选择了不限
     private void chooseEveryBady() {
-        rewardChooseContent[6] = mEverybaby.getText().toString();
+        rewardChooseContent[7] = mEverybaby.getText().toString();
         //mWorkday.setTextColor(Integer.parseInt("9ccc65"));
         mOnlyTeacher.setChecked(false);
     }
@@ -225,8 +268,8 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
                 target.put("description",mChooseContent[2]);
                 target.put("price",mChooseContent[3]);
                 target.put("courseTimeDayEnum",mChooseContent[4]);
-                target.put("teachMethodEnum","不限");
-                target.put("teachRequirementEnum",mChooseContent[6]);
+                target.put("teachMethodEnum",mChooseContent[6]);
+                target.put("teachRequirementEnum",mChooseContent[7]);
                 target.put("studentBaseEnum",mChooseContent[5]);
                 java.net.URL url = new java.net.URL(URL.getStudentPublishRewardURL(target.toString()));
                 Log.i("malei",target.toString());

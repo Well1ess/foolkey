@@ -39,6 +39,7 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apply_reward_teacher);
         initView();
+
     }
 
     private void initView() {

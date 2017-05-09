@@ -328,8 +328,9 @@ public class RegisterActivity extends AppCompatActivity {
                     if (resultFlag.equals("success") && !token.equals("")) {
                         log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());
 
-                        //进行解密
-                        String TOKEN = AESOperator.getInstance().decrypt(token);
+                       /* //进行解密
+                        String TOKEN = AESOperator.getInstance().decrypt(token);*/
+                        String TOKEN = token;
 
                         //保存Token
                         GlobalUtil.getInstance().setToken(TOKEN);

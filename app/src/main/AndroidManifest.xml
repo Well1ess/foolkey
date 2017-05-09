@@ -16,15 +16,18 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--小米推送所需权限-->
+    <!-- 小米推送所需权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <permission android:name="com.example.a29149.yuyuan.permission.MIPUSH_RECEIVE" android:protectionLevel="signature" />
-    <!--这里com.xiaomi.mipushdemo改成app的包名-->
-    <uses-permission android:name="com.example.a29149.yuyuan.permission.MIPUSH_RECEIVE" />
-    <!--这里com.xiaomi.mipushdemo改成app的包名-->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
+    <permission
+        android:name="com.example.a29149.yuyuan.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signature" />
+    <!-- 这里com.xiaomi.mipushdemo改成app的包名 -->
+    <uses-permission android:name="com.example.a29149.yuyuan.permission.MIPUSH_RECEIVE" />
+
+    <!-- 这里com.xiaomi.mipushdemo改成app的包名 -->
     <application
         android:name=".Application.MyApplication"
         android:allowBackup="true"
@@ -33,16 +36,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
-
-        <activity android:name=".Main.MainActivity">
-
-        </activity>
+        <activity android:name=".Main.MainActivity"></activity>
         <activity android:name=".Login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Login.RegisterActivity" />
         <activity android:name=".Login.ModifyPwdActivity" />
@@ -51,8 +46,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Model.Index.Course.CourseActivity" />
         <activity android:name=".OriginIndex.OriginIndexActivity" />
-        <activity android:name=".Model.Discovery.Activity.RewardActivity" >
-        </activity>
+        <activity android:name=".Model.Discovery.Activity.RewardActivity"></activity>
         <activity android:name=".Model.Discovery.Activity.QAActivity" />
         <activity android:name=".Model.Discovery.Activity.ArticleActivity" />
         <activity android:name=".Model.Me.Setting.SettingActivity" />
@@ -61,59 +55,57 @@
         <activity android:name=".Model.Me.Coupon.CouponActivity" />
         <activity android:name=".Model.Publish.Activity.PublishRewardStudentActivity" />
         <activity android:name=".Model.Publish.Activity.PublishQuestionStudentActivity" />
-        <activity android:name=".Model.Me.Recharge.RechargeActivity"></activity>
-        <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity"/>
-        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity">
+        <activity android:name=".Model.Me.Recharge.RechargeActivity" />
+        <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity" />
+        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity"></activity>
+        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity"></activity>
+        <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity" />
+        <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity" />
 
-        </activity>
-
-        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity">
-
-        </activity>
-        <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity"/>
-        <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity"/>
-
-        <!--小米推送所需服务-->
+        <!-- 小米推送所需服务 -->
         <service
+            android:name="com.xiaomi.push.service.XMPushService"
             android:enabled="true"
-            android:process=":pushservice"
-            android:name="com.xiaomi.push.service.XMPushService"/>
+            android:process=":pushservice" />
         <service
             android:name="com.xiaomi.push.service.XMJobService"
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:process=":pushservice" />
-        <!--注：此service必须在3.0.1版本以后（包括3.0.1版本）加入-->
+        <!-- 注：此service必须在3.0.1版本以后（包括3.0.1版本）加入 -->
         <service
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
             android:enabled="true"
-            android:exported="true"
-            android:name="com.xiaomi.mipush.sdk.PushMessageHandler" />
-        <service android:enabled="true"
-                 android:name="com.xiaomi.mipush.sdk.MessageHandleService" />
-        <!--注：此service必须在2.2.5版本以后（包括2.2.5版本）加入-->
+            android:exported="true" />
+        <service
+            android:name="com.xiaomi.mipush.sdk.MessageHandleService"
+            android:enabled="true" />
+        <!-- 注：此service必须在2.2.5版本以后（包括2.2.5版本）加入 -->
         <receiver
-            android:exported="true"
-            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver" >
+            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
         <receiver
+            android:name="com.xiaomi.push.service.receivers.PingReceiver"
             android:exported="false"
-            android:process=":pushservice"
-            android:name="com.xiaomi.push.service.receivers.PingReceiver" >
+            android:process=":pushservice">
             <intent-filter>
                 <action android:name="com.xiaomi.push.PING_TIMER" />
             </intent-filter>
         </receiver>
 
-        <!--配置自定义的BroadcastReceiver-->
+        <!-- 配置自定义的BroadcastReceiver -->
         <receiver
-            android:exported="true"
-            android:name="com.example.a29149.yuyuan.BroadcastReceiver.DemoMessageReceiver">
-            <!--这里com.xiaomi.mipushdemo.DemoMessageRreceiver改成app中定义的完整类名-->
+            android:name=".BroadcastReceiver.DemoMessageReceiver"
+            android:exported="true">
+
+            <!-- 这里com.xiaomi.mipushdemo.DemoMessageRreceiver改成app中定义的完整类名 -->
             <intent-filter>
                 <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
             </intent-filter>
@@ -125,6 +117,13 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".Model.Me.Reward.OwnerRewardActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

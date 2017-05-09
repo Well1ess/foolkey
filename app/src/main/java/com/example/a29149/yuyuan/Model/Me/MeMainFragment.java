@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
+import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
@@ -89,6 +90,13 @@ public class MeMainFragment extends Fragment {
         str1 = str1.split("\\.")[0];
         int i1 = Integer.parseInt(str1);
         return i1;
+    }
+
+    @OnClick(R.id.owner_reward)
+    public void setCheckReward(View view)
+    {
+        //跳转到悬赏详情
+        startActivity(new Intent(getActivity(), OwnerRewardActivity.class));
     }
 
     @OnClick(R.id.setting)

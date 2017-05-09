@@ -189,8 +189,8 @@ public class GlobalUtil {
 
 
     public TeacherDTO getTeacherDTO() {
-        if (teacherDTO == null)
-            teacherDTO = new TeacherDTO();
+      /*  if (teacherDTO == null)
+            teacherDTO = new TeacherDTO();*/
         return teacherDTO;
     }
 

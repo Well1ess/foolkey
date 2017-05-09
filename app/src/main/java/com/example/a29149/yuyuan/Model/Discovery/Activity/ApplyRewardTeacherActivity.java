@@ -64,9 +64,11 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
     private void applyRewardTeacher() {
         //验证身份
         TeacherDTO teacherDTO = GlobalUtil.getInstance().getTeacherDTO();
+        Log.i("malei",teacherDTO.toString());
         if(teacherDTO != null)
         {
             String verifyState = teacherDTO.getVerifyState();
+            Log.i("malei",verifyState);
             //如果是已认证老师或者是认证中的老师，则直接接单
             if(verifyState.equals("processing") || verifyState.equals("verified"))
             {

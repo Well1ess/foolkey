@@ -340,7 +340,7 @@ public class LoginActivity extends AppCompatActivity{
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
                     String token = jsonObject.getString("token");
-                    //获取学生信息DTO
+                    /*//获取学生信息DTO
                     log.d(this, jsonObject.getString("StudentDTO"));
                     java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
                     }.getType();
@@ -356,7 +356,7 @@ public class LoginActivity extends AppCompatActivity{
                     {
                         //存储老师DTO
                         GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
-                    }
+                    }*/
                     //获取id,用以推送
                     String id = jsonObject.getString("id");
                     Log.i("malei",id);
@@ -370,6 +370,8 @@ public class LoginActivity extends AppCompatActivity{
 
                         log.d(this, token + " ");
                         Toast.makeText(LoginActivity.this, "登陆成功！", Toast.LENGTH_SHORT).show();
+                        //登录成功后刷新用户信息
+                        new RefreshSelfInfo(LoginActivity.this).execute();
 
                         //保存id
                         GlobalUtil.getInstance().setId(id);

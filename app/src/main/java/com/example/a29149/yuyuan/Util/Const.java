@@ -16,5 +16,6 @@ public class Const {
     public static final int FROM_ME_FRAGMENT_TO_RECHARGE = 1;
 
     //悬赏标签
+
     public static final String[] REWARD_TAG = {"Java","C", "Javascript","Python","PHP","Html5","Android","iOS","数据库","其它"};
 }

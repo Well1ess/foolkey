@@ -59,19 +59,39 @@
         <activity android:name=".Model.Index.Course.BuyCourseActivity" />
         <activity android:name=".Model.Index.Course.NewCourseOrderActivity" />
         <activity android:name=".Model.Me.Coupon.CouponActivity" />
-        <activity android:name=".Model.Publish.Activity.PublishRewardStudentActivity" />
-        <activity android:name=".Model.Publish.Activity.PublishQuestionStudentActivity" />
         <activity android:name=".Model.Me.Recharge.RechargeActivity"></activity>
+
+        <!-- 学生发布悬赏信息描述，已废弃-->
+        <activity android:name=".Model.Publish.Activity.PublishRewardStudentActivity" />
+        <!-- 学生发布问题信息描述-->
+        <activity android:name=".Model.Publish.Activity.PublishQuestionStudentActivity" />
+        <!-- 老师发布文章描述-->
         <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity"/>
+        <!-- 老师发布课程信息描述,已废弃-->
         <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity">
-
         </activity>
-
+        <!-- 学生发布悬赏信息描述-->
         <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity">
-
         </activity>
+        <!-- 学生发布悬赏价格信息描述-->
         <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity"/>
+        <!-- 学生发布悬赏选项信息描述-->
         <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity"/>
+
+        <!-- 老师发布课程信息描述-->
+        <activity android:name=".Model.Publish.Activity.PublishCoursedDescribeTeacherActivity"/>
+        <!-- 老师发布课程价格描述-->
+        <activity android:name=".Model.Publish.Activity.PublishCoursePriceTeacherActivity"/>
+        <!-- 老师发布课程选项信息描述-->
+        <activity android:name=".Model.Publish.Activity.PublishCourseOptionsTeacherActivity"/>
+
+
+       <!-- 申请认证老师-->
+        <activity android:name=".Model.Publish.Activity.ApplyAuthenticationTeacherActivity"/>
+
+        <!--老师接单悬赏-->
+        <activity android:name=".Model.Discovery.Activity.ApplyRewardTeacherActivity"/>
+
 
         <!--小米推送所需服务-->
         <service

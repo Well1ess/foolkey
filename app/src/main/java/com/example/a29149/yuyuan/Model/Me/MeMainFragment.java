@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CouponDTO;
+import com.example.a29149.yuyuan.Model.Discovery.Activity.ApplyRewardTeacherActivity;
 import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
@@ -63,6 +64,14 @@ public class MeMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ApplyAuthenticationTeacherActivity.ApplyAuthenticationTeacherAction.class);
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.tv_reward).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "申请悬赏", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ApplyRewardTeacherActivity.class);
                 startActivity(intent);
             }
         });

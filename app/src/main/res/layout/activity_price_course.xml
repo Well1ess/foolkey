@@ -63,7 +63,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/ed_reward_price"
+            android:id="@+id/ed_course_price"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"

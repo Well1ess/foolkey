@@ -3,6 +3,7 @@ package com.example.a29149.yuyuan.Util;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
+import com.example.a29149.yuyuan.DTO.TeacherDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +48,14 @@ public class GlobalUtil {
     private List<CourseTeacherDTO> courseTeacherDTOs;
     //学生信息
     private StudentDTO studentDTO;
+    //老师信息
+    private TeacherDTO teacherDTO;
     //用户登录获取的id，用以小米推送
     private String id;
     //用户记录发布悬赏时填写的信息
     private String[] rewardChooseContent = new String[8];
+    //用户记录发布课程时填写的信息
+    private String[] courseChooseContent = new String[7];
     //搜索用的List
     private List<Object> courseList;
     private List<Object> rewardList;
@@ -179,6 +184,17 @@ public class GlobalUtil {
         this.studentDTO = studentDTO;
     }
 
+
+    public TeacherDTO getTeacherDTO() {
+        if (teacherDTO == null)
+            teacherDTO = new TeacherDTO();
+        return teacherDTO;
+    }
+
+    public void setTeacherDTO(TeacherDTO teacherDTO) {
+        this.teacherDTO = teacherDTO;
+    }
+
     public String getId() {
         return id;
     }
@@ -193,6 +209,14 @@ public class GlobalUtil {
 
     public void setRewardChooseContent(String[] rewardChooseContent) {
         this.rewardChooseContent = rewardChooseContent;
+    }
+
+    public String[] getCourseChooseContent() {
+        return courseChooseContent;
+    }
+
+    public void setCourseChooseContent(String[] courseChooseContent) {
+        this.courseChooseContent = courseChooseContent;
     }
 
 }

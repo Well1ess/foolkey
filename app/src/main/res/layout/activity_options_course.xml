@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorPrimary"
+        android:elevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="可选项"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/iv_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="18dp"
+                android:background="?attr/homeAsUpIndicator"
+                android:backgroundTint="@color/white"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_go"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="发布"
+                android:textSize="16sp"
+                android:clickable="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="18dp"
+                android:backgroundTint="@color/white"
+                android:gravity="center"/>
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:focusable="false"
+        android:gravity="center"
+        android:text="上课时间"
+        android:textSize="16sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:background="@color/dark_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_workday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:text="工作日"/>
+        <CheckBox
+            android:id="@+id/cb_holiday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:text="节假日"/>
+        <CheckBox
+            android:id="@+id/cb_everyday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textColor="@color/grey"
+            android:text="不限"/>
+    </LinearLayout>
+
+    <include layout="@layout/item_publish_course_duration"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:focusable="false"
+        android:gravity="center"
+        android:text="上课方式"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_onLine"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:text="线上"/>
+        <CheckBox
+            android:id="@+id/cb_offLine"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:text="线下"/>
+        <CheckBox
+            android:id="@+id/cb_onAndOff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textColor="@color/grey"
+            android:text="不限"/>
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>
+
+
+

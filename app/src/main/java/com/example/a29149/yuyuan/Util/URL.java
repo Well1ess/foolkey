@@ -41,6 +41,8 @@ public class URL {
     public static final String submitOrder = "http://" + address + "/aes/placeOrderTeacherCourse?";
     //申请认证
     public static final String applyVerifyTeacherURL = "http://" + address + "/applyToVerifyTeacher?";
+    //老师申请接受悬赏
+    public static final String applyRewardTeacherURL = "http://" + address + "/aes/placeOrderStudentCourse?";
 
 
     //获取公钥
@@ -138,6 +140,13 @@ public class URL {
     //获取认证老师的url
     public static String getApplyVerifyTeacher(String token) {
         return applyVerifyTeacherURL + "clearText=" + token;
+    }
+
+    //老师申请接受悬赏
+    public static String getApplyRewardTeacherURL(String clearText, String validation, String cipherText) {
+        return applyRewardTeacherURL+ "clearText=" + clearText +
+                "&validation=" + validation +
+                "&cipherText=" + cipherText;
     }
 
 }

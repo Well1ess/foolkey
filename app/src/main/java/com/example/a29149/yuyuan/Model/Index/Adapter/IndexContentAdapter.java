@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
+import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 
@@ -30,17 +30,17 @@ public class IndexContentAdapter extends BaseAdapter {
 
     public void updateList() {
         this.notifyDataSetChanged();
-        log.d(this, GlobalUtil.getInstance().getCourseTeacherDTOs().size());
+        log.d(this, GlobalUtil.getInstance().getCourseTeacherPopularDTOs().size());
     }
 
     @Override
     public int getCount() {
-        return GlobalUtil.getInstance().getCourseTeacherDTOs().size();
+        return GlobalUtil.getInstance().getCourseTeacherPopularDTOs().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return GlobalUtil.getInstance().getCourseTeacherDTOs().get(position);
+        return GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(position);
     }
 
     @Override
@@ -58,9 +58,9 @@ public class IndexContentAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.title.setText(GlobalUtil.getInstance().getCourseTeacherDTOs().get(position).getTopic());
-        viewHolder.content.setText(GlobalUtil.getInstance().getCourseTeacherDTOs().get(position).getDescription());
-        viewHolder.author.setText(GlobalUtil.getInstance().getCourseTeacherDTOs().get(position).getCreatorId()+"");
+        viewHolder.title.setText(GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(position).getCourseTeacherDTO().getTopic());
+        viewHolder.content.setText(GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(position).getCourseTeacherDTO().getDescription());
+        viewHolder.author.setText(GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(position).getCourseTeacherDTO().getCreatorId()+"");
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

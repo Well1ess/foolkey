@@ -178,6 +178,7 @@ public class SearchActivity extends AppCompatActivity {
 
         mFragmentTabHost.setCurrentTab(0);
         mSearchCourse.setTextColor(getResources().getColor(R.color.orange));
+        condition = "course";
 
         fragmentList.clear();
         fragmentList.add(new CourseSearchFragment());

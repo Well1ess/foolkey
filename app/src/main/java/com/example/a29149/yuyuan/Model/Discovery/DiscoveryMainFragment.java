@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.Model.Discovery.Fragment.ArticleDiscoveryFragment;
 import com.example.a29149.yuyuan.Model.Discovery.Fragment.QADiscoveryFragment;
 import com.example.a29149.yuyuan.Model.Discovery.Fragment.RewardDiscoveryFragment;
@@ -111,6 +112,7 @@ public class DiscoveryMainFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.search_reward:
+                        MainActivity.shapeLoadingDialog.show();
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_FIRST_TAG);
                         break;
                     case R.id.search_QA:

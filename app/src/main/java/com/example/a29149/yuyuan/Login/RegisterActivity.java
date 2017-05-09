@@ -17,7 +17,6 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
-import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
@@ -288,8 +287,8 @@ public class RegisterActivity extends AppCompatActivity {
                 con.setConnectTimeout(5 * 1000);
                 con.setReadTimeout(10 * 1000);
 
-                con.setRequestMethod("GET");
-                con.setRequestProperty("contentType", "GBK");
+                con.setRequestMethod("POST");
+                con.setRequestProperty("contentType", "UTF-8");
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());

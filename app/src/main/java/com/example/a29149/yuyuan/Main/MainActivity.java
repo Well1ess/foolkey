@@ -23,7 +23,6 @@ import com.example.a29149.yuyuan.Model.Index.IndexMainFragment;
 import com.example.a29149.yuyuan.Model.Me.MeMainFragment;
 import com.example.a29149.yuyuan.Model.Order.fragment.OrderFragment;
 import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardDescribeStudentActivity;
-import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardStudentActivity;
 import com.example.a29149.yuyuan.Model.PublishMainFragment;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         shapeLoadingDialog = new ShapeLoadingDialog(this);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
-        shapeLoadingDialog.getDialog().setCancelable(false);
+        //shapeLoadingDialog.getDialog().setCancelable(false);
 
         mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.main_tab_fragment);
 

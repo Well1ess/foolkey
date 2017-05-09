@@ -1,7 +1,8 @@
 package com.example.a29149.yuyuan.Util;
 
 import com.example.a29149.yuyuan.DTO.CouponDTO;
-import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
+import com.example.a29149.yuyuan.DTO.CourseStudentPopularDTO;
+import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 
@@ -45,7 +46,9 @@ public class GlobalUtil {
     //抵扣卷的List
     private List<CouponDTO> couponDTOList;
     //课程列表
-    private List<CourseTeacherDTO> courseTeacherDTOs;
+    private List<CourseTeacherPopularDTO> courseTeacherPopularDTOs;
+    //学生悬赏列表
+    private List<CourseStudentPopularDTO> courseStudentPopularDTOs;
     //学生信息
     private StudentDTO studentDTO;
     //老师信息
@@ -164,14 +167,14 @@ public class GlobalUtil {
         this.couponDTOList = couponDTOList;
     }
 
-    public List<CourseTeacherDTO> getCourseTeacherDTOs() {
-        if (courseTeacherDTOs == null)
-            courseTeacherDTOs = new ArrayList<>();
-        return courseTeacherDTOs;
+    public List<CourseTeacherPopularDTO> getCourseTeacherPopularDTOs() {
+        if (courseTeacherPopularDTOs == null)
+            courseTeacherPopularDTOs = new ArrayList<>();
+        return courseTeacherPopularDTOs;
     }
 
-    public void setCourseTeacherDTOs(List<CourseTeacherDTO> courseTeacherDTOs) {
-        this.courseTeacherDTOs = courseTeacherDTOs;
+    public void setCourseTeacherPopularDTOs(List<CourseTeacherPopularDTO> courseTeacherPopularDTOs) {
+        this.courseTeacherPopularDTOs = courseTeacherPopularDTOs;
     }
 
     public StudentDTO getStudentDTO() {
@@ -211,6 +214,15 @@ public class GlobalUtil {
         this.rewardChooseContent = rewardChooseContent;
     }
 
+    public List<CourseStudentPopularDTO> getCourseStudentPopularDTOs() {
+        if (courseStudentPopularDTOs == null)
+            courseStudentPopularDTOs = new ArrayList<>();
+        return courseStudentPopularDTOs;
+    }
+
+    public void setCourseStudentPopularDTOs(List<CourseStudentPopularDTO> courseStudentPopularDTOs) {
+        this.courseStudentPopularDTOs = courseStudentPopularDTOs;
+    }
     public String[] getCourseChooseContent() {
         return courseChooseContent;
     }

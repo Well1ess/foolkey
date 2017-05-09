@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
+import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.Model.Index.Adapter.IndexContentAdapter;
@@ -177,6 +177,7 @@ public class ClassesFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("pageNo", pageNo + "");
                 jsonObject.put("technicTagEnum", params[0]);
+                jsonObject.put("token", GlobalUtil.getInstance().getToken());
 
                 java.net.URL url = new java.net.URL(URL.getGetHotCourseURL(jsonObject.toString()));
                 con = (HttpURLConnection) url.openConnection();
@@ -229,17 +230,19 @@ public class ClassesFragment extends Fragment {
 
                         log.d(this, jsonObject.getString("courseTeacherDTOS"));
 
-                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<CourseTeacherDTO>>() {
+                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<CourseTeacherPopularDTO>>() {
                         }.getType();
-                        List<CourseTeacherDTO> courseTeacherDTOs = new Gson().fromJson(jsonObject.getString("courseTeacherDTOS"), type);
+                        List<CourseTeacherPopularDTO> courseTeacherDTOs = new Gson().fromJson(jsonObject.getString("courseTeacherDTOS"), type);
 
                         //若>1则表示分页存取
                         if (pageNo == 1) {
-                            GlobalUtil.getInstance().setCourseTeacherDTOs(courseTeacherDTOs);
+                            GlobalUtil.getInstance().setCourseTeacherPopularDTOs(courseTeacherDTOs);
                         } else if (pageNo > 1) {
-                            GlobalUtil.getInstance().getCourseTeacherDTOs().addAll(courseTeacherDTOs);
+                            GlobalUtil.getInstance().getCourseTeacherPopularDTOs().addAll(courseTeacherDTOs);
                             mDynamicList.onLoadFinish();
                         }
+
+                        log.d(ClassesFragment.this, GlobalUtil.getInstance().getCourseTeacherPopularDTOs().size());
 
                         new Handler().postDelayed(new Runnable() {
                             @Override

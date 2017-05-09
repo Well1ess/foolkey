@@ -21,6 +21,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
@@ -102,6 +103,7 @@ public class MeMainFragment extends Fragment {
     @OnClick(R.id.setting)
     public void setSettingListener(View view) {
         Intent intent = new Intent(getActivity(), SettingActivity.class);
+        AppManager.getInstance().addActivity(getActivity());
         startActivity(intent);
     }
 

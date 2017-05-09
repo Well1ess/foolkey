@@ -21,7 +21,6 @@ import com.example.a29149.yuyuan.Model.Discovery.Adapter.ArticleListAdapter;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
@@ -196,9 +195,9 @@ public class ArticleDiscoveryFragment extends Fragment {
 
                         //若>1则表示分页存取
                         if (pageNo == 1) {
-                            GlobalUtil.getInstance().setCourseTeacherDTOs(courseTeacherDTOs);
+                            //GlobalUtil.getInstance().setCourseTeacherDTOs(courseTeacherDTOs);
                         } else if (pageNo > 1) {
-                            GlobalUtil.getInstance().getCourseTeacherDTOs().addAll(courseTeacherDTOs);
+                            //GlobalUtil.getInstance().getCourseTeacherDTOs().addAll(courseTeacherDTOs);
                             mDynamicListView.onLoadFinish();
                         }
 

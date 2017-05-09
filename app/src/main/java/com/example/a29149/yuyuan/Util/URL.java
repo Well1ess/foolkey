@@ -44,6 +44,8 @@ public class URL {
     //老师申请接受悬赏
     public static final String applyRewardTeacherURL = "http://" + address + "/aes/placeOrderStudentCourse?";
 
+    //获取悬赏
+    public static final String getRewardURL = "http://" +address + "/courseStudent/getRewardCoursePopular?";
 
     //获取公钥
     public static String getPublicKeyURL() {
@@ -147,6 +149,12 @@ public class URL {
         return applyRewardTeacherURL+ "clearText=" + clearText +
                 "&validation=" + validation +
                 "&cipherText=" + cipherText;
+    }
+
+    //获取悬赏
+    public static String getRewordURL(String obj)
+    {
+        return getRewardURL + "clearText="+obj;
     }
 
 }

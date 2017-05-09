@@ -110,6 +110,10 @@ public class RewardDiscoveryFragment extends Fragment {
                     }
                 });
 
+        //TODO：数据初始化
+        GetReward getReward = new GetReward();
+        getReward.execute();
+
         return view;
     }
 

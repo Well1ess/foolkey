@@ -15,6 +15,7 @@ import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
+import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
@@ -58,6 +59,13 @@ public class MeMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me_main, container, false);
+        view.findViewById(R.id.change_role).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ApplyAuthenticationTeacherActivity.ApplyAuthenticationTeacherAction.class);
+                startActivity(intent);
+            }
+        });
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);
 
@@ -106,6 +114,7 @@ public class MeMainFragment extends Fragment {
         //TODO:网络通信
         ChangeRole changeRole = new ChangeRole();
         changeRole.execute();
+
     }
 
     @Override

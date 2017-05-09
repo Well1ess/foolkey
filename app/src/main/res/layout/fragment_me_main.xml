@@ -353,6 +353,7 @@
                     android:layout_marginRight="40dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
+                    android:clickable="true"
                     android:text="  切 换 身 份  "/>
 
                 <LinearLayout

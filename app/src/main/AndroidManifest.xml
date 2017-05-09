@@ -67,6 +67,12 @@
 
         </activity>
 
+        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity">
+
+        </activity>
+        <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity"/>
+        <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity"/>
+
         <!--小米推送所需服务-->
         <service
             android:enabled="true"

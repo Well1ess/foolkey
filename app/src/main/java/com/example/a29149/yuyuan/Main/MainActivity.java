@@ -22,6 +22,7 @@ import com.example.a29149.yuyuan.Model.Discovery.DiscoveryMainFragment;
 import com.example.a29149.yuyuan.Model.Index.IndexMainFragment;
 import com.example.a29149.yuyuan.Model.Me.MeMainFragment;
 import com.example.a29149.yuyuan.Model.Order.fragment.OrderFragment;
+import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardDescribeStudentActivity;
 import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardStudentActivity;
 import com.example.a29149.yuyuan.Model.PublishMainFragment;
 import com.example.a29149.yuyuan.R;
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         mPublishRewardStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PublishRewardStudentActivity.class);
+                Intent intent = new Intent(MainActivity.this, PublishRewardDescribeStudentActivity.class);
                 startActivity(intent);
             }
         });

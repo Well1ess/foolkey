@@ -7,7 +7,7 @@ package com.example.a29149.yuyuan.Util;
 
 public class URL {
 
-    public static final String address = "10.53.179.207:8080";
+    public static final String address = "192.168.1.118:8080";
 
     //获取公钥
     public static final String publicKeyURL = "http://" + address + "/getKey?";
@@ -39,6 +39,8 @@ public class URL {
     public static final String rechargeURL = "http://" + address + "/aes/recharge?";
     //提交订单
     public static final String submitOrder = "http://" + address + "/aes/placeOrderTeacherCourse?";
+    //申请认证
+    public static final String applyVerifyTeacherURL = "http://" + address + "/applyToVerifyTeacher?";
 
 
     //获取公钥
@@ -132,4 +134,10 @@ public class URL {
     {
         return searchURL + "clearText="+obj;
     }
+
+    //获取认证老师的url
+    public static String getApplyVerifyTeacher(String token) {
+        return applyVerifyTeacherURL + "clearText=" + token;
+    }
+
 }

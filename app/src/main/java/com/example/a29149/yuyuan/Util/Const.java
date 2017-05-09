@@ -14,4 +14,7 @@ public class Const {
     public static final String[] COURSE_TYPE = {"老师课程", "学生悬赏", "提问", "围观"};
 
     public static final int FROM_ME_FRAGMENT_TO_RECHARGE = 1;
+
+    //悬赏标签
+    public static final String[] REWARD_TAG = {"Java","C", "Javascript","Python","PHP","Html5","Android","iOS","数据库","其它"};
 }

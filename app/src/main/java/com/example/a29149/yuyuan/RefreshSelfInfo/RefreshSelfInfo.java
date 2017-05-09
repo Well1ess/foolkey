@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.StudentDTO;
+import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
@@ -22,7 +24,7 @@ import java.net.HttpURLConnection;
 
 /**
  * Created by 张丽华 on 2017/5/2.
- * Description:
+ * Description:获取用户信息
  */
 
 public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
@@ -94,14 +96,26 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
                     mContext.startActivity(new Intent(mContext, MainActivity.class));
                     Activity activity = (Activity)mContext;
                     activity.finish();
-
+                    //获取学生信息dto
                     java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
                     }.getType();
                     StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("studentDTO"), type);
 
                     if (studentDTO != null)
+                    {
                         GlobalUtil.getInstance().setStudentDTO(studentDTO);
+                        Log.i("malei",studentDTO.toString());
+                    }
 
+                    //获取老师信息dto
+                    java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<StudentDTO>() {
+                    }.getType();
+                    TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
+                    if (teacherDTO != null)
+                    {
+                        GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
+                        Log.i("malei",teacherDTO.toString());
+                    }
                 }
             } catch (Exception e) {
                 Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();

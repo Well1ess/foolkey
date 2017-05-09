@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
+import com.example.a29149.yuyuan.DTO.StudentDTO;
+import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
@@ -24,6 +27,7 @@ import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.google.gson.Gson;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
@@ -33,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.util.List;
 
 /**
  * LoginActivity:登陆
@@ -335,6 +340,23 @@ public class LoginActivity extends AppCompatActivity{
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
                     String token = jsonObject.getString("token");
+                    /*//获取学生信息DTO
+                    log.d(this, jsonObject.getString("StudentDTO"));
+                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
+                    }.getType();
+                    StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("StudentDTO"), type);
+                    //存储学生信息DTO
+                    GlobalUtil.getInstance().setStudentDTO(studentDTO);
+                    //获取老师信息DTO
+                    java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<TeacherDTO>() {
+                    }.getType();
+                    TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("TeacherDTO"), type1);
+                    Log.i("malei",jsonObject.getString("TeacherDTO"));
+                    if(teacherDTO != null)
+                    {
+                        //存储老师DTO
+                        GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
+                    }*/
                     //获取id,用以推送
                     String id = jsonObject.getString("id");
                     Log.i("malei",id);
@@ -348,6 +370,8 @@ public class LoginActivity extends AppCompatActivity{
 
                         log.d(this, token + " ");
                         Toast.makeText(LoginActivity.this, "登陆成功！", Toast.LENGTH_SHORT).show();
+                        //登录成功后刷新用户信息
+                        new RefreshSelfInfo(LoginActivity.this).execute();
 
                         //保存id
                         GlobalUtil.getInstance().setId(id);

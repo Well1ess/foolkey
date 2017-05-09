@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
+import com.example.a29149.yuyuan.DTO.CourseStudentPopularDTO;
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.Model.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.Model.Discovery.Adapter.RewardListAdapter;
@@ -85,7 +85,9 @@ public class RewardDiscoveryFragment extends Fragment {
         mRewardList.setOnLoadingListener(new DynamicListView.onLoadingListener() {
             @Override
             public void setLoad() {
-                mRewardList.onLoadFinish();
+                //TODO:网络传输
+                GetReward getReward = new GetReward();
+                getReward.execute();
             }
         });
 
@@ -101,6 +103,10 @@ public class RewardDiscoveryFragment extends Fragment {
                             MainActivity.shapeLoadingDialog.show();
                         }
                         //由于是刷新，所以首先清空所有数据
+                        pageNo = 1;
+
+                        GetReward getReward = new GetReward();
+                        getReward.execute();
                     }
                 });
 
@@ -132,11 +138,11 @@ public class RewardDiscoveryFragment extends Fragment {
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("pageNo", pageNo + "");
-                jsonObject.put("technicTagEnum", params[0]);
+                jsonObject.put("token", GlobalUtil.getInstance().getToken());
 
-                java.net.URL url = new java.net.URL(URL.getGetHotCourseURL(jsonObject.toString()));
+                java.net.URL url = new java.net.URL(URL.getRewordURL(jsonObject.toString()));
                 con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getGetHotCourseURL(jsonObject.toString()));
+                log.d(this, URL.getRewordURL(jsonObject.toString()));
                 // 设置允许输出，默认为false
                 con.setDoOutput(true);
                 con.setDoInput(true);
@@ -183,17 +189,17 @@ public class RewardDiscoveryFragment extends Fragment {
 
                     if (resultFlag.equals("success")) {
 
-                        log.d(this, jsonObject.getString("courseTeacherDTOS"));
+                        log.d(this, jsonObject.getString("courseStudentDTOS"));
 
-                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<CourseTeacherDTO>>() {
+                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<CourseStudentPopularDTO>>() {
                         }.getType();
-                        List<CourseTeacherDTO> courseTeacherDTOs = new Gson().fromJson(jsonObject.getString("courseTeacherDTOS"), type);
+                        List<CourseStudentPopularDTO> courseStudentDTOS = new Gson().fromJson(jsonObject.getString("courseStudentDTOS"), type);
 
                         //若>1则表示分页存取
                         if (pageNo == 1) {
-                            GlobalUtil.getInstance().setCourseTeacherDTOs(courseTeacherDTOs);
+                            GlobalUtil.getInstance().setCourseStudentPopularDTOs(courseStudentDTOS);
                         } else if (pageNo > 1) {
-                            GlobalUtil.getInstance().getCourseTeacherDTOs().addAll(courseTeacherDTOs);
+                            GlobalUtil.getInstance().getCourseStudentPopularDTOs().addAll(courseStudentDTOS);
                             mRewardList.onLoadFinish();
                         }
 

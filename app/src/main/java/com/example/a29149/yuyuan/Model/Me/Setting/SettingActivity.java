@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.Login.LoginActivity;
+import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
@@ -39,10 +41,13 @@ public class SettingActivity extends AppCompatActivity {
     @OnClick(R.id.bt_return)
     public void setBtReturnListener(View view) {
         this.onBackPressed();
+        AppManager.getInstance().removeActivity(MainActivity.class);
     }
 
     @OnClick(R.id.quit)
     public void setBackListener(View view) {
+        String id = GlobalUtil.getInstance().getId();
+        MiPushClient.unsetUserAccount(SettingActivity.this, id, null);
 
         LogOutAction logOutAction = new LogOutAction();
         logOutAction.execute();
@@ -126,8 +131,10 @@ public class SettingActivity extends AppCompatActivity {
                     if (resultFlag.equals("success")) {
 
                         //注销账户时反注销推送id，用以不接受消息
-                        String id = GlobalUtil.getInstance().getId();
-                        MiPushClient.unsetUserAccount(SettingActivity.this, id, null);
+                        //String id = GlobalUtil.getInstance().getId();
+                        //MiPushClient.unsetUserAccount(SettingActivity.this, id, null);
+
+                        AppManager.getInstance().finishActivity(MainActivity.class);
 
                         UserConfig mUserConfig = new UserConfig(SettingActivity.this);
                         mUserConfig.clear();

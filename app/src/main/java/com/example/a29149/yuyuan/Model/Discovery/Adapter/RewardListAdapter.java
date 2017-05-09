@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
+import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 
@@ -35,12 +35,12 @@ public class RewardListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return GlobalUtil.getInstance().getContent().size();
+        return GlobalUtil.getInstance().getCourseStudentPopularDTOs().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return GlobalUtil.getInstance().getContent().get(position);
+        return GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position);
     }
 
     @Override
@@ -58,7 +58,11 @@ public class RewardListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.title.setText(GlobalUtil.getInstance().getContent().get(position));
+        viewHolder.title.setText(GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getCourseStudentDTO().getTopic());
+        viewHolder.money.setText(GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getCourseStudentDTO().getPrice()+"");
+        viewHolder.label.setText(GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getCourseStudentDTO().getTechnicTagEnum().toString());
+        viewHolder.studentKind.setText(GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getCourseStudentDTO().getStudentBaseEnum().toString());
+
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,10 +77,16 @@ public class RewardListAdapter extends BaseAdapter {
     static class ViewHolder {
         public TextView title;
         public ImageView head;
+        public TextView money;
+        public TextView label;
+        public TextView studentKind;
 
         ViewHolder(View view) {
             title = (TextView) view.findViewById(R.id.reward_title);
             head = (ImageView) view.findViewById(R.id.head);
+            money = (TextView) view.findViewById(R.id.reward_money);
+            label = (TextView) view.findViewById(R.id.label);
+            studentKind = (TextView) view.findViewById(R.id.student_kind);
         }
 
     }

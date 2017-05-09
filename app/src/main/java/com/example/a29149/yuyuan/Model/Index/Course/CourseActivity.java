@@ -10,9 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
-import com.example.a29149.yuyuan.Search.SearchActivity;
-import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
+import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -96,7 +96,7 @@ public class CourseActivity extends AppCompatActivity {
             return;
         }
 
-        CourseTeacherDTO courseTeacherDTO = GlobalUtil.getInstance().getCourseTeacherDTOs().get(mPosition);
+        CourseTeacherDTO courseTeacherDTO = GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(mPosition).getCourseTeacherDTO();
 
         mAuthor.setText("付费课程·"+ courseTeacherDTO.getCreatorId());
         mCourseLabel.setText(courseTeacherDTO.getTechnicTagEnum().toString());

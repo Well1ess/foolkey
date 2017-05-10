@@ -32,15 +32,7 @@ public class OwnerRewardActivity extends AppCompatActivity {
         mAdapter = new OwnerRewardListAdapter(this);
         mRewardList.setAdapter(mAdapter);
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("sdfhskd");
 
-
-        registerReceiver(new Bor);
-
-        Intent intent = new Intent();
-        intent.setAction("sdfhskd");
-        sendBroadcast(intent);
     }
 
     @OnClick(R.id.bt_return)

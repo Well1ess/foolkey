@@ -38,6 +38,11 @@
         android:theme="@style/AppNoBar">
         <activity android:name=".Main.MainActivity"></activity>
         <activity android:name=".Login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Login.RegisterActivity" />
         <activity android:name=".Login.ModifyPwdActivity" />
@@ -71,13 +76,7 @@
         <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity"/>
         <!-- 学生发布悬赏选项信息描述-->
         <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity"/>
-        <activity android:name=".Model.Me.Recharge.RechargeActivity" />
-        <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity" />
-        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity"></activity>
-        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity"></activity>
-        <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity" />
-        <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity" />
-        <activity android:name=".Model.Publish.Activity.ApplyAuthenticationTeacherActivity"/>
+
 
         <!-- 小米推送所需服务 -->
         <!-- 老师发布课程信息描述-->
@@ -93,6 +92,8 @@
 
         <!--老师接单悬赏-->
         <activity android:name=".Model.Discovery.Activity.ApplyRewardTeacherActivity"/>
+
+
 
 
         <!--小米推送所需服务-->
@@ -151,11 +152,7 @@
         </receiver>
 
         <activity android:name=".Model.Me.Reward.OwnerRewardActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

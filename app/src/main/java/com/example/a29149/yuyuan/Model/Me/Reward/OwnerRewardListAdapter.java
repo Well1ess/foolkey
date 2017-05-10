@@ -90,7 +90,7 @@ public class OwnerRewardListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_owner_reward, null);
-            TeacherReplyListAdapter teacherReplyListAdapter = new TeacherReplyListAdapter(mContext, sum.get(position));
+            com.example.a29149.yuyuan.Model.Me.Reward.TeacherReplyListAdapter teacherReplyListAdapter = new com.example.a29149.yuyuan.Model.Me.Reward.TeacherReplyListAdapter(mContext, sum.get(position));
             final GridView gridView = (GridView) convertView.findViewById(R.id.teacher_head);
             gridView.setAdapter(teacherReplyListAdapter);
 

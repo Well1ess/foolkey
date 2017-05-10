@@ -69,6 +69,13 @@ public class MeMainFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        view.findViewById(R.id.owner_reward).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),OwnerRewardActivity.class);
+                startActivity(intent);
+            }
+        });
 
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);

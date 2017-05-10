@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.CourseStudentDTO;
+import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
@@ -263,13 +264,12 @@ public class ApplyAuthenticationTeacherActivity extends Activity implements View
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
 
-                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<CourseStudentDTO>() {
+                    //存储所有我拥有的悬赏信息DTO
+                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<ApplicationStudentRewardAsStudentSTCDTO>>() {
                     }.getType();
                     List<ApplicationStudentRewardAsStudentSTCDTO> applicationStudentRewardAsStudentSTCDTOs = new Gson().fromJson(jsonObject.getString("applicationStudentRewardAsStudentSTCDTOS"), type);
-                    //存储所有我拥有的悬赏信息DTO
                     GlobalUtil.getInstance().setApplicationStudentRewardAsStudentSTCDTOs(applicationStudentRewardAsStudentSTCDTOs);
                     Log.i("malei",applicationStudentRewardAsStudentSTCDTOs.toString());
-
 
 
                     if (resultFlag.equals("success")) {

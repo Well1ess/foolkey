@@ -7,7 +7,7 @@ import com.example.a29149.yuyuan.Enum.TeacherRequirementEnum;
 
 
 /**
- * 悬赏
+ * 悬赏信息
  * Created by admin on 2017/4/24.
  */
 public class CourseStudentDTO extends CourseAbstract{

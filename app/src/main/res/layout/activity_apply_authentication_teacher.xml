@@ -13,6 +13,14 @@
       android:text="认证老师"
       android:layout_gravity="center"/>
 
+  <Button
+      android:id="@+id/bt_applyReward"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="查看我的悬赏"
+      android:layout_gravity="center"/>
+
+
 
 
 </LinearLayout>

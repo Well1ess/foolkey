@@ -200,6 +200,7 @@
                             android:layout_marginRight="60dp" />
 
                         <TextView
+                            android:id="@+id/tv_description"
                             android:layout_margin="18dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -236,6 +237,7 @@
                                 android:paddingTop="10dp"/>
 
                             <TextView
+                                android:id="@+id/tv_createTime"
                                 android:text="2017年4月24日19:24:52"
                                 android:textSize="12sp"
                                 android:textColor="@color/submenu_text_color"

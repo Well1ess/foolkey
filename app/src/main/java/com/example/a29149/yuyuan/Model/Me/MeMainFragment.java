@@ -64,18 +64,11 @@ public class MeMainFragment extends Fragment {
         view.findViewById(R.id.change_role).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ApplyAuthenticationTeacherActivity.ApplyAuthenticationTeacherAction.class);
+                Intent intent = new Intent(getActivity(),ApplyAuthenticationTeacherActivity.class);
                 startActivity(intent);
             }
         });
-        view.findViewById(R.id.tv_reward).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "申请悬赏", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), ApplyRewardTeacherActivity.class);
-                startActivity(intent);
-            }
-        });
+
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);
 
@@ -120,13 +113,13 @@ public class MeMainFragment extends Fragment {
         couponAction.execute();
     }
 
-    @OnClick(R.id.change_role)
+   /* @OnClick(R.id.change_role)
     public void setChangeRoleListener(View view){
         //TODO:网络通信
         ChangeRole changeRole = new ChangeRole();
         changeRole.execute();
 
-    }
+    }*/
 
     @Override
     public void onAttach(Context context) {

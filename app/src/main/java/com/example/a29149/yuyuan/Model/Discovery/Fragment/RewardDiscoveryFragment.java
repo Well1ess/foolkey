@@ -77,6 +77,7 @@ public class RewardDiscoveryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent toCourseActivity = new Intent(getActivity(), RewardActivity.class);
+                toCourseActivity.putExtra("position",position);
                 startActivity(toCourseActivity);
             }
         });
@@ -86,7 +87,7 @@ public class RewardDiscoveryFragment extends Fragment {
             @Override
             public void setLoad() {
                 //TODO:网络传输
-                GetReward getReward = new GetReward();
+                GetReward getReward = new GetReward(++pageNo);
                 getReward.execute();
             }
         });
@@ -105,13 +106,13 @@ public class RewardDiscoveryFragment extends Fragment {
                         //由于是刷新，所以首先清空所有数据
                         pageNo = 1;
 
-                        GetReward getReward = new GetReward();
+                        GetReward getReward = new GetReward(pageNo);
                         getReward.execute();
                     }
                 });
 
         //TODO：数据初始化
-        GetReward getReward = new GetReward();
+        GetReward getReward = new GetReward(1);
         getReward.execute();
 
         return view;
@@ -128,9 +129,11 @@ public class RewardDiscoveryFragment extends Fragment {
     }
 
     public class GetReward extends AsyncTask<String, Integer, String> {
+        int pageNo;
 
-        public GetReward() {
+        public GetReward(int pageNo) {
             super();
+            this.pageNo = pageNo;
         }
 
         @Override
@@ -153,8 +156,8 @@ public class RewardDiscoveryFragment extends Fragment {
                 con.setConnectTimeout(5 * 1000);
                 con.setReadTimeout(10 * 1000);
 
-                con.setRequestMethod("GET");
-                con.setRequestProperty("contentType", "GBK");
+                con.setRequestMethod("POST");
+                con.setRequestProperty("contentType", "UTF-8");
 
 
                 // 获得服务端的返回数据
@@ -193,11 +196,11 @@ public class RewardDiscoveryFragment extends Fragment {
 
                     if (resultFlag.equals("success")) {
 
-                        log.d(this, jsonObject.getString("courseStudentDTOS"));
+                        log.d(this, jsonObject.getString("rewardCourseDTOS"));
 
                         java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<CourseStudentPopularDTO>>() {
                         }.getType();
-                        List<CourseStudentPopularDTO> courseStudentDTOS = new Gson().fromJson(jsonObject.getString("courseStudentDTOS"), type);
+                        List<CourseStudentPopularDTO> courseStudentDTOS = new Gson().fromJson(jsonObject.getString("rewardCourseDTOS"), type);
 
                         //若>1则表示分页存取
                         if (pageNo == 1) {
@@ -210,7 +213,7 @@ public class RewardDiscoveryFragment extends Fragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                pageNo++;
+                                //pageNo++;
                                 mListAdapter.notifyDataSetChanged();
                                 MainActivity.shapeLoadingDialog.dismiss();
 
@@ -221,6 +224,7 @@ public class RewardDiscoveryFragment extends Fragment {
                         Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
                 }
             } else {

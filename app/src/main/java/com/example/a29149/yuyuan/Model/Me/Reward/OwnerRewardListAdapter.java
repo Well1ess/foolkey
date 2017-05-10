@@ -12,6 +12,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -46,6 +47,8 @@ public class OwnerRewardListAdapter extends BaseAdapter {
     private Drawable close;
     //我的所有悬赏
     private List<ApplicationStudentRewardAsStudentSTCDTO> list;
+    //某条悬赏所拥有的申请的老师信息和申请信息
+    private List<ApplicationRewardWithTeacherSTCDTO> applicationRewardWithTeacherSTCDTOList;
 
     public OwnerRewardListAdapter(Context context) {
         mContext = context;
@@ -113,7 +116,9 @@ public class OwnerRewardListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_owner_reward, null);
-            com.example.a29149.yuyuan.Model.Me.Reward.TeacherReplyListAdapter teacherReplyListAdapter = new com.example.a29149.yuyuan.Model.Me.Reward.TeacherReplyListAdapter(mContext, sum.get(position));
+            //获取申请的老师信息和申请信息
+            applicationRewardWithTeacherSTCDTOList = list.get(position).getApplicationRewardWithTeacherSTCDTOS();
+            TeacherReplyListAdapter teacherReplyListAdapter = new TeacherReplyListAdapter(mContext, applicationRewardWithTeacherSTCDTOList);
             final GridView gridView = (GridView) convertView.findViewById(R.id.teacher_head);
             gridView.setAdapter(teacherReplyListAdapter);
 
@@ -128,6 +133,7 @@ public class OwnerRewardListAdapter extends BaseAdapter {
                 listState.get(position).setOriginalHeight(gridView.getLayoutParams().height);
 
             final TextView textView = (TextView) convertView.findViewById(R.id.open_close);
+
             //获取悬赏标题
             final TextView title = (TextView) convertView.findViewById(R.id.tv_title);
             title.setText(GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(position).getRewardDTO().getTopic());

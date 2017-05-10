@@ -192,7 +192,7 @@ private void applyRewardTeacher() {
                 JSONObject target = new JSONObject();
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token",token);
-                target.put("courseId","5");
+                target.put("courseId",courseStudentDTO.getId());
                 //加密
                 String validation = java.net.URLEncoder.encode(
                         AESOperator.getInstance().encrypt(target.toString()).replaceAll("\n", "愚"));
@@ -243,6 +243,7 @@ private void applyRewardTeacher() {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
+                    Log.i("malei",result);
 
 
                     if (resultFlag.equals("success")) {

@@ -203,7 +203,6 @@
 
                     <TextView
                         android:id="@+id/owner_reward"
-                        android:id="@+id/tv_reward"
                         android:clickable="true"
                         style="@style/TextView.MeMenu"
                         android:text="悬赏"/>

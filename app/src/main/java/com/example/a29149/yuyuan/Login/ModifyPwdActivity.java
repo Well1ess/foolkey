@@ -12,7 +12,6 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 
-import static com.example.a29149.yuyuan.R.id.code;
 
 public class ModifyPwdActivity extends AppCompatActivity {
 

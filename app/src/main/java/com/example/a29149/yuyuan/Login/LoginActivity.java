@@ -10,9 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
-import com.example.a29149.yuyuan.DTO.StudentDTO;
-import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
@@ -27,7 +24,6 @@ import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
-import com.google.gson.Gson;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
@@ -37,7 +33,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.util.List;
 
 /**
  * LoginActivity:登陆
@@ -69,6 +64,7 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
+
 
         userConfig = new UserConfig(this);
         if (userConfig.getBooleanInfo(UserConfig.xmlSAVE)) {

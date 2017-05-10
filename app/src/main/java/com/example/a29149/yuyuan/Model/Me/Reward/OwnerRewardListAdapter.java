@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * Created by 张丽华 on 2017/5/10.
- * Description:
+ * Description:我的悬赏的适配器
  */
 
 public class OwnerRewardListAdapter extends BaseAdapter {

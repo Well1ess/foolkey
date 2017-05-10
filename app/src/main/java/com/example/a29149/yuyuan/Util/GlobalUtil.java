@@ -1,10 +1,15 @@
 package com.example.a29149.yuyuan.Util;
 
+import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
+import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
+import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.CourseStudentDTO;
 import com.example.a29149.yuyuan.DTO.CourseStudentPopularDTO;
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
+import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
+import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 
 import java.util.ArrayList;
@@ -50,7 +55,18 @@ public class GlobalUtil {
     private List<CourseTeacherPopularDTO> courseTeacherPopularDTOs;
     //学生悬赏列表
     private List<CourseStudentPopularDTO> courseStudentPopularDTOs;
+    //学生所拥有的所有悬赏信息
+    private List<ApplicationStudentRewardAsStudentSTCDTO> applicationStudentRewardAsStudentSTCDTOs;
+    //悬赏信息DTO
+    private RewardDTO rewardDTO;
 
+    //申请悬赏信息DTO和老师信息DTO
+    private List<ApplicationRewardWithTeacherSTCDTO> applicationRewardWithTeacherSTCDTOs;
+    //老师所有信息DTO
+    private TeacherAllInfoDTO teacherAllInfoDTO;
+
+    //申请悬赏的DTO
+    private ApplicationStudentRewardDTO applicationStudentRewardDTO;
     //学生发布的悬赏列表
     private List<CourseStudentDTO> courseStudentDTOs;
     //学生信息
@@ -242,6 +258,49 @@ public class GlobalUtil {
 
     public void setCourseStudentDTOs(List<CourseStudentDTO> courseStudentDTOs) {
         this.courseStudentDTOs = courseStudentDTOs;
+    }
+
+
+    public List<ApplicationStudentRewardAsStudentSTCDTO> getApplicationStudentRewardAsStudentSTCDTOs() {
+        return applicationStudentRewardAsStudentSTCDTOs;
+    }
+
+    public void setApplicationStudentRewardAsStudentSTCDTOs(List<ApplicationStudentRewardAsStudentSTCDTO> applicationStudentRewardAsStudentSTCDTOs) {
+        this.applicationStudentRewardAsStudentSTCDTOs = applicationStudentRewardAsStudentSTCDTOs;
+    }
+
+    public RewardDTO getRewardDTO() {
+        return rewardDTO;
+    }
+
+    public void setRewardDTO(RewardDTO rewardDTO) {
+        this.rewardDTO = rewardDTO;
+    }
+
+    public List<ApplicationRewardWithTeacherSTCDTO> getApplicationRewardWithTeacherSTCDTOs() {
+        return applicationRewardWithTeacherSTCDTOs;
+    }
+
+    public void setApplicationRewardWithTeacherSTCDTOs(List<ApplicationRewardWithTeacherSTCDTO> applicationRewardWithTeacherSTCDTOs) {
+        this.applicationRewardWithTeacherSTCDTOs = applicationRewardWithTeacherSTCDTOs;
+    }
+
+
+    public TeacherAllInfoDTO getTeacherAllInfoDTO() {
+        return teacherAllInfoDTO;
+    }
+
+    public void setTeacherAllInfoDTO(TeacherAllInfoDTO teacherAllInfoDTO) {
+        this.teacherAllInfoDTO = teacherAllInfoDTO;
+    }
+
+
+    public ApplicationStudentRewardDTO getApplicationStudentRewardDTO() {
+        return applicationStudentRewardDTO;
+    }
+
+    public void setApplicationStudentRewardDTO(ApplicationStudentRewardDTO applicationStudentRewardDTO) {
+        this.applicationStudentRewardDTO = applicationStudentRewardDTO;
     }
 
 

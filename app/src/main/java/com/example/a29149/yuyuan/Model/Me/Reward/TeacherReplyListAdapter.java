@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/26 0026.
+ * GridView的适配器
  */
 
 public class TeacherReplyListAdapter extends BaseAdapter

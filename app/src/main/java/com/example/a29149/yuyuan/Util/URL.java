@@ -7,7 +7,7 @@ package com.example.a29149.yuyuan.Util;
 
 public class URL {
 
-    public static final String address = "172.20.10.4:8080";
+    public static final String address = "192.168.1.118:8080";
 
     //获取公钥
     public static final String publicKeyURL = "http://" + address + "/getKey?";
@@ -50,7 +50,7 @@ public class URL {
 
 
     //获取我发布的悬赏
-    public static final String getMyRewardURL = "http://" +address + "/courseStudent/getMyPublishCourseStudent?";
+    public static final String getMyRewardURL = "http://" +address + "/application/getApplicationStudentRewardAsStudentController?";
 
     //获取公钥
     public static String getPublicKeyURL() {

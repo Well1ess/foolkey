@@ -227,6 +227,8 @@ public class GlobalUtil {
     }
 
     public String[] getRewardChooseContent() {
+        if (rewardChooseContent == null)
+            rewardChooseContent = new String[]{"","","","","不限","小白","不限","不限"};
         return rewardChooseContent;
     }
 
@@ -262,6 +264,8 @@ public class GlobalUtil {
 
 
     public List<ApplicationStudentRewardAsStudentSTCDTO> getApplicationStudentRewardAsStudentSTCDTOs() {
+        if (applicationRewardWithTeacherSTCDTOs == null)
+            applicationRewardWithTeacherSTCDTOs = new ArrayList<>();
         return applicationStudentRewardAsStudentSTCDTOs;
     }
 

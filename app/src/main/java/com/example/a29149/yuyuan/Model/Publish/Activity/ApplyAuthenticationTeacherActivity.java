@@ -191,7 +191,7 @@ public class ApplyAuthenticationTeacherActivity extends Activity implements View
     }
 
     /**
-     * 认证老师请求Action
+     * 获取我的悬赏请求Action
      */
     public class ApplyRewardAction extends AsyncTask<String, Integer, String> {
 
@@ -270,6 +270,7 @@ public class ApplyAuthenticationTeacherActivity extends Activity implements View
                     List<ApplicationStudentRewardAsStudentSTCDTO> applicationStudentRewardAsStudentSTCDTOs = new Gson().fromJson(jsonObject.getString("applicationStudentRewardAsStudentSTCDTOS"), type);
                     GlobalUtil.getInstance().setApplicationStudentRewardAsStudentSTCDTOs(applicationStudentRewardAsStudentSTCDTOs);
                     Log.i("malei",applicationStudentRewardAsStudentSTCDTOs.toString());
+                    Log.i("malei",GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(0).getRewardDTO().toString());
 
 
                     if (resultFlag.equals("success")) {

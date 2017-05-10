@@ -50,7 +50,7 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
     private CheckBox mOffLine;//线下
     private CheckBox mOnAndOff;//不限
 
-    private String[] rewardChooseContent;//保存用户填写的信息
+    private String[] rewardChooseContent ;//保存用户填写的信息，初始化默认值
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
         setContentView(R.layout.activity_options_reward);
         initView();
         rewardChooseContent = GlobalUtil.getInstance().getRewardChooseContent();
+        //rewardChooseContent = new String[]{"","","","","不限","小白","不限","不限"};
     }
 
     private void initView() {
@@ -250,6 +251,9 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
         protected void onPreExecute() {
             super.onPreExecute();
             mChooseContent = GlobalUtil.getInstance().getRewardChooseContent();
+           /* for (String temp : mChooseContent) {
+                Log.i("malei", temp);
+            }*/
         }
 
         @Override
@@ -267,10 +271,31 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
                 target.put("topic",mChooseContent[0]);
                 target.put("description",mChooseContent[2]);
                 target.put("price",mChooseContent[3]);
+                //默认选择
+                if ( mChooseContent[4] != null && !mChooseContent[4].equals(""))
+                    ;
+                else
+                    mChooseContent[4] = "不限";
                 target.put("courseTimeDayEnum",mChooseContent[4]);
-                target.put("teachMethodEnum",mChooseContent[6]);
-                target.put("teachRequirementEnum",mChooseContent[7]);
+
+                if ( mChooseContent[5] != null && !mChooseContent[5].equals(""))
+                    ;
+                else
+                    mChooseContent[5] = "小白";
                 target.put("studentBaseEnum",mChooseContent[5]);
+
+                if ( mChooseContent[6] != null && !mChooseContent[6].equals(""))
+                    ;
+                else
+                    mChooseContent[6] = "不限";
+                target.put("teachMethodEnum",mChooseContent[6]);
+
+                if ( mChooseContent[7] != null && !mChooseContent[7].equals(""))
+                    ;
+                else
+                    mChooseContent[7] = "不限";
+                target.put("teachRequirementEnum",mChooseContent[7]);
+
                 java.net.URL url = new java.net.URL(URL.getStudentPublishRewardURL(target.toString()));
                 Log.i("malei",target.toString());
                 con = (HttpURLConnection) url.openConnection();

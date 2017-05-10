@@ -12,7 +12,9 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,10 @@ public class OwnerRewardListAdapter extends BaseAdapter {
 
     private List<String> strings1;
 
+    private List<String> strings2;
+
+    private List<String> strings3;
+
     private List<List> sum;
 
     //用于保存每个列表是否展开
@@ -38,9 +44,12 @@ public class OwnerRewardListAdapter extends BaseAdapter {
     private Drawable open;
     //关闭时的标签
     private Drawable close;
+    //我的所有悬赏
+    private List<ApplicationStudentRewardAsStudentSTCDTO> list;
 
     public OwnerRewardListAdapter(Context context) {
         mContext = context;
+        list = GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs();
 
         strings = new ArrayList<>();
         strings.add("1");
@@ -58,9 +67,23 @@ public class OwnerRewardListAdapter extends BaseAdapter {
         strings1.add("1");
         strings1.add("2");
 
+        strings2 = new ArrayList<>();
+        strings2.add("1");
+        strings2.add("2");
+        strings2.add("1");
+        strings2.add("2");
+
+        strings3 = new ArrayList<>();
+        strings3.add("1");
+        strings3.add("2");
+        strings3.add("1");
+        strings3.add("2");
+
         sum = new ArrayList<>();
         sum.add(strings);
         sum.add(strings1);
+        sum.add(strings2);
+        sum.add(strings3);
 
         listState = new ArrayList<>();
         for (int i = 0; i < sum.size(); i++) {
@@ -73,17 +96,17 @@ public class OwnerRewardListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return list.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 2;
+        return position;
     }
 
     @Override
@@ -105,6 +128,12 @@ public class OwnerRewardListAdapter extends BaseAdapter {
                 listState.get(position).setOriginalHeight(gridView.getLayoutParams().height);
 
             final TextView textView = (TextView) convertView.findViewById(R.id.open_close);
+            //获取悬赏标题
+            final TextView title = (TextView) convertView.findViewById(R.id.tv_title);
+            title.setText(GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(position).getRewardDTO().getTopic());
+            //获取悬赏价格
+            final TextView price = (TextView) convertView.findViewById(R.id.tv_price);
+            price.setText(GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(position).getRewardDTO().getPrice()+"");
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -23,6 +23,8 @@ public class ApplicationStudentRewardAsStudentSTCDTO {
     }
 
     public RewardDTO getRewardDTO() {
+        if (rewardDTO == null)
+            rewardDTO = new RewardDTO();
         return rewardDTO;
     }
 

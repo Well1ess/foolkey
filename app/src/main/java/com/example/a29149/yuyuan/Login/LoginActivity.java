@@ -171,8 +171,8 @@ public class LoginActivity extends AppCompatActivity{
                 con.setConnectTimeout(5 * 1000);
                 con.setReadTimeout(10 * 1000);
 
-                con.setRequestMethod("GET");
-                con.setRequestProperty("contentType", "GBK");
+                con.setRequestMethod("POST");
+                con.setRequestProperty("contentType", "UTF-8");
 
 
                 // 获得服务端的返回数据
@@ -299,8 +299,8 @@ public class LoginActivity extends AppCompatActivity{
                 con.setConnectTimeout(5 * 1000);
                 con.setReadTimeout(10 * 1000);
 
-                con.setRequestMethod("GET");
-                con.setRequestProperty("contentType", "GBK");
+                con.setRequestMethod("POST");
+                con.setRequestProperty("contentType", "UTF-8");
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());
@@ -335,9 +335,11 @@ public class LoginActivity extends AppCompatActivity{
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
+                    Log.i("malei",resultFlag);
                     String token = jsonObject.getString("token");
+                    Log.i("malei",token);
                     /*//获取学生信息DTO
-                    log.d(this, jsonObject.getString("StudentDTO"));
+                    Log.i("malei",jsonObject.getString("StudentDTO"));
                     java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
                     }.getType();
                     StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("StudentDTO"), type);
@@ -355,7 +357,7 @@ public class LoginActivity extends AppCompatActivity{
                     }*/
                     //获取id,用以推送
                     String id = jsonObject.getString("id");
-                    Log.i("malei",id);
+                    Log.i("malei","id"+id);
 
 
                     if (resultFlag.equals("success") && !token.equals("") && !id.equals("")) {

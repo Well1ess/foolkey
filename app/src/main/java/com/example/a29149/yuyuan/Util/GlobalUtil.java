@@ -1,6 +1,7 @@
 package com.example.a29149.yuyuan.Util;
 
 import com.example.a29149.yuyuan.DTO.CouponDTO;
+import com.example.a29149.yuyuan.DTO.CourseStudentDTO;
 import com.example.a29149.yuyuan.DTO.CourseStudentPopularDTO;
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
@@ -49,6 +50,9 @@ public class GlobalUtil {
     private List<CourseTeacherPopularDTO> courseTeacherPopularDTOs;
     //学生悬赏列表
     private List<CourseStudentPopularDTO> courseStudentPopularDTOs;
+
+    //学生发布的悬赏列表
+    private List<CourseStudentDTO> courseStudentDTOs;
     //学生信息
     private StudentDTO studentDTO;
     //老师信息
@@ -230,6 +234,16 @@ public class GlobalUtil {
     public void setCourseChooseContent(String[] courseChooseContent) {
         this.courseChooseContent = courseChooseContent;
     }
+
+
+    public List<CourseStudentDTO> getCourseStudentDTOs() {
+        return courseStudentDTOs;
+    }
+
+    public void setCourseStudentDTOs(List<CourseStudentDTO> courseStudentDTOs) {
+        this.courseStudentDTOs = courseStudentDTOs;
+    }
+
 
 }
 

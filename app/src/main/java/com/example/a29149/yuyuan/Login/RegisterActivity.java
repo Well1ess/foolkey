@@ -149,8 +149,8 @@ public class RegisterActivity extends AppCompatActivity {
                 con.setConnectTimeout(5 * 1000);
                 con.setReadTimeout(10 * 1000);
 
-                con.setRequestMethod("GET");
-                con.setRequestProperty("contentType", "GBK");
+                con.setRequestMethod("POST");
+                con.setRequestProperty("contentType", "UTF-8");
 
 
                 // 获得服务端的返回数据
@@ -213,7 +213,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 log.d(this, "encryptByPub:" + encrypt);
 
                                 //将回车进行字符替换
-                                String convert = encrypt.replaceAll("\n", "愚");
+                                String convert = encrypt
+                                        .replaceAll("\n", "愚")
+                                        ;
 
                                 log.d(this, "convertTo愚:" + convert);
                                 log.d(this, "convertToUTF-8:" + java.net.URLEncoder.encode(convert));
@@ -271,10 +273,12 @@ public class RegisterActivity extends AppCompatActivity {
                 //先进行加密，在进行替换，随后是UTF-8编码
                 target.put("userName", java.net.URLEncoder.encode(
                         RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")));
+                                .replaceAll("\n", "愚")
+                ));
                 target.put("passWord", java.net.URLEncoder.encode(
                         RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")));
+                                .replaceAll("\n", "愚")
+                ));
                 target.put("AESKey", params[0]);
 
                 java.net.URL url = new java.net.URL(URL.getRegisterURL(target.toString()));

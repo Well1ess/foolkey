@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardOptionsStudentActivity;
@@ -17,6 +18,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -64,10 +66,13 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
     private void applyRewardTeacher() {
         //验证身份
         TeacherDTO teacherDTO = GlobalUtil.getInstance().getTeacherDTO();
-        Log.i("malei",teacherDTO.toString());
+
         if(teacherDTO != null)
         {
+            Log.i("malei",teacherDTO.toString());
             String verifyState = teacherDTO.getVerifyState();
+            Log.i("malei",verifyState);
+            Log.i("malei",teacherDTO.toString());
             Log.i("malei",verifyState);
             //如果是已认证老师或者是认证中的老师，则直接接单
             if(verifyState.equals("processing") || verifyState.equals("verified"))
@@ -83,6 +88,7 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
         }
         else
         {
+            Log.i("malei","teacherDTO是空的");
             //不是已认证老师，跳转到申请认证页面
             Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ApplyRewardTeacherActivity.this, ApplyAuthenticationTeacherActivity.class);
@@ -167,6 +173,8 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
+
+
                     if (resultFlag.equals("success")) {
                         Toast.makeText(ApplyRewardTeacherActivity.this, "申请成功！", Toast.LENGTH_SHORT).show();
                     }

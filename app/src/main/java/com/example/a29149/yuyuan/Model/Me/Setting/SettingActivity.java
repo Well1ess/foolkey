@@ -123,6 +123,8 @@ public class SettingActivity extends AppCompatActivity {
             super.onPostExecute(result);
             log.d(this, result);
             if (result != null) {
+                Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 try {
 
                     JSONObject jsonObject = new JSONObject(result);
@@ -131,16 +133,15 @@ public class SettingActivity extends AppCompatActivity {
                     if (resultFlag.equals("success")) {
 
                         //注销账户时反注销推送id，用以不接受消息
-                        //String id = GlobalUtil.getInstance().getId();
-                        //MiPushClient.unsetUserAccount(SettingActivity.this, id, null);
+                        String id = GlobalUtil.getInstance().getId();
+                        MiPushClient.unsetUserAccount(SettingActivity.this, id, null);
 
                         AppManager.getInstance().finishActivity(MainActivity.class);
 
                         UserConfig mUserConfig = new UserConfig(SettingActivity.this);
                         mUserConfig.clear();
-                        Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+
+
                         SettingActivity.this.finish();
 
                     } else {
@@ -148,6 +149,8 @@ public class SettingActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     Toast.makeText(SettingActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                }finally {
+                    startActivity(intent);
                 }
             } else {
                 Toast.makeText(SettingActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();

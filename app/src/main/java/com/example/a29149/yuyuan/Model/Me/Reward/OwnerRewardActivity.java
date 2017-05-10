@@ -1,7 +1,5 @@
 package com.example.a29149.yuyuan.Model.Me.Reward;
 
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,15 +30,6 @@ public class OwnerRewardActivity extends AppCompatActivity {
         mAdapter = new OwnerRewardListAdapter(this);
         mRewardList.setAdapter(mAdapter);
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("sdfhskd");
-
-
-        registerReceiver(new Bor);
-
-        Intent intent = new Intent();
-        intent.setAction("sdfhskd");
-        sendBroadcast(intent);
     }
 
     @OnClick(R.id.bt_return)

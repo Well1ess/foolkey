@@ -2,9 +2,12 @@ package com.example.a29149.yuyuan.Model.Me.Reward;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,8 @@ public class OwnerRewardListAdapter extends BaseAdapter {
     private Drawable open;
     //关闭时的标签
     private Drawable close;
+    //屏幕宽度
+    private int mScreen;
 
     public OwnerRewardListAdapter(Context context) {
         mContext = context;
@@ -69,6 +75,12 @@ public class OwnerRewardListAdapter extends BaseAdapter {
 
         close = mContext.getResources().getDrawable(android.R.drawable.arrow_down_float);
         open = mContext.getResources().getDrawable(android.R.drawable.arrow_up_float);
+
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+        mScreen = displayMetrics.widthPixels;
     }
 
     @Override
@@ -121,7 +133,12 @@ public class OwnerRewardListAdapter extends BaseAdapter {
                         textView.setText("展开");
                     }
                     else {
-                        fixListViewHeight(gridView);
+                        ViewGroup.LayoutParams params = gridView.getLayoutParams();
+                        log.d(this, sum.get(position).size()/3 + 1);
+                        params.height = (mScreen / 3) * (sum.get(position).size()/3 + 1);
+                        log.d(this, params.height);
+                        gridView.setLayoutParams(params);
+
                         listState.get(position).setOpen(true);
                         textView.setCompoundDrawables(close, null, null, null);
                         textView.setText("关闭");

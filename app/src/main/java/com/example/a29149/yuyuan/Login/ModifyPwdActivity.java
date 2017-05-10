@@ -18,7 +18,7 @@ public class ModifyPwdActivity extends AppCompatActivity {
     @ViewInject(R.id.username)
     private EditText mUserName;
 
-    @ViewInject(code)
+    @ViewInject(R.id.code)
     private EditText mCode;
     private Drawable mCodeDrawableLeft, mCodeDrawableRight;
     //验证码是否经过验证的标志位

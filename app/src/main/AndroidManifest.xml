@@ -71,12 +71,7 @@
         <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity"/>
         <!-- 学生发布悬赏选项信息描述-->
         <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity"/>
-        <activity android:name=".Model.Me.Recharge.RechargeActivity" />
-        <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity" />
-        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity"></activity>
-        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity"></activity>
-        <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity" />
-        <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity" />
+       、
         <activity android:name=".Model.Publish.Activity.ApplyAuthenticationTeacherActivity"/>
 
         <!-- 小米推送所需服务 -->
@@ -87,9 +82,6 @@
         <!-- 老师发布课程选项信息描述-->
         <activity android:name=".Model.Publish.Activity.PublishCourseOptionsTeacherActivity"/>
 
-
-       <!-- 申请认证老师-->
-        <activity android:name=".Model.Publish.Activity.ApplyAuthenticationTeacherActivity"/>
 
         <!--老师接单悬赏-->
         <activity android:name=".Model.Discovery.Activity.ApplyRewardTeacherActivity"/>

@@ -1,7 +1,9 @@
 package com.example.a29149.yuyuan.Model.Me.Reward;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,11 +123,16 @@ public class OwnerRewardListAdapter extends BaseAdapter {
             TeacherReplyListAdapter teacherReplyListAdapter = new TeacherReplyListAdapter(mContext, applicationRewardWithTeacherSTCDTOList);
             final GridView gridView = (GridView) convertView.findViewById(R.id.teacher_head);
             gridView.setAdapter(teacherReplyListAdapter);
-
+            //点击申请接单的老师的头像，跳转到老师的详细信息中
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(mContext, "s", Toast.LENGTH_SHORT).show();
+                public void onItemClick(AdapterView<?> parent, View view, int positionIn, long id) {
+                    Intent intent = new Intent(mContext,TeacherIndexActivity.class);
+                    intent.putExtra("positionIn",positionIn+"");//gridView的position
+                    Log.i("malei",positionIn+"InOwner");
+                    intent.putExtra("positionOut",position+"");//gridView的position
+                    Log.i("malei",position+"OutOwner");//listview的position
+                    mContext.startActivity(intent);
                 }
             });
 

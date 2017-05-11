@@ -46,11 +46,17 @@ public class URL {
 
     //获取悬赏
     public static final String getRewardURL = "http://" +address + "/courseStudent/getRewardCoursePopular?";
-
-
-
     //获取我发布的悬赏
     public static final String getMyRewardURL = "http://" +address + "/application/getApplicationStudentRewardAsStudentController?";
+
+    //同意悬赏申请
+    public static final String agreeApplyRewardURL = "http://" +address + "/acceptRewardApplication?";
+
+
+    //拒绝悬赏申请
+    public static final String disagreeApplyRewardURL = "http://" +address + "/refuseTeacherApplication?";
+
+
 
     //获取公钥
     public static String getPublicKeyURL() {
@@ -165,5 +171,16 @@ public class URL {
     public static String getGetMyRewardURL(String token) {
         return getMyRewardURL + "clearText=" + token;
     }
+
+    //同意悬赏申请
+    public static String getAgreeApplyRewardURL(String token) {
+        return agreeApplyRewardURL+ "clearText=" + token;
+    }
+
+    //拒绝悬赏申请
+    public static String getDisagreeApplyRewardURL(String token) {
+        return disagreeApplyRewardURL+ "clearText=" + token;
+    }
+
 
 }

@@ -9,6 +9,10 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+/**
+ * Created by 张丽华 on 2017/5/10.
+ * Description:我拥有的优惠劵
+ */
 
 public class CouponActivity extends AppCompatActivity {
 

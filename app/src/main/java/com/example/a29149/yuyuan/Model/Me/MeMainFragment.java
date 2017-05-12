@@ -19,6 +19,7 @@ import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Teacher.Index.OwnerCourseTeacherActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -73,6 +74,14 @@ public class MeMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),OwnerRewardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.tv_course).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),OwnerCourseTeacherActivity.class);
                 startActivity(intent);
             }
         });

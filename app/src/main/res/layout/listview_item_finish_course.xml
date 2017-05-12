@@ -3,18 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="30dp"
-    android:gravity="center"
+    android:padding="20dp"
     android:descendantFocusability="blocksDescendants"
     android:background="@color/white"
     android:orientation="horizontal">
-    <RadioButton
-        android:id="@+id/rb_buy"
-        android:focusable="false"
-        android:layout_marginLeft="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
     <ImageView
         android:id="@+id/iv_teacherPhone"
         android:layout_width="50dp"
@@ -23,43 +15,30 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
         android:focusable="false"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tv_teacherNameAndCourseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:textColor="@color/grey555"
             android:text="朱洪军： javaEE"/>
         <TextView
             android:id="@+id/tv_buyTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:textColor="@color/grey555"
             android:text="购买时长： 50h"/>
         <TextView
             android:id="@+id/tv_courseCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:textColor="@color/dark_green"
             android:text="课程价格： 1000RMB"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        android:layout_marginLeft="30dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_pay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/shape_corner_white"
-            android:padding="5dp"
-            android:clickable="true"
-            android:textColor="@color/dark_green"
-            android:text="立即付款"/>
-    </LinearLayout>
 </LinearLayout>

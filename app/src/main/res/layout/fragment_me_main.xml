@@ -226,6 +226,7 @@
                         android:background="@color/black"/>
 
                     <TextView
+                        android:id="@+id/tv_course"
                         style="@style/TextView.MeMenu"
                         android:text="课程"/>
                 </LinearLayout>

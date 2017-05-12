@@ -96,6 +96,8 @@
         <activity android:name=".Model.Discovery.Activity.ApplyRewardTeacherActivity"/>
         <!--接单悬赏的老师主页-->
         <activity android:name=".Model.Me.Reward.TeacherIndexActivity"/>
+        <!--老师界面的主页-->
+        <activity android:name=".Teacher.Index.OwnerCourseTeacherActivity"/>
 
 
 

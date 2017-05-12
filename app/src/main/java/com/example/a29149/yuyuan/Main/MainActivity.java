@@ -22,6 +22,7 @@ import com.example.a29149.yuyuan.Model.Discovery.DiscoveryMainFragment;
 import com.example.a29149.yuyuan.Model.Index.IndexMainFragment;
 import com.example.a29149.yuyuan.Model.Me.MeMainFragment;
 import com.example.a29149.yuyuan.Model.Order.fragment.OrderFragment;
+import com.example.a29149.yuyuan.Model.Publish.Activity.PublishCoursedDescribeTeacherActivity;
 import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardDescribeStudentActivity;
 import com.example.a29149.yuyuan.Model.PublishMainFragment;
 import com.example.a29149.yuyuan.R;
@@ -124,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         mPublishAskStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PublishCoursedDescribeTeacherActivity.class);
+                startActivity(intent);
                 Toast.makeText(MainActivity.this, "发布问题", Toast.LENGTH_SHORT).show();
             }
         });

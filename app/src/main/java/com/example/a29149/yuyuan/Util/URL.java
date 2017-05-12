@@ -51,10 +51,24 @@ public class URL {
 
     //同意悬赏申请
     public static final String agreeApplyRewardURL = "http://" +address + "/acceptRewardApplication?";
-
-
     //拒绝悬赏申请
     public static final String disagreeApplyRewardURL = "http://" +address + "/refuseTeacherApplication?";
+
+    //获取学生列表
+    public static final String applyStudentListURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
+
+
+    //开始上课请求
+    public static final String startClassURL = "http://" +address + "/startClass?";
+
+    //下课请求
+    public static final String endClassURL = "http://" +address + "/endClass?";
+
+
+    //未评价订单请求
+    public static final String noCommentURL = "http://" +address + "/获取未评价的订单?";
+
+
 
 
 
@@ -181,6 +195,28 @@ public class URL {
     public static String getDisagreeApplyRewardURL(String token) {
         return disagreeApplyRewardURL+ "clearText=" + token;
     }
+
+
+    //获取学生列表
+    public static String getApplyStudentListURL(String token) {
+        return applyStudentListURL+ "clearText=" + token;
+    }
+
+    //开始上课请求
+    public static String getStartClassURL(String token) {
+        return startClassURL+ "clearText=" + token;
+    }
+
+    //下课请求
+    public static String getEndClassURL(String token) {
+        return endClassURL+ "clearText=" + token;
+    }
+
+
+    public static String getNoCommentURL(String token) {
+        return noCommentURL+ "clearText=" + token;
+    }
+
 
 
 }

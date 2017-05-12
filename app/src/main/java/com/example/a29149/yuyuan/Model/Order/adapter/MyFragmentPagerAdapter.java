@@ -4,7 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.a29149.yuyuan.Model.Order.fragment.AllOrderFragment;
 import com.example.a29149.yuyuan.Model.Order.fragment.NoClassFragment;
+import com.example.a29149.yuyuan.Model.Order.fragment.NoCommentFragment;
 import com.example.a29149.yuyuan.Model.Order.fragment.NoPayFragment;
 
 import java.util.ArrayList;
@@ -20,8 +22,8 @@ import java.util.List;
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private static List<Fragment> fragments;
-    private List<String> mTags = Arrays.asList("购物车", "未付款", "未上课", "未评价",
-            "全部订单");
+    private List<String> mTags = Arrays.asList( "未付款", "未上课", "未评价",
+            "已完成");
 
     public MyFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -31,10 +33,9 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     private void initView() {
         fragments = new ArrayList<>();
         fragments.add(new NoPayFragment());
-        fragments.add(new NoPayFragment());
         fragments.add(new NoClassFragment());
-        fragments.add(new NoPayFragment());
-        fragments.add(new NoPayFragment());
+        fragments.add(new NoCommentFragment());
+        fragments.add(new AllOrderFragment());
     }
 
     @Override

@@ -2,11 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:background="@color/white"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="30dp">
 
     <ImageView
         android:layout_width="50dp"
@@ -23,13 +23,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="朱洪军： javaEE"
-            android:textColor="@color/black"/>
+            android:textColor="@color/grey555"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="课程标题"
-            android:textColor="@color/black"/>
+            android:textColor="@color/grey555"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
         android:background="@drawable/shape_corner_white"
         android:clickable="true"
         android:padding="5dp"
-        android:text="申请取消"
+        android:text="取消订单"
         android:textColor="@color/dark_green"/>
 
     </RelativeLayout>

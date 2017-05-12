@@ -13,10 +13,11 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewCourseAdapter;
+import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishCourseAdapter;
+import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
-import com.example.a29149.yuyuan.Model.Publish.Activity.PublishCourseTeacherActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.JSONUtil;
@@ -37,13 +38,14 @@ import java.util.Map;
 /**
  * Created by MaLei on 2017/4/29.
  * Email:ml1995@mail.ustc.edu.cn
- * 未付款的Fragment
+ * 全部订单的Fragment
  */
 
-public class NoPayFragment extends Fragment {
+public class AllOrderFragment extends Fragment {
 
     private Context mContext;
     private MyListView mBuyCourse;
+    private MyListView mReward;
     private MyListView mRecommand;
     private List<Map<String,Object>> courseNoPayList = new ArrayList<>();
 
@@ -52,7 +54,7 @@ public class NoPayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getContext();
-        View view = inflater.inflate(R.layout.fragment_viewpager_nopay, null);
+        View view = inflater.inflate(R.layout.fragment_viewpager_all_order, null);
         mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
         mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,7 +62,13 @@ public class NoPayFragment extends Fragment {
                 Log.i("malei","你点击了"+position);
             }
         });
-
+        mReward = (MyListView) view.findViewById(R.id.lv_reward);
+        mReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("malei","你点击了"+position);
+            }
+        });
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
         mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,12 +80,15 @@ public class NoPayFragment extends Fragment {
 
         //requestData();
 
-        MyListViewCourseAdapter myListViewCourseAdapter = new MyListViewCourseAdapter(mContext);
-        myListViewCourseAdapter.setData(courseNoPayList);
+        MyListViewFinishCourseAdapter myListViewFinishCourseAdapter = new MyListViewFinishCourseAdapter(mContext);
+        myListViewFinishCourseAdapter.setData(courseNoPayList);
+
+        MyListViewFinishRewardAdapter MyListViewFinishRewardAdapter = new MyListViewFinishRewardAdapter(mContext);
 
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
-        mBuyCourse.setAdapter(myListViewCourseAdapter);
 
+        mBuyCourse.setAdapter(myListViewFinishCourseAdapter);
+        mReward.setAdapter(MyListViewFinishRewardAdapter);
         mRecommand.setAdapter(myListViewRecommandAdapter);
         return view;
     }

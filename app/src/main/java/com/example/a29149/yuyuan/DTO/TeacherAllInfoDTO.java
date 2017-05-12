@@ -5,6 +5,7 @@ import com.example.a29149.yuyuan.Enum.SchoolEnum;
 import com.example.a29149.yuyuan.Enum.SexTagEnum;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Enum.UserStateEnum;
+import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 
 /**
  * Created by GR on 2017/5/5.

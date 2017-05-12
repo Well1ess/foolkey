@@ -3,6 +3,7 @@ package com.example.a29149.yuyuan.Model.Order.fragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,16 +13,22 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewCourseAdapter;
+import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
+import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
+import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
+import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardListAdapter;
+import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoCommentRewardAdapter;
+import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
-import com.example.a29149.yuyuan.Model.Publish.Activity.PublishCourseTeacherActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.JSONUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -33,17 +40,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.a29149.yuyuan.Main.MainActivity.shapeLoadingDialog;
+
 
 /**
  * Created by MaLei on 2017/4/29.
  * Email:ml1995@mail.ustc.edu.cn
- * 未付款的Fragment
+ * 未评价订单的Fragment
  */
 
-public class NoPayFragment extends Fragment {
+public class NoCommentFragment extends Fragment {
 
     private Context mContext;
     private MyListView mBuyCourse;
+    private MyListView mReward;
     private MyListView mRecommand;
     private List<Map<String,Object>> courseNoPayList = new ArrayList<>();
 
@@ -52,7 +62,15 @@ public class NoPayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getContext();
-        View view = inflater.inflate(R.layout.fragment_viewpager_nopay, null);
+        View view = inflater.inflate(R.layout.fragment_viewpager_nocomment, null);
+
+        shapeLoadingDialog = new ShapeLoadingDialog(mContext);
+        shapeLoadingDialog.setLoadingText("加载中...");
+        shapeLoadingDialog.setCanceledOnTouchOutside(false);
+        shapeLoadingDialog.show();
+
+        loadData();
+
         mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
         mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,7 +78,13 @@ public class NoPayFragment extends Fragment {
                 Log.i("malei","你点击了"+position);
             }
         });
-
+        mReward = (MyListView) view.findViewById(R.id.lv_reward);
+        mReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("malei","你点击了"+position);
+            }
+        });
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
         mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,29 +94,43 @@ public class NoPayFragment extends Fragment {
         });
 
 
-        //requestData();
 
-        MyListViewCourseAdapter myListViewCourseAdapter = new MyListViewCourseAdapter(mContext);
-        myListViewCourseAdapter.setData(courseNoPayList);
+
+
+
+        MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
 
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
-        mBuyCourse.setAdapter(myListViewCourseAdapter);
 
+
+        mReward.setAdapter(myListViewNoCommentRewardAdapter);
         mRecommand.setAdapter(myListViewRecommandAdapter);
         return view;
     }
 
+    private void loadData()
+    {
+        //如果没有进行加载
+        if (shapeLoadingDialog != null) {
+            shapeLoadingDialog.show();
+            requestData(1);
+        }
+    }
+
     //请求数据
-    private void requestData() {
-        new RequestNoPayCourseAction().execute();
+    private void requestData(int pageNo) {
+        new RequestNoPayCourseAction(pageNo).execute();
     }
     /**
      * 请求以购买未付款的订单Action
      */
     public class RequestNoPayCourseAction extends AsyncTask<String, Integer, String> {
 
-        public RequestNoPayCourseAction() {
+        int pageNo;
+
+        public RequestNoPayCourseAction(int pageNo) {
             super();
+            this.pageNo = pageNo;
         }
 
         @Override
@@ -106,15 +144,10 @@ public class NoPayFragment extends Fragment {
                 JSONObject target = new JSONObject();
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token",token);
-                /*target.put("topic",mChooseContent[0]);
-                target.put("technicTagEnum",mChooseContent[1]);
-                target.put("description",mChooseContent[2]);
-                target.put("price",mChooseContent[3]);
-                target.put("duration",mChooseContent[4]);
-                target.put("teachMethodEnum",mChooseContent[5]);
-                target.put("courseTimeDayEnum",mChooseContent[6]);*/
+                target.put("pageNo",pageNo);
 
-                java.net.URL url = new java.net.URL(URL.getTeacherPublishCoursedURL(target.toString()));
+
+                java.net.URL url = new java.net.URL(URL.getNoCommentURL(target.toString()));
                 Log.i("malei",target.toString());
                 con = (HttpURLConnection) url.openConnection();
                 // 设置允许输出，默认为false
@@ -159,8 +192,24 @@ public class NoPayFragment extends Fragment {
                     JSONObject jsonObject = new JSONObject(result);
                     courseNoPayList = JSONUtil.jsonObject2List(jsonObject,"keyName");
                     String resultFlag = jsonObject.getString("result");
+                    //存储所有我拥有的悬赏信息DTO
+                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
+                    }.getType();
+                    List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
+                    GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
+                    Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(mContext, "发布课程成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "获取成功！", Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                MyListViewNoConmmentClassAdapter myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
+                                myListViewNoConmmentClassAdapter.setData(GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs());
+                                mBuyCourse.setAdapter(myListViewNoConmmentClassAdapter);
+                                shapeLoadingDialog.dismiss();
+
+                            }
+                        }, 1000);
                     }
                 } catch (Exception e) {
                     Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();

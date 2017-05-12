@@ -19,10 +19,10 @@ import java.util.Map;
 /**
  * Created by MaLei on 2017/4/24.
  * Email:ml1995@mail.ustc.edu.cn
- * 已购买课程而未付款listView的Adapter
+ * 已购买课程且已完成的订单listView的Adapter
  */
 
-public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListener{
+public class MyListViewFinishCourseAdapter extends BaseAdapter implements OnClickListener{
     private Context mContext;
 
     private ImageView mTeacherPhone;//老师头像
@@ -32,7 +32,7 @@ public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListe
     private TextView mPay;//学生点击付款按钮
     private List<Map<String,Object>> courseNoPayList;//已购买课程但还未付款订单
 
-    public MyListViewCourseAdapter(Context context)
+    public MyListViewFinishCourseAdapter(Context context)
     {
         this.mContext = context;
     }
@@ -60,25 +60,8 @@ public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListe
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view ;
-        view=View.inflate(mContext, R.layout.listview_item_buycourse,null);
+        view=View.inflate(mContext, R.layout.listview_item_finish_course,null);
         initView(view);
-        //设置订单状态监听
-        final RadioButton rb_bug = (RadioButton) view.findViewById(R.id.rb_buy);//订单选择按钮
-        final GlobalValue globalValue = new GlobalValue();
-        rb_bug.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isCheck = globalValue.isCheck();
-                if(isCheck)
-                {
-                    if(v==rb_bug)rb_bug.setChecked(false);
-                }
-                else {
-                    if (v == rb_bug) rb_bug.setChecked(true);
-                }
-                globalValue.setCheck(!isCheck);
-            }
-        });
         return view;
     }
 
@@ -87,8 +70,6 @@ public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListe
         mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
         mBuyTime = (TextView) view.findViewById(R.id.tv_buyTime);
         mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
-        mPay = (TextView) view.findViewById(R.id.tv_pay);
-        mPay.setOnClickListener(this);
     }
 
     @Override

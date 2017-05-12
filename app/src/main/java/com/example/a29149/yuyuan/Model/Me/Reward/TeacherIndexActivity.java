@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.Model.Me.Reward;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
@@ -29,6 +31,7 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -49,10 +52,13 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
 
     private TextView mTest;
     private TeacherAllInfoDTO mTeacherAllInfoDTO;//老师信息
+    private StudentDTO mStudentDTO;//学生信息
     private ApplicationStudentRewardDTO applicationStudentRewardDTO;//申请信息
-    private RewardDTO rewardDTO;//悬赏信息DTO
+    private RewardDTO mRewardDTO;//悬赏信息DTO
     private RadioButton mRewardAgree;//同意该老师申请
     private RadioButton mRewardDisagree;//不同意该老师申请
+    //显示选项的对话框
+    private WarningDisplayDialog.Builder displayInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +77,25 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         applicationStudentRewardDTO = GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(posiOut)
                 .getApplicationRewardWithTeacherSTCDTOS().get(posiIn).getApplicationStudentRewardDTO();
 
-        rewardDTO = GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(posiOut).getRewardDTO();
+        mRewardDTO = GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(posiOut).getRewardDTO();
+        mStudentDTO = GlobalUtil.getInstance().getStudentDTO();
         Log.i("malei",mTeacherAllInfoDTO.toString());
+
+        displayInfo = new WarningDisplayDialog.Builder(this);
+        displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        displayInfo.setPositiveButton("接      单", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        displayInfo.create();
+
         initView();
         initData();
     }
@@ -97,7 +120,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         switch (id)
         {
             case R.id.main_menu_agree:
-                new AgreeApplyRewardAction().execute();
+                agreeApplyReward();
                 break;
             case R.id.main_menu_disagree:
                 new DisagreeApplyRewardAction().execute();
@@ -105,6 +128,18 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
             default:
                 break;
         }
+    }
+
+    //学生点击同意
+    private void agreeApplyReward() {
+        if(mStudentDTO.getVirtualCurrency() < mRewardDTO.getPrice()) {
+            displayInfo.setMsg("您余额不足？\n \n 请及时充值");
+
+            displayInfo.getDialog().show();
+        }else{
+            new AgreeApplyRewardAction().execute();
+        }
+
     }
 
 
@@ -134,7 +169,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
                 JSONObject target = new JSONObject();
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token",token);
-                target.put("courseId",rewardDTO.getId());
+                target.put("courseId",mRewardDTO.getId());
                 target.put("teacherId",mTeacherAllInfoDTO.getId());
 
                 java.net.URL url = new java.net.URL(URL.getDisagreeApplyRewardURL(target.toString()));
@@ -184,6 +219,9 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
 
                     if (resultFlag.equals("success")) {
                         Toast.makeText(TeacherIndexActivity.this, "拒绝申请成功！", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(TeacherIndexActivity.this,OwnerRewardActivity.class);
+                        TeacherIndexActivity.this.startActivity(intent);
+                        finish();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -228,9 +266,9 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token",token);
                 target.put("applicationId",applicationStudentRewardDTO.getId());
-                target.put("rewardId",rewardDTO.getId());
+                target.put("rewardId",mRewardDTO.getId());
                 target.put("couponId","");
-                target.put("price",rewardDTO.getPrice());
+                target.put("price",mRewardDTO.getPrice());
 
                 java.net.URL url = new java.net.URL(URL.getAgreeApplyRewardURL(target.toString()));
                 Log.i("malei",target.toString());
@@ -279,6 +317,9 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
 
                     if (resultFlag.equals("success")) {
                         Toast.makeText(TeacherIndexActivity.this, "同意申请悬赏成功！", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(TeacherIndexActivity.this,OwnerRewardActivity.class);
+                        TeacherIndexActivity.this.startActivity(intent);
+                        finish();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -62,7 +62,9 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
         MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(myFragmentPagerAdapter);
 
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        //设置tablayout按照标签数目平分
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setupWithViewPager(viewPager);
     }
 

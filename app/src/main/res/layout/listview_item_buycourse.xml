@@ -2,8 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp"
+    android:layout_height="wrap_content"
+    android:padding="30dp"
     android:gravity="center"
     android:descendantFocusability="blocksDescendants"
     android:background="@color/white"
@@ -29,13 +29,13 @@
             android:id="@+id/tv_teacherNameAndCourseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/grey555"
             android:text="朱洪军： javaEE"/>
         <TextView
             android:id="@+id/tv_buyTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/grey555"
             android:text="购买时长： 50h"/>
         <TextView
             android:id="@+id/tv_courseCost"
@@ -52,21 +52,14 @@
         android:layout_marginLeft="30dp"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tv_teacherState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="@color/dark_green"
-            android:text="老师已就绪"/>
-        <TextView
             android:id="@+id/tv_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@drawable/shape_corner_darkgreen"
+            android:background="@drawable/shape_corner_white"
             android:padding="5dp"
             android:clickable="true"
-            android:textColor="@color/white"
+            android:textColor="@color/dark_green"
             android:text="立即付款"/>
     </LinearLayout>
 </LinearLayout>

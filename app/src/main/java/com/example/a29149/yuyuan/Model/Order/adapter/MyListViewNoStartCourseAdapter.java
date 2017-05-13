@@ -39,7 +39,7 @@ public class MyListViewNoStartCourseAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final View view ;
-        view=View.inflate(mContext, R.layout.listview_item_nostartcourse,null);
+        view=View.inflate(mContext, R.layout.listview_item_nostart_course,null);
         return view;
     }
 }

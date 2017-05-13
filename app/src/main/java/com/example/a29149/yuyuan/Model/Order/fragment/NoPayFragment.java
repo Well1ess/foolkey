@@ -44,7 +44,6 @@ public class NoPayFragment extends Fragment {
 
     private Context mContext;
     private MyListView mBuyCourse;
-    private MyListView mReward;
     private MyListView mRecommand;
     private List<Map<String,Object>> courseNoPayList = new ArrayList<>();
 
@@ -61,13 +60,7 @@ public class NoPayFragment extends Fragment {
                 Log.i("malei","你点击了"+position);
             }
         });
-        mReward = (MyListView) view.findViewById(R.id.lv_reward);
-        mReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("malei","你点击了"+position);
-            }
-        });
+
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
         mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,10 +75,9 @@ public class NoPayFragment extends Fragment {
         MyListViewCourseAdapter myListViewCourseAdapter = new MyListViewCourseAdapter(mContext);
         myListViewCourseAdapter.setData(courseNoPayList);
 
-        MyListViewRewardAdapter myListViewRewardAdapter = new MyListViewRewardAdapter(mContext);
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
         mBuyCourse.setAdapter(myListViewCourseAdapter);
-        mReward.setAdapter(myListViewRewardAdapter);
+
         mRecommand.setAdapter(myListViewRecommandAdapter);
         return view;
     }

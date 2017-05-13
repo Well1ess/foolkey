@@ -7,24 +7,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
 import com.example.a29149.yuyuan.R;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/26 0026.
+ * GridView的适配器，即申请该条悬赏的老师信息适配器
  */
 
 public class TeacherReplyListAdapter extends BaseAdapter
 {
 
     private Context mContext;
-    private List<String> strings;
+    private List<ApplicationRewardWithTeacherSTCDTO> applicationRewardWithTeacherSTCDTOList;
 
-    public TeacherReplyListAdapter(Context context, List<String> strings)
+    public TeacherReplyListAdapter(Context context, List<ApplicationRewardWithTeacherSTCDTO> strings)
     {
         this.mContext = context;
-        this.strings = strings;
+        this.applicationRewardWithTeacherSTCDTOList = strings;
     }
 
     public void update()
@@ -34,12 +36,12 @@ public class TeacherReplyListAdapter extends BaseAdapter
 
     @Override
     public int getCount() {
-        return strings.size();
+        return applicationRewardWithTeacherSTCDTOList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return strings.get(position);
+        return applicationRewardWithTeacherSTCDTOList.get(position);
     }
 
     @Override
@@ -62,7 +64,8 @@ public class TeacherReplyListAdapter extends BaseAdapter
         {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
-        myViewHolder.tv.setText(strings.get(position));
+        myViewHolder.tv.setText(applicationRewardWithTeacherSTCDTOList.get(position).getTeacherAllInfoDTO().getNickedName());
+        myViewHolder.teacherName.setText(applicationRewardWithTeacherSTCDTOList.get(position).getTeacherAllInfoDTO().getNickedName());
         return convertView;
     }
 
@@ -70,10 +73,12 @@ public class TeacherReplyListAdapter extends BaseAdapter
     {
 
         TextView tv;
+        TextView teacherName;
 
         public MyViewHolder(View view)
         {
             tv = (TextView) view.findViewById(R.id.id_num);
+            teacherName = (TextView) view.findViewById(R.id.tv_teacherName);
         }
     }
 }

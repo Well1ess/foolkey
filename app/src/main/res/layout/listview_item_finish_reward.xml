@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="30dp"
+    android:background="@color/white"
+    android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/iv_teacherPhone"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher_round"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_teacherNameAndCourseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey555"
+            android:text="朱洪军： javaEE"/>
+        <TextView
+            android:id="@+id/tv_exceptTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/dark_green"
+            android:text="预计时长： 1小时"/>
+        <TextView
+            android:id="@+id/teacherCharge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/dark_green"
+            android:text="老师收费： 45RMB"/>
+    </LinearLayout>
+
+</LinearLayout>

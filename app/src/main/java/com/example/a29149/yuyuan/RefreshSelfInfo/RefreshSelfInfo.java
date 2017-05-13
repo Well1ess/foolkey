@@ -108,7 +108,7 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
                     }
 
                     //获取老师信息dto
-                    java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<StudentDTO>() {
+                    java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<TeacherDTO>() {
                     }.getType();
                     TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
                     if (teacherDTO != null)

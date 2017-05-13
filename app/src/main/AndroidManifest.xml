@@ -36,8 +36,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
-        <activity android:name=".Main.MainActivity"></activity>
-        <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".Main.MainActivity">
+
+        </activity>
+        <activity android:name=".Login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Login.RegisterActivity" />
         <activity android:name=".Login.ModifyPwdActivity" />
         <activity
@@ -45,44 +53,62 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Model.Index.Course.CourseActivity" />
         <activity android:name=".OriginIndex.OriginIndexActivity" />
-        <activity android:name=".Model.Discovery.Activity.RewardActivity" />
+        <activity android:name=".Model.Discovery.Activity.RewardActivity"></activity>
         <activity android:name=".Model.Discovery.Activity.QAActivity" />
         <activity android:name=".Model.Discovery.Activity.ArticleActivity" />
         <activity android:name=".Model.Me.Setting.SettingActivity" />
         <activity android:name=".Model.Index.Course.BuyCourseActivity" />
         <activity android:name=".Model.Index.Course.NewCourseOrderActivity" />
         <activity android:name=".Model.Me.Coupon.CouponActivity" />
-        <activity android:name=".Model.Me.Recharge.RechargeActivity" />
+        <activity android:name=".Model.Me.Recharge.RechargeActivity"></activity>
 
-        <!-- 学生发布悬赏信息描述，已废弃 -->
+        <!-- 学生发布悬赏信息描述，已废弃-->
         <activity android:name=".Model.Publish.Activity.PublishRewardStudentActivity" />
-        <!-- 学生发布问题信息描述 -->
+        <!-- 学生发布问题信息描述-->
         <activity android:name=".Model.Publish.Activity.PublishQuestionStudentActivity" />
-        <!-- 老师发布文章描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity" />
-        <!-- 老师发布课程信息描述,已废弃 -->
-        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity" />
-        <!-- 学生发布悬赏信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity" />
-        <!-- 学生发布悬赏价格信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity" />
-        <!-- 学生发布悬赏选项信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity" />
-        、
-        <activity android:name=".Model.Publish.Activity.ApplyAuthenticationTeacherActivity" />
+        <!-- 老师发布文章描述-->
+        <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity"/>
+        <!-- 老师发布课程信息描述,已废弃-->
+        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity">
+        </activity>
+        <!-- 学生发布悬赏信息描述-->
+        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity">
+        </activity>
+        <!-- 学生发布悬赏价格信息描述-->
+        <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity"/>
+        <!-- 学生发布悬赏选项信息描述-->
+        <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity"/>
+
 
         <!-- 小米推送所需服务 -->
-        <!-- 老师发布课程信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishCoursedDescribeTeacherActivity" />
-        <!-- 老师发布课程价格描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishCoursePriceTeacherActivity" />
-        <!-- 老师发布课程选项信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishCourseOptionsTeacherActivity" />
+        <!-- 老师发布课程信息描述-->
+        <activity android:name=".Model.Publish.Activity.PublishCoursedDescribeTeacherActivity"/>
+        <!-- 老师发布课程价格描述-->
+        <activity android:name=".Model.Publish.Activity.PublishCoursePriceTeacherActivity"/>
+        <!-- 老师发布课程选项信息描述-->
+        <activity android:name=".Model.Publish.Activity.PublishCourseOptionsTeacherActivity"/>
 
-        <!-- 老师接单悬赏 -->
-        <activity android:name=".Model.Discovery.Activity.ApplyRewardTeacherActivity" />
 
-        <!-- 小米推送所需服务 -->
+       <!-- 申请认证老师-->
+        <activity android:name=".Model.Publish.Activity.ApplyAuthenticationTeacherActivity"/>
+
+        <!--老师接单悬赏-->
+        <activity android:name=".Model.Discovery.Activity.ApplyRewardTeacherActivity"/>
+        <!--接单悬赏的老师主页-->
+        <activity android:name=".Model.Me.Reward.TeacherIndexActivity"/>
+        <!--老师界面的主页-->
+        <activity android:name=".Teacher.Index.course.OwnerCourseTeacherActivity"/>
+        <!--评价悬赏订单-->
+        <activity android:name=".Model.Order.activity.CommentRewardActivity"/>
+        <!--评价课程订单-->
+        <activity android:name=".Model.Order.activity.CommentCourseActivity"/>
+        <!--老师拥有的悬赏订单-->
+        <activity android:name=".Teacher.Index.reward.OwnerRewardTeacherActivity"/>
+
+
+
+
+        <!--小米推送所需服务-->
         <service
             android:name="com.xiaomi.push.service.XMPushService"
             android:enabled="true"
@@ -137,15 +163,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Model.Me.Reward.OwnerRewardActivity" />
-        <activity android:name=".TeacherInfo.TeacherInfoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".Model.Me.Reward.OwnerRewardActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".AccessOrder.AccessOrderActivity"></activity>
     </application>
 
 </manifest>

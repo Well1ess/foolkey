@@ -3,6 +3,7 @@ package com.example.a29149.yuyuan.Widget.Dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -37,6 +38,8 @@ public class PayDialog extends Dialog {
         private TextView mVirtualMoney;
         private EditText mPassword;
         private int position;
+
+
 
         public Builder(Context context) {
             this.context = context;
@@ -115,10 +118,15 @@ public class PayDialog extends Dialog {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // instantiate the dialog with the custom Theme
             final PayDialog dialog = new PayDialog(context, R.style.Base_Theme_AppCompat_Dialog);
-            View layout = inflater.inflate(R.layout.dialog_my_del_team_layout, null);
+            //View layout = inflater.inflate(R.layout.dialog_my_del_team_layout, null);
+            View layout = inflater.inflate(R.layout.dialog_pay, null);
             dialog.addContentView(layout, new LayoutParams(
                     LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
+            mAmount = (TextView) dialog.findViewById(R.id.amount);
+            Log.i("malei",mAmount.getText().toString());
+            mVirtualMoney = (TextView) dialog.findViewById(R.id.virtual_money);
+            mPassword = (EditText) dialog.findViewById(R.id.password);
 
             if (positiveButtonText != null) {
                 ((Button) layout.findViewById(R.id.info_fragment2_new_msg_bt_commit))
@@ -155,9 +163,6 @@ public class PayDialog extends Dialog {
                 layout.findViewById(R.id.info_fragment2_new_msg_bt_giveup).setVisibility(
                         View.GONE);
             }
-            mAmount = (TextView) dialog.findViewById(R.id.amount);
-            mVirtualMoney = (TextView) dialog.findViewById(R.id.virtual_money);
-            mPassword = (EditText) dialog.findViewById(R.id.password);
 
             dialog.setContentView(layout);
             //dialog.setCanceledOnTouchOutside(false);

@@ -222,8 +222,18 @@ public class PublishCourseOptionsTeacherActivity extends Activity implements Vie
                 target.put("technicTagEnum",courseChooseContent[1]);
                 target.put("description",courseChooseContent[2]);
                 target.put("price",courseChooseContent[3]);
+                //默认选择
+                if ( courseChooseContent[4] != null && !courseChooseContent[4].equals(""))
+                    ;
+                else
+                    courseChooseContent[4] = "不限";
                 target.put("courseTimeDayEnum",courseChooseContent[4]);
                 target.put("duration",courseChooseContent[5]);
+                //默认选择
+                if ( courseChooseContent[6] != null && !courseChooseContent[6].equals(""))
+                    ;
+                else
+                    courseChooseContent[6] = "不限";
                 target.put("teachMethodEnum",courseChooseContent[6]);
 
                 java.net.URL url = new java.net.URL(URL.getTeacherPublishCoursedURL(target.toString()));

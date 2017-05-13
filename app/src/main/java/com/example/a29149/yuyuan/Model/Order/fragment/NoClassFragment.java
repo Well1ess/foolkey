@@ -30,7 +30,7 @@ public class NoClassFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getContext();
-        View view = inflater.inflate(R.layout.fragmen_viewpager_noclass,null);
+        View view = inflater.inflate(R.layout.fragment_viewpager_noclass,null);
         mBuyedCourse = (MyListView) view.findViewById(R.id.lv_noStartCourse);
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
 

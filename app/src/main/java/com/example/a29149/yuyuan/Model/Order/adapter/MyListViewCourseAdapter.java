@@ -29,7 +29,6 @@ public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListe
     private TextView mTeacherNameAndCourseName;//老师姓名和课程名
     private TextView mBuyTime;//购买时长
     private TextView mCourseCost;//课程价格
-    private TextView mTeacherState;//老师状态：是否就绪
     private TextView mPay;//学生点击付款按钮
     private List<Map<String,Object>> courseNoPayList;//已购买课程但还未付款订单
 
@@ -88,7 +87,6 @@ public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListe
         mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
         mBuyTime = (TextView) view.findViewById(R.id.tv_buyTime);
         mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
-        mTeacherState = (TextView) view.findViewById(R.id.tv_teacherState);
         mPay = (TextView) view.findViewById(R.id.tv_pay);
         mPay.setOnClickListener(this);
     }

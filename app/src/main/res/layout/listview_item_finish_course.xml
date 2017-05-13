@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/white"
+    android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/iv_teacherPhone"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher_round"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:focusable="false"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_teacherNameAndCourseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/grey555"
+            android:text="朱洪军： javaEE"/>
+        <TextView
+            android:id="@+id/tv_buyTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/grey555"
+            android:text="购买时长： 50h"/>
+        <TextView
+            android:id="@+id/tv_courseCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/dark_green"
+            android:text="课程价格： 1000RMB"/>
+    </LinearLayout>
+
+</LinearLayout>

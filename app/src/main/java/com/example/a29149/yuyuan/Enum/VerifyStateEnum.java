@@ -1,4 +1,4 @@
-package com.example.a29149.yuyuan.DTO;
+package com.example.a29149.yuyuan.Enum;
 
 /**
  *

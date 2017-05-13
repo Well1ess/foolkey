@@ -13,7 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.CourseStudentDTO;
+import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
@@ -189,7 +191,7 @@ public class ApplyAuthenticationTeacherActivity extends Activity implements View
     }
 
     /**
-     * 认证老师请求Action
+     * 获取我的悬赏请求Action
      */
     public class ApplyRewardAction extends AsyncTask<String, Integer, String> {
 
@@ -262,13 +264,13 @@ public class ApplyAuthenticationTeacherActivity extends Activity implements View
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
 
-                    /*java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<CourseStudentDTO>() {
+                    //存储所有我拥有的悬赏信息DTO
+                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<ApplicationStudentRewardAsStudentSTCDTO>>() {
                     }.getType();
-                    List<CourseStudentDTO> courseStudentDTO = new Gson().fromJson(jsonObject.getString("courseStudentDTOS"), type);
-                    //存储学生信息DTO
-                    GlobalUtil.getInstance().setCourseStudentDTOs(courseStudentDTO);
-                    Log.i("malei",courseStudentDTO.toString());*/
-
+                    List<ApplicationStudentRewardAsStudentSTCDTO> applicationStudentRewardAsStudentSTCDTOs = new Gson().fromJson(jsonObject.getString("applicationStudentRewardAsStudentSTCDTOS"), type);
+                    GlobalUtil.getInstance().setApplicationStudentRewardAsStudentSTCDTOs(applicationStudentRewardAsStudentSTCDTOs);
+                    Log.i("malei",applicationStudentRewardAsStudentSTCDTOs.toString());
+                    Log.i("malei",GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(0).getRewardDTO().toString());
 
 
                     if (resultFlag.equals("success")) {

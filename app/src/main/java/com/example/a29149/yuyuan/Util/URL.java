@@ -46,11 +46,46 @@ public class URL {
 
     //获取悬赏
     public static final String getRewardURL = "http://" +address + "/courseStudent/getRewardCoursePopular?";
-
-
-
     //获取我发布的悬赏
-    public static final String getMyRewardURL = "http://" +address + "/courseStudent/getMyPublishCourseStudent?";
+    public static final String getMyRewardURL = "http://" +address + "/application/getApplicationStudentRewardAsStudentController?";
+
+
+    //获取我发布的课程
+    public static final String getMyCourseURL = "http://" +address + "/order/getAgreedOnClassOrderRewardByTeacher?";
+
+    //获取老师发布的悬赏
+    public static final String getTeacherRewardURL = "http://" +address + "/order/getAgreedOnClassOrderRewardByTeacher?";
+
+
+
+    //同意悬赏申请
+    public static final String agreeApplyRewardURL = "http://" +address + "/acceptRewardApplication?";
+    //拒绝悬赏申请
+    public static final String disagreeApplyRewardURL = "http://" +address + "/refuseTeacherApplication?";
+
+    //获取学生列表
+    public static final String applyStudentListURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
+
+
+    //开始上课请求
+    public static final String startClassURL = "http://" +address + "/startClass?";
+
+    //下课请求
+    public static final String endClassURL = "http://" +address + "/endClass?";
+
+
+    //未评价订单请求
+    public static final String noCommentURL = "http://" +address + "/获取未评价的订单?";
+
+    //评价老师
+    public static final String commentTeacherURL = "http://" +address + "/judge/teacher?";
+
+    //评价课程
+    public static final String commentCourseURL = "http://" +address + "/judge/course?";
+
+
+
+
 
     //获取公钥
     public static String getPublicKeyURL() {
@@ -165,5 +200,60 @@ public class URL {
     public static String getGetMyRewardURL(String token) {
         return getMyRewardURL + "clearText=" + token;
     }
+
+    //同意悬赏申请
+    public static String getAgreeApplyRewardURL(String token) {
+        return agreeApplyRewardURL+ "clearText=" + token;
+    }
+
+    //拒绝悬赏申请
+    public static String getDisagreeApplyRewardURL(String token) {
+        return disagreeApplyRewardURL+ "clearText=" + token;
+    }
+
+
+    //获取学生列表
+    public static String getApplyStudentListURL(String token) {
+        return applyStudentListURL+ "clearText=" + token;
+    }
+
+    //开始上课请求
+    public static String getStartClassURL(String token) {
+        return startClassURL+ "clearText=" + token;
+    }
+
+    //下课请求
+    public static String getEndClassURL(String token) {
+        return endClassURL+ "clearText=" + token;
+    }
+
+    //获取没评价的订单
+    public static String getNoCommentURL(String token) {
+        return noCommentURL+ "clearText=" + token;
+    }
+
+    //获取评价老师
+    public static String getCommentTeacherURL(String token) {
+        return commentTeacherURL+ "clearText=" + token;
+    }
+
+    //获取我发布的课程
+    public static String getGetMyCourseURL(String token) {
+        return getMyCourseURL+ "clearText=" + token;
+    }
+
+    //获取老师发布的悬赏
+    public static String getGetTeacherRewardURL(String token) {
+        return getTeacherRewardURL+ "clearText=" + token;
+    }
+
+    //评价课程
+    public static String getCommentCourseURL(String token) {
+        return commentCourseURL+ "clearText=" + token;
+    }
+
+
+
+
 
 }

@@ -17,5 +17,5 @@ public class Const {
 
     //悬赏标签
 
-    public static final String[] REWARD_TAG = {"Java","C", "Javascript","Python","PHP","Html5","Android","iOS","数据库","其它"};
+    public static final String[] REWARD_TAG = {"Java","C", "JavaScript","Python","PHP","Html5","Android","iOS","MySQL","前端","后端","其它"};
 }

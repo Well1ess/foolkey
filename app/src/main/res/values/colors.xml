@@ -15,6 +15,7 @@
     <color name="infoBar">#E0E0E0</color>
     <color name="transparent">#00000000</color>
     <color name="black">#000000</color>
+    <color name="grey555">#555555</color>
 
     <color name="head">#757575</color>
     <color name="subhead">#808080</color>

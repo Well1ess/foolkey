@@ -1,7 +1,6 @@
-package com.example.a29149.yuyuan.Teacher.Index;
+package com.example.a29149.yuyuan.Teacher.Index.reward;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +12,9 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
-import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseWithStudentAsTeacherSTCDTO;
-import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardListAdapter;
+import com.example.a29149.yuyuan.DTO.OrderBuyRewardAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 
@@ -29,7 +26,7 @@ import java.util.List;
  * Description:我的课程的适配器
  */
 
-public class OwnerCourseListAdapter extends BaseAdapter {
+public class OwnerRewardListAdapter extends BaseAdapter {
 
     private Context mContext;
 
@@ -41,13 +38,13 @@ public class OwnerCourseListAdapter extends BaseAdapter {
     //关闭时的标签
     private Drawable close;
     //我的所有悬赏
-    private List<OrderBuyCourseAsTeacherSTCDTO> list;
+    private List<OrderBuyRewardAsTeacherSTCDTO> list;
     //某条悬赏所拥有的申请的学生信息和订单信息
-    private List<OrderBuyCourseWithStudentAsTeacherSTCDTO> orderBuyCourseWithStudentAsTeacherSTCDTOList;
+    private List<OrderBuyCourseWithStudentAsTeacherSTCDTO> orderBuyCourseWithStudentAsTeacherSTCDTOs;
 
-    public OwnerCourseListAdapter(Context context) {
+    public OwnerRewardListAdapter(Context context) {
         mContext = context;
-        list = GlobalUtil.getInstance().getOrderBuyCourseAsTeacherSTCDTOs();
+        list = GlobalUtil.getInstance().getOrderBuyRewardAsTeacherSTCDTOs();
 
         listState = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -78,9 +75,9 @@ public class OwnerCourseListAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_owner_reward, null);
             //获取申请的老师信息和申请信息
-            orderBuyCourseWithStudentAsTeacherSTCDTOList = list.get(position).getOrderBuyCourseWithStudentAsTeacherSTCDTOS();
-            Log.i("malei",orderBuyCourseWithStudentAsTeacherSTCDTOList.get(0).getOrderBuyCourseDTO().toString());
-            StudentReplyListAdapter studentReplyListAdapter = new StudentReplyListAdapter(mContext, orderBuyCourseWithStudentAsTeacherSTCDTOList);
+            orderBuyCourseWithStudentAsTeacherSTCDTOs = list.get(position).getOrderBuyCourseWithStudentAsTeacherSTCDTOS();
+            Log.i("malei",orderBuyCourseWithStudentAsTeacherSTCDTOs.get(0).getOrderBuyCourseDTO().toString());
+            StudentReplyListAdapter studentReplyListAdapter = new StudentReplyListAdapter(mContext, orderBuyCourseWithStudentAsTeacherSTCDTOs);
             final GridView gridView = (GridView) convertView.findViewById(R.id.teacher_head);
             gridView.setAdapter(studentReplyListAdapter);
             //点击申请接单的老师的头像，跳转到老师的详细信息中
@@ -103,10 +100,10 @@ public class OwnerCourseListAdapter extends BaseAdapter {
 
             //获取悬赏标题
             final TextView title = (TextView) convertView.findViewById(R.id.tv_title);
-            title.setText(GlobalUtil.getInstance().getOrderBuyCourseAsTeacherSTCDTOs().get(position).getCourseDTO().getTopic());
+            title.setText(GlobalUtil.getInstance().getOrderBuyRewardAsTeacherSTCDTOs().get(position).getRewardDTO().getTopic());
             //获取悬赏价格
             final TextView price = (TextView) convertView.findViewById(R.id.tv_price);
-            price.setText(GlobalUtil.getInstance().getOrderBuyCourseAsTeacherSTCDTOs().get(position).getCourseDTO().getPrice()+"");
+            price.setText(GlobalUtil.getInstance().getOrderBuyRewardAsTeacherSTCDTOs().get(position).getRewardDTO().getPrice()+"");
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

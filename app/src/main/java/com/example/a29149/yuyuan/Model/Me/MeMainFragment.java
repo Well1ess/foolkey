@@ -12,14 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CouponDTO;
-import com.example.a29149.yuyuan.Model.Discovery.Activity.ApplyRewardTeacherActivity;
 import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Teacher.Index.OwnerCourseTeacherActivity;
+import com.example.a29149.yuyuan.Teacher.Index.course.OwnerCourseTeacherActivity;
+import com.example.a29149.yuyuan.Teacher.Index.reward.OwnerRewardTeacherActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -81,8 +81,9 @@ public class MeMainFragment extends Fragment {
         view.findViewById(R.id.tv_course).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),OwnerCourseTeacherActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(getActivity(),OwnerCourseTeacherActivity.class);//课程
+                Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
+                startActivity(intent1);
             }
         });
 

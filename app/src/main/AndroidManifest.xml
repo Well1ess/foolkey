@@ -97,7 +97,13 @@
         <!--接单悬赏的老师主页-->
         <activity android:name=".Model.Me.Reward.TeacherIndexActivity"/>
         <!--老师界面的主页-->
-        <activity android:name=".Teacher.Index.OwnerCourseTeacherActivity"/>
+        <activity android:name=".Teacher.Index.course.OwnerCourseTeacherActivity"/>
+        <!--评价悬赏订单-->
+        <activity android:name=".Model.Order.activity.CommentRewardActivity"/>
+        <!--评价课程订单-->
+        <activity android:name=".Model.Order.activity.CommentCourseActivity"/>
+        <!--老师拥有的悬赏订单-->
+        <activity android:name=".Teacher.Index.reward.OwnerRewardTeacherActivity"/>
 
 
 

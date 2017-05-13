@@ -1,4 +1,4 @@
-package com.example.a29149.yuyuan.Teacher.Index;
+package com.example.a29149.yuyuan.Teacher.Index.reward;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,20 +11,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseWithStudentAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
-import com.example.a29149.yuyuan.Model.Index.Course.NewCourseOrderActivity;
-import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
-import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -97,6 +92,8 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
         String stateStudent = mOrderBuyCourseDTO.getOrderStateEnum()+"";
         if (stateStudent.equals("同意上课"))
             stateStudent = "开始上课";
+        else if(stateStudent.equals("上课中"))
+            stateStudent = "点击下课";
         myViewHolder.state.setText(stateStudent);
         myViewHolder.tv.setOnClickListener(this);
         mDisplayDialog = new WarningDisplayDialog.Builder(mContext);
@@ -123,9 +120,34 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        mDisplayDialog.setMsg("是否开始上课？再次点击后下课！");
-        mDisplayDialog.getDialog().show();
-        Toast.makeText(mContext, "sss", Toast.LENGTH_SHORT).show();
+        int id = view.getId();
+        switch (id)
+        {
+            case R.id.id_num:
+                startOrEndClass();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private void startOrEndClass() {
+        String s = myViewHolder.state.getText().toString();
+        Log.i("malei",s);
+        switch (s)
+        {
+            case "开始上课":
+                mDisplayDialog.setMsg("是否开始上课？再次点击后下课！");
+                mDisplayDialog.getDialog().show();
+                break;
+            case "点击下课":
+                mDisplayDialog.setMsg("是否下课？点击后完成课程！");
+                mDisplayDialog.getDialog().show();
+                break;
+
+        }
+
     }
 
     static class MyViewHolder {
@@ -216,7 +238,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
                     if (resultFlag.equals("success")) {
 
                         Toast.makeText(mContext, "开始上课成功！", Toast.LENGTH_SHORT).show();
-                        myViewHolder.state.setText("下课");
+                        myViewHolder.state.setText("点击下课");
 
                     }
                 } catch (Exception e) {

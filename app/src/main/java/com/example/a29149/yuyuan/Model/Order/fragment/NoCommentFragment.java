@@ -13,14 +13,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
-import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
-import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardListAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoCommentRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -56,6 +52,8 @@ public class NoCommentFragment extends Fragment {
     private MyListView mReward;
     private MyListView mRecommand;
     private List<Map<String,Object>> courseNoPayList = new ArrayList<>();
+    private List rewardList = new ArrayList();//悬赏列表
+    private List courseList = new ArrayList();//课程列表
 
 
     @Nullable
@@ -75,7 +73,7 @@ public class NoCommentFragment extends Fragment {
         mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("malei","你点击了"+position);
+
             }
         });
         mReward = (MyListView) view.findViewById(R.id.lv_reward);
@@ -98,12 +96,12 @@ public class NoCommentFragment extends Fragment {
 
 
 
-        MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
+
 
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
 
 
-        mReward.setAdapter(myListViewNoCommentRewardAdapter);
+
         mRecommand.setAdapter(myListViewRecommandAdapter);
         return view;
     }
@@ -190,13 +188,28 @@ public class NoCommentFragment extends Fragment {
             if (result != null) {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
-                    courseNoPayList = JSONUtil.jsonObject2List(jsonObject,"keyName");
                     String resultFlag = jsonObject.getString("result");
                     //存储所有我拥有的悬赏信息DTO
                     java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
                     }.getType();
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
                     GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
+                    rewardList.clear();
+                    courseList.clear();
+                    for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
+                        switch (dto.getOrderDTO().getCourseTypeEnum()) {
+                            case 学生悬赏: {
+                                rewardList.add(dto);
+                            }
+                            break;
+                            case 老师课程: {
+                                courseList.add(dto);
+                            }
+                            break;
+                        }
+                    }
+
+
                     Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
                         Toast.makeText(mContext, "获取成功！", Toast.LENGTH_SHORT).show();
@@ -204,8 +217,13 @@ public class NoCommentFragment extends Fragment {
                             @Override
                             public void run() {
                                 MyListViewNoConmmentClassAdapter myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
-                                myListViewNoConmmentClassAdapter.setData(GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs());
+                                myListViewNoConmmentClassAdapter.setData(rewardList);
                                 mBuyCourse.setAdapter(myListViewNoConmmentClassAdapter);
+
+                                MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
+                                myListViewNoCommentRewardAdapter.setData(courseList);
+                                mReward.setAdapter(myListViewNoCommentRewardAdapter);
+
                                 shapeLoadingDialog.dismiss();
 
                             }

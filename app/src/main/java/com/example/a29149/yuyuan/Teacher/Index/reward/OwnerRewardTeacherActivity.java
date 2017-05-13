@@ -1,4 +1,4 @@
-package com.example.a29149.yuyuan.Teacher.Index;
+package com.example.a29149.yuyuan.Teacher.Index.reward;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsTeacherSTCDTO;
+import com.example.a29149.yuyuan.DTO.OrderBuyRewardAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
@@ -34,23 +34,23 @@ import static com.example.a29149.yuyuan.Main.MainActivity.shapeLoadingDialog;
 /**
  * Created by MaLei on 2017/5/12.
  * Email:ml1995@mail.ustc.edu.cn
- * 老师拥有的课程
+ * 老师拥有的悬赏
  */
 
 //拥有的课程
-public class OwnerCourseTeacherActivity extends AppCompatActivity {
+public class OwnerRewardTeacherActivity extends AppCompatActivity {
 
     //课程列表
     @ViewInject(R.id.reward_list)
     private ListView mCourseList;
 
     //适配器
-    private OwnerCourseListAdapter mAdapter;
+    private OwnerRewardListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_owner_course_teacher);
+        setContentView(R.layout.activity_owner_reward_teacher);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
@@ -86,7 +86,7 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
         new ApplyRewardAction(1).execute();
     }
     /**
-     * 获取我的悬赏请求Action
+     * 获取老师的悬赏请求Action
      */
     public class ApplyRewardAction extends AsyncTask<String, Integer, String> {
 
@@ -114,7 +114,7 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token",token);
                 target.put("pageNo",pageNo);
-                java.net.URL url = new java.net.URL(URL.getApplyStudentListURL(target.toString()));
+                java.net.URL url = new java.net.URL(URL.getGetTeacherRewardURL(target.toString()));
                 Log.i("malei",target.toString());
                 con = (HttpURLConnection) url.openConnection();
                 // 设置允许输出，默认为false
@@ -160,18 +160,18 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
                     String resultFlag = jsonObject.getString("result");
 
                     //存储所有我拥有的课程信息DTO
-                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsTeacherSTCDTO>>() {
+                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyRewardAsTeacherSTCDTO>>() {
                     }.getType();
-                    List<OrderBuyCourseAsTeacherSTCDTO> orderBuyCourseAsTeacherSTCDTOs = new Gson().fromJson(jsonObject.getString("orderBuyCourseAsTeacherSTCDTOS"), type);
-                    GlobalUtil.getInstance().setOrderBuyCourseAsTeacherSTCDTOs(orderBuyCourseAsTeacherSTCDTOs);
-                    Log.i("malei",orderBuyCourseAsTeacherSTCDTOs.toString());
+                    List<OrderBuyRewardAsTeacherSTCDTO> orderBuyRewardAsTeacherSTCDTOs = new Gson().fromJson(jsonObject.getString("orderBuyRewardAsTeacherSTCDTOS"), type);
+                    GlobalUtil.getInstance().setOrderBuyRewardAsTeacherSTCDTOs(orderBuyRewardAsTeacherSTCDTOs);
+                    Log.i("malei",orderBuyRewardAsTeacherSTCDTOs.toString());
 
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(OwnerCourseTeacherActivity.this, "获取课程成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OwnerRewardTeacherActivity.this, "获取悬赏成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                mAdapter = new OwnerCourseListAdapter(OwnerCourseTeacherActivity.this);
+                                mAdapter = new OwnerRewardListAdapter(OwnerRewardTeacherActivity.this);
                                 mCourseList.setAdapter(mAdapter);
                                 shapeLoadingDialog.dismiss();
 
@@ -180,10 +180,10 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(OwnerCourseTeacherActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OwnerRewardTeacherActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(OwnerCourseTeacherActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OwnerRewardTeacherActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -193,6 +193,8 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
             super.onProgressUpdate(values);
         }
     }
+
+
 
 
 }

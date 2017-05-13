@@ -46,7 +46,7 @@
         android:layout_marginLeft="30dp"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/tv_pay"
+            android:id="@+id/tv_comment"
             android:layout_marginTop="5dp"
             android:padding="5dp"
             android:background="@drawable/shape_corner_white"

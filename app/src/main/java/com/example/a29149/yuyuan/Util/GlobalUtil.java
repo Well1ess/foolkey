@@ -9,6 +9,7 @@ import com.example.a29149.yuyuan.DTO.CourseStudentPopularDTO;
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsTeacherSTCDTO;
+import com.example.a29149.yuyuan.DTO.OrderBuyRewardAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
@@ -72,6 +73,10 @@ public class GlobalUtil {
 
     //未评价订单
     private List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs;
+
+
+    //悬赏和学生信息
+    private List<OrderBuyRewardAsTeacherSTCDTO> orderBuyRewardAsTeacherSTCDTOs;
 
     //申请悬赏的DTO
     private ApplicationStudentRewardDTO applicationStudentRewardDTO;
@@ -331,6 +336,14 @@ public class GlobalUtil {
 
     public void setOrderBuyCourseAsStudentDTOs(List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs) {
         this.orderBuyCourseAsStudentDTOs = orderBuyCourseAsStudentDTOs;
+    }
+
+    public List<OrderBuyRewardAsTeacherSTCDTO> getOrderBuyRewardAsTeacherSTCDTOs() {
+        return orderBuyRewardAsTeacherSTCDTOs;
+    }
+
+    public void setOrderBuyRewardAsTeacherSTCDTOs(List<OrderBuyRewardAsTeacherSTCDTO> orderBuyRewardAsTeacherSTCDTOs) {
+        this.orderBuyRewardAsTeacherSTCDTOs = orderBuyRewardAsTeacherSTCDTOs;
     }
 
 

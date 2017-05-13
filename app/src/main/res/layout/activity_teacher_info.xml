@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a29149.yuyuan.TeacherInfo.TeacherInfoActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageButton
+                android:id="@+id/bt_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="?android:attr/actionModeCloseDrawable"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:text="张丽华的主页"
+                android:textColor="@color/white" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_marginTop="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp">
+                        <ImageView
+                            android:id="@+id/head"
+                            android:transitionName="shareHead"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:background="@color/grey"/>
+                        <TextView
+                            android:layout_marginTop="20dp"
+                            android:id="@+id/info"
+                            android:layout_alignTop="@id/head"
+                            android:layout_toEndOf="@id/head"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="所有的坚持，都源自于热爱"/>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_toEndOf="@id/head"
+                            android:layout_alignBottom="@id/head"
+                            android:layout_marginBottom="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grey"
+                                android:text="男"/>
+                            <View
+                                android:layout_marginRight="20dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_width="1px"
+                                android:layout_height="match_parent"
+                                android:background="@color/grey"/>
+                            <TextView
+                                android:textColor="@color/grey"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="中科大"/>
+                            <TextView
+                                android:textColor="@color/grey"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="/"/>
+                            <TextView
+                                android:textColor="@color/grey"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="博士"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/reputation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:text="声望"
+                            android:textSize="12dp"
+                            android:layout_alignBottom="@id/head"
+                            android:layout_alignRight="@id/head"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/grey"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:layout_marginRight="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/TextView.INFO_TEXT"
+                        android:text="关注人数"/>
+                    <TextView
+                        style="@style/TextView.INFO_NUM"
+                        android:text="1"/>
+
+                    <TextView
+                        style="@style/TextView.INFO_TEXT"
+                        android:text=""/>
+
+                    <TextView
+                        android:layout_marginRight="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  + 关 注  "
+                        android:textSize="16sp"
+                        android:textColor="@color/colorPrimary"
+                        android:padding="5dp"
+                        android:background="@drawable/textview_normal"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginRight="2dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextView.INFO_TEXT"
+                        android:text="授课次数"/>
+
+                    <TextView
+                        style="@style/TextView.INFO_NUM"
+                        android:text="1"/>
+
+                    <TextView
+                        style="@style/TextView.INFO_TEXT"
+                        android:text="授课时长"/>
+
+                    <TextView
+                        style="@style/TextView.INFO_NUM"
+                        android:text="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginRight="2dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextView.INFO_TEXT"
+                        android:text="已认证"/>
+
+                    <CheckBox
+                        style="@style/TextView.INFO_NUM"
+                        android:checked="true" />
+
+                    <TextView
+                        style="@style/TextView.INFO_TEXT"
+                        android:text="评价"/>
+
+                    <TextView
+                        style="@style/TextView.INFO_NUM"
+                        android:text="4.3"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextView.INFO_TEXT"
+                        android:text="GitHub    "/>
+
+                    <TextView
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:maxLines="1"
+                        android:layout_height="wrap_content"
+                        android:text="http://blog.csdn.net/hugoshine/article/details/9987917"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextView.INFO_TEXT"
+                        android:text="个人主页"/>
+
+                    <TextView
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:maxLines="1"
+                        android:layout_height="wrap_content"
+                        android:text="http://blog.csdn.net/hugoshine/article/details/9987917"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextView.INFO_TEXT"
+                        android:text="E-Mail     "/>
+
+                    <TextView
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="http://blog.csdn.net/hugoshine/article/details/9987917"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <View
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mask"
+        android:alpha="0.4"
+        android:elevation="10dp"
+        android:background="@color/black" />
+
+    <include
+        android:visibility="gone"
+        layout="@layout/option_menu_teacher"/>
+
+</FrameLayout>

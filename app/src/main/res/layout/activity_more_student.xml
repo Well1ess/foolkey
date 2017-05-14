@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageButton
+                android:transitionName="shareHead"
+                android:id="@+id/bt_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="?android:attr/actionModeCloseDrawable"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:text="全部学生"
+                android:textColor="@color/white" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--这里最好用RecycleView实现，时间不够，只能用GridLayout，后期再改-->
+
+    <LinearLayout
+        android:layout_marginTop="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="4">
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_margin="10dp"
+                        android:background="@color/grey"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"/>
+                    <TextView
+                        android:padding="2dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="开始上课"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/textview_solid"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_margin="10dp"
+                        android:background="@color/grey"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:padding="2dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="点击下课"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/textview_solid_orange"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_margin="10dp"
+                        android:background="@color/grey"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"/>
+                    <TextView
+                        android:padding="2dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="开始上课"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/textview_solid"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_margin="10dp"
+                        android:background="@color/grey"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:padding="2dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="点击下课"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/textview_solid_orange"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_margin="10dp"
+                        android:background="@color/grey"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"/>
+                    <TextView
+                        android:padding="2dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="开始上课"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/textview_solid"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_columnWeight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_margin="10dp"
+                        android:background="@color/grey"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:padding="2dp"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="点击下课"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/textview_solid_orange"/>
+                </LinearLayout>
+            </GridLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -36,8 +36,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
-        <activity android:name=".Main.MainActivity"></activity>
-        <activity android:name=".Login.LoginActivity"></activity>
+        <activity android:name=".Main.MainActivity" />
+        <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Login.RegisterActivity" />
         <activity android:name=".Login.ModifyPwdActivity" />
         <activity
@@ -61,9 +61,9 @@
         <!-- 老师发布文章描述 -->
         <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity" />
         <!-- 老师发布课程信息描述,已废弃 -->
-        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity"></activity>
+        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity" />
         <!-- 学生发布悬赏信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity"></activity>
+        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity" />
         <!-- 学生发布悬赏价格信息描述 -->
         <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity" />
         <!-- 学生发布悬赏选项信息描述 -->
@@ -147,18 +147,20 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Model.Me.Reward.OwnerRewardActivity"></activity>
-        <activity android:name=".TeacherInfo.TeacherInfoActivity">
-        </activity>
-        <activity android:name=".AccessOrder.AccessOrderActivity"
-            android:windowSoftInputMode="adjustPan">
+        <activity android:name=".Model.Me.Reward.OwnerRewardActivity" />
+        <activity android:name=".TeacherInfo.TeacherInfoActivity" />
+        <activity
+            android:name=".AccessOrder.AccessOrderActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".Teacher.Index.course.OwnerCourseTeacherActivity" />
+        <activity android:name=".TeacherMain.TeacherMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Teacher.Index.course.OwnerCourseTeacherActivity"></activity>
+        <activity android:name=".TeacherMain.Score.MoreStudent.MoreStudentActivity"></activity>
     </application>
 
 </manifest>

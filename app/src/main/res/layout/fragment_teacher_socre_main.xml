@@ -1,0 +1,97 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:elevation="5dp"
+            android:background="@color/colorPrimary">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="上课"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/background">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <RadioGroup
+                    android:id="@+id/discovery_main_menu"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:elevation="1dp">
+
+                    <RadioButton
+                        android:id="@+id/search_score"
+                        android:text="我发布的课程"
+                        style="@style/RadioButton.SearchMenu" />
+
+                    <RadioButton
+                        android:id="@+id/search_reward"
+                        android:text="发接受的悬赏"
+                        style="@style/RadioButton.SearchMenu"  />
+                </RadioGroup>
+
+                <ImageView
+                    android:id="@+id/id_tab_line"
+                    android:layout_width="10dp"
+                    android:layout_height="3dp"
+                    android:background="@color/orange"
+                    android:layout_gravity="bottom" />
+            </FrameLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/content_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <android.support.v4.app.FragmentTabHost
+                android:id="@android:id/tabhost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" >
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0" />
+            </android.support.v4.app.FragmentTabHost>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

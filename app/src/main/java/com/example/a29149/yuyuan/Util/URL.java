@@ -51,7 +51,7 @@ public class URL {
 
 
     //获取我发布的课程
-    public static final String getMyCourseURL = "http://" +address + "/order/getAgreedOnClassOrderRewardByTeacher?";
+    public static final String getMyCourseURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
 
     //获取老师发布的悬赏
     public static final String getTeacherRewardURL = "http://" +address + "/order/getAgreedOnClassOrderRewardByTeacher?";

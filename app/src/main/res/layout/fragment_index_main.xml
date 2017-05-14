@@ -86,7 +86,7 @@
             <TextView
                 android:id="@+id/ios"
                 style="@style/TextView.SlideMenu"
-                android:text="IOS" />
+                android:text="iOS" />
             <TextView
                 android:id="@+id/mysql"
                 style="@style/TextView.SlideMenu"

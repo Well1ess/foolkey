@@ -63,6 +63,8 @@ public class MeMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me_main, container, false);
+        TextView mTitle = (TextView) view.findViewById(R.id.title);
+        mTitle.setText(GlobalUtil.getInstance().getStudentDTO().getNickedName());
         view.findViewById(R.id.change_role).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,8 +84,8 @@ public class MeMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),OwnerCourseTeacherActivity.class);//课程
-                Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
-                startActivity(intent1);
+                //Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
+                startActivity(intent);
             }
         });
 

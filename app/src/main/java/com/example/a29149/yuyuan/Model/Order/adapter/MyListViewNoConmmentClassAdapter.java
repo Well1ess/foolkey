@@ -48,6 +48,7 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
     private int position; //记录位置
     private List rewardList = new ArrayList();//悬赏列表
     private List courseList = new ArrayList();//课程列表
+    private CourseAbstract courseDTO = null ;
 
     public MyListViewNoConmmentClassAdapter(Context context)
     {
@@ -85,7 +86,7 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
         mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();
         mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
-        CourseAbstract courseDTO = null ;
+
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
 
 
@@ -118,6 +119,11 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
         //跳转到课程订单评价
         Intent intent = new Intent(mContext, CommentCourseActivity.class);
         intent.putExtra("position",position);
+        intent.putExtra("Topic",courseDTO.getTopic());
+        intent.putExtra("TeacherName",mStudentDTO.getNickedName());
+        intent.putExtra("Description",courseDTO.getDescription());
+        intent.putExtra("CoursePrice",courseDTO.getPrice());
+
         mContext.startActivity(intent);
     }
 }

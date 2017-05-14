@@ -37,7 +37,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
         <activity android:name=".Main.MainActivity"></activity>
-        <activity android:name=".Login.LoginActivity"></activity>
+        <activity android:name=".Login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Login.RegisterActivity" />
         <activity android:name=".Login.ModifyPwdActivity" />
         <activity
@@ -152,11 +158,7 @@
         </activity>
         <activity android:name=".AccessOrder.AccessOrderActivity"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Teacher.Index.course.OwnerCourseTeacherActivity"></activity>
     </application>

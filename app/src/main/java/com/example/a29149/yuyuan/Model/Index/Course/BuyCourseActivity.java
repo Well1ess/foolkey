@@ -250,7 +250,7 @@ public class BuyCourseActivity extends AppCompatActivity {
                         orderDetail.putString("remark", "");
                         orderDetail.putString("deduce", 1+"");
                         orderDetail.putString("num", mNum+"");
-                        orderDetail.putString("orderMoney", mOrderMoney.getText().toString());
+                        orderDetail.putString("orderMoney", sum+"");
 
                         Intent toOrderDetail = new Intent(BuyCourseActivity.this, NewCourseOrderActivity.class);
                         toOrderDetail.putExtras(orderDetail);

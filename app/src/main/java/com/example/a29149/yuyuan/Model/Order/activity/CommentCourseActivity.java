@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,14 +33,23 @@ import java.net.HttpURLConnection;
 
 public class CommentCourseActivity extends Activity implements View.OnClickListener {
 
-    private TextView mPublish;//发布评价
-    private EditText mCourseScore;//课程分数
+    private RadioButton mPublish;//发布评价
+    private RatingBar mCourseScore;//课程分数
     private EditText mCourseContent;//课程内容评价
-    private EditText mTeacherScore;//课程分数
+    private RatingBar mTeacherScore;//课程分数
     private String scoreCourse;//保存评价课程分数
     private String commentContent;//保存评价课程内容
     private String scoreTeacher;//保存评价老师分数
     private int position;//记录评论位置
+    private String topic;
+    private String teacherName;
+    private String description;
+    private String price;
+    private TextView mTopic;//课程标题
+    private TextView mTeacherName;//课程老师名
+    private TextView mDescription;//发布评价
+    private TextView mCoursePrice;//课程价格
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,15 +57,29 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         setContentView(R.layout.activity_comment_course);
         Intent intent = getIntent();
         position = intent.getIntExtra("position",-1);
-        Log.i("malei",position+"");
+        topic = intent.getStringExtra("Topic");
+        teacherName = intent.getStringExtra("TeacherName");
+        description = intent.getStringExtra("Description");
+        price = intent.getStringExtra("CoursePrice");
+        Log.i("malei",position+"=position"+topic+"=topic"+teacherName+"=teacherName"+description+"=description"+price+"=price");
+
         initView();
     }
 
     private void initView() {
-        mCourseScore = (EditText) findViewById(R.id.ed_score_course);
+        mCourseScore = (RatingBar) findViewById(R.id.course_access);
         mCourseContent = (EditText) findViewById(R.id.ed_comment_content);
-        mTeacherScore = (EditText) findViewById(R.id.ed_score_teacher);
-        mPublish = (TextView) findViewById(R.id.tv_publish);
+        mTeacherScore = (RatingBar) findViewById(R.id.course_teacher);
+        mTopic = (TextView) findViewById(R.id.tv_topic);
+        mTopic.setText(topic);
+        mTeacherName = (TextView) findViewById(R.id.tv_teacherName);
+        mTeacherName.setText(teacherName);
+        mDescription = (TextView) findViewById(R.id.tv_description);
+        mDescription.setText(description);
+        mCoursePrice = (TextView) findViewById(R.id.tv_price);
+        mCoursePrice.setText("￥ "+price);
+
+        mPublish = (RadioButton) findViewById(R.id.main_menu_discovery);
         mPublish.setOnClickListener(this);
     }
 
@@ -63,8 +88,9 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         int id = view.getId();
         switch (id)
         {
-            case R.id.tv_publish:
+            case R.id.main_menu_discovery:
                 publishCommentReward();
+                Toast.makeText(this, "评论课程", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
@@ -73,15 +99,16 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
     }
 
     private void publishCommentReward() {
-        if (TextUtils.isEmpty(mCourseScore.getText().toString()) || TextUtils.isEmpty(mCourseContent.getText().toString())
-        || TextUtils.isEmpty(mTeacherScore.getText().toString()))
+        float courseScore = mCourseScore.getRating();
+        float teacherScore = mTeacherScore.getRating();
+        if (TextUtils.isEmpty(mCourseContent.getText().toString()))
             //非空判断
             Toast.makeText(this, "请输入评价内容", Toast.LENGTH_SHORT).show();
         else
         {
-            scoreCourse = mCourseScore.getText().toString();
+            scoreCourse = courseScore +"";
             commentContent = mCourseContent.getText().toString();
-            scoreTeacher = mTeacherScore.getText().toString();
+            scoreTeacher = teacherScore+"";
             new CommentCourseAction().execute();
             new CommentRewardAction().execute();
         }
@@ -110,7 +137,7 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token",token);
                 target.put("orderId",GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId());
-                target.put("scoreCourse",scoreCourse);
+                target.put("score",scoreCourse);
                 target.put("content",commentContent);
                 target.put("pic1Path","");
                 target.put("pic2Path","");

@@ -194,6 +194,7 @@ public class NoCommentFragment extends Fragment {
                     }.getType();
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
                     GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
+
                     rewardList.clear();
                     courseList.clear();
                     for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
@@ -217,11 +218,11 @@ public class NoCommentFragment extends Fragment {
                             @Override
                             public void run() {
                                 MyListViewNoConmmentClassAdapter myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
-                                myListViewNoConmmentClassAdapter.setData(rewardList);
+                                myListViewNoConmmentClassAdapter.setData(courseList);
                                 mBuyCourse.setAdapter(myListViewNoConmmentClassAdapter);
 
                                 MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
-                                myListViewNoCommentRewardAdapter.setData(courseList);
+                                myListViewNoCommentRewardAdapter.setData(rewardList);
                                 mReward.setAdapter(myListViewNoCommentRewardAdapter);
 
                                 shapeLoadingDialog.dismiss();

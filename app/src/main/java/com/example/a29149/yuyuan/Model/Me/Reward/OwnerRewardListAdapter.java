@@ -56,42 +56,10 @@ public class OwnerRewardListAdapter extends BaseAdapter {
         mContext = context;
         list = GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs();
 
-        strings = new ArrayList<>();
-        strings.add("1");
-        strings.add("2");
-        strings.add("3");
-        strings.add("4");
-        strings.add("1");
-        strings.add("2");
-        strings.add("3");
-        strings.add("4");
 
-        strings1 = new ArrayList<>();
-        strings1.add("1");
-        strings1.add("2");
-        strings1.add("1");
-        strings1.add("2");
-
-        strings2 = new ArrayList<>();
-        strings2.add("1");
-        strings2.add("2");
-        strings2.add("1");
-        strings2.add("2");
-
-        strings3 = new ArrayList<>();
-        strings3.add("1");
-        strings3.add("2");
-        strings3.add("1");
-        strings3.add("2");
-
-        sum = new ArrayList<>();
-        sum.add(strings);
-        sum.add(strings1);
-        sum.add(strings2);
-        sum.add(strings3);
 
         listState = new ArrayList<>();
-        for (int i = 0; i < sum.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             listState.add(new State(false, Integer.MAX_VALUE));
         }
 

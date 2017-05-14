@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.Main.MainActivity;
+import com.example.a29149.yuyuan.Model.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
@@ -342,6 +344,9 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
                     String resultFlag = jsonObject.getString("result");
                     if (resultFlag.equals("success")) {
                         Toast.makeText(PublishRewardOptionsStudentActivity.this, "发布成功！", Toast.LENGTH_SHORT).show();
+                        //发布成功后跳转到首页面
+                        Intent toMainActivity = new Intent(PublishRewardOptionsStudentActivity.this, MainActivity.class);
+                        startActivity(toMainActivity);
                     }
                 } catch (Exception e) {
                     Toast.makeText(PublishRewardOptionsStudentActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();

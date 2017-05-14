@@ -7,7 +7,9 @@ import android.view.View;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
-
+/**
+ * 测试，已废弃
+ * */
 public class MoreStudentActivity extends AppCompatActivity {
 
     @Override

@@ -17,7 +17,7 @@ import com.example.a29149.yuyuan.Util.log;
 
 /**
  * Created by 张丽华 on 2017/4/26.
- * Description:
+ * Description:发现界面的悬赏列表适配器
  */
 
 public class RewardListAdapter extends BaseAdapter {

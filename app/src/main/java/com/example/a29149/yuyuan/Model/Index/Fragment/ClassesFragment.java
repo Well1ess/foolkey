@@ -91,7 +91,7 @@ public class ClassesFragment extends Fragment {
                         //由于是刷新，所以首先清空所有数据
                         pageNo = 1;
                         GlobalUtil.getInstance().getContent().clear();
-                        GetHotCourseAction action = new GetHotCourseAction();
+                        GetHotCourseAction action = new GetHotCourseAction(pageNo);
                         action.execute(mTechnicTagEnum.toString());
                     }
                 });
@@ -105,10 +105,11 @@ public class ClassesFragment extends Fragment {
                     MainActivity.shapeLoadingDialog.show();
                 }
                 //不用清空数据
+                pageNo++;
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        GetHotCourseAction action = new GetHotCourseAction();
+                        GetHotCourseAction action = new GetHotCourseAction(pageNo);
                         action.execute(mTechnicTagEnum.toString());
                     }
                 }, 200);
@@ -120,17 +121,18 @@ public class ClassesFragment extends Fragment {
 
     public void resetContent(TechnicTagEnum technicTagEnum) {
         mTechnicTagEnum = technicTagEnum;
-        //TODO：网络通信
-        //获取主页的热门课程
-        if (MainActivity.shapeLoadingDialog != null) {
-            MainActivity.shapeLoadingDialog.show();
-        }
+//        //TODO：网络通信
+//        //获取主页的热门课程
+//        if (MainActivity.shapeLoadingDialog != null) {
+//            MainActivity.shapeLoadingDialog.show();
+//        }
         //首先清空数据
         GlobalUtil.getInstance().getContent().clear();
 
+
         //请求数据
         pageNo = 1;
-        GetHotCourseAction action = new GetHotCourseAction();
+        GetHotCourseAction action = new GetHotCourseAction(pageNo);
         action.execute(technicTagEnum.toString());
     }
 
@@ -163,8 +165,11 @@ public class ClassesFragment extends Fragment {
 
     public class GetHotCourseAction extends AsyncTask<String, Integer, String> {
 
-        public GetHotCourseAction() {
+        int pageNo;
+
+        public GetHotCourseAction(int pageNo) {
             super();
+            this.pageNo = pageNo;
         }
 
         @Override
@@ -247,7 +252,7 @@ public class ClassesFragment extends Fragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                pageNo++;
+                                //pageNo++;
                                 mContentAdapter.notifyDataSetChanged();
                                 MainActivity.shapeLoadingDialog.dismiss();
 

@@ -3,8 +3,6 @@ package com.example.a29149.yuyuan.TeacherMain.Score;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
@@ -20,15 +18,18 @@ import android.widget.TabHost.TabSpec;
 
 import com.example.a29149.yuyuan.Model.Discovery.Fragment.QADiscoveryFragment;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.TeacherMain.Score.Adapter.MenuViewPagerAdapter;
 import com.example.a29149.yuyuan.TeacherMain.Score.Fragment.TeacherScoreFragment;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.example.a29149.yuyuan.Model.Discovery.DiscoveryMainFragment.DISCOVERY_OF_FIRST_TAG;
 import static com.example.a29149.yuyuan.Model.Discovery.DiscoveryMainFragment.DISCOVERY_OF_SECOND_TAG;
+
+/**
+ * 老师界面主页面
+ *
+ */
 
 
 public class TeacherScoreMainFragment extends Fragment {
@@ -58,7 +59,7 @@ public class TeacherScoreMainFragment extends Fragment {
     @ViewInject(R.id.content_pager)
     private ViewPager mContentViewPager;
 
-    private List<Fragment> fragmentList = new ArrayList<>();
+    //private List<Fragment> fragmentList = new ArrayList<>();
 
     private int screenWidth = 0;
 
@@ -126,11 +127,11 @@ public class TeacherScoreMainFragment extends Fragment {
         mFragmentTabHost.setCurrentTab(0);
         mSearchScore.setTextColor(getResources().getColor(R.color.orange));
 
-        fragmentList.clear();
-        fragmentList.add(new TeacherScoreFragment());
-        fragmentList.add(new QADiscoveryFragment());
+//        fragmentList.clear();
+//        fragmentList.add(new TeacherScoreFragment());
+//        fragmentList.add(new QADiscoveryFragment());
 
-        mContentViewPager.setAdapter(new MenuAdapter(getChildFragmentManager()));
+        mContentViewPager.setAdapter(new MenuViewPagerAdapter(getChildFragmentManager()));
         mContentViewPager.setOffscreenPageLimit(2);
         mContentViewPager.setOnPageChangeListener(new ViewPagerListener());
         initTabLine();
@@ -166,23 +167,23 @@ public class TeacherScoreMainFragment extends Fragment {
 
     }
 
-    class MenuAdapter extends FragmentPagerAdapter {
-
-        public MenuAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int arg0) {
-            return fragmentList.get(arg0);
-        }
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-    }
+//    class MenuViewPagerAdapter extends FragmentPagerAdapter {
+//
+//        public MenuViewPagerAdapter(FragmentManager fm) {
+//            super(fm);
+//        }
+//
+//        @Override
+//        public Fragment getItem(int arg0) {
+//            return fragmentList.get(arg0);
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return fragmentList.size();
+//        }
+//
+//    }
 
     class ViewPagerListener implements ViewPager.OnPageChangeListener {
 

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
+import com.example.a29149.yuyuan.Enum.RoleEnum;
+import com.example.a29149.yuyuan.Enum.SexTagEnum;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -50,7 +53,21 @@ import java.util.List;
 
 public class TeacherIndexActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView mTest;
+    private TextView mTest;//老师简介
+    private TextView mTitle;//标题
+    private TextView mInfo;//老师的slogan
+    private TextView mTeacherSex;//老师的性别
+    private TextView mTeacherOrganization;//老师所属组织
+    private TextView mTeacherEducation;//老师学历
+    private TextView mFlollowNum;//关注老师人数
+    private TextView mCourseNum;//老师授课次数
+    private TextView mTeacheringTime;//老师授课时长
+    private CheckBox mTeacherState;//老师认证状态
+    private TextView mTeacherScore;//老师评价分数
+    private TextView mTeacherGithub;//老师Github账户url
+    private TextView mTeacherIndex;//老师主页
+    private TextView mTeacherEmail;//老师邮箱
+
     private TeacherAllInfoDTO mTeacherAllInfoDTO;//老师信息
     private StudentDTO mStudentDTO;//学生信息
     private ApplicationStudentRewardDTO applicationStudentRewardDTO;//申请信息
@@ -63,7 +80,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_index_reward);
+        setContentView(R.layout.activity_teacher_info);
         Intent intent = getIntent();
         String positionIn = intent.getStringExtra("positionIn");//gridview的position
         Log.i("malei",positionIn+"");
@@ -101,12 +118,45 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initData() {
-        String nickedName = mTeacherAllInfoDTO.getNickedName();
+        String nickedName = mTeacherAllInfoDTO.getDescription();
         mTest.setText(nickedName);
+        mTitle.setText(mTeacherAllInfoDTO.getNickedName()+"的主页");
+        mInfo.setText(mTeacherAllInfoDTO.getSlogan());
+        if (mTeacherAllInfoDTO.getSexTagEnum().compareTo(SexTagEnum.Male)==0)
+            mTeacherSex.setText("男");
+        else
+            mTeacherSex.setText("女");
+        mTeacherOrganization.setText(mTeacherAllInfoDTO.getOrganization());
+        mTeacherEducation.setText("硕士");//后台服务器没提供该字段
+        mFlollowNum.setText(mTeacherAllInfoDTO.getFollowerNumber()+"");
+        mCourseNum.setText(mTeacherAllInfoDTO.getTeachingNumber()+"");
+        mTeacheringTime.setText(mTeacherAllInfoDTO.getTeachingTime()+"");
+        if (mTeacherAllInfoDTO.getRoleEnum().compareTo(RoleEnum.teacher)==0)
+            mTeacherState.setChecked(true);
+        else
+            mTeacherState.setChecked(false);
+        mTeacherScore.setText(mTeacherAllInfoDTO.getTeacherAverageScore()+"");
+        mTeacherGithub.setText(mTeacherAllInfoDTO.getGithubUrl());
+        mTeacherIndex.setText(mTeacherAllInfoDTO.getBlogUrl());
+        mTeacherEmail.setText(mTeacherAllInfoDTO.getEmail());
     }
 
     private void initView() {
         mTest = (TextView) findViewById(R.id.tv_test);
+        mTitle = (TextView) findViewById(R.id.toolbar_title);
+        mInfo = (TextView) findViewById(R.id.info);
+        mTeacherSex = (TextView) findViewById(R.id.tv_teacherSex);
+        mTeacherOrganization = (TextView) findViewById(R.id.tv_teacherOriganization);
+        mTeacherEducation = (TextView) findViewById(R.id.tv_teacherEducation);
+        mFlollowNum = (TextView) findViewById(R.id.tv_follownum);
+        mCourseNum = (TextView) findViewById(R.id.tv_coursenum);
+        mTeacheringTime = (TextView) findViewById(R.id.tv_teachingtime);
+        mTeacherState = (CheckBox) findViewById(R.id.cb_teacherstate);
+        mTeacherScore = (TextView) findViewById(R.id.tv_evaluatescore);
+        mTeacherGithub = (TextView) findViewById(R.id.tv_github);
+        mTeacherIndex = (TextView) findViewById(R.id.tv_teacherindex);
+        mTeacherEmail = (TextView) findViewById(R.id.tv_email);
+
         mRewardAgree = (RadioButton) findViewById(R.id.main_menu_agree);
         mRewardAgree.setOnClickListener(this);
         mRewardDisagree = (RadioButton)findViewById(R.id.main_menu_disagree);

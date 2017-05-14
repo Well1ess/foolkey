@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyRewardAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -29,8 +28,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.List;
 
-import static com.example.a29149.yuyuan.Main.MainActivity.shapeLoadingDialog;
-
 /**
  * Created by MaLei on 2017/5/12.
  * Email:ml1995@mail.ustc.edu.cn
@@ -47,6 +44,7 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
     //适配器
     private OwnerRewardListAdapter mAdapter;
 
+    public static ShapeLoadingDialog shapeLoadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

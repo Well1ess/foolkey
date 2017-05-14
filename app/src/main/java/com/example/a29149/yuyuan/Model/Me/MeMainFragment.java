@@ -20,6 +20,9 @@ import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeach
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Teacher.Index.course.OwnerCourseTeacherActivity;
 import com.example.a29149.yuyuan.Teacher.Index.reward.OwnerRewardTeacherActivity;
+import com.example.a29149.yuyuan.TeacherMain.MainTeacherActivity;
+import com.example.a29149.yuyuan.TeacherMain.Me.TeacherMeMainFragment;
+import com.example.a29149.yuyuan.TeacherMain.Score.TeacherScoreMainFragment;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -68,7 +71,8 @@ public class MeMainFragment extends Fragment {
         view.findViewById(R.id.change_role).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ApplyAuthenticationTeacherActivity.class);
+                //Intent intent = new Intent(getActivity(),ApplyAuthenticationTeacherActivity.class);
+                Intent intent = new Intent(getActivity(),MainTeacherActivity.class);
                 startActivity(intent);
             }
         });

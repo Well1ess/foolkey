@@ -1,5 +1,7 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
+
 /**
  * Created by 麻磊 on 2017/5/9.
  * Description:老师信息DTO
@@ -11,7 +13,7 @@ public class TeacherDTO {
     private Float teachingTime;
     private Integer teachingNumber;
     //认证状态，分为 进行中，已认证，失败 三种
-    private String verifyState;
+    private VerifyStateEnum verifyState;
     //关注者人数
     private Integer followerNumber;
     public TeacherDTO() {
@@ -60,11 +62,11 @@ public class TeacherDTO {
         this.teachingNumber = teachingNumber;
     }
 
-    public String getVerifyState() {
+    public VerifyStateEnum getVerifyState() {
         return verifyState;
     }
 
-    public void setVerifyState(String verifyState) {
+    public void setVerifyState(VerifyStateEnum verifyState) {
         this.verifyState = verifyState;
     }
 

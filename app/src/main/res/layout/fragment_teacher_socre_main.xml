@@ -60,7 +60,7 @@
 
                     <RadioButton
                         android:id="@+id/search_reward"
-                        android:text="发接受的悬赏"
+                        android:text="我接受的悬赏"
                         style="@style/RadioButton.SearchMenu"  />
                 </RadioGroup>
 

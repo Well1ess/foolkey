@@ -183,6 +183,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_topic"
                             android:text="任务标题"
                             android:textSize="15sp"
                             android:textColor="@color/black"

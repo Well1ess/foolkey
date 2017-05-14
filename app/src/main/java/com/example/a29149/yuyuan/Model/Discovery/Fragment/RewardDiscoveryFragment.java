@@ -33,6 +33,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RewardDiscoveryFragment extends Fragment {
@@ -104,8 +105,11 @@ public class RewardDiscoveryFragment extends Fragment {
                             MainActivity.shapeLoadingDialog.show();
                         }
                         //由于是刷新，所以首先清空所有数据
-                        pageNo = 1;
 
+                        pageNo = 1;
+                        List<CourseStudentPopularDTO> courseStudentPopularDTOs = new ArrayList<CourseStudentPopularDTO>();
+
+                        GlobalUtil.getInstance().setCourseStudentPopularDTOs(courseStudentPopularDTOs);
                         GetReward getReward = new GetReward(pageNo);
                         getReward.execute();
                     }
@@ -128,6 +132,7 @@ public class RewardDiscoveryFragment extends Fragment {
         super.onDetach();
     }
 
+    //根据页码获取热门悬赏
     public class GetReward extends AsyncTask<String, Integer, String> {
         int pageNo;
 

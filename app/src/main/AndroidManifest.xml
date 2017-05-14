@@ -36,7 +36,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
-        <activity android:name=".Main.MainActivity"></activity>
+        <activity android:name=".Main.MainActivity"
+            android:launchMode="singleTask"></activity>
         <activity android:name=".Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -97,6 +98,10 @@
         <activity android:name=".Model.Order.activity.CommentCourseActivity" />
         <!-- 老师拥有的悬赏订单 -->
         <activity android:name=".Teacher.Index.reward.OwnerRewardTeacherActivity" />
+        <!-- 老师拥有的课程订单 -->
+        <activity android:name=".Teacher.Index.course.OwnerCourseTeacherActivity"/>
+        <!-- 切换成老师用户后的主界面 -->
+        <activity android:name=".TeacherMain.MainTeacherActivity"/>
 
         <!-- 小米推送所需服务 -->
         <service
@@ -158,9 +163,6 @@
         </activity>
         <activity android:name=".AccessOrder.AccessOrderActivity"
             android:windowSoftInputMode="adjustPan">
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".TeacherMain.Score.MoreStudent.MoreStudentActivity"></activity>
     </application>

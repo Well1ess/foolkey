@@ -6,5 +6,5 @@ package com.example.a29149.yuyuan.Enum;
  */
 
 public enum RoleEnum {
-    student, teacher
+    student, teacher, alreadyApplied
 }

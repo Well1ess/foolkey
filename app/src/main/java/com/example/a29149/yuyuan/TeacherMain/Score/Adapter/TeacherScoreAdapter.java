@@ -16,6 +16,8 @@ import com.example.a29149.yuyuan.Util.log;
 
 /**
  * Created by 张丽华 on 2017/3/27.
+ * 课程或者悬赏下的学生列表,
+ * 测试，已废弃
  */
 
 public class TeacherScoreAdapter extends BaseAdapter {

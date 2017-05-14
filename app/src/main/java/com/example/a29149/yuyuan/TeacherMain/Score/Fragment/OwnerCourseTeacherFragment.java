@@ -1,19 +1,20 @@
-package com.example.a29149.yuyuan.Model.Me.Reward;
+package com.example.a29149.yuyuan.TeacherMain.Score.Fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
+import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
-import com.example.a29149.yuyuan.Util.Annotation.OnClick;
-import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Teacher.Index.course.OwnerCourseListAdapter;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
@@ -27,40 +28,39 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.List;
-/**
- * Created by MaLei on 2017/5/11.
- * Email:ml1995@mail.ustc.edu.cn
- * 我拥有的悬赏
- */
-//拥有的悬赏
-public class OwnerRewardActivity extends AppCompatActivity {
 
-    //悬赏列表
-    @ViewInject(R.id.reward_list)
-    private ListView mRewardList;
+/**
+ * Created by MaLei on 2017/5/14.
+ * Email:ml1995@mail.ustc.edu.cn
+ * 老师发布的课程
+ */
+public class OwnerCourseTeacherFragment extends Fragment {
+
+    //课程列表
+    private ListView mCourseList;
 
     //适配器
-    private OwnerRewardListAdapter mAdapter;
+    private OwnerCourseListAdapter mAdapter;
 
     public static ShapeLoadingDialog shapeLoadingDialog;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_owner_reward);
-        AnnotationUtil.injectViews(this);
-        AnnotationUtil.setClickListener(this);
 
-        shapeLoadingDialog = new ShapeLoadingDialog(this);
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_owner_course_teacher,null);
+
+        mCourseList = (ListView) view.findViewById(R.id.course_list);
+
+        shapeLoadingDialog = new ShapeLoadingDialog(getContext());
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
         shapeLoadingDialog.show();
 
         loadData();
 
-
-
-
+        return view;
     }
 
     private void loadData()
@@ -68,28 +68,23 @@ public class OwnerRewardActivity extends AppCompatActivity {
         //如果没有进行加载
         if (shapeLoadingDialog != null) {
             shapeLoadingDialog.show();
-            applyReward();
+            applyCourse();
         }
     }
 
-    @OnClick(R.id.bt_return)
-    public void setReturnListener(View view)
-    {
-        this.finish();
-    }
 
-    //查看我发布的悬赏
-    private void applyReward() {
-        new ApplyRewardAction(1).execute();
+    //获取我的课程
+    private void applyCourse() {
+        new ApplyCourseAction(1).execute();
     }
     /**
-     * 获取我的悬赏请求Action
+     * 获取我的课程请求Action
      */
-    public class ApplyRewardAction extends AsyncTask<String, Integer, String> {
+    public class ApplyCourseAction extends AsyncTask<String, Integer, String> {
 
         int pageNo;
 
-        public ApplyRewardAction(int pageNo) {
+        public ApplyCourseAction(int pageNo) {
             super();
             this.pageNo = pageNo;
         }
@@ -111,12 +106,12 @@ public class OwnerRewardActivity extends AppCompatActivity {
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token", token);
                 target.put("pageNo", pageNo);
-                java.net.URL url = new java.net.URL(URL.getGetMyRewardURL(target.toString()));
+                java.net.URL url = new java.net.URL(URL.getGetMyCourseURL(target.toString()));
                 Log.i("malei", target.toString());
                 con = (HttpURLConnection) url.openConnection();
                 // 设置允许输出，默认为false
-                con.setDoOutput( true );
-                con.setDoInput( true );
+                con.setDoOutput(true);
+                con.setDoInput(true);
                 con.setConnectTimeout(5 * 1000);
                 con.setReadTimeout(10 * 1000);
 
@@ -156,22 +151,21 @@ public class OwnerRewardActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
 
-                    //存储所有我拥有的悬赏信息DTO
-                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<ApplicationStudentRewardAsStudentSTCDTO>>() {
+                    //存储所有我拥有的课程信息DTO
+                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsTeacherSTCDTO>>() {
                     }.getType();
-                    List<ApplicationStudentRewardAsStudentSTCDTO> applicationStudentRewardAsStudentSTCDTOs = new Gson().fromJson(jsonObject.getString("applicationStudentRewardAsStudentSTCDTOS"), type);
-                    GlobalUtil.getInstance().setApplicationStudentRewardAsStudentSTCDTOs(applicationStudentRewardAsStudentSTCDTOs);
-                    Log.i("malei",applicationStudentRewardAsStudentSTCDTOs.toString());
-                    Log.i("malei",GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(0).getRewardDTO().toString());
-
+                    List<OrderBuyCourseAsTeacherSTCDTO> orderBuyCourseAsTeacherSTCDTOs = new Gson().fromJson(jsonObject.getString("orderBuyCourseAsTeacherSTCDTOS"), type);
+                    GlobalUtil.getInstance().setOrderBuyCourseAsTeacherSTCDTOs(orderBuyCourseAsTeacherSTCDTOs);
+                    Log.i("malei", orderBuyCourseAsTeacherSTCDTOs.toString());
 
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(OwnerRewardActivity.this, "获取悬赏成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "获取课程成功！", Toast.LENGTH_SHORT).show();
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                mAdapter = new OwnerRewardListAdapter(OwnerRewardActivity.this);
-                                mRewardList.setAdapter(mAdapter);
+                                mAdapter = new OwnerCourseListAdapter(getContext());
+                                mCourseList.setAdapter(mAdapter);
                                 shapeLoadingDialog.dismiss();
 
                             }
@@ -179,10 +173,10 @@ public class OwnerRewardActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(OwnerRewardActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(OwnerRewardActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "网络连接失败！", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -192,6 +186,5 @@ public class OwnerRewardActivity extends AppCompatActivity {
             super.onProgressUpdate(values);
         }
     }
-
 
 }

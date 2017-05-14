@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.DTO.CourseStudentDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
+import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -47,6 +48,7 @@ public class RewardActivity extends AppCompatActivity {
     private CourseStudentDTO courseStudentDTO;//悬赏信息
     private TextView mRewardUser;//发布悬赏人的信息
     private TextView mTeacherEvaluate;//悬赏价格
+    private TextView mRewardTopic;//悬赏标题
     private TextView mRewardDescription;//悬赏描述
     private TextView mCreateTime;//创建悬赏的时间
 
@@ -120,6 +122,7 @@ public class RewardActivity extends AppCompatActivity {
 
         mRewardUser = (TextView) findViewById(R.id.courseEvaluate);
         mTeacherEvaluate =(TextView) findViewById(R.id.teacherEvaluate);
+        mRewardTopic = (TextView) findViewById(R.id.tv_topic);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
     }
@@ -127,8 +130,8 @@ public class RewardActivity extends AppCompatActivity {
 
     private void initData() {
         mRewardUser.setText(studentDTO.getNickedName());
-        Log.i("malei",studentDTO.getNickedName());
         mTeacherEvaluate.setText(courseStudentDTO.getPrice()+"");
+        mRewardTopic.setText(courseStudentDTO.getTopic()+"");
         mRewardDescription.setText(courseStudentDTO.getDescription());
     }
 
@@ -140,12 +143,13 @@ private void applyRewardTeacher() {
     if(teacherDTO != null)
     {
         Log.i("malei",teacherDTO.toString());
-        String verifyState = teacherDTO.getVerifyState();
-        Log.i("malei",verifyState);
+        VerifyStateEnum verifyState = teacherDTO.getVerifyState();
+        Log.i("malei",verifyState.toString());
         Log.i("malei",teacherDTO.toString());
-        Log.i("malei",verifyState);
+        Log.i("malei",verifyState.toString());
         //如果是已认证老师或者是认证中的老师，则直接接单
-        if(verifyState.equals("processing") || verifyState.equals("verified"))
+        if(verifyState.compareTo( VerifyStateEnum.processing ) == 0
+                || verifyState.compareTo( VerifyStateEnum.verified) == 0)
         {
             new RewardActivity.ApplyRewardAction().execute();
         }

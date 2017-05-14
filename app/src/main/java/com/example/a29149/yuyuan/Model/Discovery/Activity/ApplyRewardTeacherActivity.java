@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
+import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardOptionsStudentActivity;
 import com.example.a29149.yuyuan.R;
@@ -70,12 +71,13 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
         if(teacherDTO != null)
         {
             Log.i("malei",teacherDTO.toString());
-            String verifyState = teacherDTO.getVerifyState();
-            Log.i("malei",verifyState);
+            VerifyStateEnum verifyState = teacherDTO.getVerifyState();
+            Log.i("malei",verifyState.toString());
             Log.i("malei",teacherDTO.toString());
-            Log.i("malei",verifyState);
+            Log.i("malei",verifyState.toString());
             //如果是已认证老师或者是认证中的老师，则直接接单
-            if(verifyState.equals("processing") || verifyState.equals("verified"))
+            if(verifyState.compareTo(VerifyStateEnum.processing) == 0
+                    || verifyState.compareTo(VerifyStateEnum.verified) == 0)
             {
                 new ApplyRewardAction().execute();
             }

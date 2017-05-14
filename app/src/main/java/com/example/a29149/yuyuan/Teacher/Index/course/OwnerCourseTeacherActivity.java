@@ -28,12 +28,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.List;
 
-import static com.example.a29149.yuyuan.Main.MainActivity.shapeLoadingDialog;
-
 /**
  * Created by MaLei on 2017/5/12.
  * Email:ml1995@mail.ustc.edu.cn
- * 老师拥有的课程和悬赏
+ * 老师拥有的课程
  */
 
 //拥有的课程
@@ -45,6 +43,8 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
 
     //适配器
     private OwnerCourseListAdapter mAdapter;
+
+    public static ShapeLoadingDialog shapeLoadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

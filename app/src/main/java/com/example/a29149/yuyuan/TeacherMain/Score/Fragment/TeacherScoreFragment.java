@@ -35,6 +35,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.List;
 
+/**
+ * 测试，已废弃
+ * */
 public class TeacherScoreFragment extends Fragment {
 
     //页数

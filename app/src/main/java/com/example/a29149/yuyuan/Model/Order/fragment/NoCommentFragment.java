@@ -20,7 +20,6 @@ import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.JSONUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
@@ -35,8 +34,6 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static com.example.a29149.yuyuan.Main.MainActivity.shapeLoadingDialog;
 
 
 /**
@@ -54,6 +51,8 @@ public class NoCommentFragment extends Fragment {
     private List<Map<String,Object>> courseNoPayList = new ArrayList<>();
     private List rewardList = new ArrayList();//悬赏列表
     private List courseList = new ArrayList();//课程列表
+
+    public static ShapeLoadingDialog shapeLoadingDialog;
 
 
     @Nullable

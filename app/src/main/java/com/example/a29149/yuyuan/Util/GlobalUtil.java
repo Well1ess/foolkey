@@ -99,6 +99,22 @@ public class GlobalUtil {
     private List<Object> teacherList;
     private List<Object> questionList;
 
+    //老师UI——课程
+    private List<String> teacherUIScore;
+
+    public List<String> getTeacherUIScore() {
+        if (teacherUIScore == null){
+            teacherUIScore = new ArrayList<>();
+            teacherUIScore.add("1");
+            teacherUIScore.add("2");
+        }
+        return teacherUIScore;
+    }
+
+    public void setTeacherUIScore(List<String> teacherUIScore) {
+        this.teacherUIScore = teacherUIScore;
+    }
+
     public List<Object> getCourseList() {
         if (courseList == null)
             courseList = new ArrayList<>();

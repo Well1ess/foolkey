@@ -1,0 +1,53 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a29149.yuyuan.Model.Index.Fragment.ClassesFragment">
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@android:drawable/stat_notify_sync_noanim"
+            android:backgroundTint="@color/menu"/>
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="下 拉 刷 新"
+            android:textColor="@color/menu"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <com.example.a29149.yuyuan.Widget.SlideRefreshLayout
+        android:id="@+id/slide_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.a29149.yuyuan.Widget.DynamicListView
+            android:background="@color/background"
+            android:layoutAnimation="@anim/listview_project_anim"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:divider="@color/transparent"
+            android:dividerHeight="10dp">
+        </com.example.a29149.yuyuan.Widget.DynamicListView>
+
+    </com.example.a29149.yuyuan.Widget.SlideRefreshLayout>
+
+</FrameLayout>

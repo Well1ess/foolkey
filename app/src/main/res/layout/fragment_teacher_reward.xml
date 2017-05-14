@@ -1,0 +1,103 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:elevation="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorPrimaryDark">
+
+        <LinearLayout
+            android:id="@+id/test_container2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal">
+
+            <com.example.a29149.yuyuan.Widget.MyEditText
+                android:transitionName="searchView"
+                android:focusable="false"
+                android:id="@+id/key_value"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_search"
+                android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
+                android:drawableRight="@mipmap/ic_clear"
+                android:drawableTint="@color/white"
+                android:ems="20"
+                android:hint="请输入关键字"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@drawable/cursor_white"
+                android:textSize="15sp" />
+
+            <ImageButton
+                android:id="@+id/project_search_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/ic_tongzhi"
+                android:backgroundTint="@color/white" />
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="85dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@android:drawable/stat_notify_sync_noanim"
+            android:backgroundTint="@color/menu"/>
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="下 拉 刷 新"
+            android:textColor="@color/menu"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <com.example.a29149.yuyuan.Widget.SlideRefreshLayout
+        android:layout_marginTop="65dp"
+        android:id="@+id/slide_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.a29149.yuyuan.Widget.DynamicListView
+            android:background="@color/background"
+            android:layoutAnimation="@anim/listview_project_anim"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:divider="@color/transparent"
+            android:dividerHeight="10dp">
+        </com.example.a29149.yuyuan.Widget.DynamicListView>
+
+    </com.example.a29149.yuyuan.Widget.SlideRefreshLayout>
+
+</FrameLayout>

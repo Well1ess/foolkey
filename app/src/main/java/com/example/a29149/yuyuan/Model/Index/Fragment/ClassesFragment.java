@@ -70,8 +70,10 @@ public class ClassesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_classes, container, false);
         AnnotationUtil.setClickListener(this, view);
         AnnotationUtil.injectViews(this, view);
+        //存储当前标签
+        GlobalUtil.getInstance().setTechnicTagEnum(mTechnicTagEnum);
 
-        mContentAdapter = new IndexContentAdapter(getContext());
+        mContentAdapter = new IndexContentAdapter(getContext(),mTechnicTagEnum);
         mDynamicList.setAdapter(mContentAdapter);
 
         //设置课程推荐列表的监听
@@ -241,13 +243,13 @@ public class ClassesFragment extends Fragment {
 
                         //若>1则表示分页存取
                         if (pageNo == 1) {
-                            GlobalUtil.getInstance().setCourseTeacherPopularDTOs(courseTeacherDTOs);
+                            GlobalUtil.getInstance().setCourseTeacherPopularDTOs(courseTeacherDTOs,mTechnicTagEnum);
                         } else if (pageNo > 1) {
-                            GlobalUtil.getInstance().getCourseTeacherPopularDTOs().addAll(courseTeacherDTOs);
+                            GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).addAll(courseTeacherDTOs);
                             mDynamicList.onLoadFinish();
                         }
 
-                        log.d(ClassesFragment.this, GlobalUtil.getInstance().getCourseTeacherPopularDTOs().size());
+                        log.d(ClassesFragment.this, GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).size());
 
                         new Handler().postDelayed(new Runnable() {
                             @Override

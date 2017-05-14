@@ -96,7 +96,8 @@ public class CourseActivity extends AppCompatActivity {
             return;
         }
 
-        CourseTeacherDTO courseTeacherDTO = GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(mPosition).getCourseTeacherDTO();
+        CourseTeacherDTO courseTeacherDTO = GlobalUtil.getInstance().getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum())
+                .get(mPosition).getCourseTeacherDTO();
 
         mAuthor.setText("付费课程·"+ courseTeacherDTO.getCreatorId());
         mCourseLabel.setText(courseTeacherDTO.getTechnicTagEnum().toString());

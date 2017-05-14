@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -23,24 +24,25 @@ import com.example.a29149.yuyuan.Util.log;
 public class IndexContentAdapter extends BaseAdapter {
 
     private Context mContext;
+    private TechnicTagEnum mTechnicTagEnum;
 
-    public IndexContentAdapter(Context context) {
+    public IndexContentAdapter(Context context, TechnicTagEnum mTechnicTagEnum) {
         this.mContext = context;
+        this.mTechnicTagEnum = mTechnicTagEnum;
     }
 
     public void updateList() {
         this.notifyDataSetChanged();
-        log.d(this, GlobalUtil.getInstance().getCourseTeacherPopularDTOs().size());
     }
 
     @Override
     public int getCount() {
-        return GlobalUtil.getInstance().getCourseTeacherPopularDTOs().size();
+        return GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).size();
     }
 
     @Override
     public Object getItem(int position) {
-        return GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(position);
+        return GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).get(position);
     }
 
     @Override
@@ -58,9 +60,9 @@ public class IndexContentAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.title.setText(GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(position).getCourseTeacherDTO().getTopic());
-        viewHolder.content.setText(GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(position).getCourseTeacherDTO().getDescription());
-        viewHolder.author.setText(GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(position).getCourseTeacherDTO().getCreatorId()+"");
+        viewHolder.title.setText(GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).get(position).getCourseTeacherDTO().getTopic());
+        viewHolder.content.setText(GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).get(position).getCourseTeacherDTO().getDescription());
+        viewHolder.author.setText(GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).get(position).getCourseTeacherDTO().getCreatorId()+"");
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

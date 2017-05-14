@@ -78,7 +78,8 @@ public class BuyCourseActivity extends AppCompatActivity {
         //初始化
         intent = getIntent();
         mPosition = intent.getIntExtra("position", -1);
-        mUnitPrice = GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(mPosition).getCourseTeacherDTO().getPrice();
+        mUnitPrice = GlobalUtil.getInstance().getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum())
+                .get(mPosition).getCourseTeacherDTO().getPrice();
 
         //创建授课方式选择的对话框
         createTeachTypeDialog();
@@ -141,13 +142,15 @@ public class BuyCourseActivity extends AppCompatActivity {
 
         //TODO:网络数据传输
         SubmitNewOrderAction submitNewOrderAction = new SubmitNewOrderAction();
-        submitNewOrderAction.execute(URL.getSubmitOrder(GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(mPosition).getCourseTeacherDTO().getId()+"",
+        submitNewOrderAction.execute(URL.getSubmitOrder(GlobalUtil.getInstance().getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum())
+                        .get(mPosition).getCourseTeacherDTO().getId()+"",
                 sum+"",
                 mNum+"",
                 1+"",
                 teachMethodEnum.toString(),
                 CourseTypeEnum.values()[0].toString(),
-                GlobalUtil.getInstance().getCourseTeacherPopularDTOs().get(mPosition).getCourseTeacherDTO().getCreatorId()+""
+                GlobalUtil.getInstance().getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum()).
+                        get(mPosition).getCourseTeacherDTO().getCreatorId()+""
                 ));
     }
 

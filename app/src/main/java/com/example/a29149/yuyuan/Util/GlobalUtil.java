@@ -14,8 +14,10 @@ import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
+import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -25,6 +27,14 @@ import java.util.List;
 
 public class GlobalUtil {
     private static volatile GlobalUtil globalUtil;
+
+    //首页的不同标签，都会有自己的键值对，值是每个tag的热门课程
+    private static volatile HashMap<TechnicTagEnum,List> indexContentMap = new HashMap<>();
+    static {
+        for (TechnicTagEnum tag : TechnicTagEnum.values()){
+            indexContentMap.put( tag, new ArrayList() );
+        }
+    }
 
     private GlobalUtil() {
     }
@@ -52,6 +62,10 @@ public class GlobalUtil {
     private String AESKey;
     //Token
     private String token;
+
+
+    //当前标签（java）
+    private TechnicTagEnum technicTagEnum = TechnicTagEnum.Java;
     //抵扣卷的List
     private List<CouponDTO> couponDTOList;
     //课程列表
@@ -216,13 +230,15 @@ public class GlobalUtil {
         this.couponDTOList = couponDTOList;
     }
 
-    public List<CourseTeacherPopularDTO> getCourseTeacherPopularDTOs() {
+    public List<CourseTeacherPopularDTO> getCourseTeacherPopularDTOs(TechnicTagEnum tag) {
+        courseTeacherPopularDTOs = indexContentMap.get(tag);
         if (courseTeacherPopularDTOs == null)
             courseTeacherPopularDTOs = new ArrayList<>();
         return courseTeacherPopularDTOs;
     }
 
-    public void setCourseTeacherPopularDTOs(List<CourseTeacherPopularDTO> courseTeacherPopularDTOs) {
+    public void setCourseTeacherPopularDTOs(List<CourseTeacherPopularDTO> courseTeacherPopularDTOs,TechnicTagEnum tag) {
+        indexContentMap.put(tag, courseTeacherPopularDTOs);
         this.courseTeacherPopularDTOs = courseTeacherPopularDTOs;
     }
 
@@ -362,7 +378,22 @@ public class GlobalUtil {
         this.orderBuyRewardAsTeacherSTCDTOs = orderBuyRewardAsTeacherSTCDTOs;
     }
 
+    public static HashMap<TechnicTagEnum, List> getIndexContentMap() {
+        return indexContentMap;
+    }
 
+    public static void setIndexContentMap(HashMap<TechnicTagEnum, List> indexContentMap) {
+        GlobalUtil.indexContentMap = indexContentMap;
+    }
+
+
+    public TechnicTagEnum getTechnicTagEnum() {
+        return technicTagEnum;
+    }
+
+    public void setTechnicTagEnum(TechnicTagEnum technicTagEnum) {
+        this.technicTagEnum = technicTagEnum;
+    }
 }
 
 

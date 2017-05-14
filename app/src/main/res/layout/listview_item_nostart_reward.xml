@@ -28,17 +28,17 @@
             android:textColor="@color/grey555"/>
 
         <TextView
-            android:id="@+id/tv_courseTitle"
+            android:id="@+id/tv_rewardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="课程标题:"
+            android:text="悬赏标题:"
             android:textColor="@color/grey555"/>
 
         <TextView
-            android:id="@+id/tv_courseCost"
+            android:id="@+id/tv_rewardCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="课程价格： 1000RMB"
+            android:text="悬赏价格： 1000RMB"
             android:textColor="@color/dark_green"/>
     </LinearLayout>
 

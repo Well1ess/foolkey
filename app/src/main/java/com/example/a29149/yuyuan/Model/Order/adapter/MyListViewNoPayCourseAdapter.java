@@ -10,6 +10,13 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.CourseAbstract;
+import com.example.a29149.yuyuan.DTO.CourseDTO;
+import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
+import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
+import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.StudentDTO;
+import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Model.Order.global.GlobalValue;
 import com.example.a29149.yuyuan.R;
 
@@ -22,7 +29,7 @@ import java.util.Map;
  * 已购买课程而未付款listView的Adapter
  */
 
-public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListener{
+public class MyListViewNoPayCourseAdapter extends BaseAdapter implements OnClickListener{
     private Context mContext;
 
     private ImageView mTeacherPhone;//老师头像
@@ -31,8 +38,16 @@ public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListe
     private TextView mCourseCost;//课程价格
     private TextView mPay;//学生点击付款按钮
     private List<Map<String,Object>> courseNoPayList;//已购买课程但还未付款订单
+    private List<OrderBuyCourseAsStudentDTO> courseNoCommentList;//完成课程但还未评价订单
+    private StudentDTO mStudentDTO;//学生信息
+    private TeacherDTO mTeacherDTO;//老师信息
+    private CourseDTO mCourseDTO;//课程信息
+    private RewardDTO mRewardDTO;//悬赏信息
+    private OrderBuyCourseDTO mOrderBuyCourseDTO;//订单信息
+    private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
+    private CourseAbstract courseDTO = null ;
 
-    public MyListViewCourseAdapter(Context context)
+    public MyListViewNoPayCourseAdapter(Context context)
     {
         this.mContext = context;
     }
@@ -44,12 +59,12 @@ public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListe
 
     @Override
     public int getCount() {
-        return 3;
+        return courseNoPayList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return position;
+        return courseNoPayList.get(position);
     }
 
     @Override
@@ -60,8 +75,10 @@ public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListe
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view ;
-        view=View.inflate(mContext, R.layout.listview_item_buycourse,null);
+        view=View.inflate(mContext, R.layout.listview_item_nopay_course,null);
+        mOrderBuyCourseAsStudentDTO = courseNoCommentList.get(position);
         initView(view);
+        initData();
         //设置订单状态监听
         final RadioButton rb_bug = (RadioButton) view.findViewById(R.id.rb_buy);//订单选择按钮
         final GlobalValue globalValue = new GlobalValue();
@@ -80,6 +97,21 @@ public class MyListViewCourseAdapter extends BaseAdapter implements OnClickListe
             }
         });
         return view;
+    }
+
+    private void initData() {
+
+
+        mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
+        mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();
+        mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
+
+        courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
+
+
+        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
+        mBuyTime.setText("购买时长:" + mOrderBuyCourseDTO.getNumber().toString() + "h");
+        mCourseCost.setText("课程价格：" + courseDTO.getPrice().toString());
     }
 
     private void initView(View view) {

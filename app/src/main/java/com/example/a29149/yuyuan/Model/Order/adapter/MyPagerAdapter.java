@@ -36,10 +36,10 @@ public class MyPagerAdapter extends PagerAdapter {
         mReward = (MyListView) view.findViewById(R.id.lv_reward);
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
 
-        MyListViewCourseAdapter myListViewCourseAdapter = new MyListViewCourseAdapter(mContext);
-        mBuyCourse.setAdapter(myListViewCourseAdapter);
-        mReward.setAdapter(myListViewCourseAdapter);
-        mRecommand.setAdapter(myListViewCourseAdapter);
+        MyListViewNoPayCourseAdapter myListViewNoPayCourseAdapter = new MyListViewNoPayCourseAdapter(mContext);
+        mBuyCourse.setAdapter(myListViewNoPayCourseAdapter);
+        mReward.setAdapter(myListViewNoPayCourseAdapter);
+        mRecommand.setAdapter(myListViewNoPayCourseAdapter);
         return view;
     }
 

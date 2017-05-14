@@ -50,4 +50,14 @@ public class OrderBuyCourseAsStudentDTO {
     public void setTeacherDTO(TeacherDTO teacherDTO) {
         this.teacherDTO = teacherDTO;
     }
+
+    @Override
+    public String toString() {
+        return "OrderBuyCourseAsStudentDTO{" +
+                "orderDTO=" + orderDTO +
+                ", course=" + course +
+                ", studentDTO=" + studentDTO +
+                ", teacherDTO=" + teacherDTO +
+                '}';
+    }
 }

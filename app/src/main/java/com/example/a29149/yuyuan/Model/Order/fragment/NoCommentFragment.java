@@ -52,7 +52,7 @@ public class NoCommentFragment extends Fragment {
     private List rewardList = new ArrayList();//悬赏列表
     private List courseList = new ArrayList();//课程列表
 
-    public static ShapeLoadingDialog shapeLoadingDialog;
+    public  ShapeLoadingDialog shapeLoadingDialog;
 
 
     @Nullable
@@ -91,16 +91,7 @@ public class NoCommentFragment extends Fragment {
         });
 
 
-
-
-
-
-
-
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
-
-
-
         mRecommand.setAdapter(myListViewRecommandAdapter);
         return view;
     }

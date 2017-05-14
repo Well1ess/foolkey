@@ -12,11 +12,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewCourseAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishCourseAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;

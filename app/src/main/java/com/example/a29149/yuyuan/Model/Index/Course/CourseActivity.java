@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -95,9 +96,18 @@ public class CourseActivity extends AppCompatActivity {
             Toast.makeText(this, "数据获取失败", Toast.LENGTH_SHORT).show();
             return;
         }
+        System.out.println(GlobalUtil.getInstance().getTechnicTagEnum());
 
-        CourseTeacherDTO courseTeacherDTO = GlobalUtil.getInstance().getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum())
-                .get(mPosition).getCourseTeacherDTO();
+        Log.i("葛尧",
+//                 GlobalUtil.getInstance()
+//                        .getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum()).toString()
+                GlobalUtil.getInstance().getTechnicTagEnum().toString()
+        );
+
+        CourseTeacherDTO courseTeacherDTO = GlobalUtil.getInstance()
+                .getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum())
+                .get(mPosition)
+                .getCourseTeacherDTO();
 
         mAuthor.setText("付费课程·"+ courseTeacherDTO.getCreatorId());
         mCourseLabel.setText(courseTeacherDTO.getTechnicTagEnum().toString());
@@ -109,7 +119,7 @@ public class CourseActivity extends AppCompatActivity {
         mCourseContent.setText(courseTeacherDTO.getDescription());
         mCoursePrice.setText(courseTeacherDTO.getPrice()+"");
         mCreateTime.setText("");
-        mCourseRemark.setText("希望先和我联系和沟通一哈！！！");
+        mCourseRemark.setText("希望先和我联系和沟通一下！！！");
     }
 
     @OnClick(R.id.key_value)

@@ -77,6 +77,9 @@ public class URL {
     //未评价订单请求
     public static final String noCommentURL = "http://" +address + "/获取未评价的订单?";
 
+    //未评价订单请求
+    public static final String noPayCourseURL = "http://" +address + "/getStudentCourseOrder?";
+
     //评价老师
     public static final String commentTeacherURL = "http://" +address + "/judge/teacher?";
 
@@ -252,6 +255,10 @@ public class URL {
         return commentCourseURL+ "clearText=" + token;
     }
 
+
+    public static String getNoPayCourseURL(String token) {
+        return noPayCourseURL+ "clearText=" + token;
+    }
 
 
 

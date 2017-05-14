@@ -34,9 +34,11 @@ public class GlobalUtil {
         for (TechnicTagEnum tag : TechnicTagEnum.values()){
             indexContentMap.put( tag, new ArrayList() );
         }
+
     }
 
     private GlobalUtil() {
+        technicTagEnum = TechnicTagEnum.Java;
     }
 
     public static GlobalUtil getInstance()
@@ -65,7 +67,8 @@ public class GlobalUtil {
 
 
     //当前标签（java）
-    private TechnicTagEnum technicTagEnum = TechnicTagEnum.Java;
+    private static volatile TechnicTagEnum technicTagEnum = TechnicTagEnum.Java;
+
     //抵扣卷的List
     private List<CouponDTO> couponDTOList;
     //课程列表
@@ -388,6 +391,10 @@ public class GlobalUtil {
 
 
     public TechnicTagEnum getTechnicTagEnum() {
+        if (technicTagEnum == null) {
+            System.out.println("技术标签为空！");
+            technicTagEnum = TechnicTagEnum.Java;
+        }
         return technicTagEnum;
     }
 

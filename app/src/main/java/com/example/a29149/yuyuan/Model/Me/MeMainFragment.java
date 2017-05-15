@@ -286,8 +286,8 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                 con.setConnectTimeout(5 * 1000);
                 con.setReadTimeout(10 * 1000);
 
-                con.setRequestMethod("GET");
-                con.setRequestProperty("contentType", "GBK");
+                con.setRequestMethod("POST");
+                con.setRequestProperty("contentType", "UTF-8");
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());
@@ -376,8 +376,8 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                 con.setConnectTimeout(5 * 1000);
                 con.setReadTimeout(10 * 1000);
 
-                con.setRequestMethod("GET");
-                con.setRequestProperty("contentType", "GBK");
+                con.setRequestMethod("POST");
+                con.setRequestProperty("contentType", "UTF-8");
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());

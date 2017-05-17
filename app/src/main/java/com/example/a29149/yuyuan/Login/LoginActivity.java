@@ -174,7 +174,7 @@ public class LoginActivity extends AppCompatActivity{
 //
 //                con.setRequestMethod("POST");
 //                con.setRequestProperty("contentType", "UTF-8");
-                HttpSender.send( URL.publicKeyURL, "" );
+                con = HttpSender.send( URL.publicKeyURL, "" );
 
 
                 // 获得服务端的返回数据

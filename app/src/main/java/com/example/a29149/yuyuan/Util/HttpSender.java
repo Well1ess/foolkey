@@ -30,7 +30,10 @@ public class HttpSender {
 
         //拼接key与value
         //转成UTF-8编码
-        String date = URLEncoder.encode( param + "=" + content.toString(), "UTF-8" );
+        String date = content.toString();
+        date = URLEncoder.encode(date, "UTF-8" );
+        //如果再对date进行一次转码，则不会转
+        date = param + "=" + date;
         System.out.println( "发送的数据是  -  " + date );
 
         //开启网络连接

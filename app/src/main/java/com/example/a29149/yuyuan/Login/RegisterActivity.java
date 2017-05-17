@@ -219,11 +219,11 @@ public class RegisterActivity extends AppCompatActivity {
                                         ;
 
                                 log.d(this, "convertTo愚:" + convert);
-                                log.d(this, "convertToUTF-8:" + java.net.URLEncoder.encode(convert));
+//                                log.d(this, "convertToUTF-8:" + java.net.URLEncoder.encode(convert));
 
                                 //执行注册动作
                                 RegisterAction registerAction = new RegisterAction();
-                                registerAction.execute(java.net.URLEncoder.encode(convert));
+                                registerAction.execute(convert);
 
                             } catch (Exception e) {
                                 Toast.makeText(RegisterActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
@@ -272,15 +272,17 @@ public class RegisterActivity extends AppCompatActivity {
                 JSONObject target = new JSONObject();
                 //对账号，密码重复上述动作
                 //先进行加密，在进行替换，随后是UTF-8编码
-                target.put("userName", java.net.URLEncoder.encode(
+                target.put("userName",
                         RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
                                 .replaceAll("\n", "愚")
-                ));
-                target.put("passWord", java.net.URLEncoder.encode(
+                );
+                target.put("passWord",
                         RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
                                 .replaceAll("\n", "愚")
-                ));
+                );
                 target.put("AESKey", params[0]);
+                System.out.println("注册\n用户名是" + target.get("userName"));
+                System.out.println("密码是" + target.get("passWord"));
 
                 java.net.URL url = new java.net.URL(URL.getRegisterURL(""));
 //                con = (HttpURLConnection) url.openConnection();

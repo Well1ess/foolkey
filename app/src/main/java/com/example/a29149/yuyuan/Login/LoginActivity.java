@@ -18,6 +18,7 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
 import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
@@ -166,13 +167,14 @@ public class LoginActivity extends AppCompatActivity{
                 con = (HttpURLConnection) url.openConnection();
                 log.d(this, URL.getPublicKeyURL());
                 // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
+//                con.setDoOutput(true);
+//                con.setDoInput(true);
+//                con.setConnectTimeout(5 * 1000);
+//                con.setReadTimeout(10 * 1000);
+//
+//                con.setRequestMethod("POST");
+//                con.setRequestProperty("contentType", "UTF-8");
+                HttpSender.send( URL.publicKeyURL, "" );
 
 
                 // 获得服务端的返回数据
@@ -289,18 +291,21 @@ public class LoginActivity extends AppCompatActivity{
                                 GlobalUtil.getInstance().getPublicKey())
                                 .replaceAll("\n", "愚")));
 
-                java.net.URL url = new java.net.URL(URL.getLoginURL(target.toString()));
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getLoginURL(target.toString()));
+                HttpSender.send(URL.loginURL, target);
 
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
 
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
+//                java.net.URL url = new java.net.URL(URL.getLoginURL(target.toString()));
+//                con = (HttpURLConnection) url.openConnection();
+//                log.d(this, URL.getLoginURL(target.toString()));
+//
+//                // 设置允许输出，默认为false
+//                con.setDoOutput(true);
+//                con.setDoInput(true);
+//                con.setConnectTimeout(5 * 1000);
+//                con.setReadTimeout(10 * 1000);
+//
+//                con.setRequestMethod("POST");
+//                con.setRequestProperty("contentType", "UTF-8");
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());

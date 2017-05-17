@@ -7,7 +7,7 @@ package com.example.a29149.yuyuan.Util;
 
 public class URL {
 
-    public static final String address = "115.159.5.195:8080";
+    public static final String address = "123.206.102.231:8080";
 
     //获取公钥
     public static final String publicKeyURL = "http://" + address + "/getKey?";

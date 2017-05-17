@@ -16,6 +16,7 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
 import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
@@ -281,18 +282,20 @@ public class RegisterActivity extends AppCompatActivity {
                 ));
                 target.put("AESKey", params[0]);
 
-                java.net.URL url = new java.net.URL(URL.getRegisterURL(target.toString()));
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getRegisterURL(target.toString()));
-
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
+                java.net.URL url = new java.net.URL(URL.getRegisterURL(""));
+//                con = (HttpURLConnection) url.openConnection();
+//                log.d(this, URL.getRegisterURL(target.toString()));
+//                log.d(this, "wofachude====="+target.toString());
+//
+//                // 设置允许输出，默认为false
+//                con.setDoOutput(true);
+//                con.setDoInput(true);
+//                con.setConnectTimeout(5 * 1000);
+//                con.setReadTimeout(10 * 1000);
+//
+//                con.setRequestMethod("POST");
+//                con.setRequestProperty("contentType", "UTF-8");
+                con = HttpSender.send(URL.registerURL, target);
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());
@@ -302,7 +305,7 @@ public class RegisterActivity extends AppCompatActivity {
                     sb.append(line);
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             } finally {
                 if (reader != null) {
                     try {
@@ -324,6 +327,7 @@ public class RegisterActivity extends AppCompatActivity {
             log.d(this, result);
             if (result != null) {
                 try {
+                    log.d(this, "result========="+result);
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
                     String token = jsonObject.getString("tokenCipher");

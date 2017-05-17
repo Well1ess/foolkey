@@ -272,29 +272,19 @@ public class RegisterActivity extends AppCompatActivity {
                 JSONObject target = new JSONObject();
                 //对账号，密码重复上述动作
                 //先进行加密，在进行替换，随后是UTF-8编码
-                target.put("userName", java.net.URLEncoder.encode(
-                        RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")
-                ));
-                target.put("passWord", java.net.URLEncoder.encode(
-                        RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")
-                ));
-                target.put("AESKey", params[0]);
+//                target.put("userName", java.net.URLEncoder.encode(
+//                        RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
+//                                .replaceAll("\n", "愚")
+//                ));
+//                target.put("passWord", java.net.URLEncoder.encode(
+//                        RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
+//                                .replaceAll("\n", "愚")
+//                ));
+//                target.put("AESKey", params[0]);
+                target.put("userName",strUserName);
+                target.put("passWord",strPassword);
+                target.put("AESKey", GlobalUtil.getInstance().getAESKey());
 
-                java.net.URL url = new java.net.URL(URL.getRegisterURL(""));
-//                con = (HttpURLConnection) url.openConnection();
-//                log.d(this, URL.getRegisterURL(target.toString()));
-//                log.d(this, "wofachude====="+target.toString());
-//
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
                 con = HttpSender.send(URL.registerURL, target);
 
                 // 获得服务端的返回数据

@@ -20,6 +20,7 @@ import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
+import com.example.a29149.yuyuan.Util.Secret.AESKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
@@ -34,6 +35,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+
+import javax.microedition.khronos.opengles.GL;
 
 /**
  * LoginActivity:登陆
@@ -174,7 +177,7 @@ public class LoginActivity extends AppCompatActivity{
 //
 //                con.setRequestMethod("POST");
 //                con.setRequestProperty("contentType", "UTF-8");
-                con = HttpSender.send( URL.publicKeyURL, "" );
+                HttpSender.send( URL.publicKeyURL, "" );
 
 
                 // 获得服务端的返回数据
@@ -276,10 +279,10 @@ public class LoginActivity extends AppCompatActivity{
             try {
 
                 //对密码进行SHA1加密
-                String password = SHA1Coder.SHA1(strPassWord);
+               /* String password = SHA1Coder.SHA1(strPassWord);*/
 
                 JSONObject target = new JSONObject();
-                //对账号，密码先进行RSA加密，再进行替换，随后是UTF-8编码
+           /*     //对账号，密码先进行RSA加密，再进行替换，随后是UTF-8编码
                 target.put("userName", java.net.URLEncoder.encode(
                         RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
                                 .replaceAll("\n", "愚")));
@@ -289,23 +292,14 @@ public class LoginActivity extends AppCompatActivity{
                 target.put("AESKey", java.net.URLEncoder.encode(
                         RSAKeyBO.encryptByPub(GlobalUtil.getInstance().getAESKey(),
                                 GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")));
+                                .replaceAll("\n", "愚")));*/
+                target.put("userName",strUserName);
+                target.put("passWord",strPassWord);
+                target.put("AESKey", GlobalUtil.getInstance().getAESKey());
 
-                HttpSender.send(URL.loginURL, target);
+                con = HttpSender.send(URL.loginURL, target);
 
 
-//                java.net.URL url = new java.net.URL(URL.getLoginURL(target.toString()));
-//                con = (HttpURLConnection) url.openConnection();
-//                log.d(this, URL.getLoginURL(target.toString()));
-//
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());

@@ -65,4 +65,9 @@ public class HttpSender {
     public static HttpURLConnection send(String urlStr, Object content)throws IOException{
         return send(urlStr, cipherText, content);
     }
+
+    //加密传输
+    public static HttpURLConnection enCoder(String urlStr, Object content)throws IOException{
+        return send(urlStr, cipherText, content);
+    }
 }

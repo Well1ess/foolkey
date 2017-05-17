@@ -219,11 +219,11 @@ public class RegisterActivity extends AppCompatActivity {
                                         ;
 
                                 log.d(this, "convertTo愚:" + convert);
-                                log.d(this, "convertToUTF-8:" + java.net.URLEncoder.encode(convert));
+//                                log.d(this, "convertToUTF-8:" + java.net.URLEncoder.encode(convert));
 
                                 //执行注册动作
                                 RegisterAction registerAction = new RegisterAction();
-                                registerAction.execute(java.net.URLEncoder.encode(convert));
+                                registerAction.execute(convert);
 
                             } catch (Exception e) {
                                 Toast.makeText(RegisterActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
@@ -285,6 +285,19 @@ public class RegisterActivity extends AppCompatActivity {
                 target.put("passWord",strPassword);
                 target.put("AESKey", GlobalUtil.getInstance().getAESKey());
 
+                java.net.URL url = new java.net.URL(URL.getRegisterURL(""));
+//                con = (HttpURLConnection) url.openConnection();
+//                log.d(this, URL.getRegisterURL(target.toString()));
+//                log.d(this, "wofachude====="+target.toString());
+//
+//                // 设置允许输出，默认为false
+//                con.setDoOutput(true);
+//                con.setDoInput(true);
+//                con.setConnectTimeout(5 * 1000);
+//                con.setReadTimeout(10 * 1000);
+//
+//                con.setRequestMethod("POST");
+//                con.setRequestProperty("contentType", "UTF-8");
                 con = HttpSender.send(URL.registerURL, target);
 
                 // 获得服务端的返回数据

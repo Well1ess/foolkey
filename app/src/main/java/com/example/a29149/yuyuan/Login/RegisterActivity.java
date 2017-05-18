@@ -215,7 +215,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 //将回车进行字符替换
                                 String convert = encrypt
-                                        .replaceAll("\n", "愚")
+//                                        .replaceAll("\n", "愚")
                                         ;
 
                                 log.d(this, "convertTo愚:" + convert);
@@ -274,11 +274,11 @@ public class RegisterActivity extends AppCompatActivity {
                 //先进行加密，在进行替换，随后是UTF-8编码
                 target.put("userName",
                         RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")
+//                                .replaceAll("\n", "愚")
                 );
                 target.put("passWord",
                         RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")
+//                                .replaceAll("\n", "愚")
                 );
                 target.put("AESKey", params[0]);
                 System.out.println("注册\n用户名是" + target.get("userName"));

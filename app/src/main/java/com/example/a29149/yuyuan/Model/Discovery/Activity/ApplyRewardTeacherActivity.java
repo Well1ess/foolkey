@@ -16,6 +16,7 @@ import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeach
 import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardOptionsStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
@@ -125,23 +126,25 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token",token);
                 target.put("courseId","5");
-                //加密
-                String validation = java.net.URLEncoder.encode(
-                        AESOperator.getInstance().encrypt(target.toString()).replaceAll("\n", "愚"));
+                //封装为aes加密的格式
+                target = AESOperator.getInstance().encode(target);
 
-                java.net.URL url = new java.net.URL(URL.getApplyRewardTeacherURL(target.toString()
-                        ,validation,""));
-                Log.i("malei",target.toString());
-                Log.i("malei",validation);
-                con = (HttpURLConnection) url.openConnection();
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
+//                java.net.URL url = new java.net.URL(URL.getApplyRewardTeacherURL(target.toString()
+//                        ,validation,""));
+//                Log.i("malei",target.toString());
+//                Log.i("malei",validation);
+//                con = (HttpURLConnection) url.openConnection();
+//                // 设置允许输出，默认为false
+//                con.setDoOutput(true);
+//                con.setDoInput(true);
+//                con.setConnectTimeout(5 * 1000);
+//                con.setReadTimeout(10 * 1000);
+//
+//                con.setRequestMethod("POST");
+//                con.setRequestProperty("contentType", "UTF-8");
+                //发送
+                con = HttpSender.send( URL.applyRewardTeacherURL, target);
 
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());

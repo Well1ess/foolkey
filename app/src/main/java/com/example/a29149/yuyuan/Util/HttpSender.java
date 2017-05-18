@@ -14,7 +14,9 @@ import java.net.URLEncoder;
 public class HttpSender {
 
     //目前所有的参数，都主要发往这个地方
-    public static final String cipherText = "cipherText";
+    public static final String cipherText = "clearText";
+
+    public static final String token = "token";
 
 
     /**

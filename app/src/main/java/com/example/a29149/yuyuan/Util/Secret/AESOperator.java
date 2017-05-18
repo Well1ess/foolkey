@@ -7,6 +7,9 @@ package com.example.a29149.yuyuan.Util.Secret;
 
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -18,6 +21,25 @@ import javax.crypto.spec.SecretKeySpec;
  * AES 是一种可逆加密算法，对用户的敏感信息加密处理 对原始数据进行AES加密后，在进行Base64编码转化；
  */
 public class AESOperator {
+
+
+    public static final String clearText = "clearText";
+    public static final String validation = "validation";
+    public static final String cipherText = "cipherText";
+
+    //封装好的加密传输函数
+    public JSONObject encode(JSONObject content)throws Exception{
+        //放置明文
+        JSONObject target = new JSONObject();
+        target.put(clearText, content);
+        //加密明文，
+        String validationStr = AESOperator.getInstance().encrypt(content.toString());
+        target.put(validation, validationStr);
+        //放置密文
+        target.put(cipherText, "");
+
+        return target;
+    }
 
     /*
      * 加密用的Key 可以用26个字母和数字组成 此处使用AES-128-CBC加密模式，key需要为16位。

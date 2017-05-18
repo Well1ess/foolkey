@@ -21,6 +21,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
@@ -152,18 +153,19 @@ public class RewardDiscoveryFragment extends Fragment {
                 jsonObject.put("pageNo", pageNo + "");
                 jsonObject.put("token", GlobalUtil.getInstance().getToken());
 
-                java.net.URL url = new java.net.URL(URL.getRewordURL(jsonObject.toString()));
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getRewordURL(jsonObject.toString()));
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
+//                java.net.URL url = new java.net.URL(URL.getRewordURL(jsonObject.toString()));
+//                con = (HttpURLConnection) url.openConnection();
+//                log.d(this, URL.getRewordURL(jsonObject.toString()));
+//                // 设置允许输出，默认为false
+//                con.setDoOutput(true);
+//                con.setDoInput(true);
+//                con.setConnectTimeout(5 * 1000);
+//                con.setReadTimeout(10 * 1000);
+//
+//                con.setRequestMethod("POST");
+//                con.setRequestProperty("contentType", "UTF-8");
 
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
+                con = HttpSender.send( URL.getRewardURL, jsonObject);
 
                 // 获得服务端的返回数据
                 InputStreamReader read = new InputStreamReader(con.getInputStream());

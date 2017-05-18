@@ -280,18 +280,23 @@ public class LoginActivity extends AppCompatActivity{
 
                 JSONObject target = new JSONObject();
                 //对账号，密码先进行RSA加密，再进行替换，随后是UTF-8编码
-                target.put("userName", java.net.URLEncoder.encode(
+                target.put("userName",
                         RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")));
-                target.put("passWord", java.net.URLEncoder.encode(
+//                                .replaceAll("\n", "愚")
+                );
+                target.put("passWord",
                         RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")));
-                target.put("AESKey", java.net.URLEncoder.encode(
-                        RSAKeyBO.encryptByPub(GlobalUtil.getInstance().getAESKey(),
-                                GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")));
+//                                .replaceAll("\n", "愚")
+                );
+                target.put("AESKey",
+                        RSAKeyBO.encryptByPub(
+                                GlobalUtil.getInstance().getAESKey(),
+                                GlobalUtil.getInstance().getPublicKey()
+                        )
+//                                .replaceAll("\n", "愚")
+                );
 
-                HttpSender.send(URL.loginURL, target);
+                con = HttpSender.send(URL.loginURL, target);
 
 
 //                java.net.URL url = new java.net.URL(URL.getLoginURL(target.toString()));

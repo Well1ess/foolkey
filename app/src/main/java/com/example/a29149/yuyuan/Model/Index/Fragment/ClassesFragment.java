@@ -177,52 +177,18 @@ public class ClassesFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
             try {
+                //构建发送对象
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("pageNo", pageNo + "");
                 jsonObject.put("technicTagEnum", params[0]);
                 jsonObject.put("token", GlobalUtil.getInstance().getToken());
-
-//                java.net.URL url = new java.net.URL(URL.getGetHotCourseURL(jsonObject.toString()));
-//                con = (HttpURLConnection) url.openConnection();
-//                log.d(this, URL.getGetHotCourseURL(jsonObject.toString()));
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
-
-                con = HttpSender.send( URL.getHotCourseURL, jsonObject);
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
+                //发送
+                return HttpSender.send(URL.getHotCourseURL, jsonObject);
+            }catch (Exception e){
                 e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
+                return null;
             }
-            return sb.toString();
         }
 
         @Override

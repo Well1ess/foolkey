@@ -35,6 +35,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
+import static com.example.a29149.yuyuan.Util.HttpSender.send;
+
 /**
  * LoginActivity:登陆
  */
@@ -157,50 +159,13 @@ public class LoginActivity extends AppCompatActivity{
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
             try {
-                java.net.URL url = new java.net.URL(URL.getPublicKeyURL());
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getPublicKeyURL());
-                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
-                con = HttpSender.send( URL.publicKeyURL, "" );
-
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (MalformedURLException e) {
+                return send(URL.publicKeyURL, new JSONObject());
+            }catch (Exception e){
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
+                return null;
             }
-            return sb.toString();
+
         }
 
         @Override
@@ -277,63 +242,17 @@ public class LoginActivity extends AppCompatActivity{
 
                 //对密码进行SHA1加密
                 String password = SHA1Coder.SHA1(strPassWord);
-
+                //生成明文对象
                 JSONObject target = new JSONObject();
-                //对账号，密码先进行RSA加密，再进行替换，随后是UTF-8编码
-                target.put("userName",
-                        RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
-//                                .replaceAll("\n", "愚")
-                );
-                target.put("passWord",
-                        RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
-//                                .replaceAll("\n", "愚")
-                );
-                target.put("AESKey",
-                        RSAKeyBO.encryptByPub(
-                                GlobalUtil.getInstance().getAESKey(),
-                                GlobalUtil.getInstance().getPublicKey()
-                        )
-//                                .replaceAll("\n", "愚")
-                );
-
-                con = HttpSender.send(URL.loginURL, target);
-
-
-//                java.net.URL url = new java.net.URL(URL.getLoginURL(target.toString()));
-//                con = (HttpURLConnection) url.openConnection();
-//                log.d(this, URL.getLoginURL(target.toString()));
-//
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
+                target.put("userName", strUserName);
+                target.put("passWord", password);
+                target.put("AESKey", GlobalUtil.getInstance().getAESKey() );
+                //加密传输
+                return HttpSender.sendWithRSA(URL.loginURL, target);
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
+                return null;
             }
-            return sb.toString();
         }
 
         @Override

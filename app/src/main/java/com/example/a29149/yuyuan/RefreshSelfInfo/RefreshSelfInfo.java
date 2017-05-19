@@ -41,52 +41,18 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... params) {
 
-        StringBuffer sb = new StringBuffer();
-        BufferedReader reader = null;
-        HttpURLConnection con = null;
 
         try {
-
-//            java.net.URL url = new java.net.URL(URL.getSelfInfoURL());
-//            con = (HttpURLConnection) url.openConnection();
-//
-//            log.d(this, URL.getSelfInfoURL());
-//
-//            // 设置允许输出，默认为false
-//            con.setDoOutput(true);
-//            con.setDoInput(true);
-//            con.setConnectTimeout(5 * 1000);
-//            con.setReadTimeout(10 * 1000);
-//
-//            con.setRequestMethod("POST");
-//            con.setRequestProperty("contentType", "UTF-8");
+            //传输的数据带上token
             JSONObject content = new JSONObject();
             content.put(HttpSender.token, GlobalUtil.getInstance().getToken());
             //加密传输
-            con = HttpSender.send( URL.selfInfoURL, AESOperator.getInstance().encode(content));
+            return HttpSender.sendWithAES( URL.selfInfoURL, content );
 
-            // 获得服务端的返回数据
-            InputStreamReader read = new InputStreamReader(con.getInputStream());
-            reader = new BufferedReader(read);
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (con != null) {
-                con.disconnect();
-            }
+            return null;
         }
-        return sb.toString();
     }
 
     @Override

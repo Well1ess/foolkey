@@ -32,6 +32,10 @@ import java.net.HttpURLConnection;
 /**
  * Created by MaLei on 2017/5/8.
  * Email:ml1995@mail.ustc.edu.cn
+ *
+ * 这里的课程依然写死了
+ *
+ *
  * 老师申请接单悬赏
  */
 public class ApplyRewardTeacherActivity extends AppCompatActivity implements View.OnClickListener {
@@ -116,58 +120,19 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
             try {
                 JSONObject target = new JSONObject();
                 String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                target.put("courseId","5");
-                //封装为aes加密的格式
-                target = AESOperator.getInstance().encode(target);
+                target.put("token", token);
+                target.put("courseId", "这里有bug");
 
-//                java.net.URL url = new java.net.URL(URL.getApplyRewardTeacherURL(target.toString()
-//                        ,validation,""));
-//                Log.i("malei",target.toString());
-//                Log.i("malei",validation);
-//                con = (HttpURLConnection) url.openConnection();
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
-                //发送
-                con = HttpSender.send( URL.applyRewardTeacherURL, target);
+                return HttpSender.send(URL.applyRewardTeacherURL, target);
 
 
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
+            }catch (Exception e){
                 e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
+                return null;
             }
-            return sb.toString();
         }
 
         @Override

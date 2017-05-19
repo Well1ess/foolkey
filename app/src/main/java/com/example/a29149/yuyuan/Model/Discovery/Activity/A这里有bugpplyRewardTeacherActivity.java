@@ -9,25 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
-import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardOptionsStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
-import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
-import com.google.gson.Gson;
 
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 
 /**
  * Created by MaLei on 2017/5/8.
@@ -38,7 +29,7 @@ import java.net.HttpURLConnection;
  *
  * 老师申请接单悬赏
  */
-public class ApplyRewardTeacherActivity extends AppCompatActivity implements View.OnClickListener {
+public class A这里有bugpplyRewardTeacherActivity extends AppCompatActivity implements View.OnClickListener {
 
     private  Button mApplyReward;
 
@@ -89,7 +80,7 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
             else
             {
                 Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ApplyRewardTeacherActivity.this, ApplyAuthenticationTeacherActivity.class);
+                Intent intent = new Intent(A这里有bugpplyRewardTeacherActivity.this, ApplyAuthenticationTeacherActivity.class);
                 startActivity(intent);
             }
         }
@@ -98,7 +89,7 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
             Log.i("malei","teacherDTO是空的");
             //不是已认证老师，跳转到申请认证页面
             Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ApplyRewardTeacherActivity.this, ApplyAuthenticationTeacherActivity.class);
+            Intent intent = new Intent(A这里有bugpplyRewardTeacherActivity.this, ApplyAuthenticationTeacherActivity.class);
             startActivity(intent);
         }
     }
@@ -146,13 +137,13 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
 
 
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(ApplyRewardTeacherActivity.this, "申请成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(A这里有bugpplyRewardTeacherActivity.this, "申请成功！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(ApplyRewardTeacherActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(A这里有bugpplyRewardTeacherActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(ApplyRewardTeacherActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(A这里有bugpplyRewardTeacherActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
             }
 
         }

@@ -22,7 +22,7 @@ public class URL {
     //更新个人信息/获取个人信息
     public static final String selfInfoURL = "http://" + address + "/aes/getMyInfo?";
     //获取悬赏任务
-    public static final String rewordURL = "http://" + address + "/aes/get";
+    public static final String rewardURL = "http://" + address + "/aes/get";
     //切换身份
     public static final String switchToTeacher = "http://" + address + "/switchToTeacher?";
     //获取课程
@@ -195,7 +195,7 @@ public class URL {
     }
 
     //获取悬赏
-    public static String getRewordURL(String obj)
+    public static String getRewardURL(String obj)
     {
         return getRewardURL + "clearText="+obj;
     }

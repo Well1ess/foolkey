@@ -15,6 +15,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
@@ -102,50 +103,55 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
+//
+//            StringBuffer sb = new StringBuffer();
+//            BufferedReader reader = null;
+//            HttpURLConnection con = null;
 
             try {
                 JSONObject target = new JSONObject();
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token",token);
                 target.put("pageNo",pageNo);
-                java.net.URL url = new java.net.URL(URL.getGetTeacherRewardURL(target.toString()));
-                Log.i("malei",target.toString());
-                con = (HttpURLConnection) url.openConnection();
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
 
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
+                return HttpSender.send( URL.getTeacherRewardURL, target );
 
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
+//                java.net.URL url = new java.net.URL(URL.getGetTeacherRewardURL(target.toString()));
+//                Log.i("malei",target.toString());
+//                con = (HttpURLConnection) url.openConnection();
+//                // 设置允许输出，默认为false
+//                con.setDoOutput(true);
+//                con.setDoInput(true);
+//                con.setConnectTimeout(5 * 1000);
+//                con.setReadTimeout(10 * 1000);
+//
+//                con.setRequestMethod("POST");
+//                con.setRequestProperty("contentType", "UTF-8");
+//
+//                // 获得服务端的返回数据
+//                InputStreamReader read = new InputStreamReader(con.getInputStream());
+//                reader = new BufferedReader(read);
+//                String line = "";
+//                while ((line = reader.readLine()) != null) {
+//                    sb.append(line);
+//                }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
+                return null;
             }
-            return sb.toString();
+//            finally {
+//                if (reader != null) {
+//                    try {
+//                        reader.close();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                if (con != null) {
+//                    con.disconnect();
+//                }
+//            }
+//            return sb.toString();
         }
 
         @Override

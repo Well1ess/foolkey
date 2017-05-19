@@ -136,6 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
+                //传输一个空的json，获取key
                 return HttpSender.send(URL.publicKeyURL, new JSONObject());
             }catch (Exception e){
                 e.printStackTrace();

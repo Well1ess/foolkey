@@ -27,6 +27,10 @@ public class HttpSender {
     //目前所有的参数，都主要发往这个地方
     public static final String cipherText = "clearText";
 
+    //如果目标地址包含下面的字段，则加密发送
+    public static final String rsaURL = "/rsa";
+    public static final String aesURL = "/aes";
+
     public static final String token = "token";
 
 
@@ -75,14 +79,30 @@ public class HttpSender {
 
     /**
      * 发送一个json对象，返回接收到的字符串
+     * 如果地址栏包含 aesURL 或者rsaURL，则使用相应的加密方法
      * @param urlStr
      * @param content
      * @return 接收到的字符串
      * @throws IOException
      */
-    public static String send(String urlStr, JSONObject content)throws IOException{
+    public static String send(String urlStr, JSONObject content)throws Exception{
+        JSONObject jsonObject;
+
+        //根据URL地址判断加密方式
+        if (urlStr.contains( aesURL ) ){
+            //如果链接包含 aes
+            jsonObject = AESOperator.getInstance().encode(content);
+        }else if ( urlStr.contains( rsaURL ) ){
+            //如果链接包含 rsa
+            jsonObject = RSAKeyBO.encodeJSONObject(content);
+        }else {
+            //什么都不包含，明文发送
+            jsonObject = content;
+        }
+
+
         //发送
-        HttpURLConnection con = send(urlStr, cipherText, content);
+        HttpURLConnection con = send(urlStr, cipherText, jsonObject);
 
         //接收
         BufferedReader reader = null;

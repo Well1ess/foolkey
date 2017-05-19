@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Yuyuan.iml" filepath="$PROJECT_DIR$/Yuyuan.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/foolkey.iml" filepath="$PROJECT_DIR$/foolkey.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resource/resource.iml" filepath="$PROJECT_DIR$/resource/resource.iml" />
     </modules>
   </component>
 </project>

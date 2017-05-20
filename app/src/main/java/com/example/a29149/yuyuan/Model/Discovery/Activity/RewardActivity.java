@@ -194,7 +194,7 @@ private void applyRewardTeacher() {
                 String token = GlobalUtil.getInstance().getToken();
                 target.put("token", token);
                 target.put("courseId", courseStudentDTO.getId());
-                return HttpSender.sendWithAES( URL.applyRewardTeacherURL, target );
+                return HttpSender.send( URL.applyRewardTeacherURL, target );
             }catch (Exception e){
                 e.printStackTrace();
                 return null;

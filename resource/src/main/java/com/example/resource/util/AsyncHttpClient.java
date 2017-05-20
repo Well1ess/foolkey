@@ -58,6 +58,8 @@ public class AsyncHttpClient {
 
         @Override
         protected String doInBackground(String... params) {
+
+//            JSONObject jsonObject =
             StringBuffer sb = new StringBuffer();
             BufferedReader reader = null;
             HttpURLConnection con = null;

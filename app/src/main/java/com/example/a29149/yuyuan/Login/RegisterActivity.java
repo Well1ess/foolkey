@@ -223,7 +223,7 @@ public class RegisterActivity extends AppCompatActivity {
                 target.put("AESKey", params[0]);
 
                 //RSA加密发送
-                return HttpSender.sendWithRSA( URL.registerURL, target);
+                return HttpSender.send( URL.registerURL, target);
 
             }catch (Exception e){
                 e.printStackTrace();

@@ -88,7 +88,7 @@
         <activity android:name=".Model.Publish.Activity.ApplyAuthenticationTeacherActivity" />
 
         <!-- 老师接单悬赏 -->
-        <activity android:name=".Model.Discovery.Activity.A这里有bugpplyRewardTeacherActivity" />
+        <activity android:name=".Model.Discovery.Activity.ApplyRewardTeacherActivity" />
         <!-- 接单悬赏的老师主页 -->
         <activity android:name=".Model.Me.Reward.TeacherIndexActivity" />
         <!-- 老师界面的主页 -->

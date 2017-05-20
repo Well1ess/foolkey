@@ -40,19 +40,7 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
 
     @Override
     protected String doInBackground(String... params) {
-
-
-        try {
-            //传输的数据带上token
-            JSONObject content = new JSONObject();
-            content.put(HttpSender.token, GlobalUtil.getInstance().getToken());
-            //加密传输
-            return HttpSender.sendWithAES( URL.selfInfoURL, content );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return URL.doWithSelfInfoURL( );
     }
 
     @Override

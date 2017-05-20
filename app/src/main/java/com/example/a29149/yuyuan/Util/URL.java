@@ -1,5 +1,7 @@
 package com.example.a29149.yuyuan.Util;
 
+import org.json.JSONObject;
+
 /**
  * Created by 张丽华 on 2017/4/30.
  * Description:
@@ -260,6 +262,29 @@ public class URL {
         return noPayCourseURL+ "clearText=" + token;
     }
 
+    //获取登陆者的信息
+    public static String doWithSelfInfoURL(){
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("token", GlobalUtil.getInstance().getToken() );
+            return HttpSender.send( URL.selfInfoURL, jsonObject );
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String doWithRechargeURL(String money){
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("token", GlobalUtil.getInstance().getToken() );
+            jsonObject.put("amount", money );
+            return HttpSender.send( URL.rechargeURL, jsonObject );
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 

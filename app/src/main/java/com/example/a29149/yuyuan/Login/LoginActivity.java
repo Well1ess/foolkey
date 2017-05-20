@@ -151,9 +151,9 @@ public class LoginActivity extends AppCompatActivity{
     /**
      * 获取公钥
      */
-    public class GetPublicKeyAction extends AsyncTask<String, Integer, String> {
+    private class GetPublicKeyAction extends AsyncTask<String, Integer, String> {
 
-        public GetPublicKeyAction() {
+        GetPublicKeyAction() {
             super();
         }
 
@@ -225,19 +225,14 @@ public class LoginActivity extends AppCompatActivity{
     /**
      * 登陆请求Action
      */
-    public class LoginAction extends AsyncTask<String, Integer, String> {
+    private class LoginAction extends AsyncTask<String, Integer, String> {
 
-        public LoginAction() {
+        LoginAction() {
             super();
         }
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
             try {
 
                 //对密码进行SHA1加密
@@ -248,7 +243,7 @@ public class LoginActivity extends AppCompatActivity{
                 target.put("passWord", password);
                 target.put("AESKey", GlobalUtil.getInstance().getAESKey() );
                 //加密传输
-                return HttpSender.sendWithRSA(URL.loginURL, target);
+                return HttpSender.send(URL.loginURL, target);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;

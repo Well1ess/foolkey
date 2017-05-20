@@ -29,7 +29,7 @@ import org.json.JSONObject;
  *
  * 老师申请接单悬赏
  */
-public class A这里有bugpplyRewardTeacherActivity extends AppCompatActivity implements View.OnClickListener {
+public class ApplyRewardTeacherActivity extends AppCompatActivity implements View.OnClickListener {
 
     private  Button mApplyReward;
 
@@ -80,7 +80,7 @@ public class A这里有bugpplyRewardTeacherActivity extends AppCompatActivity im
             else
             {
                 Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(A这里有bugpplyRewardTeacherActivity.this, ApplyAuthenticationTeacherActivity.class);
+                Intent intent = new Intent(ApplyRewardTeacherActivity.this, ApplyAuthenticationTeacherActivity.class);
                 startActivity(intent);
             }
         }
@@ -89,7 +89,7 @@ public class A这里有bugpplyRewardTeacherActivity extends AppCompatActivity im
             Log.i("malei","teacherDTO是空的");
             //不是已认证老师，跳转到申请认证页面
             Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(A这里有bugpplyRewardTeacherActivity.this, ApplyAuthenticationTeacherActivity.class);
+            Intent intent = new Intent(ApplyRewardTeacherActivity.this, ApplyAuthenticationTeacherActivity.class);
             startActivity(intent);
         }
     }
@@ -137,13 +137,13 @@ public class A这里有bugpplyRewardTeacherActivity extends AppCompatActivity im
 
 
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(A这里有bugpplyRewardTeacherActivity.this, "申请成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ApplyRewardTeacherActivity.this, "申请成功！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(A这里有bugpplyRewardTeacherActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ApplyRewardTeacherActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(A这里有bugpplyRewardTeacherActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplyRewardTeacherActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
             }
 
         }

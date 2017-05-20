@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.Util;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -35,8 +36,6 @@ public class URL {
     public static final String teacherPublishCoursedURL = "http://" + address + "/courseTeacher/publishCourseTeacher?";
     //搜索
     public static final String searchURL = "http://" + address + "/search?";
-
-    public static final String studentPublishXuanshangURL = "http://" + address + "/courseStudent/publishRewardCourse?";
     //充值
     public static final String rechargeURL = "http://" + address + "/aes/recharge?";
     //提交订单
@@ -92,22 +91,6 @@ public class URL {
 
 
 
-    //获取公钥
-    public static String getPublicKeyURL() {
-        return publicKeyURL;
-    }
-
-    //进行注册
-    public static String getRegisterURL(String cipherText) {
-        return registerURL + "cipherText=" + cipherText;
-    }
-
-    //登陆请求
-    public static String getLoginURL(String cipherText) {
-        return loginURL + "cipherText=" + cipherText;
-    }
-
-
     //获取学生发布悬赏
     public static String getStudentPublishRewardURL(String clearText) {
         return studentPublishRewardURL + "clearText=" + clearText;
@@ -157,27 +140,7 @@ public class URL {
         return rechargeURL + AESTransformResult.getResult("", "amount", amount);
     }
 
-    //提交订单
 
-    /**
-     * @param courseId      课程Id
-     * @param amount        定点金额
-     * @param number        购买数量
-     * @param cutOffPercent 金额
-     * @param teachMethod   教授方式
-     * @param courseType    课程类型
-     * @return
-     */
-    public static String getSubmitOrder(String courseId, String amount, String number, String cutOffPercent, String teachMethod, String courseType, String teacherId) {
-        return submitOrder + AESTransformResult.getResult("",
-                "courseId", courseId,
-                "amount", amount,
-                "number", number,
-                "cutOffPercent", cutOffPercent,
-                "teachMethod", teachMethod,
-                "courseType", courseType,
-                "teacherId", teacherId);
-    }
 
     public static String getSearchURL(String obj)
     {
@@ -262,11 +225,27 @@ public class URL {
         return noPayCourseURL+ "clearText=" + token;
     }
 
+
+    /**
+     *
+     * 下面的方法，是针对每个链接，写的相应的申请，在activity中调用这些方法
+     *
+     * 如果某个前后端接口发生了变化，只需要修改下面的函数即可
+     *
+     */
+
+    //获取一个带有登陆者token的JSON对象
+    private static JSONObject getJSON() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("token", GlobalUtil.getInstance().getToken());
+        return jsonObject;
+    }
+
+
     //获取登陆者的信息
     public static String doWithSelfInfoURL(){
         try{
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("token", GlobalUtil.getInstance().getToken() );
+            JSONObject jsonObject = getJSON();
             return HttpSender.send( URL.selfInfoURL, jsonObject );
         }catch (Exception e){
             e.printStackTrace();
@@ -274,10 +253,10 @@ public class URL {
         }
     }
 
+    //登陆者给自己充值
     public static String doWithRechargeURL(String money){
         try{
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("token", GlobalUtil.getInstance().getToken() );
+            JSONObject jsonObject = getJSON();
             jsonObject.put("amount", money );
             return HttpSender.send( URL.rechargeURL, jsonObject );
         }catch (Exception e){
@@ -286,6 +265,71 @@ public class URL {
         }
     }
 
+
+    //学生发布悬赏
+    public static String doWithStudentPublishRewardURL(
+            String technicTagEnum,
+            String topic,
+            String description,
+            String price,
+            String courseTimeDayEnum,
+            String teachMethodEnum,
+            String teachRequirementEnum,
+            String studentBaseEnum
+    ){
+        try {
+            JSONObject target = getJSON();
+            target.put("technicTagEnum", technicTagEnum);
+            target.put("topic", topic );
+            target.put("description", description);
+            target.put("price", price);
+            target.put("courseTimeDayEnum", courseTimeDayEnum);
+            target.put("teachMethodEnum", teachMethodEnum);
+            target.put("teachRequirementEnum", teachRequirementEnum);
+            target.put("studentBaseEnum", studentBaseEnum);
+            return HttpSender.send( URL.studentPublishRewardURL, target);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    //提交订单
+    /**
+     *
+     * 购买老师课程
+     * @param courseId      课程Id
+     * @param amount        定点金额
+     * @param number        购买数量
+     * @param cutOffPercent 金额
+     * @param teachMethod   教授方式
+     * @param courseType    课程类型
+     * @return
+     */
+    public static String doWithSubmitOrder(
+            String courseId,
+            String amount,
+            String number,
+            String cutOffPercent,
+            String teachMethod,
+            String courseType,
+            String teacherId
+    ){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put( "courseId", courseId );
+            jsonObject.put( "amount", amount );
+            jsonObject.put( "number", number );
+            jsonObject.put( "cutOffPercent", cutOffPercent );
+            jsonObject.put( "teachMethod", teachMethod);
+            jsonObject.put( "courseType", courseType );
+            jsonObject.put( "teacherId", teacherId );
+            return HttpSender.send( submitOrder, jsonObject );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 }

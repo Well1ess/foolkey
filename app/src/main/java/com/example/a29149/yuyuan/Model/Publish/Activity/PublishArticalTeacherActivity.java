@@ -145,6 +145,7 @@ public class PublishArticalTeacherActivity extends Activity implements View.OnCl
         @Override
         protected String doInBackground(String... params) {
 
+
             StringBuffer sb = new StringBuffer();
             BufferedReader reader = null;
             HttpURLConnection con = null;

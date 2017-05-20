@@ -34,7 +34,7 @@ import java.net.HttpURLConnection;
  * Email:ml1995@mail.ustc.edu.cn
  * 学生发布悬赏
  */
-
+@Deprecated
 public class PublishRewardStudentActivity extends Activity implements View.OnClickListener {
 
     private TextView mCancel;//取消

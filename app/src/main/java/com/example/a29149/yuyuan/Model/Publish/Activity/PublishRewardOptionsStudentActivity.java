@@ -260,97 +260,46 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
 
         @Override
         protected String doInBackground(String... params) {
-//
-//            StringBuffer sb = new StringBuffer();
-//            BufferedReader reader = null;
-//            HttpURLConnection con = null;
 
-//            try {
-//                JSONObject target = new JSONObject();
-//                String token = GlobalUtil.getInstance().getToken();
-//                target.put("token",token);
-//                target.put("technicTagEnum",mChooseContent[1]);
-//                target.put("topic",mChooseContent[0]);
-//                target.put("description",mChooseContent[2]);
-//                target.put("price",mChooseContent[3]);
-                //默认选择
-                String courseTimeDayEnumStr;
-                if ( mChooseContent[4] != null && !mChooseContent[4].equals(""))
-                    ;
-                else
-                    mChooseContent[4] = "不限";
-                courseTimeDayEnumStr = mChooseContent[4];
-//                target.put("courseTimeDayEnum",mChooseContent[4]);
+            //默认选择
+            String courseTimeDayEnumStr;
+            if ( mChooseContent[4] != null && !mChooseContent[4].equals(""))
+                ;
+            else
+                mChooseContent[4] = "不限";
+            courseTimeDayEnumStr = mChooseContent[4];
 
-                String studentBaseEnumStr;
-                if ( mChooseContent[5] != null && !mChooseContent[5].equals(""))
-                    ;
-                else
-                    mChooseContent[5] = "小白";
-                studentBaseEnumStr = mChooseContent[5];
-//                target.put("studentBaseEnum",mChooseContent[5]);
+            String studentBaseEnumStr;
+            if ( mChooseContent[5] != null && !mChooseContent[5].equals(""))
+                ;
+            else
+                mChooseContent[5] = "小白";
+            studentBaseEnumStr = mChooseContent[5];
 
-                String teachMethodEnumStr;
-                if ( mChooseContent[6] != null && !mChooseContent[6].equals(""))
-                    ;
-                else
-                    mChooseContent[6] = "不限";
-                teachMethodEnumStr = mChooseContent[6];
-//                target.put("teachMethodEnum",mChooseContent[6]);
+            String teachMethodEnumStr;
+            if ( mChooseContent[6] != null && !mChooseContent[6].equals(""))
+                ;
+            else
+                mChooseContent[6] = "不限";
+            teachMethodEnumStr = mChooseContent[6];
 
-                String teachRequirementEnumStr;
-                if ( mChooseContent[7] != null && !mChooseContent[7].equals(""))
-                    ;
-                else
-                    mChooseContent[7] = "不限";
-                teachRequirementEnumStr = mChooseContent[7];
-//                target.put("teachRequirementEnum",mChooseContent[7]);
+            String teachRequirementEnumStr;
+            if ( mChooseContent[7] != null && !mChooseContent[7].equals(""))
+                ;
+            else
+                mChooseContent[7] = "不限";
+            teachRequirementEnumStr = mChooseContent[7];
 
-                return URL.doWithStudentPublishRewardURL(
-                        mChooseContent[1],
-                        mChooseContent[0],
-                        mChooseContent[2],
-                        mChooseContent[3],
-                        courseTimeDayEnumStr,
-                        teachMethodEnumStr,
-                        teachRequirementEnumStr,
-                        studentBaseEnumStr
-                );
-
-//                java.net.URL url = new java.net.URL(URL.getStudentPublishRewardURL(target.toString()));
-//                Log.i("malei",target.toString());
-//                con = (HttpURLConnection) url.openConnection();
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "GBK");
-//
-//                // 获得服务端的返回数据
-//                InputStreamReader read = new InputStreamReader(con.getInputStream());
-//                reader = new BufferedReader(read);
-//                String line = "";
-//                while ((line = reader.readLine()) != null) {
-//                    sb.append(line);
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (reader != null) {
-//                    try {
-//                        reader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                if (con != null) {
-//                    con.disconnect();
-//                }
-//            }
-//            return sb.toString();
+            return URL.doWithStudentPublishRewardURL(
+                    mChooseContent[1],
+                    mChooseContent[0],
+                    mChooseContent[2],
+                    mChooseContent[3],
+                    courseTimeDayEnumStr,
+                    teachMethodEnumStr,
+                    teachRequirementEnumStr,
+                    studentBaseEnumStr
+            );
         }
 
         @Override

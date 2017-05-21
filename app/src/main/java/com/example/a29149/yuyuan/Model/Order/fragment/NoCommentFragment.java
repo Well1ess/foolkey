@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
+import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoCommentRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
@@ -23,6 +24,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.a29149.yuyuan.controller.order.student.GetSpecifiStateOrderController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -124,51 +126,13 @@ public class NoCommentFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
+            System.out.println();
+            System.out.println(this.getClass() + "这里的到底是要未评价还是未付款的订单？？？\n");
+            return GetSpecifiStateOrderController.execute(
+                    OrderStateEnum.结束上课.toString(),
+                    pageNo + ""
+            );
 
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                target.put("pageNo",pageNo);
-
-
-                java.net.URL url = new java.net.URL(URL.getNoCommentURL(target.toString()));
-                Log.i("malei",target.toString());
-                con = (HttpURLConnection) url.openConnection();
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "GBK");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
         }
 
         @Override

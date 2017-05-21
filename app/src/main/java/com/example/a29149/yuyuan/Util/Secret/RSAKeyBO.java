@@ -1,5 +1,11 @@
 package com.example.a29149.yuyuan.Util.Secret;
 
+import com.example.a29149.yuyuan.Util.GlobalUtil;
+
+import org.json.JSONObject;
+
+import java.util.Iterator;
+
 /**
  * 获取公私钥
  * Created by geyao on 2017/4/25.
@@ -14,6 +20,31 @@ public class RSAKeyBO {
 
     public RSAKeyBO() {
         super();
+    }
+
+
+    /**
+     * 把一个明文JSONObject，转变为密文的json，key不会加密，对values分别加密
+     * @param jsonObject
+     * @return
+     */
+    public static JSONObject encodeJSONObject(JSONObject jsonObject) throws Exception{
+        JSONObject result = new JSONObject();
+        //遍历该json的key
+        Iterator iterator = jsonObject.keys();
+        while (iterator.hasNext()){
+            //拿到key
+            String key = iterator.next().toString();
+            //拿到明文
+            String rawStr = jsonObject.getString(key);
+            System.out.println("明文是 " + rawStr);
+            //对密文进行预处理
+            //加密，获取密文
+            String cipherText = RSAKeyBO.encryptByPub(rawStr, GlobalUtil.getInstance().getPublicKey());
+            //放置在request里
+            result.put( key, cipherText );
+        }
+        return result;
     }
 
 

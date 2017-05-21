@@ -21,10 +21,12 @@ import com.example.a29149.yuyuan.Model.Discovery.Adapter.ArticleListAdapter;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
+import com.example.a29149.yuyuan.controller.course.reward.GetPopularController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -129,50 +131,12 @@ public class ArticleDiscoveryFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
 
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("pageNo", pageNo + "");
-                jsonObject.put("technicTagEnum", params[0]);
+            return com.example.a29149.yuyuan.controller.course.course.GetPopularController.execute(
+                    pageNo + "",
+                    params[0]
+            );
 
-                java.net.URL url = new java.net.URL(URL.getGetHotCourseURL(jsonObject.toString()));
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getGetHotCourseURL(jsonObject.toString()));
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
         }
 
         @Override

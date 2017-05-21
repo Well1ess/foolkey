@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.CourseStudentDTO;
+import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
@@ -20,17 +20,11 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.Secret.AESOperator;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
 
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 
 /**
  * Created by MaLei on 2017/5/9.
@@ -45,7 +39,7 @@ public class RewardActivity extends AppCompatActivity {
     private RadioButton mOrder;//我要接单
     private int position = -1;//item位置
     private StudentDTO studentDTO;//发布悬赏的学生信息
-    private CourseStudentDTO courseStudentDTO;//悬赏信息
+    private RewardDTO rewardDTO;//悬赏信息
     private TextView mRewardUser;//发布悬赏人的信息
     private TextView mTeacherEvaluate;//悬赏价格
     private TextView mRewardTopic;//悬赏标题
@@ -63,14 +57,14 @@ public class RewardActivity extends AppCompatActivity {
         Log.i("malei",position+"");
         if(position != -1)
         {
-            studentDTO = GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getStudentDTO();
-            courseStudentDTO = GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getCourseStudentDTO();
+            studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
+            rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
 
         }
         else
         {
             studentDTO = new StudentDTO();
-            courseStudentDTO = new CourseStudentDTO();
+            rewardDTO = new RewardDTO();
         }
         initView();
         initData();
@@ -130,9 +124,9 @@ public class RewardActivity extends AppCompatActivity {
 
     private void initData() {
         mRewardUser.setText(studentDTO.getNickedName());
-        mTeacherEvaluate.setText(courseStudentDTO.getPrice()+"");
-        mRewardTopic.setText(courseStudentDTO.getTopic()+"");
-        mRewardDescription.setText(courseStudentDTO.getDescription());
+        mTeacherEvaluate.setText(rewardDTO.getPrice()+"");
+        mRewardTopic.setText(rewardDTO.getTopic()+"");
+        mRewardDescription.setText(rewardDTO.getDescription());
     }
 
 //老师申请接单悬赏
@@ -187,56 +181,8 @@ private void applyRewardTeacher() {
 
         @Override
         protected String doInBackground(String... params) {
+            return ApplyController.execute( rewardDTO.getId() + "");
 
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                target.put("courseId",courseStudentDTO.getId());
-                //加密
-                String validation = java.net.URLEncoder.encode(
-                        AESOperator.getInstance().encrypt(target.toString()).replaceAll("\n", "愚"));
-
-                java.net.URL url = new java.net.URL(URL.getApplyRewardTeacherURL(target.toString()
-                        ,validation,""));
-                Log.i("malei",target.toString());
-                Log.i("malei",validation);
-                con = (HttpURLConnection) url.openConnection();
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
         }
 
         @Override

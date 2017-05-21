@@ -1,6 +1,6 @@
 package com.example.a29149.yuyuan.DTO;
 
-import com.example.a29149.yuyuan.Enum.CourseStudentStateEnum;
+import com.example.a29149.yuyuan.Enum.RewardStateEnum;
 import com.example.a29149.yuyuan.Enum.SexTagEnum;
 import com.example.a29149.yuyuan.Enum.StudentBaseEnum;
 import com.example.a29149.yuyuan.Enum.TeacherRequirementEnum;
@@ -16,7 +16,7 @@ public class RewardDTO extends CourseAbstract{
     private TeacherRequirementEnum teacherRequirementEnum;
 
     // 悬赏状态 待接单,已解决
-    private CourseStudentStateEnum courseStudentStateEnum;
+    private RewardStateEnum rewardStateEnum;
 
     // 学生基础
     private StudentBaseEnum studentBaseEnum;
@@ -26,9 +26,9 @@ public class RewardDTO extends CourseAbstract{
 
     @Override
     public String toString() {
-        return "CourseStudentDTO{" +
+        return "RewardDTO{" +
                 "teacherRequirementEnum=" + teacherRequirementEnum +
-                ", courseStudentStateEnum=" + courseStudentStateEnum +
+                ", rewardStateEnum=" + rewardStateEnum +
                 ", studentBaseEnum=" + studentBaseEnum +
                 ", sexTagEnum=" + sexTagEnum +
                 '}';
@@ -42,12 +42,12 @@ public class RewardDTO extends CourseAbstract{
         this.teacherRequirementEnum = teacherRequirementEnum;
     }
 
-    public CourseStudentStateEnum getCourseStudentStateEnum() {
-        return courseStudentStateEnum;
+    public RewardStateEnum getRewardStateEnum() {
+        return rewardStateEnum;
     }
 
-    public void setCourseStudentStateEnum(CourseStudentStateEnum courseStudentStateEnum) {
-        this.courseStudentStateEnum = courseStudentStateEnum;
+    public void setRewardStateEnum(RewardStateEnum rewardStateEnum) {
+        this.rewardStateEnum = rewardStateEnum;
     }
 
     public StudentBaseEnum getStudentBaseEnum() {

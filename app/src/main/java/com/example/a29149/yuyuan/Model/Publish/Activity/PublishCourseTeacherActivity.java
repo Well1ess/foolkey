@@ -21,6 +21,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.course.course.PublishController;
 
 import org.json.JSONObject;
 
@@ -252,56 +253,16 @@ public class PublishCourseTeacherActivity extends Activity implements View.OnCli
         @Override
         protected String doInBackground(String... params) {
 
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
+            return PublishController.execute(
+                    mChooseContent[0],
+                    mChooseContent[1],
+                    mChooseContent[2],
+                    mChooseContent[3],
+                    mChooseContent[4],
+                    mChooseContent[5],
+                    mChooseContent[6]
+            );
 
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                target.put("topic",mChooseContent[0]);
-                target.put("technicTagEnum",mChooseContent[1]);
-                target.put("description",mChooseContent[2]);
-                target.put("price",mChooseContent[3]);
-                target.put("duration",mChooseContent[4]);
-                target.put("teachMethodEnum",mChooseContent[5]);
-                target.put("courseTimeDayEnum",mChooseContent[6]);
-
-                java.net.URL url = new java.net.URL(URL.getTeacherPublishCoursedURL(target.toString()));
-                Log.i("malei",target.toString());
-                con = (HttpURLConnection) url.openConnection();
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "GBK");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
         }
 
         @Override

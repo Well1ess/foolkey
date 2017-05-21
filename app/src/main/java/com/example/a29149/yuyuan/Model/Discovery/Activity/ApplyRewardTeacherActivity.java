@@ -9,28 +9,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
-import com.example.a29149.yuyuan.Model.Publish.Activity.PublishRewardOptionsStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.Secret.AESOperator;
+import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
-import com.google.gson.Gson;
+import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
 
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 
 /**
  * Created by MaLei on 2017/5/8.
  * Email:ml1995@mail.ustc.edu.cn
+ *
+ * 这里的课程依然写死了
+ *
+ *
  * 老师申请接单悬赏
  */
 public class ApplyRewardTeacherActivity extends AppCompatActivity implements View.OnClickListener {
@@ -115,56 +112,7 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                target.put("courseId","5");
-                //加密
-                String validation = java.net.URLEncoder.encode(
-                        AESOperator.getInstance().encrypt(target.toString()).replaceAll("\n", "愚"));
-
-                java.net.URL url = new java.net.URL(URL.getApplyRewardTeacherURL(target.toString()
-                        ,validation,""));
-                Log.i("malei",target.toString());
-                Log.i("malei",validation);
-                con = (HttpURLConnection) url.openConnection();
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
+            return ApplyController.execute(params[0]);
         }
 
         @Override

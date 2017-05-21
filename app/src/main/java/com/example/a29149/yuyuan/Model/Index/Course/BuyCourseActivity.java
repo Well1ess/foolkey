@@ -26,6 +26,7 @@ import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.course.course.ApplyController;
 
 import org.json.JSONObject;
 
@@ -142,7 +143,8 @@ public class BuyCourseActivity extends AppCompatActivity {
 
         //TODO:网络数据传输
         SubmitNewOrderAction submitNewOrderAction = new SubmitNewOrderAction();
-        submitNewOrderAction.execute(URL.getSubmitOrder(GlobalUtil.getInstance().getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum())
+        submitNewOrderAction.execute(
+                GlobalUtil.getInstance().getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum())
                         .get(mPosition).getCourseTeacherDTO().getId()+"",
                 sum+"",
                 mNum+"",
@@ -151,7 +153,7 @@ public class BuyCourseActivity extends AppCompatActivity {
                 CourseTypeEnum.values()[0].toString(),
                 GlobalUtil.getInstance().getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum()).
                         get(mPosition).getCourseTeacherDTO().getCreatorId()+""
-                ));
+                );
     }
 
     @OnClick(R.id.reduce_num)
@@ -183,6 +185,7 @@ public class BuyCourseActivity extends AppCompatActivity {
         mSelectTeachType.show();
     }
 
+
     public class SubmitNewOrderAction extends AsyncTask<String, Integer, String> {
 
         public SubmitNewOrderAction() {
@@ -191,48 +194,16 @@ public class BuyCourseActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
 
-            try {
-                java.net.URL url = new java.net.URL(params[0]);
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, params[0]);
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
+            return ApplyController.execute(
+                    params[0],
+                    params[1],
+                    params[2],
+                    params[3],
+                    params[4],
+                    params[5],
+                    params[6]
+            );
         }
 
         @Override

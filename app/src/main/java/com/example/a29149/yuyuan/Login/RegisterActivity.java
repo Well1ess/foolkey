@@ -23,6 +23,7 @@ import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.userInfo.RegisterController;
 
 import org.json.JSONObject;
 
@@ -135,49 +136,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
             try {
-                java.net.URL url = new java.net.URL(URL.getPublicKeyURL());
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getPublicKeyURL());
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (MalformedURLException e) {
+                //传输一个空的json，获取key
+                return HttpSender.send(URL.publicKeyURL, new JSONObject());
+            }catch (Exception e){
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
+                return null;
             }
-            return sb.toString();
         }
 
         @Override
@@ -199,31 +164,20 @@ public class RegisterActivity extends AppCompatActivity {
                             GlobalUtil.getInstance().setPublicKey(publicKey);
 
                             try {
-                                AESCoder coder = new AESCoder();
 
                                 //对AESKey的操作保存在单例中
-                                GlobalUtil.getInstance().setAESKey(coder.getRandomString(16));
+                                GlobalUtil.getInstance().setAESKey(AESCoder.getRandomString(16));
 
                                 log.d(this, "AESKey:" + GlobalUtil.getInstance().getAESKey());
                                 log.d(this, "publicKey:" + GlobalUtil.getInstance().getPublicKey());
-
-                                //使用公钥对AES进行RSA加密
-                                String encrypt = RSAKeyBO.encryptByPub(GlobalUtil.getInstance().getAESKey(),
-                                        GlobalUtil.getInstance().getPublicKey());
+                                //获取AES密钥
+                                String encrypt = GlobalUtil.getInstance().getAESKey();
 
                                 log.d(this, "encryptByPub:" + encrypt);
 
-                                //将回车进行字符替换
-                                String convert = encrypt
-                                        .replaceAll("\n", "愚")
-                                        ;
-
-                                log.d(this, "convertTo愚:" + convert);
-//                                log.d(this, "convertToUTF-8:" + java.net.URLEncoder.encode(convert));
-
                                 //执行注册动作
                                 RegisterAction registerAction = new RegisterAction();
-                                registerAction.execute(convert);
+                                registerAction.execute(encrypt);
 
                             } catch (Exception e) {
                                 Toast.makeText(RegisterActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
@@ -259,69 +213,21 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
             try {
-                log.d(this, "P:"+strPassword);
-                log.d(this, "U:"+strUserName);
+                log.d(this, "P:" + strPassword);
+                log.d(this, "U:" + strUserName);
                 String password = SHA1Coder.SHA1(strPassword);
 
-                JSONObject target = new JSONObject();
-                //对账号，密码重复上述动作
-                //先进行加密，在进行替换，随后是UTF-8编码
-//                target.put("userName", java.net.URLEncoder.encode(
-//                        RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
-//                                .replaceAll("\n", "愚")
-//                ));
-//                target.put("passWord", java.net.URLEncoder.encode(
-//                        RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
-//                                .replaceAll("\n", "愚")
-//                ));
-//                target.put("AESKey", params[0]);
-                target.put("userName",strUserName);
-                target.put("passWord",strPassword);
-                target.put("AESKey", GlobalUtil.getInstance().getAESKey());
+                return RegisterController.execute(
+                        strUserName,
+                        password,
+                        params[0]
+                );
 
-                java.net.URL url = new java.net.URL(URL.getRegisterURL(""));
-//                con = (HttpURLConnection) url.openConnection();
-//                log.d(this, URL.getRegisterURL(target.toString()));
-//                log.d(this, "wofachude====="+target.toString());
-//
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
-                con = HttpSender.send(URL.registerURL, target);
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
+            }catch (Exception e){
                 e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
+                return null;
             }
-            return sb.toString();
         }
 
         @Override

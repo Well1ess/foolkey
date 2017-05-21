@@ -20,12 +20,12 @@ import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
-import com.example.a29149.yuyuan.Util.Secret.AESKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.userInfo.LogInController;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
@@ -36,7 +36,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
-import javax.microedition.khronos.opengles.GL;
+import static com.example.a29149.yuyuan.Util.HttpSender.send;
 
 /**
  * LoginActivity:登陆
@@ -152,58 +152,21 @@ public class LoginActivity extends AppCompatActivity{
     /**
      * 获取公钥
      */
-    public class GetPublicKeyAction extends AsyncTask<String, Integer, String> {
+    private class GetPublicKeyAction extends AsyncTask<String, Integer, String> {
 
-        public GetPublicKeyAction() {
+        GetPublicKeyAction() {
             super();
         }
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
             try {
-                java.net.URL url = new java.net.URL(URL.getPublicKeyURL());
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getPublicKeyURL());
-                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
-                HttpSender.send( URL.publicKeyURL, "" );
-
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (MalformedURLException e) {
+                return send(URL.publicKeyURL, new JSONObject());
+            }catch (Exception e){
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
+                return null;
             }
-            return sb.toString();
+
         }
 
         @Override
@@ -263,66 +226,29 @@ public class LoginActivity extends AppCompatActivity{
     /**
      * 登陆请求Action
      */
-    public class LoginAction extends AsyncTask<String, Integer, String> {
+    private class LoginAction extends AsyncTask<String, Integer, String> {
 
-        public LoginAction() {
+        LoginAction() {
             super();
         }
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
             try {
 
                 //对密码进行SHA1加密
-               /* String password = SHA1Coder.SHA1(strPassWord);*/
+                String password = SHA1Coder.SHA1(strPassWord);
 
-                JSONObject target = new JSONObject();
-           /*     //对账号，密码先进行RSA加密，再进行替换，随后是UTF-8编码
-                target.put("userName", java.net.URLEncoder.encode(
-                        RSAKeyBO.encryptByPub(strUserName, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")));
-                target.put("passWord", java.net.URLEncoder.encode(
-                        RSAKeyBO.encryptByPub(password, GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")));
-                target.put("AESKey", java.net.URLEncoder.encode(
-                        RSAKeyBO.encryptByPub(GlobalUtil.getInstance().getAESKey(),
-                                GlobalUtil.getInstance().getPublicKey())
-                                .replaceAll("\n", "愚")));*/
-                target.put("userName",strUserName);
-                target.put("passWord",strPassWord);
-                target.put("AESKey", GlobalUtil.getInstance().getAESKey());
+                return LogInController.execute(
+                        strUserName,
+                        password,
+                        GlobalUtil.getInstance().getAESKey()
+                );
 
-                con = HttpSender.send(URL.loginURL, target);
-
-
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
+                return null;
             }
-            return sb.toString();
         }
 
         @Override

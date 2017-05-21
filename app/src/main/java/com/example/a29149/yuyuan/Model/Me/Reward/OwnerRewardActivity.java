@@ -125,9 +125,6 @@ public class OwnerRewardActivity extends AppCompatActivity {
                         applicationStudentRewardAsStudentSTCDTOs = new ArrayList<>();
                     }
                     GlobalUtil.getInstance().setApplicationStudentRewardAsStudentSTCDTOs(applicationStudentRewardAsStudentSTCDTOs);
-                    Log.i("malei",applicationStudentRewardAsStudentSTCDTOs.toString());
-                    Log.i("malei",GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(0).getRewardDTO().toString());
-
 
                     if (resultFlag.equals("success")) {
                         Toast.makeText(OwnerRewardActivity.this, "获取悬赏成功！", Toast.LENGTH_SHORT).show();

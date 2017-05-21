@@ -115,7 +115,6 @@ public class OwnerRewardTeacherFragment extends Fragment {
                     }.getType();
                     List<OrderBuyRewardAsTeacherSTCDTO> orderBuyRewardAsTeacherSTCDTOs = new Gson().fromJson(jsonObject.getString("orderBuyRewardAsTeacherSTCDTOS"), type);
                     GlobalUtil.getInstance().setOrderBuyRewardAsTeacherSTCDTOs(orderBuyRewardAsTeacherSTCDTOs);
-                    Log.i("malei",orderBuyRewardAsTeacherSTCDTOs.toString());
 
                     if (resultFlag.equals("success")) {
                         Toast.makeText(getContext(), "获取悬赏成功！", Toast.LENGTH_SHORT).show();

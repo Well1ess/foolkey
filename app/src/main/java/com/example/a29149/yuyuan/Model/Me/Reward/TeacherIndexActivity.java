@@ -250,8 +250,8 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
             System.out.println(this.getClass() + "这里的优惠券Id依然是写死的！\n");
             return AcceptController.execute(
                     applicationStudentRewardDTO.getId()+"",
-                    mRewardDTO.getId()+"",
-                    ""
+                    "", // 这里原本应该是优惠券的Id
+                    mRewardDTO.getPrice() + ""
             );
 
         }

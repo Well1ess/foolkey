@@ -17,6 +17,7 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.a29149.yuyuan.controller.course.reward.GetWithApplicationController;
 import com.example.a29149.yuyuan.controller.course.reward.MineController;
 import com.google.gson.Gson;
 
@@ -101,7 +102,7 @@ public class OwnerRewardActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             //只会获取我的未解决的悬赏，内含部分申请的老师
-            return MineController.execute( pageNo + "");
+            return GetWithApplicationController.execute( pageNo + "");
 
 
         }
@@ -122,8 +123,10 @@ public class OwnerRewardActivity extends AppCompatActivity {
                     try {
                          applicationStudentRewardAsStudentSTCDTOs = new Gson().fromJson(jsonObject.getString("applicationStudentRewardAsStudentSTCDTOS"), type);
                     }catch (JSONException e){
+                        e.printStackTrace();
                         applicationStudentRewardAsStudentSTCDTOs = new ArrayList<>();
                     }
+
                     GlobalUtil.getInstance().setApplicationStudentRewardAsStudentSTCDTOs(applicationStudentRewardAsStudentSTCDTOs);
 
                     if (resultFlag.equals("success")) {

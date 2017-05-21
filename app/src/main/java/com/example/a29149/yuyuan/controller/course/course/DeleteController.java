@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * Created by geyao on 2017/5/21.
  */
 
-public class DeleteCourseController extends AbstractController{
+public class DeleteController extends AbstractController{
 
     private static String url = address + "/aes/course/delete";
 

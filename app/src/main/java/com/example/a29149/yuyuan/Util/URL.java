@@ -30,8 +30,6 @@ public class URL {
     public static final String rewardURL = "http://" + address + "/aes/get";
     //切换身份
     private static final String switchToTeacher = "http://" + address + "/switchToTeacher?";
-    //获取课程
-    public static final String getHotCourseURL = "http://" + address + "/courseTeacher/getCourseTeacherPopular?";
     //老师发布课程
     private static final String teacherPublishCoursedURL = "http://" + address + "/courseTeacher/publishCourseTeacher?";
     //搜索
@@ -122,24 +120,6 @@ public class URL {
         try {
             JSONObject jsonObject = getJSON();
             return HttpSender.send( URL.switchToTeacher, jsonObject);
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
-
-    /**
-     * 获取热门课程
-     * @param pageNo
-     * @param technicTagEnum
-     * @return
-     */
-    public static String doWithGetHotCourseURL(String pageNo, String technicTagEnum){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put( "pageNo", pageNo);
-            jsonObject.put( "technicTagEnum", technicTagEnum);
-            return HttpSender.send( URL.getHotCourseURL, jsonObject);
         }catch (Exception e){
             e.printStackTrace();
             return failJSON();
@@ -414,42 +394,6 @@ public class URL {
     }
 
 
-    /**
-     * 老师发布课程
-     * @param topic
-     * @param technicTagEnum
-     * @param description
-     * @param price
-     * @param courseTimeDayEnum
-     * @param duration
-     * @param teachMethodEnum
-     * @return
-     */
-    public static String doWithTeacherPublishCoursedURL(
-            String topic,
-            String technicTagEnum,
-            String description,
-            String price,
-            String courseTimeDayEnum,
-            String duration,
-            String teachMethodEnum
-    ){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put("topic", topic);
-            jsonObject.put("technicTagEnum", technicTagEnum);
-            jsonObject.put("description", description);
-            jsonObject.put("price", price);
-            jsonObject.put("courseTimeDayEnum", courseTimeDayEnum);
-            jsonObject.put("duration", duration);
-            jsonObject.put("teachMethodEnum", teachMethodEnum);
-            return HttpSender.send( URL.teacherPublishCoursedURL, jsonObject );
-
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
 
 
 

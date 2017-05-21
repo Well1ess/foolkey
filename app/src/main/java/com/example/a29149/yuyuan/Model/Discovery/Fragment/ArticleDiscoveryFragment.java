@@ -26,6 +26,7 @@ import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
+import com.example.a29149.yuyuan.controller.course.reward.GetPopularController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -131,18 +132,11 @@ public class ArticleDiscoveryFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            try {
-                //构建JSON
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("pageNo", pageNo + "");
-                jsonObject.put("technicTagEnum", params[0]);
+            return com.example.a29149.yuyuan.controller.course.course.GetPopularController.execute(
+                    pageNo + "",
+                    params[0]
+            );
 
-                return HttpSender.send( URL.getHotCourseURL, jsonObject );
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
         }
 
         @Override

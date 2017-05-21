@@ -18,20 +18,14 @@ import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
-import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.userInfo.RegisterController;
 
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -54,6 +48,10 @@ public class RegisterActivity extends AppCompatActivity {
     @ViewInject(R.id.code)
     private EditText mCode;
 
+    //等待提示
+    public ShapeLoadingDialog shapeLoadingDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +60,11 @@ public class RegisterActivity extends AppCompatActivity {
         AnnotationUtil.injectViews(this);
 
         userConfig = new UserConfig(RegisterActivity.this);
+
+        shapeLoadingDialog = new ShapeLoadingDialog(this);
+        shapeLoadingDialog.setLoadingText("加载中...");
+        shapeLoadingDialog.setCanceledOnTouchOutside(false);
+        shapeLoadingDialog.getDialog().setCancelable(false);
     }
 
     @Override
@@ -119,6 +122,8 @@ public class RegisterActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
+            //显示
+            shapeLoadingDialog.show();
             //TODO:网络传输
             GetPublicKeyAction getPublicKeyAction = new GetPublicKeyAction();
             getPublicKeyAction.execute();
@@ -233,6 +238,7 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            shapeLoadingDialog.dismiss();
             log.d(this, result);
             if (result != null) {
                 try {
@@ -265,6 +271,7 @@ public class RegisterActivity extends AppCompatActivity {
                         userConfig.setUserInfo(UserConfig.xmlPASSWORD, strPassword);
                         //设置标志位
                         userConfig.setUserInfo(UserConfig.xmlSAVE, true);
+
 
                         AppManager.getInstance().finishActivity(LoginActivity.class);
                         RegisterActivity.this.finish();

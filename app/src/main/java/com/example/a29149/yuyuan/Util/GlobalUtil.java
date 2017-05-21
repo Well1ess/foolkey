@@ -4,8 +4,7 @@ import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
-import com.example.a29149.yuyuan.DTO.CourseStudentDTO;
-import com.example.a29149.yuyuan.DTO.CourseStudentPopularDTO;
+import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsTeacherSTCDTO;
@@ -74,7 +73,7 @@ public class GlobalUtil {
     //课程列表
     private List<CourseTeacherPopularDTO> courseTeacherPopularDTOs;
     //学生悬赏列表
-    private List<CourseStudentPopularDTO> courseStudentPopularDTOs;
+    private List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs;
     //学生所拥有的所有悬赏信息
     private List<ApplicationStudentRewardAsStudentSTCDTO> applicationStudentRewardAsStudentSTCDTOs;
     //悬赏信息DTO
@@ -98,7 +97,7 @@ public class GlobalUtil {
     //申请悬赏的DTO
     private ApplicationStudentRewardDTO applicationStudentRewardDTO;
     //学生发布的悬赏列表
-    private List<CourseStudentDTO> courseStudentDTOs;
+    private List<RewardDTO> rewardDTOList;
     //学生信息
     private StudentDTO studentDTO;
     //老师信息
@@ -284,14 +283,14 @@ public class GlobalUtil {
         this.rewardChooseContent = rewardChooseContent;
     }
 
-    public List<CourseStudentPopularDTO> getCourseStudentPopularDTOs() {
-        if (courseStudentPopularDTOs == null)
-            courseStudentPopularDTOs = new ArrayList<>();
-        return courseStudentPopularDTOs;
+    public List<RewardWithStudentSTCDTO> getRewardWithStudentSTCDTOs() {
+        if (rewardWithStudentSTCDTOs == null)
+            rewardWithStudentSTCDTOs = new ArrayList<>();
+        return rewardWithStudentSTCDTOs;
     }
 
-    public void setCourseStudentPopularDTOs(List<CourseStudentPopularDTO> courseStudentPopularDTOs) {
-        this.courseStudentPopularDTOs = courseStudentPopularDTOs;
+    public void setRewardWithStudentSTCDTOs(List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs) {
+        this.rewardWithStudentSTCDTOs = rewardWithStudentSTCDTOs;
     }
     public String[] getCourseChooseContent() {
         return courseChooseContent;
@@ -302,14 +301,21 @@ public class GlobalUtil {
     }
 
 
-    public List<CourseStudentDTO> getCourseStudentDTOs() {
-        return courseStudentDTOs;
+    public List<CourseTeacherPopularDTO> getCourseTeacherPopularDTOs() {
+        return courseTeacherPopularDTOs;
     }
 
-    public void setCourseStudentDTOs(List<CourseStudentDTO> courseStudentDTOs) {
-        this.courseStudentDTOs = courseStudentDTOs;
+    public void setCourseTeacherPopularDTOs(List<CourseTeacherPopularDTO> courseTeacherPopularDTOs) {
+        this.courseTeacherPopularDTOs = courseTeacherPopularDTOs;
     }
 
+    public List<RewardDTO> getRewardDTOList() {
+        return rewardDTOList;
+    }
+
+    public void setRewardDTOList(List<RewardDTO> rewardDTOList) {
+        this.rewardDTOList = rewardDTOList;
+    }
 
     public List<ApplicationStudentRewardAsStudentSTCDTO> getApplicationStudentRewardAsStudentSTCDTOs() {
         if (applicationRewardWithTeacherSTCDTOs == null)

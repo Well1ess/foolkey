@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.CourseStudentPopularDTO;
+import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.Model.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.Model.Discovery.Adapter.RewardListAdapter;
@@ -103,9 +103,9 @@ public class RewardDiscoveryFragment extends Fragment {
                         //由于是刷新，所以首先清空所有数据
 
                         pageNo = 1;
-                        List<CourseStudentPopularDTO> courseStudentPopularDTOs = new ArrayList<CourseStudentPopularDTO>();
+                        List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs = new ArrayList<RewardWithStudentSTCDTO>();
 
-                        GlobalUtil.getInstance().setCourseStudentPopularDTOs(courseStudentPopularDTOs);
+                        GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(rewardWithStudentSTCDTOs);
                         GetReward getReward = new GetReward(pageNo);
                         getReward.execute();
                     }
@@ -158,15 +158,15 @@ public class RewardDiscoveryFragment extends Fragment {
 
                         log.d(this, jsonObject.getString("rewardCourseDTOS"));
 
-                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<CourseStudentPopularDTO>>() {
+                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<RewardWithStudentSTCDTO>>() {
                         }.getType();
-                        List<CourseStudentPopularDTO> courseStudentDTOS = new Gson().fromJson(jsonObject.getString("rewardCourseDTOS"), type);
+                        List<RewardWithStudentSTCDTO> courseStudentDTOS = new Gson().fromJson(jsonObject.getString("rewardCourseDTOS"), type);
 
                         //若>1则表示分页存取
                         if (pageNo == 1) {
-                            GlobalUtil.getInstance().setCourseStudentPopularDTOs(courseStudentDTOS);
+                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(courseStudentDTOS);
                         } else if (pageNo > 1) {
-                            GlobalUtil.getInstance().getCourseStudentPopularDTOs().addAll(courseStudentDTOS);
+                            GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().addAll(courseStudentDTOS);
                             mRewardList.onLoadFinish();
                         }
 

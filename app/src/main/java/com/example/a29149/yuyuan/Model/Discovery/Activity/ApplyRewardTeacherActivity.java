@@ -17,6 +17,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
 
 import org.json.JSONObject;
 
@@ -111,7 +112,7 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
 
         @Override
         protected String doInBackground(String... params) {
-            return URL.doWithApplyRewardTeacherURL( params[0] );
+            return ApplyController.execute(params[0]);
         }
 
         @Override

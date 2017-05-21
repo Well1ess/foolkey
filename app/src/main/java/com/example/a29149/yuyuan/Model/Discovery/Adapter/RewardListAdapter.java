@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -35,12 +36,12 @@ public class RewardListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return GlobalUtil.getInstance().getCourseStudentPopularDTOs().size();
+        return GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position);
+        return GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position);
     }
 
     @Override
@@ -58,10 +59,19 @@ public class RewardListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.title.setText(GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getCourseStudentDTO().getTopic());
-        viewHolder.money.setText(GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getCourseStudentDTO().getPrice()+"");
-        viewHolder.label.setText(GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getCourseStudentDTO().getTechnicTagEnum().toString());
-        viewHolder.studentKind.setText(GlobalUtil.getInstance().getCourseStudentPopularDTOs().get(position).getCourseStudentDTO().getStudentBaseEnum().toString());
+
+        //获取当前的reward
+        RewardDTO rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
+
+        if (rewardDTO.getCreatorId().equals( GlobalUtil.getInstance().getStudentDTO().getId()) ){
+            //如果这个悬赏是自己的，则不显示
+//            return null;
+        }
+
+        viewHolder.title.setText(rewardDTO.getTopic());
+        viewHolder.money.setText(rewardDTO.getPrice()+"");
+        viewHolder.label.setText(rewardDTO.getTechnicTagEnum().toString());
+        viewHolder.studentKind.setText(rewardDTO.getStudentBaseEnum().toString());
 
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override

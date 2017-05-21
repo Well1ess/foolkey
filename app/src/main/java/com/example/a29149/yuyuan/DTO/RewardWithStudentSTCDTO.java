@@ -5,9 +5,9 @@ package com.example.a29149.yuyuan.DTO;
  * Description:
  */
 
-public class CourseStudentPopularDTO {
+public class RewardWithStudentSTCDTO {
     private StudentDTO studentDTO;
-    private CourseStudentDTO courseStudentDTO;
+    private RewardDTO rewardDTO;
 
     public StudentDTO getStudentDTO() {
         return studentDTO;
@@ -17,11 +17,11 @@ public class CourseStudentPopularDTO {
         this.studentDTO = studentDTO;
     }
 
-    public CourseStudentDTO getCourseStudentDTO() {
-        return courseStudentDTO;
+    public RewardDTO getRewardDTO() {
+        return rewardDTO;
     }
 
-    public void setCourseStudentDTO(CourseStudentDTO courseStudentDTO) {
-        this.courseStudentDTO = courseStudentDTO;
+    public void setRewardDTO(RewardDTO rewardDTO) {
+        this.rewardDTO = rewardDTO;
     }
 }

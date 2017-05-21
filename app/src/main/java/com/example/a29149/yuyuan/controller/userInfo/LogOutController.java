@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 public class LogOutController extends AbstractController {
 
-    private static String url = address + "logOut";
+    private static String url = address + "/logOut";
 
     public static String execute(){
         try {

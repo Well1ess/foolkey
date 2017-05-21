@@ -25,6 +25,7 @@ import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
+import com.example.a29149.yuyuan.controller.course.course.GetPopularController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -133,7 +134,7 @@ public class TeacherScoreFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithGetHotCourseURL( pageNo +"", params[0] );
+            return GetPopularController.execute(pageNo + "", params[0]);
 
         }
 

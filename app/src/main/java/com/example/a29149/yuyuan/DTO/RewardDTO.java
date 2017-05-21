@@ -26,7 +26,7 @@ public class RewardDTO extends CourseAbstract{
 
     @Override
     public String toString() {
-        return "CourseStudentDTO{" +
+        return "RewardDTO{" +
                 "teacherRequirementEnum=" + teacherRequirementEnum +
                 ", courseStudentStateEnum=" + courseStudentStateEnum +
                 ", studentBaseEnum=" + studentBaseEnum +

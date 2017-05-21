@@ -47,7 +47,7 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        log.d(this, result);
+//        log.d(this, result);
 
         if (result != null) {
             try {

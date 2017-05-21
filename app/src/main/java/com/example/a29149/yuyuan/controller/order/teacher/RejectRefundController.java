@@ -1,4 +1,4 @@
-package com.example.a29149.yuyuan.controller.order;
+package com.example.a29149.yuyuan.controller.order.teacher;
 
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.controller.AbstractController;
@@ -6,18 +6,19 @@ import com.example.a29149.yuyuan.controller.AbstractController;
 import org.json.JSONObject;
 
 /**
- * 取消某个订单，只能是未付款的
+ * 老师拒绝了退款申请
  * Created by geyao on 2017/5/21.
  */
 
-public class CancelOrderController extends AbstractController {
+public class RejectRefundController extends AbstractController {
 
-    private static String url = address + "/aes/cancelOrder";
+    private static String url = address + "/aes/rejectRefund";
 
     public static String execute(String orderId){
         try {
             JSONObject jsonObject = getJSON();
-            return HttpSender.send( url, jsonObject);
+            jsonObject.put( "orderId", orderId);
+            return HttpSender.send( url, jsonObject );
         }catch (Exception e){
             e.printStackTrace();
             return failJSON();

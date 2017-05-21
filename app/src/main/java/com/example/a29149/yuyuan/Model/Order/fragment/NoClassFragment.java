@@ -26,6 +26,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.a29149.yuyuan.controller.order.student.GetSpecifiStateOrderController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -107,7 +108,7 @@ public class NoClassFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithGetOrderAsStudent(
+            return GetSpecifiStateOrderController.execute(
                     OrderStateEnum.同意上课.toString(),
                     pageNo + ""
             );

@@ -20,6 +20,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.course.course.PublishController;
 
 import org.json.JSONObject;
 
@@ -338,6 +339,8 @@ public class PublishArticalTeacherActivity extends Activity implements View.OnCl
 
         @Override
         protected String doInBackground(String... params) {
+
+//            return PublishController.execute()
 
             StringBuffer sb = new StringBuffer();
             BufferedReader reader = null;

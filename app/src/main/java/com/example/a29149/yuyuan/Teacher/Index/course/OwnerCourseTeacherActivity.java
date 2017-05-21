@@ -19,6 +19,7 @@ import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.a29149.yuyuan.controller.order.teacher.home.GetAgreedOnClassOrderCourseByTeacherController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -105,7 +106,7 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithGetMyCourseURL( pageNo + "");
+            return GetAgreedOnClassOrderCourseByTeacherController.execute( pageNo + "");
 
         }
 
@@ -173,7 +174,9 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithApplyStudentListURL(pageNo + "");
+            System.out.println();
+            System.out.println(this.getClass() + "这里不知道到底该传什么给你");
+            return null;
 
         }
 

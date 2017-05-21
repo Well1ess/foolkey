@@ -19,6 +19,7 @@ import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.a29149.yuyuan.controller.order.teacher.home.GetAgreedOnClassOrderRewardByTeacherController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -103,7 +104,9 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            return URL.doWithGetTeacherRewardURL(pageNo + "");
+
+
+            return GetAgreedOnClassOrderRewardByTeacherController.execute(pageNo + "");
 
         }
 

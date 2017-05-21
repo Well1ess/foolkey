@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
+import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoCommentRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
@@ -23,6 +24,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.a29149.yuyuan.controller.order.student.GetSpecifiStateOrderController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -126,7 +128,10 @@ public class NoCommentFragment extends Fragment {
 
             System.out.println();
             System.out.println(this.getClass() + "这里的到底是要未评价还是未付款的订单？？？\n");
-            return URL.doWithNoCommentURL( pageNo + "" );
+            return GetSpecifiStateOrderController.execute(
+                    OrderStateEnum.结束上课.toString(),
+                    pageNo + ""
+            );
 
         }
 

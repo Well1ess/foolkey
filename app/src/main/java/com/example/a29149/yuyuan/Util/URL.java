@@ -41,26 +41,14 @@ public class URL {
     //申请认证
     private static final String applyVerifyTeacherURL = "http://" + address + "/applyToVerifyTeacher?";
 
-    //获取老师准备上课、正在上课的课程
-    private static final String getMyCourseURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
-
-    //获取老师准备上课、正在上课的悬赏
-    private static final String getTeacherRewardURL = "http://" +address + "/order/getAgreedOnClassOrderRewardByTeacher?";
-
-    //获取学生列表
-    private static final String applyStudentListURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
-
-
-    //未评价订单请求
-    private static final String getOrderAsStudent = "http://" +address + "/getOrderAsStudent?";
-
 
 
 
     //获取老师发布课程
     @Deprecated
     public static String getTeacherPublishCoursedURL(String clearText) {
-        return teacherPublishCoursedURL + "clearText=" + clearText;
+//        return teacherPublishCoursedURL + "clearText=" + clearText;
+        return null;
     }
 
     //注销
@@ -128,84 +116,6 @@ public class URL {
     }
 
 
-
-
-
-    /**
-     * 获取登录者的关于课程、悬赏的订单
-     * @param orderState 指定的订单状态
-     * @param pageNo 页数
-     * @return
-     */
-    public static String doWithGetOrderAsStudent(String orderState, String pageNo){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put( "orderState", orderState);
-            jsonObject.put( "pageNo", pageNo );
-            return HttpSender.send( URL.getOrderAsStudent, jsonObject);
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
-
-    /**
-     * 获取登陆者未评价的课程、悬赏订单
-     * @param pageNo 页数
-     * @return
-     */
-    public static String doWithNoCommentURL( String pageNo ){
-        return doWithGetOrderAsStudent(OrderStateEnum.结束上课.toString() , pageNo);
-    }
-
-
-
-    /**
-     * 老师获取要上课、正在上课的悬赏
-     * @param pageNo
-     * @return
-     */
-    public static String doWithGetMyCourseURL(String pageNo){
-        try {
-            JSONObject target = getJSON();
-            target.put("pageNo",pageNo);
-            return HttpSender.send( URL.getMyCourseURL, target );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
-
-
-
-    /**
-     * 老师获取要上课、正在上课的悬赏
-     * @param pageNo
-     * @return
-     */
-    public static String doWithGetTeacherRewardURL(String pageNo){
-        try {
-            JSONObject target = getJSON();
-            target.put("pageNo",pageNo);
-            return HttpSender.send( URL.getTeacherRewardURL, target );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
-
-
-
-    /**
-     * 获取未付款的订单，包括课程、悬赏
-     * @param pageNo
-     * @return
-     */
-    public static String doWithNoPayOrderURL(String pageNo) {
-        return doWithGetOrderAsStudent( OrderStateEnum.未付款.toString(), pageNo);
-    }
 
 
 
@@ -301,23 +211,6 @@ public class URL {
         }
     }
 
-    /**
-     *  老师获取 已付款 未评价 的课程订单(同意上课, 上课中)
-     * @param pageNo
-     * @return
-     */
-    public static String doWithApplyStudentListURL(String pageNo){
-        try {
-            JSONObject target = getJSON();
-            target.put("pageNo",pageNo);
-
-            return HttpSender.send( URL.applyStudentListURL, target );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
 
 
 }

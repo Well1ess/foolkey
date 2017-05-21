@@ -51,13 +51,6 @@ public class URL {
     private static final String applyStudentListURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
 
 
-    //开始上课请求
-    private static final String startClassURL = "http://" +address + "/startClass?";
-
-    //下课请求
-    private static final String endClassURL = "http://" +address + "/endClass?";
-
-
     //未评价订单请求
     private static final String getOrderAsStudent = "http://" +address + "/getOrderAsStudent?";
 
@@ -143,48 +136,7 @@ public class URL {
 
 
 
-    /**
-     * 开始上课
-     * @param orderId 订单id
-     * @param studentId 学生id
-     * @return
-     */
-    public static String doWithStartClassURL(
-            String orderId,
-            String studentId
-    ){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put( "orderId", orderId );
-            jsonObject.put( "studentId", studentId );
-            return HttpSender.send( URL.startClassURL, jsonObject );
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
 
-
-    /**
-     * 下课
-     * @param orderId 订单id
-     * @param studentId 学生id
-     * @return
-     */
-    public static String doWithEndClassURL(
-            String orderId,
-            String studentId
-    ){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put( "orderId", orderId );
-            jsonObject.put( "studentId", studentId );
-            return HttpSender.send( URL.endClassURL, jsonObject );
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
 
     /**
      * 获取登录者的关于课程、悬赏的订单

@@ -25,6 +25,8 @@ import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.controller.course.haveClass.EndClassController;
+import com.example.a29149.yuyuan.controller.course.haveClass.StartClassController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -159,9 +161,8 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithStartClassURL(
-                    mOrderBuyCourseDTO.getId() + "",
-                    mStudentDTO.getId() + ""
+            return StartClassController.execute(
+                    mOrderBuyCourseDTO.getId() + ""
             );
         }
 
@@ -213,10 +214,10 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithEndClassURL(
-                    mOrderBuyCourseDTO.getId() + "",
-                    mStudentDTO.getId() + ""
+            return EndClassController.execute(
+                    mOrderBuyCourseDTO.getId() + ""
             );
+
         }
 
         @Override

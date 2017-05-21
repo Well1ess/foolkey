@@ -105,54 +105,8 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-//            StringBuffer sb = new StringBuffer();
-//            BufferedReader reader = null;
-//            HttpURLConnection con = null;
+            return URL.doWithGetMyCourseURL( pageNo + "");
 
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                target.put("pageNo",pageNo);
-
-                return HttpSender.send( URL.getMyCourseURL, target );
-
-//                java.net.URL url = new java.net.URL(URL.getGetMyCourseURL(target.toString()));
-//                Log.i("malei",target.toString());
-//                con = (HttpURLConnection) url.openConnection();
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
-//
-//                // 获得服务端的返回数据
-//                InputStreamReader read = new InputStreamReader(con.getInputStream());
-//                reader = new BufferedReader(read);
-//                String line = "";
-//                while ((line = reader.readLine()) != null) {
-//                    sb.append(line);
-//                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-//            finally {
-//                if (reader != null) {
-//                    try {
-//                        reader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                if (con != null) {
-//                    con.disconnect();
-//                }
-//            }
-//            return sb.toString();
         }
 
         @Override
@@ -218,55 +172,9 @@ public class OwnerCourseTeacherActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-//
-//            StringBuffer sb = new StringBuffer();
-//            BufferedReader reader = null;
-//            HttpURLConnection con = null;
 
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                target.put("pageNo",pageNo);
+            return URL.doWithApplyStudentListURL(pageNo + "");
 
-                return HttpSender.send( URL.applyStudentListURL, target );
-
-//                java.net.URL url = new java.net.URL(URL.getApplyStudentListURL(target.toString()));
-//                Log.i("malei",target.toString());
-//                con = (HttpURLConnection) url.openConnection();
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
-//
-//                // 获得服务端的返回数据
-//                InputStreamReader read = new InputStreamReader(con.getInputStream());
-//                reader = new BufferedReader(read);
-//                String line = "";
-//                while ((line = reader.readLine()) != null) {
-//                    sb.append(line);
-//                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-//            finally {
-//                if (reader != null) {
-//                    try {
-//                        reader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                if (con != null) {
-//                    con.disconnect();
-//                }
-//            }
-//            return sb.toString();
         }
 
         @Override

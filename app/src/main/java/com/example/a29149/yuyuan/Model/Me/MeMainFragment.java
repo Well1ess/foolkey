@@ -264,48 +264,9 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected String doInBackground(String... params) {
-
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
-            try {
-
-                java.net.URL url = new java.net.URL(URL.getCouponURL("1", "10"));
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getCouponURL("1", "1"));
-
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
+            System.out.println();
+            System.out.println(this.getClass() + "这里有个方法依然是写死的\n");
+            return URL.doWithCouponURL("1", "20");
         }
 
         @Override
@@ -352,50 +313,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         @Override
         protected String doInBackground(String... params) {
 
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
-
-            try {
-
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("token", GlobalUtil.getInstance().getToken());
-
-                java.net.URL url = new java.net.URL(URL.getSwitchToTeacher());
-                con = (HttpURLConnection) url.openConnection();
-                log.d(this, URL.getSwitchToTeacher());
-
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
+            return URL.doWithSwitchToTeacher();
         }
 
         @Override

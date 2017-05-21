@@ -128,57 +128,19 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         @Override
         protected String doInBackground(String... params) {
 
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
+            System.out.println();
+            System.out.println(this.getClass() + "这里的图片路径依然是写死的！\n");
 
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                target.put("orderId",GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId());
-                target.put("score",scoreCourse);
-                target.put("content",commentContent);
-                target.put("pic1Path","");
-                target.put("pic2Path","");
-                target.put("pic3Path","");
-                target.put("pic4Path","");
+            return URL.doWithCommentCourseURL(
+                    GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId() + "",
+                    scoreCourse,
+                    commentContent,
+                    "",
+                    "",
+                    "",
+                    ""
+            );
 
-
-                java.net.URL url = new java.net.URL(URL.getCommentCourseURL(target.toString()));
-                Log.i("malei",target.toString());
-                con = (HttpURLConnection) url.openConnection();
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
         }
 
         @Override
@@ -221,53 +183,12 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         @Override
         protected String doInBackground(String... params) {
 
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
+            return URL.doWithCommentTeacherURL(
+                    GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId() + "",
+                    scoreTeacher,
+                    GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getTeacherDTO().getId() + ""
+            );
 
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                target.put("orderId",GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId());
-                target.put("score",scoreTeacher);
-                target.put("teacherId",GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getTeacherDTO().getId());
-
-
-                java.net.URL url = new java.net.URL(URL.getCommentTeacherURL(target.toString()));
-                Log.i("malei",target.toString());
-                con = (HttpURLConnection) url.openConnection();
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "GBK");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
         }
 
         @Override

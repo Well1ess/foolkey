@@ -111,19 +111,7 @@ public class ApplyRewardTeacherActivity extends AppCompatActivity implements Vie
 
         @Override
         protected String doInBackground(String... params) {
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token", token);
-                target.put("courseId", "这里有bug");
-
-                return HttpSender.send(URL.applyRewardTeacherURL, target);
-
-
-            }catch (Exception e){
-                e.printStackTrace();
-                return null;
-            }
+            return URL.doWithApplyRewardTeacherURL( params[0] );
         }
 
         @Override

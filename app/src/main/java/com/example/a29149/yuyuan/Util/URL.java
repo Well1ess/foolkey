@@ -1,5 +1,7 @@
 package com.example.a29149.yuyuan.Util;
 
+import com.example.a29149.yuyuan.Enum.OrderStateEnum;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,84 +21,79 @@ public class URL {
     //登陆
     public static final String loginURL = "http://" + address + "/rsa/login?";
     //注销
-    public static final String logOutURL = "http://" + address + "/aes/logOut?";
+    private static final String logOutURL = "http://" + address + "/aes/logOut?";
     //获取折扣卷
-    public static final String couponURL = "http://" + address + "/aes/getMyCoupon?";
+    private static final String couponURL = "http://" + address + "/aes/getMyCoupon?";
     //更新个人信息/获取个人信息
-    public static final String selfInfoURL = "http://" + address + "/aes/getMyInfo?";
+    private static final String selfInfoURL = "http://" + address + "/aes/getMyInfo?";
     //获取悬赏任务
     public static final String rewardURL = "http://" + address + "/aes/get";
     //切换身份
-    public static final String switchToTeacher = "http://" + address + "/switchToTeacher?";
+    private static final String switchToTeacher = "http://" + address + "/switchToTeacher?";
     //获取课程
     public static final String getHotCourseURL = "http://" + address + "/courseTeacher/getCourseTeacherPopular?";
     //学生发布悬赏
-    public static final String studentPublishRewardURL = "http://" + address + "/courseStudent/publishRewardCourse?";
+    private static final String studentPublishRewardURL = "http://" + address + "/courseStudent/publishRewardCourse?";
     //老师发布课程
-    public static final String teacherPublishCoursedURL = "http://" + address + "/courseTeacher/publishCourseTeacher?";
+    private static final String teacherPublishCoursedURL = "http://" + address + "/courseTeacher/publishCourseTeacher?";
     //搜索
     public static final String searchURL = "http://" + address + "/search?";
     //充值
-    public static final String rechargeURL = "http://" + address + "/aes/recharge?";
+    private static final String rechargeURL = "http://" + address + "/aes/recharge?";
     //提交订单
-    public static final String submitOrder = "http://" + address + "/aes/placeOrderTeacherCourse?";
+    private static final String submitOrder = "http://" + address + "/aes/placeOrderTeacherCourse?";
     //申请认证
-    public static final String applyVerifyTeacherURL = "http://" + address + "/applyToVerifyTeacher?";
-    //老师申请接受悬赏
-    public static final String applyRewardTeacherURL = "http://" + address + "/aes/placeOrderStudentCourse?";
+    private static final String applyVerifyTeacherURL = "http://" + address + "/applyToVerifyTeacher?";
 
-    //获取悬赏
-    public static final String getRewardURL = "http://" +address + "/courseStudent/getRewardCoursePopular?";
     //获取我发布的悬赏
-    public static final String getMyRewardURL = "http://" +address + "/application/getApplicationStudentRewardAsStudentController?";
+    private static final String getMyRewardURL = "http://" +address + "/application/getApplicationStudentRewardAsStudentController?";
 
 
-    //获取我发布的课程
-    public static final String getMyCourseURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
+    //获取老师准备上课、正在上课的课程
+    private static final String getMyCourseURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
 
-    //获取老师发布的悬赏
-    public static final String getTeacherRewardURL = "http://" +address + "/order/getAgreedOnClassOrderRewardByTeacher?";
+    //获取老师准备上课、正在上课的悬赏
+    private static final String getTeacherRewardURL = "http://" +address + "/order/getAgreedOnClassOrderRewardByTeacher?";
 
 
 
     //同意悬赏申请
-    public static final String agreeApplyRewardURL = "http://" +address + "/acceptRewardApplication?";
+    private static final String agreeApplyRewardURL = "http://" +address + "/acceptRewardApplication?";
     //拒绝悬赏申请
-    public static final String disagreeApplyRewardURL = "http://" +address + "/refuseTeacherApplication?";
+    private static final String disagreeApplyRewardURL = "http://" +address + "/refuseTeacherApplication?";
 
     //获取学生列表
-    public static final String applyStudentListURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
+    private static final String applyStudentListURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
 
 
     //开始上课请求
-    public static final String startClassURL = "http://" +address + "/startClass?";
+    private static final String startClassURL = "http://" +address + "/startClass?";
 
     //下课请求
-    public static final String endClassURL = "http://" +address + "/endClass?";
+    private static final String endClassURL = "http://" +address + "/endClass?";
 
 
     //未评价订单请求
-    public static final String noCommentURL = "http://" +address + "/获取未评价的订单?";
-
-    //未评价订单请求
-    public static final String noPayCourseURL = "http://" +address + "/getStudentCourseOrder?";
+    private static final String getOrderAsStudent = "http://" +address + "/getOrderAsStudent?";
 
     //评价老师
-    public static final String commentTeacherURL = "http://" +address + "/judge/teacher?";
+    private static final String commentTeacherURL = "http://" +address + "/judge/teacher?";
 
     //评价课程
-    public static final String commentCourseURL = "http://" +address + "/judge/course?";
+    private static final String commentCourseURL = "http://" +address + "/judge/course?";
 
 
 
 
 
     //获取学生发布悬赏
+    @Deprecated
     public static String getStudentPublishRewardURL(String clearText) {
         return studentPublishRewardURL + "clearText=" + clearText;
     }
 
     //获取老师发布课程
+    @Deprecated
     public static String getTeacherPublishCoursedURL(String clearText) {
         return teacherPublishCoursedURL + "clearText=" + clearText;
     }
@@ -109,136 +106,329 @@ public class URL {
      * @param cipherText 密文
      * @return
      */
+    @Deprecated
     public static String getLogOutURL(String clearText, String validation, String cipherText) {
         return logOutURL + "clearText=" + clearText +
                 "&validation=" + validation +
                 "&cipherText=" + cipherText;
     }
 
-    //优惠券
-    public static String getCouponURL(String pageNo, String pageSize) {
-        return couponURL + AESTransformResult.getResult("", "pageNo", pageNo, "pageSize", pageSize);
-    }
 
-    //获取个人信息
-    public static String getSelfInfoURL() {
-        return selfInfoURL + AESTransformResult.getResult("");
-    }
-
-    //切换身份
-    public static String getSwitchToTeacher() {
-        return switchToTeacher + "token=" + GlobalUtil.getInstance().getToken();
-    }
-
-    //获取热门课程
-    public static String getGetHotCourseURL(String str) {
-        return getHotCourseURL + "clearText=" + str;
-    }
-
-    //充值
-    public static String getRechargeURL(String amount) {
-        return rechargeURL + AESTransformResult.getResult("", "amount", amount);
-    }
-
-
-
-    public static String getSearchURL(String obj)
-    {
-        return searchURL + "clearText="+obj;
-    }
-
-    //获取认证老师的url
-    public static String getApplyVerifyTeacher(String token) {
-        return applyVerifyTeacherURL + "clearText=" + token;
-    }
-
-    //老师申请接受悬赏
-    public static String getApplyRewardTeacherURL(String clearText, String validation, String cipherText) {
-        return applyRewardTeacherURL+ "clearText=" + clearText +
-                "&validation=" + validation +
-                "&cipherText=" + cipherText;
-    }
-
-    //获取悬赏
-    public static String getRewardURL(String obj)
-    {
-        return getRewardURL + "clearText="+obj;
-    }
-    //获取我发布的悬赏
-    public static String getGetMyRewardURL(String token) {
-        return getMyRewardURL + "clearText=" + token;
-    }
-
-    //同意悬赏申请
-    public static String getAgreeApplyRewardURL(String token) {
-        return agreeApplyRewardURL+ "clearText=" + token;
-    }
-
-    //拒绝悬赏申请
-    public static String getDisagreeApplyRewardURL(String token) {
-        return disagreeApplyRewardURL+ "clearText=" + token;
-    }
-
-
-    //获取学生列表
-    public static String getApplyStudentListURL(String token) {
-        return applyStudentListURL+ "clearText=" + token;
-    }
-
-    //开始上课请求
-    public static String getStartClassURL(String token) {
-        return startClassURL+ "clearText=" + token;
-    }
-
-    //下课请求
-    public static String getEndClassURL(String token) {
-        return endClassURL+ "clearText=" + token;
-    }
-
-    //获取没评价的订单
-    public static String getNoCommentURL(String token) {
-        return noCommentURL+ "clearText=" + token;
-    }
-
-    //获取评价老师
-    public static String getCommentTeacherURL(String token) {
-        return commentTeacherURL+ "clearText=" + token;
-    }
-
-    //获取我发布的课程
-    public static String getGetMyCourseURL(String token) {
-        return getMyCourseURL+ "clearText=" + token;
-    }
-
-    //获取老师发布的悬赏
-    public static String getGetTeacherRewardURL(String token) {
-        return getTeacherRewardURL+ "clearText=" + token;
-    }
-
-    //评价课程
-    public static String getCommentCourseURL(String token) {
-        return commentCourseURL+ "clearText=" + token;
-    }
-
-
-    public static String getNoPayCourseURL(String token) {
-        return noPayCourseURL+ "clearText=" + token;
+    /**
+     * 获取我的优惠券
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    public static String doWithCouponURL(String pageNo, String pageSize){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put("pageNo", pageNo);
+            jsonObject.put("pageSize", pageSize);
+            return HttpSender.send( URL.couponURL, jsonObject);
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
     }
 
 
     /**
-     *
-     * 下面的方法，是针对每个链接，写的相应的申请，在activity中调用这些方法
-     *
-     * 如果某个前后端接口发生了变化，只需要修改下面的函数即可
-     *
+     * 登陆者切换为老师身份
+     * @return
      */
+    public static String doWithSwitchToTeacher(){
+        try {
+            JSONObject jsonObject = getJSON();
+            return HttpSender.send( URL.switchToTeacher, jsonObject);
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+    /**
+     * 获取热门课程
+     * @param pageNo
+     * @param technicTagEnum
+     * @return
+     */
+    public static String doWithGetHotCourseURL(String pageNo, String technicTagEnum){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put( "pageNo", pageNo);
+            jsonObject.put( "technicTagEnum", technicTagEnum);
+            return HttpSender.send( URL.getHotCourseURL, jsonObject);
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+
+    /**
+     * 申请认证老师
+     * @return
+     */
+    public static String doWithApplyVerifyTeacherURL(){
+        try {
+            JSONObject jsonObject = getJSON();
+            return HttpSender.send( URL.applyVerifyTeacherURL, jsonObject );
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+
+
+    /**
+     * 获取我所有的悬赏，包括申请的人（如果有）
+     * 分页获取，不管有无申请都会返回该悬赏
+     * 通过此方法返回的申请老师的数目有限制，每个悬赏下面的申请老师，一次拿取不会太多，目前是 4 次
+     * @return
+     */
+    public static String doWithGetMyRewardURL(String pageNo){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put( "pageNo", pageNo);
+            return HttpSender.send( URL.getMyRewardURL, jsonObject );
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+
+    /**
+     * 同意悬赏申请
+     * @param applicationId 申请Id
+     * @param rewardId 悬赏Id
+     * @param couponId 优惠券Id
+     * @return
+     */
+    public static String doWithAgreeApplyRewardURL(
+            String applicationId,
+            String rewardId,
+            String couponId
+    ){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put( "applicationId", applicationId );
+            jsonObject.put( "rewardId", rewardId );
+            jsonObject.put( "couponId", couponId == null ? "":couponId );
+            return HttpSender.send( URL.agreeApplyRewardURL, jsonObject);
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+    /**
+     * 拒绝悬赏的申请
+     * @param applicationId 申请的Id
+     * @return
+     */
+    public static String doWithDisagreeApplyRewardURL(String applicationId){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put( "applicationId", applicationId);
+            return HttpSender.send( URL.disagreeApplyRewardURL, jsonObject);
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+
+
+
+    /**
+     * 开始上课
+     * @param orderId 订单id
+     * @param studentId 学生id
+     * @return
+     */
+    public static String doWithStartClassURL(
+            String orderId,
+            String studentId
+    ){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put( "orderId", orderId );
+            jsonObject.put( "studentId", studentId );
+            return HttpSender.send( URL.startClassURL, jsonObject );
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+
+    /**
+     * 下课
+     * @param orderId 订单id
+     * @param studentId 学生id
+     * @return
+     */
+    public static String doWithEndClassURL(
+            String orderId,
+            String studentId
+    ){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put( "orderId", orderId );
+            jsonObject.put( "studentId", studentId );
+            return HttpSender.send( URL.endClassURL, jsonObject );
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+    /**
+     * 获取登录者的关于课程、悬赏的订单
+     * @param orderState 指定的订单状态
+     * @param pageNo 页数
+     * @return
+     */
+    public static String doWithGetOrderAsStudent(String orderState, String pageNo){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put( "orderState", orderState);
+            jsonObject.put( "pageNo", pageNo );
+            return HttpSender.send( URL.getOrderAsStudent, jsonObject);
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+    /**
+     * 获取登陆者未评价的课程、悬赏订单
+     * @param pageNo 页数
+     * @return
+     */
+    public static String doWithNoCommentURL( String pageNo ){
+        return doWithGetOrderAsStudent(OrderStateEnum.结束上课.toString() , pageNo);
+    }
+
+
+    /**
+     * 评价老师
+     * @param orderId 订单id
+     * @param score 分数
+     * @param teacherId 老师的id
+     * @return
+     */
+    public static String doWithCommentTeacherURL(String orderId, String score, String teacherId){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put("orderId", orderId);
+            jsonObject.put("score", score);
+            jsonObject.put("teacherId", teacherId);
+            return HttpSender.send( URL.commentTeacherURL, jsonObject);
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+    /**
+     * 老师获取要上课、正在上课的悬赏
+     * @param pageNo
+     * @return
+     */
+    public static String doWithGetMyCourseURL(String pageNo){
+        try {
+            JSONObject target = getJSON();
+            target.put("pageNo",pageNo);
+            return HttpSender.send( URL.getMyCourseURL, target );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+
+
+    /**
+     * 老师获取要上课、正在上课的悬赏
+     * @param pageNo
+     * @return
+     */
+    public static String doWithGetTeacherRewardURL(String pageNo){
+        try {
+            JSONObject target = getJSON();
+            target.put("pageNo",pageNo);
+            return HttpSender.send( URL.getTeacherRewardURL, target );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+    /**
+     * 登陆者对课程进行评价
+     * @param orderId
+     * @param score
+     * @param content
+     * @param pic1Path
+     * @param pic2Path
+     * @param pic3Path
+     * @param pic4Path
+     * @return
+     */
+    public static String doWithCommentCourseURL(
+        String orderId,
+        String score,
+        String content,
+        String pic1Path,
+        String pic2Path,
+        String pic3Path,
+        String pic4Path
+    ){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put("orderId", orderId);
+            jsonObject.put("score", score);
+            jsonObject.put("content", content);
+            jsonObject.put("pic1Path", pic1Path);
+            jsonObject.put("pic2Path", pic2Path);
+            jsonObject.put("pic3Path", pic3Path);
+            jsonObject.put("pic4Path", pic4Path);
+            return HttpSender.send( URL.commentCourseURL, jsonObject);
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+
+
+    /**
+     * 获取未付款的订单，包括课程、悬赏
+     * @param pageNo
+     * @return
+     */
+    public static String doWithNoPayOrderURL(String pageNo) {
+        return doWithGetOrderAsStudent( OrderStateEnum.未付款.toString(), pageNo);
+    }
+
+
 
     //获取一个带有登陆者token的JSON对象
-    private static JSONObject getJSON() throws JSONException {
+    public static JSONObject getJSON() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("token", GlobalUtil.getInstance().getToken());
         return jsonObject;
+    }
+
+    //网络连接失败了，返回这样的函数
+    public static String failJSON(){
+        return null;
     }
 
 
@@ -249,7 +439,7 @@ public class URL {
             return HttpSender.send( URL.selfInfoURL, jsonObject );
         }catch (Exception e){
             e.printStackTrace();
-            return null;
+            return failJSON();
         }
     }
 
@@ -261,7 +451,7 @@ public class URL {
             return HttpSender.send( URL.rechargeURL, jsonObject );
         }catch (Exception e){
             e.printStackTrace();
-            return null;
+            return failJSON();
         }
     }
 
@@ -290,7 +480,7 @@ public class URL {
             return HttpSender.send( URL.studentPublishRewardURL, target);
         }catch (Exception e){
             e.printStackTrace();
-            return null;
+            return failJSON();
         }
     }
 
@@ -324,10 +514,82 @@ public class URL {
             jsonObject.put( "teachMethod", teachMethod);
             jsonObject.put( "courseType", courseType );
             jsonObject.put( "teacherId", teacherId );
-            return HttpSender.send( submitOrder, jsonObject );
+            return HttpSender.send( URL.submitOrder, jsonObject );
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return failJSON();
+        }
+    }
+
+
+    /**
+     * 老师发布课程
+     * @param topic
+     * @param technicTagEnum
+     * @param description
+     * @param price
+     * @param courseTimeDayEnum
+     * @param duration
+     * @param teachMethodEnum
+     * @return
+     */
+    public static String doWithTeacherPublishCoursedURL(
+            String topic,
+            String technicTagEnum,
+            String description,
+            String price,
+            String courseTimeDayEnum,
+            String duration,
+            String teachMethodEnum
+    ){
+        try {
+            JSONObject jsonObject = getJSON();
+            jsonObject.put("topic", topic);
+            jsonObject.put("technicTagEnum", technicTagEnum);
+            jsonObject.put("description", description);
+            jsonObject.put("price", price);
+            jsonObject.put("courseTimeDayEnum", courseTimeDayEnum);
+            jsonObject.put("duration", duration);
+            jsonObject.put("teachMethodEnum", teachMethodEnum);
+            return HttpSender.send( URL.teacherPublishCoursedURL, jsonObject );
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+
+
+    /**
+     * 登陆者 登出
+     * @return
+     */
+    public static String doWithLogOutURL(){
+        try {
+            JSONObject jsonObject = getJSON();
+            return HttpSender.send( URL.logOutURL, jsonObject);
+        }catch (Exception e){
+            e.printStackTrace();
+            return failJSON();
+        }
+    }
+
+    /**
+     *  老师获取 已付款 未评价 的课程订单(同意上课, 上课中)
+     * @param pageNo
+     * @return
+     */
+    public static String doWithApplyStudentListURL(String pageNo){
+        try {
+            JSONObject target = getJSON();
+            target.put("pageNo",pageNo);
+
+            return HttpSender.send( URL.applyStudentListURL, target );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return failJSON();
         }
     }
 

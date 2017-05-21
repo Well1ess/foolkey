@@ -25,6 +25,7 @@ import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.controller.course.reward.ApplyRewardController;
 
 import org.json.JSONObject;
 
@@ -188,17 +189,8 @@ private void applyRewardTeacher() {
 
         @Override
         protected String doInBackground(String... params) {
-            try {
-                //构建JSON
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token", token);
-                target.put("courseId", courseStudentDTO.getId());
-                return HttpSender.send( URL.applyRewardTeacherURL, target );
-            }catch (Exception e){
-                e.printStackTrace();
-                return null;
-            }
+            return ApplyRewardController.execute( courseStudentDTO.getId() + "");
+
         }
 
         @Override

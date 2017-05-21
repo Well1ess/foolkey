@@ -21,19 +21,14 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.HttpSender;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
+import com.example.a29149.yuyuan.controller.course.reward.GetPopularRewardController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -144,16 +139,8 @@ public class RewardDiscoveryFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("pageNo", pageNo + "");
-                jsonObject.put("token", GlobalUtil.getInstance().getToken());
 
-                return HttpSender.send(URL.getRewardURL, jsonObject);
-            }catch (Exception e){
-                e.printStackTrace();
-                return null;
-            }
+            return GetPopularRewardController.execute( pageNo + "");
 
         }
 

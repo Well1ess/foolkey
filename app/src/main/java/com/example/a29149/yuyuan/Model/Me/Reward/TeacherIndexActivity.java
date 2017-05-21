@@ -58,6 +58,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     private RadioButton mRewardDisagree;//不同意该老师申请
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
+    private WarningDisplayDialog.Builder displayInfo1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mRewardDTO = GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(posiOut).getRewardDTO();
         mStudentDTO = GlobalUtil.getInstance().getStudentDTO();
         Log.i("malei",mTeacherAllInfoDTO.toString());
-
+        //余额不足提示
         displayInfo = new WarningDisplayDialog.Builder(this);
         displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
             @Override
@@ -87,13 +88,29 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
                 dialog.dismiss();
             }
         });
-        displayInfo.setPositiveButton("接      单", new DialogInterface.OnClickListener() {
+        displayInfo.setPositiveButton("充      值", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
         displayInfo.create();
+        //显示确认接单
+        displayInfo1 = new WarningDisplayDialog.Builder(this);
+        displayInfo1.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        displayInfo1.setPositiveButton("接      单", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                new AgreeApplyRewardAction().execute();
+                dialog.dismiss();
+            }
+        });
+        displayInfo1.create();
 
         initView();
         initData();
@@ -169,7 +186,9 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
 
             displayInfo.getDialog().show();
         }else{
-            new AgreeApplyRewardAction().execute();
+            displayInfo1.setMsg("是 否 确 认？\n \n ");
+
+            displayInfo1.getDialog().show();
         }
 
     }

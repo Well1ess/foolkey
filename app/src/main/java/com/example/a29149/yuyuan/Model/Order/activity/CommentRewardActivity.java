@@ -15,6 +15,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
 
 import org.json.JSONObject;
 
@@ -91,11 +92,11 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithCommentTeacherURL(
+            return JudgeTeacherController.execute(
                     GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId() + "",
-                    score,
-                    GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getTeacherDTO().getId() + ""
+                    score
             );
+
 
         }
 

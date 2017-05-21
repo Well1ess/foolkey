@@ -18,6 +18,8 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.course.judge.JudgeCourseController;
+import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
 
 import org.json.JSONObject;
 
@@ -131,7 +133,7 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
             System.out.println();
             System.out.println(this.getClass() + "这里的图片路径依然是写死的！\n");
 
-            return URL.doWithCommentCourseURL(
+            return JudgeCourseController.execute(
                     GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId() + "",
                     scoreCourse,
                     commentContent,
@@ -183,11 +185,11 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithCommentTeacherURL(
+            return JudgeTeacherController.execute(
                     GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId() + "",
-                    scoreTeacher,
-                    GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getTeacherDTO().getId() + ""
+                    scoreTeacher
             );
+
 
         }
 

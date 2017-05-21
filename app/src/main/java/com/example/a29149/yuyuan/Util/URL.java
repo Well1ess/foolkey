@@ -54,13 +54,6 @@ public class URL {
     //未评价订单请求
     private static final String getOrderAsStudent = "http://" +address + "/getOrderAsStudent?";
 
-    //评价老师
-    private static final String commentTeacherURL = "http://" +address + "/judge/teacher?";
-
-    //评价课程
-    private static final String commentCourseURL = "http://" +address + "/judge/course?";
-
-
 
 
 
@@ -166,25 +159,6 @@ public class URL {
     }
 
 
-    /**
-     * 评价老师
-     * @param orderId 订单id
-     * @param score 分数
-     * @param teacherId 老师的id
-     * @return
-     */
-    public static String doWithCommentTeacherURL(String orderId, String score, String teacherId){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put("orderId", orderId);
-            jsonObject.put("score", score);
-            jsonObject.put("teacherId", teacherId);
-            return HttpSender.send( URL.commentTeacherURL, jsonObject);
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
 
     /**
      * 老师获取要上课、正在上课的悬赏
@@ -217,42 +191,6 @@ public class URL {
             return HttpSender.send( URL.getTeacherRewardURL, target );
 
         } catch (Exception e) {
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
-
-    /**
-     * 登陆者对课程进行评价
-     * @param orderId
-     * @param score
-     * @param content
-     * @param pic1Path
-     * @param pic2Path
-     * @param pic3Path
-     * @param pic4Path
-     * @return
-     */
-    public static String doWithCommentCourseURL(
-        String orderId,
-        String score,
-        String content,
-        String pic1Path,
-        String pic2Path,
-        String pic3Path,
-        String pic4Path
-    ){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put("orderId", orderId);
-            jsonObject.put("score", score);
-            jsonObject.put("content", content);
-            jsonObject.put("pic1Path", pic1Path);
-            jsonObject.put("pic2Path", pic2Path);
-            jsonObject.put("pic3Path", pic3Path);
-            jsonObject.put("pic4Path", pic4Path);
-            return HttpSender.send( URL.commentCourseURL, jsonObject);
-        }catch (Exception e){
             e.printStackTrace();
             return failJSON();
         }

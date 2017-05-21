@@ -18,23 +18,16 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
-import com.example.a29149.yuyuan.Util.Secret.RSAKeyBO;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.userInfo.LogInController;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 
 import static com.example.a29149.yuyuan.Util.HttpSender.send;
 
@@ -61,6 +54,8 @@ public class LoginActivity extends AppCompatActivity{
 
     //获取用户配置
     UserConfig userConfig;
+    //等待提示
+    public ShapeLoadingDialog shapeLoadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +64,10 @@ public class LoginActivity extends AppCompatActivity{
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
+        shapeLoadingDialog = new ShapeLoadingDialog(this);
+        shapeLoadingDialog.setLoadingText("加载中...");
+        shapeLoadingDialog.setCanceledOnTouchOutside(false);
+        shapeLoadingDialog.getDialog().setCancelable(false);
 
         userConfig = new UserConfig(this);
         if (userConfig.getBooleanInfo(UserConfig.xmlSAVE)) {
@@ -140,6 +139,8 @@ public class LoginActivity extends AppCompatActivity{
         if (cancel) {
             focusView.requestFocus();
         } else {
+            //显示
+            shapeLoadingDialog.show();
             //TODO:网络传输
             strUserName = userName;
             strPassWord = password;
@@ -254,6 +255,7 @@ public class LoginActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            shapeLoadingDialog.dismiss();
             log.d(this, result);
 
             if (result != null) {

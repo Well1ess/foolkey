@@ -51,6 +51,7 @@ public class MoreStudentActivity extends AppCompatActivity {
                 Toast.makeText(MoreStudentActivity.this, "开始上课", Toast.LENGTH_SHORT).show();
             }
         });
+
         //结束上课的回调函数，可以在onStartCourse里面添加任意想要的参数，然后特异处理
         mStudentListAdapter.setEndCourse(new StudentListAdapter.EndCourse() {
             @Override

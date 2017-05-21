@@ -12,6 +12,12 @@
     android:focusableInTouchMode="true"
     tools:context="com.example.a29149.yuyuan.Login.LoginActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/load"
+        android:background=""/>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

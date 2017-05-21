@@ -6,7 +6,6 @@
     <ImageView
         android:id="@+id/head"
         android:layout_margin="10dp"
-        android:background="@color/grey"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"/>

@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.R;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.util.List;
 
@@ -31,6 +34,9 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     private StartCourse startCourse;
     private EndCourse endCourse;
 
+    //加载图片
+    private RequestManager glide;
+
     public StudentListAdapter(List<String> data, Context context) {
         mData = data;
         mContext = context;
@@ -38,6 +44,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
         if (data.size() % 2 != 0)
             throw new IllegalArgumentException("数据必须为偶数！");
 
+        glide = Glide.with(mContext);
     }
 
     @Override
@@ -60,7 +67,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     @Override
     public void onBindViewHolder(Holder holder, int position) {
         if (holder != null) {
-            if (getItemViewType(position) == START_COURSE)
+            if (getItemViewType(position) == START_COURSE) {
                 holder.button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -68,7 +75,11 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
                             startCourse.onStartCourse();
                     }
                 });
-            else if (getItemViewType(position) == END_COURSE)
+                glide.load("http://foolkey-1252706879.cossh.myqcloud.com/photo/test.png")
+                        .transform(new GlideCircleTransform(mContext))
+                        .into(holder.head);
+            }
+            else if (getItemViewType(position) == END_COURSE) {
                 holder.button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -76,6 +87,11 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
                             endCourse.onEndCourse();
                     }
                 });
+                glide.load("https://cloud.tencent.com/document/product/436/6517")
+                        .transform(new GlideCircleTransform(mContext))
+                        .into(holder.head);
+            }
+
         }
     }
 

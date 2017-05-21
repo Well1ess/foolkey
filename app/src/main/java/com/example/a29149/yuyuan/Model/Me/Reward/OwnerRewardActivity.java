@@ -20,8 +20,10 @@ import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.course.reward.MineController;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * Created by MaLei on 2017/5/11.
@@ -116,7 +118,12 @@ public class OwnerRewardActivity extends AppCompatActivity {
                     //存储所有我拥有的悬赏信息DTO
                     java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<ApplicationStudentRewardAsStudentSTCDTO>>() {
                     }.getType();
-                    List < ApplicationStudentRewardAsStudentSTCDTO > applicationStudentRewardAsStudentSTCDTOs = new Gson().fromJson(jsonObject.getString("applicationStudentRewardAsStudentSTCDTOS"), type);
+                    List < ApplicationStudentRewardAsStudentSTCDTO > applicationStudentRewardAsStudentSTCDTOs;
+                    try {
+                         applicationStudentRewardAsStudentSTCDTOs = new Gson().fromJson(jsonObject.getString("applicationStudentRewardAsStudentSTCDTOS"), type);
+                    }catch (JSONException e){
+                        applicationStudentRewardAsStudentSTCDTOs = new ArrayList<>();
+                    }
                     GlobalUtil.getInstance().setApplicationStudentRewardAsStudentSTCDTOs(applicationStudentRewardAsStudentSTCDTOs);
                     Log.i("malei",applicationStudentRewardAsStudentSTCDTOs.toString());
                     Log.i("malei",GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(0).getRewardDTO().toString());

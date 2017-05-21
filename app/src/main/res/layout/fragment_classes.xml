@@ -50,6 +50,7 @@
 
     </com.example.a29149.yuyuan.Widget.SlideRefreshLayout>
 
+    <!--没有课程时，显示下列图片-->
     <include
         layout="@layout/empty"/>
 

@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity{
 
     //获取用户配置
     UserConfig userConfig;
-    //等待提示
+    //等待提示，华哥的跳跳跳动画
     public ShapeLoadingDialog shapeLoadingDialog;
 
     @Override
@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity{
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
+        //华哥的跳跳跳动画
         shapeLoadingDialog = new ShapeLoadingDialog(this);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
@@ -139,7 +140,7 @@ public class LoginActivity extends AppCompatActivity{
         if (cancel) {
             focusView.requestFocus();
         } else {
-            //显示
+            //显示华哥的跳跳跳动画
             shapeLoadingDialog.show();
             //TODO:网络传输
             strUserName = userName;
@@ -255,6 +256,7 @@ public class LoginActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            //跳跳跳的动画不再显示
             shapeLoadingDialog.dismiss();
             log.d(this, result);
 

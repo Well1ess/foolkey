@@ -16,7 +16,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/load"
-        android:background=""/>
+
+        />
+    <!--上面是登录的背景图片，登录还是不要背景图片了-->
 
     <RelativeLayout
         android:layout_width="wrap_content"

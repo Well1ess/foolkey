@@ -5,4 +5,4 @@
     android:layout_height="match_parent"
     android:scaleType="fitCenter"
     android:visibility="gone"
-    android:src="@drawable/empty" />
+    android:src="@drawable/google_robot_grey2" />

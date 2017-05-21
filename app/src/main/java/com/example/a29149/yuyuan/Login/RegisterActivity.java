@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     @ViewInject(R.id.code)
     private EditText mCode;
 
-    //等待提示
+    //等待提示,华哥的跳跳跳动画
     public ShapeLoadingDialog shapeLoadingDialog;
 
 
@@ -61,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         userConfig = new UserConfig(RegisterActivity.this);
 
+        //等待提示,华哥的跳跳跳动画
         shapeLoadingDialog = new ShapeLoadingDialog(this);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
@@ -238,6 +239,7 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            //等待提示,华哥的跳跳跳动画，消失
             shapeLoadingDialog.dismiss();
             log.d(this, result);
             if (result != null) {

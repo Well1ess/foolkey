@@ -5,45 +5,27 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.SexTagEnum;
-import com.example.a29149.yuyuan.Model.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
-import com.example.a29149.yuyuan.Util.Annotation.OnClick;
-import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
-import com.google.gson.Gson;
+import com.example.a29149.yuyuan.controller.course.reward.AcceptController;
+import com.example.a29149.yuyuan.controller.course.reward.RefuseController;
 
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.util.List;
 
 /**
  * Created by MaLei on 2017/5/11.
@@ -211,7 +193,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithDisagreeApplyRewardURL(applicationStudentRewardDTO.getId() + "");
+            return RefuseController.execute(applicationStudentRewardDTO.getId() + "");
 
         }
 
@@ -266,7 +248,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
 
             System.out.println();
             System.out.println(this.getClass() + "这里的优惠券Id依然是写死的！\n");
-            return URL.doWithAgreeApplyRewardURL(
+            return AcceptController.execute(
                     applicationStudentRewardDTO.getId()+"",
                     mRewardDTO.getId()+"",
                     ""

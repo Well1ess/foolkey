@@ -1,35 +1,26 @@
 package com.example.a29149.yuyuan.Model.Publish.Activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
-import com.example.a29149.yuyuan.DTO.CourseStudentDTO;
-import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.course.reward.GetWithApplicationController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.util.List;
 
 /**
@@ -170,7 +161,7 @@ public class ApplyAuthenticationTeacherActivity extends Activity implements View
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithGetMyRewardURL( pageNo+"" );
+            return GetWithApplicationController.execute(pageNo + "");
 
         }
 

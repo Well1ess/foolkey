@@ -55,4 +55,9 @@ public abstract class AbstractController {
     public static String failJSON(){
         return null;
     }
+
+    public static String failJSON(Exception e){
+        e.printStackTrace();
+        return null;
+    }
 }

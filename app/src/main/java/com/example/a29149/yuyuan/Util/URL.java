@@ -32,8 +32,6 @@ public class URL {
     private static final String switchToTeacher = "http://" + address + "/switchToTeacher?";
     //获取课程
     public static final String getHotCourseURL = "http://" + address + "/courseTeacher/getCourseTeacherPopular?";
-    //学生发布悬赏
-    private static final String studentPublishRewardURL = "http://" + address + "/courseStudent/publishRewardCourse?";
     //老师发布课程
     private static final String teacherPublishCoursedURL = "http://" + address + "/courseTeacher/publishCourseTeacher?";
     //搜索
@@ -45,22 +43,11 @@ public class URL {
     //申请认证
     private static final String applyVerifyTeacherURL = "http://" + address + "/applyToVerifyTeacher?";
 
-    //获取我发布的悬赏
-    private static final String getMyRewardURL = "http://" +address + "/application/getApplicationStudentRewardAsStudentController?";
-
-
     //获取老师准备上课、正在上课的课程
     private static final String getMyCourseURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
 
     //获取老师准备上课、正在上课的悬赏
     private static final String getTeacherRewardURL = "http://" +address + "/order/getAgreedOnClassOrderRewardByTeacher?";
-
-
-
-    //同意悬赏申请
-    private static final String agreeApplyRewardURL = "http://" +address + "/acceptRewardApplication?";
-    //拒绝悬赏申请
-    private static final String disagreeApplyRewardURL = "http://" +address + "/refuseTeacherApplication?";
 
     //获取学生列表
     private static final String applyStudentListURL = "http://" +address + "/order/getAgreedOnClassOrderCourseByTeacher?";
@@ -85,12 +72,6 @@ public class URL {
 
 
 
-
-    //获取学生发布悬赏
-    @Deprecated
-    public static String getStudentPublishRewardURL(String clearText) {
-        return studentPublishRewardURL + "clearText=" + clearText;
-    }
 
     //获取老师发布课程
     @Deprecated
@@ -179,67 +160,6 @@ public class URL {
             return failJSON();
         }
     }
-
-
-
-    /**
-     * 获取我所有的悬赏，包括申请的人（如果有）
-     * 分页获取，不管有无申请都会返回该悬赏
-     * 通过此方法返回的申请老师的数目有限制，每个悬赏下面的申请老师，一次拿取不会太多，目前是 4 次
-     * @return
-     */
-    public static String doWithGetMyRewardURL(String pageNo){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put( "pageNo", pageNo);
-            return HttpSender.send( URL.getMyRewardURL, jsonObject );
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
-
-
-    /**
-     * 同意悬赏申请
-     * @param applicationId 申请Id
-     * @param rewardId 悬赏Id
-     * @param couponId 优惠券Id
-     * @return
-     */
-    public static String doWithAgreeApplyRewardURL(
-            String applicationId,
-            String rewardId,
-            String couponId
-    ){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put( "applicationId", applicationId );
-            jsonObject.put( "rewardId", rewardId );
-            jsonObject.put( "couponId", couponId == null ? "":couponId );
-            return HttpSender.send( URL.agreeApplyRewardURL, jsonObject);
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
-
-    /**
-     * 拒绝悬赏的申请
-     * @param applicationId 申请的Id
-     * @return
-     */
-    public static String doWithDisagreeApplyRewardURL(String applicationId){
-        try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put( "applicationId", applicationId);
-            return HttpSender.send( URL.disagreeApplyRewardURL, jsonObject);
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
-
 
 
 
@@ -455,34 +375,6 @@ public class URL {
         }
     }
 
-
-    //学生发布悬赏
-    public static String doWithStudentPublishRewardURL(
-            String technicTagEnum,
-            String topic,
-            String description,
-            String price,
-            String courseTimeDayEnum,
-            String teachMethodEnum,
-            String teachRequirementEnum,
-            String studentBaseEnum
-    ){
-        try {
-            JSONObject target = getJSON();
-            target.put("technicTagEnum", technicTagEnum);
-            target.put("topic", topic );
-            target.put("description", description);
-            target.put("price", price);
-            target.put("courseTimeDayEnum", courseTimeDayEnum);
-            target.put("teachMethodEnum", teachMethodEnum);
-            target.put("teachRequirementEnum", teachRequirementEnum);
-            target.put("studentBaseEnum", studentBaseEnum);
-            return HttpSender.send( URL.studentPublishRewardURL, target);
-        }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
-        }
-    }
 
     //提交订单
     /**

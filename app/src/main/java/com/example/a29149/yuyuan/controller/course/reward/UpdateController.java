@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * Created by geyao on 2017/5/21.
  */
 
-public class UpdateRewardController extends AbstractController {
+public class UpdateController extends AbstractController {
 
     private static String url = address + "/aes/reward/update";
 

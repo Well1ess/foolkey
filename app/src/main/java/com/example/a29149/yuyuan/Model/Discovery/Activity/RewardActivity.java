@@ -20,19 +20,11 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.HttpSender;
-import com.example.a29149.yuyuan.Util.Secret.AESOperator;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
-import com.example.a29149.yuyuan.controller.course.reward.ApplyRewardController;
+import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
 
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 
 /**
  * Created by MaLei on 2017/5/9.
@@ -189,7 +181,7 @@ private void applyRewardTeacher() {
 
         @Override
         protected String doInBackground(String... params) {
-            return ApplyRewardController.execute( courseStudentDTO.getId() + "");
+            return ApplyController.execute( courseStudentDTO.getId() + "");
 
         }
 

@@ -5,23 +5,27 @@ import com.example.a29149.yuyuan.controller.AbstractController;
 
 import org.json.JSONObject;
 
+
 /**
- * 老师申请悬赏，需要悬赏的Id
+ * 获取流行的悬赏
  * Created by geyao on 2017/5/21.
  */
 
-public class ApplyRewardController extends AbstractController {
+public class GetPopularController extends AbstractController {
 
-    private static String url = address + "/aes/applyReward";
+    //获取悬赏
+    public static String url = address + "/reward/getPopular";
 
-    public static String execute( String rewardId ){
+
+    public static String execute(String pageNo){
         try {
             JSONObject jsonObject = getJSON();
-            jsonObject.put("rewardId", rewardId);
-            return HttpSender.send( url, jsonObject);
+            jsonObject.put("pageNo", pageNo);
+            return HttpSender.send( url, jsonObject );
         }catch (Exception e){
             e.printStackTrace();
             return failJSON();
         }
     }
+
 }

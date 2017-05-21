@@ -29,6 +29,7 @@ import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
+import com.example.a29149.yuyuan.controller.course.reward.GetPopularController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -145,54 +146,13 @@ public class TeacherRewardMainFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-//            StringBuffer sb = new StringBuffer();
-//            BufferedReader reader = null;
-//            HttpURLConnection con = null;
 
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("pageNo", pageNo + "");
-                jsonObject.put("token", GlobalUtil.getInstance().getToken());
+            System.out.println();
+            System.out.println(this.getClass() + "这里我不知道到底该放什么\n");
 
-                return HttpSender.send( URL.rewardURL, jsonObject );
-
-//                java.net.URL url = new java.net.URL(URL.getRewardURL(jsonObject.toString()));
-//                con = (HttpURLConnection) url.openConnection();
-//                log.d(this, URL.getRewardURL(jsonObject.toString()));
-//                // 设置允许输出，默认为false
-//                con.setDoOutput(true);
-//                con.setDoInput(true);
-//                con.setConnectTimeout(5 * 1000);
-//                con.setReadTimeout(10 * 1000);
-//
-//                con.setRequestMethod("POST");
-//                con.setRequestProperty("contentType", "UTF-8");
-//
-//
-//                // 获得服务端的返回数据
-//                InputStreamReader read = new InputStreamReader(con.getInputStream());
-//                reader = new BufferedReader(read);
-//                String line = "";
-//                while ((line = reader.readLine()) != null) {
-//                    sb.append(line);
-//                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-//            finally {
-//                if (reader != null) {
-//                    try {
-//                        reader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                if (con != null) {
-//                    con.disconnect();
-//                }
-//            }
-//            return sb.toString();
+            return GetPopularController.execute(
+                    pageNo + ""
+            );
         }
 
         @Override

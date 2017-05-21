@@ -32,6 +32,9 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.controller.userInfo.GetCouponController;
+import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.example.a29149.yuyuan.controller.userInfo.teacher.SwitchToTeacherController;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -266,7 +269,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         protected String doInBackground(String... params) {
             System.out.println();
             System.out.println(this.getClass() + "这里有个方法依然是写死的\n");
-            return URL.doWithCouponURL("1", "20");
+            return GetCouponController.execute("1");
         }
 
         @Override
@@ -313,7 +316,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithSwitchToTeacher();
+            return SwitchToTeacherController.execute();
         }
 
         @Override
@@ -362,48 +365,8 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         @Override
         protected String doInBackground(String... params) {
 
-            StringBuffer sb = new StringBuffer();
-            BufferedReader reader = null;
-            HttpURLConnection con = null;
+            return ApplyToVerifyController.execute();
 
-            try {
-                JSONObject target = new JSONObject();
-                String token = GlobalUtil.getInstance().getToken();
-                target.put("token",token);
-                java.net.URL url = new java.net.URL(URL.getApplyVerifyTeacher(target.toString()));
-                Log.i("malei",target.toString());
-                con = (HttpURLConnection) url.openConnection();
-                // 设置允许输出，默认为false
-                con.setDoOutput(true);
-                con.setDoInput(true);
-                con.setConnectTimeout(5 * 1000);
-                con.setReadTimeout(10 * 1000);
-
-                con.setRequestMethod("POST");
-                con.setRequestProperty("contentType", "UTF-8");
-
-                // 获得服务端的返回数据
-                InputStreamReader read = new InputStreamReader(con.getInputStream());
-                reader = new BufferedReader(read);
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (con != null) {
-                    con.disconnect();
-                }
-            }
-            return sb.toString();
         }
 
         @Override

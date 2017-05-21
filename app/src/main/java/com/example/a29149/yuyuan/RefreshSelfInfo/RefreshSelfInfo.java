@@ -15,6 +15,7 @@ import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.userInfo.GetMyInfoController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -40,7 +41,7 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        return URL.doWithSelfInfoURL( );
+        return GetMyInfoController.execute();
     }
 
     @Override

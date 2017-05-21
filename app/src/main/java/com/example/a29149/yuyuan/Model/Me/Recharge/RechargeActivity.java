@@ -17,6 +17,8 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.money.ChargeMoneyController;
+import com.example.a29149.yuyuan.controller.userInfo.GetMyInfoController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -73,7 +75,7 @@ public class RechargeActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithRechargeURL( money );
+            return ChargeMoneyController.execute(money);
         }
 
         @Override
@@ -116,7 +118,7 @@ public class RechargeActivity extends AppCompatActivity {
         //刷新个人资料
         @Override
         protected String doInBackground(String... params) {
-            return URL.doWithSelfInfoURL( );
+            return GetMyInfoController.execute();
         }
 
         @Override

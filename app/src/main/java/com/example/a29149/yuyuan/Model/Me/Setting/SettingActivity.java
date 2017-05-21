@@ -18,6 +18,7 @@ import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.userInfo.LogOutController;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
@@ -61,7 +62,7 @@ public class SettingActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            return URL.doWithLogOutURL();
+            return LogOutController.execute();
         }
 
         @Override

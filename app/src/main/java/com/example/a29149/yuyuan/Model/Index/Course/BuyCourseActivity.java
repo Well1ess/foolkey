@@ -26,6 +26,7 @@ import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.course.course.ApplyController;
 
 import org.json.JSONObject;
 
@@ -194,7 +195,7 @@ public class BuyCourseActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            return URL.doWithSubmitOrder(
+            return ApplyController.execute(
                     params[0],
                     params[1],
                     params[2],

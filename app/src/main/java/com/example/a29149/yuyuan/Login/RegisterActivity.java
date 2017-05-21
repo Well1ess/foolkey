@@ -23,6 +23,7 @@ import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.userInfo.RegisterController;
 
 import org.json.JSONObject;
 
@@ -216,14 +217,12 @@ public class RegisterActivity extends AppCompatActivity {
                 log.d(this, "P:" + strPassword);
                 log.d(this, "U:" + strUserName);
                 String password = SHA1Coder.SHA1(strPassword);
-                //构造要发送的明文对象
-                JSONObject target = new JSONObject();
-                target.put("userName", strUserName);
-                target.put("passWord", password);
-                target.put("AESKey", params[0]);
 
-                //RSA加密发送
-                return HttpSender.send( URL.registerURL, target);
+                return RegisterController.execute(
+                        strUserName,
+                        password,
+                        params[0]
+                );
 
             }catch (Exception e){
                 e.printStackTrace();

@@ -25,6 +25,7 @@ import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.userInfo.LogInController;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
@@ -237,13 +238,13 @@ public class LoginActivity extends AppCompatActivity{
 
                 //对密码进行SHA1加密
                 String password = SHA1Coder.SHA1(strPassWord);
-                //生成明文对象
-                JSONObject target = new JSONObject();
-                target.put("userName", strUserName);
-                target.put("passWord", password);
-                target.put("AESKey", GlobalUtil.getInstance().getAESKey() );
-                //加密传输
-                return HttpSender.send(URL.loginURL, target);
+
+                return LogInController.execute(
+                        strUserName,
+                        password,
+                        GlobalUtil.getInstance().getAESKey()
+                );
+
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;

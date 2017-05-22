@@ -8,8 +8,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
@@ -25,6 +28,7 @@ import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.userInfo.LogInController;
+import com.example.resource.util.image.GlideCircleTransform;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
@@ -52,6 +56,11 @@ public class LoginActivity extends AppCompatActivity{
     @ViewInject(R.id.password)
     private EditText mPasswordView;
 
+    private RequestManager glide;
+
+    @ViewInject(R.id.photo_circle)
+    private ImageView imageView;
+
     //获取用户配置
     UserConfig userConfig;
     //等待提示，华哥的跳跳跳动画
@@ -63,6 +72,12 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
+
+
+        glide = Glide.with(this);
+        glide.load("http://foolkey-1252706879.cossh.myqcloud.com/photo/test.png")
+                .transform(new GlideCircleTransform(this))
+                .into(imageView);
 
         //华哥的跳跳跳动画
         shapeLoadingDialog = new ShapeLoadingDialog(this);

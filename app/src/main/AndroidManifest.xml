@@ -40,12 +40,10 @@
             android:launchMode="singleTask"></activity>
 
         <activity android:name=".Login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+
         <activity android:name=".Login.RegisterActivity" />
         <activity android:name=".Login.ModifyPwdActivity" />
         <activity
@@ -166,6 +164,15 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".TeacherMain.Score.MoreStudent.MoreStudentActivity">
+
+        </activity>
+
+        <activity android:name=".Main.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

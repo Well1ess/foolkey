@@ -14,6 +14,9 @@ import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
 
 /**
+ * splashActivity
+ * 启动时一闪而过的东西，会判断本地是否有缓存，如果有，则向服务器发送一个自动刷新的请求
+ * 如果没有，或者请求失败，则跳转到登陆界面
  * Created by geyao on 2017/5/22.
  */
 
@@ -27,6 +30,7 @@ public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //这里要首先设置主题，否则会有灰色的画面闪过，不能达到一开app就splash图片的效果
         setTheme( R.style.splashScreenTheme );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);

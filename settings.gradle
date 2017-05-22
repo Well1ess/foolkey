@@ -1,1 +1,1 @@
-include ':app', ':resource'
+include ':app', ':resource', ':huanxin'

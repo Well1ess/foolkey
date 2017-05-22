@@ -9,7 +9,9 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
+import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.Main.MainActivity;
+import com.example.a29149.yuyuan.Main.SplashActivity;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESOperator;
@@ -79,10 +81,16 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
                     }
                 }
             } catch (Exception e) {
-                Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "请求失败，请重新登录", Toast.LENGTH_SHORT).show();
+                mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                Activity activity = (Activity)mContext;
+//                activity.finish();
             }
         } else {
             Toast.makeText(mContext, "网络连接失败！", Toast.LENGTH_SHORT).show();
+            mContext.startActivity(new Intent(mContext, LoginActivity.class));
+            Activity activity = (Activity)mContext;
+//            activity.finish();
         }
 
     }

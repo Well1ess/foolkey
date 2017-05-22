@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
@@ -44,8 +45,10 @@ public class ClassesFragment extends Fragment {
     private IndexContentAdapter mContentAdapter;
 
     //空列表显示
-    @ViewInject(R.id.empty)
+    @ViewInject(R.id.empty_image)
     private ImageView iv_empty;
+    @ViewInject(R.id.empty_text)
+    private TextView empty_text;
 
     //暂存当前的类别
     TechnicTagEnum mTechnicTagEnum;
@@ -207,7 +210,10 @@ public class ClassesFragment extends Fragment {
                         if (pageNo == 1) {
                             GlobalUtil.getInstance().setCourseTeacherPopularDTOs(courseTeacherDTOs,mTechnicTagEnum);
                             if (courseTeacherDTOs.size() <= 3) // 显示暂无更多数据的图片
+                            {
                                 iv_empty.setVisibility(View.VISIBLE);
+                                empty_text.setVisibility(View.VISIBLE);
+                            }
                         } else if (pageNo > 1) {
                             GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).addAll(courseTeacherDTOs);
                             mDynamicList.onLoadFinish();

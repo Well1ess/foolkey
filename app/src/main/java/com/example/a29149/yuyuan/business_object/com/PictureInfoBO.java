@@ -28,7 +28,7 @@ public class PictureInfoBO extends AbstractBO {
     public String getPhotoURL(String userName){
         String url;
         if (userName == null || userName.equals("")){
-            url = "drawable/splash_test.jpg";
+            url = objectDBUrl + "photo/test.png";
             return url;
         }
         url = getLocalPhoto(userName);
@@ -50,7 +50,7 @@ public class PictureInfoBO extends AbstractBO {
     }
 
     public static String getOnlinePhoto(String userName){
-        return "photo/user/head/"
+        return  objectDBUrl + "photo/user/head/"
                 + userName + ".png"
 //                + "photo/test.png"
                 ;

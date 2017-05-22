@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.Login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -39,7 +41,7 @@ import static com.example.a29149.yuyuan.Util.HttpSender.send;
 /**
  * LoginActivity:登陆
  */
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     /**
      * 第一步：获取公玥
      * 第二步：对密码进行SHA1加密
@@ -50,6 +52,9 @@ public class LoginActivity extends AppCompatActivity{
 
     private String strUserName;
     private String strPassWord;
+
+    //上一个输入的用户名，记录放置频繁刷新
+    private String lastUserName = "";
 
     @ViewInject(R.id.username)
     private EditText mUserNameView;
@@ -78,12 +83,25 @@ public class LoginActivity extends AppCompatActivity{
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
+        //图片加载器
+        glide = Glide.with(this);
+
+        mUserNameView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) {
+                    // 此处为得到焦点时的处理内容
+                } else {
+                    // 此处为失去焦点时的处理内容
+                    //更新头像
+                    autoUpdatePhoto();
+                }
+            }
+        });
+
 
         //用glide动态地加载图片
-        glide = Glide.with(this);
-        glide.load( pictureInfoBO.getPhotoURL( UserConfig.xmlUSER_NAME ) )
-                .transform(new GlideCircleTransform(this))
-                .into(imageView);
+        loadImage( UserConfig.xmlUSER_NAME );
 
         //华哥的跳跳跳动画
         shapeLoadingDialog = new ShapeLoadingDialog(this);
@@ -169,8 +187,51 @@ public class LoginActivity extends AppCompatActivity{
             GetPublicKeyAction getPublicKeyAction = new GetPublicKeyAction();
             getPublicKeyAction.execute();
         }
-
     }
+
+    /**
+     * 点击事件
+     * 并没有什么作用
+     * @param view
+     */
+    @Override
+    public void onClick(View view) {
+        autoUpdatePhoto();
+    }
+
+    /**
+     * 加载图片
+     * @param userName
+     */
+    private void loadImage( String userName ){
+        //用glide动态地加载图片
+        String url = pictureInfoBO.getPhotoURL( userName );
+        System.out.println(this.getClass() + "   取到的url是");
+        System.out.println(url);
+        glide.load( url )
+                .transform(new GlideCircleTransform(this))
+                .into(imageView);
+    }
+
+    /**
+     * 根据用户名决定是否值得更新头像
+     */
+    private void autoUpdatePhoto(){
+        //获取输入
+        String userName = mUserNameView.getText().toString();
+        if (userName != null && !userName.equals("")
+                && !userName.equals(lastUserName)
+                && !userName.equals("username")
+                ){
+            //输入了新的用户名，可以刷新图片了
+            lastUserName = userName;
+            loadImage( lastUserName );
+        }
+    }
+
+
+
+
 
     /**
      * 获取公钥

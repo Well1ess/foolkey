@@ -55,7 +55,6 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
     private WarningDisplayDialog.Builder displayInfo;
 
     private TextView mTitle;//用户名
-    private TextView mChangeRole;//切换用户角色
     private TextView mOwnerReward;//我的悬赏
     private TextView mOwnerCourse;//我的课程
 
@@ -96,9 +95,6 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
         mTitle = (TextView) view.findViewById(R.id.title);
         mTitle.setText(GlobalUtil.getInstance().getStudentDTO().getNickedName());
-
-        mChangeRole = (TextView) view.findViewById(R.id.change_role);
-        mChangeRole.setOnClickListener(this);
 
         mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
         mOwnerReward.setOnClickListener(this);
@@ -165,14 +161,6 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         CouponAction couponAction = new CouponAction();
         couponAction.execute();
     }
-
-   /* @OnClick(R.id.change_role)
-    public void setChangeRoleListener(View view){
-        //TODO:网络通信
-        ChangeRole changeRole = new ChangeRole();
-        changeRole.execute();
-
-    }*/
 
     @Override
     public void onAttach(Context context) {
@@ -244,48 +232,5 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
             super.onProgressUpdate(values);
         }
     }
-
-    //切换身份
-    public class ChangeRole extends AsyncTask<String, Integer, String> {
-
-        public ChangeRole() {
-            super();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            return SwitchToTeacherController.execute();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            log.d(this, result);
-            if (result != null) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String resultFlag = jsonObject.getString("result");
-                    if (resultFlag.equals("success")) {
-
-                    } else {
-                        Toast.makeText(getActivity(), "JSON解析异常！", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    Toast.makeText(getActivity(), "返回结果异常！", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
-    }
-
-
 
 }

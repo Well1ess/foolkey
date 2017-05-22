@@ -106,26 +106,6 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
         mOwnerCourse.setOnClickListener(this);
 
-
-        displayInfo = new WarningDisplayDialog.Builder(getContext());
-        displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        displayInfo.setPositiveButton("确      定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                //点击确定后跳发送申请认证
-                new ApplyAuthenticationTeacherAction().execute();
-                Intent intent = new Intent(getContext(), MainTeacherActivity.class);
-                startActivity(intent);
-            }
-        });
-        displayInfo.create();
-
     }
 
 
@@ -134,9 +114,6 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         int id = view.getId();
         switch (id)
         {
-            case R.id.change_role:
-                changeRole();
-                break;
             case R.id.owner_reward:
                 Intent intent1 = new Intent(getActivity(),OwnerRewardActivity.class);
                 startActivity(intent1);
@@ -310,71 +287,5 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    /**
-     * 认证老师请求Action
-     */
-    public class ApplyAuthenticationTeacherAction extends AsyncTask<String, Integer, String> {
-
-        public ApplyAuthenticationTeacherAction() {
-            super();
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            return ApplyToVerifyController.execute();
-
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            log.d(this, result);
-            if (result != null) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String resultFlag = jsonObject.getString("result");
-
-                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
-                    }.getType();
-                    StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("studentDTO"), type);
-                    //存储学生信息DTO
-                    GlobalUtil.getInstance().setStudentDTO(studentDTO);
-                    //获取老师信息DTO
-                    java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<TeacherDTO>() {
-                    }.getType();
-                    TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
-                    Log.i("malei",jsonObject.getString("teacherDTO"));
-                    if(teacherDTO != null)
-                    {
-                        //存储老师DTO
-                        GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
-                        Log.i("geyao  ", "认证后存储老师DTO了嘛？ " + this.getClass());
-                    }
-
-
-                    if (resultFlag.equals("success")) {
-                        Toast.makeText(getContext(), "认证成功！", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(), "返回结果为fail！", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(getContext(), "网络连接失败！", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
-    }
 
 }

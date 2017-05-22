@@ -62,6 +62,9 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
     @ViewInject(R.id.virtual_money)
     private TextView mVirtualMoney;
 
+//    @ViewInject(R.id.cash_rmb)
+//    private TextView cashView;
+
     public MeMainFragment() {
 
     }
@@ -92,7 +95,10 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
     private void initView()
     {
         int virtualMoney = DoubleParseInt(GlobalUtil.getInstance().getStudentDTO().getVirtualCurrency());
+        //将现金转换为好看的样子，保留2位小数
+//        String cash = String.format("%.2f", GlobalUtil.getInstance().getStudentDTO().getCash() );
         mVirtualMoney.setText(virtualMoney+"");
+//        cashView.setText(cash);
 
         mTitle = (TextView) view.findViewById(R.id.title);
         mTitle.setText(GlobalUtil.getInstance().getStudentDTO().getNickedName());
@@ -387,12 +393,11 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                     java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<TeacherDTO>() {
                     }.getType();
                     TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
-                    Log.i("malei",jsonObject.getString("teacherDTO"));
                     if(teacherDTO != null)
                     {
                         //存储老师DTO
                         GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
-                        Log.i("geyao  ", "认证后存储老师DTO了嘛？ " + this.getClass());
+
                     }
 
 

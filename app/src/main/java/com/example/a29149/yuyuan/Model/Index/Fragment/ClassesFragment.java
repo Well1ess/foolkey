@@ -206,7 +206,7 @@ public class ClassesFragment extends Fragment {
                         //若>1则表示分页存取
                         if (pageNo == 1) {
                             GlobalUtil.getInstance().setCourseTeacherPopularDTOs(courseTeacherDTOs,mTechnicTagEnum);
-                            if (courseTeacherDTOs.size()==0)
+                            if (courseTeacherDTOs.size() <= 3) // 显示暂无更多数据的图片
                                 iv_empty.setVisibility(View.VISIBLE);
                         } else if (pageNo > 1) {
                             GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).addAll(courseTeacherDTOs);

@@ -11,17 +11,16 @@ import org.json.JSONObject;
  * 上传个人头像，获取签名
  */
 
-public class GetPictureImage extends AbstractController{
+public class GetPictureImageController extends AbstractController{
 
-    private static String url = address + "/aes/getMyInfo";
+    private static String url = address + "/aes/upload/getSign";
 
     public static String execute(){
         try{
             JSONObject jsonObject = getJSON();
             return HttpSender.send( url, jsonObject );
         }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
+            return failJSON( e );
         }
     }
 }

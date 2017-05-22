@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.Application.BizServer;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.tencent.cos.model.COSRequest;
 import com.tencent.cos.model.COSResult;
 import com.tencent.cos.model.PutObjectRequest;
@@ -24,16 +25,17 @@ import static com.example.a29149.yuyuan.Application.MyApplication.cos;
 
 public class UploadFile {
     public static String bucket = "foolkey";
-    public static String cosPath = "/photo/test4.png";
+    public static String cosPath = PictureInfoBO.getOnlinePhoto("18306131366");
     //web.myqcloud.com
     public static String srcPath = "";//本地文件的绝对路径
-    public static String sign = "";
+    public  String sign = "";
     public Context mContext;
     public BizServer bizServer ;
 
-    public UploadFile(Context mContext){
+    public UploadFile(Context mContext,String sign){
         this.mContext = mContext;
         bizServer = BizServer.getInstance(mContext);
+        this.sign = sign;
     }
     public static void setSrcPath(String srcPath) {
         UploadFile.srcPath = srcPath;
@@ -42,13 +44,13 @@ public class UploadFile {
 
     public static PutObjectRequest putObjectRequest = new PutObjectRequest();
 
-    public static void updata(String srcPath) {
+    public void updata(String srcPath) {
         putObjectRequest.setBucket(bucket);
         putObjectRequest.setCosPath(cosPath);
         putObjectRequest.setSrcPath(srcPath);
         putObjectRequest.setSign(sign);
 
-        Log.i("malei","开始上传");
+        Log.i("malei","开始上传sign ="+sign);
         putObjectRequest.setListener(new IUploadTaskListener() {
             @Override
             public void onSuccess (COSRequest cosRequest, COSResult cosResult){

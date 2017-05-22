@@ -26,9 +26,11 @@ import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
+import com.example.a29149.yuyuan.Util.Secret.ConverterByteBase64;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UploadFile;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.userInfo.GetPictureImageController;
 
 import org.json.JSONObject;
 
@@ -74,9 +76,7 @@ public class ImageUploadActivity extends Activity {
         mUpdateImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UploadFile uploadFile = new UploadFile(ImageUploadActivity.this);
-                Log.i("malei", srcPath);
-                uploadFile.updata(srcPath);
+                new GetSignAction().execute();
             }
         });
     }
@@ -207,12 +207,9 @@ public class ImageUploadActivity extends Activity {
 
         @Override
         protected String doInBackground(String... params) {
-            try {
-                return send(URL.publicKeyURL, new JSONObject());
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
+
+            String result = GetPictureImageController.execute();
+            return result;
 
         }
 
@@ -226,10 +223,15 @@ public class ImageUploadActivity extends Activity {
                     JSONObject jsonObject = new JSONObject(result);
 
                     String resultFlag = jsonObject.getString("result");
-                    String publicKey = jsonObject.getString("publicKey");
+                    String sign = jsonObject.getString("sign");
+                    sign = new String( ConverterByteBase64.base642Byte(sign) );
+                    Log.i("malei","sign="+sign);
 
                     if (resultFlag.equals("success")) {
-
+                        GlobalUtil.getInstance().setSign(sign);
+                        UploadFile uploadFile = new UploadFile(ImageUploadActivity.this,GlobalUtil.getInstance().getSign());
+                        Log.i("malei", srcPath);
+                        uploadFile.updata(srcPath);
                     }
                 } catch (Exception e) {
                     Toast.makeText(ImageUploadActivity.this, "连接失败", Toast.LENGTH_SHORT).show();

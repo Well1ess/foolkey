@@ -84,13 +84,13 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
                 Toast.makeText(mContext, "请求失败，请重新登录", Toast.LENGTH_SHORT).show();
                 mContext.startActivity(new Intent(mContext, LoginActivity.class));
                 Activity activity = (Activity)mContext;
-                activity.finish();
+//                activity.finish();
             }
         } else {
             Toast.makeText(mContext, "网络连接失败！", Toast.LENGTH_SHORT).show();
             mContext.startActivity(new Intent(mContext, LoginActivity.class));
             Activity activity = (Activity)mContext;
-            activity.finish();
+//            activity.finish();
         }
 
     }

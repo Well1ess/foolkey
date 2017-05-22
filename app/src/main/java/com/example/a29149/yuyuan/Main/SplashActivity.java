@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.Main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +17,7 @@ import com.example.a29149.yuyuan.Util.log;
  * Created by geyao on 2017/5/22.
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
 
     //获取用户配置
     UserConfig userConfig;
@@ -26,8 +27,9 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setTheme( R.style.splashScreenTheme );
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_splash);
 
         userConfig = new UserConfig(this);
         if (userConfig.getBooleanInfo(UserConfig.xmlSAVE)) {
@@ -38,12 +40,12 @@ public class SplashActivity extends AppCompatActivity {
             GlobalUtil.getInstance().setAESKey(userConfig.getStringInfo(UserConfig.xmlAES_KEY));
             GlobalUtil.getInstance().setToken(userConfig.getStringInfo(UserConfig.xmlTOKEN));
 
-            System.out.println(this.getClass() + "判断可以自动登录");
             //TODO：直接进行网络传输
+            //向服务器刷新，如果成功，则登录
             RefreshSelfInfo refreshSelfInfo = new RefreshSelfInfo(this);
             refreshSelfInfo.execute();
         }else {
-            System.out.println(this.getClass() + "判断不可以自动登录");
+            //如果本地没有数据，则重新登录
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
             SplashActivity.this.finish();

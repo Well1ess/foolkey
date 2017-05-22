@@ -318,4 +318,8 @@
         <item name="android:paddingLeft">25dp</item>
     </style>
 
+    <style name="splashScreenTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/splash_test</item>
+    </style>
+
 </resources>

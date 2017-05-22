@@ -16,25 +16,17 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoClassRewardAdapter;
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoCommentRewardAdapter;
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoConmmentClassAdapter;
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoStartCourseAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
-import com.example.a29149.yuyuan.controller.order.student.GetSpecifiStateOrderController;
+import com.example.a29149.yuyuan.controller.order.student.GetSpecificStateOrderController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +45,7 @@ public class NoClassFragment extends Fragment {
     private List rewardList = new ArrayList();//悬赏列表
     private List courseList = new ArrayList();//课程列表
 
+    private Object object;
     public ShapeLoadingDialog shapeLoadingDialog;
 
 
@@ -108,7 +101,7 @@ public class NoClassFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            return GetSpecifiStateOrderController.execute(
+            return GetSpecificStateOrderController.execute(
                     OrderStateEnum.同意上课.toString(),
                     pageNo + ""
             );

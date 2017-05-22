@@ -50,17 +50,19 @@
         android:layout_marginTop="65dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@color/white"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/QQmusicTipRed"
-            android:gravity="center"
-            android:id="@+id/quit"
-            android:text="退出登陆"/>
+        android:background="@color/background"
+        android:orientation="vertical"
+        >
+
+        <!--切换身份-->
+        <include layout="@layout/component_button_switch"/>
+
+        <!--登出-->
+        <include layout="@layout/component_button_logout"/>
+
+
+
+
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

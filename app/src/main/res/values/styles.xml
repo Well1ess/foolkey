@@ -318,6 +318,7 @@
         <item name="android:paddingLeft">25dp</item>
     </style>
 
+    <!--启动时最早显示的画面-->
     <style name="splashScreenTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/splash_test</item>
     </style>

@@ -20,17 +20,17 @@
         />
     <!--上面是登录的背景图片，登录还是不要背景图片了-->
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true">
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:background="#F0F0F0"/>
-    </RelativeLayout>
+        android:paddingLeft="90dp"
+        android:paddingRight="90dp"
+        android:paddingTop="30dp"
+        >
+
+        <include layout="@layout/component_photo_circle" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_marginLeft="16dp"

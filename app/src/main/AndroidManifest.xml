@@ -175,6 +175,8 @@
 
         </activity>
 
+
+        <!--splashActivity -->
         <activity android:name=".Main.SplashActivity"
             android:theme="@style/splashScreenTheme"
             >

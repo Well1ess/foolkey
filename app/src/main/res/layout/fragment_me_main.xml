@@ -240,116 +240,11 @@
                 android:background="@color/white"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                <!--我当前的余额，虚拟币-->
+                <include layout="@layout/virtual_money_text_button"/>
+                <!--我的优惠券-->
+                <include layout="@layout/component_coupon_text_button"/>
 
-                    <TextView
-                        style="@style/TextView.MeMenuNumber"
-                        android:text="2500"/>
-
-                    <TextView
-                        style="@style/TextView.MeMenuNumberUnit"
-                        android:text="人民币"/>
-
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/black"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/textview_normal"
-                        android:padding="5dp"
-                        android:text="  提 现  "
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/virtual_money"
-                        style="@style/TextView.MeMenuNumber"
-                        android:text="2500"/>
-
-                    <TextView
-                        style="@style/TextView.MeMenuNumberUnit"
-                        android:text="虚拟币"/>
-
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/black"/>
-
-                    <TextView
-                        android:id="@+id/recharge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/textview_normal"
-                        android:padding="5dp"
-                        android:text="  充 值  "
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/TextView.MeMenuNumber"
-                        android:text="1"/>
-
-                    <TextView
-                        style="@style/TextView.MeMenuNumberUnit"
-                        android:text="优惠券"/>
-
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/black"/>
-
-                    <TextView
-                        android:id="@+id/check_coupon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/textview_normal"
-                        android:padding="5dp"
-                        android:text="  查 看  "
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"/>
-
-                </LinearLayout>
 
 
             </LinearLayout>
@@ -357,80 +252,11 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:background="@color/white">
 
-                <TextView
-                    android:id="@+id/change_role"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/textview_normal"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:text="  切 换 身 份  "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/change_role"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
-                    android:orientation="vertical"
-                    android:scaleX="0.6"
-                    android:scaleY="0.6">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@android:drawable/ic_dialog_info"
-                            android:backgroundTint="@color/orange"
-                            android:scaleX="0.6"
-                            android:scaleY="0.6"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:drawableTint="@color/orange"
-                            android:text=" 切换为教师形态"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="可以直接"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="赚取现金"
-                            android:textColor="@color/orange"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="哦！"/>
-                    </LinearLayout>
-                </LinearLayout>
+                <!--提示信息-->
+                <include layout="@layout/component_tips_2_line"/>
 
             </RelativeLayout>
 

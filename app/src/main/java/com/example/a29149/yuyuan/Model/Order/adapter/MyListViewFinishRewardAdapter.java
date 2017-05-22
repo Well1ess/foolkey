@@ -2,49 +2,73 @@ package com.example.a29149.yuyuan.Model.Order.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.CourseAbstract;
+import com.example.a29149.yuyuan.DTO.CourseDTO;
+import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
+import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
+import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.StudentDTO;
+import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.Const;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * Created by MaLei on 2017/4/24.
  * Email:ml1995@mail.ustc.edu.cn
- * 已完成的悬赏listView的Adapter
+ * 已购买课程且已完成的订单listView的Adapter
  */
 
-public class MyListViewFinishRewardAdapter extends BaseAdapter implements View.OnClickListener {
-
+public class MyListViewFinishRewardAdapter extends BaseAdapter{
     private Context mContext;
-    private  View view ;
+
     private ImageView mTeacherPhone;//老师头像
     private TextView mTeacherNameAndCourseName;//老师姓名和课程名
-    private TextView mExceptTime;//预计时长
-    private TextView mTeacherCharge;//老师收费
-    private TextView mStudentRewardState;//学生悬赏状态：是否申请
+    private TextView mBuyTime;//购买时长
+    private TextView mCourseCost;//课程价格
     private TextView mPay;//学生点击付款按钮
-    private List<Map<String,Object>> courseNoPayList;//已购买课程但还未付款订单
+    private List<OrderBuyCourseAsStudentDTO> courseFinishList;//已完成的课程订单
+    private StudentDTO mStudentDTO;//学生信息
+    private TeacherDTO mTeacherDTO;//老师信息
+    private CourseDTO mCourseDTO;//课程信息
+    private RewardDTO mRewardDTO;//悬赏信息
+    private OrderBuyCourseDTO mOrderBuyCourseDTO;//订单信息
+    private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
+    private CourseAbstract courseDTO = null ;
+
 
     public MyListViewFinishRewardAdapter(Context context)
     {
         this.mContext = context;
     }
 
+    //设置列表数据
+    public void setData(List<OrderBuyCourseAsStudentDTO> courseFinishList) {
+        if (courseFinishList == null) {
+            this.courseFinishList = new ArrayList<>();
+        }else {
+            this.courseFinishList = courseFinishList;
+        }
+    }
+
     @Override
     public int getCount() {
-        return 3;
+        return courseFinishList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return position;
+        return courseFinishList.get(position);
     }
 
     @Override
@@ -54,29 +78,31 @@ public class MyListViewFinishRewardAdapter extends BaseAdapter implements View.O
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        view=View.inflate(mContext, R.layout.listview_item_finish_reward,null);
-        initView();
+        View view ;
+        view=View.inflate(mContext, R.layout.listview_item_finish_course,null);
+        initView(view);
+
+        mOrderBuyCourseAsStudentDTO = courseFinishList.get(position);
+
+        mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
+        mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();
+        mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
+
+        courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
+
+
+        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName() +" : " + courseDTO.getTopic().toString() + "");
+        mBuyTime.setText("授课时长 ：" + mOrderBuyCourseDTO.getNumber().toString()+" h");
+        mCourseCost.setText("老师收费 : " + mOrderBuyCourseDTO.getAmount()+"" + Const.PRICE_NAME);
+
         return view;
     }
 
-    private void initView() {
+    private void initView(View view) {
         mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
         mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
-        mExceptTime = (TextView) view.findViewById(R.id.tv_exceptTime);
-        mTeacherCharge = (TextView) view.findViewById(R.id.teacherCharge);
+        mBuyTime = (TextView) view.findViewById(R.id.tv_buyTime);
+        mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id)
-        {
-            case R.id.tv_pay:
-                pay();
-        }
-    }
-
-    private void pay() {
-        Toast.makeText(mContext, "支付未付款的悬赏", Toast.LENGTH_SHORT).show();
-    }
 }

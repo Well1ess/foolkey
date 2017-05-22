@@ -7,11 +7,11 @@ import java.util.Stack;
 
 /**
  * Created by 张丽华 on 2017/5/1.
- * Description:
+ * Description:一个管理activity的任务栈
  */
 
 public class AppManager {
-    private static Stack<Activity> activityStack;
+    private static Stack<Activity> activityStack = new Stack<>();
     private static volatile AppManager instance;
 
     private AppManager() {

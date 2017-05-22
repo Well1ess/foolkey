@@ -168,6 +168,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                     || verifyState.compareTo(VerifyStateEnum.verified) == 0)
             {
                 Intent intent = new Intent(getActivity(),MainTeacherActivity.class);
+                AppManager.getInstance().finishAllActivity();
                 startActivity(intent);
             }
             else

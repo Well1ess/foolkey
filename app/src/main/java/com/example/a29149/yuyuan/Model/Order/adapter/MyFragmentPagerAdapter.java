@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.a29149.yuyuan.Model.Order.fragment.AllOrderFragment;
+import com.example.a29149.yuyuan.Model.Order.fragment.FinishOrderFragment;
 import com.example.a29149.yuyuan.Model.Order.fragment.NoClassFragment;
 import com.example.a29149.yuyuan.Model.Order.fragment.NoCommentFragment;
 import com.example.a29149.yuyuan.Model.Order.fragment.NoPayFragment;
@@ -35,7 +35,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         fragments.add(new NoPayFragment());
         fragments.add(new NoClassFragment());
         fragments.add(new NoCommentFragment());
-        fragments.add(new AllOrderFragment());
+        fragments.add(new FinishOrderFragment());
     }
 
     @Override

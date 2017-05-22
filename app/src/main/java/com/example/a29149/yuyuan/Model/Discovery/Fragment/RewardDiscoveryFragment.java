@@ -41,6 +41,7 @@ public class RewardDiscoveryFragment extends Fragment {
     //上划到底部动态更新的List
     @ViewInject(R.id.content)
     private DynamicListView mRewardList;
+
     private RewardListAdapter mListAdapter;
 
     //记录请求的页数
@@ -167,6 +168,7 @@ public class RewardDiscoveryFragment extends Fragment {
                             GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(courseStudentDTOS);
                         } else if (pageNo > 1) {
                             GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().addAll(courseStudentDTOS);
+                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(courseStudentDTOS);
                             mRewardList.onLoadFinish();
                         }
 

@@ -15,13 +15,12 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoCommentRewardAdapter;
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoConmmentClassAdapter;
+import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishRewardAdapter;
+import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishCourseAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.order.student.GetSpecifiStateOrderController;
@@ -29,10 +28,6 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,27 +36,28 @@ import java.util.Map;
 /**
  * Created by MaLei on 2017/4/29.
  * Email:ml1995@mail.ustc.edu.cn
- * 未评价订单的Fragment
+ * 已完成订单的Fragment
  */
 
-public class NoCommentFragment extends Fragment {
+public class FinishOrderFragment extends Fragment {
 
     private Context mContext;
     private MyListView mBuyCourse;
     private MyListView mReward;
     private MyListView mRecommand;
-    private List<Map<String,Object>> courseNoPayList = new ArrayList<>();
+    private List<Map<String, Object>> courseNoPayList = new ArrayList<>();
+
     private List rewardList = new ArrayList();//悬赏列表
     private List courseList = new ArrayList();//课程列表
 
-    public  ShapeLoadingDialog shapeLoadingDialog;
+    public ShapeLoadingDialog shapeLoadingDialog;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getContext();
-        View view = inflater.inflate(R.layout.fragment_viewpager_nocomment, null);
+        View view = inflater.inflate(R.layout.fragment_viewpager_all_order, null);
 
         shapeLoadingDialog = new ShapeLoadingDialog(mContext);
         shapeLoadingDialog.setLoadingText("加载中...");
@@ -71,24 +67,26 @@ public class NoCommentFragment extends Fragment {
         loadData();
 
         mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
+        mReward = (MyListView) view.findViewById(R.id.lv_reward);
+        mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
+
+
         mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Log.i("malei", "你点击了" + position);
             }
         });
-        mReward = (MyListView) view.findViewById(R.id.lv_reward);
         mReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("malei","你点击了"+position);
+                Log.i("malei", "你点击了" + position);
             }
         });
-        mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
         mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("malei","你点击了"+position);
+                Log.i("malei", "你点击了" + position);
             }
         });
 
@@ -98,8 +96,8 @@ public class NoCommentFragment extends Fragment {
         return view;
     }
 
-    private void loadData()
-    {
+
+    private void loadData() {
         //如果没有进行加载
         if (shapeLoadingDialog != null) {
             shapeLoadingDialog.show();
@@ -111,8 +109,9 @@ public class NoCommentFragment extends Fragment {
     private void requestData(int pageNo) {
         new RequestNoPayCourseAction(pageNo).execute();
     }
+
     /**
-     * 请求以购买未付款的订单Action
+     * 请求已完成的订单Action
      */
     public class RequestNoPayCourseAction extends AsyncTask<String, Integer, String> {
 
@@ -126,10 +125,8 @@ public class NoCommentFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            System.out.println();
-            System.out.println(this.getClass() + "这里的到底是要未评价还是未付款的订单？？？\n");
             return GetSpecifiStateOrderController.execute(
-                    OrderStateEnum.结束上课.toString(),
+                    OrderStateEnum.已评价.toString(),
                     pageNo + ""
             );
 
@@ -148,7 +145,6 @@ public class NoCommentFragment extends Fragment {
                     }.getType();
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
                     GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
-                    //Log.i("malei", "commentRewardActivity="+GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().toString());
 
                     rewardList.clear();
                     courseList.clear();
@@ -166,19 +162,20 @@ public class NoCommentFragment extends Fragment {
                     }
 
 
-                    Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
+                    Log.i("malei", orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(mContext, "获取成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "获取已完成订单成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                MyListViewNoConmmentClassAdapter myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
-                                myListViewNoConmmentClassAdapter.setData(courseList);
-                                mBuyCourse.setAdapter(myListViewNoConmmentClassAdapter);
 
-                                MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
-                                myListViewNoCommentRewardAdapter.setData(rewardList);
-                                mReward.setAdapter(myListViewNoCommentRewardAdapter);
+                                MyListViewFinishRewardAdapter myListViewFinishRewardAdapter = new MyListViewFinishRewardAdapter(mContext);
+                                myListViewFinishRewardAdapter.setData(courseList);
+                                mBuyCourse.setAdapter(myListViewFinishRewardAdapter);
+
+                                MyListViewFinishCourseAdapter myListViewFinishCourseAdapter = new MyListViewFinishCourseAdapter(mContext);
+                                myListViewFinishCourseAdapter.setData(rewardList);
+                                mReward.setAdapter(myListViewFinishCourseAdapter);
 
                                 shapeLoadingDialog.dismiss();
 

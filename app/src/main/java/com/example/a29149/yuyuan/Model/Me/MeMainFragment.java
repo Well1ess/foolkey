@@ -55,14 +55,12 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
     private WarningDisplayDialog.Builder displayInfo;
 
     private TextView mTitle;//用户名
+    private TextView mChangeRole;//切换用户角色
     private TextView mOwnerReward;//我的悬赏
     private TextView mOwnerCourse;//我的课程
 
     @ViewInject(R.id.virtual_money)
     private TextView mVirtualMoney;
-
-//    @ViewInject(R.id.cash_rmb)
-//    private TextView cashView;
 
     public MeMainFragment() {
 
@@ -94,13 +92,13 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
     private void initView()
     {
         int virtualMoney = DoubleParseInt(GlobalUtil.getInstance().getStudentDTO().getVirtualCurrency());
-        //将现金转换为好看的样子，保留2位小数
-//        String cash = String.format("%.2f", GlobalUtil.getInstance().getStudentDTO().getCash() );
         mVirtualMoney.setText(virtualMoney+"");
-//        cashView.setText(cash);
 
         mTitle = (TextView) view.findViewById(R.id.title);
         mTitle.setText(GlobalUtil.getInstance().getStudentDTO().getNickedName());
+
+        mChangeRole = (TextView) view.findViewById(R.id.change_role);
+        mChangeRole.setOnClickListener(this);
 
         mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
         mOwnerReward.setOnClickListener(this);
@@ -108,6 +106,25 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
         mOwnerCourse.setOnClickListener(this);
 
+
+        displayInfo = new WarningDisplayDialog.Builder(getContext());
+        displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        displayInfo.setPositiveButton("确      定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //点击确定后跳发送申请认证
+                new ApplyAuthenticationTeacherAction().execute();
+                Intent intent = new Intent(getContext(), MainTeacherActivity.class);
+                startActivity(intent);
+            }
+        });
+        displayInfo.create();
 
     }
 
@@ -117,6 +134,9 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         int id = view.getId();
         switch (id)
         {
+            case R.id.change_role:
+                changeRole();
+                break;
             case R.id.owner_reward:
                 Intent intent1 = new Intent(getActivity(),OwnerRewardActivity.class);
                 startActivity(intent1);
@@ -248,6 +268,113 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    //切换身份
+    public class ChangeRole extends AsyncTask<String, Integer, String> {
 
+        public ChangeRole() {
+            super();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            return SwitchToTeacherController.execute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            log.d(this, result);
+            if (result != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String resultFlag = jsonObject.getString("result");
+                    if (resultFlag.equals("success")) {
+
+                    } else {
+                        Toast.makeText(getActivity(), "JSON解析异常！", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getActivity(), "返回结果异常！", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+    }
+
+
+    /**
+     * 认证老师请求Action
+     */
+    public class ApplyAuthenticationTeacherAction extends AsyncTask<String, Integer, String> {
+
+        public ApplyAuthenticationTeacherAction() {
+            super();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            return ApplyToVerifyController.execute();
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            log.d(this, result);
+            if (result != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String resultFlag = jsonObject.getString("result");
+
+                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
+                    }.getType();
+                    StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("studentDTO"), type);
+                    //存储学生信息DTO
+                    GlobalUtil.getInstance().setStudentDTO(studentDTO);
+                    //获取老师信息DTO
+                    java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<TeacherDTO>() {
+                    }.getType();
+                    TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
+                    Log.i("malei",jsonObject.getString("teacherDTO"));
+                    if(teacherDTO != null)
+                    {
+                        //存储老师DTO
+                        GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
+                        Log.i("geyao  ", "认证后存储老师DTO了嘛？ " + this.getClass());
+                    }
+
+
+                    if (resultFlag.equals("success")) {
+                        Toast.makeText(getContext(), "认证成功！", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getContext(), "网络连接失败！", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+    }
 
 }

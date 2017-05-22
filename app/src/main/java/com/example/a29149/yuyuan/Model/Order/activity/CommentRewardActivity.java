@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
@@ -34,6 +35,7 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
     private TextView mPublish;//发布评价
     private TextView mRewardScore;//订单分数
     private String score;//保存评价分数
+    private String orderId;//保存评价订单ID
     private int position;//记录评论位置
 
     @Override
@@ -42,7 +44,8 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
         setContentView(R.layout.activity_comment_reward);
         Intent intent = getIntent();
         position = intent.getIntExtra("position",-1);
-        Log.i("malei",position+"");
+        orderId = intent.getStringExtra("orderId");
+        Log.i("malei","position="+position+"    "+ "orderId="+orderId+"");
         initView();
     }
 
@@ -91,9 +94,10 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
 
         @Override
         protected String doInBackground(String... params) {
-
+            Log.i("malei", GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().toString());
             return JudgeTeacherController.execute(
-                    GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId() + "",
+                    //GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId() + "",
+                    orderId,
                     score
             );
 
@@ -111,6 +115,10 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
 
                     if (resultFlag.equals("success")) {
                         Toast.makeText(CommentRewardActivity.this, "评价成功！", Toast.LENGTH_SHORT).show();
+                        //跳转到主页面
+                        Intent intent = new Intent(CommentRewardActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 } catch (Exception e) {
                     Toast.makeText(CommentRewardActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();

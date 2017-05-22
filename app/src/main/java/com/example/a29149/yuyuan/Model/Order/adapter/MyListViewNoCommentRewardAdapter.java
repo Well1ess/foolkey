@@ -2,6 +2,7 @@ package com.example.a29149.yuyuan.Model.Order.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,6 +17,7 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Model.Order.activity.CommentRewardActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.Const;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +90,7 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
 
         mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
         mExceptTime.setText("预计时长:" + mOrderBuyCourseDTO.getNumber().toString() + "h");
-        mTeacherCharge.setText("老师收费：" + courseDTO.getPrice().toString()+"RMB");
+        mTeacherCharge.setText("老师收费：" + courseDTO.getPrice().toString()+ Const.PRICE_NAME);
 
         return view;
     }
@@ -117,6 +119,9 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
         //跳转到悬赏订单评价
         Intent intent = new Intent(mContext, CommentRewardActivity.class);
         intent.putExtra("position",position);
+        String orderId = rewardNoCommentList.get(position).getOrderDTO().getId() + "";
+        Log.i("malei","orderId="+orderId);
+        intent.putExtra("orderId",orderId);
         mContext.startActivity(intent);
     }
 }

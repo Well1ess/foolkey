@@ -16,6 +16,7 @@ public class Const {
     public static final int FROM_ME_FRAGMENT_TO_RECHARGE = 1;
 
     //悬赏标签
-
     public static final String[] REWARD_TAG = {"Java","C", "JavaScript","Python","PHP","Html5","Android","iOS","MySQL","前端","后端","其它"};
+    //价格名称
+    public static final String PRICE_NAME = "XYB";
 }

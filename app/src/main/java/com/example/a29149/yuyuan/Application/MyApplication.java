@@ -6,6 +6,9 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.tencent.cos.COSClient;
+import com.tencent.cos.COSClientConfig;
+import com.tencent.cos.common.COSEndPoint;
 import com.xiaomi.channel.commonutils.logger.LoggerInterface;
 import com.xiaomi.mipush.sdk.Logger;
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -23,6 +26,8 @@ public class MyApplication extends Application {
     public static final String APP_ID = "2882303761517572848";
     public static final String APP_KEY = "5151757210848";
     public static final String TAG = "com.example.a29149";
+
+    public static COSClient cos;
 
         @Override
         public void onCreate() {
@@ -55,6 +60,17 @@ public class MyApplication extends Application {
                 }
             };
             Logger.setLogger(this, newLogger);
+
+            String appid =  "1252706879";
+            Context context = getApplicationContext();
+            String peristenceId = "AKIDlU4rgPAJTXbaTDTDVuKuKh2GJDwbgPkw";
+
+             //创建COSClientConfig对象，根据需要修改默认的配置参数
+            COSClientConfig config = new COSClientConfig();
+            //如设置园区
+            config.setEndPoint(COSEndPoint.COS_GZ);
+
+             cos = new COSClient(context,appid,config,peristenceId);
         }
         //判断应用是否开启
         private boolean shouldInit() {

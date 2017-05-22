@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
+import com.example.a29149.yuyuan.Main.ImageUploadActivity;
 import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
@@ -58,6 +60,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
     private TextView mChangeRole;//切换用户角色
     private TextView mOwnerReward;//我的悬赏
     private TextView mOwnerCourse;//我的课程
+    private  ImageView mHeadImage;//用户头像
 
     @ViewInject(R.id.virtual_money)
     private TextView mVirtualMoney;
@@ -106,6 +109,9 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
         mOwnerCourse.setOnClickListener(this);
 
+        mHeadImage = (ImageView) view.findViewById(R.id.head);
+        mHeadImage.setOnClickListener(this);
+
 
         displayInfo = new WarningDisplayDialog.Builder(getContext());
         displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
@@ -145,6 +151,10 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                 Intent intent2 = new Intent(getActivity(),OwnerCourseTeacherActivity.class);//课程
                 //Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
                 startActivity(intent2);
+                break;
+            case R.id.head:
+                Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
+                startActivity(intent3);
                 break;
             default:
                 break;

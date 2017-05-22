@@ -23,7 +23,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
-import com.example.a29149.yuyuan.controller.order.student.GetSpecifiStateOrderController;
+import com.example.a29149.yuyuan.controller.order.student.GetSpecificStateOrderController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -125,7 +125,7 @@ public class FinishOrderFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            return GetSpecifiStateOrderController.execute(
+            return GetSpecificStateOrderController.execute(
                     OrderStateEnum.已评价.toString(),
                     pageNo + ""
             );

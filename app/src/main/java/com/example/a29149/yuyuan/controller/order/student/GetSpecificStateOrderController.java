@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * Created by geyao on 2017/5/21.
  */
 
-public class GetSpecifiStateOrderController extends AbstractController {
+public class GetSpecificStateOrderController extends AbstractController {
 
     private static String url = address + "/aes/getOrderAsStudent";
 

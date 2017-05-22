@@ -21,18 +21,13 @@ import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
-import com.example.a29149.yuyuan.controller.order.student.GetSpecifiStateOrderController;
+import com.example.a29149.yuyuan.controller.order.student.GetSpecificStateOrderController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -128,7 +123,7 @@ public class NoCommentFragment extends Fragment {
 
             System.out.println();
             System.out.println(this.getClass() + "这里的到底是要未评价还是未付款的订单？？？\n");
-            return GetSpecifiStateOrderController.execute(
+            return GetSpecificStateOrderController.execute(
                     OrderStateEnum.结束上课.toString(),
                     pageNo + ""
             );

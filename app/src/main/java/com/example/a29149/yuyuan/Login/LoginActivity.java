@@ -27,6 +27,7 @@ import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.LogInController;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -56,8 +57,12 @@ public class LoginActivity extends AppCompatActivity{
     @ViewInject(R.id.password)
     private EditText mPasswordView;
 
+    //Glide依赖
     private RequestManager glide;
+    //寻找图片的BO
+    private PictureInfoBO pictureInfoBO = new PictureInfoBO();
 
+    //华哥画的圈，现在可以注入照片了
     @ViewInject(R.id.photo_circle)
     private ImageView imageView;
 
@@ -74,8 +79,9 @@ public class LoginActivity extends AppCompatActivity{
         AnnotationUtil.setClickListener(this);
 
 
+        //用glide动态地加载图片
         glide = Glide.with(this);
-        glide.load("http://foolkey-1252706879.cossh.myqcloud.com/photo/test.png")
+        glide.load( pictureInfoBO.getPhotoURL( UserConfig.xmlUSER_NAME ) )
                 .transform(new GlideCircleTransform(this))
                 .into(imageView);
 

@@ -2,6 +2,7 @@ package com.example.a29149.yuyuan.Teacher.Index.reward;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseWithStudentAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.TeacherMain.Score.TeacherScoreMainFragment;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.URL;
@@ -55,7 +57,8 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
 
     public void update()
     {
-        this.notifyDataSetChanged();
+        this.notifyDataSetInvalidated();
+        //this.notifyDataSetChanged();
     }
 
     @Override
@@ -202,6 +205,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
 
                         Toast.makeText(mContext, "开始上课成功！", Toast.LENGTH_SHORT).show();
                         myViewHolder.state.setText("点击下课");
+                        mOrderBuyCourseDTO.setOrderStateEnum(OrderStateEnum.上课中);
 
                     }
                 } catch (Exception e) {
@@ -256,7 +260,11 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
                     if (resultFlag.equals("success")) {
 
                         Toast.makeText(mContext, "下课成功！", Toast.LENGTH_SHORT).show();
+                        mOrderBuyCourseDTO.setOrderStateEnum(OrderStateEnum.结束上课);
                         myViewHolder.state.setText("完成");
+                        update();
+                        Intent intent = new Intent(mContext,TeacherScoreMainFragment.class);
+                        mContext.startActivity(intent);
 
                     }
                 } catch (Exception e) {

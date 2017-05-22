@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
@@ -22,8 +23,6 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.HttpSender;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
@@ -32,10 +31,6 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.util.List;
 
 
@@ -47,6 +42,10 @@ public class ClassesFragment extends Fragment {
     @ViewInject(R.id.content)
     private DynamicListView mDynamicList;
     private IndexContentAdapter mContentAdapter;
+
+    //空列表显示
+    @ViewInject(R.id.empty)
+    private ImageView iv_empty;
 
     //暂存当前的类别
     TechnicTagEnum mTechnicTagEnum;
@@ -207,6 +206,8 @@ public class ClassesFragment extends Fragment {
                         //若>1则表示分页存取
                         if (pageNo == 1) {
                             GlobalUtil.getInstance().setCourseTeacherPopularDTOs(courseTeacherDTOs,mTechnicTagEnum);
+                            if (courseTeacherDTOs.size()==0)
+                                iv_empty.setVisibility(View.VISIBLE);
                         } else if (pageNo > 1) {
                             GlobalUtil.getInstance().getCourseTeacherPopularDTOs(mTechnicTagEnum).addAll(courseTeacherDTOs);
                             mDynamicList.onLoadFinish();

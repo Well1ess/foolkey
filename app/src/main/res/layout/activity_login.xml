@@ -12,6 +12,14 @@
     android:focusableInTouchMode="true"
     tools:context="com.example.a29149.yuyuan.Login.LoginActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/load"
+
+        />
+    <!--上面是登录的背景图片，登录还是不要背景图片了-->
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

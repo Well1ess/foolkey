@@ -318,7 +318,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:background="@color/white"
-                    android:gravity="center_vertical"
+                    android:gravity="bottom"
                     android:orientation="horizontal">
 
                     <RadioButton

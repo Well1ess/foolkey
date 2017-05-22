@@ -38,6 +38,7 @@
         android:theme="@style/AppNoBar">
         <activity android:name=".Main.MainActivity"
             android:launchMode="singleTask"></activity>
+
         <activity android:name=".Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -165,7 +166,6 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".TeacherMain.Score.MoreStudent.MoreStudentActivity">
-
         </activity>
     </application>
 

@@ -23,8 +23,7 @@ public class ChargeMoneyController extends AbstractController {
             jsonObject.put("amount", amount );
             return HttpSender.send( url, jsonObject );
         }catch (Exception e){
-            e.printStackTrace();
-            return failJSON();
+            return failJSON( e );
         }
     }
 }

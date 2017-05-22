@@ -118,6 +118,10 @@ public class GlobalUtil {
     //老师UI——课程
     private List<String> teacherUIScore;
 
+
+    //腾讯SCO签名
+    private String sign;
+
     public List<String> getTeacherUIScore() {
         if (teacherUIScore == null){
             teacherUIScore = new ArrayList<>();
@@ -406,6 +410,15 @@ public class GlobalUtil {
 
     public void setTechnicTagEnum(TechnicTagEnum technicTagEnum) {
         this.technicTagEnum = technicTagEnum;
+    }
+
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
     }
 }
 

@@ -20,6 +20,12 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 上传图片至腾讯服务器所需权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <permission
         android:name="com.example.a29149.yuyuan.permission.MIPUSH_RECEIVE"
@@ -101,6 +107,8 @@
         <activity android:name=".Teacher.Index.course.OwnerCourseTeacherActivity"/>
         <!-- 切换成老师用户后的主界面 -->
         <activity android:name=".TeacherMain.MainTeacherActivity"/>
+        <!-- 用户上传头像界面 -->
+        <activity android:name=".Main.ImageUploadActivity"/>
 
         <!-- 小米推送所需服务 -->
         <service

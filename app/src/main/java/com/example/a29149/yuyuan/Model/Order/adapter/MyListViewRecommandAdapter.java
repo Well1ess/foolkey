@@ -25,8 +25,10 @@ public class MyListViewRecommandAdapter extends BaseAdapter implements View.OnCl
     private  View view ;
 
     private ImageView mTeacherPhone;//老师头像
-    private TextView mCourseName;//课程名
+
     private TextView mTeacherName;//老师姓名
+    private TextView mTeacherPrestige;
+    private TextView mTeacherSlogan;
     private TextView mBuyTime;//购买时长
     private TextView mCourseDescription;//课程描述
     private TextView mFollow;//是否关注
@@ -62,10 +64,10 @@ public class MyListViewRecommandAdapter extends BaseAdapter implements View.OnCl
 
     private void initView() {
         mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
-        mCourseName = (TextView) view.findViewById(R.id.tv_courseName);
-        mTeacherName = (TextView) view.findViewById(R.id.tv_teacherName);
-        mCourseDescription = (TextView) view.findViewById(R.id.tv_courseDescription);
-        mFollow = (TextView) view.findViewById(R.id.tv_follow);
+        mTeacherName = (TextView) view.findViewById(R.id.teacher_name);
+        mTeacherSlogan = (TextView) view.findViewById(R.id.teacher_slogan);
+        mTeacherPrestige = (TextView) view.findViewById(R.id.teacher_prestige);
+        mFollow = (TextView) view.findViewById(R.id.not_follow);
         mFollow.setOnClickListener(this);
     }
 
@@ -74,7 +76,7 @@ public class MyListViewRecommandAdapter extends BaseAdapter implements View.OnCl
         int id = v.getId();
         switch (id)
         {
-            case R.id.tv_follow:
+            case R.id.not_follow:
                 follow();
         }
     }

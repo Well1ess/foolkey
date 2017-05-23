@@ -6,6 +6,8 @@
     android:layout_height="match_parent">
 
 
+
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -46,6 +48,12 @@
 
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/light_white"
+        />
 
     <FrameLayout
         android:layout_width="match_parent"

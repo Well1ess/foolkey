@@ -5,6 +5,7 @@
     <color name="colorPrimary">#8BC34A</color>
     <color name="colorPrimaryLimit">#9CCC65</color>
     <color name="colorPrimaryDark">#7CB342</color>
+    <color name="light_white">#f0f0f0</color>
 
     <color name="colorAccent">#8BC34A</color>
 

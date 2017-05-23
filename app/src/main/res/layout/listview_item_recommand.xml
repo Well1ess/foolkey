@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:gravity="center"
-    android:padding="30dp"
+    android:padding="15dp"
     android:background="@color/white"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/iv_teacherPhone"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:src="@mipmap/ic_launcher_round"/>
 
@@ -20,24 +20,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="30dp">
+        android:paddingLeft="30dp">
         <TextView
-            android:id="@+id/tv_courseName"
+            android:id="@+id/teacher_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/grey555"
-            android:text="javaEE"/>
-        <TextView
-            android:id="@+id/tv_teacherName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey555"
+            android:textColor="@color/grey"
             android:text="朱洪军"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
         <TextView
-            android:id="@+id/tv_courseDescription"
+            android:id="@+id/teacher_prestige"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/grey555"
+            android:textColor="@color/dark_green"
+            android:text="50"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+        <TextView
+            android:id="@+id/teacher_slogon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
             android:text="简介。。。"/>
     </LinearLayout>
 
@@ -45,8 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/tv_follow"
-            android:background="@drawable/shape_corner_white"
+            android:id="@+id/not_follow"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:padding="5dp"
@@ -54,7 +59,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_green"
+            android:visibility="visible"
             android:text="+关注"/>
+        <TextView
+            android:id="@+id/already_follow"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="5dp"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_green"
+            android:visibility="gone"
+            android:text="已关注"/>
     </RelativeLayout>
 
 </LinearLayout>

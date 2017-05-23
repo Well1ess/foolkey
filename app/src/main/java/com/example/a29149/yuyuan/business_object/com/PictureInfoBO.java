@@ -1,13 +1,6 @@
 package com.example.a29149.yuyuan.business_object.com;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.example.resource.util.image.GlideCircleTransform;
 
 /**
  * 用来加载图片的URL
@@ -50,17 +43,14 @@ public class PictureInfoBO extends AbstractBO {
     }
 
     public static String getOnlinePhoto(String userName){
-        return  objectDBUrl + "photo/user/head/"
+        return    "photo/user/head/"
                 + userName + ".png"
 //                + "photo/test.png"
                 ;
     }
 
-    public static String getPhotoUrlForUpload(String userName){
-        return   "photo/user/head/"
-                + userName + ".png"
-//                + "photo/test.png"
-                ;
+    public static String getUrlForUpload(String userName){
+        return "photo/user/head/"
+                + userName + ".png";
     }
-
 }

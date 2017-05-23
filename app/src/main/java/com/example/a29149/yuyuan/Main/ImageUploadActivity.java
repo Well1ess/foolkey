@@ -38,6 +38,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLDecoder;
 
 import static com.example.a29149.yuyuan.Util.HttpSender.send;
 
@@ -228,6 +229,7 @@ public class ImageUploadActivity extends Activity {
 
                     String resultFlag = jsonObject.getString("result");
                     String sign = jsonObject.getString("sign");
+                    sign = URLDecoder.decode(sign, "utf-8");
                     sign = new String( ConverterByteBase64.base642Byte(sign) );
                     Log.i("malei","sign="+sign);
 

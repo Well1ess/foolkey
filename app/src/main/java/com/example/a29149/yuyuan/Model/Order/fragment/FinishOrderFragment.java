@@ -17,6 +17,7 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishCourseAdapter;
+import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
@@ -24,6 +25,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.order.student.GetSpecificStateOrderController;
+import com.example.a29149.yuyuan.controller.order.teacher.home.GetOrderBuyCourseAsTeacherByOrderStatesController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -52,6 +54,9 @@ public class FinishOrderFragment extends Fragment {
 
     public ShapeLoadingDialog shapeLoadingDialog;
 
+    private int pageNo = 1;//页数
+    private GetOrderBuyCourseAsTeacherByOrderStatesController getOrderBuyCourseAsTeacherByOrderStatesController;
+
 
     @Nullable
     @Override
@@ -62,9 +67,10 @@ public class FinishOrderFragment extends Fragment {
         shapeLoadingDialog = new ShapeLoadingDialog(mContext);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
-        shapeLoadingDialog.show();
 
-        loadData();
+        //刚开始请求第一页
+        pageNo = 1;
+        loadData(pageNo);
 
         mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
         mReward = (MyListView) view.findViewById(R.id.lv_reward);
@@ -97,29 +103,44 @@ public class FinishOrderFragment extends Fragment {
     }
 
 
-    private void loadData() {
+    private void loadData(int pageNo) {
         //如果没有进行加载
         if (shapeLoadingDialog != null) {
-            shapeLoadingDialog.show();
-            requestData(1);
+            requestData(pageNo);
         }
     }
 
     //请求数据
     private void requestData(int pageNo) {
-        new RequestNoPayCourseAction(pageNo).execute();
+        String userRole = GlobalUtil.getInstance().getUserRole();
+        switch (userRole){
+            case "student":
+                new StudentRequestFinishOrderAction(pageNo).execute();
+                break;
+            case "teacher":
+                new TeacherRequestFinishOrderAction(pageNo).execute();
+                break;
+            default:
+                break;
+        }
     }
 
     /**
-     * 请求已完成的订单Action
+     * 学生：请求已完成的订单Action
      */
-    public class RequestNoPayCourseAction extends AsyncTask<String, Integer, String> {
+    public class StudentRequestFinishOrderAction extends AsyncTask<String, Integer, String> {
 
         int pageNo;
 
-        public RequestNoPayCourseAction(int pageNo) {
+        public StudentRequestFinishOrderAction(int pageNo) {
             super();
             this.pageNo = pageNo;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            shapeLoadingDialog.show();
         }
 
         @Override
@@ -135,7 +156,7 @@ public class FinishOrderFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            log.d(this, result);
+            //log.d(this, result);
             if (result != null) {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
@@ -177,7 +198,7 @@ public class FinishOrderFragment extends Fragment {
                                 myListViewFinishCourseAdapter.setData(rewardList);
                                 mReward.setAdapter(myListViewFinishCourseAdapter);
 
-                                shapeLoadingDialog.dismiss();
+
 
                             }
                         }, 1000);
@@ -185,9 +206,101 @@ public class FinishOrderFragment extends Fragment {
                 } catch (Exception e) {
                     Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
+                finally {
+                    shapeLoadingDialog.dismiss();
+                }
             } else {
                 Toast.makeText(mContext, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                shapeLoadingDialog.dismiss();
             }
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+    }
+
+    /**
+     * 老师：请求已完成的订单Action
+     */
+    public class TeacherRequestFinishOrderAction extends AsyncTask<String, Integer, String> {
+
+        int pageNo;
+
+        public TeacherRequestFinishOrderAction(int pageNo) {
+            super();
+            this.pageNo = pageNo;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            shapeLoadingDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            getOrderBuyCourseAsTeacherByOrderStatesController = new GetOrderBuyCourseAsTeacherByOrderStatesController();
+            getOrderBuyCourseAsTeacherByOrderStatesController.setPageNo(pageNo+"");
+            getOrderBuyCourseAsTeacherByOrderStatesController.setOrderStateEnum(OrderStateEnum.已评价.toString());
+            getOrderBuyCourseAsTeacherByOrderStatesController.execute();
+            return  getOrderBuyCourseAsTeacherByOrderStatesController.getResult();
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            //log.d(this, result);
+            String resultFlag = getOrderBuyCourseAsTeacherByOrderStatesController.getResult();
+            if (resultFlag.equals("success")) {
+                try {
+                    //存储所有我拥有的悬赏信息DTO
+                    List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList();
+                    GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
+
+                    rewardList.clear();
+                    courseList.clear();
+                    for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
+                        switch (dto.getOrderDTO().getCourseTypeEnum()) {
+                            case 学生悬赏: {
+                                rewardList.add(dto);
+                            }
+                            break;
+                            case 老师课程: {
+                                courseList.add(dto);
+                            }
+                            break;
+                        }
+                    }
+
+                    Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
+                    if (resultFlag.equals("success")) {
+                        Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
+                                mBuyCourse.setAdapter(myListViewNoClassCourseAdapter);
+                                myListViewNoClassCourseAdapter.setData(courseList);
+
+                            }
+                        }, 1000);
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                }
+                finally {
+                    shapeLoadingDialog.dismiss();
+                }
+            } else {
+                Toast.makeText(mContext, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                shapeLoadingDialog.dismiss();
+            }
+
 
         }
 

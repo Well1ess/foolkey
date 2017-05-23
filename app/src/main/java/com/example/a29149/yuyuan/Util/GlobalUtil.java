@@ -122,6 +122,10 @@ public class GlobalUtil {
     //腾讯SCO签名
     private String sign;
 
+
+    //当前用户角色：老师，学生
+    private String userRole = "student";
+
     public List<String> getTeacherUIScore() {
         if (teacherUIScore == null){
             teacherUIScore = new ArrayList<>();
@@ -419,6 +423,15 @@ public class GlobalUtil {
 
     public void setSign(String sign) {
         this.sign = sign;
+    }
+
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 }
 

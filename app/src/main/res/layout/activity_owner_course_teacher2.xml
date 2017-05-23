@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a29149.yuyuan.Teacher.Index.course.OwnerCourseTeacherActivity">
+    tools:context=".ModelTeacher.Index.course.OwnerCourseTeacherActivity">
 
 </android.support.constraint.ConstraintLayout>

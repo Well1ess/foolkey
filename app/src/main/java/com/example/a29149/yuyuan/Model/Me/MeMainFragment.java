@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,35 +18,28 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
-import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.Main.ImageUploadActivity;
 import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Teacher.Index.course.OwnerCourseTeacherActivity;
-import com.example.a29149.yuyuan.TeacherMain.MainTeacherActivity;
+import com.example.a29149.yuyuan.ModelTeacher.Index.course.OwnerCourseTeacherActivity;
+import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.MainTeacherActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.controller.userInfo.GetCouponController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
-import com.example.a29149.yuyuan.controller.userInfo.teacher.SwitchToTeacherController;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.util.List;
 
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
@@ -64,6 +58,12 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
     @ViewInject(R.id.virtual_money)
     private TextView mVirtualMoney;
+
+    @ViewInject(R.id.slogan)
+    private TextView mUserSlogan;
+
+    @ViewInject(R.id.name)
+    private TextView mUserName;
 
     public MeMainFragment() {
 
@@ -94,11 +94,18 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
     private void initView()
     {
-        int virtualMoney = DoubleParseInt(GlobalUtil.getInstance().getStudentDTO().getVirtualCurrency());
+        StudentDTO studentDTO = GlobalUtil.getInstance().getStudentDTO();
+        int virtualMoney = DoubleParseInt(studentDTO.getVirtualCurrency());
         mVirtualMoney.setText(virtualMoney+"");
 
         mTitle = (TextView) view.findViewById(R.id.title);
-        mTitle.setText(GlobalUtil.getInstance().getStudentDTO().getNickedName());
+        mTitle.setText(studentDTO.getNickedName());
+        mUserName.setText("————"+studentDTO.getNickedName());
+
+        if (TextUtils.isEmpty(studentDTO.getSlogan()))
+            mUserSlogan.setText("这个人很懒，什么都没留下！");
+        else
+            mUserSlogan.setText(studentDTO.getSlogan());
 
         mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
         mOwnerReward.setOnClickListener(this);

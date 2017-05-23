@@ -149,7 +149,7 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
     private void goNext() {
         //提交用户的信息
         GlobalUtil.getInstance().setRewardChooseContent(rewardChooseContent);
-        Log.i("malei",rewardChooseContent.toString());
+        //Log.i("malei",rewardChooseContent.toString());
         //发布到服务器
         new PublishRewardAction().execute();
     }

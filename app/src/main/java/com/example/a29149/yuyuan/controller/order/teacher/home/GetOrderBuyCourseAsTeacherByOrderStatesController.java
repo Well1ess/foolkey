@@ -1,9 +1,6 @@
 package com.example.a29149.yuyuan.controller.order.teacher.home;
 
-import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
-import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
-import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.AbstractControllerTemplate;
@@ -15,7 +12,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
- * 老师，根据订单状态获取到我的课程-悬赏订单
+ * 老师：根据订单状态获取到我的课程-悬赏订单
  * Created by GR on 2017/5/23.
  */
 
@@ -34,7 +31,7 @@ public class GetOrderBuyCourseAsTeacherByOrderStatesController extends AbstractC
      * 后台传来的数据
      */
     //结果
-    private String result;
+    private String result ="fail";
 
     //订单信息DTOS
     private List<OrderBuyCourseAsStudentDTO> orderList;

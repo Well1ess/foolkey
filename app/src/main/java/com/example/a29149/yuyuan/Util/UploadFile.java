@@ -13,7 +13,6 @@ import com.tencent.cos.model.COSResult;
 import com.tencent.cos.model.PutObjectRequest;
 import com.tencent.cos.model.PutObjectResult;
 import com.tencent.cos.task.listener.IUploadTaskListener;
-import com.tencent.cos.utils.FileUtils;
 
 import static com.example.a29149.yuyuan.Application.MyApplication.cos;
 
@@ -25,8 +24,7 @@ import static com.example.a29149.yuyuan.Application.MyApplication.cos;
 
 public class UploadFile {
     public static String bucket = "foolkey";
-    public static String cosPath = PictureInfoBO.getPhotoUrlForUpload("18306131366");
-    //web.myqcloud.com
+    public static String cosPath = PictureInfoBO.getUrlForUpload("18306131366");
     public static String srcPath = "";//本地文件的绝对路径
     public  String sign = "";
     public Context mContext;
@@ -37,16 +35,13 @@ public class UploadFile {
         bizServer = BizServer.getInstance(mContext);
         this.sign = sign;
     }
-    public static void setSrcPath(String srcPath) {
-        UploadFile.srcPath = srcPath;
-
-    }
 
     public static PutObjectRequest putObjectRequest = new PutObjectRequest();
 
     public void updata(String srcPath) {
         putObjectRequest.setBucket(bucket);
         putObjectRequest.setCosPath(cosPath);
+        Log.i("malei","cosPath=  "+cosPath);
         putObjectRequest.setSrcPath(srcPath);
         putObjectRequest.setSign(sign);
 
@@ -69,6 +64,7 @@ public class UploadFile {
             @Override
             public void onFailed (COSRequest COSRequest,final COSResult cosResult){
                 Log.w("TEST", "上传出错： ret =" + cosResult.code + "; msg =" + cosResult.msg);
+                Log.i("malei","msg =" + cosResult.msg);
             }
 
             @Override
@@ -84,27 +80,5 @@ public class UploadFile {
             }
         });
         PutObjectResult result = cos.putObject(putObjectRequest);
-    }
-    public void upload(String srcPath){
-        bizServer.setFileId(cosPath);
-        bizServer.setSrcPath(srcPath);
-        PutObjectSamples putObjectSamples = new PutObjectSamples(new TextView(mContext),new TextView(mContext), PutObjectSamples.PUT_TYPE.SAMPLE);
-        putObjectSamples.execute(bizServer);
-    }
-    public void update(String getCosPahtName){
-        if(TextUtils.isEmpty(getCosPahtName)){
-            Toast.makeText(mContext,"文件名为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if(!getCosPahtName.startsWith("/")){
-            bizServer.setFileId("/" + getCosPahtName);
-        }else{
-            bizServer.setFileId(getCosPahtName);
-        }
-
-        UpdateObjectSamples updateObjectSamples = new UpdateObjectSamples(new TextView(mContext),true);
-        updateObjectSamples.execute(bizServer);
-
     }
 }

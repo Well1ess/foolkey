@@ -10,13 +10,13 @@
     <TextView
         android:layout_marginTop="50dp"
         style="@style/fragment_message_text"
-        android:text="你好："/>
+        android:text="你好!"/>
     <TextView
         style="@style/fragment_message_text"
         android:text="授课总次数："/>
     <TextView
         style="@style/fragment_message_text"
-        android:text="学生总数目："/>
+        android:text="当前声望值："/>
     <TextView
         android:layout_marginTop="30dp"
         style="@style/fragment_message_text"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_marginTop="30dp"
         style="@style/fragment_message_text"
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="180dp"
         android:textColor="@color/mid_green"
         android:text="—— ——Lion团队"/>
 

@@ -15,15 +15,12 @@ import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.Main.MainActivity;
-import com.example.a29149.yuyuan.Model.Me.MeMainFragment;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.TeacherMain.MainTeacherActivity;
+import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.MainTeacherActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.Secret.AESOperator;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
@@ -33,14 +30,11 @@ import com.google.gson.Gson;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-
-import static java.security.AccessController.getContext;
-
+/**
+ * Created by MaLei on 2017/5/11.
+ * Email:ml1995@mail.ustc.edu.cn
+ * 学生设置：切换到老师，登出
+ */
 public class SettingActivity extends AppCompatActivity {
 
     private TextView mChangeRole;//切换用户角色
@@ -115,6 +109,8 @@ public class SettingActivity extends AppCompatActivity {
             if(verifyState.compareTo(VerifyStateEnum.processing) == 0
                     || verifyState.compareTo(VerifyStateEnum.verified) == 0)
             {
+                //更改用户角色
+                GlobalUtil.getInstance().setUserRole("teacher");
                 Intent intent = new Intent( SettingActivity.this,MainTeacherActivity.class);
                 startActivity(intent);
             }
@@ -139,7 +135,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
 
-
+    //登出
     public class LogOutAction extends AsyncTask<String, Integer, String> {
 
         public LogOutAction() {

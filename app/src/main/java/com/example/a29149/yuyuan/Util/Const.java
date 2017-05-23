@@ -7,6 +7,10 @@ package com.example.a29149.yuyuan.Util;
 
 public class Const {
 
+    //返回结果
+    public static final String SUCCESS = "success";
+    public static final String FAIL = "fail";
+
     //授课方式
     public static final String[] TEACH_METHOD = {"线上", "线下", "不限"};
 
@@ -16,7 +20,7 @@ public class Const {
     public static final int FROM_ME_FRAGMENT_TO_RECHARGE = 1;
 
     //悬赏标签
-    public static final String[] REWARD_TAG = {"Java","C", "JavaScript","Python","PHP","Html5","Android","iOS","MySQL","前端","后端","其它"};
+    public static final String[] REWARD_TAG = {"Java", "C", "JavaScript", "Python", "PHP", "Html5", "Android", "iOS", "MySQL", "前端", "后端", "其它"};
     //价格名称
     public static final String PRICE_NAME = "XYB";
 }

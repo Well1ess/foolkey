@@ -7,7 +7,7 @@ package com.example.a29149.yuyuan.Enum;
 public enum OrderStateEnum {
     未付款, 已付款, 申请退款, 同意退款, 退款完成,
     取消课程, 同意上课, 上课中, 结束上课,
-    已评价
+    已评价, 已回答
 }
 
 

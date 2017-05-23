@@ -1,6 +1,7 @@
 package com.example.a29149.yuyuan.controller.order.teacher.home;
 
 import com.example.a29149.yuyuan.DTO.CourseDTO;
+import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Util.Const;
@@ -14,7 +15,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
- * 老师，根据订单状态获取到我的课程订单
+ * 老师，根据订单状态获取到我的课程-悬赏订单
  * Created by GR on 2017/5/23.
  */
 
@@ -26,9 +27,6 @@ public class GetOrderBuyCourseAsTeacherByOrderStatesController extends AbstractC
     //页码
     private String pageNo;
 
-//    //课程类别（课程？悬赏）
-//    private String courseTypeEnum;
-
     //订单状态
     private String orderStateEnum;
 
@@ -37,12 +35,9 @@ public class GetOrderBuyCourseAsTeacherByOrderStatesController extends AbstractC
      */
     //结果
     private String result;
+
     //订单信息DTOS
-    private List<OrderBuyCourseDTO> orderBuyCourseDTOS;
-    //学生信息DTOS
-    private List<StudentDTO> studentDTOS;
-    //课程信息DTOS
-    private List<CourseDTO> courseDTOS;
+    private List<OrderBuyCourseAsStudentDTO> orderList;
 
     @Override
     public void handle() throws JSONException {
@@ -64,30 +59,18 @@ public class GetOrderBuyCourseAsTeacherByOrderStatesController extends AbstractC
             //根据返回的结果标志进行不同的操作
             if (resultFlag.equals("success")) {
 
-                log.d(this, jsonObject.getString("orderBuyCourseDTOS"));
-                log.d(this, jsonObject.getString("studentDTOS"));
-                log.d(this, jsonObject.getString("courseDTOS"));
+                log.d(this, jsonObject.getString("orderList"));
 
                 //判断传来的参数是否是空
-                if (jsonObject.getString("orderBuyCourseDTOS") == null || jsonObject.getString("studentDTOS") == null || jsonObject.getString("courseDTOS") == null) {
+                if (jsonObject.getString("orderList") == null) {
                     this.result = Const.FAIL;
                     return;
                 }
 
-                //处理参数：orderBuyCourseDTOS（买课订单DTOS）
-                java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseDTO>>() {
+                //处理参数：orderList（买课订单DTOS）
+                java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
                 }.getType();
-                this.orderBuyCourseDTOS = new Gson().fromJson(jsonObject.getString("orderBuyCourseDTOS"), type);
-
-                //处理参数：studentDTOS（买课的学生信息DTO）
-                type = new com.google.gson.reflect.TypeToken<List<StudentDTO>>() {
-                }.getType();
-                this.studentDTOS = new Gson().fromJson(jsonObject.getString("studentDTOS"), type);
-
-                //处理参数：courseDTOS（课程信息DTO）
-                type = new com.google.gson.reflect.TypeToken<List<CourseDTO>>() {
-                }.getType();
-                this.courseDTOS = new Gson().fromJson(jsonObject.getString("courseDTOS"), type);
+                this.orderList = new Gson().fromJson(jsonObject.getString("orderList"), type);
 
                 this.result = Const.SUCCESS;
             }
@@ -109,15 +92,7 @@ public class GetOrderBuyCourseAsTeacherByOrderStatesController extends AbstractC
         return result;
     }
 
-    public List<OrderBuyCourseDTO> getOrderBuyCourseDTOS() {
-        return orderBuyCourseDTOS;
-    }
-
-    public List<StudentDTO> getStudentDTOS() {
-        return studentDTOS;
-    }
-
-    public List<CourseDTO> getCourseDTOS() {
-        return courseDTOS;
+    public List<OrderBuyCourseAsStudentDTO> getOrderList() {
+        return orderList;
     }
 }

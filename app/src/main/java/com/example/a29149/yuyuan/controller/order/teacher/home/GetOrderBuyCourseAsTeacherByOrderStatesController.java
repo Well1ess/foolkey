@@ -52,7 +52,9 @@ public class GetOrderBuyCourseAsTeacherByOrderStatesController extends AbstractC
             //把后台传来的数据String转为JSON
             jsonObject = new JSONObject(s);
             String resultFlag = jsonObject.getString("result");
-
+            if(resultFlag == null){
+                resultFlag = Const.FAIL;
+            }
             //根据返回的结果标志进行不同的操作
             if (resultFlag.equals("success")) {
 

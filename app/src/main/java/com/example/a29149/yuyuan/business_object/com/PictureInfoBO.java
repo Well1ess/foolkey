@@ -55,4 +55,12 @@ public class PictureInfoBO extends AbstractBO {
 //                + "photo/test.png"
                 ;
     }
+
+    public static String getPhotoUrlForUpload(String userName){
+        return   "photo/user/head/"
+                + userName + ".png"
+//                + "photo/test.png"
+                ;
+    }
+
 }

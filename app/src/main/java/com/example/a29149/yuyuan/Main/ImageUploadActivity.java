@@ -175,13 +175,17 @@ public class ImageUploadActivity extends Activity {
     }
 
     public void saveBitmap() {
-        String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/yuyuan/picture/";
-        File f = new File(dir + "temp_image.jpg");
+        String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/picture/";
+        File f = new File(dir  + "temp_image.jpg" );
         srcPath = f.getPath();
+        Log.i("malei","srcPath="+srcPath);
         if (!f.exists()) {
-            f.mkdirs();
+            boolean flag = f.getParentFile().mkdirs();
+            System.out.println(this.getClass() + "  结果是  " + flag);
+
         }
         try {
+            f.createNewFile();
             FileOutputStream out = new FileOutputStream(f);
             mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.flush();

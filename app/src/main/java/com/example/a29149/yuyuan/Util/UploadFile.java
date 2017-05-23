@@ -25,7 +25,7 @@ import static com.example.a29149.yuyuan.Application.MyApplication.cos;
 
 public class UploadFile {
     public static String bucket = "foolkey";
-    public static String cosPath = PictureInfoBO.getOnlinePhoto("18306131366");
+    public static String cosPath = PictureInfoBO.getPhotoUrlForUpload("18306131366");
     //web.myqcloud.com
     public static String srcPath = "";//本地文件的绝对路径
     public  String sign = "";

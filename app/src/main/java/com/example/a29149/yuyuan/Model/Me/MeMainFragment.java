@@ -121,9 +121,17 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
     private void initView()
     {
-        StudentDTO studentDTO = GlobalUtil.getInstance().getStudentDTO();
+
         int virtualMoney = DoubleParseInt(studentDTO.getVirtualCurrency());
         mVirtualMoney.setText(virtualMoney+"");
+
+        String prestige = studentDTO.getPrestige() + "";
+        reputation.setText( prestige );
+        //根据声望的长度，来经行位置的调整
+        reputation.setPadding(0,0,
+                - (prestige.length() - 1 ) * 5 + 20
+                ,0);
+        reputation.setTextSize( 125/(4 + prestige.length()) );
 
         mTitle = (TextView) view.findViewById(R.id.title);
         mTitle.setText(studentDTO.getNickedName());
@@ -137,8 +145,8 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
         mOwnerReward.setOnClickListener(this);
 
-        mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
-        mOwnerCourse.setOnClickListener(this);
+//        mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
+//        mOwnerCourse.setOnClickListener(this);
 
         mHeadImage = (ImageView) view.findViewById(R.id.head);
         mHeadImage.setOnClickListener(this);
@@ -177,11 +185,11 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                 Intent intent1 = new Intent(getActivity(),OwnerRewardActivity.class);
                 startActivity(intent1);
                 break;
-            case R.id.tv_course:
-                Intent intent2 = new Intent(getActivity(),OwnerCourseTeacherActivity.class);//课程
-                //Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
-                startActivity(intent2);
-                break;
+//            case R.id.tv_course:
+//                Intent intent2 = new Intent(getActivity(),OwnerCourseTeacherActivity.class);//课程
+//                //Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
+//                startActivity(intent2);
+//                break;
             case R.id.head:
                 Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
                 startActivity(intent3);

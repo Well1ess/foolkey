@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
@@ -34,8 +36,10 @@ import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetCouponController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -50,6 +54,8 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
     private View view;
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
+
+    private StudentDTO studentDTO;
 
     private TextView mTitle;//用户名
     private TextView mChangeRole;//切换用户角色
@@ -68,6 +74,11 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
     @ViewInject(R.id.modify_info)
     private TextView mModifyInfo;
+
+    @ViewInject(R.id.prestige)
+    private TextView reputation;
+
+    private RequestManager glide;
 
     public MeMainFragment() {
 
@@ -88,10 +99,22 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me_main, container, false);
 
+        studentDTO = GlobalUtil.getInstance().getStudentDTO();
+
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);
 
         initView();
+
+
+
+
+
+        //图片加载器
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto( studentDTO.getUserName() ) )
+                .transform(new GlideCircleTransform(getActivity()))
+                .into(mHeadImage);
 
         return view;
     }
@@ -119,6 +142,8 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
         mHeadImage = (ImageView) view.findViewById(R.id.head);
         mHeadImage.setOnClickListener(this);
+
+//        reputation.setText( studentDTO.getPrestige() );
 
 
         displayInfo = new WarningDisplayDialog.Builder(getContext());

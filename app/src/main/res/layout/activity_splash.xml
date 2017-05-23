@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-        android:background="@drawable/splash_test"
+        android:background="@drawable/splash_test3"
         >
 
     </ImageView>

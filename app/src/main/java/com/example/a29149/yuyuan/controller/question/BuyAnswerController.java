@@ -53,29 +53,26 @@ public class BuyAnswerController extends AbstractControllerTemplate {
             String resultFlag = jsonObject.getString("result");
 
             //根据返回的结果标志进行不同的操作
-            if(resultFlag.equals("success")){
+            if (resultFlag.equals("success")) {
                 log.d(this, jsonObject.getString("payResultEnum"));
                 log.d(this, jsonObject.getString("questionAnswerDTO"));
+
+                //判断传来的参数是否是空
+                if (jsonObject.getString("payResultEnum") == null || jsonObject.getString("questionAnswerDTO") == null) {
+                    this.result = Const.FAIL;
+                    return;
+                }
 
                 //处理参数：payResultEnum
                 java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<PayResultEnum>() {
                 }.getType();
-                //判断传来的参数是否是空
-                if(jsonObject.getString("payResultEnum") == null){
-                    this.result = Const.FAIL;
-                    return;
-                }
+
                 this.payResultEnum = new Gson().fromJson(jsonObject.getString("payResultEnum"), type);
 
                 //处理参数：questionAnswerDTO
                 type = new com.google.gson.reflect.TypeToken<QuestionAnswerDTO>() {
                 }.getType();
 
-                //判断传来的参数是否是空
-                if(jsonObject.getString("questionAnswerDTO") == null){
-                    this.result = Const.FAIL;
-                    return;
-                }
                 this.questionAnswerDTO = new Gson().fromJson(jsonObject.getString("questionAnswerDTO"), type);
                 this.result = Const.SUCCESS;
             }

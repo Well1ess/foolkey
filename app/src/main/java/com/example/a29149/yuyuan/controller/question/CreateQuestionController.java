@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.controller.question;
 
+import com.example.a29149.yuyuan.DTO.OrderAskQuestionDTO;
 import com.example.a29149.yuyuan.DTO.QuestionAnswerDTO;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.log;
@@ -39,6 +40,8 @@ public class CreateQuestionController extends AbstractControllerTemplate {
     private String result;
     //问答DTO
     private QuestionAnswerDTO questionAnswerDTO;
+    //问答的订单信息
+    private OrderAskQuestionDTO orderAskQuestionDTO;
 
     @Override
     public void handle() throws JSONException {
@@ -81,9 +84,9 @@ public class CreateQuestionController extends AbstractControllerTemplate {
                 this.questionAnswerDTO = new Gson().fromJson(jsonObject.getString("questionAnswerDTO"), type);
 
                 //处理参数：orderAskQuestionDTO
-                type = new com.google.gson.reflect.TypeToken<QuestionAnswerDTO>() {
+                type = new com.google.gson.reflect.TypeToken<OrderAskQuestionDTO>() {
                 }.getType();
-                this.questionAnswerDTO = new Gson().fromJson(jsonObject.getString("orderAskQuestionDTO"), type);
+                this.orderAskQuestionDTO = new Gson().fromJson(jsonObject.getString("orderAskQuestionDTO"), type);
                 this.result = Const.SUCCESS;
             }
         } catch (JSONException e) {

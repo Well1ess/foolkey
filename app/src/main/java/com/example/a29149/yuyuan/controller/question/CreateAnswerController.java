@@ -53,15 +53,15 @@ public class CreateAnswerController extends AbstractControllerTemplate {
             if (resultFlag.equals("success")) {
                 log.d(this, jsonObject.getString("questionAnswerDTO"));
 
-                //处理参数：questionAnswerDTO
-                java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<QuestionAnswerDTO>() {
-                }.getType();
-
                 //判断传来的参数是否是空
                 if (jsonObject.getString("questionAnswerDTO") == null) {
                     this.result = Const.FAIL;
                     return;
                 }
+
+                //处理参数：questionAnswerDTO
+                java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<QuestionAnswerDTO>() {
+                }.getType();
                 this.questionAnswerDTO = new Gson().fromJson(jsonObject.getString("questionAnswerDTO"), type);
                 this.result = Const.SUCCESS;
             }

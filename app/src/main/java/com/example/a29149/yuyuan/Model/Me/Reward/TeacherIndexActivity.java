@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -124,7 +123,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mTest.setText(nickedName);
         mTitle.setText(mTeacherAllInfoDTO.getNickedName()+"的主页");
         mInfo.setText(mTeacherAllInfoDTO.getSlogan());
-        if (mTeacherAllInfoDTO.getSexTagEnum().compareTo(SexTagEnum.Male)==0)
+        if (mTeacherAllInfoDTO.getSexTagEnum().compareTo(SexTagEnum.男)==0)
             mTeacherSex.setText("男");
         else
             mTeacherSex.setText("女");

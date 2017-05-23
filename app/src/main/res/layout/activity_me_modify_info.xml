@@ -9,7 +9,6 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@color/colorPrimary"
         android:elevation="5dp">
 
         <RelativeLayout
@@ -73,45 +72,43 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
-        <TextView
-            android:id="@+id/nicked"
+        <EditText
+            android:id="@+id/nickedName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="30dp"
             android:layout_marginLeft="20dp"
-            android:text=""
             android:hint="昵称"
-            android:textColorHint="@color/light_white"
+            android:padding="30dp"
+            android:text=""
+            android:textColorHint="@color/grey"
             android:textSize="20dp"
-            android:autoLink="all"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="18dp"
+            android:background="@null"
             />
 
         <ImageView
             android:layout_width="1dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
-            android:background="@color/light_white"
-            android:layout_toLeftOf="@+id/photo_circle"
             android:layout_marginEnd="30dp"
-            />
+            android:layout_toLeftOf="@+id/photo_circle"
+            android:background="@color/light_white" />
 
-        <com.example.a29149.yuyuan.Widget.SquareImageView
+        <com.example.a29149.yuyuan.Widget.SquareImageView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/photo_circle"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/circle"
             android:layout_alignParentRight="true"
             android:layout_marginRight="40dp"
 
-            android:elevation="2dp"
+            android:background="@drawable/circle"
 
 
-
-            xmlns:android="http://schemas.android.com/apk/res/android">
-
+            android:elevation="2dp">
 
 
         </com.example.a29149.yuyuan.Widget.SquareImageView>
@@ -120,8 +117,8 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_marginRight="120dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_height="1dp"
         android:background="@color/light_white"
         />
@@ -144,7 +141,29 @@
             android:textSize="15dp"
             />
 
-        <TextView
+        <EditText
+            android:id="@+id/organization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/separator"
+            android:padding="20dp"
+            android:text=""
+            android:hint="公司名称"
+            android:textColorHint="@color/grey"
+            android:textSize="15dp"
+            android:background="@null"
+            />
+
+        <ImageView
+            android:id="@+id/separator"
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@color/light_white"
+            android:layout_toLeftOf="@+id/school"
+            />
+
+        <EditText
             android:id="@+id/school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -153,9 +172,9 @@
             android:layout_marginRight="0dp"
             android:text=""
             android:hint="毕业院校"
-            android:textColorHint="@color/light_white"
+            android:textColorHint="@color/grey"
             android:textSize="15dp"
-            android:autoLink="all"
+            android:background="@null"
             />
 
 
@@ -163,20 +182,20 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_marginRight="120dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_height="1dp"
         android:background="@color/light_white"
         />
 
-    <TextView
-        android:id="@+id/blog"
+    <EditText
+        android:id="@+id/birthday"
         android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
         android:hint="出生年月"
-        android:textColorHint="@color/light_white"
+        android:textColorHint="@color/grey"
         android:textSize="15dp"
         android:background="@color/white"
         android:paddingLeft="35dp"
@@ -198,35 +217,34 @@
         android:background="@color/light_white"
         />
 
-    <TextView
+    <EditText
         android:id="@+id/slogan"
-        android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:hint="所有的坚持，都是源自热爱"
-        android:textColorHint="@color/light_white"
-        android:textSize="15dp"
         android:background="@color/white"
-        android:paddingLeft="35dp"
+        android:hint="所有的坚持，都是源自热爱"
         android:paddingBottom="15dp"
-        />
+        android:paddingLeft="35dp"
+        android:paddingTop="15dp"
+        android:text=""
+        android:textColorHint="@color/grey"
+        android:textSize="15dp" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_marginRight="120dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="35dp"
         android:layout_height="1dp"
         android:background="@color/light_white"
         />
-    <TextView
+    <EditText
         android:id="@+id/email"
         android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
         android:hint="电子邮件"
-        android:textColorHint="@color/light_white"
+        android:textColorHint="@color/grey"
         android:textSize="15dp"
         android:background="@color/white"
         android:paddingLeft="35dp"
@@ -234,22 +252,16 @@
         />
     <ImageView
         android:layout_width="match_parent"
-        android:layout_marginRight="120dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="35dp"
         android:layout_height="1dp"
         android:background="@color/light_white"
         />
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_marginRight="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_height="1dp"
-        android:background="@color/light_white"
-        />
 
-    <TextView
+
+    <EditText
         android:id="@+id/github"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -262,33 +274,11 @@
         android:textColorHint="@color/light_white"
         android:textSize="15dp" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_marginRight="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_height="1dp"
-        android:background="@color/light_white"
-        />
-
-
-    <TextView
-        android:id="@+id/organization"
-        android:paddingTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:hint="公司名称"
-        android:textColorHint="@color/light_white"
-        android:textSize="15dp"
-        android:background="@color/white"
-        android:paddingLeft="35dp"
-        android:paddingBottom="15dp"
-        />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_marginRight="120dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="35dp"
         android:layout_height="1dp"
         android:background="@color/light_white"
         />
@@ -300,7 +290,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:hint="你关注的领域"
-        android:textColorHint="@color/light_white"
+        android:textColorHint="@color/grey"
         android:textSize="15dp"
         android:background="@color/white"
         android:paddingLeft="35dp"
@@ -314,6 +304,26 @@
         android:background="@color/light_white"
         />
 
+    <EditText
+        android:id="@+id/description"
+        android:paddingTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:hint="详细描述一下你自己"
+        android:textColorHint="@color/light_white"
+        android:textSize="15dp"
+        android:background="@color/white"
+        android:paddingLeft="35dp"
+        android:paddingBottom="15dp"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+
+        android:layout_height="20dp"
+        android:background="@color/light_white"
+        />
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -346,26 +356,6 @@
         android:gravity="center"
         android:id="@+id/button_password"
         android:text="修改密码"
-        />
-
-    <ImageView
-        android:layout_width="match_parent"
-
-        android:layout_height="15dp"
-        android:background="@color/light_white"
-        />
-
-    <TextView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@color/white"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/QQmusicILikeRed"
-        android:gravity="center"
-        android:id="@+id/button_save"
-        android:text="保存"
         />
 
     <ImageView

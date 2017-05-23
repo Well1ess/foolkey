@@ -85,7 +85,6 @@ public class UpdateStudentInfoController extends AbstractControllerTemplate {
             //根据返回的结果标志进行不同的操作
             if (resultFlag.equals("success")) {
 
-                log.d(this, jsonObject.getString("orderList"));
 
                 //判断传来的参数是否是空
                 if (jsonObject.getString("studentDTO") == null) {
@@ -119,7 +118,10 @@ public class UpdateStudentInfoController extends AbstractControllerTemplate {
     }
 
     public void setTechnicTagEnum(TechnicTagEnum technicTagEnum) {
-        this.technicTagEnum = technicTagEnum;
+        if (technicTagEnum != null)
+            this.technicTagEnum = technicTagEnum;
+        else
+            this.technicTagEnum = TechnicTagEnum.Java;
     }
 
     public void setSchoolEnum(SchoolEnum schoolEnum) {

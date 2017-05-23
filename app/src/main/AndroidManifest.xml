@@ -189,6 +189,12 @@
         </receiver>
 
 
+
+
+
+
+        <activity android:name=".Model.Me.info.ModifyMyInfoActivity"/>
+
     </application>
 
 </manifest>

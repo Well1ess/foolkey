@@ -23,6 +23,7 @@ import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
+import com.example.a29149.yuyuan.Model.Me.info.ModifyMyInfoActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.ModelTeacher.Index.course.OwnerCourseTeacherActivity;
 import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.MainTeacherActivity;
@@ -64,6 +65,9 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
     @ViewInject(R.id.name)
     private TextView mUserName;
+
+    @ViewInject(R.id.modify_info)
+    private TextView mModifyInfo;
 
     public MeMainFragment() {
 
@@ -157,6 +161,10 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                 Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
                 startActivity(intent3);
                 break;
+            case R.id.modify_info:{
+                Intent intent4 = new Intent(getActivity(), ModifyMyInfoActivity.class);
+                startActivity(intent4);
+            }break;
             default:
                 break;
         }
@@ -198,6 +206,12 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         //TODO:网络通信
         CouponAction couponAction = new CouponAction();
         couponAction.execute();
+    }
+
+    @OnClick(R.id.modify_info)
+    public void setmModifyInfo(View view){
+        Intent intent4 = new Intent(getActivity(), ModifyMyInfoActivity.class);
+        startActivity(intent4);
     }
 
    /* @OnClick(R.id.change_role)

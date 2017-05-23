@@ -6,6 +6,8 @@ import com.example.a29149.yuyuan.Enum.SexTagEnum;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Enum.UserStateEnum;
 
+import java.util.*;
+
 /**
  * Created by 张丽华 on 2017/5/2.
  * Description:
@@ -24,7 +26,7 @@ public class StudentDTO {
     private String name;
     private SexTagEnum sexTagEnum;
     private String organization;
-    private Date birthday;
+    private java.util.Date birthday;
     private TechnicTagEnum technicTagEnum;
     private SchoolEnum schoolEnum;
 
@@ -264,7 +266,7 @@ public class StudentDTO {
 
 
 
-    public Date getBirthday() {
+    public java.util.Date getBirthday() {
 
         return birthday;
 
@@ -272,7 +274,7 @@ public class StudentDTO {
 
 
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(java.util.Date birthday) {
 
         this.birthday = birthday;
 

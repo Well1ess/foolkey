@@ -6,22 +6,22 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
+
 /**
- * Created by MaLei on 2017/5/23.
- * Email:ml1995@mail.ustc.edu.cn
+ * Created by 29149 on 2017/3/29.
  */
 
-public class SquareTextView extends AppCompatTextView {
+public class SquareImageView extends AppCompatImageView {
 
-    public SquareTextView(Context context) {
+    public SquareImageView(Context context) {
         super(context);
     }
 
-    public SquareTextView(Context context, @Nullable AttributeSet attrs) {
+    public SquareImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SquareTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SquareImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -30,4 +30,3 @@ public class SquareTextView extends AppCompatTextView {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 }
-

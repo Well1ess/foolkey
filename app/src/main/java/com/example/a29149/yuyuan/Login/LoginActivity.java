@@ -402,9 +402,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         //设置标志位
                         userConfig.setUserInfo(UserConfig.xmlSAVE, true);
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        LoginActivity.this.finish();
+
 
                     }
                 } catch (Exception e) {

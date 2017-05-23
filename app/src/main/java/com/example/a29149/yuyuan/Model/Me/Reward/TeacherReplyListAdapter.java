@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
@@ -77,7 +78,7 @@ public class TeacherReplyListAdapter extends BaseAdapter
 
         public MyViewHolder(View view)
         {
-            tv = (TextView) view.findViewById(R.id.id_num);
+            tv = (TextView) view.findViewById(R.id.photo_circle);
             teacherName = (TextView) view.findViewById(R.id.tv_teacherName);
         }
     }

@@ -109,6 +109,29 @@
         <activity android:name=".ModelTeacher.TeacherMain.MainTeacherActivity"/>
         <!-- 用户上传头像界面 -->
         <activity android:name=".Main.ImageUploadActivity"/>
+        <!-- 订单详情界面 -->
+        <activity android:name=".Model.Order.activity.OrderInfoActivity"/>
+        <activity android:name=".Model.Me.Reward.OwnerRewardActivity"></activity>
+        <activity android:name=".TeacherInfo.TeacherInfoActivity">
+        </activity>
+        <activity android:name=".AccessOrder.AccessOrderActivity"
+                  android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ModelTeacher.TeacherMain.Score.MoreStudent.MoreStudentActivity">
+
+        </activity>
+
+
+        <!--splashActivity -->
+        <activity android:name=".Main.SplashActivity"
+                  android:theme="@style/splashScreenTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!-- 小米推送所需服务 -->
         <service
@@ -165,27 +188,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Model.Me.Reward.OwnerRewardActivity"></activity>
-        <activity android:name=".TeacherInfo.TeacherInfoActivity">
-        </activity>
-        <activity android:name=".AccessOrder.AccessOrderActivity"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
-        <activity android:name=".ModelTeacher.TeacherMain.Score.MoreStudent.MoreStudentActivity">
 
-        </activity>
-
-
-        <!--splashActivity -->
-        <activity android:name=".Main.SplashActivity"
-            android:theme="@style/splashScreenTheme"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

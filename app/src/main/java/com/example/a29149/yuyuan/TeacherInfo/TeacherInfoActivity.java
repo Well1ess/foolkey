@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.a29149.yuyuan.R;
@@ -20,6 +21,9 @@ public class TeacherInfoActivity extends AppCompatActivity {
 
     @ViewInject(R.id.mask)
     private View mMask;
+
+    @ViewInject(R.id.bt_return)
+    private Button mReturn;
 
     @ViewInject(R.id.option_menu)
     private LinearLayout mOptionMenu;

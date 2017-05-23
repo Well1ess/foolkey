@@ -19,7 +19,7 @@
             android:paddingRight="6dp"
             android:paddingTop="30dp"
             >
-            <include layout="@layout/component_photo_circle" />
+            <include layout="@layout/component_square_text" />
         </LinearLayout>
 
         <include layout="@layout/component_prestige"

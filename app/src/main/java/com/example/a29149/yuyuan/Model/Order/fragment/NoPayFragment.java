@@ -1,6 +1,7 @@
 package com.example.a29149.yuyuan.Model.Order.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
+import com.example.a29149.yuyuan.Model.Order.activity.OrderInfoActivity;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoClassRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoPayClassAdapter;
@@ -78,6 +80,8 @@ public class NoPayFragment extends Fragment {
         mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
+                startActivity(toOrderInfo);
                 Log.i("malei","你点击了"+position);
             }
         });

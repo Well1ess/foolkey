@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ import org.json.JSONObject;
  * 悬赏详情
  */
 
-public class RewardActivity extends AppCompatActivity {
+public class RewardActivity extends AppCompatActivity implements View.OnClickListener {
 
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
@@ -45,6 +46,7 @@ public class RewardActivity extends AppCompatActivity {
     private TextView mRewardTopic;//悬赏标题
     private TextView mRewardDescription;//悬赏描述
     private TextView mCreateTime;//创建悬赏的时间
+    private ImageButton mReturn;//返回按键
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,8 @@ public class RewardActivity extends AppCompatActivity {
     private void initView() {
         mOrder = (RadioButton) findViewById(R.id.order);
         //mOrder.setOnClickListener(this);
+        mReturn = (ImageButton)findViewById(R.id.bt_return);
+        mReturn.setOnClickListener(this);
 
         mRewardUser = (TextView) findViewById(R.id.courseEvaluate);
         mTeacherEvaluate =(TextView) findViewById(R.id.teacherEvaluate);
@@ -163,6 +167,17 @@ private void applyRewardTeacher() {
         startActivity(intent);
     }
 }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bt_return:
+                this.finish();
+                break;
+            default:
+                break;
+        }
+    }
 
     /**
      * 申请悬赏请求Action

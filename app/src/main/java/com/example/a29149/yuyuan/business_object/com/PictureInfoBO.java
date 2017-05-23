@@ -43,7 +43,7 @@ public class PictureInfoBO extends AbstractBO {
     }
 
     public static String getOnlinePhoto(String userName){
-        return    "photo/user/head/"
+        return   objectDBUrl + "photo/user/head/"
                 + userName + ".png"
 //                + "photo/test.png"
                 ;

@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +58,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     private RewardDTO mRewardDTO;//悬赏信息DTO
     private RadioButton mRewardAgree;//同意该老师申请
     private RadioButton mRewardDisagree;//不同意该老师申请
+    private ImageButton mReturn;//返回
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
     private WarningDisplayDialog.Builder displayInfo1;
@@ -160,6 +163,9 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mRewardAgree.setOnClickListener(this);
         mRewardDisagree = (RadioButton)findViewById(R.id.main_menu_disagree);
         mRewardDisagree.setOnClickListener(this);
+        mReturn = (ImageButton) findViewById(R.id.bt_return);
+        mReturn.setOnClickListener(this);
+
     }
 
 
@@ -173,6 +179,9 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.main_menu_disagree:
                 new DisagreeApplyRewardAction().execute();
+                break;
+            case R.id.bt_return:
+                this.finish();
                 break;
             default:
                 break;

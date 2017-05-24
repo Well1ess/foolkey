@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -120,11 +121,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
 
 
 
-        //图片加载器
-        glide = Glide.with(this);
-        glide.load(PictureInfoBO.getOnlinePhoto( studentDTO.getUserName() ) )
-                .transform(new GlideCircleTransform(getActivity()))
-                .into(mHeadImage);
+
 
         return view;
     }
@@ -165,6 +162,18 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
 
         mHeadImage = (ImageView) view.findViewById(R.id.head);
         mHeadImage.setOnClickListener(this);
+
+        //图片加载器
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(1000);
+        alphaAnimation.setFillAfter(true);
+        mHeadImage.setAnimation(alphaAnimation);
+        alphaAnimation.start();
+
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto( studentDTO.getUserName() ) )
+                .transform(new GlideCircleTransform(getActivity()))
+                .into(mHeadImage);
 
 //        reputation.setText( studentDTO.getPrestige() );
 

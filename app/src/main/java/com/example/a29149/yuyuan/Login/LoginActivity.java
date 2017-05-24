@@ -214,7 +214,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
     @Override
     public void onClick(View view) {
-        imageView.setVisibility(View.INVISIBLE);
+//        imageView.setVisibility(View.INVISIBLE);
         autoUpdatePhoto();
     }
 
@@ -245,10 +245,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         alphaAnimation.start();
 
         glide.load( url )
+//                .asBitmap()
+//                .error(R.drawable.photo_placeholder1)
+//                .centerCrop()
                 .transform(new GlideCircleTransform(this))
 //                .crossFade(2000)
 //                .animate(1000)
                 .dontAnimate()
+
                 .into(imageView);
     }
 

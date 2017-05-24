@@ -1,6 +1,7 @@
 package com.example.a29149.yuyuan.Model.Order.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.a29149.yuyuan.controller.course.judge.JudgeStudentController;
 import com.example.resource.util.image.GlideCircleTransform;
 
 /**
@@ -40,8 +42,12 @@ public class JudgeStudentActivity extends Activity {
     private RatingBar studentScore;
 
 
+    private JudgeStudentController judgeStudentController;
+
+
     //打分的分数
     private Float score = null;
+    private String orderId;
 
     @ViewInject(R.id.publish_button)
     private RadioButton radioButton;
@@ -55,14 +61,16 @@ public class JudgeStudentActivity extends Activity {
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
+
+        Intent intent = getIntent();
         //取展示的信息
-        String studentNameStr = savedInstanceState.getString("studentName");
-        String courseNameStr = savedInstanceState.getString("courseName");
+        String studentNameStr = intent.getStringExtra("studentName");
+        String courseNameStr = intent.getStringExtra("courseName");
         studentName.setText( studentNameStr );
         courseName.setText( courseNameStr );
 
         //图片展示
-        String studentUserName = savedInstanceState.getString("studentUserName");
+        String studentUserName = intent.getStringExtra( "studentUserName" );
         glide = Glide.with(this);
         //浅出效果，不然会有黄色一闪而过
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
@@ -78,7 +86,7 @@ public class JudgeStudentActivity extends Activity {
                 .into(studentPhoto);
 
         //拿传输的信息
-        String orderId = savedInstanceState.getString("orderId");
+        orderId = intent.getStringExtra("orderId");
 
         studentScore.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -93,13 +101,12 @@ public class JudgeStudentActivity extends Activity {
     @OnClick(R.id.publish_button)
     public void publishEvaluation(View view){
         //是否评价
-        boolean flag = false;
 
         if ( score == null){
             Toast.makeText(JudgeStudentActivity.this, "点击星星进行评价", Toast.LENGTH_SHORT).show();
-            flag = false;
         }else {
-
+            JudgeStudentAction judgeStudentAction = new JudgeStudentAction();
+            judgeStudentAction.execute();
         }
     }
 
@@ -110,13 +117,24 @@ public class JudgeStudentActivity extends Activity {
     public class JudgeStudentAction extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
-            return null;
+            judgeStudentController = new JudgeStudentController();
+            judgeStudentController.setOrderId( Long.parseLong( orderId ) );
+            judgeStudentController.setScore( score + 0.0 );
+            return judgeStudentController.execute();
         }
 
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            switch ( judgeStudentController.getResult() ) {
+                case "success":{ // 评价成功
+                    finish();
+                }break;
+                case "fail":{ // 评价失败
+                    Toast.makeText(JudgeStudentActivity.this, "评价失败，请再试一次", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 

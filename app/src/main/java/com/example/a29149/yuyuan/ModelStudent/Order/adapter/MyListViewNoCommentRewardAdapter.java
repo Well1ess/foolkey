@@ -1,4 +1,4 @@
-package com.example.a29149.yuyuan.ModelStudent.Order.adapter;
+package com.example.a29149.yuyuan.Model.Order.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,15 +8,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.CommentRewardActivity;
+import com.example.a29149.yuyuan.Model.Order.activity.CommentRewardActivity;
+import com.example.a29149.yuyuan.Model.Order.activity.JudgeStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Const;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,8 +112,13 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
         int id = v.getId();
         switch (id)
         {
-            case R.id.tv_comment:
-                commentReward();
+            case R.id.tv_comment:{
+                if (GlobalUtil.getInstance().getUserRole().equals("student")) //学生评价悬赏
+                    commentReward();
+                else  // 老师评价订单
+                    teacherJudgeStudent();
+            }break;
+            default:break;
         }
     }
 
@@ -121,6 +129,26 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
         String orderId = rewardNoCommentList.get(position).getOrderDTO().getId() + "";
         Log.i("malei","orderId="+orderId);
         intent.putExtra("orderId",orderId);
+        mContext.startActivity(intent);
+    }
+
+    //老师对学生进行评价
+    private void teacherJudgeStudent(){
+        Intent intent = new Intent(mContext, JudgeStudentActivity.class);
+        intent.putExtra("position", position);
+        //传输一些信息
+        String orderId = rewardNoCommentList.get(position).getOrderDTO().getId() + "";
+        intent.putExtra("orderId",orderId);
+
+        String studentName = rewardNoCommentList.get(position).getStudentDTO().getNickedName();
+        intent.putExtra("studentName", studentName);
+
+        String courseName = rewardNoCommentList.get(position).getCourse().getTopic();
+        intent.putExtra("courseName", courseName);
+
+        String studentUserName = rewardNoCommentList.get(position).getStudentDTO().getUserName();
+        intent.putExtra("studentUserName", studentUserName);
+
         mContext.startActivity(intent);
     }
 }

@@ -280,9 +280,9 @@ public class NoCommentFragment extends Fragment {
                             @Override
                             public void run() {
 
-                                MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
-                                mBuyCourse.setAdapter(myListViewNoClassCourseAdapter);
-                                myListViewNoClassCourseAdapter.setData(courseList);
+                                MyListViewNoConmmentClassAdapter noCommentCourseAdapter = new MyListViewNoConmmentClassAdapter(mContext);
+                                mBuyCourse.setAdapter(noCommentCourseAdapter);
+                                noCommentCourseAdapter.setData(courseList);
 
 
                                 MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);

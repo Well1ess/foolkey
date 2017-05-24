@@ -1,4 +1,4 @@
-package com.example.a29149.yuyuan.ModelStudent.Order.adapter;
+package com.example.a29149.yuyuan.Model.Order.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
@@ -16,8 +17,11 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.CommentCourseActivity;
+import com.example.a29149.yuyuan.Model.Order.activity.CommentCourseActivity;
+import com.example.a29149.yuyuan.Model.Order.activity.CommentRewardActivity;
+import com.example.a29149.yuyuan.Model.Order.activity.JudgeStudentActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +40,7 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
     private TextView mBuyTime;//购买时长
     private TextView mCourseCost;//课程价格
     private TextView mComment;//评价订单
-    private List<OrderBuyCourseAsStudentDTO> courseNoCommentList;//完成课程但还未评价订单
+    private List<OrderBuyCourseAsStudentDTO> courseNoCommentList = new ArrayList<>();//完成课程但还未评价订单
     private StudentDTO mStudentDTO;//学生信息
     private TeacherDTO mTeacherDTO;//老师信息
     private CourseDTO mCourseDTO;//课程信息
@@ -55,7 +59,10 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
 
     //设置列表数据
     public void setData(List<OrderBuyCourseAsStudentDTO> courseNoCommentList) {
-        this.courseNoCommentList = courseNoCommentList;
+        if (courseNoCommentList != null)
+            this.courseNoCommentList = courseNoCommentList;
+        else
+            this.courseNoCommentList = new ArrayList<>();
     }
 
     @Override
@@ -108,8 +115,13 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
         int id = v.getId();
         switch (id)
         {
-            case R.id.tv_comment:
-                commentCourse();
+            case R.id.tv_comment: {
+                if (GlobalUtil.getInstance().getUserRole().equals("student"))
+                    commentCourse();
+                else
+                    teacherJudgeStudent();
+            }break;
+            default:break;
         }
     }
 
@@ -121,6 +133,25 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
         intent.putExtra("TeacherName",mStudentDTO.getNickedName());
         intent.putExtra("Description",courseDTO.getDescription());
         intent.putExtra("CoursePrice",courseDTO.getPrice());
+
+        mContext.startActivity(intent);
+    }
+
+    private void teacherJudgeStudent(){
+        Intent intent = new Intent(mContext, JudgeStudentActivity.class);
+        intent.putExtra("position", position);
+        //传输一些信息
+        String orderId = courseNoCommentList.get(position).getOrderDTO().getId() + "";
+        intent.putExtra("orderId",orderId);
+
+        String studentName = courseNoCommentList.get(position).getStudentDTO().getNickedName();
+        intent.putExtra("studentName", studentName);
+
+        String courseName = courseNoCommentList.get(position).getCourse().getTopic();
+        intent.putExtra("courseName", courseName);
+
+        String studentUserName = courseNoCommentList.get(position).getStudentDTO().getUserName();
+        intent.putExtra("studentUserName", studentUserName);
 
         mContext.startActivity(intent);
     }

@@ -49,6 +49,7 @@ public class ImageUploadActivity extends Activity {
     private String userName =
             GlobalUtil.getInstance().getStudentDTO().getUserName()
     ;
+//    private boolean hasPhoto
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

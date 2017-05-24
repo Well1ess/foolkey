@@ -132,6 +132,9 @@ public class GlobalUtil {
     //当前用户角色：老师，学生
     private String userRole = "student";
 
+    //用来做图片上传成功与否的标记位
+    private boolean uploadPhotoFlag = false;
+
     public List<String> getTeacherUIScore() {
         if (teacherUIScore == null){
             teacherUIScore = new ArrayList<>();
@@ -456,6 +459,14 @@ public class GlobalUtil {
 
     public void setOrderCourseList(List<OrderBuyCourseAsStudentDTO> orderCourseList) {
         this.orderCourseList = orderCourseList;
+    }
+
+    public boolean isUploadPhotoFlag() {
+        return uploadPhotoFlag;
+    }
+
+    public void setUploadPhotoFlag(boolean uploadPhotoFlag) {
+        this.uploadPhotoFlag = uploadPhotoFlag;
     }
 }
 

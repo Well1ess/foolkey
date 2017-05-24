@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                         strUserName = mUserName.getText().toString();
                         //验证输入的是否是手机号
                         if ( PhoneFormatCheckUtils.isPhoneLegal( strUserName ) ){
-                            //
+                            //strUserName = mUserName.getText().toString();
                         }
                     }else {
                         //输入不合法
@@ -188,6 +188,11 @@ public class RegisterActivity extends AppCompatActivity {
             mConfirm.setError("两次输入的密码不同！");
         }
 
+        if (!GlobalUtil.getInstance().isUploadPhotoFlag()){
+            Toast.makeText(RegisterActivity.this, "请点击图片，上传头像", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (cancel) {
             focusView.requestFocus();
         } else {
@@ -206,9 +211,30 @@ public class RegisterActivity extends AppCompatActivity {
      */
     @OnClick(R.id.photo_circle)
     public void uploadPhoto(View view){
+        System.out.println(this.getClass() + "209行" + mUserName.getText().toString());
+        //判空
+        if ( mUserName.getText() != null
+                && !mUserName.getText().toString().equals("")
+//                && PhoneFormatCheckUtils.isPhoneLegal( mUserName.getText().toString() )
+
+                ){
+            if ( PhoneFormatCheckUtils.isPhoneLegal( mUserName.getText().toString() ) )
+                strUserName = mUserName.getText().toString();
+            else {
+                Toast.makeText(RegisterActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }else {
+            //输入不合法
+            Toast.makeText(RegisterActivity.this, "请先输入手机号", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent intent = new Intent(this, ImageUploadActivity.class );
         intent.putExtra("userName", strUserName);
+
         startActivity( intent );
+
     }
 
 

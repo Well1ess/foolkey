@@ -51,6 +51,8 @@ public class UploadFile {
         putObjectRequest.setSign(sign);
 
         Log.i("malei","开始上传sign ="+sign);
+        //上传之前，把标志位置为false
+        GlobalUtil.getInstance().setUploadPhotoFlag(false);
         putObjectRequest.setListener(new IUploadTaskListener() {
             @Override
             public void onSuccess (COSRequest cosRequest, COSResult cosResult){
@@ -63,6 +65,10 @@ public class UploadFile {
                     stringBuilder.append(" resource_path= " + result.resource_path == null ? "null" : result.resource_path + "\n");
                     stringBuilder.append(" url= " + result.url == null ? "null" : result.url);
                     Log.w("TEST", stringBuilder.toString());
+                    if (result.code == 0){
+                        //上传成功
+                        GlobalUtil.getInstance().setUploadPhotoFlag( true );
+                    }
                 }
             }
 

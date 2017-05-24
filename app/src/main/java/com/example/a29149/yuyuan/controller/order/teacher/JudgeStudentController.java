@@ -11,9 +11,7 @@ import org.json.JSONObject;
  * Created by GR on 2017/5/24.
  */
 
-public class JudgeStudentController extends AbstractControllerTemplate
-
-{
+public class JudgeStudentController extends AbstractControllerTemplate {
 
     /**
      * 传送到后台的数据

@@ -15,9 +15,9 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
-import com.example.a29149.yuyuan.Main.MainActivity;
-import com.example.a29149.yuyuan.Model.Discovery.Activity.RewardActivity;
-import com.example.a29149.yuyuan.Model.Discovery.Adapter.RewardListAdapter;
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -99,8 +99,8 @@ public class TeacherRewardMainFragment extends Fragment {
                     public void onRefresh() {
                         //TODO:网络通信
                         //获取主页的热门课程
-                        if (MainActivity.shapeLoadingDialog != null) {
-                            MainActivity.shapeLoadingDialog.show();
+                        if (MainStudentActivity.shapeLoadingDialog != null) {
+                            MainStudentActivity.shapeLoadingDialog.show();
                         }
                         //由于是刷新，所以首先清空所有数据
                         pageNo = 1;
@@ -184,7 +184,7 @@ public class TeacherRewardMainFragment extends Fragment {
                             public void run() {
                                 //pageNo++;
                                 mListAdapter.notifyDataSetChanged();
-                                MainActivity.shapeLoadingDialog.dismiss();
+                                MainStudentActivity.shapeLoadingDialog.dismiss();
 
                             }
                         }, 1000);

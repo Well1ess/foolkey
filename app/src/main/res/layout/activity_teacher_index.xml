@@ -6,18 +6,31 @@
     android:layout_height="match_parent"
     tools:context="com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity">
 
+    <View
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mask"
+        android:alpha="0.4"
+        android:elevation="10dp"
+        android:background="@color/black" />
+
+    <include
+        android:visibility="gone"
+        layout="@layout/option_menu_layout"/>
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        tools:layout_editor_absoluteY="0dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
         tools:layout_editor_absoluteX="8dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="15dp"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -28,185 +41,201 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:background="?android:attr/actionModeCloseDrawable"
-                android:backgroundTint="@color/white" />
+                android:backgroundTint="@color/white"/>
 
             <TextView
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textSize="16sp"
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:singleLine="true"
                 android:text="张丽华的主页"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:layout_marginTop="65dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="65dp"
         android:orientation="vertical">
 
         <ScrollView
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/background">
+                android:background="@color/background"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/white">
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp">
+                        android:layout_height="120dp"
+                        android:layout_marginTop="10dp">
+
                         <ImageView
                             android:id="@+id/head"
-                            android:transitionName="shareHead"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:background="@color/grey"/>
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/grey"
+                            android:transitionName="shareHead"/>
+
                         <TextView
-                            android:layout_marginTop="20dp"
-                            android:id="@+id/info"
-                            android:layout_alignTop="@id/head"
-                            android:layout_toEndOf="@id/head"
+                            android:id="@+id/slogan"
                             android:layout_width="match_parent"
-                            android:gravity="center"
                             android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/head"
+                            android:layout_marginTop="20dp"
+                            android:layout_toEndOf="@id/head"
+                            android:gravity="center"
                             android:text="所有的坚持，都源自于热爱"/>
 
                         <LinearLayout
-                            android:gravity="center"
-                            android:layout_toEndOf="@id/head"
-                            android:layout_alignBottom="@id/head"
-                            android:layout_marginBottom="20dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_alignBottom="@id/head"
+                            android:layout_marginBottom="20dp"
+                            android:layout_toEndOf="@id/head"
+                            android:gravity="center"
                             android:orientation="horizontal">
+
                             <TextView
+                                android:id="@+id/sex"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/grey"
-                                android:text="男"/>
+                                android:text="男"
+                                android:textColor="@color/grey"/>
+
                             <View
-                                android:layout_marginRight="20dp"
-                                android:layout_marginLeft="20dp"
                                 android:layout_width="1px"
                                 android:layout_height="match_parent"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
                                 android:background="@color/grey"/>
+
                             <TextView
-                                android:textColor="@color/grey"
+                                android:id="@+id/organization"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="中科大"/>
+                                android:text="中科大"
+                                android:textColor="@color/grey"/>
+
                             <TextView
-                                android:textColor="@color/grey"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="/"/>
+                                android:text="/"
+                                android:textColor="@color/grey"/>
+
                             <TextView
-                                android:textColor="@color/grey"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="博士"/>
+                                android:text="博士"
+                                android:textColor="@color/grey"/>
                         </LinearLayout>
 
                         <TextView
                             android:id="@+id/reputation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimary"
-                            android:text="声望"
-                            android:textSize="12dp"
                             android:layout_alignBottom="@id/head"
-                            android:layout_alignRight="@id/head"/>
+                            android:layout_alignRight="@id/head"
+                            android:text="声望"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12dp"/>
 
                     </RelativeLayout>
 
                     <TextView
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:text="啊大家顺利康复；阿三；啦时刻提防；了卡刷个；的森林砍伐；啦可是个；啦输入法爬山的反馈看；阿斯顿；饭卡里都是；了
                                       啊大家顺利康复；阿三；啦时刻提防；了卡刷个；的森林砍伐；啦可是个；啦输入法爬山的反馈看；阿斯顿；饭卡里都是；
                                       啊大家顺利康复；阿三；啦时刻提防；了卡刷个；的森林砍伐；啦可是个；啦输入法爬山的反馈看；阿斯顿；饭卡里都是；"/>
+
                     <LinearLayout
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_follownum"
                             style="@style/TextView.MeMenuNumber"
                             android:text="1"/>
+
                         <TextView
                             style="@style/TextView.MeMenuNumberUnit"
                             android:text="位关注者"/>
 
                         <View
-                            android:layout_marginRight="40dp"
-                            android:layout_marginLeft="40dp"
                             android:layout_width="1px"
                             android:layout_height="match_parent"
-                            android:background="@color/black"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"/>
+                            android:background="@color/black"/>
 
                         <TextView
-                            android:layout_marginRight="20dp"
+                            android:id="@+id/follow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="  + 关 注  "
-                            android:textSize="16sp"
-                            android:textColor="@color/colorPrimary"
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/textview_normal"
                             android:padding="5dp"
-                            android:background="@drawable/textview_normal"/>
+                            android:text="  + 关 注  "
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"/>
 
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginRight="2dp"
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:orientation="vertical">
+
                     <TextView
-                        android:text="TA发布的"
-                        android:textSize="16sp"
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:paddingBottom="10dp"
-                        android:paddingTop="10dp"/>
+                        android:paddingTop="10dp"
+                        android:text="TA发布的"
+                        android:textSize="16sp"/>
 
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="1px"
-                        android:background="@color/colorPrimary"
                         android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp" />
+                        android:layout_marginRight="40dp"
+                        android:background="@color/colorPrimary"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -216,12 +245,13 @@
                         <TextView
                             style="@style/TextView.MeMenu"
                             android:text="文章"/>
+
                         <View
                             android:layout_width="1px"
                             android:layout_height="match_parent"
-                            android:background="@color/black"
+                            android:layout_marginBottom="10dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"/>
+                            android:background="@color/black"/>
 
                         <TextView
                             style="@style/TextView.MeMenu"
@@ -230,9 +260,9 @@
                         <View
                             android:layout_width="1px"
                             android:layout_height="match_parent"
-                            android:background="@color/black"
+                            android:layout_marginBottom="10dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"/>
+                            android:background="@color/black"/>
 
                         <TextView
                             style="@style/TextView.MeMenu"
@@ -241,27 +271,28 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:orientation="vertical">
+
                     <TextView
-                        android:text="TA收藏的"
-                        android:textSize="16sp"
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:paddingBottom="10dp"
-                        android:paddingTop="10dp"/>
+                        android:paddingTop="10dp"
+                        android:text="TA收藏的"
+                        android:textSize="16sp"/>
 
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="1px"
-                        android:background="@color/colorPrimary"
                         android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp" />
+                        android:layout_marginRight="40dp"
+                        android:background="@color/colorPrimary"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -271,12 +302,13 @@
                         <TextView
                             style="@style/TextView.MeMenu"
                             android:text="文章"/>
+
                         <View
                             android:layout_width="1px"
                             android:layout_height="match_parent"
-                            android:background="@color/black"
+                            android:layout_marginBottom="10dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"/>
+                            android:background="@color/black"/>
 
                         <TextView
                             style="@style/TextView.MeMenu"
@@ -285,9 +317,9 @@
                         <View
                             android:layout_width="1px"
                             android:layout_height="match_parent"
-                            android:background="@color/black"
+                            android:layout_marginBottom="10dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"/>
+                            android:background="@color/black"/>
 
                         <TextView
                             style="@style/TextView.MeMenu"
@@ -309,27 +341,14 @@
             android:layout_height="50dp"
             android:background="@color/white"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <RadioButton
-                style="@style/RadioButton.Menu"
                 android:id="@+id/main_menu_discovery"
-                android:text="联系老师" />
+                style="@style/RadioButton.Menu"
+                android:text="联系老师"/>
 
         </RadioGroup>
     </LinearLayout>
-
-    <View
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mask"
-        android:alpha="0.4"
-        android:elevation="10dp"
-        android:background="@color/black" />
-
-    <include
-        android:visibility="gone"
-        layout="@layout/option_menu_layout"/>
 
 </FrameLayout>

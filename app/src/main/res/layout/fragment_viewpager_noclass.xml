@@ -18,7 +18,7 @@
             android:gravity="center"
             android:text="我购买的课程"/>
 
-        <com.example.a29149.yuyuan.Model.Order.view.MyListView
+        <com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView
             android:id="@+id/lv_noStartCourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="我发布的悬赏"/>
 
-        <com.example.a29149.yuyuan.Model.Order.view.MyListView
+        <com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView
             android:id="@+id/lv_reward"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -75,7 +75,7 @@
             android:text="愚人精选"
             android:textSize="16sp"/>
 
-        <com.example.a29149.yuyuan.Model.Order.view.MyListView
+        <com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView
             android:id="@+id/lv_recommend"
             android:layout_marginBottom="15dp"
             android:layout_width="match_parent"

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.Main.MainActivity;
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
@@ -278,7 +278,7 @@ public class RegisterActivity extends AppCompatActivity {
                         AppManager.getInstance().finishActivity(LoginActivity.class);
                         RegisterActivity.this.finish();
 
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, MainStudentActivity.class);
                         startActivity(intent);
                     }
                 } catch (Exception e) {

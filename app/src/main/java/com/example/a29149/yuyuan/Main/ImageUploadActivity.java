@@ -22,12 +22,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.Secret.AESCoder;
-import com.example.a29149.yuyuan.Util.Secret.ConverterByteBase64;
-import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UploadFile;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.userInfo.GetPictureImageController;
@@ -38,9 +34,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URLDecoder;
-
-import static com.example.a29149.yuyuan.Util.HttpSender.send;
 
 public class ImageUploadActivity extends Activity {
     private ImageView mImage;
@@ -120,7 +113,7 @@ public class ImageUploadActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == MainActivity.RESULT_OK) {
+        if (resultCode == MainStudentActivity.RESULT_OK) {
             switch (requestCode) {
                 case TAKE_PICTURE:
                     cutImage(tempUri); // 对图片进行裁剪处理

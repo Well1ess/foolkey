@@ -18,7 +18,7 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseWithStudentAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.Score.TeacherScoreMainFragment;
+import com.example.a29149.yuyuan.ModelTeacher.Index.TeacherIndexMainFragment;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.controller.course.haveClass.EndClassController;
@@ -52,7 +52,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
     public void update()
     {
         this.notifyDataSetInvalidated();
-        //this.notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -257,8 +257,8 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
                         mOrderBuyCourseDTO.setOrderStateEnum(OrderStateEnum.结束上课);
                         myViewHolder.state.setText("完成");
                         update();
-//                        Intent intent = new Intent(mContext,TeacherScoreMainFragment.class);
-//                        mContext.startActivity(intent);
+                        Intent intent = new Intent(mContext,TeacherIndexMainFragment.class);
+                        mContext.startActivity(intent);
 
                     }
                 } catch (Exception e) {

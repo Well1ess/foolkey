@@ -21,7 +21,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.Main.MainActivity;
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.Fragment.ArticleSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.CourseSearchFragment;
@@ -36,9 +36,9 @@ import com.example.a29149.yuyuan.Widget.MyEditText;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.a29149.yuyuan.Main.MainActivity.SHOW_OF_FIRST_TAG;
-import static com.example.a29149.yuyuan.Main.MainActivity.SHOW_OF_SECOND_TAG;
-import static com.example.a29149.yuyuan.Main.MainActivity.SHOW_OF_THIRD_TAG;
+import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_FIRST_TAG;
+import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_SECOND_TAG;
+import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_THIRD_TAG;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -113,7 +113,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
-        MainActivity.MIUISetStatusBarLightMode(getWindow(), true);
+        MainStudentActivity.MIUISetStatusBarLightMode(getWindow(), true);
 
         //FragmentTabHost初始化
         mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.content_pager);

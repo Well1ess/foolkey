@@ -133,6 +133,11 @@ public class TeacherInfoActivity extends AppCompatActivity {
         closeOptionMenu();
     }
 
+    @OnClick(R.id.bt_return)
+    public  void setReturnListener(View view){
+        this.finish();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.info, menu);

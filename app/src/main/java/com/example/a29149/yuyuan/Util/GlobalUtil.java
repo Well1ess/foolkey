@@ -119,6 +119,10 @@ public class GlobalUtil {
     private List<String> teacherUIScore;
 
 
+    //订单悬赏列表
+    private List<OrderBuyCourseAsStudentDTO> orderRewardList;
+
+
     //腾讯SCO签名
     private String sign;
 
@@ -432,6 +436,16 @@ public class GlobalUtil {
 
     public void setUserRole(String userRole) {
         this.userRole = userRole;
+    }
+
+
+
+    public List<OrderBuyCourseAsStudentDTO> getOrderRewardList() {
+        return orderRewardList;
+    }
+
+    public void setOrderRewardList(List<OrderBuyCourseAsStudentDTO> orderRewardList) {
+        this.orderRewardList = orderRewardList;
     }
 }
 

@@ -90,6 +90,7 @@ public class FinishOrderFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("malei", "你点击了" + position);
                 Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
+                toOrderInfo.putExtra("position",position);
                 startActivity(toOrderInfo);
             }
         });
@@ -186,6 +187,7 @@ public class FinishOrderFragment extends Fragment {
                         }
                     }
 
+                    GlobalUtil.getInstance().setOrderRewardList(rewardList);
 
                     Log.i("malei", orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {

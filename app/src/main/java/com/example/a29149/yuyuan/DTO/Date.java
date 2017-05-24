@@ -18,6 +18,10 @@ public class Date {
         return year + 1900 + "年" + getMonthPlus(month) + "月" + date + "日 " + hours + ":" + minutes + ":" + seconds + "过期";
     }
 
+    public String getDataTime() {
+        return year + 1900 + "年" + getMonthPlus(month) + "月" + date + "日 " ;
+    }
+
     public String getMonthPlus(String month) {
         int num = Integer.parseInt(getMonth()) + 1;
         return num + "";

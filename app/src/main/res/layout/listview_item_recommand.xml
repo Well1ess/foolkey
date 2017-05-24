@@ -27,22 +27,18 @@
             android:layout_height="wrap_content"
             android:textColor="@color/grey"
             android:text="朱洪军"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
         <TextView
             android:id="@+id/teacher_prestige"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:textColor="@color/dark_green"
-            android:text="50"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
+            android:text="声望值：50"/>
         <TextView
             android:id="@+id/teacher_slogan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:textColor="@color/grey"
             android:text="简介。。。"/>
     </LinearLayout>

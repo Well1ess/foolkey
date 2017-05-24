@@ -6,5 +6,5 @@ package com.example.a29149.yuyuan.Enum;
  */
 
 public enum SexTagEnum {
-    Male, Female;
+    男, 女, 保密
 }

@@ -64,23 +64,34 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/white">
 
-                <ImageView
-                    android:id="@+id/head"
+                <LinearLayout
+                    android:id="@+id/head_square"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/grey"/>
+                    android:layout_marginLeft="10dp"
+                    >
+                    <com.example.a29149.yuyuan.Widget.SquareImageView
+                        android:id="@+id/head"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/circle"
+                        android:elevation="2dp"
+
+
+
+                        xmlns:android="http://schemas.android.com/apk/res/android"/>
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/slogan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_alignTop="@id/head"
+                    android:layout_alignTop="@id/head_square"
                     android:layout_marginRight="20dp"
-                    android:text="所有的坚持，都源自于热爱"/>
+                    android:text="努力的时候，全世界都在帮你"/>
 
                 <TextView
                     android:id="@+id/name"
@@ -90,19 +101,20 @@
                     android:layout_below="@id/slogan"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:text="————华哥"/>
+                    android:text="————葛尧"/>
 
                 <TextView
-                    android:id="@+id/reputation"
+                    android:id="@+id/prestige"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/head"
-                    android:layout_alignRight="@id/head"
-                    android:text="声望"
+                    android:layout_alignBottom="@id/head_square"
+                    android:layout_alignRight="@id/head_square"
+                    android:paddingRight="20dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="12dp"/>
+                    android:textSize="20dp"/>
 
                 <TextView
+                    android:id="@+id/modify_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -116,62 +128,62 @@
                     android:textSize="12sp"/>
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:orientation="vertical">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="2dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="@color/white"-->
+                <!--android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:text="我收藏的"
-                    android:textSize="16sp"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:paddingBottom="10dp"-->
+                    <!--android:paddingTop="10dp"-->
+                    <!--android:text="我收藏的"-->
+                    <!--android:textSize="16sp"/>-->
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1px"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:background="@color/orange"/>
+                <!--<View-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="1px"-->
+                    <!--android:layout_marginLeft="40dp"-->
+                    <!--android:layout_marginRight="40dp"-->
+                    <!--android:background="@color/orange"/>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal">-->
 
-                    <TextView
-                        style="@style/TextView.MeMenu"
-                        android:text="文章"/>
+                    <!--<TextView-->
+                        <!--style="@style/TextView.MeMenu"-->
+                        <!--android:text="文章"/>-->
 
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/black"/>
+                    <!--<View-->
+                        <!--android:layout_width="1px"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginBottom="10dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@color/black"/>-->
 
-                    <TextView
-                        style="@style/TextView.MeMenu"
-                        android:text="问答"/>
+                    <!--<TextView-->
+                        <!--style="@style/TextView.MeMenu"-->
+                        <!--android:text="问答"/>-->
 
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/black"/>
+                    <!--<View-->
+                        <!--android:layout_width="1px"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginBottom="10dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@color/black"/>-->
 
-                    <TextView
-                        style="@style/TextView.MeMenu"
-                        android:text="课程"/>
-                </LinearLayout>
-            </LinearLayout>
+                    <!--<TextView-->
+                        <!--style="@style/TextView.MeMenu"-->
+                        <!--android:text="课程"/>-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -187,14 +199,15 @@
                     android:layout_gravity="center"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
-                    android:text="我拥有的"
+                    android:text="查 看 申 请"
+                    android:textColor="@color/grey"
                     android:textSize="16sp"/>
 
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="1px"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginRight="120dp"
                     android:background="@color/orange"/>
 
                 <LinearLayout
@@ -206,30 +219,30 @@
                         android:id="@+id/owner_reward"
                         android:clickable="true"
                         style="@style/TextView.MeMenu"
-                        android:text="悬赏"/>
+                        android:text="悬 赏"/>
 
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/black"/>
+                    <!--<View-->
+                        <!--android:layout_width="1px"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginBottom="10dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@color/black"/>-->
 
-                    <TextView
-                        style="@style/TextView.MeMenu"
-                        android:text="问答"/>
+                    <!--<TextView-->
+                        <!--style="@style/TextView.MeMenu"-->
+                        <!--android:text="问答"/>-->
 
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/black"/>
+                    <!--<View-->
+                        <!--android:layout_width="1px"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginBottom="10dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="@color/black"/>-->
 
-                    <TextView
-                        android:id="@+id/tv_course"
-                        style="@style/TextView.MeMenu"
-                        android:text="课程"/>
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_course"-->
+                        <!--style="@style/TextView.MeMenu"-->
+                        <!--android:text="课程"/>-->
                 </LinearLayout>
             </LinearLayout>
 
@@ -250,6 +263,82 @@
 
             </LinearLayout>
 
+            <ImageView
+                android:layout_width="match_parent"
+
+                android:layout_height="15dp"
+                android:background="@color/light_white"
+                />
+
+
+
+            <TextView
+                android:id="@+id/email"
+                android:paddingTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:hint="电子邮件"
+                android:textColorHint="@color/grey"
+                android:textSize="15dp"
+                android:background="@color/white"
+                android:paddingLeft="35dp"
+                android:paddingBottom="15dp"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="35dp"
+                android:layout_height="1dp"
+                android:background="@color/light_white"
+                />
+
+
+
+
+            <TextView
+                android:id="@+id/github"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="Github账号"
+                android:paddingBottom="15dp"
+                android:paddingLeft="35dp"
+                android:paddingTop="15dp"
+                android:text=""
+                android:textColorHint="@color/light_gray"
+                android:textSize="15dp" />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="35dp"
+                android:layout_height="1dp"
+                android:background="@color/light_white"
+                />
+
+            <TextView
+                android:id="@+id/technicTag"
+                android:paddingTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:hint="你关注的领域"
+                android:textColorHint="@color/grey"
+                android:textSize="15dp"
+                android:background="@color/white"
+                android:paddingLeft="35dp"
+                android:paddingBottom="15dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+
+                android:layout_height="15dp"
+                android:background="@color/light_white"
+                />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -258,6 +347,7 @@
 
                 <!--提示信息-->
                 <include layout="@layout/component_tips_2_line"/>
+
 
             </RelativeLayout>
 

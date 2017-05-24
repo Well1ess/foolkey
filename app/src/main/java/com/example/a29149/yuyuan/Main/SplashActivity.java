@@ -48,6 +48,7 @@ public class SplashActivity extends Activity {
             //向服务器刷新，如果成功，则登录
             RefreshSelfInfo refreshSelfInfo = new RefreshSelfInfo(this);
             refreshSelfInfo.execute();
+            SplashActivity.this.finish();
         }else {
             //如果本地没有数据，则重新登录
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);

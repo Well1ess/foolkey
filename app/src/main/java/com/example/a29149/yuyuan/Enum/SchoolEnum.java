@@ -6,6 +6,6 @@ package com.example.a29149.yuyuan.Enum;
  */
 
 public enum SchoolEnum {
-    中国科学技术大学, 北京大学,
-    清华大学, 交通大学;
+    其他,中国科学技术大学, 北京大学,
+    清华大学, 交通大学
 }

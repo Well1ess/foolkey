@@ -11,10 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
@@ -23,6 +26,8 @@ import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
+import com.example.a29149.yuyuan.Model.Me.info.FreshInfo;
+import com.example.a29149.yuyuan.Model.Me.info.ModifyMyInfoActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.ModelTeacher.Index.course.OwnerCourseTeacherActivity;
 import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.MainTeacherActivity;
@@ -33,8 +38,10 @@ import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetCouponController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -44,11 +51,13 @@ import java.util.List;
 
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
 
-public class MeMainFragment extends Fragment implements View.OnClickListener {
+public class MeMainFragment extends Fragment implements View.OnClickListener , FreshInfo{
 
     private View view;
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
+
+    private StudentDTO studentDTO;
 
     private TextView mTitle;//用户名
     private TextView mChangeRole;//切换用户角色
@@ -64,6 +73,23 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
     @ViewInject(R.id.name)
     private TextView mUserName;
+
+    @ViewInject(R.id.modify_info)
+    private TextView mModifyInfo;
+
+    @ViewInject(R.id.prestige)
+    private TextView reputation;
+
+    @ViewInject(R.id.email)
+    private TextView email;
+
+    @ViewInject(R.id.github)
+    private TextView github;
+
+    @ViewInject(R.id.technicTag)
+    private TextView technicTag;
+
+    private RequestManager glide;
 
     public MeMainFragment() {
 
@@ -84,19 +110,40 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me_main, container, false);
 
+        studentDTO = GlobalUtil.getInstance().getStudentDTO();
+
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);
 
         initView();
+
+
+
+
+
+
 
         return view;
     }
 
     private void initView()
     {
-        StudentDTO studentDTO = GlobalUtil.getInstance().getStudentDTO();
+        studentDTO = GlobalUtil.getInstance().getStudentDTO();
+
         int virtualMoney = DoubleParseInt(studentDTO.getVirtualCurrency());
         mVirtualMoney.setText(virtualMoney+"");
+
+        String prestige = studentDTO.getPrestige() + "";
+        reputation.setText( prestige );
+        //根据声望的长度，来经行位置的调整
+        reputation.setPadding(0,0,
+                - (prestige.length() - 1 ) * 5 + 20
+                ,0);
+        reputation.setTextSize( 125/(4 + prestige.length()) );
+
+        email.setText(studentDTO.getEmail() + "");
+        github.setText(studentDTO.getGithubUrl() + "");
+        technicTag.setText(studentDTO.getTechnicTagEnum() + "");
 
         mTitle = (TextView) view.findViewById(R.id.title);
         mTitle.setText(studentDTO.getNickedName());
@@ -110,11 +157,25 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
         mOwnerReward.setOnClickListener(this);
 
-        mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
-        mOwnerCourse.setOnClickListener(this);
+//        mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
+//        mOwnerCourse.setOnClickListener(this);
 
         mHeadImage = (ImageView) view.findViewById(R.id.head);
         mHeadImage.setOnClickListener(this);
+
+        //图片加载器
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(1000);
+        alphaAnimation.setFillAfter(true);
+        mHeadImage.setAnimation(alphaAnimation);
+        alphaAnimation.start();
+
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto( studentDTO.getUserName() ) )
+                .transform(new GlideCircleTransform(getActivity()))
+                .into(mHeadImage);
+
+//        reputation.setText( studentDTO.getPrestige() );
 
 
         displayInfo = new WarningDisplayDialog.Builder(getContext());
@@ -148,15 +209,19 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                 Intent intent1 = new Intent(getActivity(),OwnerRewardActivity.class);
                 startActivity(intent1);
                 break;
-            case R.id.tv_course:
-                Intent intent2 = new Intent(getActivity(),OwnerCourseTeacherActivity.class);//课程
-                //Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
-                startActivity(intent2);
-                break;
+//            case R.id.tv_course:
+//                Intent intent2 = new Intent(getActivity(),OwnerCourseTeacherActivity.class);//课程
+//                //Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
+//                startActivity(intent2);
+//                break;
             case R.id.head:
                 Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
                 startActivity(intent3);
                 break;
+            case R.id.modify_info:{
+                Intent intent4 = new Intent(getActivity(), ModifyMyInfoActivity.class);
+                startActivity(intent4);
+            }break;
             default:
                 break;
         }
@@ -200,6 +265,12 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         couponAction.execute();
     }
 
+    @OnClick(R.id.modify_info)
+    public void setmModifyInfo(View view){
+        Intent intent4 = new Intent(getActivity(), ModifyMyInfoActivity.class);
+        startActivity(intent4);
+    }
+
    /* @OnClick(R.id.change_role)
     public void setChangeRoleListener(View view){
         //TODO:网络通信
@@ -230,6 +301,11 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
+    }
 
     //获取抵扣卷
     public class CouponAction extends AsyncTask<String, Integer, String> {
@@ -346,4 +422,15 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+
+    public FreshInfo freshInfo;
+
+    public void setFreshInfo(FreshInfo freshInfo){
+        this.freshInfo = freshInfo;
+    }
+
+    @Override
+    public void fresh() {
+
+    }
 }

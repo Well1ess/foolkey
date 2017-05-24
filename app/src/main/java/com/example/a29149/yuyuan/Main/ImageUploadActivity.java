@@ -229,8 +229,8 @@ public class ImageUploadActivity extends Activity {
 
                     String resultFlag = jsonObject.getString("result");
                     String sign = jsonObject.getString("sign");
-                    sign = URLDecoder.decode(sign, "utf-8");
-                    sign = new String( ConverterByteBase64.base642Byte(sign) );
+//                    sign = URLDecoder.decode(sign, "utf-8");
+//                    sign = new String( ConverterByteBase64.base642Byte(sign), "utf-8" );
                     Log.i("malei","sign="+sign);
 
                     if (resultFlag.equals("success")) {

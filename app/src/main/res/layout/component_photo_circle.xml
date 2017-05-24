@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <com.example.a29149.yuyuan.Widget.SquareImageView
-    android:id="@+id/photo_circle"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/circle"
-    android:gravity="center"
-    android:elevation="2dp"
+android:id="@+id/photo_circle"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/circle"
+android:gravity="center"
+android:elevation="2dp"
 
 
 
-    xmlns:android="http://schemas.android.com/apk/res/android">
+xmlns:android="http://schemas.android.com/apk/res/android">
 
 
 

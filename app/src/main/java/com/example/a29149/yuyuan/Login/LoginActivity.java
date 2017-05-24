@@ -2,12 +2,17 @@ package com.example.a29149.yuyuan.Login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.animation.GlideAnimation;
 import com.example.a29149.yuyuan.Main.MainActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
@@ -49,6 +55,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * 第四部：nu，up，aes分别使用龚玥加密
      * 第五步：{un， up， aeskey}发送
      */
+
+    private static final String defaultPhoto = "http://foolkey-1252706879.file.myqcloud.com/photo/photo_placeholder.png";
 
     private String strUserName;
     private String strPassWord;
@@ -95,13 +103,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     // 此处为失去焦点时的处理内容
                     //更新头像
                     autoUpdatePhoto();
+
                 }
             }
         });
 
 
+        imageView.setVisibility(View.VISIBLE);
+        //浅出效果，不然会有黄色一闪而过
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(1000);
+        alphaAnimation.setFillAfter(true);
+        imageView.setAnimation(alphaAnimation);
         //用glide动态地加载图片
-        loadImage( UserConfig.xmlUSER_NAME );
+        glide.load( defaultPhoto )
+                .transform(new GlideCircleTransform(this))
+                .crossFade(3000)
+                .into(imageView);
 
         //华哥的跳跳跳动画
         shapeLoadingDialog = new ShapeLoadingDialog(this);
@@ -129,8 +147,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             log.d(this, strPassWord);
 
             //TODO：直接进行网络传输
-            RefreshSelfInfo refreshSelfInfo = new RefreshSelfInfo(this);
-            refreshSelfInfo.execute();
+//            RefreshSelfInfo refreshSelfInfo = new RefreshSelfInfo(this);
+//            refreshSelfInfo.execute();
         }
 
     }
@@ -196,6 +214,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
     @Override
     public void onClick(View view) {
+//        imageView.setVisibility(View.INVISIBLE);
         autoUpdatePhoto();
     }
 
@@ -204,12 +223,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * @param userName
      */
     private void loadImage( String userName ){
+//        RoundedBitmapDrawable circleDrawable = RoundedBitmapDrawableFactory.create(getResources()
+//                , BitmapFactory.decodeResource(getResources()
+//                , R.drawable.photo_placeholder1));
+//        circleDrawable.getPaint().setAntiAlias(true);
+//        circleDrawable.setCircular(true);
+//        imageView.setImageDrawable(circleDrawable);
+
         //用glide动态地加载图片
         String url = pictureInfoBO.getPhotoURL( userName );
         System.out.println(this.getClass() + "   取到的url是");
         System.out.println(url);
+
+        imageView.setVisibility( View.VISIBLE );
+//        imageView.setAlpha(0.0f);
+        //浅出效果，不然会有黄色一闪而过
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(3000);
+        alphaAnimation.setFillAfter(true);
+        imageView.setAnimation(alphaAnimation);
+        alphaAnimation.start();
+
         glide.load( url )
+//                .asBitmap()
+//                .error(R.drawable.photo_placeholder1)
+//                .centerCrop()
                 .transform(new GlideCircleTransform(this))
+//                .crossFade(2000)
+//                .animate(1000)
+                .dontAnimate()
+
                 .into(imageView);
     }
 

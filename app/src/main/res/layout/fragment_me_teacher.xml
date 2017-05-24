@@ -1,0 +1,398 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.example.a29149.yuyuan.Model.Me.MeMainFragment">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:elevation="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:id="@+id/title"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:text="我"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:id="@+id/setting"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="18dp"
+                android:text="设 置"
+                android:gravity="center"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="65dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/head_square"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+
+                    >
+                    <com.example.a29149.yuyuan.Widget.SquareImageView
+                        android:id="@+id/head"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/circle"
+                        android:elevation="2dp"
+                        android:visibility="invisible"
+
+
+                        xmlns:android="http://schemas.android.com/apk/res/android"/>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/slogan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/head_square"
+                    android:layout_marginRight="20dp"
+                    android:text="努力的时候，全世界都在帮你"/>
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/slogan"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="————葛尧"/>
+
+                <TextView
+                    android:id="@+id/prestige"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/head_square"
+                    android:layout_alignRight="@id/head_square"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/modify_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/textview_edit_self_info"
+                    android:drawableTop="@android:drawable/ic_menu_edit"
+                    android:padding="3dp"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:text="编辑个人资料"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="2dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:text="我收藏的"-->
+            <!--android:textSize="16sp"/>-->
+
+            <!--<View-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="1px"-->
+            <!--android:layout_marginLeft="40dp"-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:background="@color/orange"/>-->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+            <!--style="@style/TextView.MeMenu"-->
+            <!--android:text="文章"/>-->
+
+            <!--<View-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="@color/black"/>-->
+
+            <!--<TextView-->
+            <!--style="@style/TextView.MeMenu"-->
+            <!--android:text="问答"/>-->
+
+            <!--<View-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="@color/black"/>-->
+
+            <!--<TextView-->
+            <!--style="@style/TextView.MeMenu"-->
+            <!--android:text="课程"/>-->
+            <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="查 看 我 申 请 的"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginRight="120dp"
+                    android:background="@color/orange"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/owner_reward"
+                        android:clickable="true"
+                        style="@style/TextView.MeMenu"
+                        android:text="悬 赏"/>
+
+                    <!--<View-->
+                    <!--android:layout_width="1px"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@color/black"/>-->
+
+                    <!--<TextView-->
+                    <!--style="@style/TextView.MeMenu"-->
+                    <!--android:text="问答"/>-->
+
+                    <!--<View-->
+                    <!--android:layout_width="1px"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@color/black"/>-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tv_course"-->
+                    <!--style="@style/TextView.MeMenu"-->
+                    <!--android:text="课程"/>-->
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/cash_rmb"
+                        style="@style/TextView.MeMenuNumber"
+                        android:text="0"/>
+
+                    <TextView
+                        style="@style/TextView.MeMenuNumberUnit"
+                        android:text="人民币"/>
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/recharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/textview_normal"
+                        android:padding="5dp"
+                        android:text="  提 现  "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+                <!--我当前的余额，虚拟币-->
+                <include layout="@layout/virtual_money_text_button"/>
+                <!--我的优惠券-->
+                <include layout="@layout/component_coupon_text_button"/>
+
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+
+                android:layout_height="15dp"
+                android:background="@color/light_white"
+                />
+
+
+
+            <TextView
+                android:id="@+id/email"
+                android:paddingTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:hint="电子邮件"
+                android:textColorHint="@color/grey"
+                android:textSize="15dp"
+                android:background="@color/white"
+                android:paddingLeft="35dp"
+                android:paddingBottom="15dp"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="35dp"
+                android:layout_height="1dp"
+                android:background="@color/light_white"
+                />
+
+
+
+
+            <TextView
+                android:id="@+id/github"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="Github账号"
+                android:paddingBottom="15dp"
+                android:paddingLeft="35dp"
+                android:paddingTop="15dp"
+                android:text=""
+                android:textColorHint="@color/light_gray"
+                android:textSize="15dp" />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="35dp"
+                android:layout_height="1dp"
+                android:background="@color/light_white"
+                />
+
+            <TextView
+                android:id="@+id/technicTag"
+                android:paddingTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:hint="你关注的领域"
+                android:textColorHint="@color/grey"
+                android:textSize="15dp"
+                android:background="@color/white"
+                android:paddingLeft="35dp"
+                android:paddingBottom="15dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+
+                android:layout_height="15dp"
+                android:background="@color/light_white"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:background="@color/white">
+
+                <!--提示信息-->
+                <!--<include layout="@layout/component_tips_2_line"/>-->
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

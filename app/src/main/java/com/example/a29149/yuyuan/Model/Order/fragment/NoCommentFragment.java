@@ -260,6 +260,7 @@ public class NoCommentFragment extends Fragment {
 
                     rewardList.clear();
                     courseList.clear();
+                    System.out.println(this.getClass() + "   \n " + orderBuyCourseAsStudentDTOs);
                     for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
                         switch (dto.getOrderDTO().getCourseTypeEnum()) {
                             case 学生悬赏: {
@@ -279,14 +280,21 @@ public class NoCommentFragment extends Fragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+
                                 MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
                                 mBuyCourse.setAdapter(myListViewNoClassCourseAdapter);
                                 myListViewNoClassCourseAdapter.setData(courseList);
+
+
+                                MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
+                                myListViewNoCommentRewardAdapter.setData(rewardList);
+                                mReward.setAdapter(myListViewNoCommentRewardAdapter);
 
                             }
                         }, 1000);
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {

@@ -257,8 +257,8 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
                         mOrderBuyCourseDTO.setOrderStateEnum(OrderStateEnum.结束上课);
                         myViewHolder.state.setText("完成");
                         update();
-                        Intent intent = new Intent(mContext,TeacherScoreMainFragment.class);
-                        mContext.startActivity(intent);
+//                        Intent intent = new Intent(mContext,TeacherScoreMainFragment.class);
+//                        mContext.startActivity(intent);
 
                     }
                 } catch (Exception e) {

@@ -63,12 +63,12 @@ public class MyApplication extends Application {
 
             String appid =  "1252706879";
             Context context = getApplicationContext();
-            String peristenceId = "AKIDlU4rgPAJTXbaTDTDVuKuKh2GJDwbgPkw";
+            String peristenceId = "AD5mKsOjtsiP8kCTaWOE1e6NSO9jASZW";
 
              //创建COSClientConfig对象，根据需要修改默认的配置参数
             COSClientConfig config = new COSClientConfig();
             //如设置园区
-            config.setEndPoint(COSEndPoint.COS_GZ);
+            config.setEndPoint(COSEndPoint.COS_SH);
 
              cos = new COSClient(context,appid,config,peristenceId);
         }

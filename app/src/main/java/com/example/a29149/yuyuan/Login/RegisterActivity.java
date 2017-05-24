@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.Main.ImageUploadActivity;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -17,15 +22,20 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
+import com.example.a29149.yuyuan.Util.PhoneFormatCheckUtils;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.RegisterController;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
+
+import static com.example.a29149.yuyuan.Login.LoginActivity.defaultPhoto;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -39,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
     @ViewInject(R.id.username)
     private EditText mUserName;
 
+
     @ViewInject(R.id.password)
     private EditText mPassWord;
 
@@ -47,6 +58,18 @@ public class RegisterActivity extends AppCompatActivity {
 
     @ViewInject(R.id.code)
     private EditText mCode;
+
+    //头像
+    @ViewInject(R.id.photo_circle)
+    private ImageView imageView;
+    //是否设置了头像
+    private boolean hasPhoto = false;
+
+
+    //Glide依赖
+    private RequestManager glide;
+    //寻找图片的BO
+    private PictureInfoBO pictureInfoBO = new PictureInfoBO();
 
     //等待提示,华哥的跳跳跳动画
     public ShapeLoadingDialog shapeLoadingDialog;
@@ -66,6 +89,48 @@ public class RegisterActivity extends AppCompatActivity {
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
         shapeLoadingDialog.getDialog().setCancelable(false);
+
+        //图片加载器
+        glide = Glide.with(this);
+
+        //浅出效果，不然会有黄色一闪而过
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(1000);
+        alphaAnimation.setFillAfter(true);
+        imageView.setAnimation(alphaAnimation);
+        //用glide动态地加载图片
+        glide.load( defaultPhoto )
+                .transform(new GlideCircleTransform(this))
+                .crossFade(2000)
+                .into(imageView);
+
+
+        //手机号输入框
+        mUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) {
+                    // 此处为得到焦点时的处理内容
+                } else {
+                    // 此处为失去焦点时的处理内容
+                    //查询是否注册
+
+
+
+                    //判空
+                    if ( mUserName.getText() != null){
+                        strUserName = mUserName.getText().toString();
+                        //验证输入的是否是手机号
+                        if ( PhoneFormatCheckUtils.isPhoneLegal( strUserName ) ){
+                            //
+                        }
+                    }else {
+                        //输入不合法
+                        mUserName.setError("请输入正确的手机号");
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -97,19 +162,22 @@ public class RegisterActivity extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid
-        if (TextUtils.isEmpty(strUserName)) {
-            mUserName.setError("账号不能为空！");
+        if (TextUtils.isEmpty(strUserName) || !PhoneFormatCheckUtils.isPhoneLegal( strUserName )) {
+            mUserName.setError("手机号输入错误");
             focusView = mUserName;
             cancel = true;
         } else if (TextUtils.isEmpty(strPassword)) {
-            mPassWord.setError("密码不能为空！");
+            mPassWord.setError("密码不可为空");
             focusView = mPassWord;
             cancel = true;
         } else if (TextUtils.isEmpty(confirm)) {
-            mConfirm.setError("确认密码不能为空！");
+            mConfirm.setError("确认密码不能为空");
             focusView = mConfirm;
             cancel = true;
-        } else if (TextUtils.isEmpty(code)) {
+        } else if (
+//                TextUtils.isEmpty(code)
+                    false
+                ) {
             mCode.setError("验证码不能为空！");
             focusView = mCode;
             cancel = true;
@@ -130,6 +198,19 @@ public class RegisterActivity extends AppCompatActivity {
             getPublicKeyAction.execute();
         }
     }
+
+    /**
+     * 调用上传图片的activity
+     * 要防止extra
+     * @param view
+     */
+    @OnClick(R.id.photo_circle)
+    public void uploadPhoto(View view){
+        Intent intent = new Intent(this, ImageUploadActivity.class );
+        intent.putExtra("userName", strUserName);
+        startActivity( intent );
+    }
+
 
     /**
      * 获取公钥
@@ -208,6 +289,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+
+
+
+
     /**
      * 注册请求Action
      */
@@ -275,6 +360,9 @@ public class RegisterActivity extends AppCompatActivity {
                         userConfig.setUserInfo(UserConfig.xmlSAVE, true);
 
 
+                        //这里需要弄一下上传
+
+
                         AppManager.getInstance().finishActivity(LoginActivity.class);
                         RegisterActivity.this.finish();
 
@@ -289,6 +377,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
         }
+
 
         @Override
         protected void onProgressUpdate(Integer... values) {

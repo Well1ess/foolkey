@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.Main.SplashActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * 第五步：{un， up， aeskey}发送
      */
 
-    private static final String defaultPhoto = "http://foolkey-1252706879.file.myqcloud.com/photo/photo_placeholder.png";
+    public static final String defaultPhoto = "http://foolkey-1252706879.file.myqcloud.com/photo/photo_placeholder.png";
 
     private String strUserName;
     private String strPassWord;
@@ -82,6 +83,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
+
+        //如果进入到这个页面，则清空所有的activity
+        AppManager.getInstance().finishAllActivity();
 
         //图片加载器
         glide = Glide.with(this);

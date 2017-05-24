@@ -8,20 +8,22 @@
     android:orientation="vertical"
     android:focusableInTouchMode="true"
     android:focusable="true"
-    tools:context=".Login.RegisterActivity">
+
+    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:elevation="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/background">
+        android:background="@color/dark_green">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:background="@color/background">
+
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -29,7 +31,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/button_menu_transparent">
+
+                >
 
                 <TextView
                     android:id="@+id/bt_return"
@@ -38,7 +41,7 @@
                     android:text="取消"
                     android:clickable="true"
                     android:textSize="15sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/light_green"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
@@ -52,12 +55,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:textColor="@color/head"
+                android:textColor="@color/white"
                 android:id="@+id/title"
                 android:layout_centerInParent="true"
                 android:text="注册账号"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:textSize="15sp" />
 
 
@@ -67,7 +70,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/button_menu_colorprimary">
+
+                >
 
                 <TextView
                     android:id="@+id/commit"
@@ -75,6 +79,7 @@
                     android:layout_width="wrap_content"
                     android:text="注册"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -93,6 +98,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="65dp"
         android:orientation="vertical">
+
+        <com.example.a29149.yuyuan.Widget.SquareImageView
+            android:id="@+id/photo_circle"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/circle"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:elevation="2dp"
+            android:visibility="visible"
+            />
+
 
         <LinearLayout
             android:layout_marginTop="32dp"
@@ -164,7 +181,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
                 <android.support.design.widget.TextInputLayout
                     android:layout_weight="1"
                     android:layout_width="0dp"

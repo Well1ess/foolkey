@@ -80,6 +80,9 @@ public class MainStudentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //进入到这里时会杀死闪入的activity
+        AppManager.getInstance().finishActivity( SplashActivity.class );
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AnnotationUtil.injectViews(this);

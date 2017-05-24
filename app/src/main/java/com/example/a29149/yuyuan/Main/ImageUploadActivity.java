@@ -26,6 +26,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UploadFile;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetPictureImageController;
 
 import org.json.JSONObject;
@@ -45,6 +46,9 @@ public class ImageUploadActivity extends Activity {
     protected static final int TAKE_PICTURE = 1;
     protected static Uri tempUri;
     private static final int CROP_SMALL_PICTURE = 2;
+    private String userName =
+            GlobalUtil.getInstance().getStudentDTO().getUserName()
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,7 @@ public class ImageUploadActivity extends Activity {
      * 显示修改图片的对话框
      */
     protected void showChoosePicDialog() {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(ImageUploadActivity.this);
         builder.setTitle("添加图片");
         String[] items = {"选择本地照片", "拍照"};
@@ -99,7 +104,7 @@ public class ImageUploadActivity extends Activity {
                         Intent openCameraIntent = new Intent(
                                 MediaStore.ACTION_IMAGE_CAPTURE);
                         String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/yuyuan/picture/";
-                        tempUri = Uri.fromFile(new File(dir, "temp_image.jpg"));
+                        tempUri = Uri.fromFile(new File(dir, checkUserName(userName) ));
                         // 将拍照所得的相片保存到SD卡根目录
                         openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
                         startActivityForResult(openCameraIntent, TAKE_PICTURE);
@@ -169,8 +174,9 @@ public class ImageUploadActivity extends Activity {
     }
 
     public void saveBitmap() {
+        String path = checkUserName(userName);
         String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/picture/";
-        File f = new File(dir  + "temp_image.jpg" );
+        File f = new File(dir  + path  );
         srcPath = f.getPath();
         Log.i("malei","srcPath="+srcPath);
         if (!f.exists()) {
@@ -213,6 +219,7 @@ public class ImageUploadActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
+            String path = checkUserName(userName);
             super.onPostExecute(result);
             log.d(this, result);
             if (result != null) {
@@ -229,8 +236,8 @@ public class ImageUploadActivity extends Activity {
                     if (resultFlag.equals("success")) {
                         GlobalUtil.getInstance().setSign(sign);
                         UploadFile uploadFile = new UploadFile(ImageUploadActivity.this,GlobalUtil.getInstance().getSign());
-                        Log.i("malei", srcPath);
-                        uploadFile.updata(srcPath);
+                        Log.i("malei", this.getClass() + "240行 " + path);
+                        uploadFile.updata(srcPath, path);
                     }
                 } catch (Exception e) {
                     Toast.makeText(ImageUploadActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
@@ -239,6 +246,32 @@ public class ImageUploadActivity extends Activity {
             }
 
         }
+    }
+
+    /**
+     * 判断用户名
+     * 默认是获取全局的
+     * 如果是注册时候，就得是用户输入的
+     * 如果没有注册，全局也是空，则会叫default
+     * @param userName
+     * @return
+     */
+    private String checkUserName(String userName){
+        if (getIntent().getStringExtra("userName") != null)
+            userName = getIntent().getStringExtra("userName");
+        return PictureInfoBO.getUrlForUpload( userName );
+//        String phone;
+//        if (userName == null){
+//            userName = "default";
+//        }
+//        if (getIntent().getStringExtra("userName") == null){
+//            phone = userName;
+//        }else {
+//            phone = getIntent().getStringExtra("userName");
+//            phone = PictureInfoBO.getUrlForUpload(phone);
+//        }
+//        System.out.println(this.getClass() + "270" + phone);
+//        return phone;
     }
 }
 

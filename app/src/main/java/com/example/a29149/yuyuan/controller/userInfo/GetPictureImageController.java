@@ -13,11 +13,11 @@ import org.json.JSONObject;
 
 public class GetPictureImageController extends AbstractController{
 
-    private static String url = address + "/aes/upload/getSign";
+    private static String url = address + "/upload/getSign";
 
     public static String execute(){
         try{
-            JSONObject jsonObject = getJSON();
+            JSONObject jsonObject = new JSONObject();
             return HttpSender.send( url, jsonObject );
         }catch (Exception e){
             return failJSON( e );

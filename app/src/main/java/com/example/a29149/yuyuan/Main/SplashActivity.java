@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
@@ -48,7 +49,8 @@ public class SplashActivity extends Activity {
             //向服务器刷新，如果成功，则登录
             RefreshSelfInfo refreshSelfInfo = new RefreshSelfInfo(this);
             refreshSelfInfo.execute();
-            SplashActivity.this.finish();
+            AppManager.getInstance().addActivity(this);
+
         }else {
             //如果本地没有数据，则重新登录
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);

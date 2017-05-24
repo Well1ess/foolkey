@@ -38,7 +38,12 @@ public class UploadFile {
 
     public static PutObjectRequest putObjectRequest = new PutObjectRequest();
 
-    public void updata(String srcPath) {
+    //第二参数为运路径
+    public void updata(String srcPath, String cloudPath) {
+        if (cloudPath == null || cloudPath.equals("")){
+
+        }else
+            cosPath = cloudPath;
         putObjectRequest.setBucket(bucket);
         putObjectRequest.setCosPath(cosPath);
         Log.i("malei","cosPath=  "+cosPath);

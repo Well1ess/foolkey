@@ -137,7 +137,7 @@
             android:layout_marginLeft="20dp"
             android:text=""
             android:hint="男/女"
-            android:textColorHint="@color/light_white"
+            android:textColorHint="@color/light_gray"
             android:textSize="15dp"
             />
 
@@ -189,35 +189,6 @@
         />
 
     <EditText
-        android:id="@+id/birthday"
-        android:paddingTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:hint="出生年月"
-        android:textColorHint="@color/grey"
-        android:textSize="15dp"
-        android:background="@color/white"
-        android:paddingLeft="35dp"
-        android:paddingBottom="8dp"
-        />
-
-
-    <ImageView
-        android:id="@+id/imageView"
-
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:background="@color/light_white" />
-
-    <ImageView
-        android:layout_width="match_parent"
-
-        android:layout_height="15dp"
-        android:background="@color/light_white"
-        />
-
-    <EditText
         android:id="@+id/slogan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -229,6 +200,19 @@
         android:text=""
         android:textColorHint="@color/grey"
         android:textSize="15dp" />
+
+
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+
+        android:layout_height="15dp"
+        android:background="@color/light_white"
+        />
+
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -271,7 +255,7 @@
         android:paddingLeft="35dp"
         android:paddingTop="15dp"
         android:text=""
-        android:textColorHint="@color/light_white"
+        android:textColorHint="@color/light_gray"
         android:textSize="15dp" />
 
 
@@ -311,7 +295,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:hint="详细描述一下你自己"
-        android:textColorHint="@color/light_white"
+        android:textColorHint="@color/light_gray"
         android:textSize="15dp"
         android:background="@color/white"
         android:paddingLeft="35dp"

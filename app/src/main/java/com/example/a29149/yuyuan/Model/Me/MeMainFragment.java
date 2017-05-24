@@ -25,6 +25,7 @@ import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
 import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
+import com.example.a29149.yuyuan.Model.Me.info.FreshInfo;
 import com.example.a29149.yuyuan.Model.Me.info.ModifyMyInfoActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.ModelTeacher.Index.course.OwnerCourseTeacherActivity;
@@ -49,7 +50,7 @@ import java.util.List;
 
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
 
-public class MeMainFragment extends Fragment implements View.OnClickListener {
+public class MeMainFragment extends Fragment implements View.OnClickListener , FreshInfo{
 
     private View view;
     //显示选项的对话框
@@ -77,6 +78,15 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
     @ViewInject(R.id.prestige)
     private TextView reputation;
+
+    @ViewInject(R.id.email)
+    private TextView email;
+
+    @ViewInject(R.id.github)
+    private TextView github;
+
+    @ViewInject(R.id.technicTag)
+    private TextView technicTag;
 
     private RequestManager glide;
 
@@ -121,6 +131,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
 
     private void initView()
     {
+        studentDTO = GlobalUtil.getInstance().getStudentDTO();
 
         int virtualMoney = DoubleParseInt(studentDTO.getVirtualCurrency());
         mVirtualMoney.setText(virtualMoney+"");
@@ -132,6 +143,10 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
                 - (prestige.length() - 1 ) * 5 + 20
                 ,0);
         reputation.setTextSize( 125/(4 + prestige.length()) );
+
+        email.setText(studentDTO.getEmail() + "");
+        github.setText(studentDTO.getGithubUrl() + "");
+        technicTag.setText(studentDTO.getTechnicTagEnum() + "");
 
         mTitle = (TextView) view.findViewById(R.id.title);
         mTitle.setText(studentDTO.getNickedName());
@@ -277,6 +292,11 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
+    }
 
     //获取抵扣卷
     public class CouponAction extends AsyncTask<String, Integer, String> {
@@ -393,4 +413,15 @@ public class MeMainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+
+    public FreshInfo freshInfo;
+
+    public void setFreshInfo(FreshInfo freshInfo){
+        this.freshInfo = freshInfo;
+    }
+
+    @Override
+    public void fresh() {
+
+    }
 }

@@ -9,7 +9,7 @@ import com.bumptech.glide.RequestManager;
 
 public class PictureInfoBO extends AbstractBO {
 
-    public static final String objectDBUrl = "http://foolkey-1252706879.cossh.myqcloud.com/";
+    public static final String objectDBUrl = "http://foolkey-1252706879.file.myqcloud.com/";
 
     //Glide依赖
     private RequestManager glide;

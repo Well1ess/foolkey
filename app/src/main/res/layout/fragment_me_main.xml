@@ -199,14 +199,15 @@
                     android:layout_gravity="center"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
-                    android:text="我拥有的"
+                    android:text="查 看 申 请"
+                    android:textColor="@color/grey"
                     android:textSize="16sp"/>
 
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="1px"
-                    android:layout_marginLeft="170dp"
-                    android:layout_marginRight="170dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginRight="120dp"
                     android:background="@color/orange"/>
 
                 <LinearLayout
@@ -218,7 +219,7 @@
                         android:id="@+id/owner_reward"
                         android:clickable="true"
                         style="@style/TextView.MeMenu"
-                        android:text="悬赏"/>
+                        android:text="悬 赏"/>
 
                     <!--<View-->
                         <!--android:layout_width="1px"-->
@@ -305,7 +306,7 @@
                 android:paddingLeft="35dp"
                 android:paddingTop="15dp"
                 android:text=""
-                android:textColorHint="@color/light_white"
+                android:textColorHint="@color/light_gray"
                 android:textSize="15dp" />
 
 

@@ -58,8 +58,8 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
     @ViewInject(R.id.school)
     private EditText school;
 
-    @ViewInject(R.id.birthday)
-    private EditText birthday;
+//    @ViewInject(R.id.birthday)
+//    private EditText birthday;
 
     @ViewInject(R.id.slogan)
     private EditText slogan;
@@ -122,7 +122,7 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
             birStr = null;
         else
             birStr = studentDTO.toString();
-        birthday.setText( birStr );
+//        birthday.setText( birStr );
         slogan.setText( studentDTO.getSlogan() );
         email.setText( studentDTO.getEmail() );
         organization.setText( studentDTO.getOrganization() );

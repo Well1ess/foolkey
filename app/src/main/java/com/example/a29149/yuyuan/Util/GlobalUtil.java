@@ -121,6 +121,8 @@ public class GlobalUtil {
 
     //订单悬赏列表
     private List<OrderBuyCourseAsStudentDTO> orderRewardList;
+    //订单课程列表
+    private List<OrderBuyCourseAsStudentDTO> orderCourseList;
 
 
     //腾讯SCO签名
@@ -446,6 +448,14 @@ public class GlobalUtil {
 
     public void setOrderRewardList(List<OrderBuyCourseAsStudentDTO> orderRewardList) {
         this.orderRewardList = orderRewardList;
+    }
+
+    public List<OrderBuyCourseAsStudentDTO> getOrderCourseList() {
+        return orderCourseList;
+    }
+
+    public void setOrderCourseList(List<OrderBuyCourseAsStudentDTO> orderCourseList) {
+        this.orderCourseList = orderCourseList;
     }
 }
 

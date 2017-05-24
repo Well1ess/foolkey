@@ -113,10 +113,9 @@ public class NoCommentFragment extends Fragment {
             case "student":
                 new StudentRequestNoCommentOrderAction(pageNo).execute();
                 break;
-            case "teacher":
-                new TeacherRequestNoCommentOrderAction(pageNo).execute();
-                break;
+            //其他身份，都是广义上的老师
             default:
+                new TeacherRequestNoCommentOrderAction(pageNo).execute();
                 break;
         }
     }

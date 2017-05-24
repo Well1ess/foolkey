@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +25,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- * Created by MaLei on 2017/5/23.
- * Email:ml1995@mail.ustc.edu.cn
- * 订单详情
+ * Created by geyao on 2017/5/24.
  */
 
-public class OrderInfoActivity extends Activity implements View.OnClickListener {
+public class OrderCourseInfoActivity extends Activity implements View.OnClickListener  {
 
     private StudentDTO mStudentDTO;//学生信息
     private TeacherDTO mTeacherDTO;//老师信息
@@ -39,7 +36,7 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
     private RewardDTO mRewardDTO;//悬赏信息
     private OrderBuyCourseDTO mOrderBuyCourseDTO;//订单信息
     private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
-    private List<OrderBuyCourseAsStudentDTO> orderRewardList;//全部悬赏信息
+    private List<OrderBuyCourseAsStudentDTO> orderCourseList;//全部悬赏信息
     private CourseAbstract courseDTO = null ;
 
     @ViewInject(R.id.order_id)
@@ -91,13 +88,13 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
         Log.i("malei","position="+position);
 
 
-        orderRewardList = GlobalUtil.getInstance().getOrderRewardList();
-        Log.i("malei",orderRewardList.toString());
+        orderCourseList = GlobalUtil.getInstance().getOrderCourseList();
+        Log.i("malei", orderCourseList.toString());
         initData();
     }
 
     private void initData() {
-        mOrderBuyCourseAsStudentDTO = orderRewardList.get(position);
+        mOrderBuyCourseAsStudentDTO = orderCourseList.get(position);
 
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
         mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();

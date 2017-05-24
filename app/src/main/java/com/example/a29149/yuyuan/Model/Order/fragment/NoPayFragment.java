@@ -16,15 +16,13 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
-import com.example.a29149.yuyuan.Model.Order.activity.OrderInfoActivity;
+import com.example.a29149.yuyuan.Model.Order.activity.OrderRewardInfoActivity;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoClassCourseAdapter;
-import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoClassRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoPayClassAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.order.student.GetSpecificStateOrderController;
 import com.example.a29149.yuyuan.controller.order.teacher.home.GetOrderBuyCourseAsTeacherByOrderStatesController;
@@ -80,7 +78,7 @@ public class NoPayFragment extends Fragment {
         mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
+                Intent toOrderInfo = new Intent(mContext, OrderRewardInfoActivity.class);
                 startActivity(toOrderInfo);
                 Log.i("malei","你点击了"+position);
             }
@@ -109,11 +107,11 @@ public class NoPayFragment extends Fragment {
             case "student":
                 new StudentRequestNoPayOrderAction(pageNo).execute();
                 break;
-            case "teacher":
+            //其他身份，都是广义上的老师
+            default:
                 new TeacherRequestNoPayOrderAction(pageNo).execute();
                 break;
-            default:
-                break;
+
         }
     }
 

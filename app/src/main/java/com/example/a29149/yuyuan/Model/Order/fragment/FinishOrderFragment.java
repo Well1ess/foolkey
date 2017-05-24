@@ -16,7 +16,8 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
-import com.example.a29149.yuyuan.Model.Order.activity.OrderInfoActivity;
+import com.example.a29149.yuyuan.Model.Order.activity.OrderCourseInfoActivity;
+import com.example.a29149.yuyuan.Model.Order.activity.OrderRewardInfoActivity;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishRewardAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewFinishCourseAdapter;
 import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewNoClassCourseAdapter;
@@ -24,7 +25,6 @@ import com.example.a29149.yuyuan.Model.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.Model.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.order.student.GetSpecificStateOrderController;
 import com.example.a29149.yuyuan.controller.order.teacher.home.GetOrderBuyCourseAsTeacherByOrderStatesController;
@@ -79,17 +79,23 @@ public class FinishOrderFragment extends Fragment {
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
 
 
+        //课程
         mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("malei", "你点击了" + position);
+                Intent toOrderInfo = new Intent(mContext, OrderCourseInfoActivity.class);
+                toOrderInfo.putExtra("position", position);
+                startActivity( toOrderInfo );
             }
         });
+
+        //悬赏，已完成
         mReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("malei", "你点击了" + position);
-                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
+                Intent toOrderInfo = new Intent(mContext, OrderRewardInfoActivity.class);
                 toOrderInfo.putExtra("position",position);
                 startActivity(toOrderInfo);
             }
@@ -122,10 +128,9 @@ public class FinishOrderFragment extends Fragment {
             case "student":
                 new StudentRequestFinishOrderAction(pageNo).execute();
                 break;
-            case "teacher":
-                new TeacherRequestFinishOrderAction(pageNo).execute();
-                break;
+            //其他身份，都是广义上的老师
             default:
+                new TeacherRequestFinishOrderAction(pageNo).execute();
                 break;
         }
     }
@@ -188,6 +193,8 @@ public class FinishOrderFragment extends Fragment {
                     }
 
                     GlobalUtil.getInstance().setOrderRewardList(rewardList);
+                    GlobalUtil.getInstance().setOrderCourseList(courseList);
+
 
                     Log.i("malei", orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
@@ -283,15 +290,22 @@ public class FinishOrderFragment extends Fragment {
                         }
                     }
 
+                    GlobalUtil.getInstance().setOrderRewardList(rewardList);
+                    GlobalUtil.getInstance().setOrderCourseList(courseList);
+
                     Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "获取已完成订单成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
-                                mBuyCourse.setAdapter(myListViewNoClassCourseAdapter);
-                                myListViewNoClassCourseAdapter.setData(courseList);
+                                MyListViewFinishRewardAdapter myListViewFinishRewardAdapter = new MyListViewFinishRewardAdapter(mContext);
+                                myListViewFinishRewardAdapter.setData(courseList);
+                                mBuyCourse.setAdapter(myListViewFinishRewardAdapter);
+
+                                MyListViewFinishCourseAdapter myListViewFinishCourseAdapter = new MyListViewFinishCourseAdapter(mContext);
+                                myListViewFinishCourseAdapter.setData(rewardList);
+                                mReward.setAdapter(myListViewFinishCourseAdapter);
 
                             }
                         }, 1000);

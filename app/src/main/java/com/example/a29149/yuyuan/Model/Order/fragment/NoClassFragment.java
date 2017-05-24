@@ -112,10 +112,9 @@ public class NoClassFragment extends Fragment {
             case "student":
                 new StudentRequestNoClassOrderAction(pageNo).execute();
                 break;
-            case "teacher":
-                new TeacherRequestNoClassOrderAction(pageNo).execute();
-                break;
+            //其他身份，都是广义上的老师
             default:
+                new TeacherRequestNoClassOrderAction(pageNo).execute();
                 break;
         }
     }

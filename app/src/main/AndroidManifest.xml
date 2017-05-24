@@ -110,7 +110,7 @@
         <!-- 用户上传头像界面 -->
         <activity android:name=".Main.ImageUploadActivity"/>
         <!-- 订单详情界面 -->
-        <activity android:name=".Model.Order.activity.OrderInfoActivity"/>
+        <activity android:name=".Model.Order.activity.OrderRewardInfoActivity"/>
         <activity android:name=".Model.Me.Reward.OwnerRewardActivity"></activity>
         <activity android:name=".TeacherInfo.TeacherInfoActivity">
         </activity>

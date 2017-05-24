@@ -16,6 +16,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.Util.Secret.AESOperator;
 import com.example.a29149.yuyuan.Util.URL;
+import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.userInfo.GetMyInfoController;
 import com.google.gson.Gson;
@@ -79,9 +80,19 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
                         GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
                         Log.i("malei",teacherDTO.toString());
                     }
+                }else {
+//                    UserConfig userConfig = new UserConfig();
+//                    userConfig.clear();
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    mContext.startActivity(intent);
                 }
             } catch (Exception e) {
                 Toast.makeText(mContext, "请求失败，请重新登录", Toast.LENGTH_SHORT).show();
+//                UserConfig userConfig = new UserConfig();
+//                userConfig.clear();
+                Intent intent = new Intent(mContext, LoginActivity.class);
+                mContext.startActivity(intent);
+
 
             }
         } else {

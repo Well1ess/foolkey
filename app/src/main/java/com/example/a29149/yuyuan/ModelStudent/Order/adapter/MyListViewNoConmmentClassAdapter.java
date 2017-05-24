@@ -1,4 +1,4 @@
-package com.example.a29149.yuyuan.Model.Order.adapter;
+package com.example.a29149.yuyuan.ModelStudent.Order.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
@@ -17,9 +16,8 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
-import com.example.a29149.yuyuan.Model.Order.activity.CommentCourseActivity;
-import com.example.a29149.yuyuan.Model.Order.activity.CommentRewardActivity;
-import com.example.a29149.yuyuan.Model.Order.activity.JudgeStudentActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.CommentCourseActivity;
+import com.example.a29149.yuyuan.ModelTeacher.Order.JudgeStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 

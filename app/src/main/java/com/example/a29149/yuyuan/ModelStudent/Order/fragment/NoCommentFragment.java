@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoCommentRewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
@@ -145,7 +144,6 @@ public class NoCommentFragment extends Fragment {
                     OrderStateEnum.结束上课.toString(),
                     pageNo + ""
             );
-
         }
 
         @Override

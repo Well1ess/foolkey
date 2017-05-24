@@ -1,7 +1,6 @@
-package com.example.a29149.yuyuan.Model.Me;
+package com.example.a29149.yuyuan.ModelTeacher.me;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,13 +21,11 @@ import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Main.ImageUploadActivity;
-import com.example.a29149.yuyuan.Model.Me.Coupon.CouponActivity;
-import com.example.a29149.yuyuan.Model.Me.Recharge.RechargeActivity;
-import com.example.a29149.yuyuan.Model.Me.Reward.OwnerRewardActivity;
-import com.example.a29149.yuyuan.Model.Me.Setting.SettingActivity;
-import com.example.a29149.yuyuan.Model.Me.info.FreshInfo;
-import com.example.a29149.yuyuan.Model.Me.info.ModifyMyInfoActivity;
-import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.MainTeacherActivity;
+import com.example.a29149.yuyuan.ModelStudent.Me.Coupon.CouponActivity;
+import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
+import com.example.a29149.yuyuan.ModelStudent.Me.Reward.OwnerRewardActivity;
+import com.example.a29149.yuyuan.ModelStudent.Me.Setting.SettingActivity;
+import com.example.a29149.yuyuan.ModelStudent.Me.info.ModifyMyInfoActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
@@ -36,7 +33,6 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
-import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetCouponController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
@@ -50,7 +46,13 @@ import java.util.List;
 
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
 
-public class TeacherMainFragment extends Fragment implements View.OnClickListener , FreshInfo{
+/**
+ * Created by MaLei on 2017/5/3 0014.
+ * Email:ml1995@mail.ustc.edu.cn
+ * 老师我的页面
+ */
+
+public class TeacherMainFragment extends Fragment implements View.OnClickListener {
 
     private View view;
     //显示选项的对话框
@@ -414,15 +416,4 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
         }
     }
 
-
-    public FreshInfo freshInfo;
-
-    public void setFreshInfo(FreshInfo freshInfo){
-        this.freshInfo = freshInfo;
-    }
-
-    @Override
-    public void fresh() {
-
-    }
 }

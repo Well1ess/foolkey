@@ -1,10 +1,11 @@
-package com.example.a29149.yuyuan.Model.Order.activity;
+package com.example.a29149.yuyuan.ModelTeacher.Order;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ import com.example.resource.util.image.GlideCircleTransform;
 
 /**
  * Created by geyao on 2017/5/24.
+ * 学生评价老师
  */
 
 public class JudgeStudentActivity extends Activity {
@@ -53,6 +55,7 @@ public class JudgeStudentActivity extends Activity {
     private RadioButton radioButton;
 
     private RequestManager glide;
+    private int position;//记录评论位置
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +69,8 @@ public class JudgeStudentActivity extends Activity {
         //取展示的信息
         String studentNameStr = intent.getStringExtra("studentName");
         String courseNameStr = intent.getStringExtra("courseName");
+        position = intent.getIntExtra("position",-1);
+        Log.i("malei","position="+position+"    studentName="+studentNameStr+"    courseNameStr="+courseNameStr);
         studentName.setText( studentNameStr );
         courseName.setText( courseNameStr );
 

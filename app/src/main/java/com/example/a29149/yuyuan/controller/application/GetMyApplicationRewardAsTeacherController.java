@@ -1,8 +1,6 @@
 package com.example.a29149.yuyuan.controller.application;
 
 import com.example.a29149.yuyuan.DTO.ApplicationRewardWithStudentSTCDTO;
-import com.example.a29149.yuyuan.DTO.QuestionAnswerDTO;
-import com.example.a29149.yuyuan.Enum.PayResultEnum;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.AbstractControllerTemplate;
@@ -72,5 +70,17 @@ public class GetMyApplicationRewardAsTeacherController  extends AbstractControll
             e.printStackTrace();
             this.result = Const.FAIL;
         }
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public List<ApplicationRewardWithStudentSTCDTO> getApplicationRewardWithStudentSTCDTOS() {
+        return applicationRewardWithStudentSTCDTOS;
     }
 }

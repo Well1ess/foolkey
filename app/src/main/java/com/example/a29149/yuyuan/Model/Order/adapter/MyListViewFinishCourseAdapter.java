@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * Created by MaLei on 2017/4/24.
  * Email:ml1995@mail.ustc.edu.cn
- * 已完成订单的悬赏listView的Adapter
+ * 已完成订单的课程listView的Adapter
  */
 
 public class MyListViewFinishCourseAdapter extends BaseAdapter {

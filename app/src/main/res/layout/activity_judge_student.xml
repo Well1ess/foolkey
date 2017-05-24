@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a29149.yuyuan.AccessOrder.AccessOrderActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageButton
+                android:id="@+id/bt_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="?android:attr/actionModeCloseDrawable"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:textStyle="normal"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:text="评价学生"
+                android:textColor="@color/white" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_marginTop="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/background">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/background">
+
+                <android.support.design.widget.CoordinatorLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+
+                        android:descendantFocusability="blocksDescendants"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <com.example.a29149.yuyuan.Widget.SquareImageView
+                            android:id="@+id/student_photo"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/circle"
+                            android:elevation="2dp"
+                            android:visibility="invisible"
+                            android:gravity="center">
+
+
+                        </com.example.a29149.yuyuan.Widget.SquareImageView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_gravity="center"
+                            android:focusable="false"
+                            android:orientation="vertical"
+                            >
+                            <TextView
+                                android:id="@+id/student_name"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grey555"
+                                android:paddingBottom="20dp"
+                                android:text="学生姓名"/>
+                            <TextView
+                                android:id="@+id/course_name"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/grey555"
+                                android:text="课程名称"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/order_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="￥ 50"
+                        android:textColor="@color/colorPrimary" />
+
+                </android.support.design.widget.CoordinatorLayout>
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_marginRight="2dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:orientation="vertical">-->
+                    <!--<TextView-->
+                        <!--android:text="评价课程"-->
+                        <!--android:textSize="16sp"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:paddingBottom="10dp"-->
+                        <!--android:paddingTop="10dp"/>-->
+
+                    <!--<View-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="1px"-->
+                        <!--android:background="@color/colorPrimary"-->
+                        <!--android:layout_marginLeft="40dp"-->
+                        <!--android:layout_marginRight="40dp" />-->
+
+                    <!--<RatingBar-->
+                        <!--android:scaleX="0.6"-->
+                        <!--android:scaleY="0.6"-->
+                        <!--android:layout_gravity="center_horizontal"-->
+                        <!--android:numStars="5"-->
+                        <!--android:id="@+id/course_access"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content" />-->
+
+                    <!--<EditText-->
+                        <!--android:id="@+id/ed_comment_content"-->
+                        <!--android:textSize="12sp"-->
+                        <!--android:layout_marginLeft="40dp"-->
+                        <!--android:layout_marginRight="40dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="70dp"-->
+                        <!--android:hint="点击输入评价"-->
+                        <!--android:gravity="left"-->
+                        <!--android:background="@drawable/edittext_access_selector"-->
+                        <!--/>-->
+
+                    <!--<RelativeLayout-->
+                        <!--android:layout_marginLeft="40dp"-->
+                        <!--android:layout_marginRight="40dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_marginBottom="10dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@drawable/button_dash">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_centerInParent="true"-->
+                            <!--android:id="@+id/dynamic_add"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="60dp"-->
+                            <!--android:layout_margin="5dp"-->
+                            <!--android:drawableTint="@color/colorSky"-->
+                            <!--android:drawableLeft="@android:drawable/ic_menu_gallery"-->
+                            <!--android:gravity="center"-->
+                            <!--android:text="添加图片"-->
+                            <!--android:textColor="@color/colorSky"-->
+                            <!--android:textSize="15dp" />-->
+
+                    <!--</RelativeLayout>-->
+                <!--</LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="为学生打分"
+                        android:textColor="@color/grey"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"/>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1px"
+                        android:background="@color/colorPrimary"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp" />
+
+                    <RatingBar
+                        android:scaleX="0.6"
+                        android:scaleY="0.6"
+                        android:layout_gravity="center_horizontal"
+                        android:numStars="5"
+                        android:max="5"
+                        android:stepSize="0.5"
+                        android:id="@+id/student_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <!--<EditText-->
+                        <!--android:textSize="12sp"-->
+                        <!--android:layout_marginLeft="40dp"-->
+                        <!--android:layout_marginRight="40dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="70dp"-->
+                        <!--android:hint="点击输入评价"-->
+                        <!--android:gravity="left"-->
+                        <!--android:background="@drawable/edittext_access_selector"-->
+                        <!--/>-->
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="#DEDEDE"/>
+
+        <RadioGroup
+            android:id="@+id/tab_main_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                style="@style/RadioButton.Menu"
+                android:id="@+id/publish_button"
+                android:textColor="@color/dark_green"
+                android:textSize="18dp"
+                android:textStyle="normal"
+                android:text="发布评价" />
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+</FrameLayout>

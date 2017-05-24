@@ -108,12 +108,14 @@ public class NoClassFragment extends Fragment {
     //请求数据
     private void requestData(int pageNo) {
         String userRole = GlobalUtil.getInstance().getUserRole();
+        System.out.println(userRole);
         switch (userRole){
             case "student":
                 new StudentRequestNoClassOrderAction(pageNo).execute();
                 break;
             //其他身份，都是广义上的老师
             default:
+                System.out.println(this.getClass()  + "  老师获取订单了 " + userRole);
                 new TeacherRequestNoClassOrderAction(pageNo).execute();
                 break;
         }
@@ -176,7 +178,7 @@ public class NoClassFragment extends Fragment {
                     }
 
 
-                    Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
+
                     if (resultFlag.equals("success")) {
                         Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
@@ -230,6 +232,7 @@ public class NoClassFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            System.out.println(this.getClass() + "  已发送请求\n同意上课");
             shapeLoadingDialog.show();
         }
 
@@ -253,6 +256,7 @@ public class NoClassFragment extends Fragment {
                 try {
                     //存储所有我拥有的悬赏信息DTO
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList();
+                    Log.i("malei","rewardList=  "+getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList().toString());
                     GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
 
                     rewardList.clear();
@@ -283,6 +287,7 @@ public class NoClassFragment extends Fragment {
 
                                 MyListViewNoClassRewardAdapter myListViewNoClassRewardAdapter = new MyListViewNoClassRewardAdapter(mContext);
                                 myListViewNoClassRewardAdapter.setData(rewardList);
+                                Log.i("malei","rewardList=  "+rewardList.toString());
                                 mReward.setAdapter(myListViewNoClassRewardAdapter);
 
 
@@ -290,6 +295,7 @@ public class NoClassFragment extends Fragment {
                         }, 1000);
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {

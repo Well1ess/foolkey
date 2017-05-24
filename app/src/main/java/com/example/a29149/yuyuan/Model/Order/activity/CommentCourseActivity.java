@@ -35,6 +35,7 @@ import java.net.HttpURLConnection;
 
 public class CommentCourseActivity extends Activity implements View.OnClickListener {
 
+
     private RadioButton mPublish;//发布评价
     private RatingBar mCourseScore;//课程分数
     private EditText mCourseContent;//课程内容评价

@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
-import com.example.a29149.yuyuan.Main.MainActivity;
-import com.example.a29149.yuyuan.Model.Discovery.Activity.ArticleActivity;
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.ArticleActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.Score.Adapter.TeacherScoreAdapter;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -100,8 +100,8 @@ public class TeacherScoreFragment extends Fragment {
                     public void onRefresh() {
                         //TODO:网络通信
                         //获取主页的热门课程
-                        if (MainActivity.shapeLoadingDialog != null) {
-                            MainActivity.shapeLoadingDialog.show();
+                        if (MainStudentActivity.shapeLoadingDialog != null) {
+                            MainStudentActivity.shapeLoadingDialog.show();
                         }
                         //由于是刷新，所以首先清空所有数据
                     }
@@ -164,7 +164,7 @@ public class TeacherScoreFragment extends Fragment {
                             public void run() {
                                 pageNo++;
                                 mTeacherScoreAdapter.notifyDataSetChanged();
-                                MainActivity.shapeLoadingDialog.dismiss();
+                                MainStudentActivity.shapeLoadingDialog.dismiss();
 
                             }
                         }, 1000);

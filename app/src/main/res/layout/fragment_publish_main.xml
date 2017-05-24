@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a29149.yuyuan.Model.PublishMainFragment">
+    tools:context="com.example.a29149.yuyuan.ModelStudent.PublishMainFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

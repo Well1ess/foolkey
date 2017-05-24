@@ -42,7 +42,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppNoBar">
-        <activity android:name=".Main.MainActivity"
+        <activity android:name=".Main.MainStudentActivity"
             android:launchMode="singleTask"></activity>
 
         <activity android:name=".Login.LoginActivity">
@@ -55,63 +55,63 @@
         <activity
             android:name=".Search.SearchActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".Model.Index.Course.CourseActivity" />
+        <activity android:name=".ModelStudent.Index.Course.CourseActivity" />
         <activity android:name=".OriginIndex.OriginIndexActivity" />
-        <activity android:name=".Model.Discovery.Activity.RewardActivity" />
-        <activity android:name=".Model.Discovery.Activity.QAActivity" />
-        <activity android:name=".Model.Discovery.Activity.ArticleActivity" />
-        <activity android:name=".Model.Me.Setting.SettingActivity" />
-        <activity android:name=".Model.Index.Course.BuyCourseActivity" />
-        <activity android:name=".Model.Index.Course.NewCourseOrderActivity" />
-        <activity android:name=".Model.Me.Coupon.CouponActivity" />
-        <activity android:name=".Model.Me.Recharge.RechargeActivity" />
+        <activity android:name=".ModelStudent.Discovery.Activity.RewardActivity" />
+        <activity android:name=".ModelStudent.Discovery.Activity.QAActivity" />
+        <activity android:name=".ModelStudent.Discovery.Activity.ArticleActivity" />
+        <activity android:name=".ModelStudent.Me.Setting.SettingActivity" />
+        <activity android:name=".ModelStudent.Index.Course.BuyCourseActivity" />
+        <activity android:name=".ModelStudent.Index.Course.NewCourseOrderActivity" />
+        <activity android:name=".ModelStudent.Me.Coupon.CouponActivity" />
+        <activity android:name=".ModelStudent.Me.Recharge.RechargeActivity" />
 
         <!-- 学生发布悬赏信息描述，已废弃 -->
-        <activity android:name=".Model.Publish.Activity.PublishRewardStudentActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishRewardStudentActivity" />
         <!-- 学生发布问题信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishQuestionStudentActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishQuestionStudentActivity" />
         <!-- 老师发布文章描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishArticalTeacherActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishArticalTeacherActivity" />
         <!-- 老师发布课程信息描述,已废弃 -->
-        <activity android:name=".Model.Publish.Activity.PublishCourseTeacherActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishCourseTeacherActivity" />
         <!-- 学生发布悬赏信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishRewardDescribeStudentActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishRewardDescribeStudentActivity" />
         <!-- 学生发布悬赏价格信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishRewardPriceStudentActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishRewardPriceStudentActivity" />
         <!-- 学生发布悬赏选项信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishRewardOptionsStudentActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishRewardOptionsStudentActivity" />
 
         <!-- 小米推送所需服务 -->
         <!-- 老师发布课程信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishCoursedDescribeTeacherActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishCoursedDescribeTeacherActivity" />
         <!-- 老师发布课程价格描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishCoursePriceTeacherActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishCoursePriceTeacherActivity" />
         <!-- 老师发布课程选项信息描述 -->
-        <activity android:name=".Model.Publish.Activity.PublishCourseOptionsTeacherActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.PublishCourseOptionsTeacherActivity" />
 
         <!-- 申请认证老师 -->
-        <activity android:name=".Model.Publish.Activity.ApplyAuthenticationTeacherActivity" />
+        <activity android:name=".ModelStudent.Publish.Activity.ApplyAuthenticationTeacherActivity" />
 
         <!-- 老师接单悬赏 -->
-        <activity android:name=".Model.Discovery.Activity.ApplyRewardTeacherActivity" />
+        <activity android:name=".ModelStudent.Discovery.Activity.ApplyRewardTeacherActivity" />
         <!-- 接单悬赏的老师主页 -->
-        <activity android:name=".Model.Me.Reward.TeacherIndexActivity" />
+        <activity android:name=".ModelStudent.Me.Reward.TeacherIndexActivity" />
         <!-- 老师界面的主页 -->
         <!-- 评价悬赏订单 -->
-        <activity android:name=".Model.Order.activity.CommentRewardActivity" />
+        <activity android:name=".ModelStudent.Order.activity.CommentRewardActivity" />
         <!-- 评价课程订单 -->
-        <activity android:name=".Model.Order.activity.CommentCourseActivity" />
+        <activity android:name=".ModelStudent.Order.activity.CommentCourseActivity" />
         <!-- 老师拥有的悬赏订单 -->
         <activity android:name=".ModelTeacher.Index.reward.OwnerRewardTeacherActivity" />
         <!-- 老师拥有的课程订单 -->
         <activity android:name=".ModelTeacher.Index.course.OwnerCourseTeacherActivity"/>
         <!-- 切换成老师用户后的主界面 -->
-        <activity android:name=".ModelTeacher.TeacherMain.MainTeacherActivity"/>
+        <activity android:name=".Main.MainTeacherActivity"/>
         <!-- 用户上传头像界面 -->
         <activity android:name=".Main.ImageUploadActivity"/>
         <!-- 订单详情界面 -->
-        <activity android:name=".Model.Order.activity.OrderRewardInfoActivity"/>
-        <activity android:name=".Model.Me.Reward.OwnerRewardActivity"></activity>
+        <activity android:name=".ModelStudent.Order.activity.OrderRewardInfoActivity"/>
+        <activity android:name=".ModelStudent.Me.Reward.OwnerRewardActivity"></activity>
         <activity android:name=".TeacherInfo.TeacherInfoActivity">
         </activity>
         <activity android:name=".AccessOrder.AccessOrderActivity"
@@ -193,7 +193,7 @@
 
 
 
-        <activity android:name=".Model.Me.info.ModifyMyInfoActivity"/>
+        <activity android:name=".ModelStudent.Me.info.ModifyMyInfoActivity"/>
 
     </application>
 

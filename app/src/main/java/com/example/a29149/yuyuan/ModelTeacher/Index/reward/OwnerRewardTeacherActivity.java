@@ -51,7 +51,6 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
         shapeLoadingDialog = new ShapeLoadingDialog(this);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
-        shapeLoadingDialog.show();
 
         loadData();
 
@@ -64,7 +63,6 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
     {
         //如果没有进行加载
         if (shapeLoadingDialog != null) {
-            shapeLoadingDialog.show();
             applyReward();
         }
     }
@@ -94,6 +92,7 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            shapeLoadingDialog.show();
         }
 
         @Override
@@ -127,7 +126,6 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
                             public void run() {
                                 mAdapter = new OwnerRewardListAdapter(OwnerRewardTeacherActivity.this);
                                 mCourseList.setAdapter(mAdapter);
-                                shapeLoadingDialog.dismiss();
 
                             }
                         }, 1000);
@@ -136,8 +134,12 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
                     e.printStackTrace();
                     Toast.makeText(OwnerRewardTeacherActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
+                finally {
+                    shapeLoadingDialog.show();
+                }
             } else {
                 Toast.makeText(OwnerRewardTeacherActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                shapeLoadingDialog.show();
             }
 
         }

@@ -9,12 +9,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.StudentDTO;
+import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
+
+
+/**
+ * Created by MaLei on 2017/5/8.
+ * Email:ml1995@mail.ustc.edu.cn
+ * 点击老师头像跳至此页面，显示老师主页
+ */
 
 public class OriginIndexActivity extends AppCompatActivity {
 
@@ -23,6 +38,37 @@ public class OriginIndexActivity extends AppCompatActivity {
 
     @ViewInject(R.id.option_menu)
     private LinearLayout mOptionMenu;
+
+    @ViewInject(R.id.bt_return)
+    private ImageButton mReturn;
+
+    @ViewInject(R.id.toolbar_title)
+    private TextView mToolbarTitle;//老师名字
+
+    @ViewInject(R.id.head)
+    private ImageView mHead;//老师头像
+
+    @ViewInject(R.id.slogan)
+    private TextView mSlogan;//老师slogan
+
+    @ViewInject(R.id.sex)
+    private TextView mSex;//老师性别
+
+    @ViewInject(R.id.organization)
+    private TextView mOrganization;//老师组织
+
+    @ViewInject(R.id.description)
+    private TextView mDescription;//老师描述
+
+    @ViewInject(R.id.tv_follownum)
+    private TextView mFollowNum;//关注老师人数
+
+    @ViewInject(R.id.follow)
+    private TextView mFollow;//关注老师
+
+    @ViewInject(R.id.main_menu_discovery)
+    private RadioButton mChart;//联系老师
+
 
     //记录Option Menu是否打开
     private boolean isOpen = false;
@@ -48,8 +94,25 @@ public class OriginIndexActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        initData();
     }
 
+    //填充数据
+    private void initData() {
+        StudentDTO studentDTO = GlobalUtil.getInstance().getStudentDTO();
+        TeacherDTO teacherDTO = GlobalUtil.getInstance().getTeacherDTO();
+        if (teacherDTO == null)
+            teacherDTO = new TeacherDTO();
+        mToolbarTitle.setText(studentDTO.getNickedName()+"的主页");
+        mSlogan.setText(studentDTO.getSlogan());
+        mSex.setText(studentDTO.getSexTagEnum().toString());
+        mOrganization.setText(studentDTO.getOrganization());
+        mDescription.setText(studentDTO.getDescription());
+        //mFollowNum.setText(teacherDTO.getFollowerNumber());
+    }
+
+    //打开分享面板
     private void openOptionMenu()
     {
         if (!isOpen){
@@ -75,6 +138,7 @@ public class OriginIndexActivity extends AppCompatActivity {
         }
     }
 
+    //关闭分享面板
     private void closeOptionMenu()
     {
         if (isOpen){
@@ -127,6 +191,21 @@ public class OriginIndexActivity extends AppCompatActivity {
     @OnClick(R.id.mask)
     public  void setMaskListener(View view){
         closeOptionMenu();
+    }
+
+    @OnClick(R.id.bt_return)
+    public  void setReturnListener(View view){
+        this.finish();
+    }
+
+    @OnClick(R.id.follow)
+    public  void setFollowListener(View view){
+        Toast.makeText(this,"关注该老师",Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.main_menu_discovery)
+    public  void setChartListener(View view){
+        Toast.makeText(this,"联系该老师",Toast.LENGTH_SHORT).show();
     }
 
     @Override

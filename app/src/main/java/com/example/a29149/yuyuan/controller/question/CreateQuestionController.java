@@ -37,7 +37,7 @@ public class CreateQuestionController extends AbstractControllerTemplate {
      * 后台传来的数据
      */
     //结果
-    private String result;
+    private String result = Const.FAIL;
     //问答DTO
     private QuestionAnswerDTO questionAnswerDTO;
     //问答的订单信息
@@ -93,5 +93,41 @@ public class CreateQuestionController extends AbstractControllerTemplate {
             e.printStackTrace();
             this.result = Const.FAIL;
         }
+    }
+
+    public void setAnswerId(String answerId) {
+        this.answerId = answerId;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setQuestionContent(String questionContent) {
+        this.questionContent = questionContent;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
+    public void setTechnicTagEnum(String technicTagEnum) {
+        this.technicTagEnum = technicTagEnum;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public QuestionAnswerDTO getQuestionAnswerDTO() {
+        return questionAnswerDTO;
+    }
+
+    public OrderAskQuestionDTO getOrderAskQuestionDTO() {
+        return orderAskQuestionDTO;
     }
 }

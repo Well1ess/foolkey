@@ -28,7 +28,7 @@ public class CreateAnswerController extends AbstractControllerTemplate {
      * 后台传来的数据
      */
     //结果
-    private String result;
+    private String result = Const.FAIL;
     //问答DTO
     private QuestionAnswerDTO questionAnswerDTO;
 

@@ -29,7 +29,7 @@ public class BuyAnswerController extends AbstractControllerTemplate {
      * 后台传来的数据
      */
     //结果
-    private String result;
+    private String result = Const.FAIL;
     //付款的结果（成功、失败、余额不足、优惠券不可用）
     private PayResultEnum payResultEnum;
     //问答DTO

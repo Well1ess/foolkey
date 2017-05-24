@@ -24,7 +24,7 @@ public class AgreeRefundController extends AbstractControllerTemplate {
      * 后台传来的数据
      */
     //结果
-    private String result;
+    private String result = Const.FAIL;
 
     @Override
     public void handle() throws JSONException {

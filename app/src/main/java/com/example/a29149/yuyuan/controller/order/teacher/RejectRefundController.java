@@ -1,8 +1,10 @@
 package com.example.a29149.yuyuan.controller.order.teacher;
 
-import com.example.a29149.yuyuan.Util.HttpSender;
-import com.example.a29149.yuyuan.controller.AbstractController;
+import com.example.a29149.yuyuan.Util.Const;
+import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.controller.AbstractControllerTemplate;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -10,18 +12,52 @@ import org.json.JSONObject;
  * Created by geyao on 2017/5/21.
  */
 
-public class RejectRefundController extends AbstractController {
+public class RejectRefundController extends AbstractControllerTemplate {
 
-    private static String url = address + "/aes/rejectRefund";
+    /**
+     * 传送到后台的数据
+     **/
+    //订单id
+    private Long orderId;
 
-    public static String execute(String orderId){
+    /**
+     * 后台传来的数据
+     */
+    //结果
+    private String result;
+
+    @Override
+    public void handle() throws JSONException {
+        super.url += "/aes/rejectRefund";
+
+        super.jsonObject.put("orderId", orderId);
+    }
+
+    @Override
+    protected void afterHandle(String s) {
+        JSONObject jsonObject = null;
         try {
-            JSONObject jsonObject = getJSON();
-            jsonObject.put( "orderId", orderId);
-            return HttpSender.send( url, jsonObject );
-        }catch (Exception e){
+
+            //把后台传来的数据String转为JSON
+            jsonObject = new JSONObject(s);
+            String resultFlag = jsonObject.getString("result");
+
+            //根据返回的结果标志进行不同的操作
+            if (resultFlag.equals("success")) {
+                log.d(this, jsonObject.getString("result"));
+                this.result = Const.SUCCESS;
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
-            return failJSON();
+            this.result = Const.FAIL;
         }
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getResult() {
+        return result;
     }
 }

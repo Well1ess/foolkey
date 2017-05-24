@@ -8,17 +8,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 老师同意退款申请
- * Created by geyao on 2017/5/21.
+ * Created by GR on 2017/5/24.
  */
 
-public class AgreeRefundController extends AbstractControllerTemplate {
+public class JudgeStudentController extends AbstractControllerTemplate
+
+{
 
     /**
      * 传送到后台的数据
      **/
     //订单id
     private Long orderId;
+    //分数
+    private Double score;
 
     /**
      * 后台传来的数据
@@ -28,9 +31,10 @@ public class AgreeRefundController extends AbstractControllerTemplate {
 
     @Override
     public void handle() throws JSONException {
-        super.url += "/aes/agreeRefund";
+        super.url += "/aes/judge/student";
 
         super.jsonObject.put("orderId", orderId);
+        super.jsonObject.put("score", score);
     }
 
     @Override
@@ -57,7 +61,12 @@ public class AgreeRefundController extends AbstractControllerTemplate {
         this.orderId = orderId;
     }
 
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
     public String getResult() {
         return result;
     }
+
 }

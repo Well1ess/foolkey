@@ -16,6 +16,8 @@ public class GetSearchResultEvent {
         this.keyValue = keyValue;
     }
 
+
+
     public String getKeyValue() {
         return keyValue;
     }

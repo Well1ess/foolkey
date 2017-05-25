@@ -4,12 +4,12 @@ import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
-import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyRewardAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
@@ -109,11 +109,14 @@ public class GlobalUtil {
     //用户记录发布课程时填写的信息
     private String[] courseChooseContent = new String[7];
     //搜索用的List
-    private List<Object> courseList;
     private List<Object> rewardList;
     private List<Object> articleList;
     private List<Object> teacherList;
     private List<Object> questionList;
+
+    public void addRewardWithStudentSTCDTOs(List<RewardWithStudentSTCDTO> searchRewardWithStudentSTCDTOs) {
+        this.rewardWithStudentSTCDTOs.addAll(searchRewardWithStudentSTCDTOs);
+    }
 
     //老师UI——课程
     private List<String> teacherUIScore;
@@ -148,15 +151,6 @@ public class GlobalUtil {
         this.teacherUIScore = teacherUIScore;
     }
 
-    public List<Object> getCourseList() {
-        if (courseList == null)
-            courseList = new ArrayList<>();
-        return courseList;
-    }
-
-    public void setCourseList(List<Object> courseList) {
-        this.courseList = courseList;
-    }
 
     public List<Object> getRewardList() {
         if (rewardList == null)

@@ -76,7 +76,7 @@
                         android:id="@+id/head"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@drawable/circle"
+                        android:background="@null"
                         android:elevation="2dp"
 
 

@@ -10,9 +10,11 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:background="@android:color/darker_gray"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/photo_placeholder1"
         android:id="@+id/iv_image"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="120dp"
         />
     <Button
         android:layout_width="wrap_content"
@@ -21,14 +23,89 @@
         android:layout_below="@+id/iv_image"
         android:layout_marginLeft="85dp"
         android:layout_marginTop="5dp"
-        android:id="@+id/btn_add_image"/>
+        android:id="@+id/btn_add_image"
+        android:background="@color/transparent"
+        android:textColor="@color/dark_green"
+
+        />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="上传图片"
+        android:textColor="@color/dark_green"
+        android:background="@color/transparent"
         android:layout_below="@+id/iv_image"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/btn_add_image"
         android:layout_marginTop="5dp"
         android:id="@+id/btn_update_image"/>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="100dp"
+        android:layout_alignParentBottom="true"
+
+        android:orientation="vertical"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/ic_dialog_info"
+                android:backgroundTint="@color/orange"
+                android:scaleX="0.6"
+                android:scaleY="0.6"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableTint="@color/orange"
+                android:text=" 感谢你为社区做出的无私贡献"
+                android:textColor="@color/grey555"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal">
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="可以直接"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="赚取现金"-->
+                <!--android:textColor="@color/orange"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="哦！"/>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_gray"
+                android:text="——Lion团队"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
 </RelativeLayout>

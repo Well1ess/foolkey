@@ -78,6 +78,7 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
 //                    userConfig.clear();
                     Intent intent = new Intent(mContext, LoginActivity.class);
                     mContext.startActivity(intent);
+
                 }
             } catch (Exception e) {
                 Toast.makeText(mContext, "请求失败，请重新登录", Toast.LENGTH_SHORT).show();
@@ -91,7 +92,8 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
             }
         } else {
             Toast.makeText(mContext, "网络连接失败！", Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            mContext.startActivity(intent);
         }
 
     }

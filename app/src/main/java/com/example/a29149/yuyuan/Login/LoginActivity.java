@@ -295,7 +295,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            log.d(this, result);
+//            log.d(this, result);
             if (result != null) {
                 try {
 
@@ -336,6 +336,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             } else {
                 Toast.makeText(LoginActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                shapeLoadingDialog.dismiss();
             }
 
         }

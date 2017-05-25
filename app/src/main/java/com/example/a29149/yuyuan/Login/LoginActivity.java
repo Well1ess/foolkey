@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        alphaAnimation.start();
         imageView.setVisibility(View.VISIBLE);
         //用glide动态地加载图片
-        glide.load( defaultPhoto )
+        glide.load( R.drawable.photo_placeholder1 )
                 .transform(new GlideCircleTransform(this))
                 .crossFade(3000)
                 .into(imageView);

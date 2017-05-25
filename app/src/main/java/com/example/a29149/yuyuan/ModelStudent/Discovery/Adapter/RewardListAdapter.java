@@ -21,6 +21,8 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by 张丽华 on 2017/4/26.
  * Description:发现界面的悬赏列表适配器
@@ -80,22 +82,30 @@ public class RewardListAdapter extends BaseAdapter {
         viewHolder.money.setText(rewardDTO.getPrice()+"");
         viewHolder.label.setText(rewardDTO.getTechnicTagEnum().toString());
         viewHolder.studentKind.setText(rewardDTO.getStudentBaseEnum().toString());
+//        viewHolder.prestige.setText( studentDTO.getPrestige() + "");
+//        String prestige = studentDTO.getPrestige() + "";
+        //根据声望的长度，来经行位置的调整
+//        viewHolder.prestige.setPadding(0,0,
+//                - (prestige.length() - 1 ) * 3 + 5
+//                ,0);
+//        viewHolder.prestige.setTextSize( 100/(6 + prestige.length()) );
 
         //加载图片
         glide = Glide.with(mContext);
         boolean isPic = glide.load(PictureInfoBO.getOnlinePhoto(studentDTO.getUserName() ) )
                 .transform(new GlideCircleTransform(mContext))
+                .error(R.drawable.photo_placeholder1)
                 .into( viewHolder.head ).getRequest().isFailed();
         //如果没成功，则加载一张别的图片
-        if (!isPic){
-            glide.load(
-                    PictureInfoBO.getDefaultPicCloudPath(
-                    (int)(Math.random() * PictureInfoBO.defaultPicNum) )   //随机取一张
-                    )
-                    .transform(new GlideCircleTransform(mContext))
-                    .error(R.drawable.photo_placeholder1)
-                    .into( viewHolder.head );
-        }
+//        if (!isPic){
+//            glide.load(
+//                    PictureInfoBO.getDefaultPicCloudPath(
+//                    (int)(Math.random() * PictureInfoBO.defaultPicNum) )   //随机取一张
+//                    )
+//                    .transform(new GlideCircleTransform(mContext))
+//
+//                    .into( viewHolder.head );
+//        }
 
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,12 +124,15 @@ public class RewardListAdapter extends BaseAdapter {
         public TextView money;
         public TextView label;
         public TextView studentKind;
+//        public TextView prestige;
 
         ViewHolder(View view) {
             title = (TextView) view.findViewById(R.id.reward_title);
             head = (ImageView) view.findViewById(R.id.photo_circle);
             money = (TextView) view.findViewById(R.id.reward_money);
             label = (TextView) view.findViewById(R.id.label);
+//            prestige = (TextView) view.findViewById(R.id.prestige);
+
             studentKind = (TextView) view.findViewById(R.id.student_kind);
         }
 

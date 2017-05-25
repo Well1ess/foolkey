@@ -240,7 +240,7 @@
                 android:id="@+id/photo_circle"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/circle"
+                android:background="@null"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:elevation="2dp"

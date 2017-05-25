@@ -55,7 +55,7 @@ public class JudgeStudentActivity extends Activity {
     private RadioButton radioButton;
 
     private RequestManager glide;
-    private int position;//记录评论位置
+    private String position;//记录评论位置
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class JudgeStudentActivity extends Activity {
         //取展示的信息
         String studentNameStr = intent.getStringExtra("studentName");
         String courseNameStr = intent.getStringExtra("courseName");
-        position = intent.getIntExtra("position",-1);
+        position = intent.getStringExtra("position");
         Log.i("malei","position="+position+"    studentName="+studentNameStr+"    courseNameStr="+courseNameStr);
         studentName.setText( studentNameStr );
         courseName.setText( courseNameStr );

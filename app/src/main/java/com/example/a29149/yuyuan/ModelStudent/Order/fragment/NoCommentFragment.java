@@ -49,6 +49,8 @@ public class NoCommentFragment extends Fragment {
     private List rewardList = new ArrayList();//悬赏列表
     private List courseList = new ArrayList();//课程列表
 
+    private MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter;
+
     public  ShapeLoadingDialog shapeLoadingDialog;
     private int pageNo = 1;//页数
     private GetOrderBuyCourseAsTeacherByOrderStatesController getOrderBuyCourseAsTeacherByOrderStatesController;
@@ -80,6 +82,9 @@ public class NoCommentFragment extends Fragment {
         mReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (myListViewNoCommentRewardAdapter == null)
+                    myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
+                myListViewNoCommentRewardAdapter.setPosition(position);
                 Log.i("malei","你点击了"+position);
             }
         });
@@ -187,7 +192,8 @@ public class NoCommentFragment extends Fragment {
                                 myListViewNoConmmentClassAdapter.setData(courseList);
                                 mBuyCourse.setAdapter(myListViewNoConmmentClassAdapter);
 
-                                MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
+
+                                myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
                                 myListViewNoCommentRewardAdapter.setData(rewardList);
                                 mReward.setAdapter(myListViewNoCommentRewardAdapter);
 

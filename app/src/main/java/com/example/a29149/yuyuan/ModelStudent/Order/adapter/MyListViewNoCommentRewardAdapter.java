@@ -60,6 +60,10 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
     public void setData(List<OrderBuyCourseAsStudentDTO> rewardNoCommentList) {
         this.rewardNoCommentList = rewardNoCommentList;
     }
+    //设置当前点击位置
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     @Override
     public int getCount() {
@@ -77,9 +81,14 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        this.setSetpositionListeren(new SetPositionListeren() {
+            @Override
+            public int setPosition() {
+                 return position;
+            }
+        });
         view=View.inflate(mContext, R.layout.listview_item_nocommnent_reward,null);
-        this.position = position;
         initView();
         mOrderBuyCourseAsStudentDTO = rewardNoCommentList.get(position);
 
@@ -92,7 +101,7 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
         mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
         mExceptTime.setText("预计时长:" + mOrderBuyCourseDTO.getNumber().toString() + "h");
         mTeacherCharge.setText("老师收费：" + courseDTO.getPrice().toString()+ Const.PRICE_NAME);
-
+        //SetPositionListeten.setSetPositionListeren();
         return view;
     }
 
@@ -133,7 +142,13 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
 
     //老师对学生进行评价
     private void teacherJudgeStudent(){
+        int position = 0;
+        //4.进行回调
+        if(mListeren != null){
+            position = mListeren.setPosition();
+        }
         Intent intent = new Intent(mContext, JudgeStudentActivity.class);
+        //Log.i("malei","position="+position);
         intent.putExtra("position", position);
         //传输一些信息
         String orderId = rewardNoCommentList.get(position).getOrderDTO().getId() + "";
@@ -150,4 +165,18 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
 
         mContext.startActivity(intent);
     }
+
+    //3.定义成员变量，接受监听对象
+    private SetPositionListeren mListeren;
+    //1.回调接口
+    public interface SetPositionListeren {
+        int setPosition();
+    }
+    //2.暴露接口，设置监听
+    public void setSetpositionListeren(SetPositionListeren listeren){
+        mListeren = listeren;
+    }
+
+
+
 }

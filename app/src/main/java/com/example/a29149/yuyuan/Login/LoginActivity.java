@@ -107,11 +107,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         //浅出效果，不然会有黄色一闪而过
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setFillAfter(true);
-        imageView.setAnimation(alphaAnimation);
-        alphaAnimation.start();
+//        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+//        alphaAnimation.setDuration(1000);
+//        alphaAnimation.setFillAfter(true);
+//        imageView.setAnimation(alphaAnimation);
+//        alphaAnimation.start();
         imageView.setVisibility(View.VISIBLE);
         //用glide动态地加载图片
         glide.load( defaultPhoto )

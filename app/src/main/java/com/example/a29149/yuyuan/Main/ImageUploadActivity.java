@@ -239,6 +239,8 @@ public class ImageUploadActivity extends Activity {
                         UploadFile uploadFile = new UploadFile(ImageUploadActivity.this,GlobalUtil.getInstance().getSign());
                         Log.i("malei", this.getClass() + "240行 " + path);
                         uploadFile.updata(srcPath, path);
+                        //上传完毕，退出本activity
+                        finish();
                     }
                 } catch (Exception e) {
                     Toast.makeText(ImageUploadActivity.this, "连接失败", Toast.LENGTH_SHORT).show();

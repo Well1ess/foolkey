@@ -131,7 +131,7 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
         intent.putExtra("TeacherName",mStudentDTO.getNickedName());
         intent.putExtra("Description",courseDTO.getDescription());
         intent.putExtra("CoursePrice",courseDTO.getPrice());
-
+        intent.putExtra("teacherUserName", mStudentDTO.getUserName() );
         mContext.startActivity(intent);
     }
 

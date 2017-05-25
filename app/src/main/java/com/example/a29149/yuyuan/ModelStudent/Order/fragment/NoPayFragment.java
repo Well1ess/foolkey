@@ -128,7 +128,7 @@ public class NoPayFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            shapeLoadingDialog.show();
+//            shapeLoadingDialog.show();
         }
 
         @Override
@@ -220,7 +220,7 @@ public class NoPayFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            shapeLoadingDialog.show();
+//            shapeLoadingDialog.show();
         }
 
         @Override

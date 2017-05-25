@@ -99,22 +99,23 @@ public class RegisterActivity extends AppCompatActivity {
         //图片加载器
         glide = Glide.with(this);
 
+
+
         //浅出效果，不然会有黄色一闪而过
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setDuration(2000);
-        alphaAnimation.setFillAfter(true);
         imageView.setAnimation(alphaAnimation);
-        imageView.setAlpha(0.0f);
         imageView.setVisibility(View.VISIBLE);
         alphaAnimation.start();
-        imageView.setAlpha(1.0f);
-
         //用glide动态地加载图片
         glide.load( PictureInfoBO.getDefaultPicCloudPath(defaultPicNum) )
                 .transform(new GlideCircleTransform(this))
 //                .dontAnimate()
                 .crossFade(2000)
                 .into(imageView);
+
+
+
 
 
 
@@ -175,7 +176,9 @@ public class RegisterActivity extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid
-        if (TextUtils.isEmpty(strUserName) || !PhoneFormatCheckUtils.isPhoneLegal( strUserName )) {
+        if (TextUtils.isEmpty(strUserName)
+//                || !PhoneFormatCheckUtils.isPhoneLegal( strUserName )
+                ) {
             mUserName.setError("手机号输入错误");
             focusView = mUserName;
             cancel = true;

@@ -24,6 +24,8 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
+import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -37,6 +39,8 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
 
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
+    //显示认证的对话框
+    private WarningDisplayDialog.Builder verifyConfirm;
     private RadioButton mOrder;//我要接单
     private int position = -1;//item位置
     private StudentDTO studentDTO;//发布悬赏的学生信息
@@ -74,6 +78,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         AnnotationUtil.setClickListener(this);
         AnnotationUtil.injectViews(this);
 
+        //确认是否接单的按钮设置
         displayInfo = new WarningDisplayDialog.Builder(this);
         displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
             @Override
@@ -90,6 +95,24 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
         displayInfo.create();
+
+        //确认是否认证的按钮设置
+        verifyConfirm = new WarningDisplayDialog.Builder(this);
+        verifyConfirm.setNegativeButton("取      消", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        verifyConfirm.setPositiveButton("申      请", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //进行认证
+                applyVerify();
+            }
+        });
+        verifyConfirm.create();
     }
 
     //为底部菜单添加监听
@@ -133,6 +156,12 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         mRewardDescription.setText(rewardDTO.getDescription());
     }
 
+    //申请认证
+    private void applyVerify(){
+        ApplyAuthenticationTeacherAction applyAuthenticationTeacherAction = new ApplyAuthenticationTeacherAction();
+        applyAuthenticationTeacherAction.execute();
+    }
+
 //老师申请接单悬赏
 private void applyRewardTeacher() {
     //验证身份
@@ -153,18 +182,20 @@ private void applyRewardTeacher() {
         }
         else
         {
-            Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(RewardActivity.this, ApplyAuthenticationTeacherActivity.class);
-            startActivity(intent);
+//            Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
+            verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
+
+            verifyConfirm.getDialog().show();
         }
     }
     else
     {
         Log.i("malei","teacherDTO是空的");
         //不是已认证老师，跳转到申请认证页面
-        Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(RewardActivity.this, ApplyAuthenticationTeacherActivity.class);
-        startActivity(intent);
+//        Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
+        verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
+
+        verifyConfirm.getDialog().show();
     }
 }
 
@@ -176,6 +207,77 @@ private void applyRewardTeacher() {
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * 认证老师请求Action
+     */
+    public class ApplyAuthenticationTeacherAction extends AsyncTask<String, Integer, String> {
+
+        public ApplyAuthenticationTeacherAction() {
+            super();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            return ApplyToVerifyController.execute();
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            log.d(this, result);
+            if (result != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String resultFlag = jsonObject.getString("result");
+
+                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
+                    }.getType();
+                    StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("studentDTO"), type);
+                    //存储学生信息DTO
+                    GlobalUtil.getInstance().setStudentDTO(studentDTO);
+                    //获取老师信息DTO
+                    java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<TeacherDTO>() {
+                    }.getType();
+                    TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
+                    Log.i("malei",jsonObject.getString("teacherDTO"));
+                    if(teacherDTO != null)
+                    {
+                        //存储老师DTO
+                        GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
+                        Log.i("geyao  ", "认证后存储老师DTO了嘛？ " + this.getClass());
+                    }
+
+
+                    if (resultFlag.equals("success")) {
+                        //认证成功之后，就接单
+                        Toast.makeText(RewardActivity.this, "申请成功，立即为您接单", Toast.LENGTH_SHORT).show();
+                        ApplyRewardAction applyRewardAction = new ApplyRewardAction();
+                        applyRewardAction.execute();
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(RewardActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(RewardActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
         }
     }
 
@@ -212,7 +314,8 @@ private void applyRewardTeacher() {
 
 
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(RewardActivity.this, "申请成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RewardActivity.this, "  成功接单  \n等待学生选择\n  要耐心哦  ", Toast.LENGTH_LONG).show();
+
                     }
                 } catch (Exception e) {
                     Toast.makeText(RewardActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();

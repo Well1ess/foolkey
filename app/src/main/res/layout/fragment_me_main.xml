@@ -71,16 +71,16 @@
                     android:layout_marginLeft="10dp"
 
                     >
-                    <com.example.a29149.yuyuan.Widget.SquareImageView
+
+                    <com.example.a29149.yuyuan.Widget.SquareImageView xmlns:android="http://schemas.android.com/apk/res/android"
                         android:id="@+id/head"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:background="@drawable/circle"
                         android:elevation="2dp"
-                        android:visibility="invisible"
 
 
-                        xmlns:android="http://schemas.android.com/apk/res/android"/>
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
@@ -92,7 +92,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignTop="@id/head_square"
                     android:layout_marginRight="20dp"
-                    android:text="努力的时候，全世界都在帮你"/>
+                    android:text="努力的时候，全世界都在帮你" />
 
                 <TextView
                     android:id="@+id/name"
@@ -100,9 +100,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/slogan"
-                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:text="————葛尧"/>
+                    android:layout_marginTop="10dp"
+                    android:text="————葛尧" />
 
                 <TextView
                     android:id="@+id/prestige"
@@ -112,7 +112,7 @@
                     android:layout_alignRight="@id/head_square"
                     android:paddingRight="20dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/modify_info"
@@ -126,64 +126,64 @@
                     android:scaleX="0.6"
                     android:scaleY="0.6"
                     android:text="编辑个人资料"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </RelativeLayout>
 
             <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginRight="2dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:background="@color/white"-->
-                <!--android:orientation="vertical">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="2dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:orientation="vertical">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:paddingBottom="10dp"-->
-                    <!--android:paddingTop="10dp"-->
-                    <!--android:text="我收藏的"-->
-                    <!--android:textSize="16sp"/>-->
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:text="我收藏的"-->
+            <!--android:textSize="16sp"/>-->
 
-                <!--<View-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="1px"-->
-                    <!--android:layout_marginLeft="40dp"-->
-                    <!--android:layout_marginRight="40dp"-->
-                    <!--android:background="@color/orange"/>-->
+            <!--<View-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="1px"-->
+            <!--android:layout_marginLeft="40dp"-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:background="@color/orange"/>-->
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="horizontal">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
 
-                    <!--<TextView-->
-                        <!--style="@style/TextView.MeMenu"-->
-                        <!--android:text="文章"/>-->
+            <!--<TextView-->
+            <!--style="@style/TextView.MeMenu"-->
+            <!--android:text="文章"/>-->
 
-                    <!--<View-->
-                        <!--android:layout_width="1px"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginBottom="10dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:background="@color/black"/>-->
+            <!--<View-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="@color/black"/>-->
 
-                    <!--<TextView-->
-                        <!--style="@style/TextView.MeMenu"-->
-                        <!--android:text="问答"/>-->
+            <!--<TextView-->
+            <!--style="@style/TextView.MeMenu"-->
+            <!--android:text="问答"/>-->
 
-                    <!--<View-->
-                        <!--android:layout_width="1px"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginBottom="10dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:background="@color/black"/>-->
+            <!--<View-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="@color/black"/>-->
 
-                    <!--<TextView-->
-                        <!--style="@style/TextView.MeMenu"-->
-                        <!--android:text="课程"/>-->
-                <!--</LinearLayout>-->
+            <!--<TextView-->
+            <!--style="@style/TextView.MeMenu"-->
+            <!--android:text="课程"/>-->
+            <!--</LinearLayout>-->
             <!--</LinearLayout>-->
 
             <LinearLayout
@@ -202,14 +202,14 @@
                     android:paddingTop="10dp"
                     android:text="查 看 申 请"
                     android:textColor="@color/grey"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="1px"
                     android:layout_marginLeft="120dp"
                     android:layout_marginRight="120dp"
-                    android:background="@color/orange"/>
+                    android:background="@color/orange" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -218,32 +218,32 @@
 
                     <TextView
                         android:id="@+id/owner_reward"
-                        android:clickable="true"
                         style="@style/TextView.MeMenu"
-                        android:text="悬 赏"/>
+                        android:clickable="true"
+                        android:text="悬 赏" />
 
                     <!--<View-->
-                        <!--android:layout_width="1px"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginBottom="10dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:background="@color/black"/>-->
+                    <!--android:layout_width="1px"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@color/black"/>-->
 
                     <!--<TextView-->
-                        <!--style="@style/TextView.MeMenu"-->
-                        <!--android:text="问答"/>-->
+                    <!--style="@style/TextView.MeMenu"-->
+                    <!--android:text="问答"/>-->
 
                     <!--<View-->
-                        <!--android:layout_width="1px"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_marginBottom="10dp"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:background="@color/black"/>-->
+                    <!--android:layout_width="1px"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="@color/black"/>-->
 
                     <!--<TextView-->
-                        <!--android:id="@+id/tv_course"-->
-                        <!--style="@style/TextView.MeMenu"-->
-                        <!--android:text="课程"/>-->
+                    <!--android:id="@+id/tv_course"-->
+                    <!--style="@style/TextView.MeMenu"-->
+                    <!--android:text="课程"/>-->
                 </LinearLayout>
             </LinearLayout>
 
@@ -256,10 +256,9 @@
                 android:orientation="vertical">
 
                 <!--我当前的余额，虚拟币-->
-                <include layout="@layout/virtual_money_text_button"/>
+                <include layout="@layout/virtual_money_text_button" />
                 <!--我的优惠券-->
-                <include layout="@layout/component_coupon_text_button"/>
-
+                <include layout="@layout/component_coupon_text_button" />
 
 
             </LinearLayout>
@@ -268,33 +267,28 @@
                 android:layout_width="match_parent"
 
                 android:layout_height="15dp"
-                android:background="@color/light_white"
-                />
-
+                android:background="@color/light_white" />
 
 
             <TextView
                 android:id="@+id/email"
-                android:paddingTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:hint="电子邮件"
-                android:textColorHint="@color/grey"
-                android:textSize="15dp"
                 android:background="@color/white"
-                android:paddingLeft="35dp"
+                android:hint="电子邮件"
                 android:paddingBottom="15dp"
-                />
+                android:paddingLeft="35dp"
+                android:paddingTop="15dp"
+                android:text=""
+                android:textColorHint="@color/grey"
+                android:textSize="15dp" />
+
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_marginRight="50dp"
-                android:layout_marginLeft="35dp"
                 android:layout_height="1dp"
-                android:background="@color/light_white"
-                />
-
-
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="50dp"
+                android:background="@color/light_white" />
 
 
             <TextView
@@ -313,32 +307,29 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_marginRight="50dp"
-                android:layout_marginLeft="35dp"
                 android:layout_height="1dp"
-                android:background="@color/light_white"
-                />
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="50dp"
+                android:background="@color/light_white" />
 
             <TextView
                 android:id="@+id/technicTag"
-                android:paddingTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:hint="你关注的领域"
-                android:textColorHint="@color/grey"
-                android:textSize="15dp"
                 android:background="@color/white"
-                android:paddingLeft="35dp"
+                android:hint="你关注的领域"
                 android:paddingBottom="15dp"
-                />
+                android:paddingLeft="35dp"
+                android:paddingTop="15dp"
+                android:text=""
+                android:textColorHint="@color/grey"
+                android:textSize="15dp" />
 
             <ImageView
                 android:layout_width="match_parent"
 
                 android:layout_height="15dp"
-                android:background="@color/light_white"
-                />
+                android:background="@color/light_white" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -347,7 +338,7 @@
                 android:background="@color/white">
 
                 <!--提示信息-->
-                <include layout="@layout/component_tips_2_line"/>
+                <include layout="@layout/component_tips_2_line" />
 
 
             </RelativeLayout>

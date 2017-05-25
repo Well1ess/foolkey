@@ -191,7 +191,7 @@ public class ClassesFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            log.d(this, result);
+//            log.d(this, result);
             if (result != null) {
                 try {
 

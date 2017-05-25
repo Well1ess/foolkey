@@ -168,18 +168,17 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
         mHeadImage.setOnClickListener(this);
 
         //图片加载器
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setFillAfter(true);
-        mHeadImage.setAnimation(alphaAnimation);
-        alphaAnimation.start();
-        mHeadImage.setVisibility(View.VISIBLE);
+//        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+//        alphaAnimation.setDuration(1000);
+//        alphaAnimation.setFillAfter(true);
+//        mHeadImage.setAnimation(alphaAnimation);
+//        alphaAnimation.start();
+//        mHeadImage.setVisibility(View.VISIBLE);
 
 
         glide = Glide.with(this);
         glide.load(PictureInfoBO.getOnlinePhoto( studentDTO.getUserName() ) )
                 .transform(new GlideCircleTransform(getActivity()))
-                .crossFade(1000)
                 .into(mHeadImage);
 
 //        reputation.setText( studentDTO.getPrestige() );

@@ -134,7 +134,7 @@ public class NoClassFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            shapeLoadingDialog.show();
+//            shapeLoadingDialog.show();
         }
 
         @Override
@@ -232,7 +232,7 @@ public class NoClassFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             System.out.println(this.getClass() + "  已发送请求\n同意上课");
-            shapeLoadingDialog.show();
+//            shapeLoadingDialog.show();
         }
 
         @Override

@@ -5,14 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
+import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
+import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 
 /**
  * splashActivity
@@ -29,12 +35,20 @@ public class SplashActivity extends Activity {
     private String strUserName;
     private String strPassWord;
 
+    //图片加载
+    private RequestManager glide;
+
+    @ViewInject(R.id.photo_circle)
+    private ImageView cache;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //这里要首先设置主题，否则会有灰色的画面闪过，不能达到一开app就splash图片的效果
         setTheme( R.style.splashScreenTheme );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        AnnotationUtil.injectViews(this);
+
 
         userConfig = new UserConfig(this);
         if (userConfig.getBooleanInfo(UserConfig.xmlSAVE)) {
@@ -53,9 +67,23 @@ public class SplashActivity extends Activity {
 
         }else {
             //如果本地没有数据，则重新登录
+
+//            loadPic();
+
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
             SplashActivity.this.finish();
+        }
+    }
+
+    /**
+     * 重新登录一般发生在首次安装，此时手机没有缓存默认的一些照片，我在这里缓存以后，再跳转登录
+     * 但这里总是失败
+     */
+    private void loadPic(){
+        glide = Glide.with(this);
+        for (int i = 0 ; i <= PictureInfoBO.defaultPicNum; i++ ) {
+            System.out.println( glide.load(PictureInfoBO.getDefaultPicCloudPath(i)).into(cache).getRequest().isFailed() );
         }
     }
 }

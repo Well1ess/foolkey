@@ -49,6 +49,9 @@ public class RegisterActivity extends AppCompatActivity {
     @ViewInject(R.id.username)
     private EditText mUserName;
 
+    //来个随机的默认头像
+    private Integer defaultPicNum = (int) ( Math.random() * PictureInfoBO.defaultPicNum );
+
 
     @ViewInject(R.id.password)
     private EditText mPassWord;
@@ -93,17 +96,24 @@ public class RegisterActivity extends AppCompatActivity {
         //图片加载器
         glide = Glide.with(this);
 
-        //浅出效果，不然会有黄色一闪而过
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setFillAfter(true);
-        imageView.setAnimation(alphaAnimation);
+
         //用glide动态地加载图片
-        glide.load( defaultPhoto )
+        System.out.println(this.getClass() + "105行 " + PictureInfoBO.getDefaultPicCloudPath(defaultPicNum));
+        glide.load( PictureInfoBO.getDefaultPicCloudPath(defaultPicNum) )
                 .transform(new GlideCircleTransform(this))
-                .crossFade(2000)
+                .dontAnimate()
+//                .crossFade(2000)
                 .into(imageView);
 
+        //浅出效果，不然会有黄色一闪而过
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(2000);
+        alphaAnimation.setFillAfter(true);
+        imageView.setAnimation(alphaAnimation);
+        imageView.setAlpha(0.0f);
+        imageView.setVisibility(View.VISIBLE);
+        alphaAnimation.start();
+        imageView.setAlpha(1.0f);
 
         //手机号输入框
         mUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -188,9 +198,10 @@ public class RegisterActivity extends AppCompatActivity {
             mConfirm.setError("两次输入的密码不同！");
         }
 
+        //要求上传图片
         if (!GlobalUtil.getInstance().isUploadPhotoFlag()){
-            Toast.makeText(RegisterActivity.this, "请点击图片，上传头像", Toast.LENGTH_SHORT).show();
-            return;
+//            Toast.makeText(RegisterActivity.this, "请点击图片，上传头像", Toast.LENGTH_SHORT).show();
+//            return;
         }
 
         if (cancel) {
@@ -206,34 +217,38 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * 调用上传图片的activity
-     * 要防止extra
+     * 要放置extra
      * @param view
      */
     @OnClick(R.id.photo_circle)
     public void uploadPhoto(View view){
-        System.out.println(this.getClass() + "209行" + mUserName.getText().toString());
-        //判空
-        if ( mUserName.getText() != null
-                && !mUserName.getText().toString().equals("")
-//                && PhoneFormatCheckUtils.isPhoneLegal( mUserName.getText().toString() )
 
-                ){
-            if ( PhoneFormatCheckUtils.isPhoneLegal( mUserName.getText().toString() ) )
-                strUserName = mUserName.getText().toString();
-            else {
-                Toast.makeText(RegisterActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }else {
-            //输入不合法
-            Toast.makeText(RegisterActivity.this, "请先输入手机号", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        //不让用户上传头像了
 
-        Intent intent = new Intent(this, ImageUploadActivity.class );
-        intent.putExtra("userName", strUserName);
 
-        startActivity( intent );
+//        System.out.println(this.getClass() + "209行" + mUserName.getText().toString());
+//        //判空
+//        if ( mUserName.getText() != null
+//                && !mUserName.getText().toString().equals("")
+////                && PhoneFormatCheckUtils.isPhoneLegal( mUserName.getText().toString() )
+//
+//                ){
+//            if ( PhoneFormatCheckUtils.isPhoneLegal( mUserName.getText().toString() ) )
+//                strUserName = mUserName.getText().toString();
+//            else {
+//                Toast.makeText(RegisterActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//        }else {
+//            //输入不合法
+//            Toast.makeText(RegisterActivity.this, "请先输入手机号", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        Intent intent = new Intent(this, ImageUploadActivity.class );
+//        intent.putExtra("userName", strUserName);
+//
+//        startActivity( intent );
 
     }
 
@@ -335,11 +350,24 @@ public class RegisterActivity extends AppCompatActivity {
                 log.d(this, "U:" + strUserName);
                 String password = SHA1Coder.SHA1(strPassword);
 
-                return RegisterController.execute(
-                        strUserName,
-                        password,
-                        params[0]
-                );
+                if (!GlobalUtil.getInstance().isUploadPhotoFlag()){
+                    //用户没有选择上传图片
+                    return RegisterController.execute(
+                            strUserName,
+                            password,
+                            params[0],
+                            defaultPicNum + ""
+                    );
+                }else {
+                    //用户自己上传了图片
+                    return RegisterController.execute(
+                            strUserName,
+                            password,
+                            params[0],
+                            null
+                    );
+                }
+
 
             }catch (Exception e){
                 e.printStackTrace();

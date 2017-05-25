@@ -104,6 +104,9 @@ public class HttpSender {
         String result = sb.toString();
         System.out.println( urlStr + "返回结果如下" );
         System.out.println( "返回的结果是  -  " + result );
+//        if (result == null){
+//            result = "{result:fail}";
+//        }
         return result;
     }
 

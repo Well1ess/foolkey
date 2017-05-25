@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * 第五步：{un， up， aeskey}发送
      */
 
-    public static final String defaultPhoto = "http://foolkey-1252706879.file.myqcloud.com/photo/photo_placeholder.png";
+    public static final String defaultPhoto = PictureInfoBO.getDefaultPicCloudPath(0);
 
     private String strUserName;
     private String strPassWord;
@@ -105,12 +105,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
 
 
-        imageView.setVisibility(View.VISIBLE);
+
         //浅出效果，不然会有黄色一闪而过
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setDuration(1000);
         alphaAnimation.setFillAfter(true);
         imageView.setAnimation(alphaAnimation);
+        alphaAnimation.start();
+        imageView.setVisibility(View.VISIBLE);
         //用glide动态地加载图片
         glide.load( defaultPhoto )
                 .transform(new GlideCircleTransform(this))

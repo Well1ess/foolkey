@@ -222,7 +222,7 @@ public class ImageUploadActivity extends Activity {
         protected void onPostExecute(String result) {
             String path = checkUserName(userName);
             super.onPostExecute(result);
-            log.d(this, result);
+//            log.d(this, result);
             if (result != null) {
                 try {
 
@@ -246,6 +246,8 @@ public class ImageUploadActivity extends Activity {
                     Toast.makeText(ImageUploadActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
                 }
 
+            }else {
+                Toast.makeText(ImageUploadActivity.this, "无法连接到网络\n请检查网络设置", Toast.LENGTH_LONG).show();
             }
 
         }

@@ -37,7 +37,7 @@ import org.json.JSONObject;
 
 public class TeacherIndexActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView mTest;//老师简介
+    private TextView mDescription;//老师简介
     private TextView mTitle;//标题
     private TextView mInfo;//老师的slogan
     private TextView mTeacherSex;//老师的性别
@@ -120,8 +120,8 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initData() {
-        String nickedName = mTeacherAllInfoDTO.getDescription();
-        mTest.setText(nickedName);
+        String description = mTeacherAllInfoDTO.getDescription()+"";
+        mDescription.setText(description);
         mTitle.setText(mTeacherAllInfoDTO.getNickedName()+"的主页");
         mInfo.setText(mTeacherAllInfoDTO.getSlogan());
         if (mTeacherAllInfoDTO.getSexTagEnum().compareTo(SexTagEnum.男)==0)
@@ -144,9 +144,9 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initView() {
-        mTest = (TextView) findViewById(R.id.tv_test);
+        mDescription = (TextView) findViewById(R.id.tv_description);
         mTitle = (TextView) findViewById(R.id.toolbar_title);
-        mInfo = (TextView) findViewById(R.id.info);
+        mInfo = (TextView) findViewById(R.id.slogan);
         mTeacherSex = (TextView) findViewById(R.id.tv_teacherSex);
         mTeacherOrganization = (TextView) findViewById(R.id.tv_teacherOriganization);
         mTeacherEducation = (TextView) findViewById(R.id.tv_teacherEducation);

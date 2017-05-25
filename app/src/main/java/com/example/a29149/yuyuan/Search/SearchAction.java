@@ -37,7 +37,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                 //TODO
                 break;
             case "reward":
-                searchRewardController.setKeyWord(params[0]);
+                searchRewardController.setKeyWord(params[2]);
                 searchRewardController.setPageNo(params[1]);
                 searchRewardController.execute();
                 return searchRewardController.getResult();

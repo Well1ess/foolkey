@@ -21,8 +21,6 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by 张丽华 on 2017/4/26.
  * Description:发现界面的悬赏列表适配器

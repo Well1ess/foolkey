@@ -16,7 +16,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-
+@Deprecated
 public class TeacherInfoActivity extends AppCompatActivity {
 
     @ViewInject(R.id.mask)

@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
@@ -24,8 +27,10 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.reward.AcceptController;
 import com.example.a29149.yuyuan.controller.course.reward.RefuseController;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
 
@@ -62,6 +67,10 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
     private WarningDisplayDialog.Builder displayInfo1;
+
+
+    private RequestManager gilde;
+    private ImageView mTeacherPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +124,29 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         });
         displayInfo1.create();
 
+        mTest = (TextView) findViewById(R.id.tv_test);
+        mTitle = (TextView) findViewById(R.id.toolbar_title);
+        mInfo = (TextView) findViewById(R.id.info);
+        mTeacherSex = (TextView) findViewById(R.id.tv_teacherSex);
+        mTeacherOrganization = (TextView) findViewById(R.id.tv_teacherOriganization);
+        mTeacherEducation = (TextView) findViewById(R.id.tv_teacherEducation);
+        mFlollowNum = (TextView) findViewById(R.id.tv_follownum);
+        mCourseNum = (TextView) findViewById(R.id.tv_coursenum);
+        mTeacheringTime = (TextView) findViewById(R.id.tv_teachingtime);
+        mTeacherState = (CheckBox) findViewById(R.id.cb_teacherstate);
+        mTeacherScore = (TextView) findViewById(R.id.tv_evaluatescore);
+        mTeacherGithub = (TextView) findViewById(R.id.tv_github);
+        mTeacherIndex = (TextView) findViewById(R.id.tv_teacherindex);
+        mTeacherEmail = (TextView) findViewById(R.id.tv_email);
+        mTeacherPhoto = (ImageView) findViewById(R.id.head);
+
+        mRewardAgree = (RadioButton) findViewById(R.id.main_menu_agree);
+        mRewardAgree.setOnClickListener(this);
+        mRewardDisagree = (RadioButton)findViewById(R.id.main_menu_disagree);
+        mRewardDisagree.setOnClickListener(this);
+        mReturn = (ImageButton) findViewById(R.id.bt_return);
+        mReturn.setOnClickListener(this);
+
         initView();
         initData();
     }
@@ -144,28 +176,11 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initView() {
-        mTest = (TextView) findViewById(R.id.tv_test);
-        mTitle = (TextView) findViewById(R.id.toolbar_title);
-        mInfo = (TextView) findViewById(R.id.info);
-        mTeacherSex = (TextView) findViewById(R.id.tv_teacherSex);
-        mTeacherOrganization = (TextView) findViewById(R.id.tv_teacherOriganization);
-        mTeacherEducation = (TextView) findViewById(R.id.tv_teacherEducation);
-        mFlollowNum = (TextView) findViewById(R.id.tv_follownum);
-        mCourseNum = (TextView) findViewById(R.id.tv_coursenum);
-        mTeacheringTime = (TextView) findViewById(R.id.tv_teachingtime);
-        mTeacherState = (CheckBox) findViewById(R.id.cb_teacherstate);
-        mTeacherScore = (TextView) findViewById(R.id.tv_evaluatescore);
-        mTeacherGithub = (TextView) findViewById(R.id.tv_github);
-        mTeacherIndex = (TextView) findViewById(R.id.tv_teacherindex);
-        mTeacherEmail = (TextView) findViewById(R.id.tv_email);
-
-        mRewardAgree = (RadioButton) findViewById(R.id.main_menu_agree);
-        mRewardAgree.setOnClickListener(this);
-        mRewardDisagree = (RadioButton)findViewById(R.id.main_menu_disagree);
-        mRewardDisagree.setOnClickListener(this);
-        mReturn = (ImageButton) findViewById(R.id.bt_return);
-        mReturn.setOnClickListener(this);
-
+        gilde = Glide.with(this);
+        gilde.load(PictureInfoBO.getOnlinePhoto( mTeacherAllInfoDTO.getUserName() ))
+                .placeholder( R.drawable.photo_placeholder1 )
+                .transform( new GlideCircleTransform(this) )
+                .into( mTeacherPhoto );
     }
 
 

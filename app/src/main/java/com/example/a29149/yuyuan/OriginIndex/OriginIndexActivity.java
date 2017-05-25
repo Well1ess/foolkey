@@ -28,7 +28,8 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 /**
  * Created by MaLei on 2017/5/8.
  * Email:ml1995@mail.ustc.edu.cn
- * 点击老师头像跳至此页面，显示老师主页
+ * 点击头像跳至此页面，显示学生
+ *
  */
 
 public class OriginIndexActivity extends AppCompatActivity {

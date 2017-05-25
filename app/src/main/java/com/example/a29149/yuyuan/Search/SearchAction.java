@@ -71,6 +71,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                     EventBus.getDefault().post(new GetSearchResultEvent(mCondition, false, keyValue));
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 EventBus.getDefault().post(new GetSearchResultEvent(mCondition, false, keyValue));
             }
         } else {

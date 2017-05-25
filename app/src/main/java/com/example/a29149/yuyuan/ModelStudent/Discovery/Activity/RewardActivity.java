@@ -8,10 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
@@ -20,11 +23,14 @@ import com.example.a29149.yuyuan.ModelStudent.Publish.Activity.ApplyAuthenticati
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
+import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -42,6 +48,10 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     //显示认证的对话框
     private WarningDisplayDialog.Builder verifyConfirm;
     private RadioButton mOrder;//我要接单
+
+    private RadioButton mButtonMiddle; // 联系悬赏人
+    private RadioButton mButtonLeft; // 左边的按钮
+
     private int position = -1;//item位置
     private StudentDTO studentDTO;//发布悬赏的学生信息
     private RewardDTO rewardDTO;//悬赏信息
@@ -51,6 +61,11 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     private TextView mRewardDescription;//悬赏描述
     private TextView mCreateTime;//创建悬赏的时间
     private ImageButton mReturn;//返回按键
+    @ViewInject(R.id.head)
+    private ImageView photo;
+
+
+    private RequestManager glide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +87,13 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             studentDTO = new StudentDTO();
             rewardDTO = new RewardDTO();
         }
-        initView();
-        initData();
+
 
         AnnotationUtil.setClickListener(this);
         AnnotationUtil.injectViews(this);
+
+        initView();
+        initData();
 
         //确认是否接单的按钮设置
         displayInfo = new WarningDisplayDialog.Builder(this);
@@ -116,7 +133,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     //为底部菜单添加监听
-    @OnClick({R.id.want_learn, R.id.chart, R.id.order})
+    @OnClick({R.id.want_learn, R.id.chat, R.id.order})
     public void setMenuListener(View view)
     {
         switch (view.getId())
@@ -124,7 +141,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.want_learn:
                 //TODO:网络传输
                 break;
-            case R.id.chart:
+            case R.id.chat:
                 //TODO:网络传输
                 break;
             case R.id.order:
@@ -146,6 +163,22 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         mRewardTopic = (TextView) findViewById(R.id.tv_topic);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
+        mButtonMiddle = (RadioButton) findViewById(R.id.chat);
+        mButtonLeft = (RadioButton) findViewById(R.id.want_learn);
+
+        if ( rewardDTO.getCreatorId() == null ||
+                rewardDTO.getCreatorId().equals(GlobalUtil.getInstance().getStudentDTO().getId())){
+            //这个是自己的悬赏
+            mButtonLeft.setText("删除悬赏");
+            mButtonMiddle.setVisibility(View.GONE);
+            mOrder.setText("修改悬赏");
+        }
+
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto(studentDTO.getUserName()))
+                .transform(new GlideCircleTransform(this))
+                .placeholder(R.drawable.photo_placeholder1)
+                .into(photo);
     }
 
 

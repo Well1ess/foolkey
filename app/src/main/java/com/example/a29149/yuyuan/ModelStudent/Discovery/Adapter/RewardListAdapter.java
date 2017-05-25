@@ -71,22 +71,14 @@ public class RewardListAdapter extends BaseAdapter {
         RewardDTO rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
         StudentDTO studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
 
-        if (rewardDTO.getCreatorId().equals( GlobalUtil.getInstance().getStudentDTO().getId()) ){
-            //如果这个悬赏是自己的，则不显示
-            return null;
-        }
+
 
         viewHolder.title.setText(rewardDTO.getTopic());
         viewHolder.money.setText(rewardDTO.getPrice()+"");
         viewHolder.label.setText(rewardDTO.getTechnicTagEnum().toString());
-        viewHolder.studentKind.setText(rewardDTO.getStudentBaseEnum().toString());
-//        viewHolder.prestige.setText( studentDTO.getPrestige() + "");
-//        String prestige = studentDTO.getPrestige() + "";
-        //根据声望的长度，来经行位置的调整
-//        viewHolder.prestige.setPadding(0,0,
-//                - (prestige.length() - 1 ) * 3 + 5
-//                ,0);
-//        viewHolder.prestige.setTextSize( 100/(6 + prestige.length()) );
+        //以前显示标签，但我觉得还是显示名字好
+//        viewHolder.studentKind.setText(rewardDTO.getStudentBaseEnum().toString());
+        viewHolder.studentKind.setText( studentDTO.getNickedName() + "");
 
         //加载图片
         glide = Glide.with(mContext);

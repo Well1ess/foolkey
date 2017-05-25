@@ -117,7 +117,8 @@
                                 android:layout_marginBottom="10dp"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:background="@color/grey"/>
+                                android:background="@null"
+                                />
 
                             <TextView
                                 android:layout_alignTop="@id/head"
@@ -186,17 +187,18 @@
                             android:id="@+id/tv_topic"
                             android:text="任务标题"
                             android:textSize="15sp"
-                            android:textColor="@color/black"
+                            android:textColor="@color/grey555"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingBottom="10dp"
-                            android:paddingTop="10dp"/>
+                            android:paddingTop="10dp"
+                            />
 
                         <View
                             android:layout_width="wrap_content"
                             android:layout_height="1px"
-                            android:background="@color/black"
+                            android:background="@color/light_gray"
                             android:layout_marginLeft="60dp"
                             android:layout_marginRight="60dp" />
 
@@ -206,6 +208,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:textColor="@color/grey"
                             android:text="我大大苏打法发士大夫看见哈撒可怜见科技哈了开机速度发货可怜见可怜见啊哈岁的凯莉分解和看了觉得是"/>
 
                     </LinearLayout>
@@ -218,7 +221,7 @@
                         <View
                             android:layout_width="wrap_content"
                             android:layout_height="1px"
-                            android:background="@color/black"
+                            android:background="@color/light_gray"
                             android:layout_marginLeft="60dp"
                             android:layout_marginRight="60dp" />
 
@@ -301,7 +304,7 @@
 
                 <RadioButton
                     style="@style/RadioButton.Menu"
-                    android:id="@+id/chart"
+                    android:id="@+id/chat"
                     android:text="联系悬赏人" />
 
                 <RadioButton

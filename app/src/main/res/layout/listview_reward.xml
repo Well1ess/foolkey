@@ -137,7 +137,7 @@
             android:paddingRight="4dp"
             android:paddingLeft="4dp"
             android:textSize="12dp"
-            android:background="@drawable/textview_normal"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
@@ -151,12 +151,13 @@
                 android:layout_marginTop="5dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:text="学生基础"
+                android:text="发布人："
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:paddingRight="4dp"
                 android:paddingLeft="4dp"
                 android:textSize="12dp"
+                android:textColor="@color/grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView

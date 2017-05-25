@@ -33,7 +33,7 @@ public class SearchRewardController extends AbstractControllerTemplate {
         jsonObject.put("condition", "reward");
         jsonObject.put("keyWord", keyWord);
         jsonObject.put("pageNo", pageNo);
-        url = "/search";
+        url += "/search";
     }
 
     @Override
@@ -50,10 +50,10 @@ public class SearchRewardController extends AbstractControllerTemplate {
             //根据返回的结果标志进行不同的操作
             if (resultFlag.equals("success")) {
 
-                log.d(this, jsonObject.getString("orderList"));
+                log.d(this, jsonObject.getString("list"));
 
                 //判断传来的参数是否是空
-                if (jsonObject.getString("orderList") == null) {
+                if (jsonObject.getString("list") == null) {
                     this.result = Const.FAIL;
                     return;
                 }

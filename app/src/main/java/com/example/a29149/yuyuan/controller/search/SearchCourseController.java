@@ -33,7 +33,7 @@ public class SearchCourseController extends AbstractControllerTemplate {
         jsonObject.put("condition", "course");
         jsonObject.put("keyWord", keyWord);
         jsonObject.put("pageNo", pageNo);
-        url = "/search";
+        url += "/search";
     }
 
     @Override

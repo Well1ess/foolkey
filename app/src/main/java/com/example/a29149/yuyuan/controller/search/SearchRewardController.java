@@ -26,6 +26,8 @@ public class SearchRewardController extends AbstractControllerTemplate {
     private List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOList;
 
 
+
+
     @Override
     public void handle() throws JSONException {
         jsonObject.put("condition", "reward");
@@ -75,5 +77,13 @@ public class SearchRewardController extends AbstractControllerTemplate {
 
     public void setPageNo(String pageNo) {
         this.pageNo = pageNo;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public List<RewardWithStudentSTCDTO> getRewardWithStudentSTCDTOList() {
+        return rewardWithStudentSTCDTOList;
     }
 }

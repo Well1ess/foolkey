@@ -11,7 +11,9 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Login.LoginActivity;
+import com.example.a29149.yuyuan.Login.RegisterActivity;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.controller.userInfo.GetMyInfoController;
 import com.google.gson.Gson;
@@ -49,6 +51,8 @@ public class RefreshSelfInfo extends AsyncTask<String, Integer, String> {
                 if (resultFlag.equals("success")) {
                     mContext.startActivity(new Intent(mContext, MainStudentActivity.class));
                     Activity activity = (Activity)mContext;
+                    AppManager.getInstance().finishActivity(RegisterActivity.class);
+                    AppManager.getInstance().finishActivity(LoginActivity.class);
                     activity.finish();
                     //获取学生信息dto
                     java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {

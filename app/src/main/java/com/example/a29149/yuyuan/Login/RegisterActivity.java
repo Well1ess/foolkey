@@ -16,6 +16,7 @@ import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.Main.ImageUploadActivity;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -37,7 +38,9 @@ import org.json.JSONObject;
 
 import static com.example.a29149.yuyuan.Login.LoginActivity.defaultPhoto;
 
-
+/**
+ * 现在注册成功后，会发送一次refresh请求，以便填充全局中的studentDTO
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private String strUserName;
@@ -96,15 +99,6 @@ public class RegisterActivity extends AppCompatActivity {
         //图片加载器
         glide = Glide.with(this);
 
-
-        //用glide动态地加载图片
-        System.out.println(this.getClass() + "105行 " + PictureInfoBO.getDefaultPicCloudPath(defaultPicNum));
-        glide.load( PictureInfoBO.getDefaultPicCloudPath(defaultPicNum) )
-                .transform(new GlideCircleTransform(this))
-                .dontAnimate()
-//                .crossFade(2000)
-                .into(imageView);
-
         //浅出效果，不然会有黄色一闪而过
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setDuration(2000);
@@ -114,6 +108,15 @@ public class RegisterActivity extends AppCompatActivity {
         imageView.setVisibility(View.VISIBLE);
         alphaAnimation.start();
         imageView.setAlpha(1.0f);
+
+        //用glide动态地加载图片
+        glide.load( PictureInfoBO.getDefaultPicCloudPath(defaultPicNum) )
+                .transform(new GlideCircleTransform(this))
+//                .dontAnimate()
+                .crossFade(2000)
+                .into(imageView);
+
+
 
         //手机号输入框
         mUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -378,8 +381,7 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //等待提示,华哥的跳跳跳动画，消失
-            shapeLoadingDialog.dismiss();
+
             log.d(this, result);
             if (result != null) {
                 try {
@@ -418,10 +420,19 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                         AppManager.getInstance().finishActivity(LoginActivity.class);
-                        RegisterActivity.this.finish();
 
-                        Intent intent = new Intent(RegisterActivity.this, MainStudentActivity.class);
-                        startActivity(intent);
+                        //等待提示,华哥的跳跳跳动画，消失
+                        shapeLoadingDialog.dismiss();
+
+
+
+                        RefreshSelfInfo refreshSelfInfo = new RefreshSelfInfo(RegisterActivity.this);
+                        refreshSelfInfo.execute();
+
+                        AppManager.getInstance().addActivity(RegisterActivity.this);
+
+//                        Intent intent = new Intent(RegisterActivity.this, MainStudentActivity.class);
+//                        startActivity(intent);
                     }
                 } catch (Exception e) {
                     Toast.makeText(RegisterActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();

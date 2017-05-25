@@ -172,12 +172,14 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
         alphaAnimation.setDuration(1000);
         alphaAnimation.setFillAfter(true);
         mHeadImage.setAnimation(alphaAnimation);
-        mHeadImage.setVisibility(View.VISIBLE);
         alphaAnimation.start();
+        mHeadImage.setVisibility(View.VISIBLE);
+
 
         glide = Glide.with(this);
         glide.load(PictureInfoBO.getOnlinePhoto( studentDTO.getUserName() ) )
                 .transform(new GlideCircleTransform(getActivity()))
+                .crossFade(1000)
                 .into(mHeadImage);
 
 //        reputation.setText( studentDTO.getPrestige() );

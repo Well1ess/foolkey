@@ -213,16 +213,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="40dp"
                 android:layout_gravity="center"
-                android:text="欢迎来到愚猿 ^_^"
-                android:textColor="@color/grey"
-
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:layout_gravity="center"
-                android:text="任何问题，请联系"
+                android:text="可以把你的摄影作品发给我们"
                 android:textColor="@color/grey"
                 android:textSize="10dp"
                 />
@@ -231,7 +222,16 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="5dp"
                 android:layout_gravity="center"
-                android:text="gy2016@mail.ustc.edu.cn"
+                android:text="作为默认头像"
+                android:textColor="@color/grey"
+                android:textSize="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:layout_gravity="center"
+                android:text="投稿地址：gy2016@mail.ustc.edu.cn"
                 android:textColor="@color/grey"
                 android:textSize="10dp"
                 />

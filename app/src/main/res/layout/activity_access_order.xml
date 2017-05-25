@@ -72,44 +72,62 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="30dp"
-                        android:gravity="center"
+
                         android:descendantFocusability="blocksDescendants"
                         android:background="@color/white"
                         android:orientation="horizontal">
-                        <ImageView
-                            android:id="@+id/iv_teacherPhone"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@mipmap/ic_launcher_round"/>
+                        <com.example.a29149.yuyuan.Widget.SquareImageView
+                            android:id="@+id/photo_circle"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/circle"
+                            android:gravity="center"
+                            android:elevation="2dp"
+                            android:visibility="invisible"
+                            >
+
+
+                        </com.example.a29149.yuyuan.Widget.SquareImageView>
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:focusable="false"
+                            android:gravity="center"
                             android:orientation="vertical">
                             <TextView
+                                android:id="@+id/course_topic"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/grey555"
-                                android:text="课程标题"/>
+                                android:text=""
+                                android:hint="课程标题"
+                                />
                             <TextView
+                                android:id="@+id/teacher_name"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textColor="@color/grey555"
-                                android:text="名称"/>
+                                android:text=""
+                                android:hint="老师姓名"
+                                />
                             <TextView
+                                android:id="@id/course_description"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:textColor="@color/grey555"
-                                android:text="sssssssssssssssssssssssssssssssss"/>
+                                android:text=""
+                                android:hint="这是本应该是课程描述的"
+                                />
                         </LinearLayout>
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/order_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|right"
@@ -154,12 +172,14 @@
                         android:layout_height="wrap_content" />
 
                     <EditText
+                        android:id="@+id/evaluation_course_content"
                         android:textSize="12sp"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:hint="点击输入评价"
+                        android:textColorHint="@color/grey"
                         android:gravity="left"
                         android:background="@drawable/edittext_access_selector"
                         />
@@ -171,7 +191,9 @@
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/button_dash">
+                        android:background="@drawable/button_dash"
+                        android:visibility="gone"
+                        >
 
                         <TextView
                             android:layout_centerInParent="true"
@@ -218,20 +240,13 @@
                         android:scaleY="0.6"
                         android:layout_gravity="center_horizontal"
                         android:numStars="5"
-                        android:id="@+id/course_teacher"
+                        android:id="@+id/teacher_access"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
 
-                    <EditText
-                        android:textSize="12sp"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:hint="点击输入评价"
-                        android:gravity="left"
-                        android:background="@drawable/edittext_access_selector"
                         />
+
+
                 </LinearLayout>
 
             </LinearLayout>

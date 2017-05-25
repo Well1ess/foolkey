@@ -62,12 +62,12 @@
         android:id="@+id/ed_reward_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="输入悬赏标题"
-        android:textColor="@color/dark_gray"
+        android:hint="    输入悬赏标题"
+        android:textColor="@color/grey555"
         android:maxLines="1"
         android:paddingLeft="10dp"
         android:singleLine="true"
-        android:textSize="20sp"/>
+        android:textSize="15sp"/>
 
 
     <TextView
@@ -77,15 +77,17 @@
         android:focusable="false"
         android:gravity="bottom"
         android:paddingLeft="10dp"
-        android:text="点击选择标签"
-        android:textColor="@color/dark_gray"
-        android:textSize="20sp"
+        android:text="   点击选择标签"
+        android:textColor="@color/grey555"
+        android:textSize="15sp"
         />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/dark_gray"/>
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/light_gray"/>
 
 
     <EditText
@@ -94,13 +96,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@null"
-        android:hint="输入悬赏内容..."
-        android:textColor="@color/dark_gray"
+        android:hint="    输入悬赏内容..."
+
+        android:textColor="@color/grey555"
         android:imeActionId="@+id/login"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionUnspecified"
         android:paddingLeft="10dp"
-        android:textSize="20sp"/>
+        android:textSize="15sp"/>
 
 
 </LinearLayout>

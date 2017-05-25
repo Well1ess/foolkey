@@ -170,6 +170,8 @@ public class SettingActivity extends AppCompatActivity {
                         UserConfig mUserConfig = new UserConfig(SettingActivity.this);
                         mUserConfig.clear();
 
+                        //退出时清空Global里面的东西，否则老师DTO会影响下一位用户接单
+                        GlobalUtil.clear();
 
                         SettingActivity.this.finish();
 

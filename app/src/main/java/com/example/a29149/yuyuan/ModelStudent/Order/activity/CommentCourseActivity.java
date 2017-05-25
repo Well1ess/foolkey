@@ -8,17 +8,24 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeCourseController;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
 
@@ -46,6 +53,12 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
     private TextView mTeacherName;//课程老师名
     private TextView mDescription;//发布评价
     private TextView mCoursePrice;//课程价格
+    private String teacherUserName;//老师的用户名，用来显示头像
+    private RequestManager glide;
+
+    private ImageButton mReturnButton;//返回按钮
+    private ImageView mTeacherPhoto;//老师头像
+
 
 
     @Override
@@ -58,9 +71,12 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         teacherName = intent.getStringExtra("TeacherName");
         description = intent.getStringExtra("Description");
         price = intent.getStringExtra("CoursePrice");
+        teacherUserName = intent.getStringExtra("teacherUserName");
         Log.i("malei",position+"=position"+topic+"=topic"+teacherName+"=teacherName"+description+"=description"+price+"=price");
 
         initView();
+
+
     }
 
     private void initView() {
@@ -78,6 +94,31 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
 
         mPublish = (RadioButton) findViewById(R.id.main_menu_discovery);
         mPublish.setOnClickListener(this);
+        //返回按键
+        mReturnButton.findViewById(R.id.bt_return);
+        mReturnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        //老师头像
+        mTeacherPhoto.findViewById(R.id.teacher_photo);
+        Glide.with(this);
+        //浅出效果，不然会有黄色一闪而过
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(1000);
+        alphaAnimation.setFillAfter(true);
+        mTeacherPhoto.setAnimation(alphaAnimation);
+        alphaAnimation.start();
+        mTeacherPhoto.setVisibility(View.VISIBLE);
+        //用glide动态地加载图片
+        glide.load(PictureInfoBO.getOnlinePhoto(teacherUserName ) )
+                .transform(new GlideCircleTransform(this))
+                .crossFade(3000)
+                .into(mTeacherPhoto);
+
     }
 
     @Override

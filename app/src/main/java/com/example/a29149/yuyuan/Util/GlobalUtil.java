@@ -468,6 +468,11 @@ public class GlobalUtil {
     public void setUploadPhotoFlag(boolean uploadPhotoFlag) {
         this.uploadPhotoFlag = uploadPhotoFlag;
     }
+
+    //清空
+    public static void clear(){
+        globalUtil = null;
+    }
 }
 
 

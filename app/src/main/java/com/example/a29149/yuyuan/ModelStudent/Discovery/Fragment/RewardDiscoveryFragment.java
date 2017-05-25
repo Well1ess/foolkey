@@ -148,10 +148,9 @@ public class RewardDiscoveryFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            log.d(this, result);
             if (result != null) {
                 try {
-
+                    log.d(this, result);
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
 
@@ -167,8 +166,9 @@ public class RewardDiscoveryFragment extends Fragment {
                         if (pageNo == 1) {
                             GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(courseStudentDTOS);
                         } else if (pageNo > 1) {
-                            GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().addAll(courseStudentDTOS);
-                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(courseStudentDTOS);
+                            List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs();
+                            rewardWithStudentSTCDTOs.addAll(courseStudentDTOS);
+                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(rewardWithStudentSTCDTOs);
                             mRewardList.onLoadFinish();
                         }
 

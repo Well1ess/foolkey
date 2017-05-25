@@ -18,6 +18,7 @@ import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
+import com.example.a29149.yuyuan.Enum.RewardStateEnum;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
@@ -169,9 +170,19 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         if ( rewardDTO.getCreatorId() == null ||
                 rewardDTO.getCreatorId().equals(GlobalUtil.getInstance().getStudentDTO().getId())){
             //这个是自己的悬赏
-            mButtonLeft.setText("删除悬赏");
-            mButtonMiddle.setVisibility(View.GONE);
-            mOrder.setText("修改悬赏");
+            if (rewardDTO.getRewardStateEnum().equals(RewardStateEnum.待接单)){
+                //可以随便删除
+                mButtonLeft.setText("删除悬赏");
+                mButtonMiddle.setVisibility(View.GONE);
+                mOrder.setText("修改悬赏");
+            }else {
+                //已完成的悬赏
+                mButtonLeft.setVisibility(View.GONE);
+                mOrder.setVisibility(View.GONE);
+                mButtonMiddle.setText("一键再次发布");
+                mButtonMiddle.setVisibility(View.VISIBLE);
+            }
+
         }
 
         glide = Glide.with(this);

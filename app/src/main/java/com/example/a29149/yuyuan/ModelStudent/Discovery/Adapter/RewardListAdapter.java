@@ -10,11 +10,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 /**
  * Created by 张丽华 on 2017/4/26.
@@ -24,6 +29,8 @@ import com.example.a29149.yuyuan.Util.log;
 public class RewardListAdapter extends BaseAdapter {
 
     private Context mContext;
+
+    private RequestManager glide;
 
     public RewardListAdapter(Context context) {
         this.mContext = context;
@@ -62,16 +69,33 @@ public class RewardListAdapter extends BaseAdapter {
 
         //获取当前的reward
         RewardDTO rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
+        StudentDTO studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
 
         if (rewardDTO.getCreatorId().equals( GlobalUtil.getInstance().getStudentDTO().getId()) ){
             //如果这个悬赏是自己的，则不显示
-//            return null;
+            return null;
         }
 
         viewHolder.title.setText(rewardDTO.getTopic());
         viewHolder.money.setText(rewardDTO.getPrice()+"");
         viewHolder.label.setText(rewardDTO.getTechnicTagEnum().toString());
         viewHolder.studentKind.setText(rewardDTO.getStudentBaseEnum().toString());
+
+        //加载图片
+        glide = Glide.with(mContext);
+        boolean isPic = glide.load(PictureInfoBO.getOnlinePhoto(studentDTO.getUserName() ) )
+                .transform(new GlideCircleTransform(mContext))
+                .into( viewHolder.head ).getRequest().isFailed();
+        //如果没成功，则加载一张别的图片
+        if (!isPic){
+            glide.load(
+                    PictureInfoBO.getDefaultPicCloudPath(
+                    (int)(Math.random() * PictureInfoBO.defaultPicNum) )   //随机取一张
+                    )
+                    .transform(new GlideCircleTransform(mContext))
+                    .error(R.drawable.photo_placeholder1)
+                    .into( viewHolder.head );
+        }
 
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +117,7 @@ public class RewardListAdapter extends BaseAdapter {
 
         ViewHolder(View view) {
             title = (TextView) view.findViewById(R.id.reward_title);
-            head = (ImageView) view.findViewById(R.id.head);
+            head = (ImageView) view.findViewById(R.id.photo_circle);
             money = (TextView) view.findViewById(R.id.reward_money);
             label = (TextView) view.findViewById(R.id.label);
             studentKind = (TextView) view.findViewById(R.id.student_kind);

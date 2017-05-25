@@ -12,8 +12,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:transitionName="shareHead"
-        android:background="@color/grey"
-        android:id="@+id/head"
+        android:background="@null"
+        android:id="@+id/photo_circle"
         android:layout_width="100dp"
         android:layout_height="100dp" />
 

@@ -38,7 +38,7 @@ public class UploadFile {
 
     public static PutObjectRequest putObjectRequest = new PutObjectRequest();
 
-    //第二参数为运路径
+    //第二参数为云路径
     public void updata(String srcPath, String cloudPath) {
         if (cloudPath == null || cloudPath.equals("")){
 
@@ -48,6 +48,7 @@ public class UploadFile {
         putObjectRequest.setCosPath(cosPath);
         Log.i("malei","cosPath=  "+cosPath);
         putObjectRequest.setSrcPath(srcPath);
+        putObjectRequest.setInsertOnly("0");
         putObjectRequest.setSign(sign);
 
         Log.i("malei","开始上传sign ="+sign);

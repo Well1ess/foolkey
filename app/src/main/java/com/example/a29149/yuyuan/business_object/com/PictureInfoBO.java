@@ -13,7 +13,7 @@ import com.bumptech.glide.RequestManager;
 public class PictureInfoBO extends AbstractBO {
 
     //下载用的链接，通过CDN加速
-    public static final String objectDBUrl = "http://foolkey-1252706879.file.myqcloud.com/";
+    public static final String objectDBUrl = "http://foolkey-1252706879.cossh.myqcloud.com/";
 
     //云端默认的图片数量
     public static final Integer defaultPicNum = 14;

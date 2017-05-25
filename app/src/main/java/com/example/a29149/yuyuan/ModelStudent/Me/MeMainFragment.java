@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
@@ -175,9 +176,11 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
 //        alphaAnimation.start();
 //        mHeadImage.setVisibility(View.VISIBLE);
 
-
         glide = Glide.with(this);
+        System.out.println(this.getClass() + "180行 " + PictureInfoBO.getOnlinePhoto(studentDTO.getUserName()));
         glide.load(PictureInfoBO.getOnlinePhoto( studentDTO.getUserName() ) )
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .transform(new GlideCircleTransform(getActivity()))
                 .into(mHeadImage);
 

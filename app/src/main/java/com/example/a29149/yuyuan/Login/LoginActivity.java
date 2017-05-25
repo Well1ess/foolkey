@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.a29149.yuyuan.Main.SplashActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
@@ -115,6 +116,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         imageView.setVisibility(View.VISIBLE);
         //用glide动态地加载图片
         glide.load( R.drawable.photo_placeholder1 )
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .transform(new GlideCircleTransform(this))
                 .crossFade(3000)
                 .into(imageView);
@@ -247,6 +250,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                .error(R.drawable.photo_placeholder1)
 //                .centerCrop()
                 .transform(new GlideCircleTransform(this))
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                .crossFade(2000)
 //                .animate(1000)
                 .dontAnimate()

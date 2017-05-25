@@ -57,6 +57,8 @@ public class ImageUploadActivity extends Activity {
         setContentView(R.layout.activity_imageupload);
         initUI();
         initListeners();
+        System.out.println(this.getClass() + "60行看一下Global里的学生");
+        System.out.println(GlobalUtil.getInstance().getStudentDTO());
     }
 
     private void initUI() {
@@ -87,7 +89,8 @@ public class ImageUploadActivity extends Activity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ImageUploadActivity.this);
         builder.setTitle("添加图片");
-        String[] items = {"选择本地照片", "拍照"};
+        //String[] items = {"选择本地照片", "拍照"};
+        String[] items = {"选择本地照片"};
         builder.setNegativeButton("取消", null);
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
@@ -220,6 +223,8 @@ public class ImageUploadActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
+            System.out.println(this.getClass() + "226行看一下Global");
+            System.out.println(GlobalUtil.getInstance().getStudentDTO());
             String path = checkUserName(userName);
             super.onPostExecute(result);
 //            log.d(this, result);

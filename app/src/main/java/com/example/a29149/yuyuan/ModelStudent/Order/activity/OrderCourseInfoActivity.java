@@ -130,7 +130,6 @@ public class OrderCourseInfoActivity extends Activity implements View.OnClickLis
         //加载图片
         glide = Glide.with(this);
         glide.load(PictureInfoBO.getOnlinePhoto( mStudentDTO.getUserName()) )
-                .placeholder( R.drawable.photo_placeholder1 )
                 .error( R.drawable.photo_placeholder1)
                 .transform( new GlideCircleTransform( this) )
                 .into(photo);

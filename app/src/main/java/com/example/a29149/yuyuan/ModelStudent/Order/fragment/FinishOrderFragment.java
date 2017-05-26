@@ -113,12 +113,13 @@ public class FinishOrderFragment extends Fragment {
         return view;
     }
 
-    @Override
+/*    @Override
     public void onResume() {
         super.onResume();
         pageNo = 1;
+        shapeLoadingDialog.show();
         loadData(pageNo);
-    }
+    }*/
 
 
     private void loadData(int pageNo) {

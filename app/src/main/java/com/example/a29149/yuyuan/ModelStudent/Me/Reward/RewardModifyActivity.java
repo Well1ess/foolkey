@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -120,8 +121,8 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
     private CheckBox mEverybody;
 
     //返回按钮
-    @ViewInject(R.id.bt_return)
-    private ImageButton mReturn;
+    @ViewInject(R.id.iv_return)
+    private ImageView mReturn;
 
     @ViewInject(R.id.tv_go)
     private TextView mSubmit;
@@ -136,15 +137,30 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
 
         int position = getIntent().getIntExtra("position", 0);
         topic = getIntent().getStringExtra("topic");
-         description = getIntent().getStringExtra("description");
-         technicTagEnum = getIntent().getStringExtra("technicTagEnum");
-         price = getIntent().getStringExtra("price");
-         courseTimeDayEnum = getIntent().getStringExtra("courseTimeDayEnum");
-         studentBaseEnum = getIntent().getStringExtra("studentBaseEnum");
-         teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
-         teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
-         rewardId = getIntent().getStringExtra("rewardId");
+        description = getIntent().getStringExtra("description");
+        technicTagEnum = getIntent().getStringExtra("technicTagEnum");
+        price = getIntent().getStringExtra("price");
+        courseTimeDayEnum = getIntent().getStringExtra("courseTimeDayEnum");
+        studentBaseEnum = getIntent().getStringExtra("studentBaseEnum");
+        teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
+        teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
+        rewardId = getIntent().getStringExtra("rewardId");
+
         mSubmit.setOnClickListener(this);
+        mReturn.setOnClickListener(this);
+        mTechnicTag.setOnClickListener(this);
+        mWorkday.setOnClickListener(this);
+        mHoliday.setOnClickListener(this);
+        mEveryday.setOnClickListener(this);
+        mWhiteman.setOnClickListener(this);
+        mLittleman.setOnClickListener(this);
+        mOnline.setOnClickListener(this);
+        mOffline.setOnClickListener(this);
+        mOnAndOff.setOnClickListener(this);
+        mMuchman.setOnClickListener(this);
+        mOnlyTeacher.setOnClickListener(this);
+        mEverybody.setOnClickListener(this);
+
         initData();
 
 
@@ -260,6 +276,9 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
                 break;
             case R.id.tv_go:
                 goNext();
+                break;
+            case R.id.tv_technicTag:
+                chooseTag();
                 break;
             case R.id.cb_workday:
                 chooseWeekday();

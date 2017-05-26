@@ -45,6 +45,7 @@ import org.json.JSONObject;
 
 public class RewardActivity extends AppCompatActivity implements View.OnClickListener {
 
+
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
     //显示认证的对话框

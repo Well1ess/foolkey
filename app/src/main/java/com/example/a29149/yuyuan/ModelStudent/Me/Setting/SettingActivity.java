@@ -144,7 +144,9 @@ public class SettingActivity extends AppCompatActivity {
     private void changeBackTOStudent(){
         GlobalUtil.getInstance().setUserRole(RoleEnum.student.toString());
         Intent toStudent = new Intent(SettingActivity.this, MainStudentActivity.class);
+        Toast.makeText(this, "已经切换回学生了哦", Toast.LENGTH_LONG).show();
         startActivity(toStudent);
+
         finish();
     }
 

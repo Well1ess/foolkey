@@ -16,6 +16,7 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
@@ -98,7 +99,7 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
         }
         mTeacherNameAndCourseName.setText(fisrtLine);
         mRewardTitle.setText("悬赏标题:" + courseDTO.getTopic().toString() + "");
-        mTeacherCharge.setText("悬赏价格：" + courseDTO.getPrice().toString()+"RMB");
+        mTeacherCharge.setText("悬赏价格：" + courseDTO.getPrice().toString()+ Const.PRICE_NAME);
 
         return view;
     }

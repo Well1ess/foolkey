@@ -197,14 +197,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Check for a valid
         if (TextUtils.isEmpty(userName)
-                || !PhoneFormatCheckUtils.isPhoneLegal( strUserName )
+//                || !PhoneFormatCheckUtils.isPhoneLegal( strUserName )
                 ) {
-            mUserNameView.setError("账号不能为空！");
+            mUserNameView.setError("请输入正确的用户名^_^");
             focusView = mUserNameView;
             cancel = true;
         }
         else if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError("密码不能为空！");
+            mPasswordView.setError("密码不能为空哦");
             focusView = mPasswordView;
             cancel = true;
         }
@@ -468,7 +468,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     }
                 } catch (Exception e) {
-                    Toast.makeText(LoginActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(LoginActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();

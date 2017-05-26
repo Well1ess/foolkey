@@ -439,7 +439,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     shapeLoadingDialog.dismiss();
-                    Toast.makeText(RegisterActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "重复的登录名T_T！", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 shapeLoadingDialog.dismiss();

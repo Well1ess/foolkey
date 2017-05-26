@@ -26,21 +26,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="朱洪军： javaEE"
-            android:textColor="@color/grey555"/>
+            android:textColor="@color/grey555"
+            />
 
         <TextView
             android:id="@+id/tv_rewardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="悬赏标题:"
-            android:textColor="@color/grey555"/>
+            android:textColor="@color/grey555"
+            android:layout_marginTop="5dp"
+            />
 
         <TextView
             android:id="@+id/tv_rewardCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="悬赏价格： 1000RMB"
-            android:textColor="@color/dark_green"/>
+            android:textColor="@color/dark_green"
+            android:layout_marginTop="5dp"
+            />
     </LinearLayout>
 
     <RelativeLayout

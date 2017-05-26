@@ -250,6 +250,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                .error(R.drawable.photo_placeholder1)
 //                .centerCrop()
                 .transform(new GlideCircleTransform(this))
+                .error(R.drawable.photo_placeholder1)
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                .crossFade(2000)

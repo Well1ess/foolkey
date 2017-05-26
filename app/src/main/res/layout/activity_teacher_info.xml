@@ -89,14 +89,18 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="/"
-                                android:textColor="@color/grey"/>
+                                android:textColor="@color/grey"
+                                android:visibility="gone"
+                                />
 
                             <TextView
                                 android:id="@+id/tv_teacherEducation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="博士"
-                                android:textColor="@color/grey"/>
+                                android:textColor="@color/grey"
+                                android:visibility="gone"
+                                />
                         </LinearLayout>
 
                         <TextView
@@ -279,37 +283,7 @@
                         android:text="http://blog.csdn.net/hugoshine/article/details/9987917"/>
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="1.0px"
-                        android:layout_marginTop="30dp"
-                        android:background="#DEDEDE"/>
-
-                    <RadioGroup
-                        android:id="@+id/tab_main_menu"
-                        android:layout_width="fill_parent"
-                        android:layout_height="50dp"
-                        android:layout_alignParentBottom="true"
-                        android:background="@color/white"
-                        android:gravity="bottom"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/main_menu_agree"
-                            style="@style/RadioButton.Menu"
-                            android:text="同意"/>
-
-                        <RadioButton
-                            android:id="@+id/main_menu_disagree"
-                            style="@style/RadioButton.Menu"
-                            android:text="拒绝"/>
-
-                    </RadioGroup>
-                </RelativeLayout>
 
             </LinearLayout>
         </ScrollView>
@@ -371,5 +345,37 @@
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:layout_marginTop="30dp"
+            android:background="#DEDEDE"/>
+
+        <RadioGroup
+            android:id="@+id/tab_main_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/main_menu_agree"
+                style="@style/RadioButton.Menu"
+                android:text="同意"/>
+
+            <RadioButton
+                android:id="@+id/main_menu_disagree"
+                style="@style/RadioButton.Menu"
+                android:text="拒绝"/>
+
+        </RadioGroup>
+    </RelativeLayout>
 
 </FrameLayout>

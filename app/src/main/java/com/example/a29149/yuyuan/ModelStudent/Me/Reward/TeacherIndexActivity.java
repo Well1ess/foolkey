@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
@@ -21,11 +24,14 @@ import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.SexTagEnum;
 import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.reward.AcceptController;
 import com.example.a29149.yuyuan.controller.course.reward.RefuseController;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
 
@@ -59,9 +65,16 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     private RadioButton mRewardAgree;//同意该老师申请
     private RadioButton mRewardDisagree;//不同意该老师申请
     private ImageButton mReturn;//返回
+
+
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
     private WarningDisplayDialog.Builder displayInfo1;
+
+    @ViewInject(R.id.head)
+    private ImageView mTeacherPhoto;
+
+    private RequestManager glide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +173,14 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mTeacherGithub = (TextView) findViewById(R.id.tv_github);
         mTeacherIndex = (TextView) findViewById(R.id.tv_teacherindex);
         mTeacherEmail = (TextView) findViewById(R.id.tv_email);
+
+        //填充头像
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto( mTeacherAllInfoDTO.getUserName() ))
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform( this ))
+                .into( mTeacherPhoto );
+
 
         mRewardAgree = (RadioButton) findViewById(R.id.main_menu_agree);
         mRewardAgree.setOnClickListener(this);

@@ -10,6 +10,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
@@ -19,6 +21,8 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.ModelStudent.Order.global.GlobalValue;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.util.List;
 import java.util.Map;
@@ -46,6 +50,8 @@ public class MyListViewNoPayCourseAdapter extends BaseAdapter implements OnClick
     private OrderBuyCourseDTO mOrderBuyCourseDTO;//订单信息
     private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
     private CourseAbstract courseDTO = null ;
+
+    private RequestManager glide;
 
     public MyListViewNoPayCourseAdapter(Context context)
     {
@@ -124,6 +130,12 @@ public class MyListViewNoPayCourseAdapter extends BaseAdapter implements OnClick
         mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
         mPay = (TextView) view.findViewById(R.id.tv_pay);
         mPay.setOnClickListener(this);
+
+        glide = Glide.with(mContext);
+        glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform(mContext))
+                .into(mTeacherPhone);
     }
 
     @Override

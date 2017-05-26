@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
+import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
@@ -89,7 +90,10 @@ public class SettingActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_switch)
     public void Switch(View view){
-        changeRole();
+        if ( GlobalUtil.getInstance().getUserRole().equals(RoleEnum.student.toString()) )
+            changeRole();
+        else
+            changeBackTOStudent();
     }
 
 
@@ -132,6 +136,16 @@ public class SettingActivity extends AppCompatActivity {
 
             displayInfo.getDialog().show();
         }
+    }
+
+    /**
+     * 老师切换回学生
+     */
+    private void changeBackTOStudent(){
+        GlobalUtil.getInstance().setUserRole(RoleEnum.student.toString());
+        Intent toStudent = new Intent(SettingActivity.this, MainStudentActivity.class);
+        startActivity(toStudent);
+        finish();
     }
 
 

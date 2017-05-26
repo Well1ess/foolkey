@@ -12,7 +12,7 @@ import com.example.a29149.yuyuan.R;
  * Email:ml1995@mail.ustc.edu.cn
  * 购买的课程的listView的Adapter
  */
-
+@Deprecated
 public class MyListViewNoStartCourseAdapter extends BaseAdapter {
     private Context mContext;
 

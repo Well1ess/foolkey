@@ -19,8 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.RewardDTO;
-import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
+
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -39,7 +39,6 @@ import org.json.JSONObject;
 public class RewardModifyActivity extends Activity {
 
     private RewardDTO mRewardDTO;//悬赏信息
-    private StudentDTO mStudentDTO;//学生信息
 
     private String topic;
     private String description;
@@ -51,14 +50,14 @@ public class RewardModifyActivity extends Activity {
     private String teacherRequirementEnum;
     private String rewardId;
 
-    //0-topic
-    //1-technicTag
-    //2-description
-    //3-price
-    //4-上课时间
-    //5-学生基础
-    //6-上课方式
-    //7-老师类型
+//    0-topic
+//    1-technicTag
+//    2-description
+//    3-price
+//    4-上课时间
+//    5-学生基础
+//    6-上课方式
+//    7-老师类型
     private String[] rewardChooseContent;
 
     //悬赏标题
@@ -120,44 +119,42 @@ public class RewardModifyActivity extends Activity {
     private CheckBox mEverybody;
 
     //返回按钮
-    @ViewInject(R.id.iv_return)
+    @ViewInject(R.id.bt_return)
     private ImageButton mReturn;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reward_modify1);
-//
-//        AnnotationUtil.injectViews(this);
-//        AnnotationUtil.setClickListener(this);
-//
-//        int position = getIntent().getIntExtra("position", 0);
-//        topic = getIntent().getStringExtra("topic");
-//        description = getIntent().getStringExtra("description");
-//        technicTagEnum = getIntent().getStringExtra("technicTagEnum");
-//        price = getIntent().getStringExtra("price");
-//        courseTimeDayEnum = getIntent().getStringExtra("courseTimeDayEnum");
-//        studentBaseEnum = getIntent().getStringExtra("studentBaseEnum");
-//        teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
-//        teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
-//        rewardId = getIntent().getStringExtra("rewardId");
-//        mRewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
-//        mStudentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
-//        initData();
-//
+        setContentView(R.layout.activity_reward_modify);
+        AnnotationUtil.injectViews(this);
+        AnnotationUtil.setClickListener(this);
+
+        int position = getIntent().getIntExtra("position", 0);
+        topic = getIntent().getStringExtra("topic");
+         description = getIntent().getStringExtra("description");
+         technicTagEnum = getIntent().getStringExtra("technicTagEnum");
+         price = getIntent().getStringExtra("price");
+         courseTimeDayEnum = getIntent().getStringExtra("courseTimeDayEnum");
+         studentBaseEnum = getIntent().getStringExtra("studentBaseEnum");
+         teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
+         teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
+         rewardId = getIntent().getStringExtra("rewardId");
+        initData();
+
 
     }
 
     private void initData() {
 
-        //展示,恢复数据
+        //展示
         mTopic.setText(topic);
         mDescription.setText(description);
         mTechnicTag.setText(technicTagEnum);
         mRewardPrice.setText(price);
 
-       //教学时间
+        //教学时间
 //        String courseTimeEnumStr = mRewardDTO.getCourseTimeDayEnum().toString();
         switch (courseTimeDayEnum) {
             case "工作日": {
@@ -183,8 +180,8 @@ public class RewardModifyActivity extends Activity {
         }
         //学生基础
 //        StudentBaseEnum.
-        String studentBaseEnumStr = mRewardDTO.getStudentBaseEnum().toString();
-        switch (studentBaseEnumStr) {
+//        String studentBaseEnumStr = mRewardDTO.getStudentBaseEnum().toString();
+        switch (studentBaseEnum) {
             case "小白": {
                 mWhiteman.setChecked(true);
                 mLittleman.setChecked(false);
@@ -208,8 +205,8 @@ public class RewardModifyActivity extends Activity {
         }
 
         //教学方式
-        String teachMethodEnumStr = mRewardDTO.getTeachMethodEnum().toString();
-        switch (teachMethodEnumStr) {
+//        String teachMethodEnumStr = mRewardDTO.getTeachMethodEnum().toString();
+        switch (teachMethodEnum) {
             case "线上": {
                 mOnline.setChecked(true);
                 mOffline.setChecked(false);
@@ -308,7 +305,7 @@ public class RewardModifyActivity extends Activity {
 
         //Log.i("malei",rewardChooseContent.toString());
         //发布到服务器
-//        new  PublishRewardOptionsStudentActivity.PublishRewardAction().execute();
+        new ModifyRewardAction().execute();
     }
 
     //弹出悬赏选择标签

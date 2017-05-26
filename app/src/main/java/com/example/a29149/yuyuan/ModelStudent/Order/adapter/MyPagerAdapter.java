@@ -15,7 +15,7 @@ import java.util.List;
  * Email:ml1995@mail.ustc.edu.cn
  * 以View的形式的PagerAdapter，现已废弃
  */
-
+@Deprecated
 public class MyPagerAdapter extends PagerAdapter {
     private List<View> views;
     private List<String> mTags = Arrays.asList("购物车", "未付款", "未上课", "未评价", "全部订单");

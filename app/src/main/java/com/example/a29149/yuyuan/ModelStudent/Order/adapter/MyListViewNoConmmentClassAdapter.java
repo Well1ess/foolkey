@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
@@ -20,6 +22,8 @@ import com.example.a29149.yuyuan.ModelStudent.Order.activity.CommentCourseActivi
 import com.example.a29149.yuyuan.ModelTeacher.Order.JudgeStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +53,8 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
     private List rewardList = new ArrayList();//悬赏列表
     private List courseList = new ArrayList();//课程列表
     private CourseAbstract courseDTO = null ;
+
+    private RequestManager glide;
 
     public MyListViewNoConmmentClassAdapter(Context context)
     {
@@ -106,6 +112,12 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
         mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
         mComment = (TextView) view.findViewById(R.id.tv_comment);
         mComment.setOnClickListener(this);
+
+        glide = Glide.with(mContext);
+        glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform(mContext))
+                .into(mTeacherPhone);
     }
 
     @Override

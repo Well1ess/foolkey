@@ -21,7 +21,7 @@ import java.util.Map;
  * Email:ml1995@mail.ustc.edu.cn
  * 发布悬赏listView的Adapter
  */
-
+@Deprecated
 public class MyListViewRewardAdapter extends BaseAdapter implements View.OnClickListener {
 
     private Context mContext;

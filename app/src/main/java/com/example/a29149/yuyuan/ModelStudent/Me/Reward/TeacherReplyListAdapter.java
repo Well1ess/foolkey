@@ -5,10 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.util.List;
 
@@ -19,6 +24,8 @@ import java.util.List;
 
 public class TeacherReplyListAdapter extends BaseAdapter
 {
+
+    private RequestManager glide;
 
     private Context mContext;
     private List<ApplicationRewardWithTeacherSTCDTO> applicationRewardWithTeacherSTCDTOList;
@@ -64,7 +71,14 @@ public class TeacherReplyListAdapter extends BaseAdapter
         {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
-        myViewHolder.tv.setText(applicationRewardWithTeacherSTCDTOList.get(position).getTeacherAllInfoDTO().getNickedName());
+
+        glide = Glide.with(mContext);
+        glide.load(PictureInfoBO.getOnlinePhoto(applicationRewardWithTeacherSTCDTOList.get(position).getTeacherAllInfoDTO().getUserName()))
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform(mContext))
+                .into(myViewHolder.tv);
+
+//        myViewHolder.tv.setText(applicationRewardWithTeacherSTCDTOList.get(position).getTeacherAllInfoDTO().getNickedName());
         myViewHolder.teacherName.setText(applicationRewardWithTeacherSTCDTOList.get(position).getTeacherAllInfoDTO().getNickedName());
         return convertView;
     }
@@ -72,12 +86,12 @@ public class TeacherReplyListAdapter extends BaseAdapter
     static class MyViewHolder
     {
 
-        TextView tv;
+        ImageView tv;
         TextView teacherName;
 
         public MyViewHolder(View view)
         {
-            tv = (TextView) view.findViewById(R.id.photo_circle);
+            tv = (ImageView) view.findViewById(R.id.photo_circle);
             teacherName = (TextView) view.findViewById(R.id.tv_teacherName);
         }
     }

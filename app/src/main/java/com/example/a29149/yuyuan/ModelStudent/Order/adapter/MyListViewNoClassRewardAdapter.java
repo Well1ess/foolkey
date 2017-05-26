@@ -8,12 +8,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +49,9 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
     private int position; //记录位置
     private List rewardList = new ArrayList();//悬赏列表
     private List courseList = new ArrayList();//课程列表
+
+
+    private RequestManager glide;
 
     public MyListViewNoClassRewardAdapter(Context context)
     {
@@ -103,6 +110,12 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
         mTeacherCharge = (TextView) view.findViewById(R.id.tv_rewardCost);
         mCancalReward = (TextView) view.findViewById(R.id.tv_cancel);
         mCancalReward.setOnClickListener(this);
+
+        glide = Glide.with(mContext);
+        glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform(mContext))
+                .into(mTeacherPhone);
     }
 
 

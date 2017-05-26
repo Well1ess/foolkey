@@ -115,12 +115,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        alphaAnimation.start();
         imageView.setVisibility(View.VISIBLE);
         //用glide动态地加载图片
-        glide.load( R.drawable.photo_placeholder1 )
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .transform(new GlideCircleTransform(this))
-                .crossFade(3000)
-                .into(imageView);
+        if (mUserNameView.getText() == null || mUserNameView.getText().toString().equals("")) {
+            glide.load(R.drawable.photo_placeholder1)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .transform(new GlideCircleTransform(this))
+                    .crossFade(3000)
+                    .into(imageView);
+        }else {
+            //如果用户名栏已经有了输入
+            glide.load( PictureInfoBO.getOnlinePhoto( mUserNameView.getText().toString() ) )
+                    .error(R.drawable.photo_placeholder1)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .transform(new GlideCircleTransform(this))
+                    .crossFade(3000)
+                    .into(imageView);
+        }
 
         //华哥的跳跳跳动画
         shapeLoadingDialog = new ShapeLoadingDialog(this);

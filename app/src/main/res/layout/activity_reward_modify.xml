@@ -5,378 +5,378 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/colorPrimary"
-        android:elevation="5dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="修改悬赏"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <ImageView
-                android:id="@+id/iv_return"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginLeft="18dp"
-                android:background="?attr/homeAsUpIndicator"
-                android:backgroundTint="@color/white"
-                android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tv_go"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="发 布"
-                android:textSize="16sp"
-                android:clickable="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginRight="18dp"
-                android:backgroundTint="@color/white"
-                android:gravity="center"/>
-        </RelativeLayout>
-    </android.support.design.widget.AppBarLayout>
-
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/ed_topic"
-            android:text="任务标题"
-            android:textSize="15sp"
-            android:textColor="@color/grey555"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:background="@null"
-            />
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1px"
-            android:background="@color/light_gray"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp" />
-
-        <EditText
-            android:id="@+id/ed_description"
-            android:layout_margin="18dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/grey"
-            android:text="我大大苏打法发士大夫看见哈撒可怜见科技哈了开机速度发货可怜见可怜见啊哈岁的凯莉分解和看了觉得是"
-            android:background="@null"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:id="@+id/tv_technicTag"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1.0"
-            android:focusable="false"
-            android:gravity="center"
-            android:text="当前标签"
-            android:textSize="16sp"/>
+            android:layout_height="65dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp">
 
-        <view
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:background="@color/light_white"
-            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
 
-        </view>
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="修改悬赏"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/ed_reward_price"
+                <ImageView
+                    android:id="@+id/iv_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="18dp"
+                    android:background="?attr/homeAsUpIndicator"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_go"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="发 布"
+                    android:textSize="16sp"
+                    android:clickable="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="18dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"/>
+            </RelativeLayout>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:text="金额"
-            android:background="@null"
-            android:textSize="16sp"
-            android:textColor="@color/colorPrimary"
-            android:gravity="center"
-            />
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
+            <EditText
+                android:id="@+id/ed_topic"
+                android:text="任务标题"
+                android:textSize="15sp"
+                android:textColor="@color/grey555"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:background="@null"
+                />
 
-    </LinearLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1px"
+                android:background="@color/light_gray"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp" />
 
+            <EditText
+                android:id="@+id/ed_description"
+                android:layout_margin="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/grey"
+                android:text="我大大苏打法发士大夫看见哈撒可怜见科技哈了开机速度发货可怜见可怜见啊哈岁的凯莉分解和看了觉得是"
+                android:background="@null"
+                />
 
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:background="@color/light_white"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:orientation="horizontal">
-        <CheckBox
-            android:id="@+id/cb_workday"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey"
-            android:text="工作日"/>
-        <CheckBox
-            android:id="@+id/cb_holiday"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey"
-            android:text="节假日"/>
-        <CheckBox
-            android:id="@+id/cb_everyday"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:textColor="@color/grey"
-            android:text="不限"/>
-    </LinearLayout>
-
-
-
-    <View
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:background="@color/light_gray"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:orientation="vertical">
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/tv_technicTag"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1.0"
+                android:focusable="false"
+                android:gravity="center"
+                android:text="当前标签"
+                android:textSize="16sp"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/light_white"
+                >
+
+            </View>
+
+            <EditText
+                android:id="@+id/ed_reward_price"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:text="金额"
+                android:background="@null"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                />
+
+
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:background="@color/light_white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:orientation="horizontal">
             <CheckBox
-                android:id="@+id/cb_whiteman"
-                android:layout_width="wrap_content"
+                android:id="@+id/cb_workday"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="工作日"/>
+            <CheckBox
+                android:id="@+id/cb_holiday"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="节假日"/>
+            <CheckBox
+                android:id="@+id/cb_everyday"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:textColor="@color/grey"
-                android:text="小白"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/grey"
-                android:text="需要详细讲解"/>
+                android:text="不限"/>
         </LinearLayout>
+
+
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:background="@color/light_gray"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:gravity="center">
-            <CheckBox
-                android:id="@+id/cb_littleman"
-                android:layout_width="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="入门"/>
-            <TextView
-                android:layout_width="wrap_content"
+                android:gravity="center">
+                <CheckBox
+                    android:id="@+id/cb_whiteman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:textColor="@color/grey"
+                    android:text="小白"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/grey"
+                    android:text="需要详细讲解"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/grey"
-                android:text="有一定的基础"/>
+                android:layout_marginTop="15dp"
+                android:gravity="center">
+                <CheckBox
+                    android:id="@+id/cb_littleman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey"
+                    android:text="入门"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/grey"
+                    android:text="有一定的基础"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center">
+                <CheckBox
+                    android:id="@+id/cb_muchman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey"
+                    android:text="熟练"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/grey"
+                    android:text="就差临门一脚"/>
+            </LinearLayout>
         </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:background="@color/light_gray"
+            android:layout_marginTop="18dp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:gravity="center">
+            android:layout_marginLeft="30dp"
+            android:orientation="horizontal">
             <CheckBox
-                android:id="@+id/cb_muchman"
-                android:layout_width="wrap_content"
+                android:id="@+id/cb_onLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/grey"
-                android:text="熟练"/>
-            <TextView
-                android:layout_width="wrap_content"
+                android:text="线上"/>
+            <CheckBox
+                android:id="@+id/cb_offLine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:textColor="@color/grey"
-                android:text="就差临门一脚"/>
+                android:text="线下"/>
+            <CheckBox
+                android:id="@+id/cb_onAndOff"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:textColor="@color/grey"
+                android:text="不限"/>
         </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/light_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="60dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp"
+            >
+            <CheckBox
+                android:id="@+id/cb_onlyTeacher"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="认证老师"/>
+
+            <CheckBox
+                android:id="@+id/cb_everybady"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:textColor="@color/grey"
+                android:text="不限"/>
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:background="@color/light_white"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="感谢您的精益求精"
+            android:gravity="center"
+            android:textColor="@color/light_gray"
+            android:textSize="8dp"
+            android:padding="5dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="我们会将您的决定"
+            android:gravity="center"
+            android:textColor="@color/light_gray"
+            android:textSize="8dp"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="传达到每一位申请者"
+            android:gravity="center"
+            android:textColor="@color/light_gray"
+            android:textSize="8dp"
+            android:padding="5dp"
+            android:layout_marginBottom="20dp"
+            />
+
+
     </LinearLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:background="@color/light_gray"
-        android:layout_marginTop="18dp"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:orientation="horizontal">
-        <CheckBox
-            android:id="@+id/cb_onLine"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey"
-            android:text="线上"/>
-        <CheckBox
-            android:id="@+id/cb_offLine"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey"
-            android:text="线下"/>
-        <CheckBox
-            android:id="@+id/cb_onAndOff"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:textColor="@color/grey"
-            android:text="不限"/>
-    </LinearLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/light_gray"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="60dp"
-        android:orientation="horizontal"
-        android:layout_marginBottom="30dp"
-        >
-        <CheckBox
-            android:id="@+id/cb_onlyTeacher"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey"
-            android:text="认证老师"/>
-
-        <CheckBox
-            android:id="@+id/cb_everybady"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:textColor="@color/grey"
-            android:text="不限"/>
-
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:background="@color/light_white"
-        android:layout_marginBottom="10dp"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="感谢您的精益求精"
-        android:gravity="center"
-        android:textColor="@color/light_gray"
-        android:textSize="8dp"
-        android:padding="5dp"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="我们会将您的决定"
-        android:gravity="center"
-        android:textColor="@color/light_gray"
-        android:textSize="8dp"
-
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="传达到每一位申请者"
-        android:gravity="center"
-        android:textColor="@color/light_gray"
-        android:textSize="8dp"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp"
-        />
-
-
-</LinearLayout>
 </ScrollView>
 
 

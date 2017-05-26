@@ -83,8 +83,7 @@ public class ArticleSearchFragment extends Fragment {
             @Override
             public void setLoad() {
                 //TODO:网络传输
-                SearchAction searchAction = new SearchAction();
-                searchAction.execute(condition, pageNo + "", keyValue);
+
                 pageNo++;
             }
         });
@@ -102,8 +101,6 @@ public class ArticleSearchFragment extends Fragment {
                             MainStudentActivity.shapeLoadingDialog.show();
                         }
                         //由于是刷新，所以首先清空所有数据
-                        SearchAction searchAction = new SearchAction();
-                        searchAction.execute(condition, pageNo + "", keyValue);
                     }
                 });
         return view;

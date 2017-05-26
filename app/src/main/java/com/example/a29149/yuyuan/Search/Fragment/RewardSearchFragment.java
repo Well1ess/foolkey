@@ -16,6 +16,7 @@ import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.RewardDiscovery
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.GetSearchResultEvent;
 import com.example.a29149.yuyuan.Search.SearchAction;
+import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -80,7 +81,7 @@ public class RewardSearchFragment extends Fragment {
             @Override
             public void setLoad() {
                 //TODO:网络传输
-                SearchAction searchAction = new SearchAction();
+                SearchAction searchAction = new SearchAction((SearchActivity) getActivity());
                 searchAction.execute("reward", pageNo+"", keyValue);
                 pageNo++;
             }
@@ -101,7 +102,7 @@ public class RewardSearchFragment extends Fragment {
 
                         pageNo = 1;
                         GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().clear();
-                        SearchAction searchAction = new SearchAction();
+                        SearchAction searchAction = new SearchAction((SearchActivity) getActivity());
                         searchAction.execute("reward", pageNo + "", keyValue);
                         pageNo++;
                     }
@@ -118,6 +119,14 @@ public class RewardSearchFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    public void getResult(GetSearchResultEvent searchResultEvent) {
+        keyValue = searchResultEvent.getKeyValue();
+        if (searchResultEvent.isResult()) {
+            mListAdapter.notifyDataSetChanged();
+            pageNo++;
+        }
     }
 
 }

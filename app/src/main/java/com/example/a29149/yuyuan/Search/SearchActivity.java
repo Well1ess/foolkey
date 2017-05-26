@@ -23,6 +23,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
+import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.Fragment.ArticleSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.CourseSearchFragment;
@@ -32,11 +33,13 @@ import com.example.a29149.yuyuan.Search.Fragment.TeacherSearchFragment;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.MyEditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import de.greenrobot.event.Subscribe;
 import de.greenrobot.event.ThreadMode;
 
@@ -118,6 +121,9 @@ public class SearchActivity extends AppCompatActivity {
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
         MainStudentActivity.MIUISetStatusBarLightMode(getWindow(), true);
+
+        //放置数据冗余
+        GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().clear();
 
         //FragmentTabHost初始化
         mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.content_pager);
@@ -236,13 +242,24 @@ public class SearchActivity extends AppCompatActivity {
     //搜索方法
     private void search(String keyValue) {
         //TODO:网络传输, page恒为1
-        SearchAction searchAction = new SearchAction();
+        SearchAction searchAction = new SearchAction(this);
         searchAction.execute(condition, "1", keyValue);
     }
 
-    @Subscribe(threadMode = ThreadMode.MainThread)
     public void getResult(GetSearchResultEvent searchResultEvent) {
-        Log.d("TAG", searchResultEvent.toString());
+        switch (searchResultEvent.getCondition()) {
+            case "course":
+                break;
+            case "reward":
+                ((RewardSearchFragment)fragmentList.get(1)).getResult(searchResultEvent);
+                break;
+            case "article":
+                break;
+            case "teacher":
+                break;
+            case "question":
+                break;
+        }
     }
     //对子菜单进行初始化
     private void initSubMenu() {

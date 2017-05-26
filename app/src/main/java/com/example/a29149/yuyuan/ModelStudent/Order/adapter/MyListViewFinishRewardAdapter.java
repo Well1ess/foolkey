@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
@@ -16,6 +18,8 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Const;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +47,7 @@ public class MyListViewFinishRewardAdapter extends BaseAdapter{
     private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
     private CourseAbstract courseDTO = null ;
 
+    private RequestManager glide;
 
     public MyListViewFinishRewardAdapter(Context context)
     {
@@ -77,7 +82,7 @@ public class MyListViewFinishRewardAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         View view ;
         view=View.inflate(mContext, R.layout.listview_item_finish_course,null);
-        initView(view);
+
 
         mOrderBuyCourseAsStudentDTO = courseFinishList.get(position);
 
@@ -86,6 +91,8 @@ public class MyListViewFinishRewardAdapter extends BaseAdapter{
         mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
 
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
+
+        initView(view);
 
 
         mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName() +" : " + courseDTO.getTopic().toString() + "");
@@ -100,6 +107,12 @@ public class MyListViewFinishRewardAdapter extends BaseAdapter{
         mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
         mBuyTime = (TextView) view.findViewById(R.id.tv_buyTime);
         mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
+
+        glide = Glide.with(mContext);
+        glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))
+                .error(R.drawable.photo_placeholder1)
+                .transform( new GlideCircleTransform( mContext ))
+                .into(mTeacherPhone);
     }
 
 }

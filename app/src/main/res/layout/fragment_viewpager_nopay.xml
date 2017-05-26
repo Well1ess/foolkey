@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/alpha_light_gray"
     >
 
     <LinearLayout
@@ -61,12 +62,16 @@
             android:textColor="#888888"
             android:gravity="center"
             android:text="愚人精选"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:visibility="gone"
+            />
 
         <com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView
             android:id="@+id/lv_recommend"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,7 +80,9 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

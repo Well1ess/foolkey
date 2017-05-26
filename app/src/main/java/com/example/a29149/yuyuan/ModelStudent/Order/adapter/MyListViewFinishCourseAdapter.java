@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
@@ -16,6 +18,8 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Const;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +49,8 @@ public class MyListViewFinishCourseAdapter extends BaseAdapter {
     private OrderBuyCourseDTO mOrderBuyCourseDTO;//订单信息
     private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
     private CourseAbstract courseDTO = null ;
+
+    private RequestManager glide;
 
     public MyListViewFinishCourseAdapter(Context context)
     {
@@ -102,6 +108,13 @@ public class MyListViewFinishCourseAdapter extends BaseAdapter {
         mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
         mExceptTime = (TextView) view.findViewById(R.id.tv_exceptTime);
         mTeacherCharge = (TextView) view.findViewById(R.id.teacherCharge);
+
+        glide = Glide.with(mContext);
+        glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))
+                .placeholder(R.drawable.photo_placeholder1)
+                .error(R.drawable.photo_placeholder1)
+                .transform( new GlideCircleTransform( mContext ))
+                .into(mTeacherPhone);
     }
 
 

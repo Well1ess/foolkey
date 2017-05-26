@@ -57,6 +57,6 @@
             android:padding="5dp"
             android:clickable="true"
             android:textColor="@color/dark_green"
-            android:text="取消订单"/>
+            android:text="立即评价"/>
     </LinearLayout>
 </LinearLayout>

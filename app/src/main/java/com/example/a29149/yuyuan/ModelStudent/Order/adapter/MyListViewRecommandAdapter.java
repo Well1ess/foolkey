@@ -41,7 +41,7 @@ public class MyListViewRecommandAdapter extends BaseAdapter implements View.OnCl
 
     @Override
     public int getCount() {
-        return 3;
+        return 0;
     }
 
     @Override

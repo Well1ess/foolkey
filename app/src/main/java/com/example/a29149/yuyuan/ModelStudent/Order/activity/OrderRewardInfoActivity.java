@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
@@ -21,6 +24,8 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -41,6 +46,9 @@ public class OrderRewardInfoActivity extends Activity implements View.OnClickLis
     private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
     private List<OrderBuyCourseAsStudentDTO> orderRewardList;//全部悬赏信息
     private CourseAbstract courseDTO = null ;
+
+    @ViewInject(R.id.iv_teacherPhone)
+    private ImageView photo2;
 
     @ViewInject(R.id.order_id)
     private TextView mOrderId;//订单编号
@@ -77,6 +85,11 @@ public class OrderRewardInfoActivity extends Activity implements View.OnClickLis
 
     @ViewInject(R.id.left)
     private RadioButton mChartWithTeacher;//关注该老师
+
+    @ViewInject(R.id.iv_teacherPhoto)
+    private ImageView photo;
+
+    private RequestManager glide;
 
     //获取位置
     private int position;
@@ -123,7 +136,16 @@ public class OrderRewardInfoActivity extends Activity implements View.OnClickLis
         mFollow.setOnClickListener(this);
         mChartWithTeacher.setOnClickListener(this);
 
+        glide = Glide.with( this );
+        glide.load(PictureInfoBO.getOnlinePhoto( mStudentDTO.getUserName() ) )
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform(this))
+                .into(photo);
 
+        glide.load(PictureInfoBO.getOnlinePhoto( mStudentDTO.getUserName() ) )
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform(this))
+                .into(photo2);
     }
 
     @Override

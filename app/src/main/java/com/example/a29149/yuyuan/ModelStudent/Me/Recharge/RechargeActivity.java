@@ -61,7 +61,12 @@ public class RechargeActivity extends AppCompatActivity {
             Toast.makeText(this, "金额不能为0", Toast.LENGTH_SHORT).show();
             return;
         }
+
         money = mMoney.getText().toString();
+        if (Integer.parseInt(money)  > 9999){
+            Toast.makeText(this, "一次金额不能超过9999哦", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Recharge recharge = new Recharge();
         recharge.execute();
     }

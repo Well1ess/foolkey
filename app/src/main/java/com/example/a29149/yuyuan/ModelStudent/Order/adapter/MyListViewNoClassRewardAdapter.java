@@ -101,6 +101,8 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
         mRewardTitle.setText("悬赏标题:" + courseDTO.getTopic().toString() + "");
         mTeacherCharge.setText("悬赏价格：" + courseDTO.getPrice().toString()+ Const.PRICE_NAME);
 
+
+
         return view;
     }
 

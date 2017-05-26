@@ -226,7 +226,8 @@ public class NoClassFragment extends Fragment {
                                 MyListViewNoClassRewardAdapter myListViewNoClassRewardAdapter = new MyListViewNoClassRewardAdapter(mContext);
                                 myListViewNoClassRewardAdapter.setData(rewardList);
                                 mReward.setAdapter(myListViewNoClassRewardAdapter);
-
+                                //我也不知道这里这样设置有没有用
+                                GlobalUtil.getInstance().setOrderRewardList(rewardList);
 
 
                             }
@@ -290,7 +291,7 @@ public class NoClassFragment extends Fragment {
                 try {
                     //存储所有我拥有的悬赏信息DTO
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList();
-                    Log.i("malei","rewardList=  "+getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList().toString());
+                    Log.i("malei",getClass() + " 294 rewardList=  "+getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList().toString());
                     GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
 
                     rewardList.clear();
@@ -317,13 +318,15 @@ public class NoClassFragment extends Fragment {
                                 MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
                                 mBuyedCourse.setAdapter(myListViewNoClassCourseAdapter);
                                 myListViewNoClassCourseAdapter.setData(courseList);
+//                                GlobalUtil.getInstance().setOrderCourseList(courseList);
 
 
                                 MyListViewNoClassRewardAdapter myListViewNoClassRewardAdapter = new MyListViewNoClassRewardAdapter(mContext);
                                 myListViewNoClassRewardAdapter.setData(rewardList);
                                 Log.i("malei","rewardList=  "+rewardList.toString());
                                 mReward.setAdapter(myListViewNoClassRewardAdapter);
-
+                                //我也不知道这里这样设置有没有用
+                                GlobalUtil.getInstance().setOrderRewardList(rewardList);
 
                             }
                         }, 1000);

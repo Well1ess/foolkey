@@ -109,7 +109,7 @@ public class OrderRewardInfoActivity extends Activity implements View.OnClickLis
 
 
         orderRewardList = GlobalUtil.getInstance().getOrderRewardList();
-        Log.i("malei",orderRewardList.toString());
+        System.out.println(this.getClass() + "112行" + orderRewardList);
         initData();
     }
 

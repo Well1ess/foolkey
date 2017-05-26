@@ -31,10 +31,12 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
+import com.example.a29149.yuyuan.controller.course.reward.DeleteController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -49,6 +51,8 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     private WarningDisplayDialog.Builder displayInfo;
     //显示认证的对话框
     private WarningDisplayDialog.Builder verifyConfirm;
+
+    private WarningDisplayDialog.Builder deleteVerifyConfirm;
     private RadioButton mOrder;//我要接单
 
     private RadioButton mButtonMiddle; // 联系悬赏人
@@ -62,6 +66,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     private TextView mRewardTopic;//悬赏标题
     private TextView mRewardDescription;//悬赏描述
     private TextView mCreateTime;//创建悬赏的时间
+    private TextView mPrestige;
     private ImageButton mReturn;//返回按键
     @ViewInject(R.id.head)
     private ImageView photo;
@@ -129,6 +134,24 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
         verifyConfirm.create();
+
+        deleteVerifyConfirm = new WarningDisplayDialog.Builder(this);
+        deleteVerifyConfirm.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        deleteVerifyConfirm.setPositiveButton("确认删除", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //删除悬赏
+                DeleteRewardAction deleteRewardAction = new DeleteRewardAction();
+                deleteRewardAction.execute();
+            }
+        });
+        deleteVerifyConfirm.create();
     }
 
     //为底部菜单添加监听
@@ -158,6 +181,8 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonMiddle = (RadioButton) findViewById(R.id.chat);
         mButtonLeft = (RadioButton) findViewById(R.id.want_learn);
+        mPrestige = (TextView) findViewById(R.id.reputation);
+        mButtonLeft.setOnClickListener(this);
 
         if (rewardDTO.getCreatorId() == null ||
                 rewardDTO.getCreatorId().equals(GlobalUtil.getInstance().getStudentDTO().getId())) {
@@ -190,6 +215,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         mTeacherEvaluate.setText(rewardDTO.getPrice() + "");
         mRewardTopic.setText(rewardDTO.getTopic() + "");
         mRewardDescription.setText(rewardDTO.getDescription());
+        mPrestige.setText( studentDTO.getPrestige() + "");
     }
 
     //申请认证
@@ -235,15 +261,15 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.bt_return:
                 this.finish();
                 break;
-            case R.id.order:
+            case R.id.order:{
                 if (mOrder.getText().equals("修改悬赏")) {
-                    Log.i("malei",mOrder.getText()+"");
+                    Log.i("malei", mOrder.getText() + "");
                     Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
-                    modifyIntent.putExtra("position",0);
+                    modifyIntent.putExtra("position", 0);
                     modifyIntent.putExtra("topic", rewardDTO.getTopic());
                     modifyIntent.putExtra("description", rewardDTO.getDescription());
-                    modifyIntent.putExtra("technicTagEnum",rewardDTO.getTechnicTagEnum().toString());
-                    modifyIntent.putExtra("price", rewardDTO.getPrice()+"");
+                    modifyIntent.putExtra("technicTagEnum", rewardDTO.getTechnicTagEnum().toString());
+                    modifyIntent.putExtra("price", rewardDTO.getPrice() + "");
                     modifyIntent.putExtra("courseTimeDayEnum", rewardDTO.getCourseTimeDayEnum().toString());
                     modifyIntent.putExtra("studentBaseEnum", rewardDTO.getStudentBaseEnum().toString());
                     modifyIntent.putExtra("teachMethodEnum", rewardDTO.getTeachMethodEnum().toString());
@@ -258,6 +284,23 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                     displayInfo.getDialog().show();
                     break;
                 }
+            }
+            case R.id.want_learn:{
+                if (mButtonLeft.getText() != null && mButtonLeft.getText().equals("删除悬赏")){
+                    //删除订单
+                    if (
+                            rewardDTO.getRewardStateEnum().equals(RewardStateEnum.待接单)
+                            ){
+                        deleteVerifyConfirm.setMsg("点击删除，将不可恢复，确定吗？");
+                        deleteVerifyConfirm.getDialog().show();
+                    }else {
+                        Toast.makeText(this, "已接单的悬赏不可被删除哦", Toast.LENGTH_SHORT);
+                    }
+
+                }else {
+
+                }
+            }
             default:
                 break;
         }
@@ -381,6 +424,38 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+        }
+    }
+
+    public class DeleteRewardAction extends AsyncTask<String, String, String>{
+
+        private DeleteController deleteController = new DeleteController();
+
+        @Override
+        protected String doInBackground(String... strings) {
+            deleteController.setRewardId( rewardDTO.getId() + "" );
+            return deleteController.execute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (s != null){
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if ("success".equals(jsonObject.getString("result"))){
+                        Toast.makeText(RewardActivity.this, "删除成功", Toast.LENGTH_SHORT);
+                        finish();
+                        return;
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                Toast.makeText(RewardActivity.this, "未连接到网络，请检查", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

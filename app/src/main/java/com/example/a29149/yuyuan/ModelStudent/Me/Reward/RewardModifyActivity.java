@@ -19,11 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
-
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
-import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -37,9 +36,10 @@ import org.json.JSONObject;
  * Created by GR on 2017/5/26.
  */
 
-public class RewardModifyActivity extends Activity implements View.OnClickListener {
+public class RewardModifyActivity extends Activity {
 
     private RewardDTO mRewardDTO;//悬赏信息
+    private StudentDTO mStudentDTO;//学生信息
 
     private String topic;
     private String description;
@@ -51,15 +51,15 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
     private String teacherRequirementEnum;
     private String rewardId;
 
-//    0-topic
-//    1-technicTag
-//    2-description
-//    3-price
-//    4-上课时间
-//    5-学生基础
-//    6-上课方式
-//    7-老师类型
-    private String[] rewardChooseContent = GlobalUtil.getInstance().getRewardChooseContent();
+    //0-topic
+    //1-technicTag
+    //2-description
+    //3-price
+    //4-上课时间
+    //5-学生基础
+    //6-上课方式
+    //7-老师类型
+    private String[] rewardChooseContent;
 
     //悬赏标题
     @ViewInject(R.id.ed_topic)
@@ -120,46 +120,44 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
     private CheckBox mEverybody;
 
     //返回按钮
-    @ViewInject(R.id.bt_return)
-    private ImageButton mReturn;
+//    @ViewInject(R.id.iv_return)
+//    private ImageButton mReturn;
 
-    @ViewInject(R.id.tv_go)
-    private TextView mSubmit;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward_modify);
+
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
         int position = getIntent().getIntExtra("position", 0);
         topic = getIntent().getStringExtra("topic");
-         description = getIntent().getStringExtra("description");
-         technicTagEnum = getIntent().getStringExtra("technicTagEnum");
-         price = getIntent().getStringExtra("price");
-         courseTimeDayEnum = getIntent().getStringExtra("courseTimeDayEnum");
-         studentBaseEnum = getIntent().getStringExtra("studentBaseEnum");
-         teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
-         teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
-         rewardId = getIntent().getStringExtra("rewardId");
-        mSubmit.setOnClickListener(this);
+        description = getIntent().getStringExtra("description");
+        technicTagEnum = getIntent().getStringExtra("technicTagEnum");
+        price = getIntent().getStringExtra("price");
+        courseTimeDayEnum = getIntent().getStringExtra("courseTimeDayEnum");
+        studentBaseEnum = getIntent().getStringExtra("studentBaseEnum");
+        teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
+        teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
+        rewardId = getIntent().getStringExtra("rewardId");
+        mRewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
+        mStudentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
         initData();
-
 
 
     }
 
     private void initData() {
 
-        //展示
+        //展示,恢复数据
         mTopic.setText(topic);
         mDescription.setText(description);
         mTechnicTag.setText(technicTagEnum);
         mRewardPrice.setText(price);
 
-        //教学时间
+       //教学时间
 //        String courseTimeEnumStr = mRewardDTO.getCourseTimeDayEnum().toString();
         switch (courseTimeDayEnum) {
             case "工作日": {
@@ -185,8 +183,8 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
         }
         //学生基础
 //        StudentBaseEnum.
-//        String studentBaseEnumStr = mRewardDTO.getStudentBaseEnum().toString();
-        switch (studentBaseEnum) {
+        String studentBaseEnumStr = mRewardDTO.getStudentBaseEnum().toString();
+        switch (studentBaseEnumStr) {
             case "小白": {
                 mWhiteman.setChecked(true);
                 mLittleman.setChecked(false);
@@ -210,8 +208,8 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
         }
 
         //教学方式
-//        String teachMethodEnumStr = mRewardDTO.getTeachMethodEnum().toString();
-        switch (teachMethodEnum) {
+        String teachMethodEnumStr = mRewardDTO.getTeachMethodEnum().toString();
+        switch (teachMethodEnumStr) {
             case "线上": {
                 mOnline.setChecked(true);
                 mOffline.setChecked(false);
@@ -235,8 +233,8 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
         }
 
         //老师要求
-//        String teacherRequirementEnumStr = mRewardDTO.getTeacherRequirementEnum().toString();
-        switch (teacherRequirementEnum) {
+        String teacherRequirementEnumStr = mRewardDTO.getTeacherRequirementEnum().toString();
+        switch (teacherRequirementEnumStr) {
             case "认证老师": {
                 mOnlyTeacher.setChecked(true);
                 mEverybody.setChecked(false);
@@ -299,20 +297,32 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
         }
     }
 
-
     private void goNext() {
+
+        UpdateController updateController = new UpdateController();
         //提交用户的信息
         GlobalUtil.getInstance().setRewardChooseContent(rewardChooseContent);
         rewardChooseContent[0] = mTopic.getText().toString();
-        rewardChooseContent[1] = mTechnicTag.getText().toString();
+//        rewardChooseContent[1] = mTechnicTag.getText().toString();
         rewardChooseContent[2] = mDescription.getText().toString();
         rewardChooseContent[3] = mRewardPrice.getText().toString();
 
 
+
         //Log.i("malei",rewardChooseContent.toString());
         //发布到服务器
-        ModifyRewardAction modifyRewardAction = new ModifyRewardAction();
-        modifyRewardAction.execute();
+        return
+                updateController.execute(
+                        rewardId,
+                        rewardChooseContent[1],
+                        rewardChooseContent[0],
+                        rewardChooseContent[2],
+                        rewardChooseContent[3],
+                        rewardChooseContent[4],
+                        rewardChooseContent[6],
+                        rewardChooseContent[7],
+                        rewardChooseContent[5]
+                );
     }
 
     //弹出悬赏选择标签
@@ -437,7 +447,7 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
      */
     public class ModifyRewardAction extends AsyncTask<String, Integer, String> {
 
-        private UpdateController updateController = new UpdateController();
+        private UpdateController updateController;
 
         private String[] mChooseContent;
 
@@ -505,6 +515,7 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            log.d(this, result);
             if (result != null) {
                 try {
                     JSONObject jsonObject = new JSONObject(result);

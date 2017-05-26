@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -35,6 +36,9 @@ import com.example.a29149.yuyuan.Widget.MyEditText;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.Subscribe;
+import de.greenrobot.event.ThreadMode;
 
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_FIRST_TAG;
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_SECOND_TAG;
@@ -236,6 +240,10 @@ public class SearchActivity extends AppCompatActivity {
         searchAction.execute(condition, "1", keyValue);
     }
 
+    @Subscribe(threadMode = ThreadMode.MainThread)
+    public void getResult(GetSearchResultEvent searchResultEvent) {
+        Log.d("TAG", searchResultEvent.toString());
+    }
     //对子菜单进行初始化
     private void initSubMenu() {
         mSearchSubMenu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

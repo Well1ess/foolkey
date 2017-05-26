@@ -120,13 +120,4 @@ public class RewardSearchFragment extends Fragment {
         super.onDetach();
     }
 
-    @Subscribe(threadMode = ThreadMode.MainThread)
-    public void getResult(GetSearchResultEvent searchResultEvent) {
-        keyValue = searchResultEvent.getKeyValue();
-        if (searchResultEvent.isResult()) {
-            mListAdapter.notifyDataSetChanged();
-            pageNo++;
-        }
-    }
-
 }

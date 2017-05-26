@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
@@ -19,6 +21,8 @@ import com.example.a29149.yuyuan.ModelTeacher.Order.JudgeStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +54,8 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
     private int position; //记录位置
     private List rewardList = new ArrayList();//悬赏列表
     private List courseList = new ArrayList();//课程列表
+
+    private RequestManager glide;
 
     public MyListViewNoCommentRewardAdapter(Context context)
     {
@@ -92,16 +98,31 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
         initView();
         mOrderBuyCourseAsStudentDTO = rewardNoCommentList.get(position);
 
+
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
         mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();
         mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
         CourseAbstract courseDTO = null ;
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
 
-        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
+        String fisrtLine = mStudentDTO.getNickedName()+":"+courseDTO.getTopic();
+        if (fisrtLine.length() > 9) {
+            fisrtLine = fisrtLine.substring(0, 7);
+            fisrtLine = fisrtLine + "...";
+        }
+        mTeacherNameAndCourseName.setText(fisrtLine);
         mExceptTime.setText("预计时长:" + mOrderBuyCourseDTO.getNumber().toString() + "h");
-        mTeacherCharge.setText("老师收费：" + courseDTO.getPrice().toString()+ Const.PRICE_NAME);
+        mTeacherCharge.setText("" + courseDTO.getPrice().toString()+ Const.PRICE_NAME);
         //SetPositionListeten.setSetPositionListeren();
+
+        //加载头像
+        glide = Glide.with(mContext);
+        glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()) )
+                .placeholder(R.drawable.photo_placeholder1)
+                .error(R.drawable.photo_placeholder1)
+                .transform( new GlideCircleTransform( mContext ))
+                .into(mTeacherPhone);
+
         return view;
     }
 
@@ -134,6 +155,12 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
         //跳转到悬赏订单评价
         Intent intent = new Intent(mContext, CommentRewardActivity.class);
         intent.putExtra("position",position);
+        intent.putExtra("teacherUserName", rewardNoCommentList.get(position).getStudentDTO().getUserName());
+        intent.putExtra("teacherName", rewardNoCommentList.get(position).getStudentDTO().getNickedName());
+        intent.putExtra("courseName", rewardNoCommentList.get(position).getCourse().getTopic());
+        intent.putExtra("orderPrice", rewardNoCommentList.get(position).getOrderDTO().getAmount() + "");
+
+
         String orderId = rewardNoCommentList.get(position).getOrderDTO().getId() + "";
         Log.i("malei","orderId="+orderId);
         intent.putExtra("orderId",orderId);

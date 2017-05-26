@@ -41,4 +41,13 @@ public class GetSearchResultEvent {
     public void setResult(boolean result) {
         this.result = result;
     }
+
+    @Override
+    public String toString() {
+        return "GetSearchResultEvent{" +
+                "condition='" + condition + '\'' +
+                ", result=" + result +
+                ", keyValue='" + keyValue + '\'' +
+                '}';
+    }
 }

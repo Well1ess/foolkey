@@ -2,6 +2,7 @@ package com.example.a29149.yuyuan.Search;
 
 import android.os.AsyncTask;
 
+import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.controller.search.SearchRewardController;
 
@@ -28,10 +29,18 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
 
     private SearchRewardController searchRewardController = new SearchRewardController();
 
+    private SearchActivity searchActivity;
+
+    public SearchAction(SearchActivity searchActivity) {
+        this.searchActivity = searchActivity;
+    }
+
+
     @Override
     protected String doInBackground(String... params) {
         //params[0] condition
         mCondition = params[0];
+        mPageNo = params[1];
         switch (params[0]) {
             case "course":
                 //TODO
@@ -57,25 +66,10 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        if (result != null) {
-            try {
+        if (!result.isEmpty() && result.equals(Const.SUCCESS)) {
+            //注入数据
+            injectDataToGlobe();
 
-                JSONObject jsonObject = new JSONObject(result);
-                String resultFlag = jsonObject.getString("result");
-
-                if (resultFlag.equals("success")) {
-
-                    //注入数据
-                    injectDataToGlobe();
-                } else {
-                    EventBus.getDefault().post(new GetSearchResultEvent(mCondition, false, keyValue));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                EventBus.getDefault().post(new GetSearchResultEvent(mCondition, false, keyValue));
-            }
-        } else {
-            EventBus.getDefault().post(new GetSearchResultEvent(mCondition, false, keyValue));
         }
     }
 
@@ -84,15 +78,16 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
      *
      * @return
      */
+
     private void injectDataToGlobe() {
         if (Integer.parseInt(mPageNo) == 1) {
             switch (mCondition) {
                 case "course":
                     break;
                 case "reward":
-                    EventBus.getDefault().post(new GetSearchResultEvent(mCondition, true, keyValue));
                     GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().clear();
                     GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(searchRewardController.getRewardWithStudentSTCDTOList());
+                    searchActivity.getResult(new GetSearchResultEvent("reward", true, keyValue));
                     break;
                 case "article":
                     break;
@@ -107,7 +102,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                     break;
                 case "reward":
                     EventBus.getDefault().post(new GetSearchResultEvent(mCondition, true, keyValue));
-                    GlobalUtil.getInstance().addRewardWithStudentSTCDTOs(searchRewardController.getRewardWithStudentSTCDTOList());
+                    searchActivity.getResult(new GetSearchResultEvent("reward", true, keyValue));
                     break;
                 case "article":
                     break;

@@ -70,6 +70,6 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), SearchActivity.class);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(
-                getActivity(), view, "searchView").toBundle());
+                getActivity(), v, "searchView").toBundle());
     }
 }

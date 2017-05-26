@@ -95,6 +95,8 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                Intent toRechargeActivity = new Intent(TeacherIndexActivity.this, RechargeActivity.class);
+                startActivity(toRechargeActivity);
             }
         });
         displayInfo.create();
@@ -106,7 +108,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
                 dialog.dismiss();
             }
         });
-        displayInfo1.setPositiveButton("接      单", new DialogInterface.OnClickListener() {
+        displayInfo1.setPositiveButton("同      意", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 new AgreeApplyRewardAction().execute();
@@ -197,9 +199,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         }else{
             displayInfo1.setMsg("是 否 确 认？\n \n ");
             displayInfo1.getDialog().show();
-            Intent toRechargeActivity = new Intent(TeacherIndexActivity.this, RechargeActivity.class);
-            startActivity(toRechargeActivity);
-            this.finish();
+
         }
 
     }

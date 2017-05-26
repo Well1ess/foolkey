@@ -107,6 +107,8 @@ public class OwnerRewardListAdapter extends BaseAdapter {
                 listState.get(position).setOriginalHeight(gridView.getLayoutParams().height);
 
             final TextView textView = (TextView) convertView.findViewById(R.id.open_close);
+            if(applicationRewardWithTeacherSTCDTOList.size() == 0)
+                textView.setText("暂无申请");
 
             //获取悬赏标题
             final TextView title = (TextView) convertView.findViewById(R.id.tv_title);

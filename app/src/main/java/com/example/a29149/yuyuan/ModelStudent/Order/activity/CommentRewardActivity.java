@@ -22,6 +22,7 @@ import org.json.JSONObject;
 /**
  * Created by geyao on 2017/5/13.
  * 评价悬赏订单
+ * 目前就是评价老师而已
  */
 
 public class CommentRewardActivity extends Activity implements View.OnClickListener {
@@ -32,10 +33,12 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
     private String orderId;//保存评价订单ID
     private int position;//记录评论位置
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment_reward);
+        setContentView(R.layout.activity_judge_teacher);
         Intent intent = getIntent();
         position = intent.getIntExtra("position",-1);
         orderId = intent.getStringExtra("orderId");

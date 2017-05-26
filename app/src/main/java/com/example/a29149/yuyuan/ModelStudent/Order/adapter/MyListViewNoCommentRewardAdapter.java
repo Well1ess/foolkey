@@ -163,6 +163,10 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
         String studentUserName = rewardNoCommentList.get(position).getStudentDTO().getUserName();
         intent.putExtra("studentUserName", studentUserName);
 
+        String price = rewardNoCommentList.get(position).getOrderDTO().getAmount().toString();
+        intent.putExtra("orderPrice", price);
+        intent.putExtra("currency", Const.PRICE_NAME);
+
         mContext.startActivity(intent);
     }
 

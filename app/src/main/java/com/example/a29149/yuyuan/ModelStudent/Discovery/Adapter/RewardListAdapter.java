@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
+import com.example.a29149.yuyuan.ModelStudent.Me.info.StudentInfoActivity;
 import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -59,7 +60,7 @@ public class RewardListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.listview_reward, null);
@@ -98,11 +99,13 @@ public class RewardListAdapter extends BaseAdapter {
 //                    .into( viewHolder.head );
 //        }
 
+
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toTeacherIndexActivity = new Intent(mContext, OriginIndexActivity.class);
-                mContext.startActivity(toTeacherIndexActivity, ActivityOptions
+                Intent toStudentInfo = new Intent(mContext, StudentInfoActivity.class);
+                toStudentInfo.putExtra("position", position);
+                mContext.startActivity(toStudentInfo, ActivityOptions
                         .makeSceneTransitionAnimation((Activity) mContext, v, "shareHead").toBundle());
             }
         });

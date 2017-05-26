@@ -1,20 +1,28 @@
 package com.example.a29149.yuyuan.ModelStudent.Me.info;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
+import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.text.SimpleDateFormat;
 
@@ -56,6 +64,8 @@ public class StudentInfoActivity extends Activity {
     //是否认证
     @ViewInject(R.id.cb_teacherstate)
     private CheckBox mTeacherstate;
+    @ViewInject(R.id.student_role)
+    private TextView mTeacherRole;
     //评价
     @ViewInject(R.id.tv_evaluatescore)
     private TextView mEvaluatescore;
@@ -68,6 +78,13 @@ public class StudentInfoActivity extends Activity {
     //Email
     @ViewInject(R.id.tv_email)
     private TextView mEmail;
+    @ViewInject(R.id.bt_return)
+    private ImageButton mReturn;
+
+
+    private RequestManager glide;
+
+
 
 
     @Override
@@ -78,8 +95,9 @@ public class StudentInfoActivity extends Activity {
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
-        mStudentDTO = GlobalUtil.getInstance().getStudentDTO();
-        Log.i("malei", mStudentDTO.toString());
+        int position = getIntent().getIntExtra("position", 0);
+        mStudentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
+
         initData();
 
 
@@ -96,20 +114,27 @@ public class StudentInfoActivity extends Activity {
 
         mTeacherOriganization.setText(mStudentDTO.getOrganization());
         //声望
-        mReputation.setText(mStudentDTO.getPrestige());
+        mReputation.setText(mStudentDTO.getPrestige() + "");
         //描述
         mDescription.setText(mStudentDTO.getDescription());
         //上课次数
-        mCoursenum.setText(mStudentDTO.getLearningNumber());
+        mCoursenum.setText(mStudentDTO.getLearningNumber() + "");
         //上课时间
-        mTeachertime.setText(mStudentDTO.getLearningTime());
+        mTeachertime.setText(mStudentDTO.getLearningTime() + "");
         //是否认证
-        if (mStudentDTO.getRoleEnum().equals(RoleEnum.teacher))
-            mTeacherstate.setChecked(true);
-        else
-            mTeacherstate.setChecked(false);
+        if (mStudentDTO.getRoleEnum().equals(RoleEnum.teacher)) {
+
+        }
+        else {
+            mTeacherstate.setVisibility(View.INVISIBLE);
+            switch (mStudentDTO.getRoleEnum()){
+                case student:mTeacherRole.setText("学生");break;
+                case alreadyApplied:mTeacherRole.setText("认证中");break;
+                default:mTeacherRole.setText("黑客！");
+            }
+        }
         //评价
-        mEvaluatescore.setText(mStudentDTO.getStudentAverageScore());
+        mEvaluatescore.setText(mStudentDTO.getStudentAverageScore() + "");
         //github
         mGithub.setText(mStudentDTO.getGithubUrl());
         //博客
@@ -118,7 +143,25 @@ public class StudentInfoActivity extends Activity {
         mEmail.setText(mStudentDTO.getEmail());
 
 
+
+
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))
+                .placeholder(R.drawable.photo_placeholder1)
+                .transform( new GlideCircleTransform(this) )
+                .into(mStudentPhoto);
+
+        mReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(StudentInfoActivity.this, LoginActivity.class);
+//                startActivity(intent);
+                finish();
+            }
+        });
     }
+
+
 
 
 }

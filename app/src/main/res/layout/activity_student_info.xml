@@ -267,7 +267,9 @@
                     <CheckBox
                         android:id="@+id/cb_teacherstate"
                         style="@style/TextView.INFO_NUM"
-                        android:checked="true" />
+                        android:checked="true"
+                        android:clickable="false"
+                        />
 
                     <TextView
                         style="@style/TextView.INFO_TEXT"
@@ -346,18 +348,6 @@
                         android:text="http://blog.csdn.net/hugoshine/article/details/9987917" />
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <View
-                        android:layout_width="fill_parent"
-                        android:layout_height="1.0px"
-                        android:layout_marginTop="30dp"
-                        android:background="#DEDEDE" />
-
-
-                </RelativeLayout>
 
             </LinearLayout>
         </ScrollView>

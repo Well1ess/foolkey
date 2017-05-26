@@ -194,10 +194,12 @@
 
 
         <!--修改个人信息-->
-        <activity android:name=".Model.Me.info.ModifyMyInfoActivity"/>
+        <!--<activity android:name=".Model.Me.info.ModifyMyInfoActivity"/>-->
         <!--老师评价学生-->
         <activity android:name=".ModelTeacher.Order.JudgeStudentActivity"/>
         <activity android:name=".ModelStudent.Me.info.ModifyMyInfoActivity"/>
+        <!--查看学生的个人信息-->
+        <activity android:name=".ModelStudent.Me.info.StudentInfoActivity"/>
 
     </application>
 

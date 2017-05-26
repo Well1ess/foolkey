@@ -20,6 +20,7 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RewardStateEnum;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
+import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
 import com.example.a29149.yuyuan.ModelStudent.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -76,15 +77,12 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         position = extras.getInt("position");
-        Log.i("malei",position+"");
-        if(position != -1)
-        {
+        Log.i("malei", position + "");
+        if (position != -1) {
             studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
             rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
 
-        }
-        else
-        {
+        } else {
             studentDTO = new StudentDTO();
             rewardDTO = new RewardDTO();
         }
@@ -116,7 +114,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
 
         //确认是否认证的按钮设置
         verifyConfirm = new WarningDisplayDialog.Builder(this);
-        verifyConfirm.setNegativeButton("取      消", new DialogInterface.OnClickListener(){
+        verifyConfirm.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -135,10 +133,8 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
 
     //为底部菜单添加监听
     @OnClick({R.id.want_learn, R.id.chat, R.id.order})
-    public void setMenuListener(View view)
-    {
-        switch (view.getId())
-        {
+    public void setMenuListener(View view) {
+        switch (view.getId()) {
             case R.id.want_learn:
                 //TODO:网络传输
                 break;
@@ -146,36 +142,53 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                 //TODO:网络传输
                 break;
             case R.id.order:
-                displayInfo.setMsg("您确定要此单吗？\n \n 点击 接单 将发送申请");
+                if (mOrder.getText().equals("修改订单")) {
+                    Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
+                    modifyIntent.putExtra("position",0)
+                    modifyIntent.putExtra("topic", rewardDTO.getTopic());
+                    modifyIntent.putExtra("description", rewardDTO.getDescription());
+                    modifyIntent.putExtra("technicTagEnum",rewardDTO.getTechnicTagEnum().toString());
+                    modifyIntent.putExtra("price", rewardDTO.getPrice()+"");
+                    modifyIntent.putExtra("courseTimeDayEnum", rewardDTO.getCourseTimeDayEnum().toString());
+                    modifyIntent.putExtra("studentBaseEnum", rewardDTO.getStudentBaseEnum().toString());
+                    modifyIntent.putExtra("teachMethodEnum", rewardDTO.getTeachMethodEnum().toString());
+                    modifyIntent.putExtra("teacherRequirementEnum", rewardDTO.getTeacherRequirementEnum().toString());
+                    modifyIntent.putExtra("rewardId", rewardDTO.getId());
+                    startActivity(modifyIntent);
+//                    this.finish();
 
-                displayInfo.getDialog().show();
-                break;
+                } else {
+                    displayInfo.setMsg("您确定要此单吗？\n \n 点击 接单 将发送申请");
+
+                    displayInfo.getDialog().show();
+                    break;
+                }
         }
     }
 
     private void initView() {
         mOrder = (RadioButton) findViewById(R.id.order);
         //mOrder.setOnClickListener(this);
-        mReturn = (ImageButton)findViewById(R.id.bt_return);
+        mReturn = (ImageButton) findViewById(R.id.bt_return);
         mReturn.setOnClickListener(this);
 
         mRewardUser = (TextView) findViewById(R.id.courseEvaluate);
-        mTeacherEvaluate =(TextView) findViewById(R.id.teacherEvaluate);
+        mTeacherEvaluate = (TextView) findViewById(R.id.teacherEvaluate);
         mRewardTopic = (TextView) findViewById(R.id.tv_topic);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonMiddle = (RadioButton) findViewById(R.id.chat);
         mButtonLeft = (RadioButton) findViewById(R.id.want_learn);
 
-        if ( rewardDTO.getCreatorId() == null ||
-                rewardDTO.getCreatorId().equals(GlobalUtil.getInstance().getStudentDTO().getId())){
+        if (rewardDTO.getCreatorId() == null ||
+                rewardDTO.getCreatorId().equals(GlobalUtil.getInstance().getStudentDTO().getId())) {
             //这个是自己的悬赏
-            if (rewardDTO.getRewardStateEnum().equals(RewardStateEnum.待接单)){
+            if (rewardDTO.getRewardStateEnum().equals(RewardStateEnum.待接单)) {
                 //可以随便删除
                 mButtonLeft.setText("删除悬赏");
                 mButtonMiddle.setVisibility(View.GONE);
                 mOrder.setText("修改悬赏");
-            }else {
+            } else {
                 //已完成的悬赏
                 mButtonLeft.setVisibility(View.GONE);
                 mOrder.setVisibility(View.GONE);
@@ -195,57 +208,51 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initData() {
         mRewardUser.setText(studentDTO.getNickedName());
-        mTeacherEvaluate.setText(rewardDTO.getPrice()+"");
-        mRewardTopic.setText(rewardDTO.getTopic()+"");
+        mTeacherEvaluate.setText(rewardDTO.getPrice() + "");
+        mRewardTopic.setText(rewardDTO.getTopic() + "");
         mRewardDescription.setText(rewardDTO.getDescription());
     }
 
     //申请认证
-    private void applyVerify(){
+    private void applyVerify() {
         ApplyAuthenticationTeacherAction applyAuthenticationTeacherAction = new ApplyAuthenticationTeacherAction();
         applyAuthenticationTeacherAction.execute();
     }
 
-//老师申请接单悬赏
-private void applyRewardTeacher() {
-    //验证身份
-    TeacherDTO teacherDTO = GlobalUtil.getInstance().getTeacherDTO();
+    //老师申请接单悬赏
+    private void applyRewardTeacher() {
+        //验证身份
+        TeacherDTO teacherDTO = GlobalUtil.getInstance().getTeacherDTO();
 
-    if(teacherDTO != null)
-    {
-        Log.i("malei",teacherDTO.toString());
-        VerifyStateEnum verifyState = teacherDTO.getVerifyState();
-        Log.i("malei",verifyState.toString());
-        Log.i("malei",teacherDTO.toString());
-        Log.i("malei",verifyState.toString());
-        //如果是已认证老师或者是认证中的老师，则直接接单
-        if(verifyState.compareTo( VerifyStateEnum.processing ) == 0
-                || verifyState.compareTo( VerifyStateEnum.verified) == 0)
-        {
-            new RewardActivity.ApplyRewardAction().execute();
-        }
-        else
-        {
+        if (teacherDTO != null) {
+            Log.i("malei", teacherDTO.toString());
+            VerifyStateEnum verifyState = teacherDTO.getVerifyState();
+            Log.i("malei", verifyState.toString());
+            Log.i("malei", teacherDTO.toString());
+            Log.i("malei", verifyState.toString());
+            //如果是已认证老师或者是认证中的老师，则直接接单
+            if (verifyState.compareTo(VerifyStateEnum.processing) == 0
+                    || verifyState.compareTo(VerifyStateEnum.verified) == 0) {
+                new RewardActivity.ApplyRewardAction().execute();
+            } else {
 //            Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
+                verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
+
+                verifyConfirm.getDialog().show();
+            }
+        } else {
+            Log.i("malei", "teacherDTO是空的");
+            //不是已认证老师，跳转到申请认证页面
+//        Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
             verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
 
             verifyConfirm.getDialog().show();
         }
     }
-    else
-    {
-        Log.i("malei","teacherDTO是空的");
-        //不是已认证老师，跳转到申请认证页面
-//        Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
-        verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
-
-        verifyConfirm.getDialog().show();
-    }
-}
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.bt_return:
                 this.finish();
                 break;
@@ -293,9 +300,8 @@ private void applyRewardTeacher() {
                     java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<TeacherDTO>() {
                     }.getType();
                     TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
-                    Log.i("malei",jsonObject.getString("teacherDTO"));
-                    if(teacherDTO != null)
-                    {
+                    Log.i("malei", jsonObject.getString("teacherDTO"));
+                    if (teacherDTO != null) {
                         //存储老师DTO
                         GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
                         Log.i("geyao  ", "认证后存储老师DTO了嘛？ " + this.getClass());
@@ -342,7 +348,7 @@ private void applyRewardTeacher() {
 
         @Override
         protected String doInBackground(String... params) {
-            return ApplyController.execute( rewardDTO.getId() + "");
+            return ApplyController.execute(rewardDTO.getId() + "");
 
         }
 
@@ -354,7 +360,7 @@ private void applyRewardTeacher() {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
-                    Log.i("malei",result);
+                    Log.i("malei", result);
 
 
                     if (resultFlag.equals("success")) {

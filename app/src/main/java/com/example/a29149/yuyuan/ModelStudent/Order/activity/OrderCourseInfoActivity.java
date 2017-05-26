@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
@@ -20,6 +23,8 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -73,6 +78,13 @@ public class OrderCourseInfoActivity extends Activity implements View.OnClickLis
     private TextView mFollow;//关注该老师
     //获取位置
     private int position;
+    @ViewInject(R.id.iv_teacherPhoto)
+    private ImageView photo;
+
+    @ViewInject(R.id.iv_teacherPhone)
+    private ImageView photo2;
+
+    private RequestManager glide;
 
 
 
@@ -115,7 +127,17 @@ public class OrderCourseInfoActivity extends Activity implements View.OnClickLis
         mTeacherSlogan.setText(mStudentDTO.getSlogan());
         mFollow.setOnClickListener(this);
 
+        //加载图片
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto( mStudentDTO.getUserName()) )
+                .error( R.drawable.photo_placeholder1)
+                .transform( new GlideCircleTransform( this) )
+                .into(photo);
 
+        glide.load(PictureInfoBO.getOnlinePhoto( mStudentDTO.getUserName() ) )
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform(this))
+                .into(photo2);
     }
 
     @Override

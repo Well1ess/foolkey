@@ -151,6 +151,10 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
         String studentUserName = courseNoCommentList.get(position).getStudentDTO().getUserName();
         intent.putExtra("studentUserName", studentUserName);
 
+        String price = courseNoCommentList.get(position).getOrderDTO().getAmount().toString();
+        intent.putExtra("orderPrice", price);
+        intent.putExtra("currency", "元");
+
         mContext.startActivity(intent);
     }
 }

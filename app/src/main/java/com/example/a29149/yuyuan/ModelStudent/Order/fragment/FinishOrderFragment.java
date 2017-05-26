@@ -69,14 +69,15 @@ public class FinishOrderFragment extends Fragment {
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
 
-        //刚开始请求第一页
-        pageNo = 1;
-        loadData(pageNo);
+
 
         mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
         mReward = (MyListView) view.findViewById(R.id.lv_reward);
         mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
 
+        //刚开始请求第一页
+        pageNo = 1;
+        loadData(pageNo);
 
         //课程
         mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -203,12 +204,12 @@ public class FinishOrderFragment extends Fragment {
                             public void run() {
 
                                 MyListViewFinishRewardAdapter myListViewFinishRewardAdapter = new MyListViewFinishRewardAdapter(mContext);
-                                myListViewFinishRewardAdapter.setData(courseList);
-                                mBuyCourse.setAdapter(myListViewFinishRewardAdapter);
+                                myListViewFinishRewardAdapter.setData(rewardList);
+                                mReward.setAdapter(myListViewFinishRewardAdapter);
 
                                 MyListViewFinishCourseAdapter myListViewFinishCourseAdapter = new MyListViewFinishCourseAdapter(mContext);
-                                myListViewFinishCourseAdapter.setData(rewardList);
-                                mReward.setAdapter(myListViewFinishCourseAdapter);
+                                myListViewFinishCourseAdapter.setData(courseList);
+                                mBuyCourse.setAdapter(myListViewFinishCourseAdapter);
 
 
 
@@ -298,13 +299,15 @@ public class FinishOrderFragment extends Fragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+
+
                                 MyListViewFinishRewardAdapter myListViewFinishRewardAdapter = new MyListViewFinishRewardAdapter(mContext);
-                                myListViewFinishRewardAdapter.setData(courseList);
-                                mBuyCourse.setAdapter(myListViewFinishRewardAdapter);
+                                myListViewFinishRewardAdapter.setData(rewardList);
+                                mReward.setAdapter(myListViewFinishRewardAdapter);
 
                                 MyListViewFinishCourseAdapter myListViewFinishCourseAdapter = new MyListViewFinishCourseAdapter(mContext);
-                                myListViewFinishCourseAdapter.setData(rewardList);
-                                mReward.setAdapter(myListViewFinishCourseAdapter);
+                                myListViewFinishCourseAdapter.setData(courseList);
+                                mBuyCourse.setAdapter(myListViewFinishCourseAdapter);
 
                             }
                         }, 1000);

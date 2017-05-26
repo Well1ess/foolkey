@@ -43,6 +43,9 @@ public class JudgeStudentActivity extends Activity {
     @ViewInject(R.id.student_score)
     private RatingBar studentScore;
 
+    @ViewInject(R.id.order_price)
+    private TextView mOrderPrice;
+
 
     private JudgeStudentController judgeStudentController;
 
@@ -69,6 +72,18 @@ public class JudgeStudentActivity extends Activity {
         //取展示的信息
         String studentNameStr = intent.getStringExtra("studentName");
         String courseNameStr = intent.getStringExtra("courseName");
+        String orderPrice = intent.getStringExtra("orderPrice");
+        String currency = intent.getStringExtra("currency"); //币种，是虚拟币，还是人民币
+        if (orderPrice == null
+                ||orderPrice.equals("")
+                ||orderPrice.equals("0")
+                ){
+            mOrderPrice.setText("免费");
+        }else {
+            mOrderPrice.setText(orderPrice + "  " + currency);
+        }
+
+
         position = intent.getStringExtra("position");
         Log.i("malei","position="+position+"    studentName="+studentNameStr+"    courseNameStr="+courseNameStr);
         studentName.setText( studentNameStr );

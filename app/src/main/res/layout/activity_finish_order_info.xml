@@ -136,7 +136,7 @@
         android:background="@color/light_white"
         />
 
-    <include layout="@layout/component_course"/>
+    <include layout="@layout/component_course" />
 
     <ImageView
         android:layout_width="match_parent"

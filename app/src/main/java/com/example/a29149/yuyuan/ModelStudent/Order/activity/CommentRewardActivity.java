@@ -8,45 +8,107 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
+import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.a29149.yuyuan.controller.course.judge.JudgeStudentController;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
 
 /**
  * Created by geyao on 2017/5/13.
  * 评价悬赏订单
+ * 目前就是评价老师而已
  */
 
 public class CommentRewardActivity extends Activity implements View.OnClickListener {
 
     private TextView mPublish;//发布评价
     private TextView mRewardScore;//订单分数
-    private String score;//保存评价分数
+    private Float score;//保存评价分数
     private String orderId;//保存评价订单ID
     private int position;//记录评论位置
+
+
+    @ViewInject(R.id.student_photo)
+    private ImageView teacherPhoto;
+    private String teacherUserName;
+
+    @ViewInject(R.id.student_name)
+    private TextView mTeacherName;
+
+    @ViewInject(R.id.course_name)
+    private TextView mCourseName;
+
+    @ViewInject(R.id.student_score)
+    private RatingBar studentScore;
+
+    @ViewInject(R.id.order_price)
+    private TextView mOrderPrice;
+
+    @ViewInject(R.id.publish_button)
+    private RadioButton radioButton;
+
+    private RequestManager glide;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment_reward);
+        setContentView(R.layout.activity_judge_teacher);
         Intent intent = getIntent();
+        AnnotationUtil.injectViews(this);
+        AnnotationUtil.setClickListener(this);
         position = intent.getIntExtra("position",-1);
         orderId = intent.getStringExtra("orderId");
-        Log.i("malei","position="+position+"    "+ "orderId="+orderId+"");
+
         initView();
     }
 
     private void initView() {
         mRewardScore = (TextView) findViewById(R.id.ed_score);
-        mPublish = (TextView) findViewById(R.id.tv_publish);
+        mPublish = (TextView) findViewById(R.id.publish_button);
         mPublish.setOnClickListener(this);
+
+        teacherUserName = getIntent().getStringExtra("teacherUserName");
+        String teacherName = getIntent().getStringExtra("teacherName");
+        String courseName = getIntent().getStringExtra("courseName");
+        String orderPrice = getIntent().getStringExtra("orderPrice");
+
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto(teacherName) )
+                .placeholder(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform(this))
+                .into(teacherPhoto);
+
+        if (orderPrice == null || orderPrice.equals("")||orderPrice.equals("0"))
+            mOrderPrice.setText("免费");
+        else
+            mOrderPrice.setText( orderPrice + "  " + Const.PRICE_NAME);
+        mCourseName.setText( courseName );
+        mTeacherName.setText( teacherName );
+
+        studentScore.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                score = rating;
+            }
+        });
+
     }
 
     @Override
@@ -54,7 +116,7 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
         int id = view.getId();
         switch (id)
         {
-            case R.id.tv_publish:
+            case R.id.publish_button:
                 publishCommentReward();
                 break;
             default:
@@ -64,12 +126,12 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
     }
 
     private void publishCommentReward() {
-        if (TextUtils.isEmpty(mRewardScore.getText().toString()))
-            Toast.makeText(this, "请输入评价分数", Toast.LENGTH_SHORT).show();
+        if ( score == null )
+            Toast.makeText(this, "点击星星进行评价哦", Toast.LENGTH_SHORT).show();
         else
         {
-            score = mRewardScore.getText().toString();
-            new CommentRewardAction(score).execute();
+
+            new CommentRewardAction(score + "").execute();
         }
 
     }

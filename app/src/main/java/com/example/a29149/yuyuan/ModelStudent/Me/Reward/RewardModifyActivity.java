@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -38,6 +39,7 @@ import org.json.JSONObject;
 public class RewardModifyActivity extends Activity {
 
     private RewardDTO mRewardDTO;//悬赏信息
+    private StudentDTO mStudentDTO;//学生信息
 
     private String topic;
     private String description;
@@ -118,42 +120,44 @@ public class RewardModifyActivity extends Activity {
     private CheckBox mEverybody;
 
     //返回按钮
-    @ViewInject(R.id.bt_return)
+    @ViewInject(R.id.iv_return)
     private ImageButton mReturn;
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reward_modify);
-        AnnotationUtil.injectViews(this);
-        AnnotationUtil.setClickListener(this);
-
-        int position = getIntent().getIntExtra("position", 0);
-        String topic = getIntent().getStringExtra("topic");
-        String description = getIntent().getStringExtra("description");
-        String technicTagEnum = getIntent().getStringExtra("technicTagEnum");
-        String price = getIntent().getStringExtra("price");
-        String courseTimeDayEnum = getIntent().getStringExtra("courseTimeDayEnum");
-        String studentBaseEnum = getIntent().getStringExtra("studentBaseEnum");
-        String teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
-        String teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
-        String rewardId = getIntent().getStringExtra("rewardId");
-        initData();
-
+        setContentView(R.layout.activity_reward_modify1);
+//
+//        AnnotationUtil.injectViews(this);
+//        AnnotationUtil.setClickListener(this);
+//
+//        int position = getIntent().getIntExtra("position", 0);
+//        topic = getIntent().getStringExtra("topic");
+//        description = getIntent().getStringExtra("description");
+//        technicTagEnum = getIntent().getStringExtra("technicTagEnum");
+//        price = getIntent().getStringExtra("price");
+//        courseTimeDayEnum = getIntent().getStringExtra("courseTimeDayEnum");
+//        studentBaseEnum = getIntent().getStringExtra("studentBaseEnum");
+//        teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
+//        teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
+//        rewardId = getIntent().getStringExtra("rewardId");
+//        mRewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
+//        mStudentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
+//        initData();
+//
 
     }
 
     private void initData() {
 
-        //展示
+        //展示,恢复数据
         mTopic.setText(topic);
         mDescription.setText(description);
         mTechnicTag.setText(technicTagEnum);
         mRewardPrice.setText(price);
 
-        //教学时间
+       //教学时间
 //        String courseTimeEnumStr = mRewardDTO.getCourseTimeDayEnum().toString();
         switch (courseTimeDayEnum) {
             case "工作日": {

@@ -141,34 +141,13 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.chat:
                 //TODO:网络传输
                 break;
-            case R.id.order:
-                if (mOrder.getText().equals("修改订单")) {
-                    Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
-                    modifyIntent.putExtra("position",0);
-                    modifyIntent.putExtra("topic", rewardDTO.getTopic());
-                    modifyIntent.putExtra("description", rewardDTO.getDescription());
-                    modifyIntent.putExtra("technicTagEnum",rewardDTO.getTechnicTagEnum().toString());
-                    modifyIntent.putExtra("price", rewardDTO.getPrice()+"");
-                    modifyIntent.putExtra("courseTimeDayEnum", rewardDTO.getCourseTimeDayEnum().toString());
-                    modifyIntent.putExtra("studentBaseEnum", rewardDTO.getStudentBaseEnum().toString());
-                    modifyIntent.putExtra("teachMethodEnum", rewardDTO.getTeachMethodEnum().toString());
-                    modifyIntent.putExtra("teacherRequirementEnum", rewardDTO.getTeacherRequirementEnum().toString());
-                    modifyIntent.putExtra("rewardId", rewardDTO.getId());
-                    startActivity(modifyIntent);
-//                    this.finish();
 
-                } else {
-                    displayInfo.setMsg("您确定要此单吗？\n \n 点击 接单 将发送申请");
-
-                    displayInfo.getDialog().show();
-                    break;
-                }
         }
     }
 
     private void initView() {
         mOrder = (RadioButton) findViewById(R.id.order);
-        //mOrder.setOnClickListener(this);
+        mOrder.setOnClickListener(this);
         mReturn = (ImageButton) findViewById(R.id.bt_return);
         mReturn.setOnClickListener(this);
 
@@ -256,6 +235,29 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.bt_return:
                 this.finish();
                 break;
+            case R.id.order:
+                if (mOrder.getText().equals("修改悬赏")) {
+                    Log.i("malei",mOrder.getText()+"");
+                    Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
+                    modifyIntent.putExtra("position",0);
+                    modifyIntent.putExtra("topic", rewardDTO.getTopic());
+                    modifyIntent.putExtra("description", rewardDTO.getDescription());
+                    modifyIntent.putExtra("technicTagEnum",rewardDTO.getTechnicTagEnum().toString());
+                    modifyIntent.putExtra("price", rewardDTO.getPrice()+"");
+                    modifyIntent.putExtra("courseTimeDayEnum", rewardDTO.getCourseTimeDayEnum().toString());
+                    modifyIntent.putExtra("studentBaseEnum", rewardDTO.getStudentBaseEnum().toString());
+                    modifyIntent.putExtra("teachMethodEnum", rewardDTO.getTeachMethodEnum().toString());
+                    modifyIntent.putExtra("teacherRequirementEnum", rewardDTO.getTeacherRequirementEnum().toString());
+                    modifyIntent.putExtra("rewardId", rewardDTO.getId());
+                    startActivity(modifyIntent);
+//                    this.finish();
+
+                } else {
+                    displayInfo.setMsg("您确定要此单吗？\n \n 点击 接单 将发送申请");
+
+                    displayInfo.getDialog().show();
+                    break;
+                }
             default:
                 break;
         }

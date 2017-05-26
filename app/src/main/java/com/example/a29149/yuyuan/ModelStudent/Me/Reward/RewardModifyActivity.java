@@ -23,6 +23,7 @@ import com.example.a29149.yuyuan.Main.MainStudentActivity;
 
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
+import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -36,7 +37,7 @@ import org.json.JSONObject;
  * Created by GR on 2017/5/26.
  */
 
-public class RewardModifyActivity extends Activity {
+public class RewardModifyActivity extends Activity implements View.OnClickListener {
 
     private RewardDTO mRewardDTO;//悬赏信息
 
@@ -58,7 +59,7 @@ public class RewardModifyActivity extends Activity {
 //    5-学生基础
 //    6-上课方式
 //    7-老师类型
-    private String[] rewardChooseContent;
+    private String[] rewardChooseContent = GlobalUtil.getInstance().getRewardChooseContent();
 
     //悬赏标题
     @ViewInject(R.id.ed_topic)
@@ -122,6 +123,8 @@ public class RewardModifyActivity extends Activity {
     @ViewInject(R.id.bt_return)
     private ImageButton mReturn;
 
+    @ViewInject(R.id.tv_go)
+    private TextView mSubmit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -141,7 +144,9 @@ public class RewardModifyActivity extends Activity {
          teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
          teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
          rewardId = getIntent().getStringExtra("rewardId");
+        mSubmit.setOnClickListener(this);
         initData();
+
 
 
     }
@@ -230,8 +235,8 @@ public class RewardModifyActivity extends Activity {
         }
 
         //老师要求
-        String teacherRequirementEnumStr = mRewardDTO.getTeacherRequirementEnum().toString();
-        switch (teacherRequirementEnumStr) {
+//        String teacherRequirementEnumStr = mRewardDTO.getTeacherRequirementEnum().toString();
+        switch (teacherRequirementEnum) {
             case "认证老师": {
                 mOnlyTeacher.setChecked(true);
                 mEverybody.setChecked(false);
@@ -294,18 +299,20 @@ public class RewardModifyActivity extends Activity {
         }
     }
 
+
     private void goNext() {
         //提交用户的信息
         GlobalUtil.getInstance().setRewardChooseContent(rewardChooseContent);
         rewardChooseContent[0] = mTopic.getText().toString();
-//        rewardChooseContent[1] = mTechnicTag.getText().toString();
+        rewardChooseContent[1] = mTechnicTag.getText().toString();
         rewardChooseContent[2] = mDescription.getText().toString();
         rewardChooseContent[3] = mRewardPrice.getText().toString();
 
 
         //Log.i("malei",rewardChooseContent.toString());
         //发布到服务器
-        new ModifyRewardAction().execute();
+        ModifyRewardAction modifyRewardAction = new ModifyRewardAction();
+        modifyRewardAction.execute();
     }
 
     //弹出悬赏选择标签
@@ -430,7 +437,7 @@ public class RewardModifyActivity extends Activity {
      */
     public class ModifyRewardAction extends AsyncTask<String, Integer, String> {
 
-        private UpdateController updateController;
+        private UpdateController updateController = new UpdateController();
 
         private String[] mChooseContent;
 
@@ -498,7 +505,6 @@ public class RewardModifyActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            log.d(this, result);
             if (result != null) {
                 try {
                     JSONObject jsonObject = new JSONObject(result);

@@ -248,7 +248,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                     modifyIntent.putExtra("studentBaseEnum", rewardDTO.getStudentBaseEnum().toString());
                     modifyIntent.putExtra("teachMethodEnum", rewardDTO.getTeachMethodEnum().toString());
                     modifyIntent.putExtra("teacherRequirementEnum", rewardDTO.getTeacherRequirementEnum().toString());
-                    modifyIntent.putExtra("rewardId", rewardDTO.getId());
+                    modifyIntent.putExtra("rewardId", rewardDTO.getId() + "");
                     startActivity(modifyIntent);
 //                    this.finish();
 

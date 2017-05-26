@@ -54,6 +54,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     private TextView mCourseNum;//老师授课次数
     private TextView mTeacheringTime;//老师授课时长
     private CheckBox mTeacherState;//老师认证状态
+    private TextView mTeacherVerifyState; // "已认证字样"
     private TextView mTeacherScore;//老师评价分数
     private TextView mTeacherGithub;//老师Github账户url
     private TextView mTeacherIndex;//老师主页
@@ -153,8 +154,10 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mTeacheringTime.setText(mTeacherAllInfoDTO.getTeachingTime()+"");
         if (mTeacherAllInfoDTO.getRoleEnum().compareTo(RoleEnum.teacher)==0)
             mTeacherState.setChecked(true);
-        else
+        else {
             mTeacherState.setChecked(false);
+            mTeacherVerifyState.setText("未认证");
+        }
         mTeacherScore.setText(mTeacherAllInfoDTO.getTeacherAverageScore()+"");
         mTeacherGithub.setText(mTeacherAllInfoDTO.getGithubUrl());
         mTeacherIndex.setText(mTeacherAllInfoDTO.getBlogUrl());
@@ -179,6 +182,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mCourseNum = (TextView) findViewById(R.id.tv_coursenum);
         mTeacheringTime = (TextView) findViewById(R.id.tv_teachingtime);
         mTeacherState = (CheckBox) findViewById(R.id.cb_teacherstate);
+        mTeacherVerifyState = (TextView) findViewById(R.id.tv_teacherVerifyState);
         mTeacherScore = (TextView) findViewById(R.id.tv_evaluatescore);
         mTeacherGithub = (TextView) findViewById(R.id.tv_github);
         mTeacherIndex = (TextView) findViewById(R.id.tv_teacherindex);

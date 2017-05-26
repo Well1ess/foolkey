@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseWithStudentAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
@@ -21,8 +23,10 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.ModelTeacher.Index.TeacherIndexMainFragment;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.haveClass.EndClassController;
 import com.example.a29149.yuyuan.controller.course.haveClass.StartClassController;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
 
@@ -42,6 +46,8 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
     //点击开始或取消时的警告
     private WarningDisplayDialog.Builder mDisplayDialog;
     private   MyViewHolder myViewHolder = null;
+    //图片加载
+    private RequestManager glide;
 
     public StudentReplyListAdapter(Context context, List<OrderBuyCourseWithStudentAsTeacherSTCDTO> strings)
     {
@@ -96,6 +102,11 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
             stateStudent = "点击下课";
         myViewHolder.state.setText(stateStudent);
         myViewHolder.tv.setOnClickListener(this);
+        glide = Glide.with(mContext);
+        glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform( mContext ))
+                .into(myViewHolder.tv);
         mDisplayDialog = new WarningDisplayDialog.Builder(mContext);
         mDisplayDialog.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
             @Override

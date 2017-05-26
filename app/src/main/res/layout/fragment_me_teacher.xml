@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context="com.example.a29149.yuyuan.Model.Me.MeMainFragment"
+
     >
 
     <android.support.design.widget.AppBarLayout

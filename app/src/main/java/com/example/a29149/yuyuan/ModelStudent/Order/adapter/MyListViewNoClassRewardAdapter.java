@@ -84,7 +84,12 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
         CourseAbstract courseDTO = null ;
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
 
-        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
+        String fisrtLine = mStudentDTO.getNickedName()+":"+courseDTO.getTopic();
+        if (fisrtLine.length() > 9) {
+            fisrtLine = fisrtLine.substring(0, 7);
+            fisrtLine = fisrtLine + "...";
+        }
+        mTeacherNameAndCourseName.setText(fisrtLine);
         mRewardTitle.setText("悬赏标题:" + courseDTO.getTopic().toString() + "");
         mTeacherCharge.setText("悬赏价格：" + courseDTO.getPrice().toString()+"RMB");
 

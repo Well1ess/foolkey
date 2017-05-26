@@ -1,6 +1,7 @@
 package com.example.a29149.yuyuan.ModelStudent.Order.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderCourseInfoActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderRewardInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoCommentRewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
@@ -75,6 +78,9 @@ public class NoCommentFragment extends Fragment {
         mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent toOrderInfo = new Intent(mContext, OrderCourseInfoActivity.class);
+                toOrderInfo.putExtra("position", position);
+                startActivity( toOrderInfo );
                 Log.i("malei","你点击了"+position);
             }
         });
@@ -85,6 +91,9 @@ public class NoCommentFragment extends Fragment {
                 if (myListViewNoCommentRewardAdapter == null)
                     myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
                 myListViewNoCommentRewardAdapter.setPosition(position);
+                Intent toOrderInfo = new Intent(mContext, OrderRewardInfoActivity.class);
+                toOrderInfo.putExtra("position",position);
+                startActivity(toOrderInfo);
                 Log.i("malei","你点击了"+position);
             }
         });
@@ -100,6 +109,13 @@ public class NoCommentFragment extends Fragment {
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
         mRecommand.setAdapter(myListViewRecommandAdapter);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        pageNo = 1;
+        loadData(pageNo);
     }
 
     private void loadData(int pageNo) {

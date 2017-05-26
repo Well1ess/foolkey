@@ -95,7 +95,12 @@ public class MyListViewFinishCourseAdapter extends BaseAdapter {
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
 
 
-        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
+        String fisrtLine = mStudentDTO.getNickedName()+":"+courseDTO.getTopic();
+        if (fisrtLine.length() > 9) {
+            fisrtLine = fisrtLine.substring(0, 7);
+            fisrtLine = fisrtLine + "...";
+        }
+        mTeacherNameAndCourseName.setText(fisrtLine);
         mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName() +" : " + courseDTO.getTopic().toString() + "");
         mExceptTime.setText("购买时长 ：" + mOrderBuyCourseDTO.getNumber().toString()+"h");
         mTeacherCharge.setText("课程价格 : " + mOrderBuyCourseDTO.getAmount()+"" + Const.PRICE_NAME);

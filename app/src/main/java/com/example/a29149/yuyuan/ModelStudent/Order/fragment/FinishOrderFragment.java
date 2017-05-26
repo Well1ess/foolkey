@@ -113,6 +113,13 @@ public class FinishOrderFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        pageNo = 1;
+        loadData(pageNo);
+    }
+
 
     private void loadData(int pageNo) {
         //如果没有进行加载

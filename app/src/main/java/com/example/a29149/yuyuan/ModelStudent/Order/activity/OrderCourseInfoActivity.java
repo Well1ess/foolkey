@@ -31,6 +31,7 @@ import java.util.List;
 
 /**
  * Created by geyao on 2017/5/24.
+ * 课程订单详情
  */
 
 public class OrderCourseInfoActivity extends Activity implements View.OnClickListener  {

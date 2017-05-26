@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderCourseInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderRewardInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoPayClassAdapter;
@@ -71,6 +72,9 @@ public class NoPayFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("malei","你点击了"+position);
+                Intent toOrderInfo = new Intent(mContext, OrderCourseInfoActivity.class);
+                toOrderInfo.putExtra("position", position);
+                startActivity( toOrderInfo );
             }
         });
 
@@ -78,8 +82,6 @@ public class NoPayFragment extends Fragment {
         mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent toOrderInfo = new Intent(mContext, OrderRewardInfoActivity.class);
-                startActivity(toOrderInfo);
                 Log.i("malei","你点击了"+position);
             }
         });
@@ -91,6 +93,13 @@ public class NoPayFragment extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        pageNo = 1;
+        loadData(pageNo);
     }
 
     private void loadData(int pageNo) {

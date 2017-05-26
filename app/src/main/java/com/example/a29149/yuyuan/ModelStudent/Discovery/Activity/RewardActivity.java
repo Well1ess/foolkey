@@ -144,7 +144,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.order:
                 if (mOrder.getText().equals("修改订单")) {
                     Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
-                    modifyIntent.putExtra("position",0)
+                    modifyIntent.putExtra("position",0);
                     modifyIntent.putExtra("topic", rewardDTO.getTopic());
                     modifyIntent.putExtra("description", rewardDTO.getDescription());
                     modifyIntent.putExtra("technicTagEnum",rewardDTO.getTechnicTagEnum().toString());

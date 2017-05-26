@@ -92,10 +92,15 @@ public class MyListViewFinishRewardAdapter extends BaseAdapter{
 
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
 
+
         initView(view);
 
-
-        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName() +" : " + courseDTO.getTopic().toString() + "");
+        String fisrtLine = mStudentDTO.getNickedName()+":"+courseDTO.getTopic();
+        if (fisrtLine.length() > 9) {
+            fisrtLine = fisrtLine.substring(0, 7);
+            fisrtLine = fisrtLine + "...";
+        }
+        mTeacherNameAndCourseName.setText(fisrtLine);
         mBuyTime.setText("授课时长 ：" + mOrderBuyCourseDTO.getNumber().toString()+" h");
         mCourseCost.setText("老师收费 : " + mOrderBuyCourseDTO.getAmount()+"" + Const.PRICE_NAME);
 

@@ -107,9 +107,12 @@ public class MyListViewNoPayCourseAdapter extends BaseAdapter implements OnClick
         mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
 
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
-
-
-        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
+        String fisrtLine = mStudentDTO.getNickedName()+":"+courseDTO.getTopic();
+        if (fisrtLine.length() > 9) {
+            fisrtLine = fisrtLine.substring(0, 7);
+            fisrtLine = fisrtLine + "...";
+        }
+        mTeacherNameAndCourseName.setText(fisrtLine);
         mBuyTime.setText("购买时长:" + mOrderBuyCourseDTO.getNumber().toString() + "h");
         mCourseCost.setText("课程价格：" + courseDTO.getPrice().toString());
     }

@@ -71,7 +71,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
     private WarningDisplayDialog.Builder displayInfo;
     private WarningDisplayDialog.Builder displayInfo1;
 
-    @ViewInject(R.id.head)
+
     private ImageView mTeacherPhoto;
 
     private RequestManager glide;
@@ -156,6 +156,13 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mTeacherGithub.setText(mTeacherAllInfoDTO.getGithubUrl());
         mTeacherIndex.setText(mTeacherAllInfoDTO.getBlogUrl());
         mTeacherEmail.setText(mTeacherAllInfoDTO.getEmail());
+
+        //填充头像
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto( mTeacherAllInfoDTO.getUserName() ))
+                .error(R.drawable.photo_placeholder1)
+                .transform(new GlideCircleTransform( this ))
+                .into( mTeacherPhoto );
     }
 
     private void initView() {
@@ -173,13 +180,8 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mTeacherGithub = (TextView) findViewById(R.id.tv_github);
         mTeacherIndex = (TextView) findViewById(R.id.tv_teacherindex);
         mTeacherEmail = (TextView) findViewById(R.id.tv_email);
+        mTeacherPhoto = (ImageView)findViewById(R.id.head);
 
-        //填充头像
-        glide = Glide.with(this);
-        glide.load(PictureInfoBO.getOnlinePhoto( mTeacherAllInfoDTO.getUserName() ))
-                .error(R.drawable.photo_placeholder1)
-                .transform(new GlideCircleTransform( this ))
-                .into( mTeacherPhoto );
 
 
         mRewardAgree = (RadioButton) findViewById(R.id.main_menu_agree);

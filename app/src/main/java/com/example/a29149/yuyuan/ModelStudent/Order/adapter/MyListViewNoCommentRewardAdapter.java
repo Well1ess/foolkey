@@ -95,7 +95,7 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
             }
         });
         view=View.inflate(mContext, R.layout.listview_item_nocommnent_reward,null);
-        initView();
+
         mOrderBuyCourseAsStudentDTO = rewardNoCommentList.get(position);
 
 
@@ -104,7 +104,7 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter implements Vie
         mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
         CourseAbstract courseDTO = null ;
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
-
+        initView();
         String fisrtLine = mStudentDTO.getNickedName()+":"+courseDTO.getTopic();
         if (fisrtLine.length() > 9) {
             fisrtLine = fisrtLine.substring(0, 7);

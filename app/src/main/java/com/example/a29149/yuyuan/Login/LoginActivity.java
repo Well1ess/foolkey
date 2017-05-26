@@ -23,6 +23,7 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.PhoneFormatCheckUtils;
 import com.example.a29149.yuyuan.Util.Secret.AESCoder;
 import com.example.a29149.yuyuan.Util.Secret.SHA1Coder;
 import com.example.a29149.yuyuan.Util.URL;
@@ -195,7 +196,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         View focusView = null;
 
         // Check for a valid
-        if (TextUtils.isEmpty(userName)) {
+        if (TextUtils.isEmpty(userName)
+                || !PhoneFormatCheckUtils.isPhoneLegal( strUserName )
+                ) {
             mUserNameView.setError("账号不能为空！");
             focusView = mUserNameView;
             cancel = true;

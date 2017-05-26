@@ -89,7 +89,7 @@ public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnCli
         View view ;
         view=View.inflate(mContext, R.layout.listview_item_nostart_course,null);
         this.position = position;
-        initView(view);
+
         mOrderBuyCourseAsStudentDTO = courseNoStartList.get(position);
 
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
@@ -97,7 +97,7 @@ public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnCli
         mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
 
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
-
+        initView(view);
 
         mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
         mCourseTitle.setText("课程标题:" + courseDTO.getTopic().toString() + "");

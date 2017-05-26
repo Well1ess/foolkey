@@ -20,6 +20,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeStudentController;
 import com.example.resource.util.image.GlideCircleTransform;
@@ -149,6 +150,7 @@ public class JudgeStudentActivity extends Activity {
             super.onPostExecute(s);
             switch ( judgeStudentController.getResult() ) {
                 case "success":{ // 评价成功
+                    GlobalUtil.getInstance().setFragmentFresh(true);
                     finish();
                 }break;
                 case "fail":{ // 评价失败

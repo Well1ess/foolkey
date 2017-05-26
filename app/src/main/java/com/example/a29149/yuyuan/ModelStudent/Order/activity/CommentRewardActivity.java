@@ -172,6 +172,7 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
                     if (resultFlag.equals("success")) {
                         Toast.makeText(CommentRewardActivity.this, "评价成功！", Toast.LENGTH_SHORT).show();
                         //跳转到主页面
+                        GlobalUtil.getInstance().setFragmentFresh(true);
                         Intent intent = new Intent(CommentRewardActivity.this, MainStudentActivity.class);
                         startActivity(intent);
                         finish();

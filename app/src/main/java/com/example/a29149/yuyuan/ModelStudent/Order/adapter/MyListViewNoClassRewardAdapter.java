@@ -82,7 +82,7 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
     public View getView(int position, View convertView, ViewGroup parent) {
         view=View.inflate(mContext, R.layout.listview_item_nostart_reward,null);
         this.position = position;
-        initView();
+
         mOrderBuyCourseAsStudentDTO = rewardNoStartList.get(position);
 
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
@@ -90,7 +90,7 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
         mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
         CourseAbstract courseDTO = null ;
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
-
+        initView();
         String fisrtLine = mStudentDTO.getNickedName()+":"+courseDTO.getTopic();
         if (fisrtLine.length() > 9) {
             fisrtLine = fisrtLine.substring(0, 7);
@@ -110,6 +110,7 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
         mTeacherCharge = (TextView) view.findViewById(R.id.tv_rewardCost);
         mCancalReward = (TextView) view.findViewById(R.id.tv_cancel);
         mCancalReward.setOnClickListener(this);
+
 
         glide = Glide.with(mContext);
         glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))

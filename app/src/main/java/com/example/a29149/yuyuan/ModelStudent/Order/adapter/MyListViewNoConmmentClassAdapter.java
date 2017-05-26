@@ -89,7 +89,7 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
         View view ;
         view=View.inflate(mContext, R.layout.listview_item_nocomment_course,null);
         this.position = position;
-        initView(view);
+
         mOrderBuyCourseAsStudentDTO = courseNoCommentList.get(position);
 
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
@@ -102,6 +102,7 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
         mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
         mBuyTime.setText("购买时长:" + mOrderBuyCourseDTO.getNumber().toString() + "h");
         mCourseCost.setText("课程价格：" + courseDTO.getPrice().toString());
+        initView(view);
         return view;
     }
 

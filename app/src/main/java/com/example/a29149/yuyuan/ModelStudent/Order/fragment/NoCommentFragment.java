@@ -114,8 +114,15 @@ public class NoCommentFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        pageNo = 1;
-        loadData(pageNo);
+        if (GlobalUtil.getInstance().getFragmentFresh()){
+            //用全局的方式实现回调
+            pageNo = 1;
+            shapeLoadingDialog.show();
+            loadData(pageNo);
+            GlobalUtil.getInstance().setFragmentFresh(false);
+        }else {
+            //不刷新页面，不执行
+        }
     }
 
     private void loadData(int pageNo) {

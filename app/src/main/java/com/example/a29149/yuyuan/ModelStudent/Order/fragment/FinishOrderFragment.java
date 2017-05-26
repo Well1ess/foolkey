@@ -120,6 +120,19 @@ public class FinishOrderFragment extends Fragment {
         shapeLoadingDialog.show();
         loadData(pageNo);
     }*/
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (GlobalUtil.getInstance().getFragmentFresh()){
+            //用全局的方式实现回调
+            shapeLoadingDialog.show();
+            pageNo = 1;
+            loadData(pageNo);
+            GlobalUtil.getInstance().setFragmentFresh(false);
+        }else {
+            //不刷新页面，不执行
+        }
+    }
 
 
     private void loadData(int pageNo) {

@@ -35,6 +35,8 @@ public class GlobalUtil {
         }
 
     }
+    //fragment刷新的标志，默认不刷新，因为现在不会写回调。
+    public static boolean fragmentFresh = false;
 
     private GlobalUtil() {
         technicTagEnum = TechnicTagEnum.Java;
@@ -466,6 +468,14 @@ public class GlobalUtil {
     //清空
     public static void clear(){
         globalUtil = null;
+    }
+
+    public  boolean getFragmentFresh() {
+        return fragmentFresh;
+    }
+
+    public  void setFragmentFresh(boolean fragmentFresh) {
+        GlobalUtil.fragmentFresh = fragmentFresh;
     }
 }
 

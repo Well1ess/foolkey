@@ -136,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
                         strUserName = mUserName.getText().toString();
                         //验证输入的是否是手机号
                         if ( PhoneFormatCheckUtils.isPhoneLegal( strUserName ) ){
-                            //strUserName = mUserName.getText().toString();
+                            strUserName = mUserName.getText().toString();
                         }
                     }else {
                         //输入不合法
@@ -177,7 +177,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Check for a valid
         if (TextUtils.isEmpty(strUserName)
-//                || !PhoneFormatCheckUtils.isPhoneLegal( strUserName )
+                || !PhoneFormatCheckUtils.isPhoneLegal( strUserName )
                 ) {
             mUserName.setError("手机号输入错误");
             focusView = mUserName;

@@ -83,7 +83,7 @@ public class MyListViewNoPayClassAdapter extends BaseAdapter implements OnClickL
         View view ;
         view=View.inflate(mContext, R.layout.listview_item_nocomment_course,null);
         this.position = position;
-        initView(view);
+
         mOrderBuyCourseAsStudentDTO = courseNoPayList.get(position);
 
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
@@ -101,6 +101,7 @@ public class MyListViewNoPayClassAdapter extends BaseAdapter implements OnClickL
         mTeacherNameAndCourseName.setText(fisrtLine);
         mBuyTime.setText("购买时长:" + mOrderBuyCourseDTO.getNumber().toString() + "h");
         mCourseCost.setText("课程价格：" + courseDTO.getPrice().toString());
+        initView(view);
         return view;
     }
 

@@ -83,11 +83,12 @@ public class MyListViewNoPayCourseAdapter extends BaseAdapter implements OnClick
         View view ;
         view=View.inflate(mContext, R.layout.listview_item_nopay_course,null);
         mOrderBuyCourseAsStudentDTO = courseNoCommentList.get(position);
-        initView(view);
-        initData();
+
         //设置订单状态监听
         final RadioButton rb_bug = (RadioButton) view.findViewById(R.id.rb_buy);//订单选择按钮
         final GlobalValue globalValue = new GlobalValue();
+        initView(view);
+        initData();
         rb_bug.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

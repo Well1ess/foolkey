@@ -40,7 +40,7 @@
                 android:id="@+id/photo_circle"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/photo_placeholder1"
+                android:background="@null"
                 android:elevation="2dp"
 
 

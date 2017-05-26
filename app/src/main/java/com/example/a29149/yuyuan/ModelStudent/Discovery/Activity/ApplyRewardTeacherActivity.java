@@ -28,6 +28,7 @@ import org.json.JSONObject;
  *
  * 老师申请接单悬赏
  */
+@Deprecated
 public class ApplyRewardTeacherActivity extends AppCompatActivity implements View.OnClickListener {
 
     private  Button mApplyReward;

@@ -85,9 +85,10 @@ public class RewardListAdapter extends BaseAdapter {
 
         //加载图片
         glide = Glide.with(mContext);
-        boolean isPic = glide.load(PictureInfoBO.getOnlinePhoto(studentDTO.getUserName() ) )
+        glide.load(PictureInfoBO.getOnlinePhoto(studentDTO.getUserName() ) )
+                .error(R.drawable.photo_placeholder1)
                 .transform(new GlideCircleTransform(mContext))
-                .into( viewHolder.head ).getRequest().isFailed();
+                .into( viewHolder.head );
         //如果没成功，则加载一张别的图片
 //        if (!isPic){
 //            glide.load(

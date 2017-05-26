@@ -438,9 +438,11 @@ public class RegisterActivity extends AppCompatActivity {
 //                        startActivity(intent);
                     }
                 } catch (Exception e) {
+                    shapeLoadingDialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {
+                shapeLoadingDialog.dismiss();
                 Toast.makeText(RegisterActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
             }
 

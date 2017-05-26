@@ -100,8 +100,10 @@ public class OwnerRewardListAdapter extends BaseAdapter {
                     intent.putExtra("positionOut",position+"");//gridView的position
                     Log.i("malei",position+"OutOwner");//listview的position
                     mContext.startActivity(intent);
+
                 }
             });
+
 
             if (listState.get(position).getOriginalHeight() > gridView.getLayoutParams().height)
                 listState.get(position).setOriginalHeight(gridView.getLayoutParams().height);

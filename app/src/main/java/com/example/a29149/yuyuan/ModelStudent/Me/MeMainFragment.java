@@ -131,7 +131,8 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
     {
         studentDTO = GlobalUtil.getInstance().getStudentDTO();
 
-        int virtualMoney = DoubleParseInt(studentDTO.getVirtualCurrency());
+
+        int virtualMoney = DoubleParseInt(studentDTO.getVirtualCurrency()) ;
         mVirtualMoney.setText(virtualMoney+"");
 
         String prestige = studentDTO.getPrestige() + "";

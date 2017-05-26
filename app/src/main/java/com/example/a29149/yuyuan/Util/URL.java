@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 public class URL {
 
-    public static final String address = "115.159.5.195:8080";
+    public static final String address = "111.231.41.136:80";
 
     //获取公钥
     public static final String publicKeyURL = "http://" + address + "/getKey?";

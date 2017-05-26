@@ -13,6 +13,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
@@ -55,7 +56,7 @@ public class OwnerRewardActivity extends AppCompatActivity {
 
         loadData();
 
-
+//        AppManager.getInstance().addActivity(this);
 
 
     }
@@ -156,4 +157,9 @@ public class OwnerRewardActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

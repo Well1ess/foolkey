@@ -101,6 +101,16 @@
 
 
 
+        <com.example.a29149.yuyuan.Widget.SquareImageView
+            android:id="@+id/photo_circle"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:elevation="2dp"
+            android:visibility="invisible"
+            />
 
         <LinearLayout
             android:layout_marginTop="32dp"
@@ -236,16 +246,7 @@
                 android:textSize="10dp"
                 />
 
-            <com.example.a29149.yuyuan.Widget.SquareImageView
-                android:id="@+id/photo_circle"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:elevation="2dp"
-                android:visibility="invisible"
-                />
+
         </LinearLayout>
     </LinearLayout>
 

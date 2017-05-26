@@ -66,7 +66,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        if (!result.isEmpty() && result.equals(Const.SUCCESS)) {
+        if (result != null && result.equals(Const.SUCCESS)) {
             //注入数据
             injectDataToGlobe();
 

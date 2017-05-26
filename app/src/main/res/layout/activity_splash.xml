@@ -3,28 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <com.example.a29149.yuyuan.Widget.SquareImageView
-            android:id="@+id/photo_circle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/circle"
-            android:gravity="center"
-            android:elevation="2dp"
-            android:alpha="0.0"
-            android:visibility="visible"
-
-            xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-
-        </com.example.a29149.yuyuan.Widget.SquareImageView>
-
-
-    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -34,6 +13,8 @@
         >
 
     </ImageView>
+
+
 
 
 </FrameLayout>

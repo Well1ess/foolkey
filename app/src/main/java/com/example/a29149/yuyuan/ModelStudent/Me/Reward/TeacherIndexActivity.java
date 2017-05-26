@@ -22,6 +22,7 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.SexTagEnum;
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -110,6 +111,8 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
                 dialog.dismiss();
                 Intent toRechargeActivity = new Intent(TeacherIndexActivity.this, RechargeActivity.class);
                 startActivity(toRechargeActivity);
+                //这里其实不该finish，目前的问题是充值完了，也没有刷新，fake
+                finish();
             }
         });
         displayInfo.create();
@@ -320,7 +323,8 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
 
                     if (resultFlag.equals("success")) {
                         Toast.makeText(TeacherIndexActivity.this, "同意申请悬赏成功！", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(TeacherIndexActivity.this,OwnerRewardActivity.class);
+                        mStudentDTO.setVirtualCurrency( mStudentDTO.getVirtualCurrency() - mRewardDTO.getPrice() );
+                        Intent intent = new Intent(TeacherIndexActivity.this,MainStudentActivity.class);
                         TeacherIndexActivity.this.startActivity(intent);
                         finish();
                     }

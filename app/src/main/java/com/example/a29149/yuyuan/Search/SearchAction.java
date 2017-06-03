@@ -32,7 +32,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
     private SearchActivity searchActivity;
 
     public SearchAction(SearchActivity searchActivity) {
-        this.searchActivity = searchActivity;
+        this.sarchActivity = searchActivity;
     }
 
 
@@ -41,7 +41,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
         //params[0] condition
         mCondition = params[0];
         mPageNo = params[1];
-        switch (params[0]) {
+        switch (params[j0]) {
             case "course":
                 //TODO
                 break;
@@ -69,14 +69,13 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
         if (result != null && result.equals(Const.SUCCESS)) {
             //注入数据
             injectDataToGlobe();
-
         }
     }
 
     /**
      * 将输入分类注入
      *
-     * @return
+     * @return‘
      */
 
     private void injectDataToGlobe() {

@@ -53,6 +53,8 @@ import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
 
 public class MeMainFragment extends Fragment implements View.OnClickListener , FreshInfo{
 
+    private static final String TAG = "MeMainFragment";
+
     private View view;
     //显示选项的对话框
     private WarningDisplayDialog.Builder displayInfo;
@@ -323,6 +325,11 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
     public void onResume() {
         super.onResume();
         initView();
+    }
+
+    //FIXME
+    public void test(){
+        Log.d(TAG, "test: 331");
     }
 
     //获取抵扣卷

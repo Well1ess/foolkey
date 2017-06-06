@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,18 +93,6 @@ public class RewardListAdapter extends BaseAdapter {
                 .error(R.drawable.photo_placeholder1)
                 .transform(new GlideCircleTransform(mContext))
                 .into( viewHolder.head );
-        //如果没成功，则加载一张别的图片
-//        if (!isPic){
-//            glide.load(
-//                    PictureInfoBO.getDefaultPicCloudPath(
-//                    (int)(Math.random() * PictureInfoBO.defaultPicNum) )   //随机取一张
-//                    )
-//                    .transform(new GlideCircleTransform(mContext))
-//
-//                    .into( viewHolder.head );
-//        }
-
-
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

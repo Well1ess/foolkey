@@ -269,6 +269,12 @@ public class MainStudentActivity extends AppCompatActivity {
             super.onBackPressed();
     }
 
+    /**
+     * fragment里面，startActivityForResult
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -278,6 +284,10 @@ public class MainStudentActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK){
                     Log.d(TAG, "onActivityResult: 279行");
                     Toast.makeText(this, "MainStudentActivity刷新", Toast.LENGTH_LONG).show();
+                    MeMainFragment meMainFragment;
+                    meMainFragment = (MeMainFragment) getSupportFragmentManager().findFragmentByTag(SHOW_OF_FIFTH_TAG);
+                    meMainFragment.test();
+                    //FIXME
                 }else {
                     Toast.makeText(this, "充值失败", Toast.LENGTH_SHORT).show();
                 }

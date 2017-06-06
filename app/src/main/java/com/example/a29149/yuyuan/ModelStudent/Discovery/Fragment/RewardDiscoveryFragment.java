@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardRecyclerViewAdapter;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -41,8 +43,12 @@ public class RewardDiscoveryFragment extends Fragment {
     //上划到底部动态更新的List
     @ViewInject(R.id.content)
     private DynamicListView mRewardList;
-
     private RewardListAdapter mListAdapter;
+
+
+//    @ViewInject(R.id.content)
+//    private RecyclerView recyclerView;
+//    private RewardRecyclerViewAdapter recyclerViewAdapter;
 
     //记录请求的页数
     int pageNo = 1;

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_index_content"
+    android:layout_margin="20dp"
+    android:transitionName="shareContent"
+    android:orientation="vertical"
+    >
+
+    <!--<ImageView-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+
+        <!--android:transitionName="shareHead"-->
+        <!--android:background="@null"-->
+        <!--android:id="@+id/photo_circle"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp" />-->
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:id="@+id/head_parent"
+        android:layout_alignParentLeft="true"
+        >
+
+        <LinearLayout
+            android:id="@+id/head"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+
+            >
+
+            <com.example.a29149.yuyuan.Widget.SquareImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/photo_circle"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@null"
+                android:elevation="2dp"
+
+
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/prestige"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/head"
+            android:layout_alignRight="@id/head"
+            android:paddingRight="0dp"
+            android:hint="声望"
+            android:textColorHint="@color/dark_green"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"
+            android:textSize="8dp" />
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_marginLeft="0dp"
+        android:layout_toRightOf="@id/head_parent"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignTop="@id/head_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <TextView
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:id="@+id/reward_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="项目一"
+            android:textSize="15sp"
+            android:elevation="1.5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"/>
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/reward_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textSize="15sp"
+                android:elevation="1.5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="虚拟币"
+                android:textSize="15sp"
+                android:elevation="1.5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/label"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Java"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingRight="4dp"
+            android:paddingLeft="4dp"
+            android:textSize="12dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="发布人："
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="4dp"
+                android:paddingLeft="4dp"
+                android:textSize="12dp"
+                android:textColor="@color/grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/student_kind"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="初学者"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="4dp"
+                android:paddingLeft="4dp"
+                android:textSize="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

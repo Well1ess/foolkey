@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -62,12 +63,14 @@ public class RewardListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
+        View view;
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.listview_reward, null);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
+            view = View.inflate(mContext, R.layout.listview_reward, null);
+            viewHolder = new ViewHolder(view);
+            view.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag();
         }
 
         //获取当前的reward
@@ -110,7 +113,7 @@ public class RewardListAdapter extends BaseAdapter {
                         .makeSceneTransitionAnimation((Activity) mContext, v, "shareHead").toBundle());
             }
         });
-        return convertView;
+        return view;
     }
 
     static class ViewHolder {

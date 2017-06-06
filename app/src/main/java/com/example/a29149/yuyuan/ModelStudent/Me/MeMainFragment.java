@@ -269,7 +269,9 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
     @OnClick(R.id.recharge)
     public void setRechargeListener(View view)
     {
-        startActivityForResult(new Intent(getActivity(), RechargeActivity.class), FROM_ME_FRAGMENT_TO_RECHARGE);
+        Intent intent = new Intent(getActivity(), RechargeActivity.class);
+        getActivity().startActivityForResult(intent, FROM_ME_FRAGMENT_TO_RECHARGE);
+//        startActivityForResult(new Intent(getActivity(), RechargeActivity.class), FROM_ME_FRAGMENT_TO_RECHARGE);
     }
 
 

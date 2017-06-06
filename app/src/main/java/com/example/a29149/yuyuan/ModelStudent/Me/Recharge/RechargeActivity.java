@@ -114,7 +114,7 @@ public class RechargeActivity extends AppCompatActivity {
 //                        SelfInfo selfInfo = new SelfInfo();
 //                        selfInfo.execute();
 
-                        Intent intent = new Intent();
+                        Intent intent = getIntent();
                         intent.putExtra("virtualCurrency", jsonObject.getString("virtualCurrency"));
                         setResult(RESULT_OK, intent);
                         finish();

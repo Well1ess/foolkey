@@ -232,7 +232,7 @@ public class FinishOrderFragment extends Fragment {
 
                     Log.i("malei", orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(mContext, "获取已完成订单成功！", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "获取已完成订单成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -251,13 +251,13 @@ public class FinishOrderFragment extends Fragment {
                         }, 1000);
                     }
                 } catch (Exception e) {
-                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();
                 }
             } else {
-                Toast.makeText(mContext, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
                 shapeLoadingDialog.dismiss();
             }
 
@@ -329,7 +329,7 @@ public class FinishOrderFragment extends Fragment {
 
                     Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(mContext, "获取已完成订单成功！", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "获取已完成订单成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -347,7 +347,7 @@ public class FinishOrderFragment extends Fragment {
                         }, 1000);
                     }
                 } catch (Exception e) {
-                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "返回结果为fai", Toast.LENGTH_SHORT).show();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();

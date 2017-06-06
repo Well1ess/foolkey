@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -34,7 +35,11 @@ import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
+
 public class MainStudentActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainStudentActivity";
 
     public static final String SHOW_OF_FIRST_TAG = "first";
     public static final String SHOW_OF_SECOND_TAG = "second";
@@ -262,5 +267,20 @@ public class MainStudentActivity extends AppCompatActivity {
             setClosePublishPanel(null);
         else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: 275行 " + requestCode);
+        switch (requestCode){
+            case FROM_ME_FRAGMENT_TO_RECHARGE:
+                if (resultCode == RESULT_OK){
+                    Log.d(TAG, "onActivityResult: 279行");
+                    Toast.makeText(this, "MainStudentActivity刷新", Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(this, "充值失败", Toast.LENGTH_SHORT).show();
+                }
+        }
     }
 }

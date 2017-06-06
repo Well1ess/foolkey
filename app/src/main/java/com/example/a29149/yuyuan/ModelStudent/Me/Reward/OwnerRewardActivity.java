@@ -129,7 +129,7 @@ public class OwnerRewardActivity extends AppCompatActivity {
                     GlobalUtil.getInstance().setApplicationStudentRewardAsStudentSTCDTOs(applicationStudentRewardAsStudentSTCDTOs);
 
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(OwnerRewardActivity.this, "获取悬赏成功！", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(OwnerRewardActivity.this, "获取悬赏成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -142,10 +142,10 @@ public class OwnerRewardActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(OwnerRewardActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OwnerRewardActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(OwnerRewardActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OwnerRewardActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
 
         }

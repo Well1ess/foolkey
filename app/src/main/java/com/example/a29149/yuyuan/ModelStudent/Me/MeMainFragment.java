@@ -262,11 +262,17 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
         startActivity(intent);
     }
 
+    /**
+     * 充值
+     * @param view
+     */
     @OnClick(R.id.recharge)
     public void setRechargeListener(View view)
     {
         startActivityForResult(new Intent(getActivity(), RechargeActivity.class), FROM_ME_FRAGMENT_TO_RECHARGE);
     }
+
+
 
     @OnClick(R.id.check_coupon)
     public void setCheckCouponListener(View view) {
@@ -348,10 +354,10 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
 
                         startActivity(new Intent(getActivity(), CouponActivity.class));
                     } else {
-                        Toast.makeText(getActivity(), "JSON解析异常！", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "JSON解析异常！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
-                    Toast.makeText(getActivity(), "返回结果异常！", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "返回结果异常！", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
@@ -418,7 +424,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getContext(), "返回结果为fail！", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(getContext(), "网络连接失败！", Toast.LENGTH_SHORT).show();

@@ -11,7 +11,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/photo_placeholder1"
+        android:background="@color/transparent"
         android:id="@+id/iv_image"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="120dp"
@@ -19,7 +19,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="添加图片"
+        android:text="选择照片"
         android:layout_below="@+id/iv_image"
         android:layout_marginLeft="85dp"
         android:layout_marginTop="5dp"
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/light_gray"
-                android:text="——Lion团队"
+                android:text="要开放读写手机存取才可以哦"
                 />
         </LinearLayout>
     </LinearLayout>

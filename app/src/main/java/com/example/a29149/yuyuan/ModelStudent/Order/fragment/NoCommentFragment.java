@@ -219,7 +219,7 @@ public class NoCommentFragment extends Fragment {
 
                     Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(mContext, "获取成功！", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "获取成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -238,7 +238,7 @@ public class NoCommentFragment extends Fragment {
                         }, 1000);
                     }
                 } catch (Exception e) {
-                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();
@@ -314,7 +314,7 @@ public class NoCommentFragment extends Fragment {
 
                     Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -333,7 +333,7 @@ public class NoCommentFragment extends Fragment {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();

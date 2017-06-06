@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,12 +23,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UploadFile;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetPictureImageController;
+import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
 
@@ -49,6 +53,8 @@ public class ImageUploadActivity extends Activity {
     private String userName =
             GlobalUtil.getInstance().getStudentDTO().getUserName()
     ;
+
+    private RequestManager glide;
 //    private boolean hasPhoto
 
     @Override
@@ -65,6 +71,18 @@ public class ImageUploadActivity extends Activity {
         mImage = (ImageView) findViewById(R.id.iv_image);
         mAddImage = (Button) findViewById(R.id.btn_add_image);
         mUpdateImage = (Button) findViewById(R.id.btn_update_image);
+
+        glide = Glide.with(this);
+        if (GlobalUtil.getInstance().getStudentDTO() != null){
+            glide.load(PictureInfoBO.getOnlinePhoto(GlobalUtil.getInstance().getStudentDTO().getUserName()))
+                    .error(R.drawable.photo_placeholder1)
+                    .transform(new GlideCircleTransform(this))
+                    .into(mImage);
+
+        }else {
+            mImage.setBackgroundColor(Color.parseColor("#FOFOFO"));
+        }
+
     }
 
     private void initListeners() {

@@ -274,10 +274,10 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(TeacherIndexActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TeacherIndexActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(TeacherIndexActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeacherIndexActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -334,10 +334,10 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(TeacherIndexActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TeacherIndexActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(TeacherIndexActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeacherIndexActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
 
         }

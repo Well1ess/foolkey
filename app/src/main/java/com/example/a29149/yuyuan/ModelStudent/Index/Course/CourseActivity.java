@@ -74,6 +74,8 @@ public class CourseActivity extends AppCompatActivity {
     @ViewInject(R.id.remark)
     private TextView mCourseRemark;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
      super.onCreate(savedInstanceState);
@@ -136,7 +138,7 @@ public class CourseActivity extends AppCompatActivity {
                 ActivityOptions.makeSceneTransitionAnimation(this, view, "shareHead").toBundle());
     }
 
-    @OnClick({R.id.chart, R.id.shopping, R.id.buy})
+    @OnClick({R.id.chart, R.id.shopping, R.id.buy, R.id.bt_return})
     public void setRadioButtonListener(View view) {
         switch (view.getId())
         {
@@ -153,6 +155,9 @@ public class CourseActivity extends AppCompatActivity {
                 //如果购买成功则结束CourseActivity、BuyCourseActivity,跳转至订单界面
                 //如果没有购买则正常返回
                 AppManager.getInstance().addActivity(this);
+                break;
+            case R.id.bt_return:
+                finish();
                 break;
         }
     }

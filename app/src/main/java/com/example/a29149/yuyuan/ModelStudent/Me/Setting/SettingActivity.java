@@ -259,10 +259,10 @@ public class SettingActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(SettingActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(SettingActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
 
         }

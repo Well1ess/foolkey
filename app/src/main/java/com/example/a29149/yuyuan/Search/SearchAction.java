@@ -32,7 +32,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
     private SearchActivity searchActivity;
 
     public SearchAction(SearchActivity searchActivity) {
-        this.sarchActivity = searchActivity;
+        this.searchActivity = searchActivity;
     }
 
 
@@ -41,7 +41,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
         //params[0] condition
         mCondition = params[0];
         mPageNo = params[1];
-        switch (params[j0]) {
+        switch (mCondition) {
             case "course":
                 //TODO
                 break;

@@ -197,7 +197,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Check for a valid
         if (TextUtils.isEmpty(userName)
-//                || !PhoneFormatCheckUtils.isPhoneLegal( strUserName )
+                || !PhoneFormatCheckUtils.isPhoneLegal( userName )
                 ) {
             mUserNameView.setError("请输入正确的用户名^_^");
             focusView = mUserNameView;

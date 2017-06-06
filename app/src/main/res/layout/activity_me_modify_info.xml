@@ -109,13 +109,8 @@
             android:layout_height="70dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="40dp"
-
-            android:background="@drawable/circle"
-
-
+            android:background="@color/transparent"
             android:elevation="2dp">
-
-
         </com.example.a29149.yuyuan.Widget.SquareImageView>
 
     </RelativeLayout>

@@ -47,12 +47,23 @@ public class RechargeActivity extends AppCompatActivity {
         intent = getIntent();
     }
 
+    /**
+     * 返回按键
+     * @param view
+     */
     @OnClick(R.id.bt_return)
     public void setBtReturnListener(View view)
     {
+        Intent intent = new Intent();
+        intent.putExtra("date_return", "返回");
+        setResult(RESULT_CANCELED, intent);
         this.finish();
     }
 
+    /**
+     * 点击充值按钮
+     * @param view
+     */
     @OnClick(R.id.recharge)
     public void setRechargeListener(View view)
     {
@@ -71,6 +82,9 @@ public class RechargeActivity extends AppCompatActivity {
         recharge.execute();
     }
 
+    /**
+     * 充值
+     */
     public class Recharge extends AsyncTask<String, Integer, String> {
 
         public Recharge() {
@@ -96,10 +110,14 @@ public class RechargeActivity extends AppCompatActivity {
                     if (resultFlag.equals("success")) {
 
                         Toast.makeText(RechargeActivity.this, "充值成功！", Toast.LENGTH_SHORT).show();
+                        //刷新个人资料
+//                        SelfInfo selfInfo = new SelfInfo();
+//                        selfInfo.execute();
 
-                        SelfInfo selfInfo = new SelfInfo();
-                        selfInfo.execute();
-
+                        Intent intent = new Intent();
+                        intent.putExtra("virtualCurrency", jsonObject.getString("virtualCurrency"));
+                        setResult(RESULT_OK, intent);
+                        finish();
 
                     } else {
                         Toast.makeText(RechargeActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
@@ -108,7 +126,7 @@ public class RechargeActivity extends AppCompatActivity {
                     Toast.makeText(RechargeActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(RechargeActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RechargeActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -149,10 +167,10 @@ public class RechargeActivity extends AppCompatActivity {
 
                     }
                 } catch (Exception e) {
-                    Toast.makeText(RechargeActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RechargeActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(RechargeActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RechargeActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
 
         }

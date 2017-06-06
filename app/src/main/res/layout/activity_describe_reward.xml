@@ -63,11 +63,11 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:hint="输入悬赏标题"
-        android:textColor="@color/grey555"
+        android:textColor="@color/light_gray"
         android:maxLines="1"
 
         android:layout_marginLeft="30dp"
-        android:textSize="15sp"/>
+        android:textSize="12sp"/>
 
 
     <TextView
@@ -78,8 +78,8 @@
         android:gravity="bottom"
         android:layout_marginLeft="30dp"
         android:text="点击选择标签"
-        android:textColor="@color/grey555"
-        android:textSize="15sp"
+        android:textColor="@color/light_gray"
+        android:textSize="12sp"
         />
 
     <View
@@ -98,11 +98,11 @@
         android:background="@null"
         android:hint="输入悬赏内容..."
         android:layout_marginLeft="30dp"
-        android:textColor="@color/grey555"
+        android:textColor="@color/light_gray"
         android:imeActionId="@+id/login"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionUnspecified"
-        android:textSize="15sp"/>
+        android:textSize="12sp"/>
 
 
 </LinearLayout>

@@ -535,10 +535,10 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
                         startActivity(toMainActivity);
                     }
                 } catch (Exception e) {
-                    Toast.makeText(RewardModifyActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RewardModifyActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(RewardModifyActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RewardModifyActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
 
         }

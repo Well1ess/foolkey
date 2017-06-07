@@ -102,7 +102,7 @@
                     android:layout_below="@id/slogan"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
-                    android:text="————葛尧" />
+                    android:text="————愚猿" />
 
                 <TextView
                     android:id="@+id/prestige"

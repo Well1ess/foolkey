@@ -19,6 +19,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment;
 import com.example.a29149.yuyuan.ModelStudent.Index.IndexMainFragment;
 import com.example.a29149.yuyuan.ModelStudent.Me.MeMainFragment;
@@ -30,11 +31,13 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_MODIFY;
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
 
 public class MainStudentActivity extends AppCompatActivity {
@@ -278,15 +281,25 @@ public class MainStudentActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case FROM_ME_FRAGMENT_TO_RECHARGE:
-                if (resultCode == RESULT_OK){
-                    MeMainFragment meMainFragment;
-                    meMainFragment = (MeMainFragment) getSupportFragmentManager().findFragmentByTag(SHOW_OF_FIFTH_TAG);
-                    meMainFragment.setVirtualMoney( data.getStringExtra("virtualCurrency") );
-                }else {
-                    Toast.makeText(this, "充值失败", Toast.LENGTH_SHORT).show();
-                }
+
+        if (resultCode == RESULT_OK) { // 成功请求
+            MeMainFragment meMainFragment; //【我的】页面的fragment
+            meMainFragment = (MeMainFragment) getSupportFragmentManager().findFragmentByTag(SHOW_OF_FIFTH_TAG);
+            StudentDTO studentDTO = GlobalUtil.getInstance().getStudentDTO();
+
+            switch (requestCode) {
+                case FROM_ME_FRAGMENT_TO_RECHARGE: //充值界面回去
+                    meMainFragment.setVirtualMoney(data.getStringExtra("virtualCurrency"));
+                    break;
+                case FROM_ME_FRAGMENT_TO_MODIFY: //修改个人资料界面回去
+                    meMainFragment.setGithub(studentDTO.getGithubUrl());
+                    meMainFragment.setEmail(studentDTO.getEmail());
+                    meMainFragment.setTechnicTag( studentDTO.getTechnicTagEnum() );
+                    meMainFragment.set2stNickedName(studentDTO.getNickedName());
+                    meMainFragment.setTitle(studentDTO.getNickedName());
+                    meMainFragment.setUserSlogan( studentDTO.getSlogan() );
+                    break;
+            }
         }
     }
 }

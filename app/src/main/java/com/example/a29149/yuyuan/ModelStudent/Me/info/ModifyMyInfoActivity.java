@@ -3,6 +3,7 @@ package com.example.a29149.yuyuan.ModelStudent.Me.info;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -285,8 +286,9 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
 
 
             if (updateStudentInfoController.getResult().equals("success")) {
-
                 Toast.makeText(ModifyMyInfoActivity.this, "已保存", Toast.LENGTH_SHORT).show();
+                Intent intent = getIntent();
+                setResult(RESULT_OK, intent);
                 finish();
             }else {
                 Toast.makeText(ModifyMyInfoActivity.this, "保存失败", Toast.LENGTH_SHORT).show();

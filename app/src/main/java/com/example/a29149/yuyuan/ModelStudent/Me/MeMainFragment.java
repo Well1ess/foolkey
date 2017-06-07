@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +21,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
+import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Main.ImageUploadActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
@@ -49,6 +49,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_MODIFY;
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
 
 public class MeMainFragment extends Fragment implements View.OnClickListener , FreshInfo{
@@ -133,61 +134,25 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
     {
         studentDTO = GlobalUtil.getInstance().getStudentDTO();
 
+        mTitle = (TextView) view.findViewById(R.id.title);
+        mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
+        mHeadImage = (ImageView) view.findViewById(R.id.head);
+
 
         int virtualMoney = DoubleParseInt(studentDTO.getVirtualCurrency()) ;
-        mVirtualMoney.setText(virtualMoney+"");
+        setVirtualMoney(virtualMoney + "");
+        setPrestige( studentDTO.getPrestige() + "" );
+        setTechnicTag(studentDTO.getTechnicTagEnum());
+        set2stNickedName( studentDTO.getNickedName() );
+        setUserSlogan(studentDTO.getSlogan());
+        setHeadImage( studentDTO.getUserName() );
+        setEmail( studentDTO.getEmail() );
+        setGithub( studentDTO.getGithubUrl() );
 
-        String prestige = studentDTO.getPrestige() + "";
-        reputation.setText( prestige );
-        //根据声望的长度，来经行位置的调整
-        reputation.setPadding(0,0,
-                - (prestige.length() - 1 ) * 5 + 20
-                ,0);
-        reputation.setTextSize( 125/(4 + prestige.length()) );
-
-        email.setText(studentDTO.getEmail() + "");
-        github.setText(studentDTO.getGithubUrl() + "");
-        if (studentDTO.getTechnicTagEnum() != null)
-            technicTag.setText(studentDTO.getTechnicTagEnum() + "");
-        else
-            ;
-
-
-        mTitle = (TextView) view.findViewById(R.id.title);
-        mTitle.setText(studentDTO.getNickedName() + "");
-        mUserName.setText("————"+studentDTO.getNickedName());
-
-        if (TextUtils.isEmpty(studentDTO.getSlogan()))
-            mUserSlogan.setText("这个人很懒，什么都没留下！");
-        else
-            mUserSlogan.setText(studentDTO.getSlogan());
-
-        mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
         mOwnerReward.setOnClickListener(this);
-
-//        mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
-//        mOwnerCourse.setOnClickListener(this);
-
-        mHeadImage = (ImageView) view.findViewById(R.id.head);
         mHeadImage.setOnClickListener(this);
 
-        //图片加载器
-//        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-//        alphaAnimation.setDuration(1000);
-//        alphaAnimation.setFillAfter(true);
-//        mHeadImage.setAnimation(alphaAnimation);
-//        alphaAnimation.start();
-//        mHeadImage.setVisibility(View.VISIBLE);
 
-        glide = Glide.with(this);
-        System.out.println(this.getClass() + "180行 " + PictureInfoBO.getOnlinePhoto(studentDTO.getUserName()));
-        glide.load(PictureInfoBO.getOnlinePhoto( studentDTO.getUserName() ) )
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .transform(new GlideCircleTransform(getActivity()))
-                .into(mHeadImage);
-
-//        reputation.setText( studentDTO.getPrestige() );
 
 
         displayInfo = new WarningDisplayDialog.Builder(getContext());
@@ -288,7 +253,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
     @OnClick(R.id.modify_info)
     public void setmModifyInfo(View view){
         Intent intent4 = new Intent(getActivity(), ModifyMyInfoActivity.class);
-        startActivity(intent4);
+        getActivity().startActivityForResult(intent4, FROM_ME_FRAGMENT_TO_MODIFY);
     }
 
    /* @OnClick(R.id.change_role)
@@ -328,13 +293,6 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
         }
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        initView();
-//    }
-
-
 
     /**
      * 设置余额
@@ -343,6 +301,94 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
      */
     public void setVirtualMoney(String money){
         mVirtualMoney.setText(money + "");
+    }
+
+    /**
+     * 设置slogan
+     * @param title
+     */
+    public void setTitle(String title) {
+        if (title == null || title.equals(""))
+            title = "神秘人";
+        this.mTitle.setText( title );
+    }
+
+
+    /**
+     * 设置头像
+     * @param userName
+     */
+    public void setHeadImage(String userName) {
+        glide = Glide.with(this);
+        glide.load(PictureInfoBO.getOnlinePhoto( userName+"" ) )
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .transform(new GlideCircleTransform(getActivity()))
+                .into(mHeadImage);
+    }
+
+
+    /**
+     * 设置slogan
+     * @param slogan
+     */
+    public void setUserSlogan(String slogan) {
+        if (slogan == null || slogan.equals(""))
+            slogan = "懒汉，什么都没说";
+        this.mUserSlogan.setText( slogan );
+    }
+
+    /**
+     * slogan下面的名称，也是昵称
+     * @param nickedName
+     */
+    public void set2stNickedName(String nickedName) {
+        if (nickedName == null || nickedName.equals(""))
+            nickedName = "神秘人";
+        this.mUserName.setText( "—— " + nickedName);
+    }
+
+    /**
+     * 设置声望
+     * @param prestige
+     */
+    public void setPrestige(String prestige) {
+        reputation.setText( prestige );
+        //根据声望的长度，来经行位置的调整
+        reputation.setPadding(0,0,
+                - (prestige.length() - 1 ) * 5 + 20
+                ,0);
+        reputation.setTextSize( 125/(4 + prestige.length()) );
+    }
+
+    /**
+     * 设置邮箱
+     * @param email
+     */
+    public void setEmail(String email) {
+        if (email == null || "".equals(email))
+            email = "电子邮箱";
+        this.email.setText(email + "");
+    }
+
+    /**
+     * 设置github账号
+     * @param github
+     */
+    public void setGithub(String github) {
+        if (github == null || "".equals(github))
+            github = "github地址";
+        this.github.setText(github + "");
+    }
+
+    /**
+     * 设置技术标签
+     * @param technicTag
+     */
+    public void setTechnicTag(TechnicTagEnum technicTag) {
+        if ( technicTag == null)
+            technicTag = TechnicTagEnum.其他;
+            this.technicTag.setText(technicTag + "");
     }
 
     //获取抵扣卷

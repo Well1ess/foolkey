@@ -189,7 +189,7 @@
         />
 
     <EditText
-        android:id="@+id/slogan"
+        android:id="@+id/tv_slogan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -222,7 +222,7 @@
         android:background="@color/light_white"
         />
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/tv_email"
         android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -246,7 +246,7 @@
 
 
     <EditText
-        android:id="@+id/github"
+        android:id="@+id/tv_github"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -268,7 +268,7 @@
         />
 
     <TextView
-        android:id="@+id/technicTag"
+        android:id="@+id/tv_technicTag"
         android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

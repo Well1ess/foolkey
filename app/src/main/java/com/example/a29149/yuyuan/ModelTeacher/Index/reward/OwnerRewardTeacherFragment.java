@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyRewardAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.ModelTeacher.Index.reward.OwnerRewardListAdapter;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
@@ -29,7 +28,7 @@ import static com.example.a29149.yuyuan.Main.MainStudentActivity.shapeLoadingDia
 /**
  * Created by MaLei on 2017/5/14.
  * Email:ml1995@mail.ustc.edu.cn
- * 老师拥有的悬赏
+ * 老师界面：老师申请并被同意的悬赏
  */
 public class OwnerRewardTeacherFragment extends Fragment {
 
@@ -45,7 +44,7 @@ public class OwnerRewardTeacherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_owner_reward_teacher,null);
 
-        mCourseList = (ListView) view.findViewById(R.id.reward_list);
+        mCourseList = (ListView) view.findViewById(R.id.lv_reward_list);
 
         shapeLoadingDialog = new ShapeLoadingDialog(getContext());
         shapeLoadingDialog.setLoadingText("加载中...");

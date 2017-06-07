@@ -126,7 +126,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
 
         public MyViewHolder(View view)
         {
-            tv = (TextView) view.findViewById(R.id.id_num);
+            tv = (TextView) view.findViewById(R.id.sqi_photo);
             state = (TextView) view.findViewById(R.id.tv_state);
         }
     }

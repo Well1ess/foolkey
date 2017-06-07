@@ -18,6 +18,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_alignParentRight="true"
@@ -28,10 +30,11 @@
                 android:paddingRight="4dp"
                 android:paddingLeft="4dp"
                 android:textSize="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                />
             <TextView
                 android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimary"
@@ -43,9 +46,19 @@
                 android:paddingRight="4dp"
                 android:paddingLeft="4dp"
                 android:textSize="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                />
         </LinearLayout>
+
+        <GridView
+            android:id="@+id/gv_apply_user_head"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:horizontalSpacing="5dp"
+            android:numColumns="5"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp">
+        </GridView>
 
         <LinearLayout
             android:layout_gravity="center_horizontal"
@@ -53,6 +66,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_alignParentRight="true"
@@ -62,11 +77,11 @@
                 android:paddingBottom="2dp"
                 android:paddingRight="4dp"
                 android:paddingLeft="4dp"
-                android:textSize="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="12dp"/>
             <TextView
                 android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimary"
@@ -77,21 +92,8 @@
                 android:paddingBottom="2dp"
                 android:paddingRight="4dp"
                 android:paddingLeft="4dp"
-                android:textSize="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="12dp"/>
         </LinearLayout>
-
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/teacher_head"
-            android:gravity="center"
-            android:horizontalSpacing="5dp"
-            android:verticalSpacing="5dp"
-            android:numColumns="5"
-            android:stretchMode="columnWidth">
-        </GridView>
 
         <View
             android:layout_marginTop="5dp"
@@ -100,10 +102,10 @@
             android:background="@color/divider"/>
 
         <TextView
-            android:id="@+id/open_close"
-            android:layout_gravity="center"
+            android:id="@+id/tv_open_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
             android:gravity="center"
             android:text="展开" />

@@ -105,7 +105,7 @@ public class NewCourseOrderActivity extends AppCompatActivity {
         mDisplayDialog.create();
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setBtReturnListener(View view)
     {
         this.finish();

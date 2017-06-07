@@ -33,7 +33,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.util.List;
-
+@Deprecated
 public class TeacherRewardMainFragment extends Fragment {
 
     //下拉刷新的Layout

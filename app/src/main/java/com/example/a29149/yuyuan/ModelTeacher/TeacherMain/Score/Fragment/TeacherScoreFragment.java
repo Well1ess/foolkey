@@ -34,6 +34,7 @@ import java.util.List;
 /**
  * 测试，已废弃
  * */
+@Deprecated
 public class TeacherScoreFragment extends Fragment {
 
     //页数

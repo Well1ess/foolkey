@@ -59,7 +59,7 @@ public class SearchActivity extends AppCompatActivity {
     @ViewInject(R.id.search_course)
     private RadioButton mSearchCourse;
 
-    @ViewInject(R.id.search_reward)
+    @ViewInject(R.id.rb_search_reward)
     private RadioButton mSearchReward;
 
     @ViewInject(R.id.search_teacher)
@@ -71,7 +71,7 @@ public class SearchActivity extends AppCompatActivity {
     @ViewInject(R.id.search_article)
     private RadioButton mSearchArticle;
 
-    @ViewInject(R.id.id_tab_line)
+    @ViewInject(R.id.iv_tab_line)
     private ImageView mTabLine;
 
     //指标 按钮组
@@ -93,7 +93,7 @@ public class SearchActivity extends AppCompatActivity {
     @ViewInject(R.id.search_target_teacher)
     private RadioButton mSearchTargetTeacher;
 
-    @ViewInject(R.id.content_pager)
+    @ViewInject(R.id.vp_content_pager)
     private ViewPager mContent;
     private RadioButton mCurrentTarget;
 
@@ -120,7 +120,7 @@ public class SearchActivity extends AppCompatActivity {
         GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().clear();
 
         //FragmentTabHost初始化
-        mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.content_pager);
+        mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.vp_content_pager);
 
         TabSpec tabSpec0 = mFragmentTabHost.newTabSpec(SEARCH_OF_FIRST_TAG)
                 .setIndicator("0");
@@ -148,7 +148,7 @@ public class SearchActivity extends AppCompatActivity {
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FIRST_TAG);
                         condition = "course";
                         break;
-                    case R.id.search_reward:
+                    case R.id.rb_search_reward:
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_SECOND_TAG);
                         condition = "reward";
                         break;
@@ -324,7 +324,7 @@ public class SearchActivity extends AppCompatActivity {
         mTabLine.setLayoutParams(cp);//将修改好的layoutParams设置为该控件的layoutParams*/
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setReturnListener(View view) {
         this.onBackPressed();
     }

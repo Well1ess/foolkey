@@ -19,7 +19,7 @@ import com.example.a29149.yuyuan.Util.log;
  * 课程或者悬赏下的学生列表,
  * 测试，已废弃
  */
-
+@Deprecated
 public class TeacherScoreAdapter extends BaseAdapter {
 
     private Context mContext;

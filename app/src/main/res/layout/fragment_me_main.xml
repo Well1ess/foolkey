@@ -86,7 +86,7 @@
 
 
                 <TextView
-                    android:id="@+id/slogan"
+                    android:id="@+id/tv_slogan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -95,17 +95,17 @@
                     android:text="努力的时候，全世界都在帮你" />
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@id/slogan"
+                    android:layout_below="@id/tv_slogan"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:text="————愚猿" />
 
                 <TextView
-                    android:id="@+id/prestige"
+                    android:id="@+id/tv_prestige"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/head_square"
@@ -115,7 +115,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/modify_info"
+                    android:id="@+id/tv_modify_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -217,7 +217,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/owner_reward"
+                        android:id="@+id/tv_owner_reward"
                         style="@style/TextView.MeMenu"
                         android:clickable="true"
                         android:text="悬 赏" />
@@ -271,7 +271,7 @@
 
 
             <TextView
-                android:id="@+id/email"
+                android:id="@+id/tv_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -292,7 +292,7 @@
 
 
             <TextView
-                android:id="@+id/github"
+                android:id="@+id/tv_github"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -313,7 +313,7 @@
                 android:background="@color/light_white" />
 
             <TextView
-                android:id="@+id/technicTag"
+                android:id="@+id/tv_technicTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"

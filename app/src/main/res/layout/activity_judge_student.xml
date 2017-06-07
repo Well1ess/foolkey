@@ -22,7 +22,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageButton
-                android:id="@+id/bt_return"
+                android:id="@+id/ib_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -31,12 +31,12 @@
                 android:backgroundTint="@color/white" />
 
             <TextView
+                android:id="@+id/tv_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textStyle="normal"
                 android:gravity="center"
                 android:textSize="18sp"
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:singleLine="true"
@@ -97,16 +97,18 @@
                             android:focusable="false"
                             android:orientation="vertical"
                             >
+
                             <TextView
-                                android:id="@+id/student_name"
-                                android:layout_gravity="center_horizontal"
+                                android:id="@+id/tv_student_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/grey555"
+                                android:layout_gravity="center_horizontal"
                                 android:paddingBottom="20dp"
-                                android:text="学生姓名"/>
+                                android:text="学生姓名"
+                                android:textColor="@color/grey555"/>
+
                             <TextView
-                                android:id="@+id/course_name"
+                                android:id="@+id/tv_course_name"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -118,7 +120,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/order_price"
+                        android:id="@+id/tv_order_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|right"
@@ -208,12 +210,12 @@
                     android:background="@color/white"
                     android:orientation="vertical">
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="为学生打分"
                         android:textColor="@color/grey"
                         android:textSize="16sp"
                         android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"/>
 
@@ -225,15 +227,15 @@
                         android:layout_marginRight="40dp" />
 
                     <RatingBar
+                        android:id="@+id/rb_student_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:scaleX="0.6"
                         android:scaleY="0.6"
                         android:layout_gravity="center_horizontal"
                         android:numStars="5"
                         android:max="5"
-                        android:stepSize="0.5"
-                        android:id="@+id/student_score"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:stepSize="0.5"/>
 
                     <!--<EditText-->
                         <!--android:textSize="12sp"-->
@@ -265,7 +267,7 @@
 
             <RadioButton
                 style="@style/RadioButton.Menu"
-                android:id="@+id/publish_button"
+                android:id="@+id/rb_publish"
                 android:textColor="@color/dark_green"
                 android:textSize="18dp"
                 android:textStyle="normal"

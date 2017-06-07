@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * 测试，已废弃
  * */
+@Deprecated
 public class MoreStudentActivity extends AppCompatActivity {
 
     @ViewInject(R.id.student_list)
@@ -66,7 +67,7 @@ public class MoreStudentActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setReturn(View view)
     {
         this.onBackPressed();

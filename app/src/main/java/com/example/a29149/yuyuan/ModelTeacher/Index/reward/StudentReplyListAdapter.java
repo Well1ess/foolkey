@@ -134,7 +134,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
         int id = view.getId();
         switch (id)
         {
-            case R.id.id_num:
+            case R.id.sqi_photo:
                 startOrEndClass();
                 break;
             default:
@@ -168,7 +168,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
 
         public MyViewHolder(View view)
         {
-            tv = (ImageView) view.findViewById(R.id.id_num);
+            tv = (ImageView) view.findViewById(R.id.sqi_photo);
             state = (TextView) view.findViewById(R.id.tv_state);
         }
     }

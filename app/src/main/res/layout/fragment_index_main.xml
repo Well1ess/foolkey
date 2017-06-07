@@ -107,7 +107,7 @@
         </com.example.a29149.yuyuan.Widget.SlideMenu>
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/content_pager"
+            android:id="@+id/vp_content_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

@@ -10,7 +10,7 @@
     >
 
     <TextView
-        android:id="@+id/cash_rmb"
+        android:id="@+id/tv_cash_rmb"
         style="@style/TextView.MeMenuNumber"
         android:text="0"/>
 

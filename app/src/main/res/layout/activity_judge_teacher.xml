@@ -22,7 +22,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageButton
-                android:id="@+id/bt_return"
+                android:id="@+id/ib_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -34,7 +34,7 @@
                 android:textStyle="normal"
                 android:gravity="center"
                 android:textSize="18sp"
-                android:id="@+id/toolbar_title"
+                android:id="@+id/tv_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -98,7 +98,7 @@
                             android:orientation="vertical"
                             >
                             <TextView
-                                android:id="@+id/student_name"
+                                android:id="@+id/tv_student_name"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                                 android:paddingBottom="20dp"
                                 android:text="老师姓名"/>
                             <TextView
-                                android:id="@+id/course_name"
+                                android:id="@+id/tv_course_name"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/order_price"
+                        android:id="@+id/tv_order_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|right"
@@ -232,7 +232,7 @@
                         android:numStars="5"
                         android:max="5"
                         android:stepSize="0.5"
-                        android:id="@+id/student_score"
+                        android:id="@+id/rb_student_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -266,7 +266,7 @@
 
             <RadioButton
                 style="@style/RadioButton.Menu"
-                android:id="@+id/publish_button"
+                android:id="@+id/rb_publish"
                 android:textColor="@color/dark_green"
                 android:textSize="18dp"
                 android:textStyle="normal"

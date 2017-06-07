@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +23,6 @@ import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
-import com.example.a29149.yuyuan.controller.course.judge.JudgeStudentController;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
 import com.example.resource.util.image.GlideCircleTransform;
 
@@ -49,19 +47,19 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
     private ImageView teacherPhoto;
     private String teacherUserName;
 
-    @ViewInject(R.id.student_name)
+    @ViewInject(R.id.tv_student_name)
     private TextView mTeacherName;
 
-    @ViewInject(R.id.course_name)
+    @ViewInject(R.id.tv_course_name)
     private TextView mCourseName;
 
-    @ViewInject(R.id.student_score)
+    @ViewInject(R.id.rb_student_score)
     private RatingBar studentScore;
 
-    @ViewInject(R.id.order_price)
+    @ViewInject(R.id.tv_order_price)
     private TextView mOrderPrice;
 
-    @ViewInject(R.id.publish_button)
+    @ViewInject(R.id.rb_publish)
     private RadioButton radioButton;
 
     private RequestManager glide;
@@ -81,7 +79,7 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
 
     private void initView() {
         mRewardScore = (TextView) findViewById(R.id.ed_score);
-        mPublish = (TextView) findViewById(R.id.publish_button);
+        mPublish = (TextView) findViewById(R.id.rb_publish);
         mPublish.setOnClickListener(this);
 
         teacherUserName = getIntent().getStringExtra("teacherUserName");
@@ -116,7 +114,7 @@ public class CommentRewardActivity extends Activity implements View.OnClickListe
         int id = view.getId();
         switch (id)
         {
-            case R.id.publish_button:
+            case R.id.rb_publish:
                 publishCommentReward();
                 break;
             default:

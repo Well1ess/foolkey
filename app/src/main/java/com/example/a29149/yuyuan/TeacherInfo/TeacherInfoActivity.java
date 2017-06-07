@@ -22,7 +22,7 @@ public class TeacherInfoActivity extends AppCompatActivity {
     @ViewInject(R.id.mask)
     private View mMask;
 
-    @ViewInject(R.id.bt_return)
+    @ViewInject(R.id.ib_return)
     private Button mReturn;
 
     @ViewInject(R.id.option_menu)
@@ -133,7 +133,7 @@ public class TeacherInfoActivity extends AppCompatActivity {
         closeOptionMenu();
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public  void setReturnListener(View view){
         this.finish();
     }

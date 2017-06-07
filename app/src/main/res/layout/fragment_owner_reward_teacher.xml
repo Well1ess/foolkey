@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@color/background">
         <ListView
-            android:id="@+id/reward_list"
+            android:id="@+id/lv_reward_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"

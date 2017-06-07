@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 
+@Deprecated
 public class TeacherMeMainFragment extends Fragment {
 
     public TeacherMeMainFragment() {

@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * Created by 张丽华 on 2017/5/10.
- * Description:我申请的悬赏的适配器
+ * Description:老师界面：我申请的悬赏的适配器
  */
 
 public class OwnerRewardListAdapter extends BaseAdapter {
@@ -77,7 +77,7 @@ public class OwnerRewardListAdapter extends BaseAdapter {
             orderBuyCourseWithStudentAsTeacherSTCDTOs = list.get(position).getOrderBuyCourseWithStudentAsTeacherSTCDTOS();
             Log.i("malei",orderBuyCourseWithStudentAsTeacherSTCDTOs.get(0).getOrderBuyCourseDTO().toString());
             StudentReplyListAdapter studentReplyListAdapter = new StudentReplyListAdapter(mContext, orderBuyCourseWithStudentAsTeacherSTCDTOs);
-            final GridView gridView = (GridView) convertView.findViewById(R.id.teacher_head);
+            final GridView gridView = (GridView) convertView.findViewById(R.id.gv_apply_user_head);
             gridView.setAdapter(studentReplyListAdapter);
             //点击申请接单的老师的头像，跳转到老师的详细信息中
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,7 +95,7 @@ public class OwnerRewardListAdapter extends BaseAdapter {
             if (listState.get(position).getOriginalHeight() > gridView.getLayoutParams().height)
                 listState.get(position).setOriginalHeight(gridView.getLayoutParams().height);
 
-            final TextView textView = (TextView) convertView.findViewById(R.id.open_close);
+            final TextView textView = (TextView) convertView.findViewById(R.id.tv_open_close);
 
             //获取悬赏标题
             final TextView title = (TextView) convertView.findViewById(R.id.tv_title);

@@ -71,7 +71,7 @@ public class IndexMainFragment extends Fragment {
     @ViewInject(R.id.other)
     private TextView mSlideClassOther;
 
-    @ViewInject(R.id.content_pager)
+    @ViewInject(R.id.vp_content_pager)
     private ViewPager mClassPager;
 
     private List<ClassesFragment> fragmentList = new ArrayList<>();

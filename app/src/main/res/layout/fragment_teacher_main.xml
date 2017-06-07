@@ -46,7 +46,7 @@
                 android:background="@color/white">
 
                 <RadioGroup
-                    android:id="@+id/discovery_main_menu"
+                    android:id="@+id/rg_discovery_main_menu"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -54,18 +54,18 @@
                     android:elevation="1dp">
 
                     <RadioButton
-                        android:id="@+id/search_score"
+                        android:id="@+id/rb_search_score"
                         android:text="我发布的课程"
                         style="@style/RadioButton.SearchMenu" />
 
                     <RadioButton
-                        android:id="@+id/search_reward"
+                        android:id="@+id/rb_search_reward"
                         android:text="我接受的悬赏"
                         style="@style/RadioButton.SearchMenu"  />
                 </RadioGroup>
 
                 <ImageView
-                    android:id="@+id/id_tab_line"
+                    android:id="@+id/iv_tab_line"
                     android:layout_width="10dp"
                     android:layout_height="3dp"
                     android:background="@color/orange"
@@ -73,7 +73,7 @@
             </FrameLayout>
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/content_pager"
+                android:id="@+id/vp_content_pager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />

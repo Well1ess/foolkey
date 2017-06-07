@@ -95,7 +95,7 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         mPublish = (RadioButton) findViewById(R.id.main_menu_discovery);
         mPublish.setOnClickListener(this);
         //返回按键
-        mReturnButton.findViewById(R.id.bt_return);
+        mReturnButton.findViewById(R.id.ib_return);
         mReturnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

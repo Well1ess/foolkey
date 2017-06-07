@@ -23,7 +23,7 @@
 
             <ImageButton
                 android:transitionName="shareHead"
-                android:id="@+id/bt_return"
+                android:id="@+id/ib_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -35,7 +35,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:id="@+id/toolbar_title"
+                android:id="@+id/tv_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"

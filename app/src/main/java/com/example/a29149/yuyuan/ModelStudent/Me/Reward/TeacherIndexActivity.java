@@ -172,8 +172,8 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
 
     private void initView() {
         mDescription = (TextView) findViewById(R.id.tv_description);
-        mTitle = (TextView) findViewById(R.id.toolbar_title);
-        mInfo = (TextView) findViewById(R.id.slogan);
+        mTitle = (TextView) findViewById(R.id.tv_toolbar_title);
+        mInfo = (TextView) findViewById(R.id.tv_slogan);
         mTeacherSex = (TextView) findViewById(R.id.tv_teacherSex);
         mTeacherOrganization = (TextView) findViewById(R.id.tv_teacherOriganization);
         mTeacherEducation = (TextView) findViewById(R.id.tv_teacherEducation);
@@ -194,7 +194,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mRewardAgree.setOnClickListener(this);
         mRewardDisagree = (RadioButton)findViewById(R.id.main_menu_disagree);
         mRewardDisagree.setOnClickListener(this);
-        mReturn = (ImageButton) findViewById(R.id.bt_return);
+        mReturn = (ImageButton) findViewById(R.id.ib_return);
         mReturn.setOnClickListener(this);
 
     }
@@ -211,7 +211,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
             case R.id.main_menu_disagree:
                 new DisagreeApplyRewardAction().execute();
                 break;
-            case R.id.bt_return:
+            case R.id.ib_return:
                 this.finish();
                 break;
             default:

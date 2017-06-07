@@ -45,7 +45,7 @@
                 android:backgroundTint="@color/white"/>
 
             <TextView
-                android:id="@+id/tv_student_name"
+                android:id="@+id/tv_nickedName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -131,7 +131,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/tv_teacherSex"
+                                android:id="@+id/tv_sex"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="男"
@@ -145,10 +145,10 @@
                                 android:background="@color/grey" />
 
                             <TextView
-                                android:id="@+id/tv_teacherOriganization"
+                                android:id="@+id/tv_organization"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="中科大"
+                                android:text="公司"
                                 android:textColor="@color/grey" />
 
                             <!--<TextView-->
@@ -238,7 +238,7 @@
                         android:text="上课次数" />
 
                     <TextView
-                        android:id="@+id/tv_courseNum"
+                        android:id="@+id/tv_teachingNumber"
                         style="@style/TextView.INFO_NUM"
                         android:text="1" />
 
@@ -260,12 +260,12 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/student_role"
+                        android:id="@+id/tv_role"
                         style="@style/TextView.INFO_TEXT"
                         android:text="已认证" />
 
                     <CheckBox
-                        android:id="@+id/cb_teacherState"
+                        android:id="@+id/cb_state"
                         style="@style/TextView.INFO_NUM"
                         android:checked="true"
                         android:clickable="false"
@@ -276,7 +276,7 @@
                         android:text="评价" />
 
                     <TextView
-                        android:id="@+id/tv_evaluateScore"
+                        android:id="@+id/tv_teacherAverageScore"
                         style="@style/TextView.INFO_NUM"
                         android:text="4.3" />
                 </LinearLayout>
@@ -316,7 +316,7 @@
                         android:text="博客主页:" />
 
                     <TextView
-                        android:id="@+id/tv_teacherIndex"
+                        android:id="@+id/tv_blogUrl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"

@@ -113,15 +113,15 @@
                             android:layout_marginTop="10dp"/>
 
                         <TextView
-                            android:id="@+id/num"
+                            android:id="@+id/tv_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimary"
-                            android:text="0"
-                            android:layout_marginLeft="15dp"
-                            android:textSize="18sp"
                             android:layout_marginBottom="12dp"
-                            android:layout_marginTop="12dp"/>
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="12dp"
+                            android:text="0"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/add_num"
@@ -166,7 +166,7 @@
 
                     <TextView
                         android:drawableRight="@mipmap/ic_return"
-                        android:id="@+id/teach_type"
+                        android:id="@+id/tv_teachMethodEnum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -195,13 +195,17 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:padding="16dp"
-                    android:text="备注"/>
+                    android:text="备注"
+                    android:visibility="gone"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="@color/white">
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -249,7 +253,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="合计："/>
                 <TextView
-                    android:id="@+id/money"
+                    android:id="@+id/tv_amount"
                     android:layout_marginRight="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

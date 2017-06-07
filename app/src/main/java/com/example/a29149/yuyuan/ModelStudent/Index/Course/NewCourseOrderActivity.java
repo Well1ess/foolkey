@@ -111,14 +111,14 @@ public class NewCourseOrderActivity extends AppCompatActivity {
         this.finish();
     }
 
-    @OnClick(R.id.cancel)
+    @OnClick(R.id.tv_cancel)
     public void setCancelListener(View view)
     {
         mDisplayDialog.setMsg("您确定要取消该订单吗？");
         mDisplayDialog.getDialog().show();
     }
 
-    @OnClick(R.id.buy)
+    @OnClick(R.id.tv_buy)
     public void setBuyListener(View view)
     {
         mPayDialog.getDialog().show();

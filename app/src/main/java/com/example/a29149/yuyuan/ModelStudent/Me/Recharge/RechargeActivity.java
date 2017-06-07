@@ -26,7 +26,7 @@ import org.json.JSONObject;
 
 public class RechargeActivity extends AppCompatActivity {
 
-    @ViewInject(R.id.money)
+    @ViewInject(R.id.et_amount)
     private EditText mMoney;
 
     Intent intent;

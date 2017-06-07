@@ -27,7 +27,7 @@ public class CourseActivity extends AppCompatActivity {
     //保存点击的位置
     private int mPosition;
 
-    @ViewInject(R.id.author)
+    @ViewInject(R.id.tv_nickedName)
     private TextView mAuthor;
 
     @ViewInject(R.id.iv_photo)
@@ -129,7 +129,7 @@ public class CourseActivity extends AppCompatActivity {
                 ActivityOptions.makeSceneTransitionAnimation(this, view, "shareHead").toBundle());
     }
 
-    @OnClick({R.id.chart, R.id.shopping, R.id.buy, R.id.tv_return})
+    @OnClick({R.id.chart, R.id.shopping, R.id.tv_buy, R.id.ib_return})
     public void setRadioButtonListener(View view) {
         switch (view.getId())
         {
@@ -137,7 +137,7 @@ public class CourseActivity extends AppCompatActivity {
                 break;
             case R.id.shopping:
                 break;
-            case R.id.buy:
+            case R.id.tv_buy:
                 Intent intent = new Intent(this, BuyCourseActivity.class);
                 intent.putExtra("position", mPosition);
                 startActivity(intent);
@@ -147,7 +147,7 @@ public class CourseActivity extends AppCompatActivity {
                 //如果没有购买则正常返回
                 AppManager.getInstance().addActivity(this);
                 break;
-            case R.id.tv_return:
+            case R.id.ib_return:
                 finish();
                 break;
         }

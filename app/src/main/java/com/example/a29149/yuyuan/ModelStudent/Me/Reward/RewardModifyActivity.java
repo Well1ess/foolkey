@@ -63,10 +63,10 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
     private String[] rewardChooseContent = GlobalUtil.getInstance().getRewardChooseContent();
 
     //悬赏标题
-    @ViewInject(R.id.ed_topic)
+    @ViewInject(R.id.et_topic)
     private EditText mTopic;
     //详情
-    @ViewInject(R.id.ed_description)
+    @ViewInject(R.id.et_description)
     private EditText mDescription;
 
     //悬赏标签
@@ -76,7 +76,7 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
 
 
     //金额
-    @ViewInject(R.id.ed_reward_price)
+    @ViewInject(R.id.et_reward_price)
     private EditText mRewardPrice;
 
     //===上课时间====

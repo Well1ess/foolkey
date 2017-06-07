@@ -6,13 +6,14 @@
     android:transitionName="shareContent">
 
     <ImageView
+        android:id="@+id/iv_photo"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:transitionName="shareHead"
-        android:background="@color/grey"
-        android:id="@+id/iv_photo"
+        android:background="@null"
         android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        />
 
     <TextView
         android:layout_marginRight="4dp"
@@ -38,12 +39,12 @@
         android:layout_alignTop="@id/iv_photo"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/tv_title"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            android:id="@+id/project_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="项目一"
+            android:text="课程"
             android:textSize="15sp"
             android:gravity="center"
             android:elevation="1.5dp"
@@ -55,16 +56,16 @@
             android:layout_marginBottom="5dp"/>
 
         <TextView
-            android:id="@+id/author"
+            android:id="@+id/tv_nickedName"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="张丽华"/>
+            android:text="老师姓名"/>
 
         <TextView
+            android:id="@+id/tv_description"
             android:singleLine="true"
             android:ellipsize="end"
-            android:id="@+id/project_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -74,7 +75,8 @@
             android:elevation="4dp"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:text="我是第一个" />
+            android:text="课程描述"
+            />
 
     </LinearLayout>
 

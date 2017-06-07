@@ -41,18 +41,18 @@ public class BuyCourseActivity extends AppCompatActivity {
     private float mNum = 0;
 
     //购买的个数
-    @ViewInject(R.id.num)
+    @ViewInject(R.id.tv_num)
     private TextView mCourseNum;
 
     //授方式选择对话框
     private Dialog mSelectTeachType;
 
     //授课方式
-    @ViewInject(R.id.teach_type)
+    @ViewInject(R.id.tv_teachMethodEnum)
     private TextView mTeachType;
 
     //总的订单金额
-    @ViewInject(R.id.money)
+    @ViewInject(R.id.tv_amount)
     private TextView mOrderMoney;
 
     //单价
@@ -172,7 +172,7 @@ public class BuyCourseActivity extends AppCompatActivity {
     }
 
     //授课方式的选择
-    @OnClick(R.id.teach_type)
+    @OnClick(R.id.tv_teachMethodEnum)
     public void setTeachTypeListener(View view)
     {
         mSelectTeachType.show();

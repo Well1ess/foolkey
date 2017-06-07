@@ -85,7 +85,7 @@
                         android:layout_marginTop="10dp"/>
 
                     <TextView
-                        android:id="@+id/num"
+                        android:id="@+id/tv_num"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -126,7 +126,7 @@
                         android:layout_marginTop="10dp"/>
 
                     <TextView
-                        android:id="@+id/teach_type"
+                        android:id="@+id/tv_teachMethodEnum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -167,8 +167,7 @@
                         android:layout_marginTop="10dp"/>
 
                     <TextView
-                        android:drawableRight="@mipmap/ic_return"
-                        android:id="@+id/eduction"
+                        android:id="@+id/tv_coupon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -176,6 +175,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/edittext_style_focused_1do"
+                        android:drawableRight="@mipmap/ic_return"
                         android:gravity="left"
                         android:inputType="textMultiLine"
                         android:maxLines="8"
@@ -189,13 +189,17 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:padding="16dp"
-                    android:text="备注"/>
+                    android:text="备注"
+                    android:visibility="gone"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="@color/white">
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -243,7 +247,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="合计："/>
                 <TextView
-                    android:id="@+id/money"
+                    android:id="@+id/tv_amount"
                     android:layout_marginRight="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -255,7 +259,7 @@
             <TextView
                 android:background="@drawable/textview_stroke"
                 android:layout_gravity="center_vertical"
-                android:id="@+id/cancel"
+                android:id="@+id/tv_cancel"
                 android:layout_margin="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -270,7 +274,7 @@
             <TextView
                 android:background="@color/colorPrimary"
                 android:layout_gravity="center_vertical"
-                android:id="@+id/buy"
+                android:id="@+id/tv_buy"
                 android:layout_margin="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

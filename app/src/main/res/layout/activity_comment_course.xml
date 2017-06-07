@@ -22,7 +22,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageButton
-                android:id="@+id/tv_return"
+                android:id="@+id/ib_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -76,24 +76,30 @@
                         android:descendantFocusability="blocksDescendants"
                         android:background="@color/white"
                         android:orientation="horizontal">
+
                         <com.example.a29149.yuyuan.Widget.SquareImageView
-                            android:id="@+id/teacher_photo"
+                            android:id="@+id/iv_photo"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/circle"
-                            android:gravity="center"
+                            android:background="@null"
                             android:elevation="2dp"
-                            android:visibility="invisible"
+                            android:gravity="center"
+                            android:visibility="visible"
+                            android:layout_marginRight="20dp"
                             />
+
+
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="0dp"
+                            android:layout_marginLeft="20dp"
                             android:focusable="false"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+
+                            >
                             <TextView
-                                android:id="@+id/title"
+                                android:id="@+id/tv_title"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -103,7 +109,7 @@
                                 android:layout_marginBottom="10dp"
                                 />
                             <TextView
-                                android:id="@+id/tv_teacherName"
+                                android:id="@+id/tv_nickedName"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -132,7 +138,7 @@
                         android:layout_gravity="bottom|right"
                         android:layout_marginBottom="5dp"
                         android:layout_marginRight="5dp"
-                        android:text="￥ 50"
+                        android:text="50"
                         android:textColor="@color/colorPrimary" />
 
                 </android.support.design.widget.CoordinatorLayout>
@@ -162,13 +168,13 @@
                         android:layout_marginRight="40dp" />
 
                     <RatingBar
+                        android:id="@+id/course_access"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:scaleX="0.6"
                         android:scaleY="0.6"
                         android:layout_gravity="center_horizontal"
-                        android:numStars="5"
-                        android:id="@+id/rb_course_access"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:numStars="5"/>
 
                     <EditText
                         android:id="@+id/ed_comment_content"
@@ -195,7 +201,7 @@
 
                         <TextView
                             android:layout_centerInParent="true"
-                            android:id="@+id/tv_dynamic_add"
+                            android:id="@+id/dynamic_add"
                             android:layout_width="wrap_content"
                             android:layout_height="60dp"
                             android:layout_margin="5dp"
@@ -234,13 +240,13 @@
                         android:layout_marginRight="40dp" />
 
                     <RatingBar
-                        android:scaleX="0.6"
-                        android:scaleY="0.6"
-                        android:layout_gravity="center_horizontal"
-                        android:numStars="5"
                         android:id="@+id/course_teacher"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:numStars="5"
+                        android:scaleX="0.6"
+                        android:scaleY="0.6"/>
 
                     <!--<EditText-->
                         <!--android:textSize="12sp"-->
@@ -263,7 +269,7 @@
             android:background="#DEDEDE"/>
 
         <RadioGroup
-            android:id="@+id/rg_tab_main_menu"
+            android:id="@+id/tab_main_menu"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -271,9 +277,9 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                style="@style/RadioButton.Menu"
                 android:id="@+id/rb_main_menu_discovery"
-                android:text="发布评价" />
+                style="@style/RadioButton.Menu"
+                android:text="发布评价"/>
 
         </RadioGroup>
 

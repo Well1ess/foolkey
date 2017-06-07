@@ -58,10 +58,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //上一个输入的用户名，记录放置频繁刷新
     private String lastUserName = "";
 
-    @ViewInject(R.id.username)
+    @ViewInject(R.id.et_userName)
     private EditText mUserNameView;
 
-    @ViewInject(R.id.password)
+    @ViewInject(R.id.et_passWord)
     private EditText mPasswordView;
 
     //Glide依赖

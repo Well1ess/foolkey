@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="wrap_content" >
     <com.example.a29149.yuyuan.Widget.SquareImageView
-        android:id="@+id/id_num"
+        android:id="@+id/sqi_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -17,9 +17,9 @@
         android:text="123" />
     <TextView
         android:id="@+id/tv_state"
-        android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:textColor="@color/dark_green"
         android:layout_gravity="center"
         android:text="开始上课"/>

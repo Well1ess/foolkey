@@ -16,7 +16,6 @@ import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.ArticleActivity
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.ArticleListAdapter;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.GetSearchResultEvent;
-import com.example.a29149.yuyuan.Search.SearchAction;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
@@ -37,10 +36,10 @@ public class ArticleSearchFragment extends Fragment {
     private ArticleListAdapter mArticleAdapter;
 
     //下滑刷新
-    @ViewInject(R.id.slide_layout)
+    @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideRefreshLayout;
 
-    @ViewInject(R.id.refresh)
+    @ViewInject(R.id.iv_refresh)
     private ImageView mRefreshIcon;
 
     private String condition = "article";
@@ -89,7 +88,7 @@ public class ArticleSearchFragment extends Fragment {
         });
 
         //设置列表下拉时的刷新
-        mSlideRefreshLayout.setRotateView(view.findViewById(R.id.refresh));
+        mSlideRefreshLayout.setRotateView(view.findViewById(R.id.iv_refresh));
         mSlideRefreshLayout.setOnSlideRefreshListener(
                 new SlideRefreshLayout.onSlideRefreshListener() {
                     @Override

@@ -32,7 +32,7 @@ public class CouponActivity extends AppCompatActivity {
         mCouponList.setAdapter(couponListAdapter);
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setReturnListener(View view)
     {
         this.finish();

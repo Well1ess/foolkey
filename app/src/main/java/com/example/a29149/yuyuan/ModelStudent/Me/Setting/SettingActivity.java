@@ -73,7 +73,7 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setBtReturnListener(View view) {
         this.onBackPressed();
         AppManager.getInstance().removeActivity(MainStudentActivity.class);

@@ -56,19 +56,19 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
 //    @ViewInject(R.id.birthday)
 //    private EditText birthday;
 
-    @ViewInject(R.id.slogan)
+    @ViewInject(R.id.tv_slogan)
     private EditText slogan;
 
-    @ViewInject(R.id.email)
+    @ViewInject(R.id.tv_email)
     private EditText email;
 
-    @ViewInject(R.id.github)
+    @ViewInject(R.id.tv_github)
     private EditText github;
 
     @ViewInject(R.id.organization)
     private EditText organization;
 
-    @ViewInject(R.id.technicTag)
+    @ViewInject(R.id.tv_technicTag)
     private TextView technicTag;
 
     @ViewInject(R.id.description)
@@ -152,7 +152,7 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
             case R.id.text_save:
                 save(v);
                 break;
-            case R.id.technicTag:
+            case R.id.tv_technicTag:
                 chooseTag();
                 break;
             case R.id.sex:

@@ -23,7 +23,7 @@ public class RewardViewHolder extends RecyclerView.ViewHolder {
     public RewardViewHolder(View view) {
         super(view);
         title = (TextView) view.findViewById(R.id.tv_title);
-        head = (ImageView) view.findViewById(R.id.photo_circle);
+        head = (ImageView) view.findViewById(R.id.iv_photo);
         money = (TextView) view.findViewById(R.id.tv_price);
         label = (TextView) view.findViewById(R.id.tv_technicTagEnum);
 //            prestige = (TextView) view.findViewById(R.id.prestige);

@@ -37,7 +37,7 @@ import java.util.List;
 
 public class ClassesFragment extends Fragment {
 
-    @ViewInject(R.id.slide_layout)
+    @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideLayout;
 
     @ViewInject(R.id.content)
@@ -84,7 +84,7 @@ public class ClassesFragment extends Fragment {
         setContentListListener();
 
         //设置列表下拉时的刷新
-        mSlideLayout.setRotateView(view.findViewById(R.id.refresh));
+        mSlideLayout.setRotateView(view.findViewById(R.id.iv_refresh));
         mSlideLayout.setOnSlideRefreshListener(
                 new SlideRefreshLayout.onSlideRefreshListener() {
                     @Override

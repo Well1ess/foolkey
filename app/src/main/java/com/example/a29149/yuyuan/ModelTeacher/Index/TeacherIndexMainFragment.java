@@ -38,25 +38,25 @@ public class TeacherIndexMainFragment extends Fragment {
     public static final String TEACHER_SCORE_OF_SECOND_TAG = "second";
 
     //按钮组
-    @ViewInject(R.id.discovery_main_menu)
+    @ViewInject(R.id.rg_discovery_main_menu)
     private RadioGroup mMainMenu;
 
-    @ViewInject(R.id.search_reward)
+    @ViewInject(R.id.rb_search_reward)
     private RadioButton mSearchReward;
 
-    @ViewInject(R.id.search_score)
+    @ViewInject(R.id.rb_search_score)
     private RadioButton mSearchScore;
 
 
     //指引线
-    @ViewInject(R.id.id_tab_line)
+    @ViewInject(R.id.iv_tab_line)
     private ImageView mTabLine;
 
     //容器
     @ViewInject(android.R.id.tabhost)
     private FragmentTabHost mFragmentTabHost;
 
-    @ViewInject(R.id.content_pager)
+    @ViewInject(R.id.vp_content_pager)
     private ViewPager mContentViewPager;
 
     //private List<Fragment> fragmentList = new ArrayList<>();
@@ -83,12 +83,12 @@ public class TeacherIndexMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_teacher_socre_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_teacher_main, container, false);
         AnnotationUtil.setClickListener(this, view);
         AnnotationUtil.injectViews(this, view);
 
         //FragmentTabHost初始化
-        mFragmentTabHost.setup(getContext(), getChildFragmentManager(), R.id.content_pager);
+        mFragmentTabHost.setup(getContext(), getChildFragmentManager(), R.id.vp_content_pager);
 
         TabSpec tabSpec0 = mFragmentTabHost.newTabSpec(TEACHER_SCORE_OF_FIRST_TAG)
                 .setIndicator("0");
@@ -103,10 +103,10 @@ public class TeacherIndexMainFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.search_score:
+                    case R.id.rb_search_score:
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_FIRST_TAG);
                         break;
-                    case R.id.search_reward:
+                    case R.id.rb_search_reward:
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_SECOND_TAG);
                         break;
                     default:

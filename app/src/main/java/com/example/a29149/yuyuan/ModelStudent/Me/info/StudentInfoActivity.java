@@ -32,10 +32,10 @@ public class StudentInfoActivity extends Activity {
     @ViewInject(R.id.iv_photo)
     private ImageView mStudentPhoto;
 
-    @ViewInject(R.id.student_name)
+    @ViewInject(R.id.tv_student_name)
     private TextView mStudentName;
 
-    @ViewInject(R.id.slogan)
+    @ViewInject(R.id.tv_slogan)
     private TextView mSlogan;
 
     @ViewInject(R.id.tv_teacherSex)
@@ -72,7 +72,7 @@ public class StudentInfoActivity extends Activity {
     //Email
     @ViewInject(R.id.tv_email)
     private TextView mEmail;
-    @ViewInject(R.id.bt_return)
+    @ViewInject(R.id.ib_return)
     private ImageButton mReturn;
 
 

@@ -23,13 +23,10 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
 
-import de.greenrobot.event.Subscribe;
-import de.greenrobot.event.ThreadMode;
-
 public class RewardSearchFragment extends Fragment {
 
     //下拉刷新的Layout
-    @ViewInject(R.id.slide_layout)
+    @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideLayout;
 
     //上划到底部动态更新的List
@@ -88,7 +85,7 @@ public class RewardSearchFragment extends Fragment {
         });
 
         //设置列表下拉时的刷新
-        mSlideLayout.setRotateView(view.findViewById(R.id.refresh));
+        mSlideLayout.setRotateView(view.findViewById(R.id.iv_refresh));
         mSlideLayout.setOnSlideRefreshListener(
                 new SlideRefreshLayout.onSlideRefreshListener() {
                     @Override

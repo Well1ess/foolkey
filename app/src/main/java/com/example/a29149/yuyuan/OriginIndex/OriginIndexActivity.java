@@ -40,16 +40,16 @@ public class OriginIndexActivity extends AppCompatActivity {
     @ViewInject(R.id.option_menu)
     private LinearLayout mOptionMenu;
 
-    @ViewInject(R.id.bt_return)
+    @ViewInject(R.id.ib_return)
     private ImageButton mReturn;
 
-    @ViewInject(R.id.toolbar_title)
+    @ViewInject(R.id.tv_toolbar_title)
     private TextView mToolbarTitle;//老师名字
 
     @ViewInject(R.id.iv_photo)
     private ImageView mHead;//老师头像
 
-    @ViewInject(R.id.slogan)
+    @ViewInject(R.id.tv_slogan)
     private TextView mSlogan;//老师slogan
 
     @ViewInject(R.id.sex)
@@ -194,7 +194,7 @@ public class OriginIndexActivity extends AppCompatActivity {
         closeOptionMenu();
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public  void setReturnListener(View view){
         this.finish();
     }

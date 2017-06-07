@@ -34,7 +34,7 @@ import java.util.List;
 public class OwnerRewardTeacherActivity extends AppCompatActivity {
 
     //课程列表
-    @ViewInject(R.id.reward_list)
+    @ViewInject(R.id.lv_reward_list)
     private ListView mCourseList;
 
     //适配器
@@ -67,7 +67,7 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setReturnListener(View view)
     {
         this.finish();

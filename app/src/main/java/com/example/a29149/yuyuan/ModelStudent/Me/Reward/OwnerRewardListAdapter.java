@@ -88,7 +88,7 @@ public class OwnerRewardListAdapter extends BaseAdapter {
             //获取申请的老师信息和申请信息
             applicationRewardWithTeacherSTCDTOList = list.get(position).getApplicationRewardWithTeacherSTCDTOS();
             TeacherReplyListAdapter teacherReplyListAdapter = new TeacherReplyListAdapter(mContext, applicationRewardWithTeacherSTCDTOList);
-            final GridView gridView = (GridView) convertView.findViewById(R.id.teacher_head);
+            final GridView gridView = (GridView) convertView.findViewById(R.id.gv_apply_user_head);
             gridView.setAdapter(teacherReplyListAdapter);
             //点击申请接单的老师的头像，跳转到老师的详细信息中
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,7 +108,7 @@ public class OwnerRewardListAdapter extends BaseAdapter {
             if (listState.get(position).getOriginalHeight() > gridView.getLayoutParams().height)
                 listState.get(position).setOriginalHeight(gridView.getLayoutParams().height);
 
-            final TextView textView = (TextView) convertView.findViewById(R.id.open_close);
+            final TextView textView = (TextView) convertView.findViewById(R.id.tv_open_close);
             if(applicationRewardWithTeacherSTCDTOList.size() == 0)
                 textView.setText("暂无申请");
 

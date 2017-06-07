@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.ModelTeacher.Index.course.OwnerCourseListAdapter;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
@@ -30,7 +29,7 @@ import java.util.List;
 /**
  * Created by MaLei on 2017/5/14.
  * Email:ml1995@mail.ustc.edu.cn
- * 老师发布的课程
+ * 老师界面：老师发布的课程
  */
 public class OwnerCourseTeacherFragment extends Fragment {
 
@@ -49,7 +48,7 @@ public class OwnerCourseTeacherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_owner_course_teacher,null);
 
-        mCourseList = (ListView) view.findViewById(R.id.course_list);
+        mCourseList = (ListView) view.findViewById(R.id.lv_course_list);
 
         shapeLoadingDialog = new ShapeLoadingDialog(getContext());
         shapeLoadingDialog.setLoadingText("加载中...");

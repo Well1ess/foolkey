@@ -70,25 +70,25 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
     @ViewInject(R.id.virtual_money)
     private TextView mVirtualMoney;
 
-    @ViewInject(R.id.slogan)
+    @ViewInject(R.id.tv_slogan)
     private TextView mUserSlogan;
 
-    @ViewInject(R.id.name)
+    @ViewInject(R.id.tv_name)
     private TextView mUserName;
 
-    @ViewInject(R.id.modify_info)
+    @ViewInject(R.id.tv_modify_info)
     private TextView mModifyInfo;
 
-    @ViewInject(R.id.prestige)
+    @ViewInject(R.id.tv_prestige)
     private TextView reputation;
 
-    @ViewInject(R.id.email)
+    @ViewInject(R.id.tv_email)
     private TextView email;
 
-    @ViewInject(R.id.github)
+    @ViewInject(R.id.tv_github)
     private TextView github;
 
-    @ViewInject(R.id.technicTag)
+    @ViewInject(R.id.tv_technicTag)
     private TextView technicTag;
 
     private RequestManager glide;
@@ -134,7 +134,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
         studentDTO = GlobalUtil.getInstance().getStudentDTO();
 
         mTitle = (TextView) view.findViewById(R.id.title);
-        mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
+        mOwnerReward = (TextView) view.findViewById(R.id.tv_owner_reward);
         mHeadImage = (ImageView) view.findViewById(R.id.iv_photo);
 
 
@@ -181,7 +181,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
         int id = view.getId();
         switch (id)
         {
-            case R.id.owner_reward:
+            case R.id.tv_owner_reward:
                 Intent intent1 = new Intent(getActivity(),OwnerRewardActivity.class);
                 startActivity(intent1);
                 break;
@@ -194,7 +194,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
                 Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
                 startActivity(intent3);
                 break;
-            case R.id.modify_info:{
+            case R.id.tv_modify_info:{
                 Intent intent4 = new Intent(getActivity(), ModifyMyInfoActivity.class);
                 startActivity(intent4);
             }break;
@@ -214,7 +214,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
         return i1;
     }
 
-    @OnClick(R.id.owner_reward)
+    @OnClick(R.id.tv_owner_reward)
     public void setCheckReward(View view)
     {
         //跳转到悬赏详情
@@ -232,7 +232,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
      * 充值
      * @param view
      */
-    @OnClick(R.id.recharge)
+    @OnClick(R.id.tv_recharge)
     public void setRechargeListener(View view)
     {
         Intent intent = new Intent(getActivity(), RechargeActivity.class);
@@ -249,7 +249,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
         couponAction.execute();
     }
 
-    @OnClick(R.id.modify_info)
+    @OnClick(R.id.tv_modify_info)
     public void setmModifyInfo(View view){
         Intent intent4 = new Intent(getActivity(), ModifyMyInfoActivity.class);
         getActivity().startActivityForResult(intent4, FROM_ME_FRAGMENT_TO_MODIFY);

@@ -148,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
         AppManager.getInstance().removeActivity(LoginActivity.class);
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setCancelListener(View view) {
 
         this.onBackPressed();

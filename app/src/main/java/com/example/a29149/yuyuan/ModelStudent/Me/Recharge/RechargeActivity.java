@@ -8,16 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.money.ChargeMoneyController;
-import com.example.a29149.yuyuan.controller.userInfo.GetMyInfoController;
-import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -51,7 +47,7 @@ public class RechargeActivity extends AppCompatActivity {
      * 返回按键
      * @param view
      */
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setBtReturnListener(View view)
     {
         Intent intent = getIntent();
@@ -64,7 +60,7 @@ public class RechargeActivity extends AppCompatActivity {
      * 点击充值按钮
      * @param view
      */
-    @OnClick(R.id.recharge)
+    @OnClick(R.id.tv_recharge)
     public void setRechargeListener(View view)
     {
         if (mMoney.getText().toString().equals(""))

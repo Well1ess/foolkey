@@ -13,7 +13,6 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
@@ -34,7 +33,7 @@ import java.util.List;
 public class OwnerRewardActivity extends AppCompatActivity {
 
     //悬赏列表
-    @ViewInject(R.id.reward_list)
+    @ViewInject(R.id.lv_reward_list)
     private ListView mRewardList;
 
     //适配器
@@ -70,7 +69,7 @@ public class OwnerRewardActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setReturnListener(View view)
     {
         this.finish();

@@ -35,16 +35,16 @@ public class JudgeStudentActivity extends Activity {
     @ViewInject(R.id.student_photo)
     private ImageView studentPhoto;
 
-    @ViewInject(R.id.student_name)
+    @ViewInject(R.id.tv_student_name)
     private TextView studentName;
 
-    @ViewInject(R.id.course_name)
+    @ViewInject(R.id.tv_course_name)
     private TextView courseName;
 
-    @ViewInject(R.id.student_score)
+    @ViewInject(R.id.rb_student_score)
     private RatingBar studentScore;
 
-    @ViewInject(R.id.order_price)
+    @ViewInject(R.id.tv_order_price)
     private TextView mOrderPrice;
 
 
@@ -55,7 +55,7 @@ public class JudgeStudentActivity extends Activity {
     private Float score = null;
     private String orderId;
 
-    @ViewInject(R.id.publish_button)
+    @ViewInject(R.id.rb_publish)
     private RadioButton radioButton;
 
     private RequestManager glide;
@@ -119,7 +119,7 @@ public class JudgeStudentActivity extends Activity {
 
 
 
-    @OnClick(R.id.publish_button)
+    @OnClick(R.id.rb_publish)
     public void publishEvaluation(View view){
         //是否评价
 

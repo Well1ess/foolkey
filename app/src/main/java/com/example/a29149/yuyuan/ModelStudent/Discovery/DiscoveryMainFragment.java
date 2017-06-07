@@ -41,10 +41,10 @@ public class DiscoveryMainFragment extends Fragment {
     public static final String DISCOVERY_OF_THIRD_TAG = "third";
 
     //按钮组
-    @ViewInject(R.id.discovery_main_menu)
+    @ViewInject(R.id.rg_discovery_main_menu)
     private RadioGroup mMainMenu;
 
-    @ViewInject(R.id.search_reward)
+    @ViewInject(R.id.rb_search_reward)
     private RadioButton mSearchReward;
 
     @ViewInject(R.id.search_QA)
@@ -54,14 +54,14 @@ public class DiscoveryMainFragment extends Fragment {
     private RadioButton mSearchArticle;
 
     //指引线
-    @ViewInject(R.id.id_tab_line)
+    @ViewInject(R.id.iv_tab_line)
     private ImageView mTabLine;
 
     //容器
     @ViewInject(android.R.id.tabhost)
     private FragmentTabHost mFragmentTabHost;
 
-    @ViewInject(R.id.content_pager)
+    @ViewInject(R.id.vp_content_pager)
     private ViewPager mContentViewPager;
 
     private List<Fragment> fragmentList = new ArrayList<>();
@@ -93,7 +93,7 @@ public class DiscoveryMainFragment extends Fragment {
         AnnotationUtil.injectViews(this, view);
 
         //FragmentTabHost初始化
-        mFragmentTabHost.setup(getContext(), getChildFragmentManager(), R.id.content_pager);
+        mFragmentTabHost.setup(getContext(), getChildFragmentManager(), R.id.vp_content_pager);
 
         TabSpec tabSpec0 = mFragmentTabHost.newTabSpec(DISCOVERY_OF_FIRST_TAG)
                 .setIndicator("0");
@@ -111,7 +111,7 @@ public class DiscoveryMainFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.search_reward:
+                    case R.id.rb_search_reward:
                         MainStudentActivity.shapeLoadingDialog.show();
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_FIRST_TAG);
                         break;

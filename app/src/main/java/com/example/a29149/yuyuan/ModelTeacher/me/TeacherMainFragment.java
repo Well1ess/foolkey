@@ -49,7 +49,7 @@ import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
 /**
  * Created by MaLei on 2017/5/3 0014.
  * Email:ml1995@mail.ustc.edu.cn
- * 老师我的页面
+ * 老师界面：我的页面
  */
 
 public class TeacherMainFragment extends Fragment implements View.OnClickListener {
@@ -66,31 +66,31 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
     private TextView mOwnerCourse;//我的课程
     private  ImageView mHeadImage;//用户头像
 
-    @ViewInject(R.id.cash_rmb)
+    @ViewInject(R.id.tv_cash_rmb)
     private TextView mCash;
 
     @ViewInject(R.id.virtual_money)
     private TextView mVirtualMoney;
 
-    @ViewInject(R.id.slogan)
+    @ViewInject(R.id.tv_slogan)
     private TextView mUserSlogan;
 
-    @ViewInject(R.id.name)
+    @ViewInject(R.id.tv_name)
     private TextView mUserName;
 
-    @ViewInject(R.id.modify_info)
+    @ViewInject(R.id.tv_modify_info)
     private TextView mModifyInfo;
 
-    @ViewInject(R.id.prestige)
+    @ViewInject(R.id.tv_prestige)
     private TextView reputation;
 
-    @ViewInject(R.id.email)
+    @ViewInject(R.id.tv_email)
     private TextView email;
 
-    @ViewInject(R.id.github)
+    @ViewInject(R.id.tv_github)
     private TextView github;
 
-    @ViewInject(R.id.technicTag)
+    @ViewInject(R.id.tv_technicTag)
     private TextView technicTag;
 
     private RequestManager glide;
@@ -122,17 +122,12 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
 
         initView();
 
-
-
-
-
-
-
         return view;
     }
 
     private void initView()
     {
+        Log.i("malei","initView()");
         studentDTO = GlobalUtil.getInstance().getStudentDTO();
 
         int virtualMoney = DoubleParseInt(studentDTO.getVirtualCurrency());
@@ -165,7 +160,7 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
         else
             mUserSlogan.setText(studentDTO.getSlogan());
 
-        mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
+        mOwnerReward = (TextView) view.findViewById(R.id.tv_owner_reward);
         mOwnerReward.setOnClickListener(this);
 
 //        mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
@@ -199,7 +194,7 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
         int id = view.getId();
         switch (id)
         {
-            case R.id.owner_reward:
+            case R.id.tv_owner_reward:
                 Intent intent1 = new Intent(getActivity(),OwnerRewardActivity.class);
                 startActivity(intent1);
                 break;
@@ -212,7 +207,7 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
                 Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
                 startActivity(intent3);
                 break;
-            case R.id.modify_info:{
+            case R.id.tv_modify_info:{
                 Intent intent4 = new Intent(getActivity(), ModifyMyInfoActivity.class);
                 startActivity(intent4);
             }break;
@@ -232,7 +227,7 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
         return i1;
     }
 
-    @OnClick(R.id.owner_reward)
+    @OnClick(R.id.tv_owner_reward)
     public void setCheckReward(View view)
     {
         //跳转到悬赏详情
@@ -246,7 +241,7 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
         startActivity(intent);
     }
 
-    @OnClick(R.id.recharge)
+    @OnClick(R.id.tv_recharge)
     public void setRechargeListener(View view)
     {
         startActivityForResult(new Intent(getActivity(), RechargeActivity.class), FROM_ME_FRAGMENT_TO_RECHARGE);
@@ -259,7 +254,7 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
         couponAction.execute();
     }
 
-    @OnClick(R.id.modify_info)
+    @OnClick(R.id.tv_modify_info)
     public void setmModifyInfo(View view){
         Intent intent4 = new Intent(getActivity(), ModifyMyInfoActivity.class);
         startActivity(intent4);

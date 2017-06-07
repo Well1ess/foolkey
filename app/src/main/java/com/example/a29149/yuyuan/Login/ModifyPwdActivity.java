@@ -41,7 +41,7 @@ public class ModifyPwdActivity extends AppCompatActivity {
         setCodeValidate();
     }
 
-    @OnClick(R.id.bt_return)
+    @OnClick(R.id.ib_return)
     public void setCancelListener(View view) {
         this.finish();
     }

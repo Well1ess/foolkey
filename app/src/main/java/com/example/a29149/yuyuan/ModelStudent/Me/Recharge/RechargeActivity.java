@@ -54,7 +54,7 @@ public class RechargeActivity extends AppCompatActivity {
     @OnClick(R.id.bt_return)
     public void setBtReturnListener(View view)
     {
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         intent.putExtra("date_return", "返回");
         setResult(RESULT_CANCELED, intent);
         this.finish();
@@ -110,10 +110,9 @@ public class RechargeActivity extends AppCompatActivity {
                     if (resultFlag.equals("success")) {
 
                         Toast.makeText(RechargeActivity.this, "充值成功！", Toast.LENGTH_SHORT).show();
-                        //刷新个人资料
-//                        SelfInfo selfInfo = new SelfInfo();
-//                        selfInfo.execute();
 
+
+                        //通知MainStudentActivity，后者再调用fragment的方法来进行数据刷新
                         Intent intent = getIntent();
                         intent.putExtra("virtualCurrency", jsonObject.getString("virtualCurrency") + "");
                         setResult(RESULT_OK, intent);
@@ -132,52 +131,4 @@ public class RechargeActivity extends AppCompatActivity {
 
     }
 
-    public class SelfInfo extends AsyncTask<String, Integer, String> {
-
-        public SelfInfo() {
-            super();
-        }
-
-        //刷新个人资料
-        @Override
-        protected String doInBackground(String... params) {
-            return GetMyInfoController.execute();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            log.d(this, result);
-
-            if (result != null) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String resultFlag = jsonObject.getString("result");
-                    if (resultFlag.equals("success")) {
-
-                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
-                        }.getType();
-                        StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("studentDTO"), type);
-
-                        if (studentDTO != null)
-                            GlobalUtil.getInstance().setStudentDTO(studentDTO);
-
-                        setResult(1, intent);
-                        RechargeActivity.this.finish();
-
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(RechargeActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(RechargeActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
-    }
 }

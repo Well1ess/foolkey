@@ -47,7 +47,7 @@
 
             <RadioButton
                 style="@style/RadioButton.Menu"
-                android:id="@+id/main_menu_discovery"
+                android:id="@+id/rb_main_menu_discovery"
                 android:text="发现" />
 
             <RadioButton

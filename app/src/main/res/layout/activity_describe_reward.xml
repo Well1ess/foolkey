@@ -102,6 +102,7 @@
         android:imeActionId="@+id/login"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionUnspecified"
+        android:cursorVisible="true"
         android:textSize="12sp"/>
 
 

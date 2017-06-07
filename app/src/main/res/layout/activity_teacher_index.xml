@@ -344,7 +344,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/main_menu_discovery"
+                android:id="@+id/rb_main_menu_discovery"
                 style="@style/RadioButton.Menu"
                 android:text="联系老师"/>
 

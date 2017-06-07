@@ -67,7 +67,7 @@ public class OriginIndexActivity extends AppCompatActivity {
     @ViewInject(R.id.follow)
     private TextView mFollow;//关注老师
 
-    @ViewInject(R.id.main_menu_discovery)
+    @ViewInject(R.id.rb_main_menu_discovery)
     private RadioButton mChart;//联系老师
 
 
@@ -204,7 +204,7 @@ public class OriginIndexActivity extends AppCompatActivity {
         Toast.makeText(this,"关注该老师",Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick(R.id.main_menu_discovery)
+    @OnClick(R.id.rb_main_menu_discovery)
     public  void setChartListener(View view){
         Toast.makeText(this,"联系该老师",Toast.LENGTH_SHORT).show();
     }

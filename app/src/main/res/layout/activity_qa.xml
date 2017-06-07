@@ -319,14 +319,14 @@
                 android:orientation="horizontal" >
 
                 <RadioButton
-                    style="@style/RadioButton.Menu"
                     android:id="@+id/rb_follow"
+                    style="@style/RadioButton.Menu"
                     android:text="关注答主"
                     android:checked="true" />
 
                 <RadioButton
-                    style="@style/RadioButton.Menu"
                     android:id="@+id/rb_buy"
+                    style="@style/RadioButton.Menu"
                     android:text="添加到购物车" />
 
 

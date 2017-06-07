@@ -174,7 +174,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         mReturn = (ImageButton) findViewById(R.id.bt_return);
         mReturn.setOnClickListener(this);
 
-        mRewardUser = (TextView) findViewById(R.id.courseEvaluate);
+        mRewardUser = (TextView) findViewById(R.id.tv_price);
         mTeacherEvaluate = (TextView) findViewById(R.id.teacherEvaluate);
         mRewardTopic = (TextView) findViewById(R.id.tv_topic);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);

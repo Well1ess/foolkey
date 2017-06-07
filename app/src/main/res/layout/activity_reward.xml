@@ -136,7 +136,7 @@
                             <TextView
                                 android:textColor="@color/colorPrimary"
                                 android:layout_alignTop="@id/course"
-                                android:id="@+id/courseEvaluate"
+                                android:id="@+id/tv_price"
                                 android:layout_toRightOf="@id/course"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

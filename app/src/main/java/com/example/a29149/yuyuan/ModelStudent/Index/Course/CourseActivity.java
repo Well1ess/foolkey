@@ -39,7 +39,7 @@ public class CourseActivity extends AppCompatActivity {
     private TextView mCourseLabel;
 
     //课程评价
-    @ViewInject(R.id.courseEvaluate)
+    @ViewInject(R.id.tv_price)
     private TextView mCourseEvaluation;
 
     //教师个人评价
@@ -47,7 +47,7 @@ public class CourseActivity extends AppCompatActivity {
     private TextView mTeacherEvaluation;
 
     //教师教授的人数
-    @ViewInject(R.id.numberEvaluate)
+    @ViewInject(R.id.tv_onlookerNumber)
     private TextView mNumberEvaluation;
 
     //声望值

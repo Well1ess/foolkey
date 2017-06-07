@@ -311,6 +311,13 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
 
     }
 
+    /**
+     * 这并不能起作用，还是要在activity里用
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Deprecated
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode)
@@ -321,15 +328,21 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initView();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        initView();
+//    }
 
-    //FIXME
-    public void test(){
-        Log.d(TAG, "test: 331");
+
+
+    /**
+     * 设置余额
+     * 用于充值后更新
+     * @param money
+     */
+    public void setVirtualMoney(String money){
+        mVirtualMoney.setText(money + "");
     }
 
     //获取抵扣卷

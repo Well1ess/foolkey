@@ -278,16 +278,12 @@ public class MainStudentActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult: 275行 " + requestCode);
         switch (requestCode){
             case FROM_ME_FRAGMENT_TO_RECHARGE:
                 if (resultCode == RESULT_OK){
-                    Log.d(TAG, "onActivityResult: 279行");
-                    Toast.makeText(this, "MainStudentActivity刷新", Toast.LENGTH_LONG).show();
                     MeMainFragment meMainFragment;
                     meMainFragment = (MeMainFragment) getSupportFragmentManager().findFragmentByTag(SHOW_OF_FIFTH_TAG);
-                    meMainFragment.test();
-                    //FIXME
+                    meMainFragment.setVirtualMoney( data.getStringExtra("virtualCurrency") );
                 }else {
                     Toast.makeText(this, "充值失败", Toast.LENGTH_SHORT).show();
                 }

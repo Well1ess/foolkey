@@ -27,7 +27,7 @@ public class CourseActivity extends AppCompatActivity {
     //保存点击的位置
     private int mPosition;
 
-    @ViewInject(R.id.author)
+    @ViewInject(R.id.tv_nickedName)
     private TextView mAuthor;
 
     @ViewInject(R.id.iv_photo)

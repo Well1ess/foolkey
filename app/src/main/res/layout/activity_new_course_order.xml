@@ -85,7 +85,7 @@
                         android:layout_marginTop="10dp"/>
 
                     <TextView
-                        android:id="@+id/num"
+                        android:id="@+id/tv_num"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -126,7 +126,7 @@
                         android:layout_marginTop="10dp"/>
 
                     <TextView
-                        android:id="@+id/teach_type"
+                        android:id="@+id/tv_teachMethodEnum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"

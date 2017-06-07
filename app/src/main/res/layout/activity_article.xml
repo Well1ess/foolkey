@@ -154,29 +154,22 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:text="内容"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="10dp"
-                            android:paddingTop="10dp"/>
+
 
                         <View
                             android:layout_width="wrap_content"
                             android:layout_height="1px"
-                            android:background="@color/black"
-                            android:layout_marginLeft="60dp"
-                            android:layout_marginRight="60dp" />
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:background="@color/black" />
 
                         <TextView
-                            android:layout_margin="18dp"
+                            android:id="@+id/tv_content"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="我大大苏打法发士大夫看见哈撒可怜见科技哈了开机速度发货可怜见可怜见啊哈岁的凯莉分解和看了觉得是"/>
+                            android:layout_margin="18dp"
+                            android:text="我大大苏打法发士大夫看见哈撒可怜见科技哈了开机速度发货可怜见可怜见啊哈岁的凯莉分解和看了觉得是" />
 
                     </LinearLayout>
 
@@ -209,13 +202,15 @@
                                 android:paddingTop="10dp"/>
 
                             <TextView
-                                android:text="2017年4月24日19:24:52"
-                                android:textSize="12sp"
-                                android:textColor="@color/submenu_text_color"
+                                android:id="@+id/tv_lastOperateTime"
                                 android:layout_gravity="center"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingTop="10dp"/>
+                                android:paddingTop="10dp"
+                                android:text="2017年4月24日19:24:52"
+                                android:textSize="12sp"
+                                android:textColor="@color/submenu_text_color"
+                                />
 
                         </LinearLayout>
 
@@ -266,20 +261,22 @@
                 android:orientation="horizontal" >
 
                 <RadioButton
+                    android:id="@+id/rb_like"
                     style="@style/RadioButton.Menu"
-                    android:id="@+id/good"
                     android:text="赞"
                     android:checked="true" />
 
                 <RadioButton
+                    android:id="@+id/rb_collect"
                     style="@style/RadioButton.Menu"
-                    android:id="@+id/mark"
-                    android:text="收藏" />
+                    android:text="收藏"
+                    />
 
                 <RadioButton
+                    android:id="@+id/rb_comment"
                     style="@style/RadioButton.Menu"
-                    android:id="@+id/talk"
-                    android:text="评论" />
+                    android:text="评论"
+                    />
 
             </RadioGroup>
 

@@ -52,7 +52,7 @@ public class BuyCourseActivity extends AppCompatActivity {
     private TextView mTeachType;
 
     //总的订单金额
-    @ViewInject(R.id.money)
+    @ViewInject(R.id.tv_amount)
     private TextView mOrderMoney;
 
     //单价

@@ -405,7 +405,7 @@
 
                 <RadioButton
                     style="@style/RadioButton.Menu"
-                    android:id="@+id/buy"
+                    android:id="@+id/tv_buy"
                     android:text="立即购买" />
 
             </RadioGroup>

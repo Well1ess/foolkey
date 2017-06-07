@@ -129,7 +129,7 @@ public class CourseActivity extends AppCompatActivity {
                 ActivityOptions.makeSceneTransitionAnimation(this, view, "shareHead").toBundle());
     }
 
-    @OnClick({R.id.chart, R.id.shopping, R.id.buy, R.id.ib_return})
+    @OnClick({R.id.chart, R.id.shopping, R.id.tv_buy, R.id.ib_return})
     public void setRadioButtonListener(View view) {
         switch (view.getId())
         {
@@ -137,7 +137,7 @@ public class CourseActivity extends AppCompatActivity {
                 break;
             case R.id.shopping:
                 break;
-            case R.id.buy:
+            case R.id.tv_buy:
                 Intent intent = new Intent(this, BuyCourseActivity.class);
                 intent.putExtra("position", mPosition);
                 startActivity(intent);

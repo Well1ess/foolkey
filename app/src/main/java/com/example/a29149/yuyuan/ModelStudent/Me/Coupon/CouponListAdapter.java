@@ -56,11 +56,11 @@ public class CouponListAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_coupon, null);
             mViewMap.put(position, convertView);
-            TextView value = (TextView) convertView.findViewById(R.id.value);
-            TextView level = (TextView) convertView.findViewById(R.id.level);
-            TextView title = (TextView) convertView.findViewById(R.id.title);
-            TextView endTime = (TextView) convertView.findViewById(R.id.end_time);
-            TextView kind = (TextView) convertView.findViewById(R.id.kind);
+            TextView value = (TextView) convertView.findViewById(R.id.tv_value);
+            TextView level = (TextView) convertView.findViewById(R.id.tv_level);
+            TextView title = (TextView) convertView.findViewById(R.id.tv_title);
+            TextView endTime = (TextView) convertView.findViewById(R.id.tv_deadTime);
+            TextView kind = (TextView) convertView.findViewById(R.id.tv_couponTypeEnum);
             RelativeLayout head = (RelativeLayout) convertView.findViewById(R.id.iv_photo);
 
             value.setText(check(GlobalUtil.getInstance().getCouponDTOList().get(position).getValue()));

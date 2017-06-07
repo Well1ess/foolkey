@@ -411,23 +411,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.i("malei",resultFlag);
                     String token = jsonObject.getString("token");
                     Log.i("malei",token);
-                    /*//获取学生信息DTO
-                    Log.i("malei",jsonObject.getString("StudentDTO"));
-                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
-                    }.getType();
-                    StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("StudentDTO"), type);
-                    //存储学生信息DTO
-                    GlobalUtil.getInstance().setStudentDTO(studentDTO);
-                    //获取老师信息DTO
-                    java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<TeacherDTO>() {
-                    }.getType();
-                    TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("TeacherDTO"), type1);
-                    Log.i("malei",jsonObject.getString("TeacherDTO"));
-                    if(teacherDTO != null)
-                    {
-                        //存储老师DTO
-                        GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
-                    }*/
+
                     //获取id,用以推送
                     String id = jsonObject.getString("id");
                     Log.i("malei","id"+id);

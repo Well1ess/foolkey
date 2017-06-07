@@ -4,7 +4,6 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +34,7 @@ public class CourseActivity extends AppCompatActivity {
     private ImageView mHead;
 
     //课程标签
-    @ViewInject(R.id.label)
+    @ViewInject(R.id.tv_technicTagEnum)
     private TextView mCourseLabel;
 
     //课程评价

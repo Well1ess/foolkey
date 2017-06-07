@@ -176,7 +176,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
 
         mRewardUser = (TextView) findViewById(R.id.tv_price);
         mTeacherEvaluate = (TextView) findViewById(R.id.tv_nickedName);
-        mRewardTopic = (TextView) findViewById(R.id.tv_topic);
+        mRewardTopic = (TextView) findViewById(R.id.tv_title);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonMiddle = (RadioButton) findViewById(R.id.rb_chat);

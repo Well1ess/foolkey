@@ -131,7 +131,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="问题价值"
                                 android:layout_marginLeft="20dp"
-                                android:layout_below="@+id/label"
+                                android:layout_below="@+id/tv_technicTagEnum"
                                 android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView

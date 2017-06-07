@@ -87,7 +87,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tv_topic"
+                            android:id="@+id/tv_title"
                             android:text="文章标题"
                             android:textSize="16sp"
                             android:textColor="@color/colorPrimary"
@@ -132,7 +132,7 @@
                                 android:text="——"
                                 android:gravity="right"
                                 android:layout_marginLeft="20dp"
-                                android:layout_below="@+id/label"
+                                android:layout_below="@+id/tv_technicTagEnum"
                                 android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView

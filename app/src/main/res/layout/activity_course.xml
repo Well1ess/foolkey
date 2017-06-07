@@ -113,7 +113,7 @@
                             <TextView
                                 android:textColor="@color/colorPrimary"
                                 android:layout_marginBottom="5dp"
-                                android:id="@+id/label"
+                                android:id="@+id/tv_technicTagEnum"
                                 android:layout_alignTop="@id/iv_photo"
                                 android:background="@drawable/textview_normal"
                                 android:paddingLeft="5dp"
@@ -135,7 +135,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="课程评价"
                                 android:layout_marginLeft="20dp"
-                                android:layout_below="@+id/label"
+                                android:layout_below="@+id/tv_technicTagEnum"
                                 android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView

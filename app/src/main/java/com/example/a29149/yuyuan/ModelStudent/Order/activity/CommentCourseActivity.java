@@ -83,7 +83,7 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         mCourseScore = (RatingBar) findViewById(R.id.course_access);
         mCourseContent = (EditText) findViewById(R.id.ed_comment_content);
         mTeacherScore = (RatingBar) findViewById(R.id.course_teacher);
-        mTopic = (TextView) findViewById(R.id.tv_topic);
+        mTopic = (TextView) findViewById(R.id.tv_title);
         mTopic.setText(topic);
         mTeacherName = (TextView) findViewById(R.id.tv_teacherName);
         mTeacherName.setText(teacherName);

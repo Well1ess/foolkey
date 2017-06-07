@@ -91,7 +91,7 @@ public class TeacherReplyListAdapter extends BaseAdapter
 
         public MyViewHolder(View view)
         {
-            tv = (ImageView) view.findViewById(R.id.photo_circle);
+            tv = (ImageView) view.findViewById(R.id.iv_photo);
             teacherName = (TextView) view.findViewById(R.id.tv_teacherName);
         }
     }

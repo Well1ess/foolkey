@@ -30,7 +30,7 @@ import org.json.JSONObject;
 public class AccessOrderActivity extends AppCompatActivity {
 
     //UI相关
-    @ViewInject(R.id.photo_circle)
+    @ViewInject(R.id.iv_photo)
     private ImageView mTeacherPhoto;
     @ViewInject((R.id.course_topic))
     private TextView mCourseTopic;

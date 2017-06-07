@@ -102,7 +102,7 @@
 
 
         <com.example.a29149.yuyuan.Widget.SquareImageView
-            android:id="@+id/photo_circle"
+            android:id="@+id/iv_photo"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:background="@null"

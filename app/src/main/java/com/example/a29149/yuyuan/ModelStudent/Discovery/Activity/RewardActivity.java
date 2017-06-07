@@ -282,9 +282,8 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                     displayInfo.setMsg("您确定要此单吗？\n \n 点击 接单 将发送申请");
 
                     displayInfo.getDialog().show();
-                    break;
                 }
-            }
+            }break;
             case R.id.rb_want_learn:{
                 if (mButtonLeft.getText() != null && mButtonLeft.getText().equals("删除悬赏")){
                     //删除订单
@@ -300,7 +299,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                 }else {
 
                 }
-            }
+            }break;
             default:
                 break;
         }

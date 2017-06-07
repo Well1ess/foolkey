@@ -126,7 +126,7 @@ public class PayDialog extends Dialog {
             mAmount = (TextView) dialog.findViewById(R.id.amount);
             Log.i("malei",mAmount.getText().toString());
             mVirtualMoney = (TextView) dialog.findViewById(R.id.virtual_money);
-            mPassword = (EditText) dialog.findViewById(R.id.password);
+            mPassword = (EditText) dialog.findViewById(R.id.et_passWord);
 
             if (positiveButtonText != null) {
                 ((Button) layout.findViewById(R.id.info_fragment2_new_msg_bt_commit))

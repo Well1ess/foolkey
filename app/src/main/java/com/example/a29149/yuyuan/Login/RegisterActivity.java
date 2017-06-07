@@ -44,14 +44,14 @@ public class RegisterActivity extends AppCompatActivity {
     //用户配置
     UserConfig userConfig;
 
-    @ViewInject(R.id.username)
+    @ViewInject(R.id.et_userName)
     private EditText mUserName;
 
     //来个随机的默认头像
     private Integer defaultPicNum = (int) ( Math.random() * PictureInfoBO.defaultPicNum );
 
 
-    @ViewInject(R.id.password)
+    @ViewInject(R.id.et_passWord)
     private EditText mPassWord;
 
     @ViewInject(R.id.confirm_password)

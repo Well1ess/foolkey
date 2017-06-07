@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -59,7 +58,7 @@ public class MainStudentActivity extends AppCompatActivity {
     @ViewInject(R.id.main_menu_index)
     private RadioButton mIndexButton;
 
-    @ViewInject(R.id.main_menu_discovery)
+    @ViewInject(R.id.rb_main_menu_discovery)
     private RadioButton mDiscoveryButton;
 
     @ViewInject(R.id.main_menu_publish)
@@ -161,7 +160,7 @@ public class MainStudentActivity extends AppCompatActivity {
                         mIndexButton.setTextColor(0xff8BC34A);
 
                         break;
-                    case R.id.main_menu_discovery:
+                    case R.id.rb_main_menu_discovery:
 
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_SECOND_TAG);
                         resetMenuTextColor();

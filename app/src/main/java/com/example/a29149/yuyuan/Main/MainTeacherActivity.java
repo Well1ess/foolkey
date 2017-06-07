@@ -55,7 +55,7 @@ public class MainTeacherActivity extends AppCompatActivity {
     @ViewInject(R.id.main_menu_index)
     private RadioButton mIndexButton;
 
-    @ViewInject(R.id.main_menu_discovery)
+    @ViewInject(R.id.rb_main_menu_discovery)
     private RadioButton mDiscoveryButton;
 
     @ViewInject(R.id.main_menu_publish)
@@ -154,7 +154,7 @@ public class MainTeacherActivity extends AppCompatActivity {
                         mIndexButton.setTextColor(0xff8BC34A);
 
                         break;
-                    case R.id.main_menu_discovery:
+                    case R.id.rb_main_menu_discovery:
 
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_SECOND_TAG);
                         resetMenuTextColor();

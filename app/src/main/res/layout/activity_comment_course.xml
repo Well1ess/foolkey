@@ -76,13 +76,14 @@
                         android:descendantFocusability="blocksDescendants"
                         android:background="@color/white"
                         android:orientation="horizontal">
+
                         <com.example.a29149.yuyuan.Widget.SquareImageView
                             android:id="@+id/teacher_photo"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/circle"
-                            android:gravity="center"
                             android:elevation="2dp"
+                            android:gravity="center"
                             android:visibility="invisible"
                             />
 
@@ -162,13 +163,13 @@
                         android:layout_marginRight="40dp" />
 
                     <RatingBar
+                        android:id="@+id/course_access"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:scaleX="0.6"
                         android:scaleY="0.6"
                         android:layout_gravity="center_horizontal"
-                        android:numStars="5"
-                        android:id="@+id/course_access"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:numStars="5"/>
 
                     <EditText
                         android:id="@+id/ed_comment_content"
@@ -234,13 +235,13 @@
                         android:layout_marginRight="40dp" />
 
                     <RatingBar
-                        android:scaleX="0.6"
-                        android:scaleY="0.6"
-                        android:layout_gravity="center_horizontal"
-                        android:numStars="5"
                         android:id="@+id/course_teacher"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:numStars="5"
+                        android:scaleX="0.6"
+                        android:scaleY="0.6"/>
 
                     <!--<EditText-->
                         <!--android:textSize="12sp"-->
@@ -271,9 +272,9 @@
             android:orientation="horizontal" >
 
             <RadioButton
+                android:id="@+id/rb_main_menu_discovery"
                 style="@style/RadioButton.Menu"
-                android:id="@+id/main_menu_discovery"
-                android:text="发布评价" />
+                android:text="发布评价"/>
 
         </RadioGroup>
 

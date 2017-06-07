@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:inputType="textPassword"
-                    android:id="@+id/password"
+                    android:id="@+id/et_passWord"
                     android:text=""
                     android:layout_marginRight="80dp"
                     android:gravity="center"

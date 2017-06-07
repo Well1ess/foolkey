@@ -15,7 +15,7 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 
 public class ModifyPwdActivity extends AppCompatActivity {
 
-    @ViewInject(R.id.username)
+    @ViewInject(R.id.et_userName)
     private EditText mUserName;
 
     @ViewInject(R.id.code)
@@ -24,7 +24,7 @@ public class ModifyPwdActivity extends AppCompatActivity {
     //验证码是否经过验证的标志位
     private boolean mValidateTag = false;
 
-    @ViewInject(R.id.password)
+    @ViewInject(R.id.et_passWord)
     private EditText mPassWord;
 
     @ViewInject(R.id.confirm_password)

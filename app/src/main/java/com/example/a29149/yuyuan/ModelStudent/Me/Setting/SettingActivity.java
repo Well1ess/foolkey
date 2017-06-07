@@ -79,7 +79,7 @@ public class SettingActivity extends AppCompatActivity {
         AppManager.getInstance().removeActivity(MainStudentActivity.class);
     }
 
-    @OnClick(R.id.button_logout)
+    @OnClick(R.id.tv_logOut)
     public void setBackListener(View view) {
         String id = GlobalUtil.getInstance().getId();
         MiPushClient.unsetUserAccount(SettingActivity.this, id, null);
@@ -88,7 +88,7 @@ public class SettingActivity extends AppCompatActivity {
         logOutAction.execute();
     }
 
-    @OnClick(R.id.button_switch)
+    @OnClick(R.id.tv_switch)
     public void Switch(View view){
         if ( GlobalUtil.getInstance().getUserRole().equals(RoleEnum.student.toString()) )
             changeRole();

@@ -85,7 +85,7 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         mTeacherScore = (RatingBar) findViewById(R.id.course_teacher);
         mTopic = (TextView) findViewById(R.id.tv_title);
         mTopic.setText(topic);
-        mTeacherName = (TextView) findViewById(R.id.tv_teacherName);
+        mTeacherName = (TextView) findViewById(R.id.tv_nickedName);
         mTeacherName.setText(teacherName);
         mDescription = (TextView) findViewById(R.id.tv_description);
         mDescription.setText(description);
@@ -104,19 +104,12 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         });
 
         //老师头像
-        mTeacherPhoto.findViewById(R.id.teacher_photo);
+        mTeacherPhoto.findViewById(R.id.iv_photo);
         Glide.with(this);
-        //浅出效果，不然会有黄色一闪而过
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setFillAfter(true);
-        mTeacherPhoto.setAnimation(alphaAnimation);
-        alphaAnimation.start();
-        mTeacherPhoto.setVisibility(View.VISIBLE);
         //用glide动态地加载图片
         glide.load(PictureInfoBO.getOnlinePhoto(teacherUserName ) )
+                .error(R.drawable.photo_placeholder1)
                 .transform(new GlideCircleTransform(this))
-                .crossFade(3000)
                 .into(mTeacherPhoto);
 
     }

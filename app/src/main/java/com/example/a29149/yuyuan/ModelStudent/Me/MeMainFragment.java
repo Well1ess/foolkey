@@ -319,6 +319,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
      */
     public void setHeadImage(String userName) {
         glide = Glide.with(this);
+        Log.d(TAG, "setHeadImage: 322 " + PictureInfoBO.getOnlinePhoto( userName+"" ) );
         glide.load(PictureInfoBO.getOnlinePhoto( userName+"" ) )
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

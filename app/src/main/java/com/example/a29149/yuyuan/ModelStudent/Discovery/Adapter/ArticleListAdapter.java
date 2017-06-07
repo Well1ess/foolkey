@@ -75,7 +75,7 @@ public class ArticleListAdapter extends BaseAdapter {
         public ImageView head;
 
         ViewHolder(View view) {
-            title = (TextView) view.findViewById(R.id.acticle_title);
+            title = (TextView) view.findViewById(R.id.tv_topic);
             head = (ImageView) view.findViewById(R.id.iv_photo);
         }
 

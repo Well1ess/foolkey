@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -17,7 +16,6 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UserConfig;
-import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 
 /**
@@ -38,7 +36,7 @@ public class SplashActivity extends Activity {
     //图片加载
     private RequestManager glide;
 
-    @ViewInject(R.id.photo_circle)
+    @ViewInject(R.id.iv_photo)
     private ImageView cache;
 
     @Override

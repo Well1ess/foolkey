@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.Login;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +12,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.example.a29149.yuyuan.Main.ImageUploadActivity;
-import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -35,8 +32,6 @@ import com.example.a29149.yuyuan.controller.userInfo.RegisterController;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
-
-import static com.example.a29149.yuyuan.Login.LoginActivity.defaultPhoto;
 
 /**
  * 现在注册成功后，会发送一次refresh请求，以便填充全局中的studentDTO
@@ -66,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mCode;
 
     //头像
-    @ViewInject(R.id.photo_circle)
+    @ViewInject(R.id.iv_photo)
     private ImageView imageView;
     //是否设置了头像
     private boolean hasPhoto = false;
@@ -226,7 +221,7 @@ public class RegisterActivity extends AppCompatActivity {
      * 要放置extra
      * @param view
      */
-    @OnClick(R.id.photo_circle)
+    @OnClick(R.id.iv_photo)
     public void uploadPhoto(View view){
 
         //不让用户上传头像了

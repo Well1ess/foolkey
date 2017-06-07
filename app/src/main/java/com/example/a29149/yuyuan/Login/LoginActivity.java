@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.a29149.yuyuan.Main.SplashActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.RefreshSelfInfo.RefreshSelfInfo;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -71,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private PictureInfoBO pictureInfoBO = new PictureInfoBO();
 
     //华哥画的圈，现在可以注入照片了
-    @ViewInject(R.id.photo_circle)
+    @ViewInject(R.id.iv_photo)
     private ImageView imageView;
 
     //获取用户配置

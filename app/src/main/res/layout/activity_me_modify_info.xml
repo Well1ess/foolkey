@@ -100,11 +100,11 @@
             android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:layout_marginEnd="30dp"
-            android:layout_toLeftOf="@+id/photo_circle"
+            android:layout_toLeftOf="@+id/iv_photo"
             android:background="@color/light_white" />
 
         <com.example.a29149.yuyuan.Widget.SquareImageView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/photo_circle"
+            android:id="@+id/iv_photo"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentRight="true"

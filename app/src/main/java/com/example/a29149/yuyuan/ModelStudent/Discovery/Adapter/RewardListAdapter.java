@@ -4,10 +4,6 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,7 +15,6 @@ import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.ModelStudent.Me.info.StudentInfoActivity;
-import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
@@ -115,7 +110,7 @@ public class RewardListAdapter extends BaseAdapter {
 
         ViewHolder(View view) {
             title = (TextView) view.findViewById(R.id.reward_title);
-            head = (ImageView) view.findViewById(R.id.photo_circle);
+            head = (ImageView) view.findViewById(R.id.iv_photo);
             money = (TextView) view.findViewById(R.id.reward_money);
             label = (TextView) view.findViewById(R.id.label);
 //            prestige = (TextView) view.findViewById(R.id.prestige);

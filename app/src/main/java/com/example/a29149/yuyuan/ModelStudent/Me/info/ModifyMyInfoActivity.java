@@ -74,7 +74,7 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
     @ViewInject(R.id.description)
     private EditText description;
 
-    @ViewInject(R.id.photo_circle)
+    @ViewInject(R.id.iv_photo)
     private ImageView imageView;
 
     @ViewInject(R.id.iv_return)

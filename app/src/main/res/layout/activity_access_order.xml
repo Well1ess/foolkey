@@ -77,7 +77,7 @@
                         android:background="@color/white"
                         android:orientation="horizontal">
                         <com.example.a29149.yuyuan.Widget.SquareImageView
-                            android:id="@+id/photo_circle"
+                            android:id="@+id/iv_photo"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/circle"

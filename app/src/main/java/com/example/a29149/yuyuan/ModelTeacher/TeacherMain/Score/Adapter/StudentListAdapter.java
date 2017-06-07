@@ -115,7 +115,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
 
         public Holder(View itemView, int viewType) {
             super(itemView);
-            head = (ImageView) itemView.findViewById(R.id.head);
+            head = (ImageView) itemView.findViewById(R.id.iv_photo);
             button = (TextView) itemView.findViewById(R.id.button);
 
         }

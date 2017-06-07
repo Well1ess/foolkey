@@ -46,7 +46,7 @@ public class OriginIndexActivity extends AppCompatActivity {
     @ViewInject(R.id.toolbar_title)
     private TextView mToolbarTitle;//老师名字
 
-    @ViewInject(R.id.head)
+    @ViewInject(R.id.iv_photo)
     private ImageView mHead;//老师头像
 
     @ViewInject(R.id.slogan)

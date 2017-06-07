@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -136,7 +135,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
 
         mTitle = (TextView) view.findViewById(R.id.title);
         mOwnerReward = (TextView) view.findViewById(R.id.owner_reward);
-        mHeadImage = (ImageView) view.findViewById(R.id.head);
+        mHeadImage = (ImageView) view.findViewById(R.id.iv_photo);
 
 
         int virtualMoney = DoubleParseInt(studentDTO.getVirtualCurrency()) ;
@@ -191,7 +190,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener , F
 //                //Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
 //                startActivity(intent2);
 //                break;
-            case R.id.head:
+            case R.id.iv_photo:
                 Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
                 startActivity(intent3);
                 break;

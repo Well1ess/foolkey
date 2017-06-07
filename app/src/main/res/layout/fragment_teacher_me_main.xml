@@ -65,7 +65,7 @@
                 android:background="@color/white">
 
                 <ImageView
-                    android:id="@+id/head"
+                    android:id="@+id/iv_photo"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="10dp"
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_alignTop="@id/head"
+                    android:layout_alignTop="@id/iv_photo"
                     android:layout_marginRight="20dp"
                     android:text="所有的坚持，都源自于热爱"/>
 
@@ -92,11 +92,11 @@
                     android:text="————华哥"/>
 
                 <TextView
-                    android:id="@+id/reputation"
+                    android:id="@+id/tv_prestige"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/head"
-                    android:layout_alignRight="@id/head"
+                    android:layout_alignBottom="@id/iv_photo"
+                    android:layout_alignRight="@id/iv_photo"
                     android:text="声望"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12dp"/>
@@ -104,7 +104,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/head"
+                    android:layout_alignBottom="@id/iv_photo"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/textview_edit_self_info"
                     android:drawableTop="@android:drawable/ic_menu_edit"
@@ -115,7 +115,7 @@
                     android:textSize="12sp"/>
 
                 <LinearLayout
-                    android:layout_below="@id/head"
+                    android:layout_below="@id/iv_photo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"

@@ -31,7 +31,7 @@ public class CourseActivity extends AppCompatActivity {
     @ViewInject(R.id.author)
     private TextView mAuthor;
 
-    @ViewInject(R.id.head)
+    @ViewInject(R.id.iv_photo)
     private ImageView mHead;
 
     //课程标签
@@ -51,7 +51,7 @@ public class CourseActivity extends AppCompatActivity {
     private TextView mNumberEvaluation;
 
     //声望值
-    @ViewInject(R.id.reputation)
+    @ViewInject(R.id.tv_prestige)
     private TextView mReputation;
 
     //课程标题
@@ -131,7 +131,7 @@ public class CourseActivity extends AppCompatActivity {
                 ActivityOptions.makeSceneTransitionAnimation(this, view, "searchView").toBundle());
     }
 
-    @OnClick(R.id.head)
+    @OnClick(R.id.iv_photo)
     public void setHeadListener(View view) {
         Intent toTeacherIndexActivity = new Intent(this, OriginIndexActivity.class);
         startActivity(toTeacherIndexActivity,

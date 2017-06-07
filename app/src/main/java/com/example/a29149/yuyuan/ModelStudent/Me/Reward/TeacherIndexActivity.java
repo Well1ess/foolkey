@@ -25,7 +25,6 @@ import com.example.a29149.yuyuan.Enum.SexTagEnum;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
@@ -187,7 +186,7 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mTeacherGithub = (TextView) findViewById(R.id.tv_github);
         mTeacherIndex = (TextView) findViewById(R.id.tv_teacherindex);
         mTeacherEmail = (TextView) findViewById(R.id.tv_email);
-        mTeacherPhoto = (ImageView)findViewById(R.id.head);
+        mTeacherPhoto = (ImageView)findViewById(R.id.iv_photo);
 
 
 

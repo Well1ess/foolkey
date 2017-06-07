@@ -101,7 +101,7 @@
                             android:layout_height="120dp">
 
                             <ImageView
-                                android:id="@+id/head"
+                                android:id="@+id/iv_photo"
                                 android:transitionName="shareHead"
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginTop="10dp"
@@ -114,13 +114,13 @@
                                 android:textColor="@color/colorPrimary"
                                 android:layout_marginBottom="5dp"
                                 android:id="@+id/label"
-                                android:layout_alignTop="@id/head"
+                                android:layout_alignTop="@id/iv_photo"
                                 android:background="@drawable/textview_normal"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
                                 android:paddingTop="2dp"
                                 android:paddingBottom="2dp"
-                                android:layout_toEndOf="@+id/head"
+                                android:layout_toEndOf="@+id/iv_photo"
                                 android:layout_marginLeft="20dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                                 android:text="课程评价"
                                 android:layout_marginLeft="20dp"
                                 android:layout_below="@+id/label"
-                                android:layout_toEndOf="@+id/head" />
+                                android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView
                                 android:textColor="@color/colorPrimary"
@@ -157,7 +157,7 @@
                                 android:text="教师评价"
                                 android:layout_marginLeft="20dp"
                                 android:layout_below="@+id/course"
-                                android:layout_toEndOf="@+id/head" />
+                                android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView
                                 android:textColor="@color/colorPrimary"
@@ -179,7 +179,7 @@
                                 android:text="教授人数"
                                 android:layout_marginLeft="20dp"
                                 android:layout_below="@+id/teacher"
-                                android:layout_toEndOf="@+id/head" />
+                                android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView
                                 android:textColor="@color/colorPrimary"
@@ -192,14 +192,14 @@
                                 android:text="45" />
 
                             <TextView
-                                android:id="@+id/reputation"
+                                android:id="@+id/tv_prestige"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimary"
                                 android:text="声望"
                                 android:textSize="12dp"
-                                android:layout_alignBottom="@id/head"
-                                android:layout_alignRight="@id/head"/>
+                                android:layout_alignBottom="@id/iv_photo"
+                                android:layout_alignRight="@id/iv_photo"/>
 
                         </RelativeLayout>
 

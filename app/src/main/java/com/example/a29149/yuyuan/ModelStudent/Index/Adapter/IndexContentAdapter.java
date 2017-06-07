@@ -83,7 +83,7 @@ public class IndexContentAdapter extends BaseAdapter {
             title = (TextView) view.findViewById(R.id.project_title);
             author = (TextView) view.findViewById(R.id.author);
             content = (TextView) view.findViewById(R.id.project_content);
-            head = (ImageView) view.findViewById(R.id.head);
+            head = (ImageView) view.findViewById(R.id.iv_photo);
         }
 
     }

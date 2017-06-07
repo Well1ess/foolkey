@@ -11,7 +11,7 @@
     <RelativeLayout
         android:transitionName="shareHead"
         android:background="@color/grey"
-        android:id="@+id/head"
+        android:id="@+id/iv_photo"
         android:layout_width="100dp"
         android:layout_height="100dp" >
         <TextView
@@ -44,10 +44,10 @@
 
     <LinearLayout
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/head"
+        android:layout_toRightOf="@id/iv_photo"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_alignTop="@id/head"
+        android:layout_alignTop="@id/iv_photo"
         android:orientation="vertical">
         <TextView
             android:textColor="@color/colorPrimary"

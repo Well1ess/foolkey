@@ -171,7 +171,7 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
 //        mOwnerCourse = (TextView) view.findViewById(R.id.tv_course);
 //        mOwnerCourse.setOnClickListener(this);
 
-        mHeadImage = (ImageView) view.findViewById(R.id.head);
+        mHeadImage = (ImageView) view.findViewById(R.id.iv_photo);
         mHeadImage.setOnClickListener(this);
 
         //图片加载器
@@ -187,7 +187,7 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
                 .transform(new GlideCircleTransform(getActivity()))
                 .into(mHeadImage);
 
-//        reputation.setText( studentDTO.getPrestige() );
+//        tv_prestige.setText( studentDTO.getPrestige() );
 
 
 
@@ -208,7 +208,7 @@ public class TeacherMainFragment extends Fragment implements View.OnClickListene
 //                //Intent intent1 = new Intent(getActivity(),OwnerRewardTeacherActivity.class);//悬赏
 //                startActivity(intent2);
 //                break;
-            case R.id.head:
+            case R.id.iv_photo:
                 Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
                 startActivity(intent3);
                 break;

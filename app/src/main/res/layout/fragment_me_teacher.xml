@@ -73,7 +73,7 @@
 
                     >
                     <com.example.a29149.yuyuan.Widget.SquareImageView
-                        android:id="@+id/head"
+                        android:id="@+id/iv_photo"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:background="@drawable/circle"

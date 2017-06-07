@@ -110,7 +110,7 @@
                             android:layout_height="120dp">
 
                             <ImageView
-                                android:id="@+id/head"
+                                android:id="@+id/iv_photo"
                                 android:transitionName="shareHead"
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginTop="10dp"
@@ -121,7 +121,7 @@
                                 />
 
                             <TextView
-                                android:layout_alignTop="@id/head"
+                                android:layout_alignTop="@id/iv_photo"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginBottom="3dp"
                                 android:id="@+id/course"
@@ -131,7 +131,7 @@
                                 android:text="悬赏人    "
                                 android:layout_marginLeft="20dp"
                                 android:layout_below="@+id/label"
-                                android:layout_toEndOf="@+id/head" />
+                                android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView
                                 android:textColor="@color/colorPrimary"
@@ -152,7 +152,7 @@
                                 android:text="悬赏价格"
                                 android:layout_marginLeft="20dp"
                                 android:layout_below="@+id/course"
-                                android:layout_toEndOf="@+id/head" />
+                                android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView
                                 android:textColor="@color/colorPrimary"
@@ -165,14 +165,14 @@
                                 android:text="2000" />
 
                             <TextView
-                                android:id="@+id/reputation"
+                                android:id="@+id/tv_prestige"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimary"
                                 android:text=""
                                 android:textSize="12dp"
-                                android:layout_alignBottom="@id/head"
-                                android:layout_alignRight="@id/head"/>
+                                android:layout_alignBottom="@id/iv_photo"
+                                android:layout_alignRight="@id/iv_photo"/>
 
                         </RelativeLayout>
 

@@ -1,10 +1,8 @@
 package com.example.a29149.yuyuan.ModelStudent.Me.info;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -14,17 +12,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
-import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
-import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
-
-import java.text.SimpleDateFormat;
 
 /**
  * 显示学生信息的Activity
@@ -35,7 +29,7 @@ public class StudentInfoActivity extends Activity {
 
     private StudentDTO mStudentDTO;//学生信息
 
-    @ViewInject(R.id.head)
+    @ViewInject(R.id.iv_photo)
     private ImageView mStudentPhoto;
 
     @ViewInject(R.id.student_name)
@@ -50,7 +44,7 @@ public class StudentInfoActivity extends Activity {
     @ViewInject(R.id.tv_teacherOriganization)
     private TextView mTeacherOriganization;
     //声望
-    @ViewInject(R.id.reputation)
+    @ViewInject(R.id.tv_prestige)
     private TextView mReputation;
     //描述
     @ViewInject(R.id.description)

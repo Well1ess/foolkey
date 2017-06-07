@@ -61,7 +61,7 @@ public class CouponListAdapter extends BaseAdapter {
             TextView title = (TextView) convertView.findViewById(R.id.title);
             TextView endTime = (TextView) convertView.findViewById(R.id.end_time);
             TextView kind = (TextView) convertView.findViewById(R.id.kind);
-            RelativeLayout head = (RelativeLayout) convertView.findViewById(R.id.head);
+            RelativeLayout head = (RelativeLayout) convertView.findViewById(R.id.iv_photo);
 
             value.setText(check(GlobalUtil.getInstance().getCouponDTOList().get(position).getValue()));
             level.setText("满" +check(GlobalUtil.getInstance().getCouponDTOList().get(position).getLevel()) + "元可用");

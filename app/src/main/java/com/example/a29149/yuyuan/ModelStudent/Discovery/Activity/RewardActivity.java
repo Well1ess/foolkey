@@ -21,7 +21,6 @@ import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RewardStateEnum;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
-import com.example.a29149.yuyuan.ModelStudent.Publish.Activity.ApplyAuthenticationTeacherActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
@@ -69,7 +68,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     private TextView mCreateTime;//创建悬赏的时间
     private TextView mPrestige;
     private ImageButton mReturn;//返回按键
-    @ViewInject(R.id.head)
+    @ViewInject(R.id.iv_photo)
     private ImageView photo;
 
 
@@ -182,7 +181,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonMiddle = (RadioButton) findViewById(R.id.chat);
         mButtonLeft = (RadioButton) findViewById(R.id.want_learn);
-        mPrestige = (TextView) findViewById(R.id.reputation);
+        mPrestige = (TextView) findViewById(R.id.tv_prestige);
         mButtonLeft.setOnClickListener(this);
 
         if (rewardDTO.getCreatorId() == null ||

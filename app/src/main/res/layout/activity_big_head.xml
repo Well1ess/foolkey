@@ -51,7 +51,7 @@
         android:layout_height="match_parent"
         android:background="@color/black">
         <ImageView
-            android:id="@+id/head"
+            android:id="@+id/iv_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"

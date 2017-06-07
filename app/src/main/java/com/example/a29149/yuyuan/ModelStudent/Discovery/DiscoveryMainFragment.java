@@ -246,7 +246,7 @@ public class DiscoveryMainFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.key_value)
+    @OnClick(R.id.et_search)
     public void setSearchEdtListener(View view) {
         Intent intent = new Intent(getActivity(), SearchActivity.class);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(

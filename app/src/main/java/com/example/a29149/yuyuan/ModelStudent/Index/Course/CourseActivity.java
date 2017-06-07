@@ -43,7 +43,7 @@ public class CourseActivity extends AppCompatActivity {
     private TextView mCourseEvaluation;
 
     //教师个人评价
-    @ViewInject(R.id.teacherEvaluate)
+    @ViewInject(R.id.tv_nickedName)
     private TextView mTeacherEvaluation;
 
     //教师教授的人数
@@ -98,14 +98,6 @@ public class CourseActivity extends AppCompatActivity {
             Toast.makeText(this, "数据获取失败", Toast.LENGTH_SHORT).show();
             return;
         }
-        System.out.println(GlobalUtil.getInstance().getTechnicTagEnum());
-
-        Log.i("葛尧",
-//                 GlobalUtil.getInstance()
-//                        .getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum()).toString()
-                GlobalUtil.getInstance().getTechnicTagEnum().toString()
-        );
-
         CourseTeacherDTO courseTeacherDTO = GlobalUtil.getInstance()
                 .getCourseTeacherPopularDTOs(GlobalUtil.getInstance().getTechnicTagEnum())
                 .get(mPosition)
@@ -124,7 +116,7 @@ public class CourseActivity extends AppCompatActivity {
         mCourseRemark.setText("希望先和我联系和沟通一下！！！");
     }
 
-    @OnClick(R.id.key_value)
+    @OnClick(R.id.et_search)
     public void setSearchListener(View view) {
         Intent searchActivity = new Intent(this, SearchActivity.class);
         startActivity(searchActivity,

@@ -31,7 +31,7 @@
             <com.example.a29149.yuyuan.Widget.MyEditText
                 android:transitionName="searchView"
                 android:focusable="false"
-                android:id="@+id/key_value"
+                android:id="@+id/et_search"
                 android:layout_width="0dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center_vertical"
@@ -158,7 +158,7 @@
                             <TextView
                                 android:textColor="@color/colorPrimary"
                                 android:layout_alignTop="@id/teacher"
-                                android:id="@+id/teacherEvaluate"
+                                android:id="@+id/tv_nickedName"
                                 android:layout_toRightOf="@id/teacher"
                                 android:layout_marginRight="20dp"
                                 android:layout_width="wrap_content"

@@ -52,7 +52,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener {
     private void initView() {
         tabLayout = (TabLayout) view.findViewById(R.id.id_tl);
         viewPager = (ViewPager) view.findViewById(R.id.id_vp);
-        View keySearch = view.findViewById(R.id.key_value);
+        View keySearch = view.findViewById(R.id.et_search);
         keySearch.setOnClickListener(this);
     }
 

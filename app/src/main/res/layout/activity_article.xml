@@ -32,7 +32,7 @@
             <com.example.a29149.yuyuan.Widget.MyEditText
                 android:transitionName="searchView"
                 android:focusable="false"
-                android:id="@+id/key_value"
+                android:id="@+id/et_search"
                 android:layout_width="0dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center_vertical"

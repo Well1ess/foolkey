@@ -80,7 +80,7 @@
         android:background="@color/white">
 
         <EditText
-            android:id="@+id/nickedName"
+            android:id="@+id/et_nickedName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -130,7 +130,7 @@
         >
 
         <TextView
-            android:id="@+id/sex"
+            android:id="@+id/tv_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -142,7 +142,7 @@
             />
 
         <EditText
-            android:id="@+id/organization"
+            android:id="@+id/ev_organization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/separator"
@@ -160,11 +160,11 @@
             android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:background="@color/light_white"
-            android:layout_toLeftOf="@+id/school"
+            android:layout_toLeftOf="@+id/ev_school"
             />
 
         <EditText
-            android:id="@+id/school"
+            android:id="@+id/ev_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -189,7 +189,7 @@
         />
 
     <EditText
-        android:id="@+id/tv_slogan"
+        android:id="@+id/ev_slogan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -222,7 +222,7 @@
         android:background="@color/light_white"
         />
     <EditText
-        android:id="@+id/tv_email"
+        android:id="@+id/ev_email"
         android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -243,10 +243,8 @@
         />
 
 
-
-
     <EditText
-        android:id="@+id/tv_github"
+        android:id="@+id/ev_github"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -289,7 +287,7 @@
         />
 
     <EditText
-        android:id="@+id/description"
+        android:id="@+id/ev_description"
         android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

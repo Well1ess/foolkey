@@ -44,34 +44,34 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
     //保存我的信息的DTO
     private StudentDTO studentDTO;
 
-    @ViewInject(R.id.nickedName)
+    @ViewInject(R.id.et_nickedName)
     private EditText nickedName;
 
-    @ViewInject(R.id.sex)
+    @ViewInject(R.id.tv_sex)
     private TextView sex;
 
-    @ViewInject(R.id.school)
+    @ViewInject(R.id.ev_school)
     private EditText school;
 
 //    @ViewInject(R.id.birthday)
 //    private EditText birthday;
 
-    @ViewInject(R.id.tv_slogan)
+    @ViewInject(R.id.ev_slogan)
     private EditText slogan;
 
-    @ViewInject(R.id.tv_email)
+    @ViewInject(R.id.ev_email)
     private EditText email;
 
-    @ViewInject(R.id.tv_github)
+    @ViewInject(R.id.ev_github)
     private EditText github;
 
-    @ViewInject(R.id.organization)
+    @ViewInject(R.id.ev_organization)
     private EditText organization;
 
     @ViewInject(R.id.tv_technicTag)
     private TextView technicTag;
 
-    @ViewInject(R.id.description)
+    @ViewInject(R.id.ev_description)
     private EditText description;
 
     @ViewInject(R.id.iv_photo)

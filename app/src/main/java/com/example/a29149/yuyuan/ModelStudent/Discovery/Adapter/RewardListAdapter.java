@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -27,6 +28,8 @@ import com.example.resource.util.image.GlideCircleTransform;
  */
 
 public class RewardListAdapter extends BaseAdapter {
+
+    private static final String TAG = "RewardListAdapter";
 
     private Context mContext;
 
@@ -83,6 +86,7 @@ public class RewardListAdapter extends BaseAdapter {
         viewHolder.studentKind.setText( studentDTO.getNickedName() + "");
 
         //加载图片
+//        Log.d(TAG, "getView: " + PictureInfoBO.getOnlinePhoto(studentDTO.getUserName()));
         glide = Glide.with(mContext);
         glide.load(PictureInfoBO.getOnlinePhoto(studentDTO.getUserName() ) )
                 .error(R.drawable.photo_placeholder1)
@@ -109,13 +113,13 @@ public class RewardListAdapter extends BaseAdapter {
 //        public TextView prestige;
 
         ViewHolder(View view) {
-            title = (TextView) view.findViewById(R.id.reward_title);
+            title = (TextView) view.findViewById(R.id.tv_title);
             head = (ImageView) view.findViewById(R.id.iv_photo);
-            money = (TextView) view.findViewById(R.id.reward_money);
-            label = (TextView) view.findViewById(R.id.label);
+            money = (TextView) view.findViewById(R.id.tv_price);
+            label = (TextView) view.findViewById(R.id.tv_technicTagEnum);
 //            prestige = (TextView) view.findViewById(R.id.prestige);
 
-            studentKind = (TextView) view.findViewById(R.id.student_kind);
+            studentKind = (TextView) view.findViewById(R.id.tv_studentBaseEnum);
         }
 
     }

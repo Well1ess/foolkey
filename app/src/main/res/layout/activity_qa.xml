@@ -31,7 +31,7 @@
             <com.example.a29149.yuyuan.Widget.MyEditText
                 android:transitionName="searchView"
                 android:focusable="false"
-                android:id="@+id/key_value"
+                android:id="@+id/et_search"
                 android:layout_width="0dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center_vertical"
@@ -86,14 +86,16 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:text="付费问答·华哥"
-                            android:textSize="16sp"
-                            android:textColor="@color/colorPrimary"
+                            android:id="@+id/tv_nickedName"
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingBottom="10dp"
-                            android:paddingTop="10dp"/>
+                            android:paddingTop="10dp"
+                            android:text="付费问答·华哥"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorPrimary"
+                            />
 
                         <View
                             android:layout_width="wrap_content"
@@ -116,25 +118,26 @@
                                 android:layout_marginBottom="10dp"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:background="@color/grey"/>
+                                android:background="@null"
+                                />
 
                             <TextView
+                                android:id="@+id/course"
                                 android:layout_alignTop="@id/iv_photo"
                                 android:layout_marginTop="3dp"
                                 android:layout_marginBottom="3dp"
-                                android:id="@+id/course"
                                 android:layout_marginRight="20dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="问题价值"
                                 android:layout_marginLeft="20dp"
-                                android:layout_below="@+id/label"
+                                android:layout_below="@+id/tv_technicTagEnum"
                                 android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView
+                                android:id="@+id/tv_price"
                                 android:textColor="@color/colorPrimary"
                                 android:layout_alignTop="@id/course"
-                                android:id="@+id/courseEvaluate"
                                 android:layout_toRightOf="@id/course"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -155,7 +158,7 @@
                             <TextView
                                 android:textColor="@color/colorPrimary"
                                 android:layout_alignTop="@id/teacher"
-                                android:id="@+id/teacherEvaluate"
+                                android:id="@+id/tv_nickedName"
                                 android:layout_toRightOf="@id/teacher"
                                 android:layout_marginRight="20dp"
                                 android:layout_width="wrap_content"
@@ -175,9 +178,9 @@
                                 android:layout_toEndOf="@+id/iv_photo" />
 
                             <TextView
+                                android:id="@+id/tv_onlookerNumber"
                                 android:textColor="@color/colorPrimary"
                                 android:layout_alignTop="@id/number"
-                                android:id="@+id/numberEvaluate"
                                 android:layout_toRightOf="@id/number"
                                 android:layout_marginRight="20dp"
                                 android:layout_width="wrap_content"
@@ -189,7 +192,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimary"
-                                android:text="声望"
+                                android:text="0"
                                 android:textSize="12dp"
                                 android:layout_alignBottom="@id/iv_photo"
                                 android:layout_alignRight="@id/iv_photo"/>
@@ -221,6 +224,7 @@
                             android:layout_marginRight="60dp" />
 
                         <TextView
+                            android:id="@+id/tv_questionContent"
                             android:layout_margin="18dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -257,6 +261,7 @@
                                 android:paddingTop="10dp"/>
 
                             <TextView
+                                android:id="@+id/tv_createdTime"
                                 android:text="2017年4月24日19:24:52"
                                 android:textSize="12sp"
                                 android:textColor="@color/submenu_text_color"
@@ -314,14 +319,14 @@
                 android:orientation="horizontal" >
 
                 <RadioButton
+                    android:id="@+id/rb_follow"
                     style="@style/RadioButton.Menu"
-                    android:id="@+id/main_menu_index"
                     android:text="关注答主"
                     android:checked="true" />
 
                 <RadioButton
+                    android:id="@+id/rb_buy"
                     style="@style/RadioButton.Menu"
-                    android:id="@+id/main_menu_discovery"
                     android:text="添加到购物车" />
 
 

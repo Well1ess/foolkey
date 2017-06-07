@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,7 +22,6 @@ import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
-import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.Fragment.ArticleSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.CourseSearchFragment;
@@ -39,10 +37,6 @@ import com.example.a29149.yuyuan.Widget.MyEditText;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
-import de.greenrobot.event.Subscribe;
-import de.greenrobot.event.ThreadMode;
-
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_FIRST_TAG;
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_SECOND_TAG;
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_THIRD_TAG;
@@ -55,7 +49,7 @@ public class SearchActivity extends AppCompatActivity {
     public static final String SEARCH_OF_FOUR_TAG = "four";
     public static final String SEARCH_OF_FIFTH_TAG = "fifth";
 
-    @ViewInject(R.id.key_value)
+    @ViewInject(R.id.et_search)
     private MyEditText mKeyValue;
 
     //search 按钮组

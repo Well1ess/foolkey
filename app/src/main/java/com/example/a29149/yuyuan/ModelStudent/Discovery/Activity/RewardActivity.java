@@ -155,13 +155,13 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     //为底部菜单添加监听
-    @OnClick({R.id.want_learn, R.id.chat, R.id.order})
+    @OnClick({R.id.rb_want_learn, R.id.rb_chat, R.id.tv_applyOrder})
     public void setMenuListener(View view) {
         switch (view.getId()) {
-            case R.id.want_learn:
+            case R.id.rb_want_learn:
                 //TODO:网络传输
                 break;
-            case R.id.chat:
+            case R.id.rb_chat:
                 //TODO:网络传输
                 break;
 
@@ -169,18 +169,18 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initView() {
-        mOrder = (RadioButton) findViewById(R.id.order);
+        mOrder = (RadioButton) findViewById(R.id.tv_applyOrder);
         mOrder.setOnClickListener(this);
         mReturn = (ImageButton) findViewById(R.id.bt_return);
         mReturn.setOnClickListener(this);
 
-        mRewardUser = (TextView) findViewById(R.id.courseEvaluate);
-        mTeacherEvaluate = (TextView) findViewById(R.id.teacherEvaluate);
-        mRewardTopic = (TextView) findViewById(R.id.tv_topic);
+        mRewardUser = (TextView) findViewById(R.id.tv_price);
+        mTeacherEvaluate = (TextView) findViewById(R.id.tv_nickedName);
+        mRewardTopic = (TextView) findViewById(R.id.tv_title);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
-        mButtonMiddle = (RadioButton) findViewById(R.id.chat);
-        mButtonLeft = (RadioButton) findViewById(R.id.want_learn);
+        mButtonMiddle = (RadioButton) findViewById(R.id.rb_chat);
+        mButtonLeft = (RadioButton) findViewById(R.id.rb_want_learn);
         mPrestige = (TextView) findViewById(R.id.tv_prestige);
         mButtonLeft.setOnClickListener(this);
 
@@ -261,7 +261,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.bt_return:
                 this.finish();
                 break;
-            case R.id.order:{
+            case R.id.tv_applyOrder:{
                 if (mOrder.getText().equals("修改悬赏")) {
                     Log.i("malei", mOrder.getText() + "");
                     Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
@@ -285,7 +285,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                     break;
                 }
             }
-            case R.id.want_learn:{
+            case R.id.rb_want_learn:{
                 if (mButtonLeft.getText() != null && mButtonLeft.getText().equals("删除悬赏")){
                     //删除订单
                     if (

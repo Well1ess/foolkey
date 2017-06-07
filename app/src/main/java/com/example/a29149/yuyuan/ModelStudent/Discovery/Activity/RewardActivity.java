@@ -61,8 +61,8 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     private int position = -1;//item位置
     private StudentDTO studentDTO;//发布悬赏的学生信息
     private RewardDTO rewardDTO;//悬赏信息
-    private TextView mRewardUser;//发布悬赏人的信息
-    private TextView mTeacherEvaluate;//悬赏价格
+    private TextView mNickedName;//发布悬赏人的信息
+    private TextView mRewardPrice;//悬赏价格
     private TextView mRewardTopic;//悬赏标题
     private TextView mRewardDescription;//悬赏描述
     private TextView mCreateTime;//创建悬赏的时间
@@ -174,8 +174,8 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
         mReturn = (ImageButton) findViewById(R.id.ib_return);
         mReturn.setOnClickListener(this);
 
-        mRewardUser = (TextView) findViewById(R.id.tv_nickedName);
-        mTeacherEvaluate = (TextView) findViewById(R.id.tv_price);
+        mNickedName = (TextView) findViewById(R.id.tv_nickedName);
+        mRewardPrice = (TextView) findViewById(R.id.tv_price);
         mRewardTopic = (TextView) findViewById(R.id.tv_title);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
@@ -211,8 +211,8 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
 
 
     private void initData() {
-        mRewardUser.setText(studentDTO.getNickedName());
-        mTeacherEvaluate.setText(rewardDTO.getPrice() + "");
+        mNickedName.setText(studentDTO.getNickedName());
+        mRewardPrice.setText(rewardDTO.getPrice() + "");
         mRewardTopic.setText(rewardDTO.getTopic() + "");
         mRewardDescription.setText(rewardDTO.getDescription());
         mPrestige.setText( studentDTO.getPrestige() + "");

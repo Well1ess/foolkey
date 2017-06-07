@@ -37,7 +37,7 @@ import java.util.List;
 public class TeacherRewardMainFragment extends Fragment {
 
     //下拉刷新的Layout
-    @ViewInject(R.id.slide_layout)
+    @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideLayout;
 
     //上划到底部动态更新的List
@@ -92,7 +92,7 @@ public class TeacherRewardMainFragment extends Fragment {
         });
 
         //设置列表下拉时的刷新
-        mSlideLayout.setRotateView(view.findViewById(R.id.refresh));
+        mSlideLayout.setRotateView(view.findViewById(R.id.iv_refresh));
         mSlideLayout.setOnSlideRefreshListener(
                 new SlideRefreshLayout.onSlideRefreshListener() {
                     @Override

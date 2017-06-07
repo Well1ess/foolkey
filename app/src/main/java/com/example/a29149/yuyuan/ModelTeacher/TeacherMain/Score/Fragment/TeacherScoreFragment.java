@@ -46,10 +46,10 @@ public class TeacherScoreFragment extends Fragment {
     private TeacherScoreAdapter mTeacherScoreAdapter;
 
     //下滑刷新
-    @ViewInject(R.id.slide_layout)
+    @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideRefreshLayout;
 
-    @ViewInject(R.id.refresh)
+    @ViewInject(R.id.iv_refresh)
     private ImageView mRefreshIcon;
 
     public TeacherScoreFragment() {
@@ -94,7 +94,7 @@ public class TeacherScoreFragment extends Fragment {
         });
 
         //设置列表下拉时的刷新
-        mSlideRefreshLayout.setRotateView(view.findViewById(R.id.refresh));
+        mSlideRefreshLayout.setRotateView(view.findViewById(R.id.iv_refresh));
         mSlideRefreshLayout.setOnSlideRefreshListener(
                 new SlideRefreshLayout.onSlideRefreshListener() {
                     @Override

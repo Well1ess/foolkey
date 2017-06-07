@@ -53,44 +53,44 @@ public class SearchActivity extends AppCompatActivity {
     private MyEditText mKeyValue;
 
     //search 按钮组
-    @ViewInject(R.id.search_main_menu)
+    @ViewInject(R.id.rg_search_main_menu)
     private RadioGroup mSearchMainMenu;
 
-    @ViewInject(R.id.search_course)
+    @ViewInject(R.id.rb_search_course)
     private RadioButton mSearchCourse;
 
     @ViewInject(R.id.rb_search_reward)
     private RadioButton mSearchReward;
 
-    @ViewInject(R.id.search_teacher)
+    @ViewInject(R.id.rb_search_teacher)
     private RadioButton mSearchTeacher;
 
-    @ViewInject(R.id.search_QA)
+    @ViewInject(R.id.rb_search_QA)
     private RadioButton mSearchQA;
 
-    @ViewInject(R.id.search_article)
+    @ViewInject(R.id.rb_search_article)
     private RadioButton mSearchArticle;
 
     @ViewInject(R.id.iv_tab_line)
     private ImageView mTabLine;
 
     //指标 按钮组
-    @ViewInject(R.id.search_sub_menu)
+    @ViewInject(R.id.rg_search_sub_menu)
     private RadioGroup mSearchSubMenu;
 
-    @ViewInject(R.id.search_target_multiple)
+    @ViewInject(R.id.rb_search_target_multiple)
     private RadioButton mSearchTargetMultiple;
 
-    @ViewInject(R.id.search_target_price)
+    @ViewInject(R.id.rb_search_target_price)
     private RadioButton mSearchTargetPrice;
 
-    @ViewInject(R.id.search_target_distance)
+    @ViewInject(R.id.rb_search_target_distance)
     private RadioButton mSearchTargetDistance;
 
-    @ViewInject(R.id.search_target_course)
+    @ViewInject(R.id.rb_search_target_course)
     private RadioButton mSearchTargetCourse;
 
-    @ViewInject(R.id.search_target_teacher)
+    @ViewInject(R.id.rb_search_target_teacher)
     private RadioButton mSearchTargetTeacher;
 
     @ViewInject(R.id.vp_content_pager)
@@ -144,7 +144,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.search_course:
+                    case R.id.rb_search_course:
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FIRST_TAG);
                         condition = "course";
                         break;
@@ -152,15 +152,15 @@ public class SearchActivity extends AppCompatActivity {
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_SECOND_TAG);
                         condition = "reward";
                         break;
-                    case R.id.search_teacher:
+                    case R.id.rb_search_teacher:
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_THIRD_TAG);
                         condition = "teacher";
                         break;
-                    case R.id.search_QA:
+                    case R.id.rb_search_QA:
                         mFragmentTabHost.setCurrentTabByTag(SEARCH_OF_FOUR_TAG);
                         condition = "question";
                         break;
-                    case R.id.search_article:
+                    case R.id.rb_search_article:
                         mFragmentTabHost.setCurrentTabByTag(SEARCH_OF_FIFTH_TAG);
                         condition = "article";
                         break;
@@ -261,7 +261,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (checkedId) {
-                    case R.id.search_target_multiple:
+                    case R.id.rb_search_target_multiple:
                         mSearchTargetMultiple.setChecked(true);
                         if (mCurrentTarget != mSearchTargetMultiple) {
                             mCurrentTarget.setTextColor(getResources().getColor(R.color.menu));
@@ -269,7 +269,7 @@ public class SearchActivity extends AppCompatActivity {
                             mCurrentTarget = mSearchTargetMultiple;
                         }
                         break;
-                    case R.id.search_target_price:
+                    case R.id.rb_search_target_price:
                         mSearchTargetPrice.setChecked(true);
                         if (mCurrentTarget != mSearchTargetPrice) {
                             mCurrentTarget.setTextColor(getResources().getColor(R.color.menu));
@@ -277,7 +277,7 @@ public class SearchActivity extends AppCompatActivity {
                             mCurrentTarget = mSearchTargetPrice;
                         }
                         break;
-                    case R.id.search_target_distance:
+                    case R.id.rb_search_target_distance:
                         mSearchTargetDistance.setChecked(true);
                         if (mCurrentTarget != mSearchTargetDistance) {
                             mCurrentTarget.setTextColor(getResources().getColor(R.color.menu));
@@ -285,7 +285,7 @@ public class SearchActivity extends AppCompatActivity {
                             mCurrentTarget = mSearchTargetDistance;
                         }
                         break;
-                    case R.id.search_target_course:
+                    case R.id.rb_search_target_course:
                         mSearchTargetCourse.setChecked(true);
                         if (mCurrentTarget != mSearchTargetCourse) {
                             mCurrentTarget.setTextColor(getResources().getColor(R.color.menu));
@@ -293,7 +293,7 @@ public class SearchActivity extends AppCompatActivity {
                             mCurrentTarget = mSearchTargetCourse;
                         }
                         break;
-                    case R.id.search_target_teacher:
+                    case R.id.rb_search_target_teacher:
                         mSearchTargetTeacher.setChecked(true);
                         if (mCurrentTarget != mSearchTargetTeacher) {
                             mCurrentTarget.setTextColor(getResources().getColor(R.color.menu));

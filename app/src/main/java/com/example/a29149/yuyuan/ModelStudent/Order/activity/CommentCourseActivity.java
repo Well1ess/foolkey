@@ -80,10 +80,10 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
     }
 
     private void initView() {
-        mCourseScore = (RatingBar) findViewById(R.id.course_access);
+        mCourseScore = (RatingBar) findViewById(R.id.rb_course_access);
         mCourseContent = (EditText) findViewById(R.id.ed_comment_content);
         mTeacherScore = (RatingBar) findViewById(R.id.course_teacher);
-        mTopic = (TextView) findViewById(R.id.tv_title);
+        mTopic = (TextView) findViewById(R.id.title);
         mTopic.setText(topic);
         mTeacherName = (TextView) findViewById(R.id.tv_teacherName);
         mTeacherName.setText(teacherName);
@@ -92,10 +92,10 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         mCoursePrice = (TextView) findViewById(R.id.tv_price);
         mCoursePrice.setText("￥ "+price);
 
-        mPublish = (RadioButton) findViewById(R.id.main_menu_discovery);
+        mPublish = (RadioButton) findViewById(R.id.rb_main_menu_discovery);
         mPublish.setOnClickListener(this);
         //返回按键
-        mReturnButton.findViewById(R.id.ib_return);
+        mReturnButton.findViewById(R.id.tv_return);
         mReturnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,7 +126,7 @@ public class CommentCourseActivity extends Activity implements View.OnClickListe
         int id = view.getId();
         switch (id)
         {
-            case R.id.main_menu_discovery:
+            case R.id.rb_main_menu_discovery:
                 publishCommentReward();
                 Toast.makeText(this, "评论课程", Toast.LENGTH_SHORT).show();
                 break;

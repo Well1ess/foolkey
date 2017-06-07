@@ -47,32 +47,32 @@ public class StudentInfoActivity extends Activity {
     @ViewInject(R.id.tv_prestige)
     private TextView mReputation;
     //描述
-    @ViewInject(R.id.description)
+    @ViewInject(R.id.tv_description)
     private TextView mDescription;
     //上课次数
-    @ViewInject(R.id.tv_coursenum)
+    @ViewInject(R.id.tv_courseNum)
     private TextView mCoursenum;
     //上课时间
-    @ViewInject(R.id.tv_teachingtime)
+    @ViewInject(R.id.tv_teachingTime)
     private TextView mTeachertime;
     //是否认证
-    @ViewInject(R.id.cb_teacherstate)
+    @ViewInject(R.id.cb_teacherState)
     private CheckBox mTeacherstate;
     @ViewInject(R.id.student_role)
     private TextView mTeacherRole;
     //评价
-    @ViewInject(R.id.tv_evaluatescore)
+    @ViewInject(R.id.tv_evaluateScore)
     private TextView mEvaluatescore;
     //github
     @ViewInject(R.id.tv_github)
     private TextView mGithub;
     //博客
-    @ViewInject(R.id.tv_teacherindex)
+    @ViewInject(R.id.tv_teacherIndex)
     private TextView mTeacherindex;
     //Email
     @ViewInject(R.id.tv_email)
     private TextView mEmail;
-    @ViewInject(R.id.ib_return)
+    @ViewInject(R.id.tv_return)
     private ImageButton mReturn;
 
 

@@ -130,7 +130,7 @@
         >
 
         <TextView
-            android:id="@+id/sex"
+            android:id="@+id/tv_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -142,7 +142,7 @@
             />
 
         <EditText
-            android:id="@+id/organization"
+            android:id="@+id/tv_organization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/separator"
@@ -289,7 +289,7 @@
         />
 
     <EditText
-        android:id="@+id/description"
+        android:id="@+id/tv_description"
         android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

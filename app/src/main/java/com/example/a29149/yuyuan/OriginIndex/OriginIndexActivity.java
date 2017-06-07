@@ -34,7 +34,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 
 public class OriginIndexActivity extends AppCompatActivity {
 
-    @ViewInject(R.id.mask)
+    @ViewInject(R.id.v_mask)
     private View mMask;
 
     @ViewInject(R.id.option_menu)
@@ -52,22 +52,22 @@ public class OriginIndexActivity extends AppCompatActivity {
     @ViewInject(R.id.tv_slogan)
     private TextView mSlogan;//老师slogan
 
-    @ViewInject(R.id.sex)
+    @ViewInject(R.id.tv_sex)
     private TextView mSex;//老师性别
 
-    @ViewInject(R.id.organization)
+    @ViewInject(R.id.tv_organization)
     private TextView mOrganization;//老师组织
 
-    @ViewInject(R.id.description)
+    @ViewInject(R.id.tv_description)
     private TextView mDescription;//老师描述
 
-    @ViewInject(R.id.tv_follownum)
+    @ViewInject(R.id.tv_followNum)
     private TextView mFollowNum;//关注老师人数
 
-    @ViewInject(R.id.follow)
+    @ViewInject(R.id.tv_follow)
     private TextView mFollow;//关注老师
 
-    @ViewInject(R.id.main_menu_discovery)
+    @ViewInject(R.id.rb_main_menu_discovery)
     private RadioButton mChart;//联系老师
 
 
@@ -189,22 +189,22 @@ public class OriginIndexActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick(R.id.mask)
+    @OnClick(R.id.v_mask)
     public  void setMaskListener(View view){
         closeOptionMenu();
     }
 
-    @OnClick(R.id.ib_return)
+    @OnClick(R.id.tv_return)
     public  void setReturnListener(View view){
         this.finish();
     }
 
-    @OnClick(R.id.follow)
+    @OnClick(R.id.tv_follow)
     public  void setFollowListener(View view){
         Toast.makeText(this,"关注该老师",Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick(R.id.main_menu_discovery)
+    @OnClick(R.id.rb_main_menu_discovery)
     public  void setChartListener(View view){
         Toast.makeText(this,"联系该老师",Toast.LENGTH_SHORT).show();
     }

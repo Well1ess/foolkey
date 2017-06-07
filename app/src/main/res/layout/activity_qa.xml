@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/test_container2"
+            android:id="@+id/ll_test_container2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
@@ -19,7 +19,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/ib_return"
+                android:id="@+id/tv_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -311,7 +311,7 @@
                 android:background="#DEDEDE"/>
 
             <RadioGroup
-                android:id="@+id/tab_main_menu"
+                android:id="@+id/rg_tab_main_menu"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"

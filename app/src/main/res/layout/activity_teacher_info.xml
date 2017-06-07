@@ -143,7 +143,7 @@
                         android:text="关注人数"/>
 
                     <TextView
-                        android:id="@+id/tv_follownum"
+                        android:id="@+id/tv_followNum"
                         style="@style/TextView.INFO_NUM"
                         android:text="1"/>
 
@@ -152,7 +152,7 @@
                         android:text=""/>
 
                     <TextView
-                        android:id="@+id/follow"
+                        android:id="@+id/tv_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -176,7 +176,7 @@
                         android:text="授课次数"/>
 
                     <TextView
-                        android:id="@+id/tv_coursenum"
+                        android:id="@+id/tv_courseNum"
                         style="@style/TextView.INFO_NUM"
                         android:text="1"/>
 
@@ -185,7 +185,7 @@
                         android:text="授课时长"/>
 
                     <TextView
-                        android:id="@+id/tv_teachingtime"
+                        android:id="@+id/tv_teachingTime"
                         style="@style/TextView.INFO_NUM"
                         android:text="1"/>
                 </LinearLayout>
@@ -198,12 +198,12 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/TextView.INFO_TEXT"
                         android:id="@+id/tv_teacherVerifyState"
+                        style="@style/TextView.INFO_TEXT"
                         android:text="已认证"/>
 
                     <CheckBox
-                        android:id="@+id/cb_teacherstate"
+                        android:id="@+id/cb_teacherState"
                         style="@style/TextView.INFO_NUM"
                         android:checked="true"/>
 
@@ -212,7 +212,7 @@
                         android:text="评价"/>
 
                     <TextView
-                        android:id="@+id/tv_evaluatescore"
+                        android:id="@+id/tv_evaluateScore"
                         style="@style/TextView.INFO_NUM"
                         android:text="4.3"/>
                 </LinearLayout>
@@ -252,7 +252,7 @@
                         android:text="博客主页:"/>
 
                     <TextView
-                        android:id="@+id/tv_teacherindex"
+                        android:id="@+id/tv_teacherIndex"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
@@ -294,10 +294,10 @@
 
 
     <View
+        android:id="@+id/v_mask"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mask"
         android:alpha="0.4"
         android:elevation="10dp"
         android:background="@color/black" />
@@ -358,7 +358,7 @@
             android:background="#DEDEDE"/>
 
         <RadioGroup
-            android:id="@+id/tab_main_menu"
+            android:id="@+id/rg_tab_main_menu"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
@@ -367,12 +367,12 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/main_menu_agree"
+                android:id="@+id/rb_main_menu_agree"
                 style="@style/RadioButton.Menu"
                 android:text="同意"/>
 
             <RadioButton
-                android:id="@+id/main_menu_disagree"
+                android:id="@+id/rb_main_menu_disagree"
                 style="@style/RadioButton.Menu"
                 android:text="拒绝"/>
 

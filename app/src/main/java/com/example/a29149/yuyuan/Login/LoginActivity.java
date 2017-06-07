@@ -58,10 +58,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //上一个输入的用户名，记录放置频繁刷新
     private String lastUserName = "";
 
-    @ViewInject(R.id.username)
+    @ViewInject(R.id.et_userName)
     private EditText mUserNameView;
 
-    @ViewInject(R.id.password)
+    @ViewInject(R.id.et_passWord)
     private EditText mPasswordView;
 
     //Glide依赖
@@ -166,14 +166,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    @OnClick(R.id.modify_pwd)
+    @OnClick(R.id.tv_modify_pwd)
     public void setModifyPwd(View view)
     {
         Intent modify = new Intent(this, ModifyPwdActivity.class);
         startActivity(modify);
     }
 
-    @OnClick(R.id.register)
+    @OnClick(R.id.tv_register)
     public void setRegisterListener(View view)
     {
         AppManager.getInstance().addActivity(this);
@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(register);
     }
 
-    @OnClick(R.id.sign_in_button)
+    @OnClick(R.id.tv_sign_in_button)
     public void setLoginListener(View view)
     {
         // Reset errors.

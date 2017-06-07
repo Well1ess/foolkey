@@ -9,7 +9,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/test_container2"
+            android:id="@+id/ll_test_container2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
@@ -74,12 +74,12 @@
                         style="@style/RadioButton.SearchMenu" />
 
                     <RadioButton
-                        android:id="@+id/search_QA"
+                        android:id="@+id/rb_search_QA"
                         android:text="问 答"
                         style="@style/RadioButton.SearchMenu"  />
 
                     <RadioButton
-                        android:id="@+id/search_article"
+                        android:id="@+id/rb_search_article"
                         android:text="文 章"
                         style="@style/RadioButton.SearchMenu"  />
                 </RadioGroup>

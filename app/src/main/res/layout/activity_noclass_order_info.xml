@@ -258,7 +258,7 @@
         android:layout_height="wrap_content">
 
         <RadioGroup
-            android:id="@+id/tab_main_menu"
+            android:id="@+id/rg_tab_main_menu"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"

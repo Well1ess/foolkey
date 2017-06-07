@@ -177,24 +177,24 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         mTeacherSex = (TextView) findViewById(R.id.tv_teacherSex);
         mTeacherOrganization = (TextView) findViewById(R.id.tv_teacherOriganization);
         mTeacherEducation = (TextView) findViewById(R.id.tv_teacherEducation);
-        mFlollowNum = (TextView) findViewById(R.id.tv_follownum);
-        mCourseNum = (TextView) findViewById(R.id.tv_coursenum);
-        mTeacheringTime = (TextView) findViewById(R.id.tv_teachingtime);
-        mTeacherState = (CheckBox) findViewById(R.id.cb_teacherstate);
+        mFlollowNum = (TextView) findViewById(R.id.tv_followNum);
+        mCourseNum = (TextView) findViewById(R.id.tv_courseNum);
+        mTeacheringTime = (TextView) findViewById(R.id.tv_teachingTime);
+        mTeacherState = (CheckBox) findViewById(R.id.cb_teacherState);
         mTeacherVerifyState = (TextView) findViewById(R.id.tv_teacherVerifyState);
-        mTeacherScore = (TextView) findViewById(R.id.tv_evaluatescore);
+        mTeacherScore = (TextView) findViewById(R.id.tv_evaluateScore);
         mTeacherGithub = (TextView) findViewById(R.id.tv_github);
-        mTeacherIndex = (TextView) findViewById(R.id.tv_teacherindex);
+        mTeacherIndex = (TextView) findViewById(R.id.tv_teacherIndex);
         mTeacherEmail = (TextView) findViewById(R.id.tv_email);
         mTeacherPhoto = (ImageView)findViewById(R.id.iv_photo);
 
 
 
-        mRewardAgree = (RadioButton) findViewById(R.id.main_menu_agree);
+        mRewardAgree = (RadioButton) findViewById(R.id.rb_main_menu_agree);
         mRewardAgree.setOnClickListener(this);
-        mRewardDisagree = (RadioButton)findViewById(R.id.main_menu_disagree);
+        mRewardDisagree = (RadioButton)findViewById(R.id.rb_main_menu_disagree);
         mRewardDisagree.setOnClickListener(this);
-        mReturn = (ImageButton) findViewById(R.id.ib_return);
+        mReturn = (ImageButton) findViewById(R.id.tv_return);
         mReturn.setOnClickListener(this);
 
     }
@@ -205,10 +205,10 @@ public class TeacherIndexActivity extends AppCompatActivity implements View.OnCl
         int id = view.getId();
         switch (id)
         {
-            case R.id.main_menu_agree:
+            case R.id.rb_main_menu_agree:
                 agreeApplyReward();
                 break;
-            case R.id.main_menu_disagree:
+            case R.id.rb_main_menu_disagree:
                 new DisagreeApplyRewardAction().execute();
                 break;
             case R.id.ib_return:

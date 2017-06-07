@@ -47,7 +47,7 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
     @ViewInject(R.id.nickedName)
     private EditText nickedName;
 
-    @ViewInject(R.id.sex)
+    @ViewInject(R.id.tv_sex)
     private TextView sex;
 
     @ViewInject(R.id.school)
@@ -65,13 +65,13 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
     @ViewInject(R.id.tv_github)
     private EditText github;
 
-    @ViewInject(R.id.organization)
+    @ViewInject(R.id.tv_organization)
     private EditText organization;
 
     @ViewInject(R.id.tv_technicTag)
     private TextView technicTag;
 
-    @ViewInject(R.id.description)
+    @ViewInject(R.id.tv_description)
     private EditText description;
 
     @ViewInject(R.id.iv_photo)
@@ -155,7 +155,7 @@ public class ModifyMyInfoActivity extends Activity implements View.OnClickListen
             case R.id.tv_technicTag:
                 chooseTag();
                 break;
-            case R.id.sex:
+            case R.id.tv_sex:
                 chooseSxe();
                 break;
             default:

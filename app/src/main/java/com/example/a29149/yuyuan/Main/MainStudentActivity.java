@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -53,31 +52,31 @@ public class MainStudentActivity extends AppCompatActivity {
     @ViewInject(android.R.id.tabhost)
     private FragmentTabHost mFragmentTabHost;
 
-    @ViewInject(R.id.tab_main_menu)
+    @ViewInject(R.id.rg_tab_main_menu)
     private RadioGroup mMainMenu;
 
-    @ViewInject(R.id.main_menu_index)
+    @ViewInject(R.id.rb_main_menu_index)
     private RadioButton mIndexButton;
 
-    @ViewInject(R.id.main_menu_discovery)
+    @ViewInject(R.id.rb_main_menu_discovery)
     private RadioButton mDiscoveryButton;
 
-    @ViewInject(R.id.main_menu_publish)
+    @ViewInject(R.id.rb_main_menu_publish)
     private RadioButton mPublishButton;
 
-    @ViewInject(R.id.main_menu_order)
+    @ViewInject(R.id.rb_main_menu_order)
     private RadioButton mOrderButton;
 
-    @ViewInject(R.id.main_menu_me)
+    @ViewInject(R.id.rb_main_menu_me)
     private RadioButton mMeButton;
 
-    @ViewInject(R.id.alpha_publish_panel)
+    @ViewInject(R.id.fl_alpha_publish_panel)
     private FrameLayout mAlphaPublishPanel;
 
-    @ViewInject(R.id.publish_panel)
+    @ViewInject(R.id.ll_publish_panel)
     private LinearLayout mPublishPanel;
 
-    @ViewInject(R.id.publish_panel_real)
+    @ViewInject(R.id.ll_publish_panel_real)
     private LinearLayout mRealPublishPanel;
     private boolean mPublishPanelOpen = false;
 
@@ -125,7 +124,7 @@ public class MainStudentActivity extends AppCompatActivity {
         initRadioGroupListener();
 
         //悬赏页面的控件初始化
-        mPublishRewardStudent = (TextView) findViewById(R.id.tv_xuanshang);
+        mPublishRewardStudent = (TextView) findViewById(R.id.tv_reward);
         mPublishAskStudent = (TextView) findViewById(R.id.tv_ask);
         mPublishRewardStudent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +141,7 @@ public class MainStudentActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.main_menu_publish)
+    @OnClick(R.id.rb_main_menu_publish)
     public void setMainMenuListener(View view)
     {
         openPublishPanel();
@@ -154,14 +153,14 @@ public class MainStudentActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.main_menu_index:
+                    case R.id.rb_main_menu_index:
 
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FIRST_TAG);
                         resetMenuTextColor();
                         mIndexButton.setTextColor(0xff8BC34A);
 
                         break;
-                    case R.id.main_menu_discovery:
+                    case R.id.rb_main_menu_discovery:
 
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_SECOND_TAG);
                         resetMenuTextColor();
@@ -169,14 +168,14 @@ public class MainStudentActivity extends AppCompatActivity {
 
                         break;
 
-                    case R.id.main_menu_order:
+                    case R.id.rb_main_menu_order:
 
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FOURTH_TAG);
                         resetMenuTextColor();
                         mOrderButton.setTextColor(0xff8BC34A);
 
                         break;
-                    case R.id.main_menu_me:
+                    case R.id.rb_main_menu_me:
 
                         mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FIFTH_TAG);
                         resetMenuTextColor();
@@ -215,7 +214,7 @@ public class MainStudentActivity extends AppCompatActivity {
         mRealPublishPanel.startAnimation(animationSet);
     }
 
-    @OnClick(R.id.close_publish_panel)
+    @OnClick(R.id.rb_close_publish_panel)
     public void setClosePublishPanel(View view)
     {
         mPublishPanelOpen = false;

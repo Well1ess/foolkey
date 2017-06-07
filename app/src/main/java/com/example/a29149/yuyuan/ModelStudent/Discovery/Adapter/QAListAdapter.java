@@ -75,7 +75,7 @@ public class QAListAdapter extends BaseAdapter {
         public ImageView head;
 
         ViewHolder(View view) {
-            title = (TextView) view.findViewById(R.id.tv_title);
+            title = (TextView) view.findViewById(R.id.title);
             head = (ImageView) view.findViewById(R.id.iv_photo);
         }
 

@@ -31,10 +31,10 @@
                 android:backgroundTint="@color/white" />
 
             <TextView
+                android:id="@+id/tv_toolbar_title"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:id="@+id/tv_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -96,7 +96,7 @@
                             android:gravity="center"
                             android:orientation="vertical">
                             <TextView
-                                android:id="@+id/course_topic"
+                                android:id="@+id/tv_course_title"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                                 android:hint="课程标题"
                                 />
                             <TextView
-                                android:id="@+id/teacher_name"
+                                android:id="@+id/tv_teacher_name"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
                                 android:hint="老师姓名"
                                 />
                             <TextView
-                                android:id="@+id/course_description"
+                                android:id="@+id/tv_course_description"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
@@ -163,16 +163,16 @@
                         android:layout_marginRight="40dp" />
 
                     <RatingBar
+                        android:id="@+id/rb_course_access"
                         android:scaleX="0.6"
                         android:scaleY="0.6"
                         android:layout_gravity="center_horizontal"
                         android:numStars="5"
-                        android:id="@+id/course_access"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <EditText
-                        android:id="@+id/evaluation_course_content"
+                        android:id="@+id/et_evaluation_course_content"
                         android:textSize="12sp"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
@@ -196,8 +196,8 @@
                         >
 
                         <TextView
+                            android:id="@+id/tv_dynamic_add"
                             android:layout_centerInParent="true"
-                            android:id="@+id/dynamic_add"
                             android:layout_width="wrap_content"
                             android:layout_height="60dp"
                             android:layout_margin="5dp"
@@ -236,11 +236,11 @@
                         android:layout_marginRight="40dp" />
 
                     <RatingBar
+                        android:id="@+id/rb_teacher_access"
                         android:scaleX="0.6"
                         android:scaleY="0.6"
                         android:layout_gravity="center_horizontal"
                         android:numStars="5"
-                        android:id="@+id/teacher_access"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
@@ -258,7 +258,7 @@
             android:background="#DEDEDE"/>
 
         <RadioGroup
-            android:id="@+id/tab_main_menu"
+            android:id="@+id/rg_tab_main_menu"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -266,8 +266,8 @@
             android:orientation="horizontal" >
 
             <RadioButton
+                android:id="@+id/rb_main_menu_discovery"
                 style="@style/RadioButton.Menu"
-                android:id="@+id/main_menu_discovery"
                 android:text="发布评价" />
 
         </RadioGroup>

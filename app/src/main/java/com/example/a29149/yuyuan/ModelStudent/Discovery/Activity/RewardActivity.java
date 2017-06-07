@@ -171,12 +171,12 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     private void initView() {
         mOrder = (RadioButton) findViewById(R.id.tv_applyOrder);
         mOrder.setOnClickListener(this);
-        mReturn = (ImageButton) findViewById(R.id.ib_return);
+        mReturn = (ImageButton) findViewById(R.id.tv_return);
         mReturn.setOnClickListener(this);
 
         mNickedName = (TextView) findViewById(R.id.tv_nickedName);
         mRewardPrice = (TextView) findViewById(R.id.tv_price);
-        mRewardTopic = (TextView) findViewById(R.id.tv_title);
+        mRewardTopic = (TextView) findViewById(R.id.title);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonMiddle = (RadioButton) findViewById(R.id.rb_chat);
@@ -258,7 +258,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ib_return:
+            case R.id.tv_return:
                 this.finish();
                 break;
             case R.id.tv_applyOrder:{

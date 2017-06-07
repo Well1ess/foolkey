@@ -47,10 +47,10 @@ public class DiscoveryMainFragment extends Fragment {
     @ViewInject(R.id.rb_search_reward)
     private RadioButton mSearchReward;
 
-    @ViewInject(R.id.search_QA)
+    @ViewInject(R.id.rb_search_QA)
     private RadioButton mSearchQA;
 
-    @ViewInject(R.id.search_article)
+    @ViewInject(R.id.rb_search_article)
     private RadioButton mSearchArticle;
 
     //指引线
@@ -115,10 +115,10 @@ public class DiscoveryMainFragment extends Fragment {
                         MainStudentActivity.shapeLoadingDialog.show();
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_FIRST_TAG);
                         break;
-                    case R.id.search_QA:
+                    case R.id.rb_search_QA:
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_SECOND_TAG);
                         break;
-                    case R.id.search_article:
+                    case R.id.rb_search_article:
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_THIRD_TAG);
                         break;
                     default:

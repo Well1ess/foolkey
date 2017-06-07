@@ -22,7 +22,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageButton
-                android:id="@+id/ib_return"
+                android:id="@+id/tv_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -93,7 +93,7 @@
                             android:focusable="false"
                             android:orientation="vertical">
                             <TextView
-                                android:id="@+id/tv_title"
+                                android:id="@+id/title"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                         android:scaleY="0.6"
                         android:layout_gravity="center_horizontal"
                         android:numStars="5"
-                        android:id="@+id/course_access"
+                        android:id="@+id/rb_course_access"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -195,7 +195,7 @@
 
                         <TextView
                             android:layout_centerInParent="true"
-                            android:id="@+id/dynamic_add"
+                            android:id="@+id/tv_dynamic_add"
                             android:layout_width="wrap_content"
                             android:layout_height="60dp"
                             android:layout_margin="5dp"
@@ -263,7 +263,7 @@
             android:background="#DEDEDE"/>
 
         <RadioGroup
-            android:id="@+id/tab_main_menu"
+            android:id="@+id/rg_tab_main_menu"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -272,7 +272,7 @@
 
             <RadioButton
                 style="@style/RadioButton.Menu"
-                android:id="@+id/main_menu_discovery"
+                android:id="@+id/rb_main_menu_discovery"
                 android:text="发布评价" />
 
         </RadioGroup>

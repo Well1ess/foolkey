@@ -32,17 +32,17 @@ public class AccessOrderActivity extends AppCompatActivity {
     //UI相关
     @ViewInject(R.id.iv_photo)
     private ImageView mTeacherPhoto;
-    @ViewInject((R.id.course_topic))
+    @ViewInject((R.id.tv_course_title))
     private TextView mCourseTopic;
-    @ViewInject(R.id.teacher_name)
+    @ViewInject(R.id.tv_teacher_name)
     private TextView mTeacherName;
-    @ViewInject((R.id.course_description))
+    @ViewInject((R.id.tv_course_description))
     private TextView mCourseDescription;
-    @ViewInject(R.id.course_access)
+    @ViewInject(R.id.rb_course_access)
     private RatingBar mCourseAccess;
-    @ViewInject(R.id.evaluation_course_content)
+    @ViewInject(R.id.et_evaluation_course_content)
     private EditText mEvaluationContent;
-    @ViewInject(R.id.teacher_access)
+    @ViewInject(R.id.rb_teacher_access)
     private RatingBar teacherAccess;
     private RequestManager glide;
 

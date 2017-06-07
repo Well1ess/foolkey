@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.a29149.yuyuan.R;
@@ -19,11 +20,11 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 @Deprecated
 public class TeacherInfoActivity extends AppCompatActivity {
 
-    @ViewInject(R.id.mask)
+    @ViewInject(R.id.v_mask)
     private View mMask;
 
     @ViewInject(R.id.ib_return)
-    private Button mReturn;
+    private ImageButton mReturn;
 
     @ViewInject(R.id.option_menu)
     private LinearLayout mOptionMenu;
@@ -128,12 +129,12 @@ public class TeacherInfoActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick(R.id.mask)
+    @OnClick(R.id.v_mask)
     public  void setMaskListener(View view){
         closeOptionMenu();
     }
 
-    @OnClick(R.id.ib_return)
+    @OnClick(R.id.tv_return)
     public  void setReturnListener(View view){
         this.finish();
     }

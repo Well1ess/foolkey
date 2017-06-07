@@ -23,7 +23,7 @@
 
             <ImageButton
                 android:transitionName="shareHead"
-                android:id="@+id/ib_return"
+                android:id="@+id/tv_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

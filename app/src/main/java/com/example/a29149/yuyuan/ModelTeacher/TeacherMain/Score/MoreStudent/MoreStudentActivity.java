@@ -67,7 +67,7 @@ public class MoreStudentActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.ib_return)
+    @OnClick(R.id.tv_return)
     public void setReturn(View view)
     {
         this.onBackPressed();

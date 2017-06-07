@@ -107,7 +107,7 @@ public class BuyCourseActivity extends AppCompatActivity {
                 }).create();
     }
 
-    @OnClick(R.id.ib_return)
+    @OnClick(R.id.tv_return)
     public void setReturnListener(View view)
     {
         //取消

@@ -44,20 +44,20 @@ public class RegisterActivity extends AppCompatActivity {
     //用户配置
     UserConfig userConfig;
 
-    @ViewInject(R.id.username)
+    @ViewInject(R.id.et_userName)
     private EditText mUserName;
 
     //来个随机的默认头像
     private Integer defaultPicNum = (int) ( Math.random() * PictureInfoBO.defaultPicNum );
 
 
-    @ViewInject(R.id.password)
+    @ViewInject(R.id.et_passWord)
     private EditText mPassWord;
 
-    @ViewInject(R.id.confirm_password)
+    @ViewInject(R.id.et_confirm_passWord)
     private EditText mConfirm;
 
-    @ViewInject(R.id.code)
+    @ViewInject(R.id.et_code)
     private EditText mCode;
 
     //头像
@@ -148,13 +148,13 @@ public class RegisterActivity extends AppCompatActivity {
         AppManager.getInstance().removeActivity(LoginActivity.class);
     }
 
-    @OnClick(R.id.ib_return)
+    @OnClick(R.id.tv_return)
     public void setCancelListener(View view) {
 
         this.onBackPressed();
     }
 
-    @OnClick(R.id.commit)
+    @OnClick(R.id.tv_commit)
     public void setCommitListener(View view) {
         // Reset errors.
         mUserName.setError(null);

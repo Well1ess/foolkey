@@ -67,7 +67,7 @@ public class OwnerRewardTeacherActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.ib_return)
+    @OnClick(R.id.tv_return)
     public void setReturnListener(View view)
     {
         this.finish();

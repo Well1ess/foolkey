@@ -129,7 +129,7 @@ public class CourseActivity extends AppCompatActivity {
                 ActivityOptions.makeSceneTransitionAnimation(this, view, "shareHead").toBundle());
     }
 
-    @OnClick({R.id.chart, R.id.shopping, R.id.buy, R.id.ib_return})
+    @OnClick({R.id.chart, R.id.shopping, R.id.buy, R.id.tv_return})
     public void setRadioButtonListener(View view) {
         switch (view.getId())
         {
@@ -147,7 +147,7 @@ public class CourseActivity extends AppCompatActivity {
                 //如果没有购买则正常返回
                 AppManager.getInstance().addActivity(this);
                 break;
-            case R.id.ib_return:
+            case R.id.tv_return:
                 finish();
                 break;
         }

@@ -98,7 +98,7 @@ public class OwnerRewardListAdapter extends BaseAdapter {
             final TextView textView = (TextView) convertView.findViewById(R.id.tv_open_close);
 
             //获取悬赏标题
-            final TextView title = (TextView) convertView.findViewById(R.id.tv_title);
+            final TextView title = (TextView) convertView.findViewById(R.id.title);
             title.setText(GlobalUtil.getInstance().getOrderBuyRewardAsTeacherSTCDTOs().get(position).getRewardDTO().getTopic());
             //获取悬赏价格
             final TextView price = (TextView) convertView.findViewById(R.id.tv_price);

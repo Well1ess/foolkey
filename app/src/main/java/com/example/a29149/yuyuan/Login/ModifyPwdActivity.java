@@ -15,19 +15,19 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 
 public class ModifyPwdActivity extends AppCompatActivity {
 
-    @ViewInject(R.id.username)
+    @ViewInject(R.id.et_userName)
     private EditText mUserName;
 
-    @ViewInject(R.id.code)
+    @ViewInject(R.id.et_code)
     private EditText mCode;
     private Drawable mCodeDrawableLeft, mCodeDrawableRight;
     //验证码是否经过验证的标志位
     private boolean mValidateTag = false;
 
-    @ViewInject(R.id.password)
+    @ViewInject(R.id.et_passWord)
     private EditText mPassWord;
 
-    @ViewInject(R.id.confirm_password)
+    @ViewInject(R.id.et_confirm_passWord)
     private EditText mConfirm;
 
     @Override
@@ -41,12 +41,12 @@ public class ModifyPwdActivity extends AppCompatActivity {
         setCodeValidate();
     }
 
-    @OnClick(R.id.ib_return)
+    @OnClick(R.id.tv_return)
     public void setCancelListener(View view) {
         this.finish();
     }
 
-    @OnClick(R.id.commit)
+    @OnClick(R.id.tv_commit)
     public void setCommitListener(View view) {
         // Reset errors.
         mUserName.setError(null);

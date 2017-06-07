@@ -31,7 +31,7 @@
                 android:background="@drawable/button_menu_transparent">
 
                 <TextView
-                    android:id="@+id/ib_return"
+                    android:id="@+id/tv_return"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="取消"
@@ -48,11 +48,11 @@
 
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:textColor="@color/head"
-                android:id="@+id/title"
                 android:layout_centerInParent="true"
                 android:text="修改密码"
                 android:gravity="center"
@@ -69,7 +69,7 @@
                 android:background="@drawable/button_menu_colorprimary">
 
                 <TextView
-                    android:id="@+id/commit"
+                    android:id="@+id/tv_commit"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="保存"
@@ -94,11 +94,11 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_login_form"
             android:layout_marginTop="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_centerInParent="true"
-            android:id="@+id/login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -109,8 +109,8 @@
                 android:textColorHint="@color/colorPrimary">
 
                 <EditText
+                    android:id="@+id/et_userName"
                     android:textColorHint="@color/colorPrimary"
-                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="用户名/手机号"
@@ -131,7 +131,7 @@
                     android:textColorHint="@color/colorPrimary">
 
                     <EditText
-                        android:id="@+id/code"
+                        android:id="@+id/et_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableRight="@android:drawable/checkbox_on_background"
@@ -165,8 +165,8 @@
                 android:textColorHint="@color/colorPrimary">
 
                 <EditText
+                    android:id="@+id/et_passWord"
                     android:textColorHint="@color/colorPrimary"
-                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="新的密码"
@@ -185,8 +185,8 @@
                 android:textColorHint="@color/colorPrimary">
 
                 <EditText
+                    android:id="@+id/et_confirm_passWord"
                     android:textColorHint="@color/colorPrimary"
-                    android:id="@+id/confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="确认密码"

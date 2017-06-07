@@ -7,10 +7,11 @@
     tools:context="com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity">
 
     <View
+        android:id="@+id/v_mask"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mask"
+
         android:alpha="0.4"
         android:elevation="10dp"
         android:background="@color/black" />
@@ -118,7 +119,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/sex"
+                                android:id="@+id/tv_sex"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="男"
@@ -132,7 +133,7 @@
                                 android:background="@color/grey"/>
 
                             <TextView
-                                android:id="@+id/organization"
+                                android:id="@+id/tv_organization"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="中科大"
@@ -164,7 +165,7 @@
                     </RelativeLayout>
 
                     <TextView
-                        android:id="@+id/description"
+                        android:id="@+id/tv_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -182,7 +183,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/tv_follownum"
+                            android:id="@+id/tv_followNum"
                             style="@style/TextView.MeMenuNumber"
                             android:text="1"/>
 
@@ -200,7 +201,7 @@
                             android:background="@color/black"/>
 
                         <TextView
-                            android:id="@+id/follow"
+                            android:id="@+id/tv_follow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
@@ -336,7 +337,7 @@
             android:background="#DEDEDE"/>
 
         <RadioGroup
-            android:id="@+id/tab_main_menu"
+            android:id="@+id/rg_tab_main_menu"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -344,7 +345,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/main_menu_discovery"
+                android:id="@+id/rb_main_menu_discovery"
                 style="@style/RadioButton.Menu"
                 android:text="联系老师"/>
 

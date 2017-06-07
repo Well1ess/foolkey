@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/test_container2"
+            android:id="@+id/ll_test_container2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
@@ -72,7 +72,7 @@
                     android:background="@color/white">
 
                     <RadioGroup
-                        android:id="@+id/search_main_menu"
+                        android:id="@+id/rg_search_main_menu"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -80,7 +80,7 @@
                         android:elevation="1dp">
 
                         <RadioButton
-                            android:id="@+id/search_course"
+                            android:id="@+id/rb_search_course"
                             android:text="课 程"
                             style="@style/RadioButton.SearchMenu" />
 
@@ -90,18 +90,18 @@
                             style="@style/RadioButton.SearchMenu" />
 
                         <RadioButton
-                            android:id="@+id/search_teacher"
+                            android:id="@+id/rb_search_teacher"
                             android:text="老 师"
                             style="@style/RadioButton.SearchMenu"  />
 
 
                         <RadioButton
-                            android:id="@+id/search_QA"
+                            android:id="@+id/rb_search_QA"
                             android:text="问 答"
                             style="@style/RadioButton.SearchMenu"  />
 
                         <RadioButton
-                            android:id="@+id/search_article"
+                            android:id="@+id/rb_search_article"
                             android:text="文 章"
                             style="@style/RadioButton.SearchMenu"  />
                     </RadioGroup>
@@ -115,7 +115,7 @@
                 </FrameLayout>
 
                 <RadioGroup
-                    android:id="@+id/search_sub_menu"
+                    android:id="@+id/rg_search_sub_menu"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -124,27 +124,27 @@
 
                     <RadioButton
                         android:checked="true"
-                        android:id="@+id/search_target_multiple"
+                        android:id="@+id/rb_search_target_multiple"
                         android:text="综合排序"
                         style="@style/RadioButton.SearchSubMenu" />
 
                     <RadioButton
-                        android:id="@+id/search_target_price"
+                        android:id="@+id/rb_search_target_price"
                         android:text="价格"
                         style="@style/RadioButton.SearchSubMenu" />
 
                     <RadioButton
-                        android:id="@+id/search_target_distance"
+                        android:id="@+id/rb_search_target_distance"
                         android:text="距离"
                         style="@style/RadioButton.SearchSubMenu"  />
 
                     <RadioButton
-                        android:id="@+id/search_target_course"
+                        android:id="@+id/rb_search_target_course"
                         android:text="课程评分"
                         style="@style/RadioButton.SearchSubMenu"  />
 
                     <RadioButton
-                        android:id="@+id/search_target_teacher"
+                        android:id="@+id/rb_search_target_teacher"
                         android:text="老师评分"
                         style="@style/RadioButton.SearchSubMenu"  />
                 </RadioGroup>

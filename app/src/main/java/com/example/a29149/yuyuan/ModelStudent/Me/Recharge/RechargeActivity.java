@@ -47,7 +47,7 @@ public class RechargeActivity extends AppCompatActivity {
      * 返回按键
      * @param view
      */
-    @OnClick(R.id.ib_return)
+    @OnClick(R.id.tv_return)
     public void setBtReturnListener(View view)
     {
         Intent intent = getIntent();

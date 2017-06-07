@@ -56,13 +56,13 @@ public class OrderRewardInfoActivity extends Activity implements View.OnClickLis
     @ViewInject(R.id.order_type)
     private TextView mOrderType;//订单类型
 
-    @ViewInject(R.id.course_topic)
+    @ViewInject(R.id.tv_course_title)
     private TextView mCourseTopic;//课程Topic
 
-    @ViewInject(R.id.teacher_name)
+    @ViewInject(R.id.tv_teacher_name)
     private TextView mTeacherName;//老师姓名
 
-    @ViewInject(R.id.course_description)
+    @ViewInject(R.id.tv_course_description)
     private TextView mCourseDescription;//课程描述
 
     @ViewInject(R.id.course_price)

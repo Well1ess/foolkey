@@ -75,7 +75,7 @@
         android:gravity="center"
         >
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/title"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"

@@ -22,7 +22,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageButton
-                android:id="@+id/ib_return"
+                android:id="@+id/tv_return"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -51,7 +51,7 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mask"
+        android:id="@+id/v_mask"
         android:alpha="0.4"
         android:elevation="10dp"
         android:background="@color/black" />
@@ -333,7 +333,7 @@
             android:background="#DEDEDE" />
 
         <RadioGroup
-            android:id="@+id/tab_main_menu"
+            android:id="@+id/rg_tab_main_menu"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -341,12 +341,12 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/main_menu_agree"
+                android:id="@+id/rb_main_menu_agree"
                 style="@style/RadioButton.Menu"
                 android:text="同意" />
 
             <RadioButton
-                android:id="@+id/main_menu_disagree"
+                android:id="@+id/rb_main_menu_disagree"
                 style="@style/RadioButton.Menu"
                 android:text="拒绝" />
 

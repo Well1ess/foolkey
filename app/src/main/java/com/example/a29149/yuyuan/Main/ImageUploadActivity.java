@@ -6,16 +6,23 @@ package com.example.a29149.yuyuan.Main;
  * 头像上传
  */
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,29 +39,37 @@ import com.example.a29149.yuyuan.controller.userInfo.GetPictureImageController;
 import com.example.resource.component.baseObject.AbstractActivity;
 import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
+import com.example.resource.util.image.ImageService;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ImageUploadActivity extends AbstractActivity {
-    private ImageView mImage;
-    private Button mUpdateImage;
-    private Button mAddImage;
+    private ImageView mImage;//将要上传的头像
+    private Button mUpdateImage;//上传按钮
+    private Button mAddImage;//添加头像按钮
     private Bitmap mBitmap;
-    private String srcPath;
+    private String srcPath;//上传头像的本地路径
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
     protected static Uri tempUri;
     private static final int CROP_SMALL_PICTURE = 2;
+    private Bitmap photo;//暂存拍照传过来的图片
     private String userName =
-            GlobalUtil.getInstance().getStudentDTO().getUserName()
-    ;
-
+            GlobalUtil.getInstance().getStudentDTO().getUserName();
     private RequestManager glide;
+    // 要申请的权限
+    private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private AlertDialog dialog;
+
+
 //    private boolean hasPhoto
 
     @Override
@@ -65,6 +80,19 @@ public class ImageUploadActivity extends AbstractActivity {
         initListeners();
         System.out.println(this.getClass() + "60行看一下Global里的学生");
         System.out.println(GlobalUtil.getInstance().getStudentDTO());
+        // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
+        if (true || Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // 检查该权限是否已经获取
+            int i = ContextCompat.checkSelfPermission(ImageUploadActivity.this, permissions[0]);
+            Log.i("malei","动态申请权限"+i);
+            Log.i("malei","PackageManager.PERMISSION_GRANTED="+PackageManager.PERMISSION_GRANTED);
+            // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+            if (i != PackageManager.PERMISSION_GRANTED) {
+                // 如果没有授予该权限，就去提示用户请求
+                Log.i("malei","PackageManager.PERMISSION_GRANTED="+PackageManager.PERMISSION_GRANTED);
+                showDialogTipUserRequestPermission();
+            }
+        }
     }
 
     private void initUI() {
@@ -73,13 +101,13 @@ public class ImageUploadActivity extends AbstractActivity {
         mUpdateImage = (Button) findViewById(R.id.btn_update_image);
 
         glide = Glide.with(this);
-        if (GlobalUtil.getInstance().getStudentDTO() != null){
+        if (GlobalUtil.getInstance().getStudentDTO() != null) {
             glide.load(PictureInfoBO.getOnlinePhoto(GlobalUtil.getInstance().getStudentDTO().getUserName()))
                     .error(R.drawable.photo_placeholder1)
                     .transform(new GlideCircleTransform(this))
                     .into(mImage);
 
-        }else {
+        } else {
             mImage.setBackgroundColor(Color.parseColor("#FOFOFO"));
         }
 
@@ -104,11 +132,10 @@ public class ImageUploadActivity extends AbstractActivity {
      * 显示修改图片的对话框
      */
     protected void showChoosePicDialog() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(ImageUploadActivity.this);
         builder.setTitle("添加图片");
-        //String[] items = {"选择本地照片", "拍照"};
-        String[] items = {"选择本地照片"};
+        String[] items = {"选择本地照片", "拍照"};
+        //String[] items = {"选择本地照片"};
         builder.setNegativeButton("取消", null);
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
@@ -126,7 +153,13 @@ public class ImageUploadActivity extends AbstractActivity {
                         Intent openCameraIntent = new Intent(
                                 MediaStore.ACTION_IMAGE_CAPTURE);
                         String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/yuyuan/picture/";
-                        tempUri = Uri.fromFile(new File(dir, checkUserName(userName) ));
+                        File file = new File(dir);
+                        if(!file.exists()){
+                            file.mkdir();
+                        }
+                        file = new File(dir, checkUserName(new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())+ ".JPEG"));
+                        tempUri = Uri.fromFile(file);
+
                         // 将拍照所得的相片保存到SD卡根目录
                         openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
                         startActivityForResult(openCameraIntent, TAKE_PICTURE);
@@ -140,6 +173,23 @@ public class ImageUploadActivity extends AbstractActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 123) {
+
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                // 检查该权限是否已经获取
+                int i = ContextCompat.checkSelfPermission(this, permissions[0]);
+                // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+                if (i != PackageManager.PERMISSION_GRANTED) {
+                    // 提示用户应该去应用设置界面手动开启权限
+                    showDialogTipUserGoToAppSettting();
+                } else {
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                    Toast.makeText(this, "权限获取成功", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
         if (resultCode == MainStudentActivity.RESULT_OK) {
             switch (requestCode) {
                 case TAKE_PICTURE:
@@ -195,12 +245,15 @@ public class ImageUploadActivity extends AbstractActivity {
         }
     }
 
+    /**
+     * 保存并压缩
+     */
     public void saveBitmap() {
         String path = checkUserName(userName);
         String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/picture/";
-        File f = new File(dir  + path  );
+        File f = new File(dir + path);
         srcPath = f.getPath();
-        Log.i("malei","srcPath="+srcPath);
+        Log.i("malei", "srcPath=" + srcPath);
         if (!f.exists()) {
             boolean flag = f.getParentFile().mkdirs();
             System.out.println(this.getClass() + "  结果是  " + flag);
@@ -255,11 +308,11 @@ public class ImageUploadActivity extends AbstractActivity {
                     String sign = jsonObject.getString("sign");
 //                    sign = URLDecoder.decode(sign, "utf-8");
 //                    sign = new String( ConverterByteBase64.base642Byte(sign), "utf-8" );
-                    Log.i("malei","sign="+sign);
+                    Log.i("malei", "sign=" + sign);
 
                     if (resultFlag.equals("success")) {
                         GlobalUtil.getInstance().setSign(sign);
-                        UploadFile uploadFile = new UploadFile(ImageUploadActivity.this,GlobalUtil.getInstance().getSign());
+                        UploadFile uploadFile = new UploadFile(ImageUploadActivity.this, GlobalUtil.getInstance().getSign());
                         Log.i("malei", this.getClass() + "240行 " + path);
                         uploadFile.updata(srcPath, path);
                         //上传完毕，退出本activity
@@ -269,7 +322,7 @@ public class ImageUploadActivity extends AbstractActivity {
                     Toast.makeText(ImageUploadActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
                 }
 
-            }else {
+            } else {
                 Toast.makeText(ImageUploadActivity.this, "无法连接到网络\n请检查网络设置", Toast.LENGTH_LONG).show();
             }
 
@@ -281,13 +334,16 @@ public class ImageUploadActivity extends AbstractActivity {
      * 默认是获取全局的
      * 如果是注册时候，就得是用户输入的
      * 如果没有注册，全局也是空，则会叫default
+     *
      * @param userName
+     *
      * @return
      */
-    private String checkUserName(String userName){
-        if (getIntent().getStringExtra("userName") != null)
+    private String checkUserName(String userName) {
+      /*  if (getIntent().getStringExtra("userName") != null)
             userName = getIntent().getStringExtra("userName");
-        return PictureInfoBO.getUrlForUpload( userName );
+        return PictureInfoBO.getUrlForUpload(userName);*/
+      return userName;
 //        String phone;
 //        if (userName == null){
 //            userName = "default";
@@ -301,6 +357,90 @@ public class ImageUploadActivity extends AbstractActivity {
 //        System.out.println(this.getClass() + "270" + phone);
 //        return phone;
     }
+
+        // 提示用户该请求权限的弹出框
+        private void showDialogTipUserRequestPermission() {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("存储权限不可用")
+                    .setMessage("由于存储需要获取存储空间，为你存储个人信息；\n否则，您将无法正常使用")
+                    .setPositiveButton("立即开启", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startRequestPermission();
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    }).setCancelable(false).show();
+        }
+
+        // 开始提交请求权限
+        private void startRequestPermission() {
+            ActivityCompat.requestPermissions(this, permissions, 321);
+        }
+
+        // 用户权限 申请 的回调方法
+        @Override
+        public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            if (requestCode == 321) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                        // 判断用户是否 点击了不再提醒。(检测该权限是否还可以申请)
+                        boolean b = shouldShowRequestPermissionRationale(permissions[0]);
+                        if (!b) {
+                            // 用户还是想用我的 APP 的
+                            // 提示用户去应用设置界面手动开启权限
+                            showDialogTipUserGoToAppSettting();
+                        } else
+                            finish();
+                    } else {
+                        Toast.makeText(this, "权限获取成功", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
+
+        // 提示用户去应用设置界面手动开启权限
+
+        private void showDialogTipUserGoToAppSettting() {
+
+            dialog = new AlertDialog.Builder(this)
+                    .setTitle("存储权限不可用")
+                    .setMessage("请在-应用设置-权限-中，允许愚猿使用存储权限来保存用户数据")
+                    .setPositiveButton("立即开启", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // 跳转到应用设置界面
+                            goToAppSetting();
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    }).setCancelable(false).show();
+        }
+
+        // 跳转到当前应用的设置界面
+        private void goToAppSetting() {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri);
+            startActivityForResult(intent, 123);
+        }
+
+        //
+
+
+
 }
 
 

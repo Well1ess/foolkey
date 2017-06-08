@@ -19,6 +19,7 @@ import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Main.ImageUploadActivity;
+import com.example.a29149.yuyuan.Main.UploadImageActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.OwnerRewardActivity;
@@ -157,6 +158,7 @@ public class MeMainFragment extends AbstracFragment implements View.OnClickListe
 //                break;
             case R.id.iv_photo:
                 Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
+                //Intent intent3 = new Intent(getActivity(),UploadImageActivity.class);
                 startActivity(intent3);
                 break;
             case R.id.tv_modify_info:{

@@ -116,6 +116,7 @@
             android:name=".AccessOrder.AccessOrderActivity"
             android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".ModelTeacher.TeacherMain.Score.MoreStudent.MoreStudentActivity"></activity>
+        <activity android:name=".Main.UploadImageActivity"/>
 
         <!-- splashActivity -->
         <activity

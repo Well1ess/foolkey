@@ -23,6 +23,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
@@ -34,9 +35,13 @@ import java.util.List;
  * Created by MaLei on 2017/5/23.
  * Email:ml1995@mail.ustc.edu.cn
  * 已完成悬赏订单的详情
+ *
+ * 这个Activity要复用，所有的学生订单都使用这一张Activity
+ *
  */
 
 public class OrderRewardInfoActivity extends AbstractActivity implements View.OnClickListener {
+    private static final String TAG = "OrderRewardInfoActivity";
 
     private StudentDTO mStudentDTO;//学生信息
     private TeacherDTO mTeacherDTO;//老师信息
@@ -47,47 +52,54 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
     private List<OrderBuyCourseAsStudentDTO> orderRewardList;//全部悬赏信息
     private CourseAbstract courseDTO = null ;
 
-    @ViewInject(R.id.iv_teacherPhone)
-    private ImageView photo2;
 
-    @ViewInject(R.id.order_id)
+    @ViewInject(R.id.tv_order_id)
     private TextView mOrderId;//订单编号
 
-    @ViewInject(R.id.order_type)
-    private TextView mOrderType;//订单类型
+    @ViewInject(R.id.tv_courseType)
+    private TextView mOrderType;//课程类型
 
-    @ViewInject(R.id.course_topic)
-    private TextView mCourseTopic;//课程Topic
+    @ViewInject(R.id.tv_title)
+    private TextView mCourseTopic;//课程标题
 
-    @ViewInject(R.id.teacher_name)
-    private TextView mTeacherName;//老师姓名
+    @ViewInject(R.id.tv_nickedName)
+    private TextView mTeacherName;//老师/学生 姓名
 
-    @ViewInject(R.id.course_description)
+    @ViewInject(R.id.tv_description)
     private TextView mCourseDescription;//课程描述
 
-    @ViewInject(R.id.course_price)
+    @ViewInject(R.id.tv_price)
     private TextView mCoursePrice;//课程价格
 
-    @ViewInject(R.id.order_time)
-    private TextView mOrderTime;//订单时间
+    @ViewInject(R.id.tv_createdTime)
+    private TextView mCreatedTime;//订单创建时间
 
-    @ViewInject(R.id.order_number)
+    @ViewInject(R.id.tv_number)
     private TextView mOrderNumber;//购买时长
 
-    @ViewInject(R.id.teacher_prestige)
-    private TextView mTeacherPrestige;//老师声望
+    @ViewInject(R.id.tv_orderStateEnum)
+    private TextView mOrderState; // 订单状态
 
-    @ViewInject(R.id.teacher_slogan)
-    private TextView mTeacherSlogan;//老师Slogan
+    @ViewInject(R.id.tv_teachMethodEnum)
+    private TextView mTeachMethodEnum; //授课方式
 
-    @ViewInject(R.id.not_follow)
-    private TextView mFollow;//关注该老师
+    @ViewInject(R.id.tv_payTime)
+    private TextView mPayTime; // 支付时间
 
-    @ViewInject(R.id.left)
-    private RadioButton mChartWithTeacher;//关注该老师
+    @ViewInject(R.id.tv_lessonEndTime)
+    private TextView mLessenEndTime; // 下课时间
 
-    @ViewInject(R.id.iv_teacherPhoto)
-    private ImageView photo;
+    @ViewInject(R.id.rb_left)
+    private RadioButton mLeftButton;//左边按钮
+
+    @ViewInject(R.id.rb_center)
+    private RadioButton mCenterButton; //中间按钮
+
+    @ViewInject(R.id.rb_right)
+    private RadioButton mRightButton; //右边按钮
+
+    @ViewInject(R.id.iv_photo)
+    private ImageView photo; //头像
 
     private RequestManager glide;
 
@@ -98,63 +110,85 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //绑定UI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_order_info);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
-
+        //获取意图，从意图中获取位置
         Intent intent = getIntent();
         position = intent.getIntExtra("position", -1);
-        Log.i("malei","position="+position);
-
-
+        Log.i(TAG, "onCreate: 120 " + position);
+        //这里是学生订单信息
         orderRewardList = GlobalUtil.getInstance().getOrderRewardList();
-        System.out.println(this.getClass() + "112行" + orderRewardList);
+        //给UI填充数据
         initData();
     }
 
+    /**
+     * 填充数据
+     */
     private void initData() {
+        //根据位置获取具体的信息
         mOrderBuyCourseAsStudentDTO = orderRewardList.get(position);
-
+        //老师的studentDTO
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
+        //老师的teacherDTO
         mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();
         mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
-
+        //这里的courseDTO，还不知道它到底是reward还是course
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
 
+        //设置订单编号
         mOrderId.setText(mOrderBuyCourseDTO.getCourseId()+"");
+        //设置订单类型
         mOrderType.setText(mOrderBuyCourseDTO.getCourseTypeEnum().toString());
-        mCourseTopic.setText(courseDTO.getTopic());
-        mTeacherName.setText(mStudentDTO.getNickedName());
-        mCourseDescription.setText(courseDTO.getDescription());
-        mCoursePrice.setText(courseDTO.getPrice()+"元");
+        //设置课程标题
+        mCourseTopic.setText(StringUtil.subString(courseDTO.getTopic(), 10));
+        //设置老师的昵称
+        mTeacherName.setText(StringUtil.subString( mStudentDTO.getNickedName(), 10) );
+        //设置课程的描述
+        mCourseDescription.setText(StringUtil.subString( courseDTO.getDescription(), 20 ));
+        //设置课程的价格
+        mCoursePrice.setText( courseDTO.getPrice()+"元");
+        //设置生成时间
         SimpleDateFormat time=new SimpleDateFormat("yyyy-mm-dd");
-        mOrderTime.setText(mOrderBuyCourseDTO.getCreatedTime().getDataTime());
+        mCreatedTime.setText(mOrderBuyCourseDTO.getCreatedTime().getDataTime());
+        //设置购买时长
         mOrderNumber.setText(mOrderBuyCourseDTO.getNumber().toString());
-        mTeacherPrestige.setText("声望值："+mStudentDTO.getPrestige());
-        mTeacherSlogan.setText(mStudentDTO.getSlogan());
-        mFollow.setOnClickListener(this);
-        mChartWithTeacher.setOnClickListener(this);
+        //设置上课方式
+        mTeachMethodEnum.setText( mOrderBuyCourseDTO.getTeachMethodEnum().toString() );
+        //设置支付时间
+        if (mOrderBuyCourseDTO.getPayTime() != null )
+            mPayTime.setText( mOrderBuyCourseDTO.getPayTime().getDataTime() );
+        else {
+            mPayTime.setText("未付款");
+        }
+        //设置下课时间
+        if (mOrderBuyCourseDTO.getLessonEndTime() != null)
+            mLessenEndTime.setText( mOrderBuyCourseDTO.getLessonEndTime().toString() );
+        else {
+            mLessenEndTime.setText( "未下课" );
+        }
 
+        //加载图片
         glide = Glide.with( this );
         glide.load(PictureInfoBO.getOnlinePhoto( mStudentDTO.getUserName() ) )
                 .error(R.drawable.photo_placeholder1)
                 .transform(new GlideCircleTransform(this))
                 .into(photo);
 
-        glide.load(PictureInfoBO.getOnlinePhoto( mStudentDTO.getUserName() ) )
-                .error(R.drawable.photo_placeholder1)
-                .transform(new GlideCircleTransform(this))
-                .into(photo2);
     }
 
+    /**
+     * 按钮
+     * 设置监听事件
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.not_follow:
-                Toast.makeText(this,"关注",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.left:
+            case R.id.rb_left:
                 Toast.makeText(this,"联系老师",Toast.LENGTH_SHORT).show();
                 break;
             default:

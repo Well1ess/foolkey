@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoStudentActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassRewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
@@ -73,11 +73,7 @@ public class NoClassFragment extends Fragment {
         mCourse = (MyListView) view.findViewById(R.id.lv_noStartCourse);
         mReward = (MyListView) view.findViewById(R.id.lv_reward);
         mRecommend = (MyListView) view.findViewById(R.id.lv_recommend);
-        /**
-         * 这里注意，此时的以老师身份过去，依然是以学生视角来展示的
-         * FIXME
-         * TODO
-         */
+
         //设定监听事件
         mCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -86,7 +82,7 @@ public class NoClassFragment extends Fragment {
                 //获取他点击的课程
                 OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO = courseList.get(position);
                 //这里过去的依然是悬赏的订单界面
-                Intent toOrderInfo = new Intent(mContext, OrderInfoStudentActivity.class);
+                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
                 //在bundle里直接放置DTO
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("DTO", orderBuyCourseAsStudentDTO);
@@ -103,7 +99,7 @@ public class NoClassFragment extends Fragment {
                 //获取他点击的悬赏
                 OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO = rewardList.get(position);
                 //新建意图
-                Intent toOrderInfo = new Intent(mContext, OrderInfoStudentActivity.class);
+                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
                 //在bundle里直接放置DTO
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("DTO", orderBuyCourseAsStudentDTO);

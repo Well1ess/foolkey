@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderCourseInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoStudentActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoCommentRewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
@@ -92,7 +92,7 @@ public class NoCommentFragment extends Fragment {
                 if (myListViewNoCommentRewardAdapter == null)
                     myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
                 myListViewNoCommentRewardAdapter.setPosition(position);
-                Intent toOrderInfo = new Intent(mContext, OrderInfoStudentActivity.class);
+                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
                 toOrderInfo.putExtra("position",position);
                 startActivity(toOrderInfo);
                 Log.i("malei","你点击了"+position);

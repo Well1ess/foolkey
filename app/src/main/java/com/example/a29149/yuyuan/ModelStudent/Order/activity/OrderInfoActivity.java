@@ -39,8 +39,8 @@ import java.text.SimpleDateFormat;
  *
  */
 
-public class OrderInfoStudentActivity extends AbstractActivity implements View.OnClickListener {
-    private static final String TAG = "OrderInfoStudentActivity";
+public class OrderInfoActivity extends AbstractActivity implements View.OnClickListener {
+    private static final String TAG = "OrderInfoActivity";
 
     private StudentDTO mStudentDTO;//学生信息
     private TeacherDTO mTeacherDTO;//老师信息

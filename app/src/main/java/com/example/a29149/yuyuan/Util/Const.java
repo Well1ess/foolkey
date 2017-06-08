@@ -23,6 +23,8 @@ public class Const {
     public static final int FROM_ME_FRAGMENT_TO_RECHARGE = 1;
     //从学生个人资料
     public static final int FROM_ME_FRAGMENT_TO_MODIFY = 2;
+    //从悬赏详情，跳到修改悬赏页面
+    public static final int FROM_REWARD_TO_MODIFY = 3;
 
     //悬赏标签
     public static final String[] REWARD_TAG = {"Java", "C", "JavaScript", "Python", "PHP", "Html5", "Android", "iOS", "MySQL", "前端", "后端", "其它"};

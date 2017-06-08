@@ -31,6 +31,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
+import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
@@ -52,6 +53,8 @@ import org.json.JSONObject;
  */
 
 public class RewardActivity extends AbstractAppCompatActivity implements View.OnClickListener {
+    //日志的标志
+    private static final String TAG = "RewardActivity";
 
 
     //显示选项的对话框
@@ -75,6 +78,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
     private TextView mCreateTime;//创建悬赏的时间
     private TextView mPrestige;
     private ImageButton mReturn;//返回按键
+    private TextView mOperateTime; //最后修改时间
     @ViewInject(R.id.iv_photo)
     private ImageView photo;
 
@@ -173,7 +177,6 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
 //            case R.id.rb_chat:
 //                //TODO:网络传输
 //                break;
-//
 //        }
 //    }
 
@@ -191,6 +194,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         mButtonMiddle = (RadioButton) findViewById(R.id.rb_chat);
         mButtonLeft = (RadioButton) findViewById(R.id.rb_want_learn);
         mPrestige = (TextView) findViewById(R.id.tv_prestige);
+        mOperateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonLeft.setOnClickListener(this);
         //判断这个悬赏是不是自己的
         if (rewardDTO.getCreatorId() == null ||
@@ -208,7 +212,6 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                 mButtonMiddle.setText("一键再次发布");
                 mButtonMiddle.setVisibility(View.VISIBLE);
             }
-
         }
         //加载图片
         glide = Glide.with(this);
@@ -228,6 +231,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         mRewardTopic.setText(rewardDTO.getTopic() + "");
         mRewardDescription.setText(rewardDTO.getDescription());
         mPrestige.setText( studentDTO.getPrestige() + "");
+        mOperateTime.setText( "悬赏居然没有日期，真是醉了" );
     }
 
     //申请认证
@@ -294,8 +298,8 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     modifyIntent.putExtra("teachMethodEnum", rewardDTO.getTeachMethodEnum().toString());
                     modifyIntent.putExtra("teacherRequirementEnum", rewardDTO.getTeacherRequirementEnum().toString());
                     modifyIntent.putExtra("rewardId", rewardDTO.getId() + "");
-                    startActivity(modifyIntent);
-//                    this.finish();
+                    startActivityForResult(modifyIntent, Const.FROM_REWARD_TO_MODIFY);
+
 
                 } else {    //他人的悬赏，接单
                     displayInfo.setMsg("您确定要此单吗？\n \n 点击 接单 将发送申请");
@@ -316,7 +320,8 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                         Toast.makeText(this, "已接单的悬赏不可被删除哦", Toast.LENGTH_SHORT);
                     }
                 }else {
-
+                    //非自己的悬赏，则可以点击我也想学，发布一个新的
+                    //TODO
                 }
             }break;
             //中间的按钮
@@ -328,6 +333,80 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                 break;
         }
     }
+
+    /**
+     * 根据操作，获取不同的结果，采取不同的行为
+     * @param requestCode 请求码
+     * @param resultCode 结果码
+     * @param data 意图带了额外数据
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){//成功了
+            //根据不同的请求做不同的处理
+            switch (requestCode){
+                //修改悬赏成功后
+                case Const.FROM_REWARD_TO_MODIFY:{
+                    //更新本页数据
+                    updateDate();
+                    //更新发现的listView里的数据
+                    //搜索的ListView不会在这里更新
+                    updateRewardList();
+                }break;
+                default:break;
+            }
+        }else { //操作失败
+
+        }
+    }
+
+    /**
+     * 刷新fragment里界面显示list
+     * 增删 reward 的时候就可能用到
+     */
+    public static void updateRewardList(){
+        //首先获取2个activity
+        //学生的
+        MainStudentActivity mainStudentActivity =
+                (MainStudentActivity) AppManager.getActivity(MainStudentActivity.class);
+        //老师的
+        MainTeacherActivity mainTeacherActivity =
+                (MainTeacherActivity) AppManager.getActivity(MainTeacherActivity.class);
+
+        //针对不同的activity采取不同的行为
+        if (mainStudentActivity != null){
+            //学生activity可更新，则获取DiscoveryMainFragment
+            DiscoveryMainFragment discoveryMainFragment =
+                    (DiscoveryMainFragment) mainStudentActivity.getDiscoveryMainFragment();
+            //从
+            RewardDiscoveryFragment fragment = discoveryMainFragment.getRewardDiscoveryFragment();
+            //调用更新方法
+            fragment.updateRewardList();
+        }
+        if (mainTeacherActivity != null){
+            //老师activity可更新
+            //TODO
+        }
+    }
+
+    /**
+     * 刷新本页面显示的信息，修改了悬赏信息以后就可能用到
+     */
+    private void updateDate(){
+        //重新获取一次rewardDTO，不然可能不会重新获取
+        rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
+        //设置价格
+        mRewardPrice.setText(rewardDTO.getPrice() + "");
+        //设置标题
+        mRewardTopic.setText(rewardDTO.getTopic() + "");
+        //设置描述
+        mRewardDescription.setText(rewardDTO.getDescription());
+        //设置时间
+        //FIXME
+        mOperateTime.setText( "悬赏居然没有日期，真是醉了" );
+    }
+
 
     /**
      * 认证老师请求Action
@@ -470,23 +549,9 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                         Toast.makeText(RewardActivity.this, "删除成功", Toast.LENGTH_SHORT);
                         //更新数据
                         GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().remove(position);
-                        //首先获取2个activity
-                        MainStudentActivity mainStudentActivity =
-                                (MainStudentActivity) AppManager.getActivity(MainStudentActivity.class);
-                        MainTeacherActivity mainTeacherActivity = (MainTeacherActivity) AppManager.getActivity(MainTeacherActivity.class);
-                        if (mainStudentActivity != null){
-                            //学生activity可更新，则获取DiscoveryMainFragment
-                            DiscoveryMainFragment discoveryMainFragment =
-                                    (DiscoveryMainFragment) mainStudentActivity.getDiscoveryMainFragment();
-                            //从
-                            RewardDiscoveryFragment fragment = discoveryMainFragment.getRewardDiscoveryFragment();
-                            //调用更新方法
-                            fragment.updateRewardList();
-                        }
-                        if (mainTeacherActivity != null){
-                            //老师activity可更新
-                            //TODO
-                        }
+                        //刷新界面显示
+                        updateRewardList();
+
                         finish();
                         return;
                     }

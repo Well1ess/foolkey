@@ -184,6 +184,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
         mSearchCourse.setTextColor(getResources().getColor(R.color.orange));
         condition = "course";
 
+        //添加fragment，这个顺序修改时，记得修改下面的各种get方法
         fragmentList.clear();
         fragmentList.add(new CourseSearchFragment());
         fragmentList.add(new RewardSearchFragment());
@@ -406,6 +407,14 @@ public class SearchActivity extends AbstractAppCompatActivity {
             }
             mFragmentTabHost.setCurrentTab(index);
         }
+    }
+
+    /**
+     * 获取搜索悬赏的fragment
+     * @return
+     */
+    public RewardSearchFragment getRewardSearchFragment(){
+        return (RewardSearchFragment) fragmentList.get(1);
     }
 
 }

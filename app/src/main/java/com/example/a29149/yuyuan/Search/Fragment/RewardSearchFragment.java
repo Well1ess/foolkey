@@ -63,13 +63,14 @@ public class RewardSearchFragment extends AbstracFragment {
 
         //list初始化
         mListAdapter = new RewardListAdapter(getContext());
+        //设置adapter
         mRewardList.setAdapter(mListAdapter);
         mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent toCourseActivity = new Intent(getActivity(), RewardActivity.class);
-                toCourseActivity.putExtra("position", position);
-                startActivity(toCourseActivity);
+                Intent toRewardActivity = new Intent(getActivity(), RewardActivity.class);
+                toRewardActivity.putExtra("position", position);
+                startActivity(toRewardActivity);
             }
         });
 
@@ -106,6 +107,15 @@ public class RewardSearchFragment extends AbstracFragment {
                 });
 
         return view;
+    }
+
+    /**
+     * 更新 搜索界面 的信息显示
+     * 一般发生在点悬赏进去以后，对悬赏信息进行了改动、删除
+     * 这个更新操作，放在RewardActivity调用
+     */
+    public void updateSearchRewardList(){
+        mListAdapter.notifyDataSetInvalidated();
     }
 
     @Override

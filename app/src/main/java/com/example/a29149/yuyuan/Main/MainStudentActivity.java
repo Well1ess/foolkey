@@ -109,7 +109,7 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
         //注解式绑定
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
-        //往activity管理器中添加本activity
+        //往activity管理器中添加本activity，这一步移交给AbstractFragment做了
         //全局Dialog的初始化
         shapeLoadingDialog = new ShapeLoadingDialog(this);
         shapeLoadingDialog.setLoadingText("加载中...");
@@ -250,6 +250,7 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
             Class clazz = window.getClass();
             try {
                 int darkModeFlag = 0;
+                //FIXME java.lang.ClassNotFoundException: android.view.MiuiWindowManager$LayoutParams
                 Class layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
                 if (layoutParams == null) {
                     return false;

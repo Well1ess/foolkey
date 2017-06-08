@@ -25,6 +25,7 @@ import com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.RewardDiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
@@ -332,7 +333,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
     }
 
     /**
-     * 根据操作，获取不同的结果，采取不同的行为
+     * 接受后一个activity的结果，获取不同的结果，采取不同的行为
      * @param requestCode 请求码
      * @param resultCode 结果码
      * @param data 意图带了额外数据
@@ -370,20 +371,33 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         //老师的
         MainTeacherActivity mainTeacherActivity =
                 (MainTeacherActivity) AppManager.getActivity(MainTeacherActivity.class);
+        //搜索的
+        SearchActivity searchActivity =
+                (SearchActivity) AppManager.getActivity(SearchActivity.class);
 
         //针对不同的activity采取不同的行为
         if (mainStudentActivity != null){
             //学生activity可更新，则获取DiscoveryMainFragment
             DiscoveryMainFragment discoveryMainFragment =
                     (DiscoveryMainFragment) mainStudentActivity.getDiscoveryMainFragment();
-            //从
-            RewardDiscoveryFragment fragment = discoveryMainFragment.getRewardDiscoveryFragment();
-            //调用更新方法
-            fragment.updateRewardList();
+            //如果从首页，直接搜索的话，此时activity是有的，但这下面这个fragment会出现数组越界异常
+            try {
+                //获取子fragment
+                RewardDiscoveryFragment fragment = discoveryMainFragment.getRewardDiscoveryFragment();
+                //调用更新方法
+                fragment.updateRewardList();
+            }catch (RuntimeException e){
+                //FIXME
+            }
+
         }
         if (mainTeacherActivity != null){
             //老师activity可更新
             //TODO
+        }
+        if (searchActivity != null){
+            //搜索的列表更新
+            searchActivity.getRewardSearchFragment().updateSearchRewardList();
         }
     }
 

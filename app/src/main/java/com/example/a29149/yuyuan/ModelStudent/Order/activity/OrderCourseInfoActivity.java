@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
@@ -23,7 +24,6 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
-import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import java.text.SimpleDateFormat;
@@ -34,7 +34,7 @@ import java.util.List;
  * 课程订单详情
  * 其实这个可以用悬赏的
  */
-
+@Deprecated
 public class OrderCourseInfoActivity extends AbstractActivity implements View.OnClickListener  {
 
     private StudentDTO mStudentDTO;//学生信息

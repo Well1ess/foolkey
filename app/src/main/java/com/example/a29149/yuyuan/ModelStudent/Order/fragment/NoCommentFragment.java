@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderCourseInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderRewardInfoActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoCommentRewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
@@ -73,6 +73,7 @@ public class NoCommentFragment extends Fragment {
         //刚开始请求第一页
         pageNo = 1;
         loadData(pageNo);
+        //TODO 这里立即评价还没有解决
 
         mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
         mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,7 +92,7 @@ public class NoCommentFragment extends Fragment {
                 if (myListViewNoCommentRewardAdapter == null)
                     myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
                 myListViewNoCommentRewardAdapter.setPosition(position);
-                Intent toOrderInfo = new Intent(mContext, OrderRewardInfoActivity.class);
+                Intent toOrderInfo = new Intent(mContext, OrderInfoStudentActivity.class);
                 toOrderInfo.putExtra("position",position);
                 startActivity(toOrderInfo);
                 Log.i("malei","你点击了"+position);

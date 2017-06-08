@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.ModelStudent.Order.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -12,6 +11,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
@@ -22,26 +22,25 @@ import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
-import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 /**
  * Created by MaLei on 2017/5/23.
  * Email:ml1995@mail.ustc.edu.cn
- * 已完成悬赏订单的详情
+ * 订单的详情
  *
  * 这个Activity要复用，所有的学生订单都使用这一张Activity
  *
+ * 注意，这里是学生视角
+ *
  */
 
-public class OrderRewardInfoActivity extends AbstractActivity implements View.OnClickListener {
-    private static final String TAG = "OrderRewardInfoActivity";
+public class OrderInfoStudentActivity extends AbstractActivity implements View.OnClickListener {
+    private static final String TAG = "OrderInfoStudentActivity";
 
     private StudentDTO mStudentDTO;//学生信息
     private TeacherDTO mTeacherDTO;//老师信息
@@ -103,9 +102,6 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
 
     private RequestManager glide;
 
-    //获取位置
-    private int position;
-
 
 
     @Override
@@ -115,13 +111,9 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
         setContentView(R.layout.activity_finish_order_info);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
-        //获取意图，从意图中获取位置
+        //获取意图，从意图中获取DTO
         Intent intent = getIntent();
-        position = intent.getIntExtra("position", -1);
-        mOrderBuyCourseAsStudentDTO = ( OrderBuyCourseAsStudentDTO )intent.getSerializableExtra("dto");
-
-        //这里是学生订单信息
-//        orderRewardList = GlobalUtil.getInstance().getOrderRewardList();
+        mOrderBuyCourseAsStudentDTO = ( OrderBuyCourseAsStudentDTO )intent.getSerializableExtra("DTO");
         //给UI填充数据
         initData();
     }
@@ -130,8 +122,6 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
      * 填充数据
      */
     private void initData() {
-        //根据位置获取具体的信息
-//        mOrderBuyCourseAsStudentDTO = orderRewardList.get(position);
         //老师的studentDTO
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
         //老师的teacherDTO
@@ -139,7 +129,6 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
         mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
         //这里的courseDTO，还不知道它到底是reward还是course
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
-
         //设置订单编号
         mOrderId.setText(mOrderBuyCourseDTO.getCourseId()+"");
         //设置订单类型
@@ -171,7 +160,6 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
         else {
             mLessenEndTime.setText( "未下课" );
         }
-
         //加载图片
         glide = Glide.with( this );
         glide.load(PictureInfoBO.getOnlinePhoto( mStudentDTO.getUserName() ) )

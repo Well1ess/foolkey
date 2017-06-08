@@ -16,8 +16,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderCourseInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderRewardInfoActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassRewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
@@ -74,18 +73,26 @@ public class NoClassFragment extends Fragment {
         mCourse = (MyListView) view.findViewById(R.id.lv_noStartCourse);
         mReward = (MyListView) view.findViewById(R.id.lv_reward);
         mRecommend = (MyListView) view.findViewById(R.id.lv_recommend);
+        /**
+         * 这里注意，此时的以老师身份过去，依然是以学生视角来展示的
+         * FIXME
+         * TODO
+         */
         //设定监听事件
         mCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //点击课程，进入课程详情
-                Log.i("malei", "你点击了" + position);
                 //获取他点击的课程
                 OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO = courseList.get(position);
-                Intent toOrderInfo = new Intent(mContext, OrderCourseInfoActivity.class);
-
-                toOrderInfo.putExtra("position", position);
-                startActivity( toOrderInfo );
+                //这里过去的依然是悬赏的订单界面
+                Intent toOrderInfo = new Intent(mContext, OrderInfoStudentActivity.class);
+                //在bundle里直接放置DTO
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("DTO", orderBuyCourseAsStudentDTO);
+                toOrderInfo.putExtras(bundle);
+                //跳转到订单详情的Activity
+                startActivity(toOrderInfo);
             }
         });
         mReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,11 +102,13 @@ public class NoClassFragment extends Fragment {
                 Log.i("malei", "你点击了" + position);
                 //获取他点击的悬赏
                 OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO = rewardList.get(position);
-                Intent toOrderInfo = new Intent(mContext, OrderRewardInfoActivity.class);
+                //新建意图
+                Intent toOrderInfo = new Intent(mContext, OrderInfoStudentActivity.class);
+                //在bundle里直接放置DTO
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("dto", orderBuyCourseAsStudentDTO);
+                bundle.putSerializable("DTO", orderBuyCourseAsStudentDTO);
                 toOrderInfo.putExtras(bundle);
-                toOrderInfo.putExtra("position",position);
+                //跳转到订单详情的Activity
                 startActivity(toOrderInfo);
             }
         });

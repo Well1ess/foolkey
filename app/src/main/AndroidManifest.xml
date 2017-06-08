@@ -109,7 +109,7 @@
         <activity android:name=".ModelStudent.Me.Reward.RewardModifyActivity"></activity>
         >
         <!-- 订单详情界面 -->
-        <activity android:name=".ModelStudent.Order.activity.OrderRewardInfoActivity" />
+        <activity android:name=".ModelStudent.Order.activity.OrderInfoStudentActivity" />
         <activity android:name=".ModelStudent.Me.Reward.OwnerRewardActivity" />
         <activity android:name=".TeacherInfo.TeacherInfoActivity"></activity>
         <activity

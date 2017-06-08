@@ -19,6 +19,8 @@ import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.Const;
+import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
@@ -99,9 +101,11 @@ public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnCli
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
         initView(view);
 
-        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
-        mCourseTitle.setText("课程标题:" + courseDTO.getTopic().toString() + "");
-        mCourseCost.setText("课程价格：" + courseDTO.getPrice().toString());
+
+        mCourseTitle.setText(StringUtil.subString(courseDTO.getTopic(), 20));
+        mCourseCost.setText(StringUtil.subString( courseDTO.getPrice().toString()+ Const.PRICE_NAME , 15));
+        mTeacherNameAndCourseName.setText(StringUtil.subString(mStudentDTO.getNickedName(), 10));
+
         return view;
     }
 

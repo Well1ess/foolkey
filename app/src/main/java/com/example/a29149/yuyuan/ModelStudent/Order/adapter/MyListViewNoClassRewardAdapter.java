@@ -17,6 +17,7 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Const;
+import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
@@ -92,14 +93,10 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
         CourseAbstract courseDTO = null ;
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
         initView();
-        String fisrtLine = mStudentDTO.getNickedName()+":"+courseDTO.getTopic();
-        if (fisrtLine.length() > 9) {
-            fisrtLine = fisrtLine.substring(0, 7);
-            fisrtLine = fisrtLine + "...";
-        }
-        mTeacherNameAndCourseName.setText(fisrtLine);
-        mRewardTitle.setText("悬赏标题:" + courseDTO.getTopic().toString() + "");
-        mTeacherCharge.setText("悬赏价格：" + courseDTO.getPrice().toString()+ Const.PRICE_NAME);
+
+        mTeacherNameAndCourseName.setText(StringUtil.subString(mStudentDTO.getNickedName(), 10));
+        mRewardTitle.setText(StringUtil.subString(courseDTO.getTopic(), 20));
+        mTeacherCharge.setText(StringUtil.subString( courseDTO.getPrice().toString()+ Const.PRICE_NAME , 15));
 
 
 

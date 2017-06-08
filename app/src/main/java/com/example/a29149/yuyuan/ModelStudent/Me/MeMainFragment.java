@@ -34,7 +34,7 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetCouponController;
-import com.example.resource.component.baseObject.AbstracFragment;
+import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 

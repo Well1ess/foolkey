@@ -16,8 +16,7 @@ import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
-import com.example.resource.component.baseObject.AbstractActivity;
-import com.example.resource.component.baseObject.AbstractAppCompatActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 
 /**
  * splashActivity

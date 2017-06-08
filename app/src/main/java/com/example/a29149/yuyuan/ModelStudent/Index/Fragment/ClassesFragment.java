@@ -27,7 +27,7 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
 import com.example.a29149.yuyuan.controller.course.course.GetPopularController;
-import com.example.resource.component.baseObject.AbstracFragment;
+import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;

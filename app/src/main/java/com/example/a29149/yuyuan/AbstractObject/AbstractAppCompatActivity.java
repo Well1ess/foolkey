@@ -1,10 +1,12 @@
-package com.example.resource.component.baseObject;
+package com.example.a29149.yuyuan.AbstractObject;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.resource.DataHelper;
 import com.example.resource.util.AsyncHttpClient;
 import com.example.resource.util.HttpMethod;
@@ -15,6 +17,12 @@ import com.example.resource.util.HttpMethod;
  */
 
 public abstract class AbstractAppCompatActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AppManager.getInstance().addActivity(this);
+    }
 
     public void SS() {
         new AsyncHttpClient(this, "URL", HttpMethod.POST)

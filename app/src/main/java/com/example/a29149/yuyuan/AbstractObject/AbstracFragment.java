@@ -1,4 +1,4 @@
-package com.example.resource.component.baseObject;
+package com.example.a29149.yuyuan.AbstractObject;
 
 import android.support.v4.app.Fragment;
 

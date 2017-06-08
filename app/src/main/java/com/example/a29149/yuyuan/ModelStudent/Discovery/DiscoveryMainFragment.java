@@ -29,7 +29,7 @@ import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.resource.component.baseObject.AbstracFragment;
+import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
 import java.util.ArrayList;
 import java.util.List;

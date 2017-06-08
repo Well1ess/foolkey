@@ -75,6 +75,7 @@ public class RewardDiscoveryFragment extends Fragment {
         //list初始化
         mListAdapter = new RewardListAdapter(getContext());
         mRewardList.setAdapter(mListAdapter);
+        //给viewList设置点击监听器
         mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -121,6 +122,14 @@ public class RewardDiscoveryFragment extends Fragment {
         getReward.execute();
 
         return view;
+    }
+
+    /**
+     * 刷新数据，主要用于删除悬赏时，列表里也要删除
+     */
+    public void updateRewardList(){
+        //调用adapter的notifyDateChanged方法
+        mListAdapter.updateList();
     }
 
     @Override

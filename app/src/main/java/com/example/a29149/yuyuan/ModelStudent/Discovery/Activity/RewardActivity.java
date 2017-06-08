@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,11 +20,17 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RewardStateEnum;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
+import com.example.a29149.yuyuan.Main.MainTeacherActivity;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.RewardDiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
@@ -461,6 +468,25 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     JSONObject jsonObject = new JSONObject(s);
                     if ("success".equals(jsonObject.getString("result"))){
                         Toast.makeText(RewardActivity.this, "删除成功", Toast.LENGTH_SHORT);
+                        //更新数据
+                        GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().remove(position);
+                        //首先获取2个activity
+                        MainStudentActivity mainStudentActivity =
+                                (MainStudentActivity) AppManager.getActivity(MainStudentActivity.class);
+                        MainTeacherActivity mainTeacherActivity = (MainTeacherActivity) AppManager.getActivity(MainTeacherActivity.class);
+                        if (mainStudentActivity != null){
+                            //学生activity可更新，则获取DiscoveryMainFragment
+                            DiscoveryMainFragment discoveryMainFragment =
+                                    (DiscoveryMainFragment) mainStudentActivity.getDiscoveryMainFragment();
+                            //从
+                            RewardDiscoveryFragment fragment = discoveryMainFragment.getRewardDiscoveryFragment();
+                            //调用更新方法
+                            fragment.updateRewardList();
+                        }
+                        if (mainTeacherActivity != null){
+                            //老师activity可更新
+                            //TODO
+                        }
                         finish();
                         return;
                     }

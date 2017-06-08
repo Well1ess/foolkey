@@ -39,6 +39,9 @@ public class RewardListAdapter extends BaseAdapter {
         this.mContext = context;
     }
 
+    /**
+     * 刷新列表
+     */
     public void updateList() {
         this.notifyDataSetChanged();
         log.d(this, GlobalUtil.getInstance().getContent().size());
@@ -71,13 +74,10 @@ public class RewardListAdapter extends BaseAdapter {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
-
         //获取当前的reward
         RewardDTO rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
         StudentDTO studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
-
-
-
+        //设置数据
         viewHolder.title.setText(rewardDTO.getTopic());
         viewHolder.money.setText(rewardDTO.getPrice()+"");
         viewHolder.label.setText(rewardDTO.getTechnicTagEnum().toString());
@@ -92,6 +92,7 @@ public class RewardListAdapter extends BaseAdapter {
                 .error(R.drawable.photo_placeholder1)
                 .transform(new GlideCircleTransform(mContext))
                 .into( viewHolder.head );
+        //头像设置跳转个人界面的监听器
         viewHolder.head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +105,8 @@ public class RewardListAdapter extends BaseAdapter {
         return view;
     }
 
-    static class ViewHolder {
+    //使用ViewHolder来提高效率
+    private static class ViewHolder {
         public TextView title;
         public ImageView head;
         public TextView money;

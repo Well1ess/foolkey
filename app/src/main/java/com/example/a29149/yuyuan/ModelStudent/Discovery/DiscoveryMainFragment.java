@@ -254,4 +254,13 @@ public class DiscoveryMainFragment extends AbstracFragment {
                 getActivity(), view, "searchView").toBundle());
     }
 
+    /**
+     * 获取发现悬赏的fragment
+     * @return
+     */
+    public RewardDiscoveryFragment getRewardDiscoveryFragment(){
+        RewardDiscoveryFragment fragment = (RewardDiscoveryFragment)fragmentList.get(0);
+        return fragment;
+    }
+
 }

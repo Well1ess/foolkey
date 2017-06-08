@@ -15,6 +15,7 @@ import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyFragmentPagerAdapt
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
+import com.example.resource.component.baseObject.AbstracFragment;
 
 
 /**
@@ -23,7 +24,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
  * 订单Fragment
  */
 
-public class OrderFragment extends Fragment implements View.OnClickListener {
+public class OrderFragment extends AbstracFragment implements View.OnClickListener {
 
     private View view;
     private ViewPager viewPager;

@@ -2,7 +2,11 @@ package com.example.a29149.yuyuan.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -85,44 +89,41 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
     private TextView mPublishRewardStudent;
     private TextView mPublishAskStudent;
 
+    //首页
+    private Fragment indexMainFragment = new IndexMainFragment() ;
+    //发现
+    private Fragment discoveryMainFragment = new DiscoveryMainFragment();
+    //发布
+    private Fragment publishMainFragment = new PublishMainFragment() ;
+    //订单
+    private Fragment orderFragment = new OrderFragment();
+    //我的
+    private Fragment meMainFragment = new MeMainFragment() ;
+    //fragment管理器
+    private FragmentManager fm = getSupportFragmentManager();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //进入到这里时会杀死闪入的activity
         AppManager.getInstance().finishActivity( SplashActivity.class );
-
+        //绑定UI等等
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //注解式绑定
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
+        //往activity管理器中添加本activity
         AppManager.getInstance().addActivity(MainStudentActivity.this);
         //全局Dialog的初始化
         shapeLoadingDialog = new ShapeLoadingDialog(this);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
-        //shapeLoadingDialog.getDialog().setCancelable(false);
-
-        mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.main_tab_fragment);
-
-        TabHost.TabSpec tabSpec0 = mFragmentTabHost.newTabSpec(SHOW_OF_FIRST_TAG)
-                .setIndicator("0");
-        TabHost.TabSpec tabSpec1 = mFragmentTabHost.newTabSpec(SHOW_OF_SECOND_TAG)
-                .setIndicator("1");
-        TabHost.TabSpec tabSpec2 = mFragmentTabHost.newTabSpec(SHOW_OF_THIRD_TAG)
-                .setIndicator("2");
-        TabHost.TabSpec tabSpec3 = mFragmentTabHost.newTabSpec(SHOW_OF_FOURTH_TAG)
-                .setIndicator("3");
-        TabHost.TabSpec tabSpec4 = mFragmentTabHost.newTabSpec(SHOW_OF_FIFTH_TAG)
-                .setIndicator("4");
-
-        mFragmentTabHost.addTab(tabSpec0, IndexMainFragment.class, null);
-        mFragmentTabHost.addTab(tabSpec1, DiscoveryMainFragment.class, null);
-        mFragmentTabHost.addTab(tabSpec2, PublishMainFragment.class, null);
-        mFragmentTabHost.addTab(tabSpec3, OrderFragment.class, null);
-        mFragmentTabHost.addTab(tabSpec4, MeMainFragment.class, null);
-
+        //设置按钮颜色
         mIndexButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+        //初始化按钮与fragment绑定关系
         initRadioGroupListener();
-
+        //一开始的时候展示的是首页
+        switchFragment(R.id.main_tab_fragment, indexMainFragment);
         //悬赏页面的控件初始化
         mPublishRewardStudent = (TextView) findViewById(R.id.tv_xuanshang);
         mPublishAskStudent = (TextView) findViewById(R.id.tv_ask);
@@ -141,46 +142,52 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
         });
     }
 
+
+    /**
+     * 发布按键
+     * @param view
+     */
     @OnClick(R.id.main_menu_publish)
     public void setMainMenuListener(View view)
     {
         openPublishPanel();
     }
 
+    /**
+     * 初始化5个按钮
+     */
     private void initRadioGroupListener() {
         mMainMenu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
+            //注册事件
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                /**
+                 * 根据点击不同，展示不同的fragment
+                 */
                 switch (checkedId) {
-                    case R.id.main_menu_index:
-
-                        mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FIRST_TAG);
+                    case R.id.main_menu_index://首页
+                        switchFragment(R.id.main_tab_fragment, indexMainFragment);
                         resetMenuTextColor();
                         mIndexButton.setTextColor(0xff8BC34A);
-
                         break;
-                    case R.id.rb_main_menu_discovery:
 
-                        mFragmentTabHost.setCurrentTabByTag(SHOW_OF_SECOND_TAG);
+                    case R.id.rb_main_menu_discovery: //发现
+                        switchFragment(R.id.main_tab_fragment, discoveryMainFragment);
                         resetMenuTextColor();
                         mDiscoveryButton.setTextColor(0xff8BC34A);
-
                         break;
 
-                    case R.id.main_menu_order:
-
-                        mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FOURTH_TAG);
+                    case R.id.main_menu_order: // 订单
+                        switchFragment(R.id.main_tab_fragment, orderFragment);
                         resetMenuTextColor();
                         mOrderButton.setTextColor(0xff8BC34A);
 
                         break;
-                    case R.id.main_menu_me:
-
-                        mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FIFTH_TAG);
+                    case R.id.main_menu_me: // 我的
+                        switchFragment(R.id.main_tab_fragment, meMainFragment);
                         resetMenuTextColor();
                         mMeButton.setTextColor(0xff8BC34A);
-
                         break;
 
                     default:
@@ -188,6 +195,7 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
                 }
             }
         });
+
     }
 
     private void openPublishPanel() {
@@ -222,6 +230,9 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
         mPublishPanel.setVisibility(View.GONE);
     }
 
+    /**
+     * 重设按钮的颜色
+     */
     private void resetMenuTextColor() {
         mIndexButton.setTextColor(0xffaaaaaa);
         mDiscoveryButton.setTextColor(0xffaaaaaa);
@@ -257,7 +268,7 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
                 }
                 result = true;
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
         return result;
@@ -272,7 +283,8 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
     }
 
     /**
-     * fragment里面，startActivityForResult
+     * fragment里面，startActivityForResult，返回的结果在这里处理
+     * 这里拿到fragment，再做处理
      * @param requestCode
      * @param resultCode
      * @param data
@@ -282,10 +294,8 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) { // 成功请求
-            MeMainFragment meMainFragment; //【我的】页面的fragment
-            meMainFragment = (MeMainFragment) getSupportFragmentManager().findFragmentByTag(SHOW_OF_FIFTH_TAG);
             StudentDTO studentDTO = GlobalUtil.getInstance().getStudentDTO();
-
+            MeMainFragment meMainFragment = (MeMainFragment) this.meMainFragment;
             switch (requestCode) {
                 case FROM_ME_FRAGMENT_TO_RECHARGE: //充值界面回去
                     meMainFragment.setVirtualMoney(data.getStringExtra("virtualCurrency"));

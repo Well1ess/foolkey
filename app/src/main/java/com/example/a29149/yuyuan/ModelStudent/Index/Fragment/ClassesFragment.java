@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +27,7 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
 import com.example.a29149.yuyuan.controller.course.course.GetPopularController;
+import com.example.resource.component.baseObject.AbstracFragment;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 
-public class ClassesFragment extends Fragment {
+public class ClassesFragment extends AbstracFragment {
 
     @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideLayout;

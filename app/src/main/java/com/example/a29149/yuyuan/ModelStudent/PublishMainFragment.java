@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
+import com.example.resource.component.baseObject.AbstracFragment;
 
-public class PublishMainFragment extends Fragment {
+public class PublishMainFragment extends AbstracFragment {
 
     public PublishMainFragment() {
 

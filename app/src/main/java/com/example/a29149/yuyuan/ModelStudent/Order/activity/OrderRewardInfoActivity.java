@@ -49,7 +49,7 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
     private RewardDTO mRewardDTO;//悬赏信息
     private OrderBuyCourseDTO mOrderBuyCourseDTO;//订单信息
     private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
-    private List<OrderBuyCourseAsStudentDTO> orderRewardList;//全部悬赏信息
+//    private List<OrderBuyCourseAsStudentDTO> orderRewardList;//全部悬赏信息
     private CourseAbstract courseDTO = null ;
 
 
@@ -118,9 +118,10 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
         //获取意图，从意图中获取位置
         Intent intent = getIntent();
         position = intent.getIntExtra("position", -1);
-        Log.i(TAG, "onCreate: 120 " + position);
+        mOrderBuyCourseAsStudentDTO = ( OrderBuyCourseAsStudentDTO )intent.getSerializableExtra("dto");
+
         //这里是学生订单信息
-        orderRewardList = GlobalUtil.getInstance().getOrderRewardList();
+//        orderRewardList = GlobalUtil.getInstance().getOrderRewardList();
         //给UI填充数据
         initData();
     }
@@ -130,7 +131,7 @@ public class OrderRewardInfoActivity extends AbstractActivity implements View.On
      */
     private void initData() {
         //根据位置获取具体的信息
-        mOrderBuyCourseAsStudentDTO = orderRewardList.get(position);
+//        mOrderBuyCourseAsStudentDTO = orderRewardList.get(position);
         //老师的studentDTO
         mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
         //老师的teacherDTO

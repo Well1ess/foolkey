@@ -32,6 +32,7 @@ import java.util.List;
 /**
  * Created by geyao on 2017/5/24.
  * 课程订单详情
+ * 其实这个可以用悬赏的
  */
 
 public class OrderCourseInfoActivity extends AbstractActivity implements View.OnClickListener  {

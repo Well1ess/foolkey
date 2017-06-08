@@ -25,6 +25,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.component.baseObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import java.text.SimpleDateFormat;
@@ -36,7 +37,7 @@ import java.util.List;
  * 已完成悬赏订单的详情
  */
 
-public class OrderRewardInfoActivity extends Activity implements View.OnClickListener {
+public class OrderRewardInfoActivity extends AbstractActivity implements View.OnClickListener {
 
     private StudentDTO mStudentDTO;//学生信息
     private TeacherDTO mTeacherDTO;//老师信息

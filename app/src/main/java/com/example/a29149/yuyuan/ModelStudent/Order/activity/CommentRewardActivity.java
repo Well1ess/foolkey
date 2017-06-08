@@ -24,6 +24,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
+import com.example.resource.component.baseObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ import org.json.JSONObject;
  * 目前就是评价老师而已
  */
 
-public class CommentRewardActivity extends Activity implements View.OnClickListener {
+public class CommentRewardActivity extends AbstractActivity implements View.OnClickListener {
 
     private TextView mPublish;//发布评价
     private TextView mRewardScore;//订单分数

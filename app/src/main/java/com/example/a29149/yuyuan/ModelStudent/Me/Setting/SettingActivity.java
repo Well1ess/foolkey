@@ -27,6 +27,7 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.controller.userInfo.LogOutController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 import com.google.gson.Gson;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
@@ -36,7 +37,7 @@ import org.json.JSONObject;
  * Email:ml1995@mail.ustc.edu.cn
  * 学生设置：切换到老师，登出
  */
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends AbstractAppCompatActivity {
 
     private TextView mChangeRole;//切换用户角色
     //显示选项的对话框

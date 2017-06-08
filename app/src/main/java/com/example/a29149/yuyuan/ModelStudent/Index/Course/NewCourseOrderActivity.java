@@ -17,10 +17,11 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.PayDialog;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.controller.userInfo.LogOutController;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
 import org.json.JSONObject;
 
-public class NewCourseOrderActivity extends AppCompatActivity {
+public class NewCourseOrderActivity extends AbstractAppCompatActivity {
 
     //取消订单时的警告
     private WarningDisplayDialog.Builder mDisplayDialog;

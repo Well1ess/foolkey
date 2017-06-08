@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.AccessOrder;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
@@ -22,12 +21,13 @@ import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeCourseController;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class AccessOrderActivity extends AppCompatActivity {
+public class AccessOrderActivity extends AbstractAppCompatActivity {
 
     //UI相关
     @ViewInject(R.id.iv_photo)

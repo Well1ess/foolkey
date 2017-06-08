@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.resource.component.baseObject.AbstractActivity;
 
 import org.json.JSONObject;
 
@@ -26,7 +27,7 @@ import org.json.JSONObject;
  * 学生发布问答
  */
 
-public class PublishQuestionStudentActivity extends Activity implements View.OnClickListener {
+public class PublishQuestionStudentActivity extends AbstractActivity implements View.OnClickListener {
 
     private TextView mCancel;//取消
     private TextView mPublish;//发布

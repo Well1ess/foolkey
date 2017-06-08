@@ -143,26 +143,6 @@ public class MeMainFragment extends Fragment implements View.OnClickListener{
 
         mOwnerReward.setOnClickListener(this);
         mHeadImage.setOnClickListener(this);
-
-//        displayInfo = new WarningDisplayDialog.Builder(getContext());
-//        displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        displayInfo.setPositiveButton("确      定", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//                //点击确定后跳发送申请认证
-//                new ApplyAuthenticationTeacherAction().execute();
-//                Intent intent = new Intent(getContext(), MainTeacherActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        displayInfo.create();
-
     }
 
 
@@ -192,6 +172,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
 
 
     public int DoubleParseInt(Double d1) {
@@ -226,6 +207,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener{
     public void setRechargeListener(View view)
     {
         Intent intent = new Intent(getActivity(), RechargeActivity.class);
+//        startActivity(intent);
         getActivity().startActivityForResult(intent, FROM_ME_FRAGMENT_TO_RECHARGE);
 //        startActivityForResult(new Intent(getActivity(), RechargeActivity.class), FROM_ME_FRAGMENT_TO_RECHARGE);
     }

@@ -4,18 +4,24 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.ModelStudent.Me.MeMainFragment;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.money.ChargeMoneyController;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
 import org.json.JSONObject;
+
+import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_FIFTH_TAG;
 
 
 /**
@@ -24,7 +30,9 @@ import org.json.JSONObject;
  * 用户充值界面
  */
 
-public class RechargeActivity extends AppCompatActivity {
+public class RechargeActivity extends AbstractAppCompatActivity {
+
+    private static final String TAG = "RechargeActivity";
 
     @ViewInject(R.id.et_amount)
     private EditText mMoney;
@@ -39,8 +47,8 @@ public class RechargeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recharge);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
+        Log.d(TAG, "onCreate: 49 " + getIntent());
 
-        intent = getIntent();
     }
 
     /**
@@ -98,6 +106,7 @@ public class RechargeActivity extends AppCompatActivity {
             super.onPostExecute(result);
             log.d(this, result);
             if (result != null) {
+                Intent intent = getIntent();
                 try {
 
                     JSONObject jsonObject = new JSONObject(result);
@@ -106,23 +115,31 @@ public class RechargeActivity extends AppCompatActivity {
                     if (resultFlag.equals("success")) {
 
                         Toast.makeText(RechargeActivity.this, "充值成功！", Toast.LENGTH_SHORT).show();
+                        Double virtualCurrency = Double.parseDouble(jsonObject.getString("virtualCurrency") + "");
 
+                        GlobalUtil.getInstance().getStudentDTO().setVirtualCurrency(virtualCurrency);
 
                         //通知MainStudentActivity，后者再调用fragment的方法来进行数据刷新
-                        Intent intent = getIntent();
-                        intent.putExtra("virtualCurrency", jsonObject.getString("virtualCurrency") + "");
+
+                        intent.putExtra("virtualCurrency", virtualCurrency + "");
                         setResult(RESULT_OK, intent);
-                        finish();
 
                     } else {
                         Toast.makeText(RechargeActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
+                    //失败
+                    setResult(RESULT_CANCELED, intent);
+                    e.printStackTrace();
                     Toast.makeText(RechargeActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                }finally {
+//                    Log.d(TAG, "onPostExecute: 135");
+                    finish();
                 }
             } else {
                 Toast.makeText(RechargeActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
+            finish();
         }
 
     }

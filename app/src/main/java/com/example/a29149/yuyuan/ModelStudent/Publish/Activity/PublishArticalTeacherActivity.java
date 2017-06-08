@@ -20,6 +20,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.resource.component.baseObject.AbstractActivity;
 
 import org.json.JSONObject;
 
@@ -34,7 +35,7 @@ import java.net.HttpURLConnection;
  * 老师发布文章
  */
 
-public class PublishArticalTeacherActivity extends Activity implements View.OnClickListener {
+public class PublishArticalTeacherActivity extends AbstractActivity implements View.OnClickListener {
 
     private TextView mCancel;//取消
     private TextView mPublish;//发布

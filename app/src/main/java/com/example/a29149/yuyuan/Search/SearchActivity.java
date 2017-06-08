@@ -33,6 +33,7 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.MyEditText;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_FIRST_T
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_SECOND_TAG;
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_THIRD_TAG;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AbstractAppCompatActivity {
 
     public static final String SEARCH_OF_FIRST_TAG = "first";
     public static final String SEARCH_OF_SECOND_TAG = "second";

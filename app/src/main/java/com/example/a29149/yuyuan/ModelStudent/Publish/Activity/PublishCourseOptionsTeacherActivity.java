@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.controller.course.course.PublishController;
+import com.example.resource.component.baseObject.AbstractActivity;
 
 import org.json.JSONObject;
 
@@ -25,7 +26,7 @@ import org.json.JSONObject;
  * 老师填写课程上课时间、课程总时长、上课方式
  */
 
-public class PublishCourseOptionsTeacherActivity extends Activity implements View.OnClickListener {
+public class PublishCourseOptionsTeacherActivity extends AbstractActivity implements View.OnClickListener {
 
     private ImageView mReturn;
     private TextView mGo;

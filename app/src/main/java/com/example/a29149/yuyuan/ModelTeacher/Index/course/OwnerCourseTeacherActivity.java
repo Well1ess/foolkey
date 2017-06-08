@@ -18,6 +18,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.order.teacher.home.GetAgreedOnClassOrderCourseByTeacherController;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -33,7 +34,7 @@ import java.util.List;
  */
 
 //拥有的课程
-public class OwnerCourseTeacherActivity extends AppCompatActivity {
+public class OwnerCourseTeacherActivity extends AbstractAppCompatActivity {
 
     //课程列表
     @ViewInject(R.id.lv_reward_list)

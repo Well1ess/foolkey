@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.Main;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +16,8 @@ import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UserConfig;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.component.baseObject.AbstractActivity;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
 /**
  * splashActivity
@@ -25,7 +26,7 @@ import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
  * Created by geyao on 2017/5/22.
  */
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends AbstractActivity {
 
     //获取用户配置
     UserConfig userConfig;

@@ -25,6 +25,7 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeCourseController;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
+import com.example.resource.component.baseObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ import org.json.JSONObject;
  * 评价课程订单
  */
 
-public class CommentCourseActivity extends Activity implements View.OnClickListener {
+public class CommentCourseActivity extends AbstractActivity implements View.OnClickListener {
 
 
     private RadioButton mPublish;//发布评价

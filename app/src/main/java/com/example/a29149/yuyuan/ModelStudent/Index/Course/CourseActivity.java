@@ -18,8 +18,9 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
-public class CourseActivity extends AppCompatActivity {
+public class CourseActivity extends AbstractAppCompatActivity {
 
     //获取传递来的Intent
     private Intent intent;

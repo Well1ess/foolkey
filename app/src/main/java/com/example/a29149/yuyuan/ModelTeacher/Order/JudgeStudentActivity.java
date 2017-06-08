@@ -23,6 +23,7 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeStudentController;
+import com.example.resource.component.baseObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 /**
@@ -30,7 +31,7 @@ import com.example.resource.util.image.GlideCircleTransform;
  * 学生评价老师
  */
 
-public class JudgeStudentActivity extends Activity {
+public class JudgeStudentActivity extends AbstractActivity {
 
     @ViewInject(R.id.student_photo)
     private ImageView studentPhoto;

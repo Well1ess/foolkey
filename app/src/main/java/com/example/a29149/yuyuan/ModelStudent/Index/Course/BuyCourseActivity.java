@@ -26,10 +26,11 @@ import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.course.ApplyController;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
 import org.json.JSONObject;
 
-public class BuyCourseActivity extends AppCompatActivity {
+public class BuyCourseActivity extends AbstractAppCompatActivity {
 
     //获取传递来的Intent
     private Intent intent;

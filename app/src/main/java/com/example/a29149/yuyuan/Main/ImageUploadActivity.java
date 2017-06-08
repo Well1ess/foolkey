@@ -6,7 +6,6 @@ package com.example.a29149.yuyuan.Main;
  * 头像上传
  */
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,9 +27,10 @@ import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UploadFile;
-import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetPictureImageController;
+import com.example.resource.component.baseObject.AbstractActivity;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
@@ -40,7 +40,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ImageUploadActivity extends Activity {
+public class ImageUploadActivity extends AbstractActivity {
     private ImageView mImage;
     private Button mUpdateImage;
     private Button mAddImage;

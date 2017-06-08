@@ -30,6 +30,7 @@ import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.reward.UpdateController;
+import com.example.resource.component.baseObject.AbstractActivity;
 
 import org.json.JSONObject;
 
@@ -38,7 +39,7 @@ import org.json.JSONObject;
  * Created by GR on 2017/5/26.
  */
 
-public class RewardModifyActivity extends Activity implements View.OnClickListener {
+public class RewardModifyActivity extends AbstractActivity implements View.OnClickListener {
 
     private RewardDTO mRewardDTO;//悬赏信息
 

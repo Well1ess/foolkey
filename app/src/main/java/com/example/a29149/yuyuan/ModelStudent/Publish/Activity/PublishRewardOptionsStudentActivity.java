@@ -16,6 +16,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.reward.PublishController;
+import com.example.resource.component.baseObject.AbstractActivity;
 
 import org.json.JSONObject;
 
@@ -25,7 +26,7 @@ import org.json.JSONObject;
  * 学生填写悬赏上课时间、基础、理想老师
  */
 
-public class PublishRewardOptionsStudentActivity extends Activity implements View.OnClickListener {
+public class PublishRewardOptionsStudentActivity extends AbstractActivity implements View.OnClickListener {
 
     private ImageView mReturn;
     private TextView mGo;

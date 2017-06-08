@@ -18,6 +18,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
+import com.example.resource.component.baseObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 /**
@@ -25,7 +26,7 @@ import com.example.resource.util.image.GlideCircleTransform;
  * Created by geyao on 2017/5/25.
  */
 
-public class StudentInfoActivity extends Activity {
+public class StudentInfoActivity extends AbstractActivity {
 
     private StudentDTO mStudentDTO;//学生信息
 

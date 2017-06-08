@@ -1,4 +1,4 @@
-package com.example.resource.component;
+package com.example.resource.component.baseObject;
 
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import com.example.resource.util.HttpMethod;
  * Description:
  */
 
-public class YvActivity extends AppCompatActivity {
+public abstract class AbstractAppCompatActivity extends AppCompatActivity {
 
     public void SS() {
         new AsyncHttpClient(this, "URL", HttpMethod.POST)

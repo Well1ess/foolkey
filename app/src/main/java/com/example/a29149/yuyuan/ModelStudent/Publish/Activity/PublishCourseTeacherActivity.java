@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.course.PublishController;
+import com.example.resource.component.baseObject.AbstractActivity;
 
 import org.json.JSONObject;
 
@@ -29,7 +30,7 @@ import org.json.JSONObject;
  * 老师发布课程
  */
 
-public class PublishCourseTeacherActivity extends Activity implements View.OnClickListener {
+public class PublishCourseTeacherActivity extends AbstractActivity implements View.OnClickListener {
 
     private TextView mCancel;//取消
     private TextView mPublish;//发布

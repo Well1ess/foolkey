@@ -23,6 +23,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
 
 /**
@@ -32,7 +33,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
  *
  */
 
-public class OriginIndexActivity extends AppCompatActivity {
+public class OriginIndexActivity extends AbstractAppCompatActivity {
 
     @ViewInject(R.id.mask)
     private View mMask;

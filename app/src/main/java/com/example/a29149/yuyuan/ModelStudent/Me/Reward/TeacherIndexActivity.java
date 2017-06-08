@@ -31,6 +31,7 @@ import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.reward.AcceptController;
 import com.example.a29149.yuyuan.controller.course.reward.RefuseController;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
@@ -41,7 +42,7 @@ import org.json.JSONObject;
  * 申请悬赏的老师主页
  */
 
-public class TeacherIndexActivity extends AppCompatActivity implements View.OnClickListener {
+public class TeacherIndexActivity extends AbstractAppCompatActivity implements View.OnClickListener {
 
     private TextView mDescription;//老师简介
     private TextView mTitle;//标题

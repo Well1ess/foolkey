@@ -12,6 +12,7 @@ import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.Score.Adapter.StudentL
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
  * 测试，已废弃
  * */
 @Deprecated
-public class MoreStudentActivity extends AppCompatActivity {
+public class MoreStudentActivity extends AbstractAppCompatActivity {
 
     @ViewInject(R.id.student_list)
     private RecyclerView mStudentList;

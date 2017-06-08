@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.Main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -30,6 +29,7 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -38,7 +38,7 @@ import java.lang.reflect.Method;
  * 老师用户的主界面
  */
 
-public class MainTeacherActivity extends AppCompatActivity {
+public class MainTeacherActivity extends AbstractAppCompatActivity {
 
     public static final String SHOW_OF_FIRST_TAG = "first";
     public static final String SHOW_OF_SECOND_TAG = "second";

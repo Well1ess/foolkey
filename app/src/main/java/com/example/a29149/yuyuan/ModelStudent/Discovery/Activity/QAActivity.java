@@ -4,8 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.a29149.yuyuan.R;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 
-public class QAActivity extends AppCompatActivity {
+public class QAActivity extends AbstractAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

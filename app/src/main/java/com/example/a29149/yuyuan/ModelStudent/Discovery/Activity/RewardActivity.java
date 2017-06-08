@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -32,6 +31,7 @@ import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
 import com.example.a29149.yuyuan.controller.course.reward.DeleteController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.example.resource.component.baseObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 
@@ -44,7 +44,7 @@ import org.json.JSONObject;
  * 悬赏详情
  */
 
-public class RewardActivity extends AppCompatActivity implements View.OnClickListener {
+public class RewardActivity extends AbstractAppCompatActivity implements View.OnClickListener {
 
 
     //显示选项的对话框

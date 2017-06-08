@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ import org.json.JSONObject;
  */
 
 public class RewardModifyActivity extends AbstractActivity implements View.OnClickListener {
-
+    private static final String TAG = "RewardModifyActivity";
     private RewardDTO mRewardDTO;//悬赏信息
 
     private String topic; //悬赏标题
@@ -541,6 +542,7 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
                         GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get( position ).setRewardDTO( rewardDTO );
                         //通知结果
                         setResult(RESULT_OK);
+                        Log.d(TAG, "onPostExecute: 545 " + position);
                         finish();
                         return;
                         //发布成功后跳转到首页面

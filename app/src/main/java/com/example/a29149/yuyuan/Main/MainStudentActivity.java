@@ -127,6 +127,7 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainStudentActivity.this, PublishRewardDescribeStudentActivity.class);
+
                 startActivity(intent);
             }
         });

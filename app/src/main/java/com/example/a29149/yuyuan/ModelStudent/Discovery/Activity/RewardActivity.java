@@ -256,7 +256,6 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
             } else {
 //            Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
                 verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
-
                 verifyConfirm.getDialog().show();
             }
         } else {
@@ -264,7 +263,6 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
             //不是已认证老师，跳转到申请认证页面
 //        Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
             verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
-
             verifyConfirm.getDialog().show();
         }
     }
@@ -286,7 +284,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                 if (mOrder.getText().equals("修改悬赏")) {  //自己的悬赏，就是修改悬赏资料
                     Log.i("malei", mOrder.getText() + "");
                     Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
-                    modifyIntent.putExtra("position", 0);
+                    modifyIntent.putExtra("position", position);
                     modifyIntent.putExtra("topic", rewardDTO.getTopic());
                     modifyIntent.putExtra("description", rewardDTO.getDescription());
                     modifyIntent.putExtra("technicTagEnum", rewardDTO.getTechnicTagEnum().toString());

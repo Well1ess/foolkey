@@ -3,17 +3,20 @@ package com.example.a29149.yuyuan.ModelStudent.Me.Recharge;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.MeMainFragment;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.money.ChargeMoneyController;
@@ -88,6 +91,9 @@ public class RechargeActivity extends AbstractAppCompatActivity {
 
     /**
      * 充值
+     * 会先通知MainStudentActivity的MeMainFragment刷新数值
+     * 如果null
+     * 则通知源activity，完成更新
      */
     public class Recharge extends AsyncTask<String, Integer, String> {
 
@@ -111,18 +117,27 @@ public class RechargeActivity extends AbstractAppCompatActivity {
 
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
-
+                    //充值成功
                     if (resultFlag.equals("success")) {
-
+                        //提示用户
                         Toast.makeText(RechargeActivity.this, "充值成功！", Toast.LENGTH_SHORT).show();
+                        //从服务器获取余额的最新值
                         Double virtualCurrency = Double.parseDouble(jsonObject.getString("virtualCurrency") + "");
-
+                        //更新本地学生的资料
                         GlobalUtil.getInstance().getStudentDTO().setVirtualCurrency(virtualCurrency);
-
-                        //通知MainStudentActivity，后者再调用fragment的方法来进行数据刷新
-
-                        intent.putExtra("virtualCurrency", virtualCurrency + "");
-                        setResult(RESULT_OK, intent);
+                        //获取学生activity
+                        MainStudentActivity mainStudentActivity = (MainStudentActivity) AppManager.getActivity(MainStudentActivity.class);
+                        if (mainStudentActivity != null){
+                            //如果学生的activity不为null，则可以直接调用它的fragment
+                            MeMainFragment fragment = (MeMainFragment) mainStudentActivity.getMeMainFragment();
+                            //更新fragment里，金额的显示
+                            fragment.setVirtualMoney( virtualCurrency + "" );
+                        }else {
+                            //如果这个时候学生的activity不存在了
+                            //通知源activity，充值完成
+                            intent.putExtra("virtualCurrency", virtualCurrency + "");
+                            setResult(RESULT_OK, intent);
+                        }
 
                     } else {
                         Toast.makeText(RechargeActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();

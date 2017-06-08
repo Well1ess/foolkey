@@ -311,4 +311,49 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
             }
         }
     }
+
+    /**
+     * 以下5个获取fragment的方法，可以使得别的activity直接操作这些fragment
+     * @Author geyao
+     * @Date 2017/6/8 下午12:39
+     **/
+    /**
+     * 获取首页的fragment
+     * @return
+     */
+    public Fragment getIndexMainFragment() {
+        return indexMainFragment;
+    }
+
+    /**
+     * 获取发现的fragment
+     * @return
+     */
+    public Fragment getDiscoveryMainFragment() {
+        return discoveryMainFragment;
+    }
+
+    /**
+     * 获取发布的fragment
+     * @return
+     */
+    public Fragment getPublishMainFragment() {
+        return publishMainFragment;
+    }
+
+    /**
+     * 获取订单的fragment
+     * @return
+     */
+    public Fragment getOrderFragment() {
+        return orderFragment;
+    }
+
+    /**
+     * 获取【我的】fragment
+     * @return
+     */
+    public Fragment getMeMainFragment() {
+        return meMainFragment;
+    }
 }

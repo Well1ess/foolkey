@@ -110,15 +110,15 @@ public class RechargeActivity extends AbstractAppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            log.d(this, result);
             if (result != null) {
+                //获取意图
                 Intent intent = getIntent();
                 try {
-
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
-                    //充值成功
+
                     if (resultFlag.equals("success")) {
+                        //充值成功
                         //提示用户
                         Toast.makeText(RechargeActivity.this, "充值成功！", Toast.LENGTH_SHORT).show();
                         //从服务器获取余额的最新值
@@ -140,6 +140,7 @@ public class RechargeActivity extends AbstractAppCompatActivity {
                         }
 
                     } else {
+                        //充值失败 TODO
                         Toast.makeText(RechargeActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
@@ -149,9 +150,10 @@ public class RechargeActivity extends AbstractAppCompatActivity {
                     Toast.makeText(RechargeActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
                 }finally {
 //                    Log.d(TAG, "onPostExecute: 135");
+                    //不管怎么样，都要finish
                     finish();
                 }
-            } else {
+            } else { //没有获取到结果
                 Toast.makeText(RechargeActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
             finish();

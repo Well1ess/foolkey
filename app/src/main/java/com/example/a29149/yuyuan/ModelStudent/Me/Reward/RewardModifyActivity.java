@@ -509,7 +509,7 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
             teachRequirementEnumStr = mChooseContent[7];
 
             return
-                    updateController.execute(
+                    UpdateController.execute(
                             rewardId,
                             mChooseContent[1],
                             mChooseContent[0],

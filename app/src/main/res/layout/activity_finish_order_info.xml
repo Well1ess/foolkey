@@ -114,7 +114,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/order_type"
+                    android:id="@+id/tv_courseType"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
@@ -136,19 +136,87 @@
         android:background="@color/light_white"
         />
 
-    <include layout="@layout/component_course" />
-
-    <ImageView
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="15dp"
+        android:gravity="center"
+        android:descendantFocusability="blocksDescendants"
         android:background="@color/white"
-        />
+        android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/white"
-        />
+
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@null"
+            android:layout_marginRight="30dp"
+            />
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey555"
+                android:layout_gravity="center"
+                android:text="Spring框架的运用"/>
+
+            <TextView
+                android:id="@+id/tv_nickedName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/grey555"
+                android:layout_marginTop="10dp"
+                android:text="朱红军"/>
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_gray"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="这门课是一种主要……"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:layout_marginLeft="40dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+
+                android:clickable="true"
+                android:textColor="@color/dark_green"
+                android:text="50元"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -156,15 +224,11 @@
         android:background="@color/light_white"
         />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:background="@color/white"
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="25dp"
         android:background="@color/white"
         android:gravity="left"
         android:orientation="horizontal"
@@ -175,13 +239,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingLeft="40dp"
-            android:text="成交时间"
+            android:text="生成时间"
             android:textColor="@color/grey"
             />
 
 
         <TextView
-            android:id="@+id/order_time"
+            android:id="@+id/tv_createdTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
@@ -191,15 +255,12 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:background="@color/white"
-        />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="15dp"
         android:background="@color/white"
         android:gravity="left"
         android:orientation="horizontal"
@@ -216,7 +277,7 @@
 
 
         <TextView
-            android:id="@+id/order_number"
+            android:id="@+id/tv_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
@@ -233,19 +294,116 @@
 
     </LinearLayout>
 
-    <ImageView
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:background="@color/white"
-        />
+        android:gravity="left"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="40dp"
+            android:text="订单状态"
+            android:textColor="@color/grey"
+            />
+        <TextView
+            android:id="@+id/tv_orderStateEnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:text="已完成"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:background="@color/white"
+        android:gravity="left"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="40dp"
+            android:text="授课方式"
+            android:textColor="@color/grey"
+            />
+        <TextView
+            android:id="@+id/tv_teachMethodEnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:text="不限"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:background="@color/white"
+        android:gravity="left"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="40dp"
+            android:text="支付时间"
+            android:textColor="@color/grey"
+            />
+        <TextView
+            android:id="@+id/tv_payTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:text="2016年9月7日 08:00:00"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:background="@color/white"
+        android:gravity="left"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="40dp"
+            android:text="下课时间"
+            android:textColor="@color/grey"
+            />
+        <TextView
+            android:id="@+id/tv_lessonEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:text="2016年9月7日 08:00:00"
+            />
+    </LinearLayout>
+
+
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="15dp"
         android:background="@color/light_white"
         />
-
-    <include layout="@layout/listview_item_recommand"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -267,16 +425,16 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/left"
+                android:id="@+id/rb_left"
                 style="@style/RadioButton.Menu"
                 android:text="联系老师"/>
             <RadioButton
-                android:id="@+id/center"
+                android:id="@+id/rb_center"
                 android:visibility="gone"
                 style="@style/RadioButton.Menu"
                 android:text="联系老师"/>
             <RadioButton
-                android:id="@+id/right"
+                android:id="@+id/rb_right"
                 android:visibility="gone"
                 style="@style/RadioButton.Menu"
                 android:text="联系老师"/>

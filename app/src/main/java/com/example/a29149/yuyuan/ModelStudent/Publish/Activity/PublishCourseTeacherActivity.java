@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Publish.Activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -20,7 +19,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.course.PublishController;
-import com.example.resource.component.baseObject.AbstractActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 
 import org.json.JSONObject;
 

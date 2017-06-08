@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.ModelTeacher.Index.course;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -18,7 +17,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.order.teacher.home.GetAgreedOnClassOrderCourseByTeacherController;
-import com.example.resource.component.baseObject.AbstractAppCompatActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONException;

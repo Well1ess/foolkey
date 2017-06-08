@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.ModelStudent.Discovery.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
-import com.example.resource.component.baseObject.AbstractAppCompatActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 
 import org.json.JSONObject;
 

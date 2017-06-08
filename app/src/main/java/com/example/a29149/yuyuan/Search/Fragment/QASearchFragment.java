@@ -2,17 +2,17 @@ package com.example.a29149.yuyuan.Search.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
-public class QASearchFragment extends Fragment {
+public class QASearchFragment extends AbstracFragment {
 
     public QASearchFragment() {
-
+        super();
     }
 
 

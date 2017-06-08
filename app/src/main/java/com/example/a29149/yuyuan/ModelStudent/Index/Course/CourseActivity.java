@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.ModelStudent.Index.Course;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +17,7 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.resource.component.baseObject.AbstractAppCompatActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 
 public class CourseActivity extends AbstractAppCompatActivity {
 

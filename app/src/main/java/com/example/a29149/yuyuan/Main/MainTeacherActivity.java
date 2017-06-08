@@ -29,7 +29,7 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
-import com.example.resource.component.baseObject.AbstractAppCompatActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -88,7 +88,6 @@ public class MainTeacherActivity extends AbstractAppCompatActivity {
         setContentView(R.layout.activity_main_teacher);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
-        AppManager.getInstance().addActivity(MainTeacherActivity.this);
         //全局Dialog的初始化
         shapeLoadingDialog = new ShapeLoadingDialog(this);
         shapeLoadingDialog.setLoadingText("加载中...");

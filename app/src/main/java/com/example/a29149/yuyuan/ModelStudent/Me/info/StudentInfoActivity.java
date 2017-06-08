@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Me.info;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
-import com.example.resource.component.baseObject.AbstractActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 /**

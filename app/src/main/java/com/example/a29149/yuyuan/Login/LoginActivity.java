@@ -30,7 +30,7 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.LogInController;
-import com.example.resource.component.baseObject.AbstractAppCompatActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.xiaomi.mipush.sdk.MiPushClient;
 

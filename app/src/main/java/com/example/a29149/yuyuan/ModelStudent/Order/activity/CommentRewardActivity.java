@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Order.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,7 +23,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
-import com.example.resource.component.baseObject.AbstractActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;

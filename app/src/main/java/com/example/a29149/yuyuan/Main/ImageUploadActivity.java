@@ -36,8 +36,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UploadFile;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetPictureImageController;
-import com.example.resource.component.baseObject.AbstractActivity;
-import com.example.resource.component.baseObject.AbstractAppCompatActivity;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.example.resource.util.image.ImageService;
 

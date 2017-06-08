@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.Search.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +19,13 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
+import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
 import de.greenrobot.event.Subscribe;
 import de.greenrobot.event.ThreadMode;
 
 
-public class ArticleSearchFragment extends Fragment {
+public class ArticleSearchFragment extends AbstracFragment {
 
     //页数
     int pageNo = 2;
@@ -46,6 +46,7 @@ public class ArticleSearchFragment extends Fragment {
     private String keyValue;
 
     public ArticleSearchFragment() {
+        super();
     }
 
     public static ArticleSearchFragment newInstance() {

@@ -1,11 +1,13 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
+
 /**
  * 搜索课程得到的结果
  * Created by geyao on 2017/5/25.
  */
 
-public class CourseWithTeacherSTCDTO {
+public class CourseWithTeacherSTCDTO  extends AbstractDTO {
 
     //课程信息
     private CourseDTO courseDTO;

@@ -1,11 +1,13 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
+
 /**
  * Created by 张丽华 on 2017/5/2.
  * Description:
  */
 
-public class Date {
+public class Date  extends AbstractDTO {
     String date;
     String day;
     String hours;

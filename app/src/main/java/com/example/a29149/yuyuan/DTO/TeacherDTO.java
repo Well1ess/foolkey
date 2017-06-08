@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 
 /**
@@ -7,7 +8,7 @@ import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
  * Description:老师信息DTO
  */
 
-public class TeacherDTO {
+public class TeacherDTO  extends AbstractDTO {
     private Long id;
     private Float teacherAverageScore;
     private Float teachingTime;

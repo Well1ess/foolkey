@@ -1,11 +1,13 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
+
 /**
  * 老师申请悬赏的DTO
  * Created by GR on 2017/5/24.
  */
 
-public class ApplicationRewardWithStudentSTCDTO {
+public class ApplicationRewardWithStudentSTCDTO extends AbstractDTO {
 
     //申请信息
     private ApplicationStudentRewardDTO applicationStudentRewardDTO;

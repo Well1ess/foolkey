@@ -7,7 +7,7 @@ import com.example.a29149.yuyuan.Enum.CourseTeacherStateEnum;
  * 课程信息
  */
 
-public class CourseDTO extends CourseAbstract{
+public class CourseDTO extends CourseAbstract {
 
         //建议时长 0.5h/1h...
         private Float duration;

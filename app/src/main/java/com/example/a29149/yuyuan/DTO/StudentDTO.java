@@ -1,19 +1,18 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.SchoolEnum;
 import com.example.a29149.yuyuan.Enum.SexTagEnum;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Enum.UserStateEnum;
 
-import java.util.*;
-
 /**
  * Created by 张丽华 on 2017/5/2.
  * Description:
  */
 
-public class StudentDTO {
+public class StudentDTO  extends AbstractDTO {
     private Long id;
     private String userName;
     private String passWord;

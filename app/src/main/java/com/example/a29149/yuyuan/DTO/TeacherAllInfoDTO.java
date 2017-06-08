@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.SchoolEnum;
 import com.example.a29149.yuyuan.Enum.SexTagEnum;
@@ -10,7 +11,7 @@ import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 /**
  * Created by GR on 2017/5/5.
  */
-public class TeacherAllInfoDTO {
+public class TeacherAllInfoDTO  extends AbstractDTO {
 
     private Long id;
 

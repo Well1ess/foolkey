@@ -1,12 +1,13 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.Enum.EvaluationStateEnum;
 
 /**
  * Created by GR on 2017/5/24.
  */
 
-public class EvaluationAbstract {
+public class EvaluationAbstract  extends AbstractDTO {
 
     private Long id;
 

@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
@@ -39,7 +37,7 @@ public class JudgeStudentActivity extends AbstractActivity {
     @ViewInject(R.id.iv_photo)
     private ImageView studentPhoto;
 
-    @ViewInject(R.id.tv_student_name)
+    @ViewInject(R.id.tv_nickedName)
     private TextView studentName;
 
     @ViewInject(R.id.tv_course_name)

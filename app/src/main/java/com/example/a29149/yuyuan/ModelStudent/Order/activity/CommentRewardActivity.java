@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Order.activity;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
-import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -47,31 +45,32 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
 
 
     @ViewInject(R.id.iv_photo)
-    private ImageView teacherPhoto;
+    private ImageView photo; //照片
 
 
-    @ViewInject(R.id.tv_student_name)
-    private TextView mTeacherName;
+    @ViewInject(R.id.tv_nickedName)
+    private TextView mNickedName; //昵称
 
     @ViewInject(R.id.tv_course_name)
-    private TextView mCourseName;
+    private TextView mCourseName; //课程的名字
 
     @ViewInject(R.id.rb_student_score)
-    private RatingBar studentScore;
+    private RatingBar studentScore; //打分条
 
     @ViewInject(R.id.tv_order_price)
-    private TextView mOrderPrice;
+    private TextView mOrderPrice; //订单金额
 
     @ViewInject(R.id.rb_publish)
-    private RadioButton radioButton;
+    private RadioButton radioButton; //发布
 
     @ViewInject(R.id.ib_return)
-    private ImageButton back; //返回键
+    private ImageButton back; //返回键，暂时没用到
 
-    private RequestManager glide;
+    private RequestManager glide; // 图片加载器
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //绑定UI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_judge_teacher);
         AnnotationUtil.injectViews(this);
@@ -80,30 +79,33 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
         initView();
     }
 
+    /**
+     * 初始化视图
+     */
     private void initView() {
         mRewardScore = (TextView) findViewById(R.id.ed_score);
         mPublish = (TextView) findViewById(R.id.rb_publish);
         mPublish.setOnClickListener(this);
-
+        //获取信息
         orderBuyCourseAsStudentDTO = (OrderBuyCourseAsStudentDTO) getIntent().getSerializableExtra("DTO");
 
         String teacherName = orderBuyCourseAsStudentDTO.getStudentDTO().getNickedName();
         String courseName = orderBuyCourseAsStudentDTO.getCourse().getTopic();
         String orderPrice = orderBuyCourseAsStudentDTO.getOrderDTO().getAmount() + "";
-
+        //加载图片
         glide = Glide.with(this);
         glide.load(PictureInfoBO.getOnlinePhoto(orderBuyCourseAsStudentDTO.getStudentDTO().getUserName()) )
                 .placeholder(R.drawable.photo_placeholder1)
                 .transform(new GlideCircleTransform(this))
-                .into(teacherPhoto);
-
+                .into(photo);
+        //文字信息
         if (orderPrice == null || orderPrice.equals("")||orderPrice.equals("0"))
             mOrderPrice.setText("免费");
         else
             mOrderPrice.setText( orderPrice + "  " + Const.PRICE_NAME);
         mCourseName.setText(StringUtil.subString(courseName, 15));
-        mTeacherName.setText( StringUtil.subString( teacherName, 15) );
-
+        mNickedName.setText( StringUtil.subString( teacherName, 15) );
+        //打分监听器
         studentScore.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -113,6 +115,7 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
 
     }
 
+    //点击监听器
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -130,12 +133,15 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
 
     }
 
+    /**
+     * 发布悬赏
+     *
+     */
     private void publishCommentReward() {
         if ( score == null )
             Toast.makeText(this, "点击星星进行评价哦", Toast.LENGTH_SHORT).show();
         else
         {
-
             new CommentRewardAction(score + "").execute();
         }
 
@@ -144,7 +150,7 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
     /**
      * 提交评论悬赏订单Action
      */
-    public class CommentRewardAction extends AsyncTask<String, Integer, String> {
+    private class CommentRewardAction extends AsyncTask<String, Integer, String> {
 
         String score;
 
@@ -177,9 +183,10 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
                     if (resultFlag.equals("success")) {
                         Toast.makeText(CommentRewardActivity.this, "评价成功！", Toast.LENGTH_SHORT).show();
                         //跳转到主页面
-                        GlobalUtil.getInstance().setFragmentFresh(true);
-                        Intent intent = new Intent(CommentRewardActivity.this, MainStudentActivity.class);
-                        startActivity(intent);
+                        //TODO 这里应当是通知adapter刷新数据
+//                        GlobalUtil.getInstance().setFragmentFresh(true);
+//                        Intent intent = new Intent(CommentRewardActivity.this, MainStudentActivity.class);
+//                        startActivity(intent);
                         finish();
                     }
                 } catch (Exception e) {

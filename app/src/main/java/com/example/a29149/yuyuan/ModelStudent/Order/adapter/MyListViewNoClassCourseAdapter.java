@@ -110,8 +110,8 @@ public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnCli
     }
 
     private void initView(View view) {
-        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
-        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
+        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_photo);
+        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_nickedName);
         //mCourseTitle = (TextView) view.findViewById(R.id.tv_courseTitle);
         mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
         mCanael = (TextView) view.findViewById(R.id.tv_cancel);

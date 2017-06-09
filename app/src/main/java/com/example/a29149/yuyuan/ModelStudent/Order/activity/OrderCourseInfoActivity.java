@@ -83,7 +83,7 @@ public class OrderCourseInfoActivity extends AbstractActivity implements View.On
     @ViewInject(R.id.iv_teacherPhoto)
     private ImageView photo;
 
-    @ViewInject(R.id.iv_teacherPhone)
+    @ViewInject(R.id.iv_photo)
     private ImageView photo2;
 
     private RequestManager glide;

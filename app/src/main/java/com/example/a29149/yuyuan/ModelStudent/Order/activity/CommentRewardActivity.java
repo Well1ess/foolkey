@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
@@ -14,12 +15,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
@@ -39,13 +42,13 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
     private TextView mPublish;//发布评价
     private TextView mRewardScore;//订单分数
     private Float score;//保存评价分数
-    private String orderId;//保存评价订单ID
-    private int position;//记录评论位置
+
+    private OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO; //要评价的订单
 
 
-    @ViewInject(R.id.student_photo)
+    @ViewInject(R.id.iv_photo)
     private ImageView teacherPhoto;
-    private String teacherUserName;
+
 
     @ViewInject(R.id.tv_student_name)
     private TextView mTeacherName;
@@ -62,17 +65,17 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
     @ViewInject(R.id.rb_publish)
     private RadioButton radioButton;
 
+    @ViewInject(R.id.ib_return)
+    private ImageButton back; //返回键
+
     private RequestManager glide;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_judge_teacher);
-        Intent intent = getIntent();
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
-        position = intent.getIntExtra("position",-1);
-        orderId = intent.getStringExtra("orderId");
 
         initView();
     }
@@ -82,13 +85,14 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
         mPublish = (TextView) findViewById(R.id.rb_publish);
         mPublish.setOnClickListener(this);
 
-        teacherUserName = getIntent().getStringExtra("teacherUserName");
-        String teacherName = getIntent().getStringExtra("teacherName");
-        String courseName = getIntent().getStringExtra("courseName");
-        String orderPrice = getIntent().getStringExtra("orderPrice");
+        orderBuyCourseAsStudentDTO = (OrderBuyCourseAsStudentDTO) getIntent().getSerializableExtra("DTO");
+
+        String teacherName = orderBuyCourseAsStudentDTO.getStudentDTO().getNickedName();
+        String courseName = orderBuyCourseAsStudentDTO.getCourse().getTopic();
+        String orderPrice = orderBuyCourseAsStudentDTO.getOrderDTO().getAmount() + "";
 
         glide = Glide.with(this);
-        glide.load(PictureInfoBO.getOnlinePhoto(teacherName) )
+        glide.load(PictureInfoBO.getOnlinePhoto(orderBuyCourseAsStudentDTO.getStudentDTO().getUserName()) )
                 .placeholder(R.drawable.photo_placeholder1)
                 .transform(new GlideCircleTransform(this))
                 .into(teacherPhoto);
@@ -97,8 +101,8 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
             mOrderPrice.setText("免费");
         else
             mOrderPrice.setText( orderPrice + "  " + Const.PRICE_NAME);
-        mCourseName.setText( courseName );
-        mTeacherName.setText( teacherName );
+        mCourseName.setText(StringUtil.subString(courseName, 15));
+        mTeacherName.setText( StringUtil.subString( teacherName, 15) );
 
         studentScore.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -116,6 +120,9 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
         {
             case R.id.rb_publish:
                 publishCommentReward();
+                break;
+            case R.id.ib_return:
+                finish();
                 break;
             default:
                 break;
@@ -151,7 +158,7 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
             Log.i("malei", GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().toString());
             return JudgeTeacherController.execute(
                     //GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId() + "",
-                    orderId,
+                    orderBuyCourseAsStudentDTO.getOrderDTO().getId() + "",
                     score
             );
 

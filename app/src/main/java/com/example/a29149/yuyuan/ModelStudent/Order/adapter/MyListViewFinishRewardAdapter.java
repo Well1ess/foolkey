@@ -108,8 +108,8 @@ public class MyListViewFinishRewardAdapter extends BaseAdapter{
     }
 
     private void initView(View view) {
-        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
-        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
+        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_photo);
+        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_nickedName);
         mBuyTime = (TextView) view.findViewById(R.id.tv_buyTime);
         mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
 

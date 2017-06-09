@@ -245,8 +245,6 @@ public class NoClassFragment extends Fragment {
                                 mReward.setAdapter(myListViewNoClassRewardAdapter);
                                 //我也不知道这里这样设置有没有用
                                 GlobalUtil.getInstance().setOrderRewardList(rewardList);
-
-
                             }
                         }, 1000);
                     }

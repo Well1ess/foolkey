@@ -26,7 +26,7 @@ import com.example.resource.util.image.GlideCircleTransform;
  * Created by 张丽华 on 2017/4/26.
  * Description:发现界面的悬赏列表适配器
  */
-
+//TODO 这里获取数据依然要依靠全局变量
 public class RewardListAdapter extends BaseAdapter {
 
     private static final String TAG = "RewardListAdapter";
@@ -44,7 +44,6 @@ public class RewardListAdapter extends BaseAdapter {
      */
     public void updateList() {
         this.notifyDataSetChanged();
-        log.d(this, GlobalUtil.getInstance().getContent().size());
     }
 
     @Override

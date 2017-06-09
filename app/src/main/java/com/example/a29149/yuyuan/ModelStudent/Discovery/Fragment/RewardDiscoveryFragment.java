@@ -31,7 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO 这里的数据传输依然依靠全局变量
 public class RewardDiscoveryFragment extends Fragment {
 
     //下拉刷新的Layout
@@ -74,6 +74,7 @@ public class RewardDiscoveryFragment extends Fragment {
 
         //list初始化
         mListAdapter = new RewardListAdapter(getContext());
+        //给listView设置adapter
         mRewardList.setAdapter(mListAdapter);
         //给viewList设置点击监听器
         mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

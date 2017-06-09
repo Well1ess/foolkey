@@ -16,7 +16,7 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.CommentRewardActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.StudentJudgeRewardActivity;
 import com.example.a29149.yuyuan.ModelTeacher.Order.JudgeStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Const;
@@ -40,6 +40,7 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
     private Context mContext;
 
     private List<OrderBuyCourseAsStudentDTO> rewardNoCommentList;// 完成课程但还未评价订单
+
     private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO; //最主要的展示信息
 
     //图片加载器
@@ -104,6 +105,8 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
         viewHolder.mJudgeNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //必须在监听事件里重新获取一下DTO，不然DTO会是List里面的最后一个DTO
+                mOrderBuyCourseAsStudentDTO = rewardNoCommentList.get(position);
                 if (GlobalUtil.getInstance().getUserRole().equals("student"))
                     //学生评价悬赏
                     commentReward(mOrderBuyCourseAsStudentDTO);
@@ -128,7 +131,7 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
      */
     private void commentReward(OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO) {
         //跳转到悬赏订单评价
-        Intent intent = new Intent(mContext, CommentRewardActivity.class);
+        Intent intent = new Intent(mContext, StudentJudgeRewardActivity.class);
         //建一个Bundle来存储信息
         Bundle bundle = new Bundle();
         bundle.putSerializable("DTO", mOrderBuyCourseAsStudentDTO);
@@ -146,6 +149,7 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
         intent.putExtras(bundle);
         mContext.startActivity(intent);
     }
+
 
     /**
      * ViewHolder来优化效率
@@ -168,5 +172,11 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
         }
     }
 
-
+    /**
+     * 获取adapter的数据源
+     * @return
+     */
+    public List<OrderBuyCourseAsStudentDTO> getRewardNoCommentList() {
+        return rewardNoCommentList;
+    }
 }

@@ -15,9 +15,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.fragment.NoCommentFragment;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.StringUtil;
@@ -35,7 +38,9 @@ import org.json.JSONObject;
  * 目前就是评价老师而已
  */
 
-public class CommentRewardActivity extends AbstractActivity implements View.OnClickListener {
+public class StudentJudgeRewardActivity extends AbstractActivity implements View.OnClickListener {
+
+    private static final String TAG = "StudentJudgeRewardActiv";
 
     private TextView mPublish;//发布评价
     private TextView mRewardScore;//订单分数
@@ -182,19 +187,22 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
                     String resultFlag = jsonObject.getString("result");
 
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(CommentRewardActivity.this, "评价成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StudentJudgeRewardActivity.this, "评价成功！", Toast.LENGTH_SHORT).show();
                         //跳转到主页面
-                        //TODO 这里应当是通知adapter刷新数据
-//                        GlobalUtil.getInstance().setFragmentFresh(true);
-//                        Intent intent = new Intent(CommentRewardActivity.this, MainStudentActivity.class);
-//                        startActivity(intent);
+                        //获取Activity，一步一步地获取fragment
+                        MainStudentActivity mainStudentActivity =
+                                (MainStudentActivity) AppManager.getActivity(MainStudentActivity.class);
+                        NoCommentFragment noCommentFragment =
+                                mainStudentActivity.getOrderFragment().getNoCommentFragment();
+                        //从数据源中移除已评价的订单
+                        noCommentFragment.removeRewardById(orderBuyCourseAsStudentDTO.getOrderDTO().getId());
                         finish();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(CommentRewardActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentJudgeRewardActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(CommentRewardActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(StudentJudgeRewardActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
             }
 
         }

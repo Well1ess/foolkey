@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,8 @@ public class OrderFragment extends AbstracFragment implements View.OnClickListen
     private View view;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
+    private MyFragmentPagerAdapter myFragmentPagerAdapter;
 
     @Nullable
     @Override
@@ -57,7 +60,8 @@ public class OrderFragment extends AbstracFragment implements View.OnClickListen
     }
 
     private void initData() {
-        MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
+        //添加了4个fragment
+        myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(myFragmentPagerAdapter);
 
         //设置tablayout按照标签数目平分
@@ -71,5 +75,23 @@ public class OrderFragment extends AbstracFragment implements View.OnClickListen
         Intent intent = new Intent(getActivity(), SearchActivity.class);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(
                 getActivity(), v, "searchView").toBundle());
+    }
+
+    /**
+     * 临时的方法
+     * 获取子fragment
+     * @param position
+     * @return
+     */
+    private Fragment getFragment(int position){
+        return myFragmentPagerAdapter.getItem(position);
+    }
+
+    /**
+     * 获取未评价的fragment
+     * @return
+     */
+    public NoCommentFragment getNoCommentFragment(){
+        return (NoCommentFragment) getFragment(2);
     }
 }

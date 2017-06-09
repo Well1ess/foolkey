@@ -133,6 +133,7 @@ public class JudgeStudentActivity extends AbstractActivity {
      * 发布评价的action
      */
     private class JudgeStudentAction extends AsyncTask<String, String, String> {
+
         @Override
         protected String doInBackground(String... strings) {
             judgeStudentController = new JudgeStudentController();

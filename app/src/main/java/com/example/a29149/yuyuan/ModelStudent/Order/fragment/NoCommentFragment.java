@@ -200,7 +200,7 @@ public class NoCommentFragment extends Fragment {
      * 根据order的Id，从list里移除一个dto
      * @return
      */
-    private boolean removeOrderById(List <OrderBuyCourseAsStudentDTO> target, int id){
+    private boolean removeOrderById(List <OrderBuyCourseAsStudentDTO> target, long id){
         List <OrderBuyCourseAsStudentDTO> list = target;
         for (OrderBuyCourseAsStudentDTO dto : list){
             if ( dto.getOrderDTO().getId() == id ){
@@ -219,7 +219,7 @@ public class NoCommentFragment extends Fragment {
      *
      * @return boolean
      */
-    public boolean removeRewardById(int id){
+    public boolean removeRewardById(long id){
         boolean flag = removeOrderById(getRewardList(), id);
         if( flag == true ){
             myListViewNoCommentRewardAdapter.notifyDataSetChanged();
@@ -235,7 +235,7 @@ public class NoCommentFragment extends Fragment {
      *
      * @return boolean
      */
-    public boolean removeCourseById(int id){
+    public boolean removeCourseById(long id){
         boolean flag = removeOrderById(getCourseList(), id);
         if( flag == true ){
             myListViewNoConmmentClassAdapter.notifyDataSetChanged();

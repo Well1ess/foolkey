@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.Enum.CourseTimeDayEnum;
 import com.example.a29149.yuyuan.Enum.TeachMethodEnum;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
@@ -9,7 +10,7 @@ import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
  * Description:
  */
 
-public class CourseAbstract {
+public class CourseAbstract  extends AbstractDTO {
 
     private Long id;
     private Long creatorId;

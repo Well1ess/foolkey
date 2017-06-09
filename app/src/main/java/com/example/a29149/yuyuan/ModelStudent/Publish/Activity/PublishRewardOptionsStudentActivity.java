@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Publish.Activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,11 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.reward.PublishController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -25,7 +30,7 @@ import org.json.JSONObject;
  * 学生填写悬赏上课时间、基础、理想老师
  */
 
-public class PublishRewardOptionsStudentActivity extends Activity implements View.OnClickListener {
+public class PublishRewardOptionsStudentActivity extends AbstractActivity implements View.OnClickListener {
 
     private ImageView mReturn;
     private TextView mGo;
@@ -304,8 +309,35 @@ public class PublishRewardOptionsStudentActivity extends Activity implements Vie
                     if (resultFlag.equals("success")) {
                         Toast.makeText(PublishRewardOptionsStudentActivity.this, "发布成功！", Toast.LENGTH_SHORT).show();
                         //发布成功后跳转到首页面
-                        Intent toMainActivity = new Intent(PublishRewardOptionsStudentActivity.this, MainStudentActivity.class);
-                        startActivity(toMainActivity);
+//                        Intent toMainActivity = new Intent(PublishRewardOptionsStudentActivity.this, MainStudentActivity.class);
+//                        startActivity(toMainActivity);
+                        try {
+                            //关闭前2个activity
+                            AppManager.getActivity(PublishRewardDescribeStudentActivity.class).finish();
+                            AppManager.getActivity(PublishRewardPriceStudentActivity.class).finish();
+                        }catch (NullPointerException e){
+                            //就算空指针，也没什么
+                        }
+
+                        //更新可能存在的ListView，但事实证明，下面这样并不管用
+                        try{
+                            //获取返回的rewardDTO
+                            java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<RewardDTO>() {
+                            }.getType();
+                            RewardDTO rewardDTO = new Gson().fromJson(jsonObject.getString("courseStudentDTO"), type);
+                            //封装进缓存
+                            RewardWithStudentSTCDTO rewardWithStudentSTCDTO = new RewardWithStudentSTCDTO();
+                            rewardWithStudentSTCDTO.setRewardDTO(rewardDTO);
+                            rewardWithStudentSTCDTO.setStudentDTO( GlobalUtil.getInstance().getStudentDTO() );
+                            //保存在缓存，注意，这里必须指定0才会插入到第一来
+                            GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().add( 0, rewardWithStudentSTCDTO );
+                            //更新列表
+                            RewardActivity.updateRewardList();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        //关闭自己
+                        finish();
                     }
                 } catch (Exception e) {
                     Toast.makeText(PublishRewardOptionsStudentActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();

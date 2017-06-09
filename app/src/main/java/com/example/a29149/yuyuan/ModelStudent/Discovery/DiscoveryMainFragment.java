@@ -29,12 +29,13 @@ import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class DiscoveryMainFragment extends Fragment {
+public class DiscoveryMainFragment extends AbstracFragment {
 
     public static final String DISCOVERY_OF_FIRST_TAG = "first";
     public static final String DISCOVERY_OF_SECOND_TAG = "second";
@@ -251,6 +252,15 @@ public class DiscoveryMainFragment extends Fragment {
         Intent intent = new Intent(getActivity(), SearchActivity.class);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(
                 getActivity(), view, "searchView").toBundle());
+    }
+
+    /**
+     * 获取发现悬赏的fragment
+     * @return
+     */
+    public RewardDiscoveryFragment getRewardDiscoveryFragment(){
+        RewardDiscoveryFragment fragment = (RewardDiscoveryFragment)fragmentList.get(0);
+        return fragment;
     }
 
 }

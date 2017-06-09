@@ -1,11 +1,13 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
+
 /**
  * Created by 张丽华 on 2017/5/9.
  * Description:
  */
 
-public class RewardWithStudentSTCDTO {
+public class RewardWithStudentSTCDTO  extends AbstractDTO {
     private StudentDTO studentDTO;
     private RewardDTO rewardDTO;
 

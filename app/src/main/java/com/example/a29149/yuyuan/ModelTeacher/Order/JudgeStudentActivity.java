@@ -1,13 +1,10 @@
 package com.example.a29149.yuyuan.ModelTeacher.Order;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
@@ -16,29 +13,34 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
+import com.example.a29149.yuyuan.Enum.CourseTypeEnum;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeStudentController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 /**
  * Created by geyao on 2017/5/24.
  * 学生评价老师
  */
+//TODO 界面什么的还没改
+public class JudgeStudentActivity extends AbstractActivity {
 
-public class JudgeStudentActivity extends Activity {
-
-    @ViewInject(R.id.student_photo)
+    @ViewInject(R.id.iv_photo)
     private ImageView studentPhoto;
 
-    @ViewInject(R.id.tv_student_name)
+    @ViewInject(R.id.tv_nickedName)
     private TextView studentName;
 
-    @ViewInject(R.id.tv_course_name)
+    @ViewInject(R.id.tv_title)
     private TextView courseName;
 
     @ViewInject(R.id.rb_student_score)
@@ -47,6 +49,7 @@ public class JudgeStudentActivity extends Activity {
     @ViewInject(R.id.tv_order_price)
     private TextView mOrderPrice;
 
+    private OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO; //要评价的订单
 
     private JudgeStudentController judgeStudentController;
 
@@ -59,55 +62,49 @@ public class JudgeStudentActivity extends Activity {
     private RadioButton radioButton;
 
     private RequestManager glide;
-    private String position;//记录评论位置
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //绑定UI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_judge_student);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
-
+        //获取意图，拿取要展示的DTO
         Intent intent = getIntent();
+        orderBuyCourseAsStudentDTO = (OrderBuyCourseAsStudentDTO) intent.getSerializableExtra("DTO");
         //取展示的信息
-        String studentNameStr = intent.getStringExtra("studentName");
-        String courseNameStr = intent.getStringExtra("courseName");
-        String orderPrice = intent.getStringExtra("orderPrice");
-        String currency = intent.getStringExtra("currency"); //币种，是虚拟币，还是人民币
-        if (orderPrice == null
-                ||orderPrice.equals("")
-                ||orderPrice.equals("0")
+        String studentNameStr = orderBuyCourseAsStudentDTO.getStudentDTO().getNickedName();
+        String courseNameStr = orderBuyCourseAsStudentDTO.getCourse().getTopic();
+        String orderPrice = orderBuyCourseAsStudentDTO.getOrderDTO().getAmount() + "";
+        String currency;
+        if (orderBuyCourseAsStudentDTO.getOrderDTO().getCourseTypeEnum().compareTo(CourseTypeEnum.老师课程) == 0){
+            currency = "元";
+        }else {
+            currency = Const.PRICE_NAME;
+        }
+        if (orderPrice.equals("") || orderPrice.equals("0")
                 ){
             mOrderPrice.setText("免费");
         }else {
             mOrderPrice.setText(orderPrice + "  " + currency);
         }
-
-
-        position = intent.getStringExtra("position");
-        Log.i("malei","position="+position+"    studentName="+studentNameStr+"    courseNameStr="+courseNameStr);
-        studentName.setText( studentNameStr );
-        courseName.setText( courseNameStr );
+        studentName.setText(StringUtil.subString(studentNameStr, 10) );
+        courseName.setText( StringUtil.subString(courseNameStr, 10) );
 
         //图片展示
-        String studentUserName = intent.getStringExtra( "studentUserName" );
+        String studentUserName = orderBuyCourseAsStudentDTO.getStudentDTO().getUserName();
         glide = Glide.with(this);
-        //浅出效果，不然会有黄色一闪而过
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setFillAfter(true);
-        studentPhoto.setAnimation(alphaAnimation);
-        alphaAnimation.start();
-        studentPhoto.setVisibility(View.VISIBLE);
         //用glide动态地加载图片
         glide.load(PictureInfoBO.getOnlinePhoto(studentUserName))
                 .transform(new GlideCircleTransform(this))
-                .crossFade(2000)
+                .error(R.drawable.photo_placeholder1)
                 .into(studentPhoto);
 
         //拿传输的信息
-        orderId = intent.getStringExtra("orderId");
+        orderId = orderBuyCourseAsStudentDTO.getOrderDTO().getId() + "";
 
         studentScore.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -135,7 +132,7 @@ public class JudgeStudentActivity extends Activity {
     /**
      * 发布评价的action
      */
-    public class JudgeStudentAction extends AsyncTask<String, String, String> {
+    private class JudgeStudentAction extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
             judgeStudentController = new JudgeStudentController();
@@ -150,6 +147,7 @@ public class JudgeStudentActivity extends Activity {
             super.onPostExecute(s);
             switch ( judgeStudentController.getResult() ) {
                 case "success":{ // 评价成功
+                    //FIXME 评价成功后，adapter的刷新
                     GlobalUtil.getInstance().setFragmentFresh(true);
                     finish();
                 }break;

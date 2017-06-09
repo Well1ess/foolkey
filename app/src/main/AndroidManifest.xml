@@ -96,7 +96,7 @@
         <!-- 评价悬赏订单 -->
         <activity android:name=".ModelStudent.Order.activity.CommentRewardActivity" />
         <!-- 评价课程订单 -->
-        <activity android:name=".ModelStudent.Order.activity.CommentCourseActivity" />
+        <activity android:name=".ModelStudent.Order.activity.StudentJudgeCourseActivity" />
         <!-- 老师拥有的悬赏订单 -->
         <activity android:name=".ModelTeacher.Index.reward.OwnerRewardTeacherActivity" />
         <!-- 老师拥有的课程订单 -->
@@ -109,13 +109,14 @@
         <activity android:name=".ModelStudent.Me.Reward.RewardModifyActivity"></activity>
         >
         <!-- 订单详情界面 -->
-        <activity android:name=".ModelStudent.Order.activity.OrderRewardInfoActivity" />
+        <activity android:name=".ModelStudent.Order.activity.OrderInfoActivity" />
         <activity android:name=".ModelStudent.Me.Reward.OwnerRewardActivity" />
         <activity android:name=".TeacherInfo.TeacherInfoActivity"></activity>
         <activity
             android:name=".AccessOrder.AccessOrderActivity"
             android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".ModelTeacher.TeacherMain.Score.MoreStudent.MoreStudentActivity"></activity>
+        <activity android:name=".Main.UploadImageActivity"/>
 
         <!-- splashActivity -->
         <activity

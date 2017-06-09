@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Publish.Activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 
 import org.json.JSONObject;
 
@@ -26,7 +26,7 @@ import org.json.JSONObject;
  * 学生发布悬赏
  */
 @Deprecated
-public class PublishRewardStudentActivity extends Activity implements View.OnClickListener {
+public class PublishRewardStudentActivity extends AbstractActivity implements View.OnClickListener {
 
     private TextView mCancel;//取消
     private TextView mPublish;//发布
@@ -54,7 +54,7 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
     }
 
     private void initView() {
-        mCancel = (TextView) findViewById(R.id.tv_cancel);
+        mCancel = (TextView) findViewById(R.id.tv_judge);
         mCancel.setOnClickListener(this);
         mPublish = (TextView) findViewById(R.id.tv_publish);
         mPublish.setOnClickListener(this);
@@ -94,7 +94,7 @@ public class PublishRewardStudentActivity extends Activity implements View.OnCli
             case R.id.tv_publish:
                 publish();
                 break;
-            case R.id.tv_cancel:
+            case R.id.tv_judge:
                 finish();
                 break;
             case R.id.rl_tagItemChoose:

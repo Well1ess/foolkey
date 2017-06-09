@@ -2,26 +2,23 @@ package com.example.a29149.yuyuan.ModelStudent.Order.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
-import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
-import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.CommentCourseActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.StudentJudgeCourseActivity;
 import com.example.a29149.yuyuan.ModelTeacher.Order.JudgeStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
@@ -34,25 +31,14 @@ import java.util.List;
  * 课程而未评论listView的Adapter
  */
 
-public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnClickListener{
+public class MyListViewNoConmmentClassAdapter extends BaseAdapter {
     private Context mContext;
 
-    private ImageView mTeacherPhone;//老师头像
-    private TextView mTeacherNameAndCourseName;//老师姓名和课程名
-    private TextView mBuyTime;//购买时长
-    private TextView mCourseCost;//课程价格
-    private TextView mComment;//评价订单
+
+
     private List<OrderBuyCourseAsStudentDTO> courseNoCommentList = new ArrayList<>();//完成课程但还未评价订单
-    private StudentDTO mStudentDTO;//学生信息
-    private TeacherDTO mTeacherDTO;//老师信息
-    private CourseDTO mCourseDTO;//课程信息
-    private RewardDTO mRewardDTO;//悬赏信息
-    private OrderBuyCourseDTO mOrderBuyCourseDTO;//订单信息
-    private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
-    private int position; //记录位置
-    private List rewardList = new ArrayList();//悬赏列表
-    private List courseList = new ArrayList();//课程列表
-    private CourseAbstract courseDTO = null ;
+
+    private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;
 
     private RequestManager glide;
 
@@ -85,89 +71,88 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter implements OnC
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view ;
-        view=View.inflate(mContext, R.layout.listview_item_nocomment_course,null);
-        this.position = position;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        //使用了和评价悬赏相同的ViewHolder
+        MyListViewNoCommentRewardAdapter.ViewHolder viewHolder;
+        View view;
+        //使用viewHolder来优化展示效率
+        if (convertView == null) {
+            view = View.inflate(mContext, R.layout.listview_item_nocommnent_reward, null);
+            viewHolder = new MyListViewNoCommentRewardAdapter.ViewHolder(view);
+            view.setTag(viewHolder);
+        } else {
+            view = convertView;
+            viewHolder = (MyListViewNoCommentRewardAdapter.ViewHolder) view.getTag();
+        }
 
+        //获取本item的信息
+        /**
+         * 最主要的展示信息，就是在这里了
+         */
         mOrderBuyCourseAsStudentDTO = courseNoCommentList.get(position);
 
-        mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
-        mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();
-        mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
+        //获取各种子dto
+        StudentDTO mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
+        TeacherDTO mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();
+        OrderBuyCourseDTO mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
+        CourseAbstract courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
 
-        courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
+        //设置文字信息展示
+        viewHolder.mNickedName.setText(StringUtil.subString(mStudentDTO.getNickedName(), 10));
+        viewHolder.mNumber.setText("时长:" + mOrderBuyCourseDTO.getNumber().toString() + "h");
+        viewHolder.mAmount.setText("价格:" + courseDTO.getPrice().toString());
 
 
-        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
-        mBuyTime.setText("购买时长:" + mOrderBuyCourseDTO.getNumber().toString() + "h");
-        mCourseCost.setText("课程价格：" + courseDTO.getPrice().toString());
-        initView(view);
-        return view;
-    }
+        //评论按键设置点击监听
+        //注意，这个监听事件必须放在getView里，不然【立即评价】按钮会出现问题
+        viewHolder.mJudgeNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (GlobalUtil.getInstance().getUserRole().equals("student"))
+                    //学生评价课程
+                    judgeCourse(mOrderBuyCourseAsStudentDTO );
+                else
+                    // 老师评价订单，即评价学生
+                    teacherJudgeStudent(mOrderBuyCourseAsStudentDTO);
+            }
+        });
 
-    private void initView(View view) {
-        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
-        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
-        mBuyTime = (TextView) view.findViewById(R.id.tv_buyTime);
-        mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
-        mComment = (TextView) view.findViewById(R.id.tv_comment);
-        mComment.setOnClickListener(this);
-
+        //加载图片
         glide = Glide.with(mContext);
         glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))
                 .error(R.drawable.photo_placeholder1)
                 .transform(new GlideCircleTransform(mContext))
-                .into(mTeacherPhone);
+                .into(viewHolder.mPhoto);
+
+        return view;
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id)
-        {
-            case R.id.tv_comment: {
-                if (GlobalUtil.getInstance().getUserRole().equals("student"))
-                    commentCourse();
-                else
-                    teacherJudgeStudent();
-            }break;
-            default:break;
-        }
-    }
 
-    private void commentCourse() {
+    /**
+     * 学生评价课程
+     * @param orderBuyCourseAsStudentDTO 包含了综合信息的DTO
+     */
+    private void judgeCourse(OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO) {
         //跳转到课程订单评价
-        Intent intent = new Intent(mContext, CommentCourseActivity.class);
-        intent.putExtra("position",position);
-        intent.putExtra("Topic",courseDTO.getTopic());
-        intent.putExtra("TeacherName",mStudentDTO.getNickedName());
-        intent.putExtra("Description",courseDTO.getDescription());
-        intent.putExtra("CoursePrice",courseDTO.getPrice());
-        intent.putExtra("teacherUserName", mStudentDTO.getUserName() );
+        Intent intent = new Intent(mContext, StudentJudgeCourseActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("DTO", orderBuyCourseAsStudentDTO);
+        intent.putExtras(bundle);
         mContext.startActivity(intent);
     }
 
-    private void teacherJudgeStudent(){
+    /**
+     * 老师评价学生
+     * @param orderBuyCourseAsStudentDTO 包含了综合信息的DTO
+     */
+    private void teacherJudgeStudent( OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO ){
+        //TODO 修改下面这个activity
         Intent intent = new Intent(mContext, JudgeStudentActivity.class);
-        intent.putExtra("position", position);
-        //传输一些信息
-        String orderId = courseNoCommentList.get(position).getOrderDTO().getId() + "";
-        intent.putExtra("orderId",orderId);
-
-        String studentName = courseNoCommentList.get(position).getStudentDTO().getNickedName();
-        intent.putExtra("studentName", studentName);
-
-        String courseName = courseNoCommentList.get(position).getCourse().getTopic();
-        intent.putExtra("courseName", courseName);
-
-        String studentUserName = courseNoCommentList.get(position).getStudentDTO().getUserName();
-        intent.putExtra("studentUserName", studentUserName);
-
-        String price = courseNoCommentList.get(position).getOrderDTO().getAmount().toString();
-        intent.putExtra("orderPrice", price);
-        intent.putExtra("currency", "元");
-
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("DTO", orderBuyCourseAsStudentDTO);
+        intent.putExtras(bundle);
         mContext.startActivity(intent);
     }
+
+
 }

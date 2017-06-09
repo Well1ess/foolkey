@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.Login;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +30,7 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.LogInController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
@@ -41,7 +41,7 @@ import static com.example.a29149.yuyuan.Util.HttpSender.send;
 /**
  * LoginActivity:登陆
  */
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AbstractAppCompatActivity implements View.OnClickListener{
     /**
      * 第一步：获取公玥
      * 第二步：对密码进行SHA1加密

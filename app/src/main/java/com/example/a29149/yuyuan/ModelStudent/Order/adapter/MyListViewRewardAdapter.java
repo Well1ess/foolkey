@@ -80,8 +80,8 @@ public class MyListViewRewardAdapter extends BaseAdapter implements View.OnClick
     }
 
     private void initView() {
-        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
-        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
+        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_photo);
+        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_nickedName);
         mExceptTime = (TextView) view.findViewById(R.id.tv_exceptTime);
         mTeacherCharge = (TextView) view.findViewById(R.id.teacherCharge);
         mStudentRewardState = (TextView) view.findViewById(R.id.tv_studentRewardState);

@@ -1,5 +1,7 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  * Description:某个悬赏的信息以及其所有的申请信息及老师信息
  */
 
-public class ApplicationStudentRewardAsStudentSTCDTO {
+public class ApplicationStudentRewardAsStudentSTCDTO  extends AbstractDTO {
 
     //悬赏DTO
     private RewardDTO rewardDTO;

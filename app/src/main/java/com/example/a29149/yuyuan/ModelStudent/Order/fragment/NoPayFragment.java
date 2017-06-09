@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderCourseInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderRewardInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoPayClassAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;

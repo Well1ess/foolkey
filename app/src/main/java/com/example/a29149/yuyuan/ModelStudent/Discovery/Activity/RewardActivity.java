@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,11 +19,17 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RewardStateEnum;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
+import com.example.a29149.yuyuan.Main.MainTeacherActivity;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.RewardDiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
-import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.AppManager;
+import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
@@ -32,6 +37,7 @@ import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
 import com.example.a29149.yuyuan.controller.course.reward.DeleteController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 
@@ -44,7 +50,9 @@ import org.json.JSONObject;
  * 悬赏详情
  */
 
-public class RewardActivity extends AppCompatActivity implements View.OnClickListener {
+public class RewardActivity extends AbstractAppCompatActivity implements View.OnClickListener {
+    //日志的标志
+    private static final String TAG = "RewardActivity";
 
 
     //显示选项的对话框
@@ -68,6 +76,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     private TextView mCreateTime;//创建悬赏的时间
     private TextView mPrestige;
     private ImageButton mReturn;//返回按键
+    private TextView mOperateTime; //最后修改时间
     @ViewInject(R.id.iv_photo)
     private ImageView photo;
 
@@ -77,13 +86,15 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reward);
-
+        setContentView(R.layout.activity_reward);   //绑定UI
+        //获取意图
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+        //获取位置
         position = extras.getInt("position");
         Log.i("malei", position + "");
         if (position != -1) {
+            //获取信息
             studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
             rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
 
@@ -92,10 +103,10 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             rewardDTO = new RewardDTO();
         }
 
-
+        //注解式绑定
         AnnotationUtil.setClickListener(this);
         AnnotationUtil.injectViews(this);
-
+        //初始化数据与试图
         initView();
         initData();
 
@@ -134,7 +145,7 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
         verifyConfirm.create();
-
+        //删除按钮
         deleteVerifyConfirm = new WarningDisplayDialog.Builder(this);
         deleteVerifyConfirm.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
             @Override
@@ -155,35 +166,35 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     //为底部菜单添加监听
-    @OnClick({R.id.rb_want_learn, R.id.rb_chat, R.id.tv_applyOrder})
-    public void setMenuListener(View view) {
-        switch (view.getId()) {
-            case R.id.rb_want_learn:
-                //TODO:网络传输
-                break;
-            case R.id.rb_chat:
-                //TODO:网络传输
-                break;
-
-        }
-    }
+//    @OnClick({R.id.rb_want_learn, R.id.rb_chat, R.id.tv_applyOrder})
+//    public void setMenuListener(View view) {
+//        switch (view.getId()) {
+//            case R.id.rb_want_learn:
+//                //TODO:网络传输
+//                break;
+//            case R.id.rb_chat:
+//                //TODO:网络传输
+//                break;
+//        }
+//    }
 
     private void initView() {
         mOrder = (RadioButton) findViewById(R.id.tv_applyOrder);
         mOrder.setOnClickListener(this);
-        mReturn = (ImageButton) findViewById(R.id.tv_return);
+        mReturn = (ImageButton) findViewById(R.id.ib_return);
         mReturn.setOnClickListener(this);
-
+        //绑定UI
         mNickedName = (TextView) findViewById(R.id.tv_nickedName);
         mRewardPrice = (TextView) findViewById(R.id.tv_price);
-        mRewardTopic = (TextView) findViewById(R.id.title);
+        mRewardTopic = (TextView) findViewById(R.id.tv_title);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonMiddle = (RadioButton) findViewById(R.id.rb_chat);
         mButtonLeft = (RadioButton) findViewById(R.id.rb_want_learn);
         mPrestige = (TextView) findViewById(R.id.tv_prestige);
+        mOperateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonLeft.setOnClickListener(this);
-
+        //判断这个悬赏是不是自己的
         if (rewardDTO.getCreatorId() == null ||
                 rewardDTO.getCreatorId().equals(GlobalUtil.getInstance().getStudentDTO().getId())) {
             //这个是自己的悬赏
@@ -199,9 +210,8 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                 mButtonMiddle.setText("一键再次发布");
                 mButtonMiddle.setVisibility(View.VISIBLE);
             }
-
         }
-
+        //加载图片
         glide = Glide.with(this);
         glide.load(PictureInfoBO.getOnlinePhoto(studentDTO.getUserName()))
                 .transform(new GlideCircleTransform(this))
@@ -210,12 +220,16 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+    /**
+     * 设置数据
+     */
     private void initData() {
         mNickedName.setText(studentDTO.getNickedName());
         mRewardPrice.setText(rewardDTO.getPrice() + "");
         mRewardTopic.setText(rewardDTO.getTopic() + "");
         mRewardDescription.setText(rewardDTO.getDescription());
         mPrestige.setText( studentDTO.getPrestige() + "");
+        mOperateTime.setText( "悬赏居然没有日期，真是醉了" );
     }
 
     //申请认证
@@ -242,7 +256,6 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             } else {
 //            Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
                 verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
-
                 verifyConfirm.getDialog().show();
             }
         } else {
@@ -250,22 +263,28 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
             //不是已认证老师，跳转到申请认证页面
 //        Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
             verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
-
             verifyConfirm.getDialog().show();
         }
     }
 
+    /**
+     * 添加点击监听
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_return:
+            //返回按键
+            case R.id.ib_return:
                 this.finish();
                 break;
+            //右边按钮
+            //包含接单和悬赏2种操作
             case R.id.tv_applyOrder:{
-                if (mOrder.getText().equals("修改悬赏")) {
+                if (mOrder.getText().equals("修改悬赏")) {  //自己的悬赏，就是修改悬赏资料
                     Log.i("malei", mOrder.getText() + "");
                     Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
-                    modifyIntent.putExtra("position", 0);
+                    modifyIntent.putExtra("position", position);
                     modifyIntent.putExtra("topic", rewardDTO.getTopic());
                     modifyIntent.putExtra("description", rewardDTO.getDescription());
                     modifyIntent.putExtra("technicTagEnum", rewardDTO.getTechnicTagEnum().toString());
@@ -275,35 +294,128 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                     modifyIntent.putExtra("teachMethodEnum", rewardDTO.getTeachMethodEnum().toString());
                     modifyIntent.putExtra("teacherRequirementEnum", rewardDTO.getTeacherRequirementEnum().toString());
                     modifyIntent.putExtra("rewardId", rewardDTO.getId() + "");
-                    startActivity(modifyIntent);
-//                    this.finish();
+                    startActivityForResult(modifyIntent, Const.FROM_REWARD_TO_MODIFY);
 
-                } else {
+
+                } else {    //他人的悬赏，接单
                     displayInfo.setMsg("您确定要此单吗？\n \n 点击 接单 将发送申请");
-
+                    //接单的逻辑，写在了对话框的逻辑里
                     displayInfo.getDialog().show();
                 }
             }break;
+            //左边按钮
+            //包含删除、"我也想学"2种逻辑
             case R.id.rb_want_learn:{
                 if (mButtonLeft.getText() != null && mButtonLeft.getText().equals("删除悬赏")){
-                    //删除订单
-                    if (
-                            rewardDTO.getRewardStateEnum().equals(RewardStateEnum.待接单)
-                            ){
+                    //删除悬赏
+                    if ( rewardDTO.getRewardStateEnum().equals(RewardStateEnum.待接单) ){
                         deleteVerifyConfirm.setMsg("点击删除，将不可恢复，确定吗？");
                         deleteVerifyConfirm.getDialog().show();
                     }else {
+                        //已经被接单的悬赏不能被删除，这里的已接单，是指用户已经同意老师申请、并付款了
                         Toast.makeText(this, "已接单的悬赏不可被删除哦", Toast.LENGTH_SHORT);
                     }
-
                 }else {
-
+                    //非自己的悬赏，则可以点击我也想学，发布一个新的
+                    //TODO
                 }
             }break;
+            //中间的按钮
+            //聊天
+            case R.id.rb_chat:{
+                //TODO
+            }
             default:
                 break;
         }
     }
+
+    /**
+     * 接受后一个activity的结果，获取不同的结果，采取不同的行为
+     * @param requestCode 请求码
+     * @param resultCode 结果码
+     * @param data 意图带了额外数据
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){//成功了
+            //根据不同的请求做不同的处理
+            switch (requestCode){
+                //修改悬赏成功后
+                case Const.FROM_REWARD_TO_MODIFY:{
+                    //更新本页数据
+                    updateDate();
+                    //更新发现的listView里的数据
+                    //搜索的ListView不会在这里更新
+                    updateRewardList();
+                }break;
+                default:break;
+            }
+        }else { //操作失败
+
+        }
+    }
+
+    /**
+     * 刷新fragment里界面显示list
+     * 增删 reward 的时候就可能用到
+     */
+    public static void updateRewardList(){
+        //首先获取2个activity
+        //学生的
+        MainStudentActivity mainStudentActivity =
+                (MainStudentActivity) AppManager.getActivity(MainStudentActivity.class);
+        //老师的
+        MainTeacherActivity mainTeacherActivity =
+                (MainTeacherActivity) AppManager.getActivity(MainTeacherActivity.class);
+        //搜索的
+        SearchActivity searchActivity =
+                (SearchActivity) AppManager.getActivity(SearchActivity.class);
+
+        //针对不同的activity采取不同的行为
+        if (mainStudentActivity != null){
+            //学生activity可更新，则获取DiscoveryMainFragment
+            DiscoveryMainFragment discoveryMainFragment =
+                    (DiscoveryMainFragment) mainStudentActivity.getDiscoveryMainFragment();
+            //如果从首页，直接搜索的话，此时activity是有的，但这下面这个fragment会出现数组越界异常
+            try {
+                //获取子fragment
+                RewardDiscoveryFragment fragment = discoveryMainFragment.getRewardDiscoveryFragment();
+                //调用更新方法
+                fragment.updateRewardList();
+            }catch (RuntimeException e){
+                //FIXME
+            }
+
+        }
+        if (mainTeacherActivity != null){
+            //老师activity可更新
+            //TODO
+        }
+        if (searchActivity != null){
+            //搜索的列表更新
+            searchActivity.getRewardSearchFragment().updateSearchRewardList();
+        }
+    }
+
+    /**
+     * 刷新本页面显示的信息，修改了悬赏信息以后就可能用到
+     */
+    private void updateDate(){
+        //重新获取一次rewardDTO，不然可能不会重新获取
+        rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
+        //设置价格
+        mRewardPrice.setText(rewardDTO.getPrice() + "");
+        //设置标题
+        mRewardTopic.setText(rewardDTO.getTopic() + "");
+        //设置描述
+        mRewardDescription.setText(rewardDTO.getDescription());
+        //设置时间
+        //FIXME
+        mOperateTime.setText( "悬赏居然没有日期，真是醉了" );
+    }
+
 
     /**
      * 认证老师请求Action
@@ -321,15 +433,17 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
 
         @Override
         protected String doInBackground(String... params) {
-
+            //发送申请的请求，并接收返回结果
             return ApplyToVerifyController.execute();
-
         }
 
+        /**
+         * 对结果进行处理
+         * @param result
+         */
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            log.d(this, result);
             if (result != null) {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
@@ -404,14 +518,12 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
-                    Log.i("malei", result);
-
-
                     if (resultFlag.equals("success")) {
                         Toast.makeText(RewardActivity.this, "  成功接单  \n等待学生选择\n  要耐心哦  ", Toast.LENGTH_LONG).show();
 
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     Toast.makeText(RewardActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {
@@ -444,6 +556,11 @@ public class RewardActivity extends AppCompatActivity implements View.OnClickLis
                     JSONObject jsonObject = new JSONObject(s);
                     if ("success".equals(jsonObject.getString("result"))){
                         Toast.makeText(RewardActivity.this, "删除成功", Toast.LENGTH_SHORT);
+                        //更新数据
+                        GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().remove(position);
+                        //刷新界面显示
+                        updateRewardList();
+
                         finish();
                         return;
                     }

@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.ModelTeacher.Index.reward;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -18,6 +17,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.order.teacher.home.GetAgreedOnClassOrderRewardByTeacherController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -31,7 +31,7 @@ import java.util.List;
  */
 
 //拥有的课程
-public class OwnerRewardTeacherActivity extends AppCompatActivity {
+public class OwnerRewardTeacherActivity extends AbstractAppCompatActivity {
 
     //课程列表
     @ViewInject(R.id.lv_reward_list)

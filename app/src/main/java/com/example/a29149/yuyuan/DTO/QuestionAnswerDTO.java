@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.Enum.QuestionStateEnum;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 
@@ -8,7 +9,7 @@ import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
  * Created by GR on 2017/5/22.
  */
 
-public class QuestionAnswerDTO {
+public class QuestionAnswerDTO  extends AbstractDTO {
 
     private Long id;
 

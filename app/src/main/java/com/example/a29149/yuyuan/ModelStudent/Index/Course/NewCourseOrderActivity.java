@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,10 +16,11 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.PayDialog;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.controller.userInfo.LogOutController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 
 import org.json.JSONObject;
 
-public class NewCourseOrderActivity extends AppCompatActivity {
+public class NewCourseOrderActivity extends AbstractAppCompatActivity {
 
     //取消订单时的警告
     private WarningDisplayDialog.Builder mDisplayDialog;
@@ -111,7 +111,7 @@ public class NewCourseOrderActivity extends AppCompatActivity {
         this.finish();
     }
 
-    @OnClick(R.id.tv_cancel)
+    @OnClick(R.id.tv_judge)
     public void setCancelListener(View view)
     {
         mDisplayDialog.setMsg("您确定要取消该订单吗？");

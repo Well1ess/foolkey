@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Me.info;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +30,7 @@ import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.UpdateStudentInfoController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 /**
@@ -39,7 +39,7 @@ import com.example.resource.util.image.GlideCircleTransform;
  * Created by geyao on 2017/5/23.
  */
 
-public class ModifyMyInfoActivity extends Activity implements View.OnClickListener{
+public class ModifyMyInfoActivity extends AbstractActivity implements View.OnClickListener{
 
     //保存我的信息的DTO
     private StudentDTO studentDTO;

@@ -16,8 +16,7 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderCourseInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderRewardInfoActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassRewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
@@ -43,66 +42,83 @@ import java.util.List;
 public class NoClassFragment extends Fragment {
 
     private Context mContext;
-    private MyListView mBuyedCourse;
-    private MyListView mRecommand;
-    private MyListView mReward;
-    private List rewardList = new ArrayList();//悬赏列表
-    private List courseList = new ArrayList();//课程列表
+    private MyListView mCourse; //未上课的课程
+    private MyListView mRecommend; //推荐
+    private MyListView mReward; // 未上课的悬赏
+    private List<OrderBuyCourseAsStudentDTO> rewardList = new ArrayList();//悬赏列表
+    private List<OrderBuyCourseAsStudentDTO> courseList = new ArrayList();//课程列表
 
     private Object object;
     public ShapeLoadingDialog shapeLoadingDialog;
     private int pageNo = 1;//页数
-    private GetOrderBuyCourseAsTeacherByOrderStatesController getOrderBuyCourseAsTeacherByOrderStatesController;
 
+    private GetOrderBuyCourseAsTeacherByOrderStatesController getOrderBuyCourseAsTeacherByOrderStatesController; // 作为老师获取课程订单的controller
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getContext();
+        // 绑定UI
         View view = inflater.inflate(R.layout.fragment_viewpager_noclass,null);
-
-
+        //加载动画
         shapeLoadingDialog = new ShapeLoadingDialog(mContext);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
 
-
         //刚开始请求第一页
         pageNo = 1;
+        //加载数据
         loadData(pageNo);
-
-        mBuyedCourse = (MyListView) view.findViewById(R.id.lv_noStartCourse);
+        //绑定UI
+        mCourse = (MyListView) view.findViewById(R.id.lv_noStartCourse);
         mReward = (MyListView) view.findViewById(R.id.lv_reward);
-        mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
+        mRecommend = (MyListView) view.findViewById(R.id.lv_recommend);
 
-        mBuyedCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //设定监听事件
+        mCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("malei", "你点击了" + position);
-                Intent toOrderInfo = new Intent(mContext, OrderCourseInfoActivity.class);
-                toOrderInfo.putExtra("position", position);
-                startActivity( toOrderInfo );
+                //点击课程，进入课程详情
+                //获取他点击的课程
+                OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO = courseList.get(position);
+                //这里过去的依然是悬赏的订单界面
+                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
+                //在bundle里直接放置DTO
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("DTO", orderBuyCourseAsStudentDTO);
+                toOrderInfo.putExtras(bundle);
+                //跳转到订单详情的Activity
+                startActivity(toOrderInfo);
             }
         });
         mReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //点击悬赏，进入悬赏详情
                 Log.i("malei", "你点击了" + position);
-                Intent toOrderInfo = new Intent(mContext, OrderRewardInfoActivity.class);
-                toOrderInfo.putExtra("position",position);
+                //获取他点击的悬赏
+                OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO = rewardList.get(position);
+                //新建意图
+                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
+                //在bundle里直接放置DTO
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("DTO", orderBuyCourseAsStudentDTO);
+                toOrderInfo.putExtras(bundle);
+                //跳转到订单详情的Activity
                 startActivity(toOrderInfo);
             }
         });
-        mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mRecommend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //点击推荐
                 Log.i("malei", "你点击了" + position);
             }
         });
 
 
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
-        mRecommand.setAdapter(myListViewRecommandAdapter);
+        mRecommend.setAdapter(myListViewRecommandAdapter);
         return view;
     }
 
@@ -132,8 +148,13 @@ public class NoClassFragment extends Fragment {
         }
     }
 
+    /**
+     * 加载数据
+     * @param pageNo
+     */
     private void loadData(int pageNo) {
         //如果没有进行加载
+        //FIXME 目前是根据加载动画来决定是否加载的
         if (shapeLoadingDialog != null) {
             requestData(pageNo);
         }
@@ -210,18 +231,14 @@ public class NoClassFragment extends Fragment {
                             break;
                         }
                     }
-
-
-
                     if (resultFlag.equals("success")) {
 //                        Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
-                                mBuyedCourse.setAdapter(myListViewNoClassCourseAdapter);
+                                mCourse.setAdapter(myListViewNoClassCourseAdapter);
                                 myListViewNoClassCourseAdapter.setData(courseList);
-
 
                                 MyListViewNoClassRewardAdapter myListViewNoClassRewardAdapter = new MyListViewNoClassRewardAdapter(mContext);
                                 myListViewNoClassRewardAdapter.setData(rewardList);
@@ -234,6 +251,7 @@ public class NoClassFragment extends Fragment {
                         }, 1000);
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
 //                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {
@@ -316,7 +334,7 @@ public class NoClassFragment extends Fragment {
                             @Override
                             public void run() {
                                 MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
-                                mBuyedCourse.setAdapter(myListViewNoClassCourseAdapter);
+                                mCourse.setAdapter(myListViewNoClassCourseAdapter);
                                 myListViewNoClassCourseAdapter.setData(courseList);
 //                                GlobalUtil.getInstance().setOrderCourseList(courseList);
 

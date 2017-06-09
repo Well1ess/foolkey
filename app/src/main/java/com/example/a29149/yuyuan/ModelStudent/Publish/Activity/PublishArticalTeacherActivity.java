@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Publish.Activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -20,6 +19,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.URL;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 
 import org.json.JSONObject;
 
@@ -34,7 +34,7 @@ import java.net.HttpURLConnection;
  * 老师发布文章
  */
 
-public class PublishArticalTeacherActivity extends Activity implements View.OnClickListener {
+public class PublishArticalTeacherActivity extends AbstractActivity implements View.OnClickListener {
 
     private TextView mCancel;//取消
     private TextView mPublish;//发布
@@ -62,7 +62,7 @@ public class PublishArticalTeacherActivity extends Activity implements View.OnCl
     }
 
     private void initView() {
-        mCancel = (TextView) findViewById(R.id.tv_cancel);
+        mCancel = (TextView) findViewById(R.id.tv_judge);
         mCancel.setOnClickListener(this);
         mPublish = (TextView) findViewById(R.id.tv_publish);
         mPublish.setOnClickListener(this);
@@ -102,7 +102,7 @@ public class PublishArticalTeacherActivity extends Activity implements View.OnCl
             case R.id.tv_publish:
                 publish();
                 break;
-            case R.id.tv_cancel:
+            case R.id.tv_judge:
                 finish();
                 break;
             case R.id.rl_tagItemChoose:

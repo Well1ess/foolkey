@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.Enum.ApplicationStateEnum;
 
 /**
@@ -7,7 +8,7 @@ import com.example.a29149.yuyuan.Enum.ApplicationStateEnum;
  * 所有的申请共有的信息
  */
 
-public class ApplicationAbstract {
+public class ApplicationAbstract extends AbstractDTO {
 
     private Long id;
 

@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Order.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +11,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.CourseDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
@@ -32,9 +32,10 @@ import java.util.List;
 /**
  * Created by geyao on 2017/5/24.
  * 课程订单详情
+ * 其实这个可以用悬赏的
  */
-
-public class OrderCourseInfoActivity extends Activity implements View.OnClickListener  {
+@Deprecated
+public class OrderCourseInfoActivity extends AbstractActivity implements View.OnClickListener  {
 
     private StudentDTO mStudentDTO;//学生信息
     private TeacherDTO mTeacherDTO;//老师信息
@@ -82,7 +83,7 @@ public class OrderCourseInfoActivity extends Activity implements View.OnClickLis
     @ViewInject(R.id.iv_teacherPhoto)
     private ImageView photo;
 
-    @ViewInject(R.id.iv_teacherPhone)
+    @ViewInject(R.id.iv_photo)
     private ImageView photo2;
 
     private RequestManager glide;

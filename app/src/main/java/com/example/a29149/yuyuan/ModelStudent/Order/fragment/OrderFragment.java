@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyFragmentPagerAdapt
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
+import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
 
 /**
@@ -23,7 +23,7 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
  * 订单Fragment
  */
 
-public class OrderFragment extends Fragment implements View.OnClickListener {
+public class OrderFragment extends AbstracFragment implements View.OnClickListener {
 
     private View view;
     private ViewPager viewPager;

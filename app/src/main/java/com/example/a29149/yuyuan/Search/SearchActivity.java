@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -33,6 +32,7 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.MyEditText;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_FIRST_T
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_SECOND_TAG;
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_THIRD_TAG;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AbstractAppCompatActivity {
 
     public static final String SEARCH_OF_FIRST_TAG = "first";
     public static final String SEARCH_OF_SECOND_TAG = "second";
@@ -184,6 +184,7 @@ public class SearchActivity extends AppCompatActivity {
         mSearchCourse.setTextColor(getResources().getColor(R.color.orange));
         condition = "course";
 
+        //添加fragment，这个顺序修改时，记得修改下面的各种get方法
         fragmentList.clear();
         fragmentList.add(new CourseSearchFragment());
         fragmentList.add(new RewardSearchFragment());
@@ -406,6 +407,14 @@ public class SearchActivity extends AppCompatActivity {
             }
             mFragmentTabHost.setCurrentTab(index);
         }
+    }
+
+    /**
+     * 获取搜索悬赏的fragment
+     * @return
+     */
+    public RewardSearchFragment getRewardSearchFragment(){
+        return (RewardSearchFragment) fragmentList.get(1);
     }
 
 }

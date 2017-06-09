@@ -1,11 +1,13 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
+
 /**
  * Created by geyao on 2017/5/12.
  * 某个课程下，学生-订单信息DTO
  */
 
-public class OrderBuyCourseWithStudentAsTeacherSTCDTO {
+public class OrderBuyCourseWithStudentAsTeacherSTCDTO  extends AbstractDTO {
     //学生信息
     private StudentDTO studentDTO;
     //订单信息

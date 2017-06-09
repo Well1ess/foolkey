@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.Search.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +21,9 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
+import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
-public class RewardSearchFragment extends Fragment {
+public class RewardSearchFragment extends AbstracFragment {
 
     //下拉刷新的Layout
     @ViewInject(R.id.srl_slide_layout)
@@ -41,7 +41,7 @@ public class RewardSearchFragment extends Fragment {
     String keyValue;
 
     public RewardSearchFragment() {
-
+        super();
     }
 
     public static RewardDiscoveryFragment newInstance() {
@@ -63,13 +63,14 @@ public class RewardSearchFragment extends Fragment {
 
         //list初始化
         mListAdapter = new RewardListAdapter(getContext());
+        //设置adapter
         mRewardList.setAdapter(mListAdapter);
         mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent toCourseActivity = new Intent(getActivity(), RewardActivity.class);
-                toCourseActivity.putExtra("position", position);
-                startActivity(toCourseActivity);
+                Intent toRewardActivity = new Intent(getActivity(), RewardActivity.class);
+                toRewardActivity.putExtra("position", position);
+                startActivity(toRewardActivity);
             }
         });
 
@@ -106,6 +107,15 @@ public class RewardSearchFragment extends Fragment {
                 });
 
         return view;
+    }
+
+    /**
+     * 更新 搜索界面 的信息显示
+     * 一般发生在点悬赏进去以后，对悬赏信息进行了改动、删除
+     * 这个更新操作，放在RewardActivity调用
+     */
+    public void updateSearchRewardList(){
+        mListAdapter.notifyDataSetInvalidated();
     }
 
     @Override

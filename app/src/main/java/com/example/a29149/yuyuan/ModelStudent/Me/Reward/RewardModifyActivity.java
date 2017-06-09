@@ -1,35 +1,32 @@
 package com.example.a29149.yuyuan.ModelStudent.Me.Reward;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.RewardDTO;
-import com.example.a29149.yuyuan.Main.MainStudentActivity;
 
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
-import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.reward.UpdateController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -38,19 +35,21 @@ import org.json.JSONObject;
  * Created by GR on 2017/5/26.
  */
 
-public class RewardModifyActivity extends Activity implements View.OnClickListener {
-
+public class RewardModifyActivity extends AbstractActivity implements View.OnClickListener {
+    private static final String TAG = "RewardModifyActivity";
     private RewardDTO mRewardDTO;//悬赏信息
 
-    private String topic;
-    private String description;
-    private String technicTagEnum;
-    private String price;
-    private String courseTimeDayEnum;
-    private String studentBaseEnum;
-    private String teachMethodEnum;
-    private String teacherRequirementEnum;
-    private String rewardId;
+    private String topic; //悬赏标题
+    private String description; //悬赏描述
+    private String technicTagEnum; // 悬赏的领域
+    private String price; // 悬赏的价格
+    private String courseTimeDayEnum; // 悬赏需要的上课时间
+    private String studentBaseEnum; //学生基础
+    private String teachMethodEnum; //授课方法
+    private String teacherRequirementEnum; //对老师的要求
+    private String rewardId; // 悬赏的id
+
+    private int position; // listView里的位置
 
 //    0-topic
 //    1-technicTag
@@ -135,7 +134,7 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
-        int position = getIntent().getIntExtra("position", 0);
+        position = getIntent().getIntExtra("position", 0);
         topic = getIntent().getStringExtra("topic");
         description = getIntent().getStringExtra("description");
         technicTagEnum = getIntent().getStringExtra("technicTagEnum");
@@ -463,21 +462,22 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
         public ModifyRewardAction() {
             super();
         }
-
-
+        /**
+         * 先获取需要的信息
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             mChooseContent = GlobalUtil.getInstance().getRewardChooseContent();
-           /* for (String temp : mChooseContent) {
-                Log.i("malei", temp);
-            }*/
         }
 
+        /**
+         * 发出更新请求
+         * @param params
+         * @return
+         */
         @Override
         protected String doInBackground(String... params) {
-
-
             //默认选择
             String courseTimeDayEnumStr;
             if ( mChooseContent[4] != null && !mChooseContent[4].equals(""))
@@ -508,7 +508,7 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
             teachRequirementEnumStr = mChooseContent[7];
 
             return
-                    updateController.execute(
+                    UpdateController.execute(
                             rewardId,
                             mChooseContent[1],
                             mChooseContent[0],
@@ -521,6 +521,10 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
                     );
         }
 
+        /**
+         * 对更新请求的结果进行操作
+         * @param result
+         */
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -529,17 +533,30 @@ public class RewardModifyActivity extends Activity implements View.OnClickListen
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
                     if (resultFlag.equals("success")) {
-                        Toast.makeText(RewardModifyActivity.this, "发布成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RewardModifyActivity.this, "修改成功！", Toast.LENGTH_SHORT).show();
+                        //获取更新后的悬赏信息
+                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<RewardDTO>() {
+                        }.getType();
+                        RewardDTO rewardDTO = new Gson().fromJson(jsonObject.getString("courseStudentDTO"), type);
+                        //更新到缓存
+                        GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get( position ).setRewardDTO( rewardDTO );
+                        //通知结果
+                        setResult(RESULT_OK);
+                        Log.d(TAG, "onPostExecute: 545 " + position);
+                        finish();
+                        return;
                         //发布成功后跳转到首页面
-                        Intent toMainActivity = new Intent(RewardModifyActivity.this, MainStudentActivity.class);
-                        startActivity(toMainActivity);
+//                        Intent toMainActivity = new Intent(RewardModifyActivity.this, MainStudentActivity.class);
+//                        startActivity(toMainActivity);
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     Toast.makeText(RewardModifyActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(RewardModifyActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
             }
+            setResult(RESULT_CANCELED);
 
         }
 

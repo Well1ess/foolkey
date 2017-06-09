@@ -1,12 +1,13 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 
 /**
  * Created by geyao on 2017/5/12.
  */
 
-public class OrderAbstract {
+public class OrderAbstract  extends AbstractDTO {
 
     private Long id;
 

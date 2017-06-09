@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.DTO;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.Enum.CouponTypeEnum;
 
 /**
@@ -7,7 +8,7 @@ import com.example.a29149.yuyuan.Enum.CouponTypeEnum;
  * Description:
  */
 
-public class CouponDTO {
+public class CouponDTO  extends AbstractDTO {
 
     private Long id;
     private Long ownerId;

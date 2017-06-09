@@ -1,7 +1,6 @@
 package com.example.a29149.yuyuan.ModelTeacher.TeacherMain.Score.MoreStudent;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,6 +11,7 @@ import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.Score.Adapter.StudentL
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  * 测试，已废弃
  * */
 @Deprecated
-public class MoreStudentActivity extends AppCompatActivity {
+public class MoreStudentActivity extends AbstractAppCompatActivity {
 
     @ViewInject(R.id.student_list)
     private RecyclerView mStudentList;

@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Publish.Activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +19,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 
 /**
  * Created by MaLei on 2017/5/8.
@@ -27,7 +27,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
  * 学生填写悬赏内容、标题、标签
  */
 
-public class PublishRewardDescribeStudentActivity extends Activity implements View.OnClickListener {
+public class PublishRewardDescribeStudentActivity extends AbstractActivity implements View.OnClickListener {
 
     private ImageView mReturn;
     private ImageView mGo;

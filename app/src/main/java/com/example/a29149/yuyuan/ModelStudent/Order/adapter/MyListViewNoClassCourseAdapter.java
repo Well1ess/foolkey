@@ -19,6 +19,8 @@ import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.Const;
+import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
@@ -99,18 +101,20 @@ public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnCli
         courseDTO = mOrderBuyCourseAsStudentDTO.getCourse();
         initView(view);
 
-        mTeacherNameAndCourseName.setText(mStudentDTO.getNickedName()+":"+courseDTO.getTopic());
-        mCourseTitle.setText("课程标题:" + courseDTO.getTopic().toString() + "");
-        mCourseCost.setText("课程价格：" + courseDTO.getPrice().toString());
+
+        mCourseTitle.setText(StringUtil.subString(courseDTO.getTopic(), 20));
+        mCourseCost.setText(StringUtil.subString( courseDTO.getPrice().toString()+ Const.PRICE_NAME , 15));
+        mTeacherNameAndCourseName.setText(StringUtil.subString(mStudentDTO.getNickedName(), 10));
+
         return view;
     }
 
     private void initView(View view) {
-        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
-        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
+        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_photo);
+        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_nickedName);
         //mCourseTitle = (TextView) view.findViewById(R.id.tv_courseTitle);
-        mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
-        mCanael = (TextView) view.findViewById(R.id.tv_cancel);
+        mCourseCost = (TextView) view.findViewById(R.id.tv_amount);
+        mCanael = (TextView) view.findViewById(R.id.tv_judge);
         mCanael.setOnClickListener(this);
 
         glide = Glide.with(mContext);
@@ -125,14 +129,14 @@ public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnCli
         int id = v.getId();
         switch (id)
         {
-            case R.id.tv_cancel:
+            case R.id.tv_judge:
                 cancelCourse();
         }
     }
 
     private void cancelCourse() {
 //        //跳转到课程订单评价
-//        Intent intent = new Intent(mContext, CommentCourseActivity.class);
+//        Intent intent = new Intent(mContext, StudentJudgeCourseActivity.class);
 //        intent.putExtra("position",position);
 //        intent.putExtra("Topic",courseDTO.getTopic());
 //        intent.putExtra("TeacherName",mStudentDTO.getNickedName());

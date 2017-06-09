@@ -2,7 +2,6 @@ package com.example.a29149.yuyuan.Login;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -29,6 +28,7 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.RegisterController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
@@ -36,7 +36,7 @@ import org.json.JSONObject;
 /**
  * 现在注册成功后，会发送一次refresh请求，以便填充全局中的studentDTO
  */
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AbstractAppCompatActivity {
 
     private String strUserName;
     private String strPassword;

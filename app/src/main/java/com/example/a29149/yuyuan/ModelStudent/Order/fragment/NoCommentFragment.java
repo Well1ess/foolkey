@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderCourseInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderRewardInfoActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoCommentRewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
@@ -43,19 +43,20 @@ import java.util.Map;
  */
 
 public class NoCommentFragment extends Fragment {
+    private static final String TAG = "NoCommentFragment";
 
     private Context mContext;
-    private MyListView mBuyCourse;
-    private MyListView mReward;
-    private MyListView mRecommand;
-    private List<Map<String,Object>> courseNoPayList = new ArrayList<>();
-    private List rewardList = new ArrayList();//悬赏列表
-    private List courseList = new ArrayList();//课程列表
-
+    private MyListView mCourse; //课程
+    private MyListView mReward; //悬赏
+    private MyListView mRecommend; // 推荐
+    private List<OrderBuyCourseAsStudentDTO> rewardList = new ArrayList();//悬赏列表
+    private List<OrderBuyCourseAsStudentDTO> courseList = new ArrayList();//课程列表
+    //Adapter
     private MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter;
 
     public  ShapeLoadingDialog shapeLoadingDialog;
     private int pageNo = 1;//页数
+    //老师身份，根据状态获取订单的controller
     private GetOrderBuyCourseAsTeacherByOrderStatesController getOrderBuyCourseAsTeacherByOrderStatesController;
 
 
@@ -64,7 +65,7 @@ public class NoCommentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getContext();
         View view = inflater.inflate(R.layout.fragment_viewpager_nocomment, null);
-
+        //加载动画
         shapeLoadingDialog = new ShapeLoadingDialog(mContext);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
@@ -73,32 +74,45 @@ public class NoCommentFragment extends Fragment {
         //刚开始请求第一页
         pageNo = 1;
         loadData(pageNo);
-
-        mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
-        mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //TODO 这里立即评价还没有解决
+        //课程的ListView,绑定UI
+        mCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
+        //设置监听事件
+        mCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent toOrderInfo = new Intent(mContext, OrderCourseInfoActivity.class);
-                toOrderInfo.putExtra("position", position);
+                //TODO 课程的立即评价还没有解决
+                //查看某个具体的课程订单
+                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
+                //新建Bundle，放置具体的DTO
+                Bundle bundle = new Bundle();
+                //从类变量的List里获取具体的DTO
+                bundle.putSerializable("DTO", courseList.get(position));
+                //将Bundle放置在intent里，并开启新Activity
+                toOrderInfo.putExtras( bundle );
                 startActivity( toOrderInfo );
-                Log.i("malei","你点击了"+position);
+                Log.i(TAG, "onItemClick: 91 " + position);
             }
         });
+        //悬赏的ListView
         mReward = (MyListView) view.findViewById(R.id.lv_reward);
         mReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (myListViewNoCommentRewardAdapter == null)
-                    myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
-                myListViewNoCommentRewardAdapter.setPosition(position);
-                Intent toOrderInfo = new Intent(mContext, OrderRewardInfoActivity.class);
-                toOrderInfo.putExtra("position",position);
-                startActivity(toOrderInfo);
-                Log.i("malei","你点击了"+position);
+                //未评价的adapter
+                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
+                //新建Bundle，放置具体的DTO
+                Bundle bundle = new Bundle();
+                //从类变量的List里获取具体的DTO
+                bundle.putSerializable("DTO", rewardList.get(position));
+                //将Bundle放置在intent里，并开启新Activity
+                toOrderInfo.putExtras( bundle );
+                startActivity( toOrderInfo );
+
             }
         });
-        mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
-        mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mRecommend = (MyListView) view.findViewById(R.id.lv_recommend);
+        mRecommend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("malei","你点击了"+position);
@@ -107,7 +121,7 @@ public class NoCommentFragment extends Fragment {
 
 
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
-        mRecommand.setAdapter(myListViewRecommandAdapter);
+        mRecommend.setAdapter(myListViewRecommandAdapter);
         return view;
     }
 
@@ -177,9 +191,6 @@ public class NoCommentFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-
-            System.out.println();
-            System.out.println(this.getClass() + "这里的到底是要未评价还是未付款的订单？？？\n");
             return GetSpecificStateOrderController.execute(
                     OrderStateEnum.结束上课.toString(),
                     pageNo + ""
@@ -225,7 +236,7 @@ public class NoCommentFragment extends Fragment {
                             public void run() {
                                 MyListViewNoConmmentClassAdapter myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
                                 myListViewNoConmmentClassAdapter.setData(courseList);
-                                mBuyCourse.setAdapter(myListViewNoConmmentClassAdapter);
+                                mCourse.setAdapter(myListViewNoConmmentClassAdapter);
 
 
                                 myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
@@ -320,7 +331,7 @@ public class NoCommentFragment extends Fragment {
                             public void run() {
 
                                 MyListViewNoConmmentClassAdapter noCommentCourseAdapter = new MyListViewNoConmmentClassAdapter(mContext);
-                                mBuyCourse.setAdapter(noCommentCourseAdapter);
+                                mCourse.setAdapter(noCommentCourseAdapter);
                                 noCommentCourseAdapter.setData(courseList);
 
 

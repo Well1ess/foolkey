@@ -1,7 +1,6 @@
 package com.example.a29149.yuyuan.ModelStudent.Me.Coupon;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
@@ -9,12 +8,14 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
+
 /**
  * Created by 张丽华 on 2017/5/10.
  * Description:我拥有的优惠劵
  */
 
-public class CouponActivity extends AppCompatActivity {
+public class CouponActivity extends AbstractAppCompatActivity {
 
     @ViewInject(R.id.coupon_list)
     private ListView mCouponList;

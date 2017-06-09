@@ -1,6 +1,5 @@
 package com.example.a29149.yuyuan.ModelStudent.Publish.Activity;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +16,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.reward.GetWithApplicationController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -29,7 +29,7 @@ import java.util.List;
  * 学生申请认证老师
  */
 
-public class ApplyAuthenticationTeacherActivity extends Activity implements View.OnClickListener {
+public class ApplyAuthenticationTeacherActivity extends AbstractActivity implements View.OnClickListener {
 
     private Button mApply;//学生点击申请认证老师
     private Button mApplyReaward;//查看我发布的悬赏

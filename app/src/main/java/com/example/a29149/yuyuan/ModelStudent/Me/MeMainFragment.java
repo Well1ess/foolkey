@@ -1,11 +1,9 @@
 package com.example.a29149.yuyuan.ModelStudent.Me;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,17 +17,15 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
-import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Main.ImageUploadActivity;
+import com.example.a29149.yuyuan.Main.UploadImageActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.OwnerRewardActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Setting.SettingActivity;
-import com.example.a29149.yuyuan.ModelStudent.Me.info.FreshInfo;
 import com.example.a29149.yuyuan.ModelStudent.Me.info.ModifyMyInfoActivity;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Main.MainTeacherActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -39,7 +35,7 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetCouponController;
-import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
+import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 
@@ -51,7 +47,7 @@ import java.util.List;
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_MODIFY;
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
 
-public class MeMainFragment extends Fragment implements View.OnClickListener{
+public class MeMainFragment extends AbstracFragment implements View.OnClickListener{
 
     private static final String TAG = "MeMainFragment";
 
@@ -143,26 +139,6 @@ public class MeMainFragment extends Fragment implements View.OnClickListener{
 
         mOwnerReward.setOnClickListener(this);
         mHeadImage.setOnClickListener(this);
-
-//        displayInfo = new WarningDisplayDialog.Builder(getContext());
-//        displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        displayInfo.setPositiveButton("确      定", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//                //点击确定后跳发送申请认证
-//                new ApplyAuthenticationTeacherAction().execute();
-//                Intent intent = new Intent(getContext(), MainTeacherActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        displayInfo.create();
-
     }
 
 
@@ -182,6 +158,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener{
 //                break;
             case R.id.iv_photo:
                 Intent intent3 = new Intent(getActivity(),ImageUploadActivity.class);
+                //Intent intent3 = new Intent(getActivity(),UploadImageActivity.class);
                 startActivity(intent3);
                 break;
             case R.id.tv_modify_info:{
@@ -192,6 +169,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
 
 
     public int DoubleParseInt(Double d1) {
@@ -226,6 +204,7 @@ public class MeMainFragment extends Fragment implements View.OnClickListener{
     public void setRechargeListener(View view)
     {
         Intent intent = new Intent(getActivity(), RechargeActivity.class);
+//        startActivity(intent);
         getActivity().startActivityForResult(intent, FROM_ME_FRAGMENT_TO_RECHARGE);
 //        startActivityForResult(new Intent(getActivity(), RechargeActivity.class), FROM_ME_FRAGMENT_TO_RECHARGE);
     }
@@ -435,79 +414,5 @@ public class MeMainFragment extends Fragment implements View.OnClickListener{
     /**
      * 认证老师请求Action
      */
-//    public class ApplyAuthenticationTeacherAction extends AsyncTask<String, Integer, String> {
-//
-//        public ApplyAuthenticationTeacherAction() {
-//            super();
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//
-//            return ApplyToVerifyController.execute();
-//
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-//            log.d(this, result);
-//            if (result != null) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(result);
-//                    String resultFlag = jsonObject.getString("result");
-//
-//                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
-//                    }.getType();
-//                    StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("studentDTO"), type);
-//                    //存储学生信息DTO
-//                    GlobalUtil.getInstance().setStudentDTO(studentDTO);
-//                    //获取老师信息DTO
-//                    java.lang.reflect.Type type1 = new com.google.gson.reflect.TypeToken<TeacherDTO>() {
-//                    }.getType();
-//                    TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
-//                    Log.i("malei",jsonObject.getString("teacherDTO"));
-//                    if(teacherDTO != null)
-//                    {
-//                        //存储老师DTO
-//                        GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
-//                        Log.i("geyao  ", "认证后存储老师DTO了嘛？ " + this.getClass());
-//                    }
-//
-//
-//                    if (resultFlag.equals("success")) {
-//                        Toast.makeText(getContext(), "认证成功！", Toast.LENGTH_SHORT).show();
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-////                    Toast.makeText(getContext(), "返回结果为fail！", Toast.LENGTH_SHORT).show();
-//                }
-//            } else {
-//                Toast.makeText(getContext(), "网络连接失败！", Toast.LENGTH_SHORT).show();
-//            }
-//
-//        }
-//
-//        @Override
-//        protected void onProgressUpdate(Integer... values) {
-//            super.onProgressUpdate(values);
-//        }
-//    }
-//
-//
-//    public FreshInfo freshInfo;
-//
-//    public void setFreshInfo(FreshInfo freshInfo){
-//        this.freshInfo = freshInfo;
-//    }
-//
-//    @Override
-//    public void fresh() {
-//
-//    }
+
 }

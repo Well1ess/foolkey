@@ -1,11 +1,11 @@
 package com.example.a29149.yuyuan.ModelStudent.Discovery.Activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 
-public class ArticleActivity extends AppCompatActivity {
+public class ArticleActivity extends AbstractAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

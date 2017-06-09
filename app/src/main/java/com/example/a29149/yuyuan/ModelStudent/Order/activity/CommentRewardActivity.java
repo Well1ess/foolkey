@@ -51,7 +51,7 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
     @ViewInject(R.id.tv_nickedName)
     private TextView mNickedName; //昵称
 
-    @ViewInject(R.id.tv_course_name)
+    @ViewInject(R.id.tv_title)
     private TextView mCourseName; //课程的名字
 
     @ViewInject(R.id.rb_student_score)

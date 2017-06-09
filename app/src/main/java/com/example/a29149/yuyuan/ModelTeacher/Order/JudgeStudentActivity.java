@@ -40,7 +40,7 @@ public class JudgeStudentActivity extends AbstractActivity {
     @ViewInject(R.id.tv_nickedName)
     private TextView studentName;
 
-    @ViewInject(R.id.tv_course_name)
+    @ViewInject(R.id.tv_title)
     private TextView courseName;
 
     @ViewInject(R.id.rb_student_score)
@@ -62,16 +62,17 @@ public class JudgeStudentActivity extends AbstractActivity {
     private RadioButton radioButton;
 
     private RequestManager glide;
-    private String position;//记录评论位置
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //绑定UI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_judge_student);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
-
+        //获取意图，拿取要展示的DTO
         Intent intent = getIntent();
         orderBuyCourseAsStudentDTO = (OrderBuyCourseAsStudentDTO) intent.getSerializableExtra("DTO");
         //取展示的信息
@@ -131,7 +132,7 @@ public class JudgeStudentActivity extends AbstractActivity {
     /**
      * 发布评价的action
      */
-    public class JudgeStudentAction extends AsyncTask<String, String, String> {
+    private class JudgeStudentAction extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
             judgeStudentController = new JudgeStudentController();
@@ -146,6 +147,7 @@ public class JudgeStudentActivity extends AbstractActivity {
             super.onPostExecute(s);
             switch ( judgeStudentController.getResult() ) {
                 case "success":{ // 评价成功
+                    //FIXME 评价成功后，adapter的刷新
                     GlobalUtil.getInstance().setFragmentFresh(true);
                     finish();
                 }break;

@@ -33,7 +33,7 @@
             android:layout_marginTop="5dp"
             android:maxLines="1"
             android:textColor="@color/dark_green"
-            android:text="购买时长： 1小时"/>
+            android:text="购买时长： 0小时"/>
         <TextView
             android:id="@+id/teacherCharge"
             android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
             android:layout_marginTop="5dp"
             android:maxLines="1"
             android:textColor="@color/dark_green"
-            android:text="老师收费： 45R11"/>
+            android:text="价格： 0"/>
     </LinearLayout>
 
     <LinearLayout

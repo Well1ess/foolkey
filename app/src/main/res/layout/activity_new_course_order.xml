@@ -259,7 +259,7 @@
             <TextView
                 android:background="@drawable/textview_stroke"
                 android:layout_gravity="center_vertical"
-                android:id="@+id/tv_cancel"
+                android:id="@+id/tv_judge"
                 android:layout_margin="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

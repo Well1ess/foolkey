@@ -62,7 +62,7 @@ public class PublishArticalTeacherActivity extends AbstractActivity implements V
     }
 
     private void initView() {
-        mCancel = (TextView) findViewById(R.id.tv_cancel);
+        mCancel = (TextView) findViewById(R.id.tv_judge);
         mCancel.setOnClickListener(this);
         mPublish = (TextView) findViewById(R.id.tv_publish);
         mPublish.setOnClickListener(this);
@@ -102,7 +102,7 @@ public class PublishArticalTeacherActivity extends AbstractActivity implements V
             case R.id.tv_publish:
                 publish();
                 break;
-            case R.id.tv_cancel:
+            case R.id.tv_judge:
                 finish();
                 break;
             case R.id.rl_tagItemChoose:

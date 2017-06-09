@@ -109,8 +109,8 @@ public class MyListViewNoPayClassAdapter extends BaseAdapter implements OnClickL
         mTeacherPhone = (ImageView) view.findViewById(R.id.iv_photo);
         mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_nickedName);
         mBuyTime = (TextView) view.findViewById(R.id.tv_buyTime);
-        mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
-        mCancel = (TextView) view.findViewById(R.id.tv_cancel);
+        mCourseCost = (TextView) view.findViewById(R.id.tv_amount);
+        mCancel = (TextView) view.findViewById(R.id.tv_judge);
         mCancel.setOnClickListener(this);
 
         glide = Glide.with(mContext);
@@ -125,7 +125,7 @@ public class MyListViewNoPayClassAdapter extends BaseAdapter implements OnClickL
         int id = v.getId();
         switch (id)
         {
-            case R.id.tv_cancel:
+            case R.id.tv_judge:
                 cancelCourse();
         }
     }

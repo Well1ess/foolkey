@@ -136,7 +136,7 @@ public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnCli
 
     private void cancelCourse() {
 //        //跳转到课程订单评价
-//        Intent intent = new Intent(mContext, CommentCourseActivity.class);
+//        Intent intent = new Intent(mContext, StudentJudgeCourseActivity.class);
 //        intent.putExtra("position",position);
 //        intent.putExtra("Topic",courseDTO.getTopic());
 //        intent.putExtra("TeacherName",mStudentDTO.getNickedName());

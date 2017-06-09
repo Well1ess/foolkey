@@ -14,7 +14,7 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.CommentCourseActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.StudentJudgeCourseActivity;
 import com.example.a29149.yuyuan.ModelTeacher.Order.JudgeStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -134,8 +134,7 @@ public class MyListViewNoConmmentClassAdapter extends BaseAdapter {
      */
     private void judgeCourse(OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO) {
         //跳转到课程订单评价
-        //TODO 修改下面这个activity
-        Intent intent = new Intent(mContext, CommentCourseActivity.class);
+        Intent intent = new Intent(mContext, StudentJudgeCourseActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("DTO", orderBuyCourseAsStudentDTO);
         intent.putExtras(bundle);

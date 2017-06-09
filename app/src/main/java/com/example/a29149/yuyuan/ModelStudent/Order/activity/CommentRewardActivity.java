@@ -93,6 +93,7 @@ public class CommentRewardActivity extends AbstractActivity implements View.OnCl
         String courseName = orderBuyCourseAsStudentDTO.getCourse().getTopic();
         String orderPrice = orderBuyCourseAsStudentDTO.getOrderDTO().getAmount() + "";
         //加载图片
+        //FIXME 图片加载失败
         glide = Glide.with(this);
         glide.load(PictureInfoBO.getOnlinePhoto(orderBuyCourseAsStudentDTO.getStudentDTO().getUserName()) )
                 .placeholder(R.drawable.photo_placeholder1)

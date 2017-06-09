@@ -40,11 +40,6 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
     private Context mContext;
 
     private List<OrderBuyCourseAsStudentDTO> rewardNoCommentList;//完成课程但还未评价订单
-    private StudentDTO mStudentDTO;//学生信息
-    private TeacherDTO mTeacherDTO;//老师信息
-    private OrderBuyCourseDTO mOrderBuyCourseDTO;//订单信息
-    private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
-    private int position; //记录位置
 
     //图片加载器
     private RequestManager glide;
@@ -57,10 +52,6 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
     //设置列表数据
     public void setData(List<OrderBuyCourseAsStudentDTO> rewardNoCommentList) {
         this.rewardNoCommentList = rewardNoCommentList;
-    }
-    //设置当前点击位置
-    public void setPosition(int position) {
-        this.position = position;
     }
 
     @Override
@@ -82,6 +73,7 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         View view;
+        //使用viewHolder来优化展示效率
         if (convertView == null) {
             view = View.inflate(mContext, R.layout.listview_item_nocommnent_reward, null);
             viewHolder = new ViewHolder(view);
@@ -92,10 +84,10 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
         }
 
         //根据位置，获取DTO
-        mOrderBuyCourseAsStudentDTO = rewardNoCommentList.get(position);
-        mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
-        mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();
-        mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
+        OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO = rewardNoCommentList.get(position);
+        StudentDTO mStudentDTO = mOrderBuyCourseAsStudentDTO.getStudentDTO();
+        TeacherDTO mTeacherDTO = mOrderBuyCourseAsStudentDTO.getTeacherDTO();
+        OrderBuyCourseDTO mOrderBuyCourseDTO = mOrderBuyCourseAsStudentDTO.getOrderDTO();
         CourseAbstract courseDTO =  mOrderBuyCourseAsStudentDTO.getCourse() ;
         //初始化图形界面
         initView();
@@ -108,12 +100,15 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
         //SetPositionListeten.setSetPositionListeren();
 
         //评论按键设置点击监听
-        viewHolder.mCommentReward.setOnClickListener(new View.OnClickListener() {
+        //注意，这个监听事件必须放在getView里，不然【立即评价】按钮会出现问题
+        viewHolder.mJudgeNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (GlobalUtil.getInstance().getUserRole().equals("student")) //学生评价悬赏
+                if (GlobalUtil.getInstance().getUserRole().equals("student"))
+                    //学生评价悬赏
                     commentReward(position);
-                else  // 老师评价订单，即评价学生
+                else
+                    // 老师评价订单，即评价学生
                     teacherJudgeStudent(position);
             }
         });
@@ -134,6 +129,7 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
 
     /**
      * 评价 悬赏 订单
+     * 这个position，在getView里
      */
     private void commentReward(int position) {
         //跳转到悬赏订单评价
@@ -142,11 +138,6 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
         Bundle bundle = new Bundle();
         bundle.putSerializable("DTO", rewardNoCommentList.get(position));
         intent.putExtras(bundle);
-//        intent.putExtra("position",position);
-//        intent.putExtra("teacherUserName", rewardNoCommentList.get(position).getStudentDTO().getUserName());
-//        intent.putExtra("teacherName", rewardNoCommentList.get(position).getStudentDTO().getNickedName());
-//        intent.putExtra("courseName", rewardNoCommentList.get(position).getCourse().getTopic());
-//        intent.putExtra("orderPrice", rewardNoCommentList.get(position).getOrderDTO().getAmount() + "");
         mContext.startActivity(intent);
     }
 
@@ -154,26 +145,29 @@ public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
     private void teacherJudgeStudent(int position){
         //跳转到评价学生界面
         Intent intent = new Intent(mContext, JudgeStudentActivity.class);
-        //Log.i("malei","position="+position);
+        //使用Bundle存放dto
         Bundle bundle = new Bundle();
         bundle.putSerializable("DTO", rewardNoCommentList.get(position));
         intent.putExtras(bundle);
         mContext.startActivity(intent);
     }
 
+    /**
+     * ViewHolder来优化效率
+     */
     private static class ViewHolder{
         private ImageView mPhoto;//老师头像
         private TextView mNickedName;//老师姓名
         private TextView mExceptTime;//预计时长
         private TextView mTeacherCharge;//老师收费
-        private TextView mCommentReward;//评论悬赏
+        private TextView mJudgeNow;//立即评价 按钮
 
         ViewHolder(View view){
             mPhoto = (ImageView) view.findViewById(R.id.iv_photo);
             mNickedName = (TextView) view.findViewById(R.id.tv_nickedName);
             mExceptTime = (TextView) view.findViewById(R.id.tv_exceptTime);
             mTeacherCharge = (TextView) view.findViewById(R.id.teacherCharge);
-            mCommentReward = (TextView) view.findViewById(R.id.tv_comment);
+            mJudgeNow = (TextView) view.findViewById(R.id.tv_comment);
         }
     }
 

@@ -25,7 +25,7 @@ import java.util.List;
  * Created by geyao on 2017/6/10.
  */
 
-public class ScrollViewPager extends FrameLayout {
+public class Mr_Zhang_ScrollViewPager extends FrameLayout {
 
     //记录当前child的位置
     private static int mCurrentChild = 0;
@@ -58,7 +58,7 @@ public class ScrollViewPager extends FrameLayout {
     private List<AbstractFragment> fragmentList;
     //要替换的那个FrameLayout的id
     private int mViewContainerId;
-    private static final String TAG = "ScrollViewPager";
+    private static final String TAG = "Mr_Zhang_ScrollViewPager";
 
     /**
      * @param onChildSelectedListener
@@ -66,7 +66,7 @@ public class ScrollViewPager extends FrameLayout {
      * @author 29149
      * @time 2017/6/10 9:40
      */
-    public void setOnChildSelectedListener(ScrollViewPager.onChildSelectedListener onChildSelectedListener) {
+    public void setOnChildSelectedListener(Mr_Zhang_ScrollViewPager.onChildSelectedListener onChildSelectedListener) {
         this.onChildSelectedListener = onChildSelectedListener;
     }
 
@@ -84,17 +84,17 @@ public class ScrollViewPager extends FrameLayout {
         this.fragmentList = fragments;
     }
 
-    public ScrollViewPager(@NonNull Context context) {
+    public Mr_Zhang_ScrollViewPager(@NonNull Context context) {
         super(context);
         init(context, null);
     }
 
-    public ScrollViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public Mr_Zhang_ScrollViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public ScrollViewPager(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public Mr_Zhang_ScrollViewPager(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -107,8 +107,8 @@ public class ScrollViewPager extends FrameLayout {
         mScreenHeight = displayMetrics.heightPixels;
 
         if (attrs != null) {
-            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ScrollViewPager);
-            maxChildViewCount = typedArray.getInt(R.styleable.ScrollViewPager_pageMaxChildView, Integer.MAX_VALUE);
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Mr_Zhang_ScrollViewPager);
+            maxChildViewCount = typedArray.getInt(R.styleable.Mr_Zhang_ScrollViewPager_pageMaxChildView, Integer.MAX_VALUE);
             if (maxChildViewCount == Integer.MAX_VALUE)
                 throw new IllegalArgumentException("你确定你没忘记在xml里面设置属性吗？");
         }

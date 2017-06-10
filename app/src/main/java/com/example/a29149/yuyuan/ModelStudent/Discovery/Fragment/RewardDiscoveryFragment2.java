@@ -17,6 +17,7 @@ import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter2;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -31,8 +32,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 //TODO 这里的数据传输依然依靠全局变量
-public class RewardDiscoveryFragment extends Fragment {
+public class RewardDiscoveryFragment2 extends Fragment {
 
     //下拉刷新的Layout
     @ViewInject(R.id.srl_slide_layout)
@@ -41,7 +43,7 @@ public class RewardDiscoveryFragment extends Fragment {
     //上划到底部动态更新的List
     @ViewInject(R.id.content)
     private DynamicListView mRewardList;
-    private RewardListAdapter mListAdapter;
+    private RewardListAdapter2 mListAdapter;
 
 
 //    @ViewInject(R.id.content)
@@ -51,12 +53,12 @@ public class RewardDiscoveryFragment extends Fragment {
     //记录请求的页数
     int pageNo = 1;
 
-    public RewardDiscoveryFragment() {
+    public RewardDiscoveryFragment2() {
 
     }
 
-    public static RewardDiscoveryFragment newInstance() {
-        RewardDiscoveryFragment fragment = new RewardDiscoveryFragment();
+    public static RewardDiscoveryFragment2 newInstance() {
+        RewardDiscoveryFragment2 fragment = new RewardDiscoveryFragment2();
         return fragment;
     }
 
@@ -73,7 +75,9 @@ public class RewardDiscoveryFragment extends Fragment {
         AnnotationUtil.setClickListener(this, view);
 
         //list初始化
-        mListAdapter = new RewardListAdapter(getContext());
+        mListAdapter = new RewardListAdapter2(getContext());
+        //设置数据源
+        mListAdapter.setData(GlobalUtil.getInstance().getRewardWithStudentSTCDTOs());
         //给listView设置adapter
         mRewardList.setAdapter(mListAdapter);
         //给viewList设置点击监听器

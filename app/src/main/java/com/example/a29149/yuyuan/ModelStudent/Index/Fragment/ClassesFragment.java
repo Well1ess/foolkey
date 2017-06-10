@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
@@ -27,7 +28,6 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
 import com.example.a29149.yuyuan.controller.course.course.GetPopularController;
-import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 
-public class ClassesFragment extends AbstracFragment {
+public class ClassesFragment extends AbstractFragment {
 
     @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideLayout;

@@ -41,7 +41,6 @@ import java.util.Map;
  * Email:ml1995@mail.ustc.edu.cn
  * 未评价订单的Fragment
  */
-
 public class NoCommentFragment extends Fragment {
     private static final String TAG = "NoCommentFragment";
 
@@ -52,8 +51,12 @@ public class NoCommentFragment extends Fragment {
     private List<OrderBuyCourseAsStudentDTO> rewardList = new ArrayList();//悬赏列表
     private List<OrderBuyCourseAsStudentDTO> courseList = new ArrayList();//课程列表
     //Adapter
-    private MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter;
+    private MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter; //悬赏的adapter
+    private MyListViewNoConmmentClassAdapter myListViewNoConmmentClassAdapter; //课程的adapter
 
+    /**
+     * The Shape loading dialog.
+     */
     public  ShapeLoadingDialog shapeLoadingDialog;
     private int pageNo = 1;//页数
     //老师身份，根据状态获取订单的controller
@@ -171,13 +174,98 @@ public class NoCommentFragment extends Fragment {
                 break;
         }
     }
+
+    /**
+     * 获取悬赏adapter的数据源
+     * 如果更新悬赏订单，要改动这里的list
+     *
+     * @return reward list
+     */
+    public List<OrderBuyCourseAsStudentDTO> getRewardList() {
+        return rewardList;
+    }
+
+    /**
+     * 获取课程adapter的数据源
+     * 如果更新课程订单，要改动这里的list
+     *
+     * @return course list
+     */
+    public List<OrderBuyCourseAsStudentDTO> getCourseList() {
+        //TODO
+        return courseList;
+    }
+
+    /**
+     * 根据order的Id，从list里移除一个dto
+     * @return
+     */
+    private boolean removeOrderById(List <OrderBuyCourseAsStudentDTO> target, long id){
+        List <OrderBuyCourseAsStudentDTO> list = target;
+        for (OrderBuyCourseAsStudentDTO dto : list){
+            if ( dto.getOrderDTO().getId() == id ){
+                list.remove(dto);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 从悬赏的数据源中，根据id删除一个订单
+     * 如果删除成功了，会自动通知adapter更新数据
+     *
+     * @param id the id
+     *
+     * @return boolean
+     */
+    public boolean removeRewardById(long id){
+        boolean flag = removeOrderById(getRewardList(), id);
+        if( flag == true ){
+            myListViewNoCommentRewardAdapter.notifyDataSetChanged();
+        }
+        return flag;
+    }
+
+    /**
+     * 从课程的数据源中，根据id删除一个订单
+     * 如果删除成功了，会自动通知adapter更新数据
+     *
+     * @param id the id
+     *
+     * @return boolean
+     */
+    public boolean removeCourseById(long id){
+        boolean flag = removeOrderById(getCourseList(), id);
+        if( flag == true ){
+            myListViewNoConmmentClassAdapter.notifyDataSetChanged();
+        }
+        return flag;
+    }
+
+    /**
+     * 通知adapter刷新数据
+     */
+    public void updateOrderList(){
+        myListViewNoCommentRewardAdapter.notifyDataSetChanged();
+        myListViewNoConmmentClassAdapter.notifyDataSetChanged();
+    }
+
     /**
      * 学生：请求已上课未评价的订单Action
      */
     public class StudentRequestNoCommentOrderAction extends AsyncTask<String, Integer, String> {
 
+        /**
+         * The Page no.
+         */
         int pageNo;
 
+        /**
+         * Instantiates a new Student request no comment order action.
+         *
+         * @param pageNo the page no
+         */
         public StudentRequestNoCommentOrderAction(int pageNo) {
             super();
             this.pageNo = pageNo;
@@ -234,7 +322,7 @@ public class NoCommentFragment extends Fragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                MyListViewNoConmmentClassAdapter myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
+                                myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
                                 myListViewNoConmmentClassAdapter.setData(courseList);
                                 mCourse.setAdapter(myListViewNoConmmentClassAdapter);
 
@@ -272,8 +360,16 @@ public class NoCommentFragment extends Fragment {
      */
     public class TeacherRequestNoCommentOrderAction extends AsyncTask<String, Integer, String> {
 
+        /**
+         * The Page no.
+         */
         int pageNo;
 
+        /**
+         * Instantiates a new Teacher request no comment order action.
+         *
+         * @param pageNo the page no
+         */
         public TeacherRequestNoCommentOrderAction(int pageNo) {
             super();
             this.pageNo = pageNo;
@@ -330,9 +426,9 @@ public class NoCommentFragment extends Fragment {
                             @Override
                             public void run() {
 
-                                MyListViewNoConmmentClassAdapter noCommentCourseAdapter = new MyListViewNoConmmentClassAdapter(mContext);
-                                mCourse.setAdapter(noCommentCourseAdapter);
-                                noCommentCourseAdapter.setData(courseList);
+                                myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
+                                mCourse.setAdapter(myListViewNoConmmentClassAdapter);
+                                myListViewNoConmmentClassAdapter.setData(courseList);
 
 
                                 MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);

@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.ArticleDiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.QADiscoveryFragment;
@@ -29,13 +30,12 @@ import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class DiscoveryMainFragment extends AbstracFragment {
+public class DiscoveryMainFragment extends AbstractFragment {
 
     public static final String DISCOVERY_OF_FIRST_TAG = "first";
     public static final String DISCOVERY_OF_SECOND_TAG = "second";

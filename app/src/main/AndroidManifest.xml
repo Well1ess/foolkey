@@ -94,7 +94,7 @@
         <activity android:name=".ModelStudent.Me.Reward.TeacherIndexActivity" />
         <!-- 老师界面的主页 -->
         <!-- 评价悬赏订单 -->
-        <activity android:name=".ModelStudent.Order.activity.CommentRewardActivity" />
+        <activity android:name=".ModelStudent.Order.activity.StudentJudgeRewardActivity" />
         <!-- 评价课程订单 -->
         <activity android:name=".ModelStudent.Order.activity.StudentJudgeCourseActivity" />
         <!-- 老师拥有的悬赏订单 -->

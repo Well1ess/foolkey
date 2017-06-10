@@ -319,39 +319,39 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
      * 获取首页的fragment
      * @return
      */
-    public Fragment getIndexMainFragment() {
-        return indexMainFragment;
+    public IndexMainFragment getIndexMainFragment() {
+        return (IndexMainFragment) indexMainFragment;
     }
 
     /**
      * 获取发现的fragment
      * @return
      */
-    public Fragment getDiscoveryMainFragment() {
-        return discoveryMainFragment;
+    public DiscoveryMainFragment getDiscoveryMainFragment() {
+        return (DiscoveryMainFragment) discoveryMainFragment;
     }
 
     /**
      * 获取发布的fragment
      * @return
      */
-    public Fragment getPublishMainFragment() {
-        return publishMainFragment;
+    public PublishMainFragment getPublishMainFragment() {
+        return (PublishMainFragment) publishMainFragment;
     }
 
     /**
      * 获取订单的fragment
      * @return
      */
-    public Fragment getOrderFragment() {
-        return orderFragment;
+    public OrderFragment getOrderFragment() {
+        return (OrderFragment) orderFragment;
     }
 
     /**
      * 获取【我的】fragment
      * @return
      */
-    public Fragment getMeMainFragment() {
-        return meMainFragment;
+    public MeMainFragment getMeMainFragment() {
+        return (MeMainFragment) meMainFragment;
     }
 }

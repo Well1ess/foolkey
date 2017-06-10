@@ -17,7 +17,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.fragment.NoCommentFragment;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
@@ -141,8 +144,9 @@ public class StudentJudgeCourseActivity extends AbstractActivity implements View
             commentContent = mCourseContent.getText().toString();
             scoreTeacher = teacherScore+"";
             //FIXME 这样提交网络请求方式不好
+            //先做了评价课程，在评价课程里评价老师
             new CommentCourseAction().execute();
-            new CommentRewardAction().execute();
+
         }
 
     }
@@ -184,6 +188,8 @@ public class StudentJudgeCourseActivity extends AbstractActivity implements View
                     if (resultFlag.equals("success")) {
                         Toast.makeText(StudentJudgeCourseActivity.this, "评价成功！", Toast.LENGTH_SHORT).show();
                         //TODO 这里没有刷新adapter
+                        //如果成功了，则继续评价老师
+                        new CommentRewardAction().execute();
                     }
                 } catch (Exception e) {
                     Toast.makeText(StudentJudgeCourseActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
@@ -232,7 +238,16 @@ public class StudentJudgeCourseActivity extends AbstractActivity implements View
 
                     if (resultFlag.equals("success")) {
                         Toast.makeText(StudentJudgeCourseActivity.this, "评价成功！", Toast.LENGTH_SHORT).show();
-                        //TODO 这里没有刷新adapter
+                        //TODO 未测试
+                        //获取Activity，一步一步地获取fragment
+                        MainStudentActivity mainStudentActivity =
+                                (MainStudentActivity) AppManager.getActivity(MainStudentActivity.class);
+                        NoCommentFragment noCommentFragment =
+                                mainStudentActivity.getOrderFragment().getNoCommentFragment();
+                        //从数据源中移除已评价的订单
+                        //更新adapter
+                        noCommentFragment.removeCourseById( orderBuyCourseAsStudentDTO.getOrderDTO().getId() );
+                        finish();
                     }
                 } catch (Exception e) {
                     Toast.makeText(StudentJudgeCourseActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();

@@ -15,11 +15,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Main.ImageUploadActivity;
-import com.example.a29149.yuyuan.Main.UploadImageActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Coupon.CouponActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.OwnerRewardActivity;
@@ -35,7 +35,6 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetCouponController;
-import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 
@@ -47,7 +46,7 @@ import java.util.List;
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_MODIFY;
 import static com.example.a29149.yuyuan.Util.Const.FROM_ME_FRAGMENT_TO_RECHARGE;
 
-public class MeMainFragment extends AbstracFragment implements View.OnClickListener{
+public class MeMainFragment extends AbstractFragment implements View.OnClickListener{
 
     private static final String TAG = "MeMainFragment";
 

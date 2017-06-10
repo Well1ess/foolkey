@@ -6,10 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
-public class QASearchFragment extends AbstracFragment {
+public class QASearchFragment extends AbstractFragment {
 
     public QASearchFragment() {
         super();

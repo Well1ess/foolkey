@@ -4,18 +4,17 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyFragmentPagerAdapter;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -26,49 +25,66 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 
 public class OrderFragment extends AbstractFragment implements View.OnClickListener {
 
-    private View view;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    //持有子Fragment的引用
+    private List<AbstractFragment> childFragmentList;
+    //未付款订单
+    private NoPayFragment noPayFragment;
+    //未评论订单
+    private NoCommentFragment noCommentFragment;
+    //未上课订单
+    private NoClassFragment noClassFragment;
+    //已完成订单
+    private FinishOrderFragment finishOrderFragment;
 
-    private MyFragmentPagerAdapter myFragmentPagerAdapter;
+    //无参构造器
+    public OrderFragment() {
+        super();
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (view != null) {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (parent != null) {
-                parent.removeView(view);
-            }
-            return view;
-        }
-        view = inflater.inflate(R.layout.fragment_order,null);
+        //绑定UI
+        View view = inflater.inflate(R.layout.fragment_order, container, false);
+
+        //给各个子Fragment赋值
+        noPayFragment = new NoPayFragment();
+        noCommentFragment = new NoCommentFragment();
+        noClassFragment = new NoClassFragment();
+        finishOrderFragment = new FinishOrderFragment();
+
+        //给list赋值
+        childFragmentList = new ArrayList<>();
+
+        //按序添加，此顺序将会影响实际的顺序
+        childFragmentList.add(noPayFragment);
+        childFragmentList.add(noClassFragment);
+        childFragmentList.add(noCommentFragment);
+        childFragmentList.add(finishOrderFragment);
+
+        //子Fragment设置当前Fragment
+        noPayFragment.setFragment(R.id.fl_container, this, childFragmentList);
+        noClassFragment.setFragment(R.id.fl_container, this, childFragmentList);
+        noCommentFragment.setFragment(R.id.fl_container, this, childFragmentList);
+        finishOrderFragment.setFragment(R.id.fl_container, this, childFragmentList);
+
+        //设置切换的Fragment
+        switchFragment(R.id.fl_container, noClassFragment);
+        switchFragment(R.id.fl_container, noCommentFragment);
+        switchFragment(R.id.fl_container, finishOrderFragment);
+        switchFragment(R.id.fl_container, noPayFragment);
+
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);
 
-        initView();
-        initData();
+
+        //搜索
+        View keySearch = view.findViewById(R.id.et_search);
+        keySearch.setOnClickListener(this);
+
         return view;
     }
 
-
-    private void initView() {
-        tabLayout = (TabLayout) view.findViewById(R.id.id_tl);
-        viewPager = (ViewPager) view.findViewById(R.id.id_vp);
-        View keySearch = view.findViewById(R.id.et_search);
-        keySearch.setOnClickListener(this);
-    }
-
-    private void initData() {
-        //添加了4个fragment
-        myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
-        viewPager.setAdapter(myFragmentPagerAdapter);
-
-        //设置tablayout按照标签数目平分
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.setupWithViewPager(viewPager);
-    }
 
     @Override
     public void onClick(View v) {
@@ -77,21 +93,12 @@ public class OrderFragment extends AbstractFragment implements View.OnClickListe
                 getActivity(), v, "searchView").toBundle());
     }
 
-    /**
-     * 临时的方法
-     * 获取子fragment
-     * @param position
-     * @return
-     */
-    private Fragment getFragment(int position){
-        return myFragmentPagerAdapter.getItem(position);
-    }
 
     /**
      * 获取未评价的fragment
      * @return
      */
     public NoCommentFragment getNoCommentFragment(){
-        return (NoCommentFragment) getFragment(2);
+        return noCommentFragment;
     }
 }

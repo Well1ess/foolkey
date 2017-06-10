@@ -27,6 +27,14 @@ import java.util.List;
 
 public class Mr_Zhang_ScrollViewPager extends FrameLayout {
 
+    //滑动的速度要求
+    private static final int SCROLL_SPEED = 100;
+
+    //滑动超过屏幕的 1/N 后，翻页
+    private static final int SWITCH_THRESHOLD = 10;
+
+    private static final int SWITCH_SPEED = 400;
+
     //记录当前child的位置
     private static int mCurrentChild = 0;
     //记录多少个fragment，由xml传递
@@ -170,19 +178,19 @@ public class Mr_Zhang_ScrollViewPager extends FrameLayout {
                 scrollBy(-deltaX, 0);
                 break;
             case MotionEvent.ACTION_UP:
-                mTracker.computeCurrentVelocity(1000);
+                mTracker.computeCurrentVelocity(SWITCH_SPEED);
                 float xVelocity = mTracker.getXVelocity();
-                //如果水平方向速度大于400，即快速滑动一下
-                if (Math.abs(xVelocity) >= 400) {
+                //如果水平方向速度大于阈值，即快速滑动一下
+                if (Math.abs(xVelocity) >= SCROLL_SPEED) {
                     //速度大于0则表示右滑。。。
                     mCurrentChild = xVelocity > 0 ? mCurrentChild - 1 : mCurrentChild + 1;
                 } else {
                     //如果水平方向速度小于400，则按照滑动的距离
                     //如果滑动了屏幕的一般，且是向左滑动则+1
-                    if (Math.abs(getScrollX()) > mScreenWidth / 2 && getScrollX() > 0) {
+                    if (Math.abs(getScrollX()) > mScreenWidth / SWITCH_THRESHOLD && getScrollX() > 0) {
                         mCurrentChild++;
 
-                    } else if (Math.abs(getScrollX()) > mScreenWidth / 2 && getScrollX() < 0) {
+                    } else if (Math.abs(getScrollX()) > mScreenWidth / SWITCH_THRESHOLD && getScrollX() < 0) {
                         //如果滑动了屏幕的一般，且是向右滑动则-1
                         mCurrentChild--;
 

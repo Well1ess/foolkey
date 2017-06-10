@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
@@ -23,7 +23,6 @@ import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandA
 import com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Widget.Mr_Zhang_ScrollViewPager;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
 import com.example.a29149.yuyuan.controller.order.student.GetSpecificStateOrderController;
 import com.example.a29149.yuyuan.controller.order.teacher.home.GetOrderBuyCourseAsTeacherByOrderStatesController;
@@ -42,34 +41,7 @@ import java.util.Map;
  * 已完成订单的Fragment
  */
 
-public class FinishOrderFragment extends AbstractFragment {
-
-    private static final String TAG = "FinishOrderFragment";
-
-    //以下几项属性，与华哥的ScrollView实现有关
-    private int mViewContainerId;
-    private List<AbstractFragment> fragmentList;
-    private AbstractFragment zFragment;
-
-    /**
-     * 无参构造器
-     */
-    public FinishOrderFragment() {
-        super();
-    }
-
-    /**
-     * 设定Fragment
-     * @param viewContainerId
-     * @param fragment
-     * @param fragments
-     */
-    public void setFragment(int viewContainerId, AbstractFragment fragment, List<AbstractFragment> fragments){
-        mViewContainerId = viewContainerId;
-        zFragment = fragment;
-        this.fragmentList = fragments;
-    }
-
+public class FinishOrderFragment extends Fragment {
 
     private Context mContext;
     private MyListView mCourse;
@@ -90,12 +62,7 @@ public class FinishOrderFragment extends AbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getContext();
-
-        //绑定UI
-        View view = inflater.inflate(R.layout.fragment_viewpager_all_order, container, false);
-        Mr_Zhang_ScrollViewPager scrollViewPager = (Mr_Zhang_ScrollViewPager) view.findViewById(R.id.z_fragment_container);
-        scrollViewPager.setFragment(mViewContainerId, zFragment, fragmentList);
-
+        View view = inflater.inflate(R.layout.fragment_viewpager_all_order, null);
 
         shapeLoadingDialog = new ShapeLoadingDialog(mContext);
         shapeLoadingDialog.setLoadingText("加载中...");

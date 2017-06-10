@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.a29149.yuyuan.Widget.Mr_Zhang_ScrollViewPager
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/alpha_light_gray"
-    android:id="@+id/z_fragment_container"
-    custom:pageMaxChildView="4"
-    tools:context="com.example.a29149.yuyuan.ModelStudent.Order.fragment.NoCommentFragment"
     >
 
     <LinearLayout
@@ -17,29 +12,29 @@
         android:background="@color/alpha_light_gray"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textSize="13sp"
-            android:textColor="@color/white"
-            android:background="@color/dark_green"
-            android:gravity="center"
-            android:text="未评论订单"
-            />
-
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:textSize="13sp"
             android:textColor="#888888"
             android:gravity="center"
             android:text="我购买的课程"/>
 
+
+
         <com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView
             android:id="@+id/lv_buyCourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_height="1px"
+            android:background="@color/dark_green"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -128,4 +123,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</com.example.a29149.yuyuan.Widget.Mr_Zhang_ScrollViewPager>
+</ScrollView>

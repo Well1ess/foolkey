@@ -199,10 +199,10 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                             GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(rewardWithStudentSTCDTOs);
                             mRewardList.onLoadFinish();
                         }
-                        //如果分页请求结果为空，说明没有请求到下一页，设置页码为当前页
-                        if (courseStudentDTOS.size() == 0) {
-                            setPageNo(pageNo - 1);
-                        }
+//                        //如果分页请求结果为空，说明没有请求到下一页，设置页码为当前页
+//                        if (courseStudentDTOS.size() != 0) {
+//                            setPageNo(pageNo + 1);
+//                        }
 
                         new Handler().postDelayed(new Runnable() {
                             @Override

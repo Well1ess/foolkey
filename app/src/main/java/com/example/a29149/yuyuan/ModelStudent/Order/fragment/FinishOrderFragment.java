@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
@@ -41,7 +42,10 @@ import java.util.Map;
  * 已完成订单的Fragment
  */
 
-public class FinishOrderFragment extends Fragment {
+public class FinishOrderFragment extends AbstractFragment {
+
+    //缓存页面布局
+    private View view;
 
     private Context mContext;
     private MyListView mCourse;
@@ -61,8 +65,13 @@ public class FinishOrderFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //如果已经有了这个碎片布局，就直接返回，不需要重新绘制
+        if(view != null){
+            return view;
+        }
         mContext = getContext();
-        View view = inflater.inflate(R.layout.fragment_viewpager_all_order, null);
+        view = inflater.inflate(R.layout.fragment_viewpager_all_order, null);
 
         shapeLoadingDialog = new ShapeLoadingDialog(mContext);
         shapeLoadingDialog.setLoadingText("加载中...");

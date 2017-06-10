@@ -186,7 +186,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         //绑定UI
         mNickedName = (TextView) findViewById(R.id.tv_nickedName);
         mRewardPrice = (TextView) findViewById(R.id.tv_price);
-        mRewardTopic = (TextView) findViewById(R.id.tv_title);
+        mRewardTopic = (TextView) findViewById(R.id.title);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonMiddle = (RadioButton) findViewById(R.id.rb_chat);

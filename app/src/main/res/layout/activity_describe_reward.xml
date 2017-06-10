@@ -67,6 +67,7 @@
         android:maxLines="1"
 
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:textSize="12sp"/>
 
 
@@ -77,6 +78,7 @@
         android:focusable="false"
         android:gravity="bottom"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:text="点击选择标签"
         android:textColor="@color/light_gray"
         android:textSize="12sp"
@@ -93,11 +95,13 @@
     <EditText
         android:id="@+id/ed_reward_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="top"
         android:layout_marginTop="20dp"
         android:background="@null"
         android:hint="输入悬赏内容..."
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:textColor="@color/light_gray"
         android:imeActionId="@+id/login"
         android:imeActionLabel="@string/action_sign_in_short"

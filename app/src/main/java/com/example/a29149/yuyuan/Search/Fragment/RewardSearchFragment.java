@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter;
@@ -21,9 +22,8 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
-import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
-public class RewardSearchFragment extends AbstracFragment {
+public class RewardSearchFragment extends AbstractFragment {
 
     //下拉刷新的Layout
     @ViewInject(R.id.srl_slide_layout)

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.ModelStudent.Index.Fragment.ClassesFragment;
 import com.example.a29149.yuyuan.R;
@@ -22,12 +23,11 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Widget.SlideMenu;
-import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IndexMainFragment extends AbstracFragment {
+public class IndexMainFragment extends AbstractFragment {
 
     private View view;
 

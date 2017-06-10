@@ -10,11 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyFragmentPagerAdapter;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
-import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
 
 /**
@@ -23,7 +23,7 @@ import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
  * 订单Fragment
  */
 
-public class OrderFragment extends AbstracFragment implements View.OnClickListener {
+public class OrderFragment extends AbstractFragment implements View.OnClickListener {
 
     private View view;
     private ViewPager viewPager;

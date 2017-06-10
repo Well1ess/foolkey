@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.ArticleActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.ArticleListAdapter;
@@ -19,13 +20,12 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
-import com.example.a29149.yuyuan.AbstractObject.AbstracFragment;
 
 import de.greenrobot.event.Subscribe;
 import de.greenrobot.event.ThreadMode;
 
 
-public class ArticleSearchFragment extends AbstracFragment {
+public class ArticleSearchFragment extends AbstractFragment {
 
     //页数
     int pageNo = 2;

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/FrameLayout.Normal"
@@ -8,7 +7,7 @@
         style="@style/LineLayout.Normal">
 
         <FrameLayout
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:id="@+id/main_tab_fragment"
             android:layout_weight="1" />

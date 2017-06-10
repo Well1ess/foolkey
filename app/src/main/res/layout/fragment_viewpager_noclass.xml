@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<com.example.a29149.yuyuan.Widget.Mr_Zhang_ScrollViewPager
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/alpha_light_gray"
+    android:id="@+id/z_fragment_container"
+    custom:pageMaxChildView="4"
+    tools:context="com.example.a29149.yuyuan.ModelStudent.Order.fragment.NoClassFragment"
     >
 
     <LinearLayout
@@ -84,4 +89,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</com.example.a29149.yuyuan.Widget.Mr_Zhang_ScrollViewPager>

@@ -18,6 +18,7 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Const;
+import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
@@ -95,12 +96,7 @@ public class MyListViewFinishRewardAdapter extends BaseAdapter{
 
         initView(view);
 
-        String fisrtLine = mStudentDTO.getNickedName()+":"+courseDTO.getTopic();
-        if (fisrtLine.length() > 9) {
-            fisrtLine = fisrtLine.substring(0, 7);
-            fisrtLine = fisrtLine + "...";
-        }
-        mTeacherNameAndCourseName.setText(fisrtLine);
+        mTeacherNameAndCourseName.setText(StringUtil.subString(mStudentDTO.getNickedName(), 15));
         mBuyTime.setText("授课时长 ：" + mOrderBuyCourseDTO.getNumber().toString()+" h");
         mCourseCost.setText("老师收费 : " + mOrderBuyCourseDTO.getAmount()+"" + Const.PRICE_NAME);
 

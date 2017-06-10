@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_item_index_content"
-    android:layout_margin="20dp"
-    android:transitionName="shareContent"
-    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="10sp"
+    android:orientation="horizontal"
+    android:gravity="start"
     >
 
     <!--<ImageView-->
@@ -21,25 +21,24 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
         android:background="@null"
         android:id="@+id/head_parent"
-        android:layout_alignParentLeft="true"
+        android:layout_gravity="center_vertical"
         >
 
         <LinearLayout
             android:id="@+id/iv_photo_parent"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
 
             >
 
             <com.example.a29149.yuyuan.Widget.SquareImageView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/iv_photo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="@null"
                 android:elevation="2dp"
                 android:visibility="visible"
@@ -67,113 +66,94 @@
 
     <LinearLayout
         android:layout_marginLeft="0dp"
-        android:layout_toRightOf="@id/head_parent"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignTop="@id/head_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginStart="15dp"
         >
-        <TextView
-            android:id="@+id/title"
-            android:textColor="@color/colorPrimary"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            android:textStyle="bold"
-            android:layout_width="fill_parent"
+        <LinearLayout
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="项目一"
-            android:textSize="15sp"
-            android:elevation="1.5dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:orientation="horizontal"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"/>
-        <LinearLayout
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/tv_price"
-                android:textColor="@color/colorPrimary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20"
-                android:textSize="15sp"
-                android:elevation="1.5dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="虚拟币"
-                android:textSize="15sp"
-                android:elevation="1.5dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"/>
+            android:layout_marginBottom="2dp"
+            android:gravity="center_vertical"
+            >
 
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tv_technicTagEnum"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/colorPrimary"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="其他"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingRight="4dp"
-            android:paddingLeft="4dp"
-            android:textSize="12dp"
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <LinearLayout
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
             <TextView
+                android:id="@+id/tv_technicTagEnum"
+                android:text="技术标签"
+                android:textSize="12sp"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="学生基础："
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:paddingRight="4dp"
-                android:paddingLeft="4dp"
-                android:textSize="12dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_nickedName"
+                android:text="学生昵称"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:textColor="@color/grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/tv_studentBaseEnum"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/colorPrimary"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="初学者"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:paddingRight="4dp"
-                android:paddingLeft="4dp"
-                android:textSize="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
+                android:gravity="end"
+                >
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:textColor="@color/dark_green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="12sp"
+
+                    android:elevation="1.5dp"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="桃子"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="2sp"
+                    android:layout_marginBottom="2dp"/>
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:textColor="@color/grey555"
+            android:layout_gravity="start"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="悬赏标题"
+            android:textSize="12sp"
+            android:elevation="1.5dp"
+            android:maxLines="3"
+            android:layout_marginRight="50dp"
+            />
+
+
+
+
+
+
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

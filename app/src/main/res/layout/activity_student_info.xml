@@ -27,15 +27,7 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <ImageButton
-            android:id="@+id/tv_return"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="?android:attr/actionModeCloseDrawable"
-            android:backgroundTint="@color/white"/>
+
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -44,6 +36,18 @@
             android:layout_marginTop="15dp"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageButton
+                android:id="@+id/ib_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@mipmap/ic_return"
+                android:backgroundTint="@color/white"
+                android:rotation="180"
+                />
 
             <TextView
                 android:id="@+id/tv_nickedName"

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
@@ -37,7 +38,6 @@ import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.reward.ApplyController;
 import com.example.a29149.yuyuan.controller.course.reward.DeleteController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
-import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 import com.google.gson.Gson;
 
@@ -181,12 +181,12 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
     private void initView() {
         mOrder = (RadioButton) findViewById(R.id.tv_applyOrder);
         mOrder.setOnClickListener(this);
-        mReturn = (ImageButton) findViewById(R.id.ib_return);
-        mReturn.setOnClickListener(this);
+//        mReturn = (ImageButton) findViewById(R.id.ib_return);
+//        mReturn.setOnClickListener(this);
         //绑定UI
         mNickedName = (TextView) findViewById(R.id.tv_nickedName);
         mRewardPrice = (TextView) findViewById(R.id.tv_price);
-        mRewardTopic = (TextView) findViewById(R.id.title);
+        mRewardTopic = (TextView) findViewById(R.id.tv_title);
         mRewardDescription = (TextView) findViewById(R.id.tv_description);
         mCreateTime = (TextView) findViewById(R.id.tv_createTime);
         mButtonMiddle = (RadioButton) findViewById(R.id.rb_chat);
@@ -276,7 +276,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         switch (v.getId()) {
             //返回按键
             case R.id.ib_return:
-                this.finish();
+                finish();
                 break;
             //右边按钮
             //包含接单和悬赏2种操作

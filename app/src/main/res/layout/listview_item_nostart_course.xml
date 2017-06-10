@@ -10,7 +10,7 @@
     android:padding="30dp">
 
     <ImageView
-        android:id="@+id/iv_teacherPhone"
+        android:id="@+id/iv_photo"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginLeft="15dp"
@@ -24,7 +24,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_teacherNameAndCourseName"
+            android:id="@+id/tv_nickedName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="朱洪军： javaEE"
@@ -40,7 +40,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_courseCost"
+            android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="课程价格： 1000RMB"
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     <TextView
-        android:id="@+id/tv_cancel"
+        android:id="@+id/tv_judge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

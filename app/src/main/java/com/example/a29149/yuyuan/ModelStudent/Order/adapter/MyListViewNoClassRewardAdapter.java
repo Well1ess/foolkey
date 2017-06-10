@@ -104,11 +104,11 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
     }
 
     private void initView() {
-        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
-        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
+        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_photo);
+        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_nickedName);
         mRewardTitle = (TextView) view.findViewById(R.id.tv_rewardTitle);
         mTeacherCharge = (TextView) view.findViewById(R.id.tv_rewardCost);
-        mCancalReward = (TextView) view.findViewById(R.id.tv_cancel);
+        mCancalReward = (TextView) view.findViewById(R.id.tv_judge);
         mCancalReward.setOnClickListener(this);
 
 
@@ -125,7 +125,7 @@ public class MyListViewNoClassRewardAdapter extends BaseAdapter implements View.
         int id = v.getId();
         switch (id)
         {
-            case R.id.tv_cancel:
+            case R.id.tv_judge:
                 cancelReward();
         }
     }

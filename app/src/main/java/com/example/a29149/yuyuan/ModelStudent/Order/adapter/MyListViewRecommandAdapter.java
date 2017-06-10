@@ -63,7 +63,7 @@ public class MyListViewRecommandAdapter extends BaseAdapter implements View.OnCl
     }
 
     private void initView() {
-        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
+        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_photo);
         mTeacherName = (TextView) view.findViewById(R.id.teacher_name);
         mTeacherSlogan = (TextView) view.findViewById(R.id.teacher_slogan);
         mTeacherPrestige = (TextView) view.findViewById(R.id.teacher_prestige);

@@ -55,7 +55,7 @@ public class PublishQuestionStudentActivity extends AbstractActivity implements 
     }
 
     private void initView() {
-        mCancel = (TextView) findViewById(R.id.tv_cancel);
+        mCancel = (TextView) findViewById(R.id.tv_judge);
         mCancel.setOnClickListener(this);
         mPublish = (TextView) findViewById(R.id.tv_publish);
         mPublish.setOnClickListener(this);
@@ -95,7 +95,7 @@ public class PublishQuestionStudentActivity extends AbstractActivity implements 
             case R.id.tv_publish:
                 publish();
                 break;
-            case R.id.tv_cancel:
+            case R.id.tv_judge:
                 finish();
                 break;
             case R.id.tv_tagChoose:

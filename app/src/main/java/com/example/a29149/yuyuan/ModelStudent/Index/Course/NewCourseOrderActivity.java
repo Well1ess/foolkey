@@ -111,7 +111,7 @@ public class NewCourseOrderActivity extends AbstractAppCompatActivity {
         this.finish();
     }
 
-    @OnClick(R.id.tv_cancel)
+    @OnClick(R.id.tv_judge)
     public void setCancelListener(View view)
     {
         mDisplayDialog.setMsg("您确定要取消该订单吗？");

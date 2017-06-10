@@ -110,11 +110,11 @@ public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnCli
     }
 
     private void initView(View view) {
-        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_teacherPhone);
-        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_teacherNameAndCourseName);
+        mTeacherPhone = (ImageView) view.findViewById(R.id.iv_photo);
+        mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_nickedName);
         //mCourseTitle = (TextView) view.findViewById(R.id.tv_courseTitle);
-        mCourseCost = (TextView) view.findViewById(R.id.tv_courseCost);
-        mCanael = (TextView) view.findViewById(R.id.tv_cancel);
+        mCourseCost = (TextView) view.findViewById(R.id.tv_amount);
+        mCanael = (TextView) view.findViewById(R.id.tv_judge);
         mCanael.setOnClickListener(this);
 
         glide = Glide.with(mContext);
@@ -129,14 +129,14 @@ public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnCli
         int id = v.getId();
         switch (id)
         {
-            case R.id.tv_cancel:
+            case R.id.tv_judge:
                 cancelCourse();
         }
     }
 
     private void cancelCourse() {
 //        //跳转到课程订单评价
-//        Intent intent = new Intent(mContext, CommentCourseActivity.class);
+//        Intent intent = new Intent(mContext, StudentJudgeCourseActivity.class);
 //        intent.putExtra("position",position);
 //        intent.putExtra("Topic",courseDTO.getTopic());
 //        intent.putExtra("TeacherName",mStudentDTO.getNickedName());

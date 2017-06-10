@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,20 +13,22 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.ModelStudent.Me.info.StudentInfoActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
+import java.util.List;
+
 /**
  * Created by 张丽华 on 2017/4/26.
- * Description:发现界面的悬赏列表适配器
+ * Description:发现界面的悬赏列表适配器,改造数据源
  */
 //TODO 这里获取数据依然要依靠全局变量
-public class RewardListAdapter extends BaseAdapter {
+public class RewardListAdapter2 extends BaseAdapter {
 
     private static final String TAG = "RewardListAdapter";
 
@@ -35,8 +36,15 @@ public class RewardListAdapter extends BaseAdapter {
 
     private RequestManager glide;
 
-    public RewardListAdapter(Context context) {
+    private List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs;//悬赏列表数据
+
+    public RewardListAdapter2(Context context) {
         this.mContext = context;
+    }
+
+    //设置数据源
+    public void setData(List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs) {
+        this.rewardWithStudentSTCDTOs = rewardWithStudentSTCDTOs;
     }
 
     /**
@@ -48,12 +56,12 @@ public class RewardListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().size();
+        return rewardWithStudentSTCDTOs.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position);
+        return rewardWithStudentSTCDTOs.get(position);
     }
 
     @Override
@@ -74,8 +82,8 @@ public class RewardListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         //获取当前的reward
-        RewardDTO rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
-        StudentDTO studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
+        RewardDTO rewardDTO = rewardWithStudentSTCDTOs.get(position).getRewardDTO();
+        StudentDTO studentDTO = rewardWithStudentSTCDTOs.get(position).getStudentDTO();
         //设置数据
         viewHolder.title.setText(rewardDTO.getTopic());
         viewHolder.money.setText(rewardDTO.getPrice()+"");

@@ -377,7 +377,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         if (mainStudentActivity != null){
             //学生activity可更新，则获取DiscoveryMainFragment
             DiscoveryMainFragment discoveryMainFragment =
-                    (DiscoveryMainFragment) mainStudentActivity.getDiscoveryMainFragment();
+                   mainStudentActivity.getDiscoveryMainFragment();
             //如果从首页，直接搜索的话，此时activity是有的，但这下面这个fragment会出现数组越界异常
             try {
                 //获取子fragment
@@ -557,6 +557,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     if ("success".equals(jsonObject.getString("result"))){
                         Toast.makeText(RewardActivity.this, "删除成功", Toast.LENGTH_SHORT);
                         //更新数据
+                        //TODO 这里依然是用全局变量处理悬赏
                         GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().remove(position);
                         //刷新界面显示
                         updateRewardList();

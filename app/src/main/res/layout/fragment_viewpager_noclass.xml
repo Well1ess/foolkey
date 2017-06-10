@@ -16,6 +16,18 @@
         android:layout_height="match_parent"
         android:background="@color/alpha_light_gray"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="13sp"
+            android:textColor="@color/white"
+            android:background="@color/dark_green"
+            android:gravity="center"
+            android:text="未上课订单"
+            />
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"

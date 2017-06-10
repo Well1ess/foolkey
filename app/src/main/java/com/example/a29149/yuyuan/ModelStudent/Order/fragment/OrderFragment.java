@@ -69,10 +69,10 @@ public class OrderFragment extends AbstractFragment implements View.OnClickListe
         finishOrderFragment.setFragment(R.id.fl_container, this, childFragmentList);
 
         //设置切换的Fragment
-        switchFragment(R.id.fl_container, noPayFragment);
         switchFragment(R.id.fl_container, noClassFragment);
         switchFragment(R.id.fl_container, noCommentFragment);
         switchFragment(R.id.fl_container, finishOrderFragment);
+        switchFragment(R.id.fl_container, noPayFragment);
 
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);

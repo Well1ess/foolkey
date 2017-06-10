@@ -17,7 +17,7 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.ModelStudent.Me.info.StudentInfoActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
@@ -76,7 +76,7 @@ public class RewardListAdapter extends BaseAdapter {
         RewardDTO rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
         StudentDTO studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
         //设置数据
-        viewHolder.title.setText(rewardDTO.getTopic());
+        viewHolder.title.setText(StringUtil.subString( rewardDTO.getTopic(), 60 ));
         viewHolder.money.setText(rewardDTO.getPrice()+"");
         viewHolder.label.setText(rewardDTO.getTechnicTagEnum().toString());
         //以前显示标签，但我觉得还是显示名字好
@@ -113,13 +113,13 @@ public class RewardListAdapter extends BaseAdapter {
 //        public TextView prestige;
 
         ViewHolder(View view) {
-            title = (TextView) view.findViewById(R.id.title);
+            title = (TextView) view.findViewById(R.id.tv_title);
             head = (ImageView) view.findViewById(R.id.iv_photo);
             money = (TextView) view.findViewById(R.id.tv_price);
             label = (TextView) view.findViewById(R.id.tv_technicTagEnum);
 //            prestige = (TextView) view.findViewById(R.id.prestige);
 
-            studentKind = (TextView) view.findViewById(R.id.tv_studentBaseEnum);
+            studentKind = (TextView) view.findViewById(R.id.tv_nickedName);
         }
 
     }

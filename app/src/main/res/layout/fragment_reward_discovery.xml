@@ -37,15 +37,16 @@
         <com.example.a29149.yuyuan.Widget.DynamicListView
             android:background="@color/background"
             android:layoutAnimation="@anim/listview_project_anim"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_marginTop="10dp"
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
-            android:divider="@color/transparent"
-            android:dividerHeight="10dp">
+            android:divider="@drawable/divider_reward_list"
+            android:dividerHeight="1sp"
+            >
         </com.example.a29149.yuyuan.Widget.DynamicListView>
 
     </com.example.a29149.yuyuan.Widget.SlideRefreshLayout>

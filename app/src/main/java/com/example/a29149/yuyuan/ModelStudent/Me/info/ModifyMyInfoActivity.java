@@ -155,7 +155,7 @@ public class ModifyMyInfoActivity extends AbstractActivity implements View.OnCli
             case R.id.tv_technicTag:
                 chooseTag();
                 break;
-            case R.id.sex:
+            case R.id.tv_sex:
                 chooseSxe();
                 break;
             default:

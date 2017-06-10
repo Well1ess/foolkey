@@ -113,7 +113,7 @@ public class DiscoveryMainFragment extends AbstractFragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rb_search_reward:
-                        MainStudentActivity.shapeLoadingDialog.show();
+//                        MainStudentActivity.shapeLoadingDialog.show();
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_FIRST_TAG);
                         break;
                     case R.id.rb_search_QA:

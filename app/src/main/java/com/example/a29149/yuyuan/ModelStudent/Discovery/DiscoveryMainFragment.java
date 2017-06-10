@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -21,6 +20,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
+import com.example.a29149.yuyuan.AbstractObject.YYFragmentTabHost;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.ArticleDiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.QADiscoveryFragment;
@@ -60,7 +60,7 @@ public class DiscoveryMainFragment extends AbstractFragment {
 
     //容器
     @ViewInject(android.R.id.tabhost)
-    private FragmentTabHost mFragmentTabHost;
+    private YYFragmentTabHost mFragmentTabHost;
 
     @ViewInject(R.id.vp_content_pager)
     private ViewPager mContentViewPager;

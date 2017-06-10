@@ -1,6 +1,7 @@
 package com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment;
 
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -93,7 +94,8 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent toCourseActivity = new Intent(getActivity(), RewardActivity.class);
                     toCourseActivity.putExtra("position", position);
-                    startActivity(toCourseActivity);
+                    startActivity(toCourseActivity, ActivityOptions
+                            .makeSceneTransitionAnimation( getActivity(), view, "shareHead").toBundle() );
                 }
             });
 

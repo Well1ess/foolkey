@@ -61,14 +61,27 @@
     <EditText
         android:id="@+id/ed_reward_title"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:hint="输入悬赏标题"
-        android:textColor="@color/light_gray"
+        android:textColor="@color/grey555"
+        android:textColorHint="@color/light_gray"
         android:maxLines="1"
-
+        android:gravity="bottom"
+        android:background="@null"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        android:paddingBottom="4dp"
+        />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/colorPrimary"/>
+
 
 
     <TextView
@@ -79,17 +92,19 @@
         android:gravity="bottom"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="点击选择标签"
-        android:textColor="@color/light_gray"
+        android:hint="点击选择标签"
+        android:textColor="@color/grey555"
+        android:textColorHint="@color/light_gray"
         android:textSize="12sp"
+        android:paddingBottom="4dp"
         />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@color/light_gray"/>
+        android:background="@color/colorPrimary"/>
 
 
     <EditText
@@ -102,7 +117,8 @@
         android:hint="输入悬赏内容..."
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:textColor="@color/light_gray"
+        android:textColor="@color/grey555"
+        android:textColorHint="@color/light_gray"
         android:imeActionId="@+id/login"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionUnspecified"

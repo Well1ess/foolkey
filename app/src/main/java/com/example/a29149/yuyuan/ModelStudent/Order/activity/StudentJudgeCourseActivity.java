@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.fragment.NoCommentFragment;
@@ -26,7 +27,6 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeCourseController;
 import com.example.a29149.yuyuan.controller.course.judge.JudgeTeacherController;
-import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
@@ -246,7 +246,7 @@ public class StudentJudgeCourseActivity extends AbstractActivity implements View
                                 mainStudentActivity.getOrderFragment().getNoCommentFragment();
                         //从数据源中移除已评价的订单
                         //更新adapter
-                        noCommentFragment.removeCourseById( orderBuyCourseAsStudentDTO.getOrderDTO().getId() );
+                        noCommentFragment.getCourseAdapter().remove( orderBuyCourseAsStudentDTO );
                         finish();
                     }
                 } catch (Exception e) {

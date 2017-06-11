@@ -62,4 +62,28 @@ public class OrderBuyCourseAsStudentDTO  extends AbstractDTO {
                 ", teacherDTO=" + teacherDTO +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        try {
+            OrderBuyCourseAsStudentDTO dto = (OrderBuyCourseAsStudentDTO)o;
+            if (this.orderDTO.getId().equals( dto.getOrderDTO().getId() )){
+                //只要订单的id相同，我就认为他俩相同
+                return true;
+            }
+        }catch (Exception e){
+            //
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = orderDTO != null ? orderDTO.hashCode() : 0;
+        result = 31 * result + (course != null ? course.hashCode() : 0);
+        result = 31 * result + (studentDTO != null ? studentDTO.hashCode() : 0);
+        result = 31 * result + (teacherDTO != null ? teacherDTO.hashCode() : 0);
+        return result;
+    }
 }

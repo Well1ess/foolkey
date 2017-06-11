@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +17,8 @@ import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoCommentRewardAdapter;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoConmmentClassAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
+import com.example.a29149.yuyuan.ModelStudent.Order.adapter.NoJudgedOrderAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -52,9 +50,11 @@ public class NoCommentFragment extends AbstractFragment {
     private MyListView mRecommend; // 推荐
     private List<OrderBuyCourseAsStudentDTO> rewardList = new ArrayList();//悬赏列表
     private List<OrderBuyCourseAsStudentDTO> courseList = new ArrayList();//课程列表
-    //Adapter
-    private MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter; //悬赏的adapter
-    private MyListViewNoConmmentClassAdapter myListViewNoConmmentClassAdapter; //课程的adapter
+
+    //悬赏的Adapter
+    private NoJudgedOrderAdapter rewardAdapter;
+    //课程的Adapter
+    private NoJudgedOrderAdapter courseAdapter;
 
     /**
      * The Shape loading dialog.
@@ -84,7 +84,7 @@ public class NoCommentFragment extends AbstractFragment {
 
         //刚开始请求第一页
         pageNo = 1;
-        loadData(pageNo);
+        requestData(pageNo);
         //TODO 这里立即评价还没有解决
         //课程的ListView,绑定UI
         mCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
@@ -145,8 +145,7 @@ public class NoCommentFragment extends AbstractFragment {
             //用全局的方式实现回调
             shapeLoadingDialog.show();
             pageNo = 1;
-            loadData(pageNo);
-            GlobalUtil.getInstance().setFragmentFresh(false);
+            requestData(pageNo);
         } else {
             //相当于Fragment的onPause
         }
@@ -162,12 +161,6 @@ public class NoCommentFragment extends AbstractFragment {
         }
     }
 
-    private void loadData(int pageNo) {
-        //如果没有进行加载
-        if (shapeLoadingDialog != null) {
-            requestData(pageNo);
-        }
-    }
 
     //请求数据
     private void requestData(int pageNo) {
@@ -220,43 +213,27 @@ public class NoCommentFragment extends AbstractFragment {
     }
 
     /**
-     * 从悬赏的数据源中，根据id删除一个订单
-     * 如果删除成功了，会自动通知adapter更新数据
-     *
-     * @param id the id
-     *
-     * @return boolean
-     */
-    public boolean removeRewardById(long id){
-        boolean flag = removeOrderById(getRewardList(), id);
-        if( flag == true ){
-            myListViewNoCommentRewardAdapter.notifyDataSetChanged();
-        }
-        return flag;
-    }
-
-    /**
-     * 从课程的数据源中，根据id删除一个订单
-     * 如果删除成功了，会自动通知adapter更新数据
-     *
-     * @param id the id
-     *
-     * @return boolean
-     */
-    public boolean removeCourseById(long id){
-        boolean flag = removeOrderById(getCourseList(), id);
-        if( flag == true ){
-            myListViewNoConmmentClassAdapter.notifyDataSetChanged();
-        }
-        return flag;
-    }
-
-    /**
      * 通知adapter刷新数据
      */
     public void updateOrderList(){
-        myListViewNoCommentRewardAdapter.notifyDataSetChanged();
-        myListViewNoConmmentClassAdapter.notifyDataSetChanged();
+        rewardAdapter.notifyDataSetChanged();
+        courseAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 获取悬赏的Adapter
+     * @return
+     */
+    public NoJudgedOrderAdapter getRewardAdapter() {
+        return rewardAdapter;
+    }
+
+    /**
+     * 获取课程的Adapter
+     * @return
+     */
+    public NoJudgedOrderAdapter getCourseAdapter() {
+        return courseAdapter;
     }
 
     /**
@@ -305,7 +282,7 @@ public class NoCommentFragment extends AbstractFragment {
                     java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
                     }.getType();
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
-                    GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
+
                     //Log.i("malei", "commentRewardActivity="+GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().toString());
 
                     rewardList.clear();
@@ -324,28 +301,23 @@ public class NoCommentFragment extends AbstractFragment {
                     }
 
 
-                    Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
 //                        Toast.makeText(mContext, "获取成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
-                                myListViewNoConmmentClassAdapter.setData(courseList);
-                                mCourse.setAdapter(myListViewNoConmmentClassAdapter);
+                                //绑定未评价课程的adapter
+                                courseAdapter = new NoJudgedOrderAdapter( courseList, mContext );
+                                mCourse.setAdapter( courseAdapter );
 
-
-                                myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
-                                myListViewNoCommentRewardAdapter.setData(rewardList);
-                                mReward.setAdapter(myListViewNoCommentRewardAdapter);
-
-
-
+                                //绑定未评价悬赏的adapter
+                                rewardAdapter = new NoJudgedOrderAdapter( rewardList, mContext );
+                                mReward.setAdapter( rewardAdapter );
                             }
                         }, 1000);
                     }
                 } catch (Exception e) {
-//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();
@@ -433,22 +405,17 @@ public class NoCommentFragment extends AbstractFragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                courseAdapter = new NoJudgedOrderAdapter( courseList, mContext );
+                                mCourse.setAdapter( courseAdapter );
 
-                                myListViewNoConmmentClassAdapter = new MyListViewNoConmmentClassAdapter(mContext);
-                                mCourse.setAdapter(myListViewNoConmmentClassAdapter);
-                                myListViewNoConmmentClassAdapter.setData(courseList);
-
-
-                                MyListViewNoCommentRewardAdapter myListViewNoCommentRewardAdapter = new MyListViewNoCommentRewardAdapter(mContext);
-                                myListViewNoCommentRewardAdapter.setData(rewardList);
-                                mReward.setAdapter(myListViewNoCommentRewardAdapter);
-
+                                //绑定未评价悬赏的adapter
+                                rewardAdapter = new NoJudgedOrderAdapter( rewardList, mContext );
+                                mReward.setAdapter( rewardAdapter );
                             }
                         }, 1000);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();

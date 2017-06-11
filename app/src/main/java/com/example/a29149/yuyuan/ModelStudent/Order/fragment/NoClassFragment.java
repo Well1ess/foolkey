@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +17,8 @@ import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassRewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
+import com.example.a29149.yuyuan.ModelStudent.Order.adapter.NoClassOrderAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -127,6 +125,7 @@ public class NoClassFragment extends AbstractFragment {
         });
 
 
+        //推送的
         MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
         mRecommend.setAdapter(myListViewRecommandAdapter);
         return view;
@@ -246,15 +245,13 @@ public class NoClassFragment extends AbstractFragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
-                                mCourse.setAdapter(myListViewNoClassCourseAdapter);
-                                myListViewNoClassCourseAdapter.setData(courseList);
+                                //未上课课程绑定Adapter
+                                NoClassOrderAdapter courseAdapter = new NoClassOrderAdapter(courseList, mContext);
+                                mCourse.setAdapter( courseAdapter );
+                                //未上课悬赏绑定Adapter
+                                NoClassOrderAdapter rewardAdapter = new NoClassOrderAdapter(rewardList, mContext);
+                                mReward.setAdapter( rewardAdapter );
 
-                                MyListViewNoClassRewardAdapter myListViewNoClassRewardAdapter = new MyListViewNoClassRewardAdapter(mContext);
-                                myListViewNoClassRewardAdapter.setData(rewardList);
-                                mReward.setAdapter(myListViewNoClassRewardAdapter);
-                                //我也不知道这里这样设置有没有用
-                                GlobalUtil.getInstance().setOrderRewardList(rewardList);
                             }
                         }, 1000);
                     }
@@ -341,18 +338,12 @@ public class NoClassFragment extends AbstractFragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
-                                mCourse.setAdapter(myListViewNoClassCourseAdapter);
-                                myListViewNoClassCourseAdapter.setData(courseList);
-//                                GlobalUtil.getInstance().setOrderCourseList(courseList);
-
-
-                                MyListViewNoClassRewardAdapter myListViewNoClassRewardAdapter = new MyListViewNoClassRewardAdapter(mContext);
-                                myListViewNoClassRewardAdapter.setData(rewardList);
-                                Log.i("malei","rewardList=  "+rewardList.toString());
-                                mReward.setAdapter(myListViewNoClassRewardAdapter);
-                                //我也不知道这里这样设置有没有用
-                                GlobalUtil.getInstance().setOrderRewardList(rewardList);
+                                //未上课课程绑定Adapter
+                                NoClassOrderAdapter courseAdapter = new NoClassOrderAdapter(courseList, mContext);
+                                mCourse.setAdapter( courseAdapter );
+                                //未上课悬赏绑定Adapter
+                                NoClassOrderAdapter rewardAdapter = new NoClassOrderAdapter(rewardList, mContext);
+                                mReward.setAdapter( rewardAdapter );
 
                             }
                         }, 1000);

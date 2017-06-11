@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,14 +37,8 @@ public class RewardDiscoveryFragment extends AbstractFragment {
 
     //缓存当前view，方便再次切换到这个view时，不需要执行onCreateView方法
     private View view;
-
     private Context mContext;
-
-
     private List<RewardWithStudentSTCDTO> allRewardWithStudentSTCDTOS = new ArrayList<>(); //所有的悬赏列表
-
-//    private RewardListAdapter rewardListAdapter;    //悬赏的Adapter
-
 
     //下拉刷新的Layout
     @ViewInject(R.id.srl_slide_layout)
@@ -91,11 +84,11 @@ public class RewardDiscoveryFragment extends AbstractFragment {
             AnnotationUtil.injectViews(this, view);
             AnnotationUtil.setClickListener(this, view);
 
-            //list初始化
+            //Adapter初始化
             mListAdapter = new RewardListAdapter(getContext());
             //给listView设置adapter
 
-            //给viewList设置点击监听器
+            //给每个item设置点击监听器
             mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,7 +101,6 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                     //将Bundle放置在intent里，并开启新Activity
                     intent.putExtras( bundle );
                     startActivity( intent );
-                    Log.i(TAG, "onItemClick: 114 " + position);
                 }
             });
             //设置列表动态加载
@@ -117,7 +109,6 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                 public void setLoad() {
                     //TODO:网络传输
                     GetReward getReward = new GetReward(++pageNo);
-                    Log.d(TAG, "setLoad: pageNo : " + pageNo);
                     getReward.execute();
                 }
             });
@@ -134,14 +125,10 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                                 MainStudentActivity.shapeLoadingDialog.show();
                             }
                             //由于是刷新，所以首先清空所有数据
-
                             pageNo = 1;
                             List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs = new ArrayList<RewardWithStudentSTCDTO>();
-
                             setAllRewardWithStudentSTCDTOS(rewardWithStudentSTCDTOs);
-//                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(rewardWithStudentSTCDTOs);
                             GetReward getReward = new GetReward(pageNo);
-                            Log.d(TAG, "onRefresh: 142 ");
                             getReward.execute();
                         }
                     });
@@ -200,8 +187,6 @@ public class RewardDiscoveryFragment extends AbstractFragment {
 
                     if (resultFlag.equals("success")) {
 
-                        log.d(this, jsonObject.getString("rewardCourseDTOS"));
-
                         java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<RewardWithStudentSTCDTO>>() {
                         }.getType();
                         List<RewardWithStudentSTCDTO> courseStudentDTOS = new Gson().fromJson(jsonObject.getString("rewardCourseDTOS"), type);
@@ -211,12 +196,8 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                             setAllRewardWithStudentSTCDTOS(courseStudentDTOS);
                             mListAdapter.setData(allRewardWithStudentSTCDTOS);
                             mRewardList.setAdapter(mListAdapter);
-                            Log.d(TAG, "onPostExecute: 210");
-//                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(courseStudentDTOS);
                         } else if (pageNo > 1) {
-//                            List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs();
                             allRewardWithStudentSTCDTOS.addAll(courseStudentDTOS);
-//                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(allRewardWithStudentSTCDTOS);
                             mRewardList.onLoadFinish();
                         }
 

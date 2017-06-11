@@ -1,7 +1,6 @@
 package com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment;
 
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,7 +21,6 @@ import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapte
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
@@ -101,7 +99,6 @@ public class RewardDiscoveryFragment extends AbstractFragment {
             mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //TODO 课程的立即评价还没有解决
                     //查看某个具体的课程订单
                     Intent intent = new Intent(mContext, RewardActivity.class);
                     //新建Bundle，放置具体的DTO
@@ -114,17 +111,6 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                     Log.i(TAG, "onItemClick: 114 " + position);
                 }
             });
-
-//            mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    Intent toCourseActivity = new Intent(getActivity(), RewardActivity.class);
-//                    toCourseActivity.putExtra("position", position);
-//                    startActivity(toCourseActivity, ActivityOptions
-//                            .makeSceneTransitionAnimation( getActivity(), view, "shareHead").toBundle() );
-//                }
-//            });
-
             //设置列表动态加载
             mRewardList.setOnLoadingListener(new DynamicListView.onLoadingListener() {
                 @Override
@@ -226,11 +212,11 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                             mListAdapter.setData(allRewardWithStudentSTCDTOS);
                             mRewardList.setAdapter(mListAdapter);
                             Log.d(TAG, "onPostExecute: 210");
-                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(courseStudentDTOS);
+//                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(courseStudentDTOS);
                         } else if (pageNo > 1) {
 //                            List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs();
                             allRewardWithStudentSTCDTOS.addAll(courseStudentDTOS);
-                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(allRewardWithStudentSTCDTOS);
+//                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(allRewardWithStudentSTCDTOS);
                             mRewardList.onLoadFinish();
                         }
 

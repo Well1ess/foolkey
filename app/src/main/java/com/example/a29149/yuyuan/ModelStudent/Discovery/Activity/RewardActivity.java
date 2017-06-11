@@ -1,5 +1,7 @@
 package com.example.a29149.yuyuan.ModelStudent.Discovery.Activity;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -27,6 +29,7 @@ import com.example.a29149.yuyuan.Main.MainTeacherActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.RewardDiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
+import com.example.a29149.yuyuan.ModelStudent.Me.info.StudentInfoActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -91,21 +94,6 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward);   //绑定UI
-//        //获取意图
-//        Intent intent = getIntent();
-//        Bundle extras = intent.getExtras();
-//        //获取位置
-//        position = extras.getInt("position");
-//        Log.i("malei", position + "");
-//        if (position != -1) {
-//            //获取信息
-//            studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
-//            rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
-//
-//        } else {
-//            studentDTO = new StudentDTO();
-//            rewardDTO = new RewardDTO();
-//        }
 
         //注解式绑定
         AnnotationUtil.setClickListener(this);
@@ -113,12 +101,12 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
 
         //获取意图，从意图中获取DTO
         Intent intent = getIntent();
-        rewardWithStudentSTCDTO = ( RewardWithStudentSTCDTO )intent.getSerializableExtra("DTO");
+        rewardWithStudentSTCDTO = (RewardWithStudentSTCDTO) intent.getSerializableExtra("DTO");
 
-        if(rewardWithStudentSTCDTO!=null) {
+        if (rewardWithStudentSTCDTO != null) {
             studentDTO = rewardWithStudentSTCDTO.getStudentDTO();
             rewardDTO = rewardWithStudentSTCDTO.getRewardDTO();
-        }else {
+        } else {
             studentDTO = new StudentDTO();
             rewardDTO = new RewardDTO();
         }
@@ -233,6 +221,22 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                 .transform(new GlideCircleTransform(this))
                 .placeholder(R.drawable.photo_placeholder1)
                 .into(photo);
+        photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //查看某个悬赏发布人的具体信息
+                Intent intent = new Intent(RewardActivity.this, StudentInfoActivity.class);
+                //新建Bundle，放置具体的DTO
+                Bundle bundle = new Bundle();
+                //从类变量的List里获取具体的DTO
+                bundle.putSerializable("DTO", studentDTO);
+                //将Bundle放置在intent里，并开启新Activity
+                intent.putExtras(bundle);
+//                startActivity( intent );
+                RewardActivity.this.startActivity(intent, ActivityOptions
+                        .makeSceneTransitionAnimation((Activity) RewardActivity.this, v, "shareHead").toBundle());
+            }
+        });
     }
 
 
@@ -244,8 +248,8 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         mRewardPrice.setText(rewardDTO.getPrice() + "");
         mRewardTopic.setText(rewardDTO.getTopic() + "");
         mRewardDescription.setText(rewardDTO.getDescription());
-        mPrestige.setText( studentDTO.getPrestige() + "");
-        mOperateTime.setText( "悬赏居然没有日期，真是醉了" );
+        mPrestige.setText(studentDTO.getPrestige() + "");
+        mOperateTime.setText("悬赏居然没有日期，真是醉了");
     }
 
     //申请认证
@@ -285,6 +289,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
 
     /**
      * 添加点击监听
+     *
      * @param v
      */
     @Override
@@ -296,7 +301,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                 break;
             //右边按钮
             //包含接单和悬赏2种操作
-            case R.id.tv_applyOrder:{
+            case R.id.tv_applyOrder: {
                 if (mOrder.getText().equals("修改悬赏")) {  //自己的悬赏，就是修改悬赏资料
                     Log.i("malei", mOrder.getText() + "");
                     Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
@@ -318,27 +323,29 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     //接单的逻辑，写在了对话框的逻辑里
                     displayInfo.getDialog().show();
                 }
-            }break;
+            }
+            break;
             //左边按钮
             //包含删除、"我也想学"2种逻辑
-            case R.id.rb_want_learn:{
-                if (mButtonLeft.getText() != null && mButtonLeft.getText().equals("删除悬赏")){
+            case R.id.rb_want_learn: {
+                if (mButtonLeft.getText() != null && mButtonLeft.getText().equals("删除悬赏")) {
                     //删除悬赏
-                    if ( rewardDTO.getRewardStateEnum().equals(RewardStateEnum.待接单) ){
+                    if (rewardDTO.getRewardStateEnum().equals(RewardStateEnum.待接单)) {
                         deleteVerifyConfirm.setMsg("点击删除，将不可恢复，确定吗？");
                         deleteVerifyConfirm.getDialog().show();
-                    }else {
+                    } else {
                         //已经被接单的悬赏不能被删除，这里的已接单，是指用户已经同意老师申请、并付款了
                         Toast.makeText(this, "已接单的悬赏不可被删除哦", Toast.LENGTH_SHORT);
                     }
-                }else {
+                } else {
                     //非自己的悬赏，则可以点击我也想学，发布一个新的
                     //TODO
                 }
-            }break;
+            }
+            break;
             //中间的按钮
             //聊天
-            case R.id.rb_chat:{
+            case R.id.rb_chat: {
                 //TODO
             }
             default:
@@ -348,27 +355,30 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
 
     /**
      * 接受后一个activity的结果，获取不同的结果，采取不同的行为
+     *
      * @param requestCode 请求码
-     * @param resultCode 结果码
-     * @param data 意图带了额外数据
+     * @param resultCode  结果码
+     * @param data        意图带了额外数据
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){//成功了
+        if (resultCode == RESULT_OK) {//成功了
             //根据不同的请求做不同的处理
-            switch (requestCode){
+            switch (requestCode) {
                 //修改悬赏成功后
-                case Const.FROM_REWARD_TO_MODIFY:{
+                case Const.FROM_REWARD_TO_MODIFY: {
                     //更新本页数据
                     updateDate();
                     //更新发现的listView里的数据
                     //搜索的ListView不会在这里更新
                     updateRewardList();
-                }break;
-                default:break;
+                }
+                break;
+                default:
+                    break;
             }
-        }else { //操作失败
+        } else { //操作失败
 
         }
     }
@@ -377,7 +387,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
      * 刷新fragment里界面显示list
      * 增删 reward 的时候就可能用到
      */
-    public static void updateRewardList(){
+    public static void updateRewardList() {
         //首先获取2个activity
         //学生的
         MainStudentActivity mainStudentActivity =
@@ -390,26 +400,26 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                 (SearchActivity) AppManager.getActivity(SearchActivity.class);
 
         //针对不同的activity采取不同的行为
-        if (mainStudentActivity != null){
+        if (mainStudentActivity != null) {
             //学生activity可更新，则获取DiscoveryMainFragment
             DiscoveryMainFragment discoveryMainFragment =
-                   mainStudentActivity.getDiscoveryMainFragment();
+                    mainStudentActivity.getDiscoveryMainFragment();
             //如果从首页，直接搜索的话，此时activity是有的，但这下面这个fragment会出现数组越界异常
             try {
                 //获取子fragment
                 RewardDiscoveryFragment fragment = discoveryMainFragment.getRewardDiscoveryFragment();
                 //调用更新方法
                 fragment.updateRewardList();
-            }catch (RuntimeException e){
+            } catch (RuntimeException e) {
                 //FIXME
             }
 
         }
-        if (mainTeacherActivity != null){
+        if (mainTeacherActivity != null) {
             //老师activity可更新
             //TODO
         }
-        if (searchActivity != null){
+        if (searchActivity != null) {
             //搜索的列表更新
             searchActivity.getRewardSearchFragment().updateSearchRewardList();
         }
@@ -418,7 +428,8 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
     /**
      * 刷新本页面显示的信息，修改了悬赏信息以后就可能用到
      */
-    private void updateDate(){
+    private void updateDate() {
+        //// TODO: 2017/6/11 这里还是全局变量 
         //重新获取一次rewardDTO，不然可能不会重新获取
         rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
         //设置价格
@@ -429,7 +440,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         mRewardDescription.setText(rewardDTO.getDescription());
         //设置时间
         //FIXME
-        mOperateTime.setText( "悬赏居然没有日期，真是醉了" );
+        mOperateTime.setText("悬赏居然没有日期，真是醉了");
     }
 
 
@@ -455,6 +466,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
 
         /**
          * 对结果进行处理
+         *
          * @param result
          */
         @Override
@@ -468,6 +480,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
                     }.getType();
                     StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("studentDTO"), type);
+                    //// TODO: 2017/6/11 全局变量
                     //存储学生信息DTO
                     GlobalUtil.getInstance().setStudentDTO(studentDTO);
                     //获取老师信息DTO
@@ -476,6 +489,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
                     Log.i("malei", jsonObject.getString("teacherDTO"));
                     if (teacherDTO != null) {
+                        //// TODO: 2017/6/11 全局变量
                         //存储老师DTO
                         GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
                         Log.i("geyao  ", "认证后存储老师DTO了嘛？ " + this.getClass());
@@ -554,23 +568,23 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         }
     }
 
-    public class DeleteRewardAction extends AsyncTask<String, String, String>{
+    public class DeleteRewardAction extends AsyncTask<String, String, String> {
 
         private DeleteController deleteController = new DeleteController();
 
         @Override
         protected String doInBackground(String... strings) {
-            deleteController.setRewardId( rewardDTO.getId() + "" );
+            deleteController.setRewardId(rewardDTO.getId() + "");
             return deleteController.execute();
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (s != null){
+            if (s != null) {
                 try {
                     JSONObject jsonObject = new JSONObject(s);
-                    if ("success".equals(jsonObject.getString("result"))){
+                    if ("success".equals(jsonObject.getString("result"))) {
                         Toast.makeText(RewardActivity.this, "删除成功", Toast.LENGTH_SHORT);
                         //更新数据
                         //TODO 这里依然是用全局变量处理悬赏
@@ -586,7 +600,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }else {
+            } else {
                 Toast.makeText(RewardActivity.this, "未连接到网络，请检查", Toast.LENGTH_SHORT).show();
             }
         }

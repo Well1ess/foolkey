@@ -89,9 +89,9 @@ public class StudentInfoActivity extends AbstractActivity {
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
-        int position = getIntent().getIntExtra("position", 0);
-        mStudentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
-
+//        int position = getIntent().getIntExtra("position", 0);
+//        mStudentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
+        mStudentDTO = (StudentDTO) getIntent().getSerializableExtra("DTO");
         initData();
 
 

@@ -52,11 +52,11 @@
 
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
-                android:id="@+id/title"
                 android:layout_centerInParent="true"
                 android:text="注册账号"
                 android:gravity="center"
@@ -74,7 +74,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/commit"
+                    android:id="@+id/tv_commit"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="注册"
@@ -113,11 +113,11 @@
             />
 
         <LinearLayout
+            android:id="@+id/login_form"
             android:layout_marginTop="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_centerInParent="true"
-            android:id="@+id/login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -128,8 +128,8 @@
                 android:textColorHint="@color/colorPrimary">
 
                 <EditText
-                    android:textColorHint="@color/colorPrimary"
                     android:id="@+id/et_userName"
+                    android:textColorHint="@color/colorPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="手机号"
@@ -145,8 +145,8 @@
                 android:textColorHint="@color/colorPrimary">
 
                 <EditText
-                    android:textColorHint="@color/colorPrimary"
                     android:id="@+id/et_passWord"
+                    android:textColorHint="@color/colorPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="密码"
@@ -165,8 +165,8 @@
                 android:textColorHint="@color/colorPrimary">
 
                 <EditText
+                    android:id="@+id/et_confirm_passWord"
                     android:textColorHint="@color/colorPrimary"
-                    android:id="@+id/confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="确认密码"
@@ -192,8 +192,8 @@
                     android:textColorHint="@color/colorPrimary">
 
                     <EditText
+                        android:id="@+id/et_code"
                         android:textColorHint="@color/colorPrimary"
-                        android:id="@+id/code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="验证码"

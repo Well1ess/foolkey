@@ -194,7 +194,7 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
         mRewardAgree.setOnClickListener(this);
         mRewardDisagree = (RadioButton)findViewById(R.id.rb_main_menu_disagree);
         mRewardDisagree.setOnClickListener(this);
-        mReturn = (ImageButton) findViewById(R.id.tv_return);
+        mReturn = (ImageButton) findViewById(R.id.ib_return);
         mReturn.setOnClickListener(this);
 
     }

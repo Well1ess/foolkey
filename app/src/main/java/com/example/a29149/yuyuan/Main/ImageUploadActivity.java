@@ -31,18 +31,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.UploadFile;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.userInfo.GetPictureImageController;
-import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
-import com.example.resource.util.image.ImageService;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -225,7 +223,7 @@ public class ImageUploadActivity extends AbstractActivity {
         // outputX outputY 是裁剪图片宽高
         intent.putExtra("outputX", 150);
         intent.putExtra("outputY", 150);
-        intent.putExtra("return-data", true);
+        intent.putExtra("return-dataList", true);
         startActivityForResult(intent, CROP_SMALL_PICTURE);
     }
 
@@ -235,7 +233,7 @@ public class ImageUploadActivity extends AbstractActivity {
     protected void setImageToView(Intent data) {
         Bundle extras = data.getExtras();
         if (extras != null) {
-            mBitmap = extras.getParcelable("data");
+            mBitmap = extras.getParcelable("dataList");
             //这里图片是方形的，可以用一个工具类处理成圆形（很多头像都是圆形，这种工具类网上很多不再详述）
             mImage.setImageBitmap(mBitmap);//显示图片
             //保存图片至sd卡

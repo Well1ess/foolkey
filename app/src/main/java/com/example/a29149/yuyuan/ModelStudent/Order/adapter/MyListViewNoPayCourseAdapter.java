@@ -32,7 +32,7 @@ import java.util.Map;
  * Email:ml1995@mail.ustc.edu.cn
  * 已购买课程而未付款listView的Adapter
  */
-
+@Deprecated
 public class MyListViewNoPayCourseAdapter extends BaseAdapter implements OnClickListener{
     private Context mContext;
 

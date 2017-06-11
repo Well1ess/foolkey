@@ -10,14 +10,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
-import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 /**
@@ -89,9 +88,8 @@ public class StudentInfoActivity extends AbstractActivity {
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
-//        int position = getIntent().getIntExtra("position", 0);
-//        mStudentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
         mStudentDTO = (StudentDTO) getIntent().getSerializableExtra("DTO");
+
         initData();
 
 

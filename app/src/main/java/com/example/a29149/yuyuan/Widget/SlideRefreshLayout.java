@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.VelocityTracker;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -24,7 +23,7 @@ public class SlideRefreshLayout extends FrameLayout {
     //滑动跟手的程度，越小越灵敏
     private static final double SCROLL_SPEED = 1.5;
     //滑动的阈值
-    private static final int SCROLL_THRESHOLD = 50;
+    private static final int SCROLL_THRESHOLD = 40;
     //测量速度的时间间隔
     private static final int OBSERVE_TIME = 1000;
     //滑动速度的阈值
@@ -35,7 +34,7 @@ public class SlideRefreshLayout extends FrameLayout {
 
 
     //记录手指滑动的速度
-    private VelocityTracker mTracker;
+//    private VelocityTracker mTracker;
 
     private View mRotateView;
 
@@ -54,21 +53,18 @@ public class SlideRefreshLayout extends FrameLayout {
         super(context);
         mScroller = new Scroller(context);
         mContext = context;
-        mTracker = VelocityTracker.obtain();
     }
 
     public SlideRefreshLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mScroller = new Scroller(context);
         mContext = context;
-        mTracker = VelocityTracker.obtain();
     }
 
     public SlideRefreshLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mScroller = new Scroller(context);
         mContext = context;
-        mTracker = VelocityTracker.obtain();
     }
 
     @Override
@@ -118,17 +114,10 @@ public class SlideRefreshLayout extends FrameLayout {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-
                 break;
             case MotionEvent.ACTION_MOVE:
                 startRotate();
                 int deltaY = y - mLastY;
-
-                //TODO 这里其实应该是记录速度，但总是失败，我只有根据手指滑动的距离来做了
-                if (deltaY > FINGER_DISTANCE){
-                    onSlideRefreshListener.onRefresh();
-                    break;
-                }
 
                 int offsetY = 0;
                 if (deltaY != 0 && deltaY > 0)
@@ -149,12 +138,12 @@ public class SlideRefreshLayout extends FrameLayout {
                 break;
         }
         //清空速度追踪器
-        mTracker.clear();
         mLastY = y;
         mLastX = x;
         return true;
     }
 
+    //FIXME 这个滑动比较卡
     public void smoothScrollBy(int dx, int dy) {
         mScroller.startScroll(0, getScrollY(), 0, dy, 500);
         invalidate();

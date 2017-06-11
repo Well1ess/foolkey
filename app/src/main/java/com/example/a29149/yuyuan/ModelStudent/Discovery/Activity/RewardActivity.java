@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RewardStateEnum;
@@ -66,6 +68,8 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
     private RadioButton mButtonMiddle; // 联系悬赏人
     private RadioButton mButtonLeft; // 左边的按钮
 
+    private RewardWithStudentSTCDTO rewardWithStudentSTCDTO;    //悬赏包含的所有信息
+
     private int position = -1;//item位置
     private StudentDTO studentDTO;//发布悬赏的学生信息
     private RewardDTO rewardDTO;//悬赏信息
@@ -84,28 +88,40 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
     private RequestManager glide;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward);   //绑定UI
-        //获取意图
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        //获取位置
-        position = extras.getInt("position");
-        Log.i("malei", position + "");
-        if (position != -1) {
-            //获取信息
-            studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
-            rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
-
-        } else {
-            studentDTO = new StudentDTO();
-            rewardDTO = new RewardDTO();
-        }
+//        //获取意图
+//        Intent intent = getIntent();
+//        Bundle extras = intent.getExtras();
+//        //获取位置
+//        position = extras.getInt("position");
+//        Log.i("malei", position + "");
+//        if (position != -1) {
+//            //获取信息
+//            studentDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getStudentDTO();
+//            rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
+//
+//        } else {
+//            studentDTO = new StudentDTO();
+//            rewardDTO = new RewardDTO();
+//        }
 
         //注解式绑定
         AnnotationUtil.setClickListener(this);
         AnnotationUtil.injectViews(this);
+
+        //获取意图，从意图中获取DTO
+        Intent intent = getIntent();
+        rewardWithStudentSTCDTO = ( RewardWithStudentSTCDTO )intent.getSerializableExtra("DTO");
+
+        if(rewardWithStudentSTCDTO!=null) {
+            studentDTO = rewardWithStudentSTCDTO.getStudentDTO();
+            rewardDTO = rewardWithStudentSTCDTO.getRewardDTO();
+        }else {
+            studentDTO = new StudentDTO();
+            rewardDTO = new RewardDTO();
+        }
         //初始化数据与试图
         initView();
         initData();

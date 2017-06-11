@@ -41,6 +41,14 @@ public class RewardDiscoveryFragment extends AbstractFragment {
     //缓存当前view，方便再次切换到这个view时，不需要执行onCreateView方法
     private View view;
 
+    private Context mContext;
+
+
+    private List<RewardWithStudentSTCDTO> allRewardWithStudentSTCDTOS = new ArrayList<>(); //所有的悬赏列表
+
+//    private RewardListAdapter rewardListAdapter;    //悬赏的Adapter
+
+
     //下拉刷新的Layout
     @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideLayout;
@@ -77,6 +85,7 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                              Bundle savedInstanceState) {
 
         // 判断view有没有创建，如果创建了，则不需要重新加载。
+        mContext = getContext();
         if (view == null) {
             //把跳跳跳动画放在这里，目的是第一次创建view时，才会执行动画
             MainStudentActivity.shapeLoadingDialog.show();
@@ -87,17 +96,34 @@ public class RewardDiscoveryFragment extends AbstractFragment {
             //list初始化
             mListAdapter = new RewardListAdapter(getContext());
             //给listView设置adapter
-            mRewardList.setAdapter(mListAdapter);
+
             //给viewList设置点击监听器
             mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent toCourseActivity = new Intent(getActivity(), RewardActivity.class);
-                    toCourseActivity.putExtra("position", position);
-                    startActivity(toCourseActivity, ActivityOptions
-                            .makeSceneTransitionAnimation( getActivity(), view, "shareHead").toBundle() );
+                    //TODO 课程的立即评价还没有解决
+                    //查看某个具体的课程订单
+                    Intent intent = new Intent(mContext, RewardActivity.class);
+                    //新建Bundle，放置具体的DTO
+                    Bundle bundle = new Bundle();
+                    //从类变量的List里获取具体的DTO
+                    bundle.putSerializable("DTO", allRewardWithStudentSTCDTOS.get(position));
+                    //将Bundle放置在intent里，并开启新Activity
+                    intent.putExtras( bundle );
+                    startActivity( intent );
+                    Log.i(TAG, "onItemClick: 114 " + position);
                 }
             });
+
+//            mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    Intent toCourseActivity = new Intent(getActivity(), RewardActivity.class);
+//                    toCourseActivity.putExtra("position", position);
+//                    startActivity(toCourseActivity, ActivityOptions
+//                            .makeSceneTransitionAnimation( getActivity(), view, "shareHead").toBundle() );
+//                }
+//            });
 
             //设置列表动态加载
             mRewardList.setOnLoadingListener(new DynamicListView.onLoadingListener() {
@@ -126,8 +152,10 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                             pageNo = 1;
                             List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs = new ArrayList<RewardWithStudentSTCDTO>();
 
-                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(rewardWithStudentSTCDTOs);
+                            setAllRewardWithStudentSTCDTOS(rewardWithStudentSTCDTOs);
+//                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(rewardWithStudentSTCDTOs);
                             GetReward getReward = new GetReward(pageNo);
+                            Log.d(TAG, "onRefresh: 142 ");
                             getReward.execute();
                         }
                     });
@@ -194,14 +222,19 @@ public class RewardDiscoveryFragment extends AbstractFragment {
 
                         //若>1则表示分页存取
                         if (pageNo == 1) {
+                            setAllRewardWithStudentSTCDTOS(courseStudentDTOS);
+                            mListAdapter.setData(allRewardWithStudentSTCDTOS);
+                            mRewardList.setAdapter(mListAdapter);
+                            Log.d(TAG, "onPostExecute: 210");
                             GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(courseStudentDTOS);
                         } else if (pageNo > 1) {
-                            List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs();
-                            rewardWithStudentSTCDTOs.addAll(courseStudentDTOS);
-                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(rewardWithStudentSTCDTOs);
+//                            List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOs = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs();
+                            allRewardWithStudentSTCDTOS.addAll(courseStudentDTOS);
+                            GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(allRewardWithStudentSTCDTOS);
                             mRewardList.onLoadFinish();
                         }
-//                        //如果分页请求结果为空，说明没有请求到下一页，设置页码为当前页
+
+                        //如果分页请求结果为空，说明没有请求到下一页，设置页码为当前页
 //                        if (courseStudentDTOS.size() != 0) {
 //                            setPageNo(pageNo + 1);
 //                        }
@@ -209,6 +242,8 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+//                                rewardListAdapter.setData(allRewardWithStudentSTCDTOS);
+
                                 //pageNo++;
                                 mListAdapter.notifyDataSetChanged();
                                 MainStudentActivity.shapeLoadingDialog.dismiss();
@@ -236,5 +271,13 @@ public class RewardDiscoveryFragment extends AbstractFragment {
 
     public void setPageNo(int pageNo) {
         this.pageNo = pageNo;
+    }
+
+    public List<RewardWithStudentSTCDTO> getAllRewardWithStudentSTCDTOS() {
+        return allRewardWithStudentSTCDTOS;
+    }
+
+    public void setAllRewardWithStudentSTCDTOS(List<RewardWithStudentSTCDTO> allRewardWithStudentSTCDTOS) {
+        this.allRewardWithStudentSTCDTOS = allRewardWithStudentSTCDTOS;
     }
 }

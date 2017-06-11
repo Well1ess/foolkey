@@ -27,6 +27,8 @@ import java.util.List;
  */
 
 public abstract class YYOrderAdapter extends YYBaseAdapter<OrderBuyCourseAsStudentDTO> {
+    private static final String TAG = "YYOrderAdapter";
+
     //默认按钮不显示
     protected boolean buttonVisibleFlag = false;
     //默认按钮文字为 ""
@@ -111,16 +113,23 @@ public abstract class YYOrderAdapter extends YYBaseAdapter<OrderBuyCourseAsStude
      * @param viewHolder
      */
     public void initView(OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO, OrderViewHolder viewHolder){
-        viewHolder.mNickedName.setText(orderBuyCourseAsStudentDTO.getStudentDTO().getNickedName());
-        viewHolder.mTitle.setText(orderBuyCourseAsStudentDTO.getCourse().getTopic());
-        viewHolder.mAmount.setText("金额:" + orderBuyCourseAsStudentDTO.getOrderDTO().getAmount());
-        //填充头像
-        glide = Glide.with(mContext);
-        glide.load(PictureInfoBO.getOnlinePhoto( orderBuyCourseAsStudentDTO.getStudentDTO().getUserName() ))
-                .transform(new GlideCircleTransform(mContext))
-                .error(R.drawable.photo_placeholder1)
-                .into( viewHolder.mPhoto );
-        //按钮的设置，在createView里进行了
+        if (orderBuyCourseAsStudentDTO != null) {
+            viewHolder.mNickedName.setText(orderBuyCourseAsStudentDTO.getStudentDTO().getNickedName());
+            viewHolder.mTitle.setText(orderBuyCourseAsStudentDTO.getCourse().getTopic());
+            viewHolder.mAmount.setText("金额:" + orderBuyCourseAsStudentDTO.getOrderDTO().getAmount());
+            //填充头像
+            glide = Glide.with(mContext);
+            glide.load(PictureInfoBO.getOnlinePhoto(orderBuyCourseAsStudentDTO.getStudentDTO().getUserName()))
+                    .transform(new GlideCircleTransform(mContext))
+                    .error(R.drawable.photo_placeholder1)
+                    .into(viewHolder.mPhoto);
+            //按钮的设置，在createView里进行了
+        }else {
+            //空数据
+
+        }
+
+
     }
 
 
@@ -153,7 +162,18 @@ public abstract class YYOrderAdapter extends YYBaseAdapter<OrderBuyCourseAsStude
                 mButton.setVisibility(View.INVISIBLE);
             }
             //按钮显示文字
-            mButton.setText(text.substring(0, 3));
+            mButton.setText(text.substring(0, 4));
+        }
+
+        @Override
+        public String toString() {
+            return "OrderViewHolder{" +
+                    "mPhoto=" + mPhoto +
+                    ", mNickedName=" + mNickedName +
+                    ", mTitle=" + mTitle +
+                    ", mAmount=" + mAmount +
+                    ", mButton=" + mButton +
+                    '}';
         }
     }
 }

@@ -43,9 +43,8 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
     public T getItem(int position) {
         if (dataList == null)
             return null;
-        else if (dataList.size() - 1 > position)
+        if (position >= 0 || position < dataList.size())
             return dataList.get(position);
-
         return null;
     }
 

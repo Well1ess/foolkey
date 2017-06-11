@@ -143,8 +143,6 @@ public class NoPayFragment extends AbstractFragment {
 
         @Override
         protected String doInBackground(String... params) {
-            //跳跳跳动画出现
-            shapeLoadingDialog.show();
 
             return GetSpecificStateOrderController.execute(
                     OrderStateEnum.未付款.toString(),

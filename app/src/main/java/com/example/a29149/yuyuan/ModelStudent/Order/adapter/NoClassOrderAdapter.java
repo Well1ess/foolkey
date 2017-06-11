@@ -20,6 +20,6 @@ public class NoClassOrderAdapter extends YYOrderAdapter {
     @Override
     void buttonClick(OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO) {
         //TODO聊天功能并没有做
-        Toast.makeText(mContext, "聊天敬请期待", Toast.LENGTH_SHORT);
+        Toast.makeText(mContext, "聊天敬请期待", Toast.LENGTH_SHORT).show();
     }
 }

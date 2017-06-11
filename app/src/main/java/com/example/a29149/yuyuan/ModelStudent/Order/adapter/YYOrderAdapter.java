@@ -26,18 +26,17 @@ import java.util.List;
  * Created by geyao on 2017/6/11.
  */
 
-public abstract class YYOrderAdatper extends YYBaseAdapter<OrderBuyCourseAsStudentDTO> {
+public abstract class YYOrderAdapter extends YYBaseAdapter<OrderBuyCourseAsStudentDTO> {
     //默认按钮不显示
     protected boolean buttonVisibleFlag = false;
     //默认按钮文字为 ""
     protected String buttonText = "";
-
     //图片加载器
     private RequestManager glide;
 
     //构造器
     //构造的时候就指明按钮的显示
-    public YYOrderAdatper(List<OrderBuyCourseAsStudentDTO> data, Context context, boolean buttonVisibleFlag, String buttonText) {
+    public YYOrderAdapter(List<OrderBuyCourseAsStudentDTO> data, Context context, boolean buttonVisibleFlag, String buttonText) {
         super(data, context);
         this.buttonVisibleFlag = buttonVisibleFlag;
         this.buttonText = buttonText;

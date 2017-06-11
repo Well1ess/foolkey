@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +16,9 @@ import android.widget.Toast;
 import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
-import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderCourseInfoActivity;
+import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoPayClassAdapter;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -48,15 +46,16 @@ public class NoPayFragment extends AbstractFragment {
     private View view;
 
     private Context mContext;
-    private MyListView mBuyCourse;
-    private MyListView mRecommand;
+    private MyListView mCourseListView;  //未付款课程
+    private MyListView mRecommendListView;  //推荐
     private List<Map<String,Object>> courseNoPayList = new ArrayList<>();
+    @Deprecated
     private List rewardList = new ArrayList();//悬赏列表
-    private List courseList = new ArrayList();//课程列表
+    private List<OrderBuyCourseAsStudentDTO> courseList = new ArrayList();//课程列表
 
-    public  ShapeLoadingDialog shapeLoadingDialog;
+    public  ShapeLoadingDialog shapeLoadingDialog; // 跳跳跳动画
     private int pageNo = 1;//页数
-    private GetOrderBuyCourseAsTeacherByOrderStatesController getOrderBuyCourseAsTeacherByOrderStatesController;
+    private GetOrderBuyCourseAsTeacherByOrderStatesController getOrderBuyCourseAsTeacherByOrderStatesController; // 与后台交互的controller
 
 
     @Nullable
@@ -69,6 +68,7 @@ public class NoPayFragment extends AbstractFragment {
         }
 
         mContext = getContext();
+        //绑定UI
         view = inflater.inflate(R.layout.fragment_viewpager_nopay, null);
 
         shapeLoadingDialog = new ShapeLoadingDialog(mContext);
@@ -76,19 +76,24 @@ public class NoPayFragment extends AbstractFragment {
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
 
 
-        mBuyCourse = (MyListView) view.findViewById(R.id.lv_buyCourse);
-        mBuyCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mCourseListView = (MyListView) view.findViewById(R.id.lv_buyCourse);
+        mCourseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("malei","你点击了"+position);
-                Intent toOrderInfo = new Intent(mContext, OrderCourseInfoActivity.class);
-                toOrderInfo.putExtra("position", position);
+                // 跳转到订单详情的意图
+                Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
+                //构造传输的数据
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("DTO", courseList.get(position));
+                toOrderInfo.putExtras(bundle);
+                //开启活动
                 startActivity( toOrderInfo );
             }
         });
 
-        mRecommand = (MyListView) view.findViewById(R.id.lv_recommend);
-        mRecommand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mRecommendListView = (MyListView) view.findViewById(R.id.lv_recommend);
+        mRecommendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("malei","你点击了"+position);
@@ -98,44 +103,12 @@ public class NoPayFragment extends AbstractFragment {
 
         //刚开始请求第一页
         pageNo = 1;
-        loadData(pageNo);
+        requestData(pageNo);
 
 
         return view;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && GlobalUtil.getInstance().getFragmentFresh()) {
-            //相当于Fragment的onResume
-            //在这里处理加载数据等操作
-            //用全局的方式实现回调
-            shapeLoadingDialog.show();
-            pageNo = 1;
-            loadData(pageNo);
-            GlobalUtil.getInstance().setFragmentFresh(false);
-        } else {
-            //相当于Fragment的onPause
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (GlobalUtil.getInstance().getFragmentFresh()){
-
-        }else {
-            //不刷新页面，不执行
-        }
-    }
-
-    private void loadData(int pageNo) {
-        //如果没有进行加载
-        if (shapeLoadingDialog != null) {
-            requestData(pageNo);
-        }
-    }
 
     //请求数据
     private void requestData(int pageNo) {
@@ -170,6 +143,8 @@ public class NoPayFragment extends AbstractFragment {
 
         @Override
         protected String doInBackground(String... params) {
+            //跳跳跳动画出现
+            shapeLoadingDialog.show();
 
             return GetSpecificStateOrderController.execute(
                     OrderStateEnum.未付款.toString(),
@@ -208,23 +183,23 @@ public class NoPayFragment extends AbstractFragment {
                     }
 
                     String resultFlag = jsonObject.getString("result");
-                    Log.i("malei","NoPay    "+resultFlag);
                     if (resultFlag.equals("success")) {
-//                        Toast.makeText(mContext, "获取未付款订单成功！", Toast.LENGTH_SHORT).show();
+
+                        //构建未付款订单的adapter，并设置数据
                         MyListViewNoPayClassAdapter myListViewNoPayClassAdapter = new MyListViewNoPayClassAdapter(mContext);
                         myListViewNoPayClassAdapter.setData(courseList);
+                        //ListView设置adapter
+                        mCourseListView.setAdapter(myListViewNoPayClassAdapter);
 
-                        MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
-                        mBuyCourse.setAdapter(myListViewNoPayClassAdapter);
-
-                        mRecommand.setAdapter(myListViewRecommandAdapter);
+                        //TODO 推荐没有做
+//                        MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
+//                        mRecommendListView.setAdapter(myListViewRecommandAdapter);
 
 
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
 //                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
-                    Log.i("malei","NoPay fail");
                 }
                 finally {
                     shapeLoadingDialog.dismiss();
@@ -280,7 +255,6 @@ public class NoPayFragment extends AbstractFragment {
                 try {
                     //存储所有我拥有的悬赏信息DTO
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList();
-                    GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
 
                     rewardList.clear();
                     courseList.clear();
@@ -304,7 +278,7 @@ public class NoPayFragment extends AbstractFragment {
                             @Override
                             public void run() {
                                 MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
-                                mBuyCourse.setAdapter(myListViewNoClassCourseAdapter);
+                                mCourseListView.setAdapter(myListViewNoClassCourseAdapter);
                                 myListViewNoClassCourseAdapter.setData(courseList);
 
                             }

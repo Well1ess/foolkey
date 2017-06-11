@@ -33,7 +33,8 @@ public class Mr_Zhang_ScrollViewPager extends FrameLayout {
     //滑动超过屏幕的 1/N 后，翻页
     private static final int SWITCH_THRESHOLD = 10;
 
-    private static final int SWITCH_SPEED = 400;
+    //测量速度的时间间隔
+    private static final int TIME_FOR_SPEED = 400;
 
     //记录当前child的位置
     private static int mCurrentChild = 0;
@@ -178,7 +179,7 @@ public class Mr_Zhang_ScrollViewPager extends FrameLayout {
                 scrollBy(-deltaX, 0);
                 break;
             case MotionEvent.ACTION_UP:
-                mTracker.computeCurrentVelocity(SWITCH_SPEED);
+                mTracker.computeCurrentVelocity(TIME_FOR_SPEED);
                 float xVelocity = mTracker.getXVelocity();
                 //如果水平方向速度大于阈值，即快速滑动一下
                 if (Math.abs(xVelocity) >= SCROLL_SPEED) {

@@ -15,43 +15,43 @@ import java.util.List;
 public abstract class YYBaseAdapter<T> extends BaseAdapter {
 
     //保存数据
-    private List<T> data;
+    protected List<T> dataList;
     //上下文
-    private Context mContext;
+    protected Context mContext;
     //加载布局
-    private LayoutInflater layoutInflater;
+    protected LayoutInflater layoutInflater;
 
     /**
-     * @param data    数据
+     * @param dataList    数据
      * @param context 上下文
      * @discription 构造函数
      * @author 29149
      * @time 2017/6/10 15:12
      */
-    public YYBaseAdapter(List<T> data, Context context) {
-        this.data = data;
+    public YYBaseAdapter(List<T> dataList, Context context) {
+        this.dataList = dataList;
         mContext = context;
         layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return data.size();
+        return dataList.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        if (data == null)
+    public T getItem(int position) {
+        if (dataList == null)
             return null;
-        else if (data.size() - 1 < position)
-            return data;
+        else if (dataList.size() - 1 > position)
+            return dataList.get(position);
 
         return null;
     }
 
     @Override
     public long getItemId(int position) {
-        if (data == null)
+        if (dataList == null)
             return 0;
         else
             return position;
@@ -74,7 +74,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
     public boolean addData(T data) {
         if (data == null)
             return false;
-        boolean result = this.data.add(data);
+        boolean result = this.dataList.add(data);
         notifyDataSetChanged();
         return result;
     }
@@ -86,13 +86,13 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
      * @author 29149
      * @time 2017/6/10 15:15
      */
-    public boolean addData(List<T> newData) {
-        if (data == null) {
-            data = newData;
+    public boolean addDataLst(List<T> newData) {
+        if (dataList == null) {
+            dataList = newData;
             notifyDataSetChanged();
             return true;
         } else {
-            boolean result = data.addAll(newData);
+            boolean result = dataList.addAll(newData);
             notifyDataSetChanged();
             return result;
         }
@@ -109,7 +109,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
     public boolean addData(int position, T data) {
         if (data == null)
             return false;
-        this.data.add(position, data);
+        this.dataList.add(position, data);
         notifyDataSetChanged();
         return true;
     }
@@ -122,9 +122,9 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
      * @time 2017/6/10 15:16
      */
     public T remove(int position) {
-        if (position > data.size())
+        if (position > dataList.size())
             return null;
-        T temp = data.remove(position);
+        T temp = dataList.remove(position);
         notifyDataSetChanged();
         return temp;
     }
@@ -137,7 +137,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
      * @time 2017/6/10 15:16
      */
     public boolean remove(T data) {
-        boolean remove = this.data.remove(data);
+        boolean remove = this.dataList.remove(data);
         notifyDataSetChanged();
         return remove;
     }
@@ -148,8 +148,8 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
      * @time 2017/6/10 15:16
      */
     public void resetData() {
-        if (data != null) {
-            data.clear();
+        if (dataList != null) {
+            dataList.clear();
             notifyDataSetChanged();
         }
     }
@@ -163,12 +163,12 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
 
     public void resetData(List<T> data) {
         if (data != null) {
-            this.data = data;
+            this.dataList = data;
             notifyDataSetChanged();
         }
     }
 
-    public List<T> getData(){
-        return data;
+    public List<T> getDataList(){
+        return dataList;
     }
 }

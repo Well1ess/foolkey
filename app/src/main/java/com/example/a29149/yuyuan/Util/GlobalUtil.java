@@ -13,6 +13,7 @@ import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
+import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 
 import java.util.ArrayList;
@@ -435,8 +436,8 @@ public class GlobalUtil {
         return userRole;
     }
 
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
+    public void setUserRole(RoleEnum role) {
+        this.userRole = role.toString();
     }
 
 

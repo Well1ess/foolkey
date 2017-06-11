@@ -9,14 +9,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.Login.LoginActivity;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
-import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Main.MainTeacherActivity;
+import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.AppManager;
@@ -26,7 +27,6 @@ import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.controller.userInfo.LogOutController;
 import com.example.a29149.yuyuan.controller.userInfo.teacher.ApplyToVerifyController;
-import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.google.gson.Gson;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
@@ -114,7 +114,7 @@ public class SettingActivity extends AbstractAppCompatActivity {
                     || verifyState.compareTo(VerifyStateEnum.verified) == 0)
             {
                 //更改用户角色
-                GlobalUtil.getInstance().setUserRole("teacher");
+                GlobalUtil.getInstance().setUserRole(RoleEnum.teacher);
                 Intent intent = new Intent( SettingActivity.this,MainTeacherActivity.class);
                 startActivity(intent);
             }
@@ -142,7 +142,7 @@ public class SettingActivity extends AbstractAppCompatActivity {
      * 老师切换回学生
      */
     private void changeBackTOStudent(){
-        GlobalUtil.getInstance().setUserRole(RoleEnum.student.toString());
+        GlobalUtil.getInstance().setUserRole(RoleEnum.student);
         Intent toStudent = new Intent(SettingActivity.this, MainStudentActivity.class);
         Toast.makeText(this, "已经切换回学生了哦", Toast.LENGTH_LONG).show();
         startActivity(toStudent);

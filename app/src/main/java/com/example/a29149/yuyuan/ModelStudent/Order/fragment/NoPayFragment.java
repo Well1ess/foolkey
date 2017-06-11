@@ -18,7 +18,7 @@ import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoPayClassAdapter;
+import com.example.a29149.yuyuan.ModelStudent.Order.adapter.NoPayCourseAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -186,10 +186,10 @@ public class NoPayFragment extends AbstractFragment {
                     if (resultFlag.equals("success")) {
 
                         //构建未付款订单的adapter，并设置数据
-                        MyListViewNoPayClassAdapter myListViewNoPayClassAdapter = new MyListViewNoPayClassAdapter(mContext);
-                        myListViewNoPayClassAdapter.setData(courseList);
+                        NoPayCourseAdapter noPayCourseAdapter = new NoPayCourseAdapter(mContext);
+                        noPayCourseAdapter.setData(courseList);
                         //ListView设置adapter
-                        mCourseListView.setAdapter(myListViewNoPayClassAdapter);
+                        mCourseListView.setAdapter(noPayCourseAdapter);
 
                         //TODO 推荐没有做
 //                        MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);

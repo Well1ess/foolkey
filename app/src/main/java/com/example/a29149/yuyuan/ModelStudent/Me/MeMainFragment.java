@@ -251,11 +251,11 @@ public class MeMainFragment extends AbstractFragment implements View.OnClickList
      * 这并不能起作用，还是要在activity里用
      * @param requestCode
      * @param resultCode
-     * @param data
+     * @param dataList
      */
 //    @Deprecated
 //    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//    public void onActivityResult(int requestCode, int resultCode, Intent dataList) {
 //        switch (requestCode)
 //        {
 //            case FROM_ME_FRAGMENT_TO_RECHARGE:

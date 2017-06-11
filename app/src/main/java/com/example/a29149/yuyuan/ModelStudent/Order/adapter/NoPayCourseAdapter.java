@@ -22,7 +22,6 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,14 +30,14 @@ import java.util.List;
  * 课程而未购买listView的Adapter
  */
 
-public class MyListViewNoPayClassAdapter extends BaseAdapter implements OnClickListener{
+public class NoPayCourseAdapter extends BaseAdapter implements OnClickListener{
     private Context mContext;
 
     private ImageView mTeacherPhone;//老师头像
     private TextView mTeacherNameAndCourseName;//老师姓名和课程名
     private TextView mBuyTime;//购买时长
     private TextView mCourseCost;//课程价格
-    private TextView mCancel;//评价订单
+    private TextView mCancel;//取消订单
     private List<OrderBuyCourseAsStudentDTO> courseNoPayList;//课程但还未购买订单
     private StudentDTO mStudentDTO;//学生信息
     private TeacherDTO mTeacherDTO;//老师信息
@@ -47,13 +46,12 @@ public class MyListViewNoPayClassAdapter extends BaseAdapter implements OnClickL
     private OrderBuyCourseDTO mOrderBuyCourseDTO;//订单信息
     private OrderBuyCourseAsStudentDTO mOrderBuyCourseAsStudentDTO;//全部信息
     private int position; //记录位置
-    private List rewardList = new ArrayList();//悬赏列表
-    private List courseList = new ArrayList();//课程列表
+
     private CourseAbstract courseDTO = null ;
 
     private RequestManager glide;
 
-    public MyListViewNoPayClassAdapter(Context context)
+    public NoPayCourseAdapter(Context context)
     {
         this.mContext = context;
     }
@@ -81,7 +79,7 @@ public class MyListViewNoPayClassAdapter extends BaseAdapter implements OnClickL
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view ;
-        view=View.inflate(mContext, R.layout.listview_item_nocomment_course,null);
+        view=View.inflate(mContext, R.layout.adapter_order,null);
         this.position = position;
 
         mOrderBuyCourseAsStudentDTO = courseNoPayList.get(position);
@@ -110,7 +108,8 @@ public class MyListViewNoPayClassAdapter extends BaseAdapter implements OnClickL
         mTeacherNameAndCourseName = (TextView) view.findViewById(R.id.tv_nickedName);
         mBuyTime = (TextView) view.findViewById(R.id.tv_buyTime);
         mCourseCost = (TextView) view.findViewById(R.id.tv_amount);
-        mCancel = (TextView) view.findViewById(R.id.tv_judge);
+        mCancel = (TextView) view.findViewById(R.id.tv_button);
+
         mCancel.setOnClickListener(this);
 
         glide = Glide.with(mContext);
@@ -125,7 +124,7 @@ public class MyListViewNoPayClassAdapter extends BaseAdapter implements OnClickL
         int id = v.getId();
         switch (id)
         {
-            case R.id.tv_judge:
+            case R.id.tv_button:
                 cancelCourse();
         }
     }

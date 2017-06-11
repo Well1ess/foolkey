@@ -70,7 +70,7 @@ public class UploadImageActivity extends AppCompatActivity implements View.OnCli
             case UploadImageActivity.SELECT_CAMERA://相机
 
                 Bundle bundle = data.getExtras();
-                photo = (Bitmap) bundle.get("data");
+                photo = (Bitmap) bundle.get("dataList");
                 miv_photoEdit.setImageBitmap(photo);
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();

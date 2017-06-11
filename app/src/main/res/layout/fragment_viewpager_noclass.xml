@@ -25,7 +25,10 @@
         <com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView
             android:id="@+id/lv_noStartCourse"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider_reward_list"
+            android:dividerHeight="1px"
+            />
 
         <View
             android:layout_width="match_parent"
@@ -47,7 +50,10 @@
         <com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView
             android:id="@+id/lv_reward"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider_reward_list"
+            android:dividerHeight="1px"
+            />
 
         <TextView
             android:layout_width="match_parent"

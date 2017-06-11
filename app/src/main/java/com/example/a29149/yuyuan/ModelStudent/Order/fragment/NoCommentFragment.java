@@ -17,7 +17,6 @@ import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.NoJudgedOrderAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
@@ -84,6 +83,7 @@ public class NoCommentFragment extends AbstractFragment {
 
         //刚开始请求第一页
         pageNo = 1;
+        //请求数据
         requestData(pageNo);
         //TODO 这里立即评价还没有解决
         //课程的ListView,绑定UI
@@ -126,43 +126,18 @@ public class NoCommentFragment extends AbstractFragment {
         mRecommend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("malei","你点击了"+position);
+                //TODO 推荐没做
             }
         });
 
-
-        MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
-        mRecommend.setAdapter(myListViewRecommandAdapter);
         return view;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && GlobalUtil.getInstance().getFragmentFresh()) {
-            //相当于Fragment的onResume
-            //在这里处理加载数据等操作
-            //用全局的方式实现回调
-            shapeLoadingDialog.show();
-            pageNo = 1;
-            requestData(pageNo);
-        } else {
-            //相当于Fragment的onPause
-        }
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (GlobalUtil.getInstance().getFragmentFresh()){
-
-        }else {
-            //不刷新页面，不执行
-        }
-    }
-
-
-    //请求数据
+    /**
+     * 根据不同的身份，请求数据
+     * @param pageNo
+     */
     private void requestData(int pageNo) {
         String userRole = GlobalUtil.getInstance().getUserRole();
         switch (userRole){
@@ -174,27 +149,6 @@ public class NoCommentFragment extends AbstractFragment {
                 new TeacherRequestNoCommentOrderAction(pageNo).execute();
                 break;
         }
-    }
-
-    /**
-     * 获取悬赏adapter的数据源
-     * 如果更新悬赏订单，要改动这里的list
-     *
-     * @return reward list
-     */
-    public List<OrderBuyCourseAsStudentDTO> getRewardList() {
-        return rewardList;
-    }
-
-    /**
-     * 获取课程adapter的数据源
-     * 如果更新课程订单，要改动这里的list
-     *
-     * @return course list
-     */
-    public List<OrderBuyCourseAsStudentDTO> getCourseList() {
-        //TODO
-        return courseList;
     }
 
     /**
@@ -222,6 +176,7 @@ public class NoCommentFragment extends AbstractFragment {
 
     /**
      * 获取悬赏的Adapter
+     * 如果要操纵数据源，通过Adapter来操作
      * @return
      */
     public NoJudgedOrderAdapter getRewardAdapter() {
@@ -230,6 +185,7 @@ public class NoCommentFragment extends AbstractFragment {
 
     /**
      * 获取课程的Adapter
+     * 如果要操纵数据源，通过Adapter来操作
      * @return
      */
     public NoJudgedOrderAdapter getCourseAdapter() {
@@ -257,12 +213,6 @@ public class NoCommentFragment extends AbstractFragment {
         }
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            shapeLoadingDialog.show();
-        }
-
-        @Override
         protected String doInBackground(String... params) {
             return GetSpecificStateOrderController.execute(
                     OrderStateEnum.结束上课.toString(),
@@ -278,31 +228,26 @@ public class NoCommentFragment extends AbstractFragment {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
-                    //存储所有我拥有的悬赏信息DTO
-                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
-                    }.getType();
-                    List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
-
-                    //Log.i("malei", "commentRewardActivity="+GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().toString());
-
-                    rewardList.clear();
-                    courseList.clear();
-                    for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
-                        switch (dto.getOrderDTO().getCourseTypeEnum()) {
-                            case 学生悬赏: {
-                                rewardList.add(dto);
-                            }
-                            break;
-                            case 老师课程: {
-                                courseList.add(dto);
-                            }
-                            break;
-                        }
-                    }
-
-
+                    //如果成功
                     if (resultFlag.equals("success")) {
-//                        Toast.makeText(mContext, "获取成功！", Toast.LENGTH_SHORT).show();
+                        //获取所有我拥有的悬赏信息DTO
+                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
+                        }.getType();
+                        List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
+                        rewardList.clear();
+                        courseList.clear();
+                        for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
+                            switch (dto.getOrderDTO().getCourseTypeEnum()) {
+                                case 学生悬赏: {
+                                    rewardList.add(dto);
+                                }
+                                break;
+                                case 老师课程: {
+                                    courseList.add(dto);
+                                }
+                                break;
+                            }
+                        }
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -315,6 +260,9 @@ public class NoCommentFragment extends AbstractFragment {
                                 mReward.setAdapter( rewardAdapter );
                             }
                         }, 1000);
+                    }else {
+                        //获取失败
+                        Toast.makeText(mContext, "网络连接失败！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -356,12 +304,6 @@ public class NoCommentFragment extends AbstractFragment {
         }
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            shapeLoadingDialog.show();
-        }
-
-        @Override
         protected String doInBackground(String... params) {
 
             getOrderBuyCourseAsTeacherByOrderStatesController = new GetOrderBuyCourseAsTeacherByOrderStatesController();
@@ -381,11 +323,8 @@ public class NoCommentFragment extends AbstractFragment {
                 try {
                     //存储所有我拥有的悬赏信息DTO
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList();
-                    GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
-
                     rewardList.clear();
                     courseList.clear();
-                    System.out.println(this.getClass() + "   \n " + orderBuyCourseAsStudentDTOs);
                     for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
                         switch (dto.getOrderDTO().getCourseTypeEnum()) {
                             case 学生悬赏: {
@@ -398,22 +337,12 @@ public class NoCommentFragment extends AbstractFragment {
                             break;
                         }
                     }
+                    courseAdapter = new NoJudgedOrderAdapter( courseList, mContext );
+                    mCourse.setAdapter( courseAdapter );
 
-                    Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
-                    if (resultFlag.equals("success")) {
-//                        Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                courseAdapter = new NoJudgedOrderAdapter( courseList, mContext );
-                                mCourse.setAdapter( courseAdapter );
-
-                                //绑定未评价悬赏的adapter
-                                rewardAdapter = new NoJudgedOrderAdapter( rewardList, mContext );
-                                mReward.setAdapter( rewardAdapter );
-                            }
-                        }, 1000);
-                    }
+                    //绑定未评价悬赏的adapter
+                    rewardAdapter = new NoJudgedOrderAdapter( rewardList, mContext );
+                    mReward.setAdapter( rewardAdapter );
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

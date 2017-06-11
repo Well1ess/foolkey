@@ -17,7 +17,6 @@ import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.NoClassOrderAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
@@ -53,6 +52,11 @@ public class NoClassFragment extends AbstractFragment {
     private Object object;
     public ShapeLoadingDialog shapeLoadingDialog;
     private int pageNo = 1;//页数
+
+    //未上课悬赏的Adapter
+    private NoClassOrderAdapter rewardAdapter;
+    //未上课课程的Adapter
+    private NoClassOrderAdapter courseAdapter;
 
     private GetOrderBuyCourseAsTeacherByOrderStatesController getOrderBuyCourseAsTeacherByOrderStatesController; // 作为老师获取课程订单的controller
 
@@ -103,7 +107,6 @@ public class NoClassFragment extends AbstractFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //点击悬赏，进入悬赏详情
-                Log.i("malei", "你点击了" + position);
                 //获取他点击的悬赏
                 OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO = rewardList.get(position);
                 //新建意图
@@ -120,66 +123,28 @@ public class NoClassFragment extends AbstractFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //点击推荐
-                Log.i("malei", "你点击了" + position);
+                //TODO 推荐没做
             }
         });
-
-
-        //推送的
-        MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
-        mRecommend.setAdapter(myListViewRecommandAdapter);
         return view;
     }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && GlobalUtil.getInstance().getFragmentFresh()) {
-            //相当于Fragment的onResume
-            //在这里处理加载数据等操作
-            //用全局的方式实现回调
-            shapeLoadingDialog.show();
-            pageNo = 1;
-            loadData(pageNo);
-            GlobalUtil.getInstance().setFragmentFresh(false);
-        } else {
-            //相当于Fragment的onPause
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (GlobalUtil.getInstance().getFragmentFresh()){
-
-        }else {
-            //不刷新页面，不执行
-        }
-    }
-
     /**
      * 加载数据
      * @param pageNo
      */
     private void loadData(int pageNo) {
-        //如果没有进行加载
-        //FIXME 目前是根据加载动画来决定是否加载的
-        if (shapeLoadingDialog != null) {
-            requestData(pageNo);
-        }
+        requestData(pageNo);
     }
 
     //请求数据
     private void requestData(int pageNo) {
         String userRole = GlobalUtil.getInstance().getUserRole();
-        System.out.println(userRole);
         switch (userRole){
             case "student":
                 new StudentRequestNoClassOrderAction(pageNo).execute();
                 break;
             //其他身份，都是广义上的老师
             default:
-                System.out.println(this.getClass()  + "  老师获取订单了 " + userRole);
                 new TeacherRequestNoClassOrderAction(pageNo).execute();
                 break;
         }
@@ -197,14 +162,7 @@ public class NoClassFragment extends AbstractFragment {
         }
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            shapeLoadingDialog.show();
-        }
-
-        @Override
         protected String doInBackground(String... params) {
-
             return GetSpecificStateOrderController.execute(
                     OrderStateEnum.同意上课.toString(),
                     pageNo + ""
@@ -220,36 +178,35 @@ public class NoClassFragment extends AbstractFragment {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     String resultFlag = jsonObject.getString("result");
-                    //存储所有我拥有的悬赏信息DTO
-                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
-                    }.getType();
-                    List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
-                    GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
 
-                    rewardList.clear();
-                    courseList.clear();
-                    for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
-                        switch (dto.getOrderDTO().getCourseTypeEnum()) {
-                            case 学生悬赏: {
-                                rewardList.add(dto);
-                            }
-                            break;
-                            case 老师课程: {
-                                courseList.add(dto);
-                            }
-                            break;
-                        }
-                    }
                     if (resultFlag.equals("success")) {
-//                        Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
+                        //存储所有我拥有的悬赏信息DTO
+                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
+                        }.getType();
+                        List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
+                        rewardList.clear();
+                        courseList.clear();
+                        for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
+                            switch (dto.getOrderDTO().getCourseTypeEnum()) {
+                                case 学生悬赏: {
+                                    rewardList.add(dto);
+                                }
+                                break;
+                                case 老师课程: {
+                                    courseList.add(dto);
+                                }
+                                break;
+                            }
+                        }
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 //未上课课程绑定Adapter
-                                NoClassOrderAdapter courseAdapter = new NoClassOrderAdapter(courseList, mContext);
+                                courseAdapter = new NoClassOrderAdapter(courseList, mContext);
                                 mCourse.setAdapter( courseAdapter );
                                 //未上课悬赏绑定Adapter
-                                NoClassOrderAdapter rewardAdapter = new NoClassOrderAdapter(rewardList, mContext);
+                                rewardAdapter = new NoClassOrderAdapter(rewardList, mContext);
                                 mReward.setAdapter( rewardAdapter );
 
                             }
@@ -257,7 +214,6 @@ public class NoClassFragment extends AbstractFragment {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();
@@ -286,17 +242,8 @@ public class NoClassFragment extends AbstractFragment {
             super();
             this.pageNo = pageNo;
         }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            System.out.println(this.getClass() + "  已发送请求\n同意上课");
-//            shapeLoadingDialog.show();
-        }
-
         @Override
         protected String doInBackground(String... params) {
-
             getOrderBuyCourseAsTeacherByOrderStatesController = new GetOrderBuyCourseAsTeacherByOrderStatesController();
             getOrderBuyCourseAsTeacherByOrderStatesController.setPageNo(pageNo+"");
             getOrderBuyCourseAsTeacherByOrderStatesController.setOrderStateEnum(OrderStateEnum.同意上课.toString());
@@ -308,15 +255,12 @@ public class NoClassFragment extends AbstractFragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //log.d(this, result);
             String resultFlag = getOrderBuyCourseAsTeacherByOrderStatesController.getResult();
             if (resultFlag.equals("success")) {
                 try {
                     //存储所有我拥有的悬赏信息DTO
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList();
                     Log.i("malei",getClass() + " 294 rewardList=  "+getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList().toString());
-                    GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
-
                     rewardList.clear();
                     courseList.clear();
                     for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
@@ -331,26 +275,21 @@ public class NoClassFragment extends AbstractFragment {
                             break;
                         }
                     }
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //未上课课程绑定Adapter
+                            courseAdapter = new NoClassOrderAdapter(courseList, mContext);
+                            mCourse.setAdapter( courseAdapter );
+                            //未上课悬赏绑定Adapter
+                            rewardAdapter = new NoClassOrderAdapter(rewardList, mContext);
+                            mReward.setAdapter( rewardAdapter );
 
-                    Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
-                    if (resultFlag.equals("success")) {
-//                        Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                //未上课课程绑定Adapter
-                                NoClassOrderAdapter courseAdapter = new NoClassOrderAdapter(courseList, mContext);
-                                mCourse.setAdapter( courseAdapter );
-                                //未上课悬赏绑定Adapter
-                                NoClassOrderAdapter rewardAdapter = new NoClassOrderAdapter(rewardList, mContext);
-                                mReward.setAdapter( rewardAdapter );
+                        }
+                    }, 1000);
 
-                            }
-                        }, 1000);
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();

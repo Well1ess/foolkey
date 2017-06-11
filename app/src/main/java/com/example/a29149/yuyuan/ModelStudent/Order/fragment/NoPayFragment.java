@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewNoClassCourseAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.adapter.NoPayOrderAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
@@ -52,6 +50,8 @@ public class NoPayFragment extends AbstractFragment {
     @Deprecated
     private List rewardList = new ArrayList();//悬赏列表
     private List<OrderBuyCourseAsStudentDTO> courseList = new ArrayList();//课程列表
+    //Adapter
+    private NoPayOrderAdapter noPayCourseAdapter;
 
     public  ShapeLoadingDialog shapeLoadingDialog; // 跳跳跳动画
     private int pageNo = 1;//页数
@@ -74,13 +74,12 @@ public class NoPayFragment extends AbstractFragment {
         shapeLoadingDialog = new ShapeLoadingDialog(mContext);
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
-
-
+        //ListView绑定
         mCourseListView = (MyListView) view.findViewById(R.id.lv_buyCourse);
+        //设置点击事件
         mCourseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("malei","你点击了"+position);
                 // 跳转到订单详情的意图
                 Intent toOrderInfo = new Intent(mContext, OrderInfoActivity.class);
                 //构造传输的数据
@@ -91,7 +90,7 @@ public class NoPayFragment extends AbstractFragment {
                 startActivity( toOrderInfo );
             }
         });
-
+        //推荐的ListView
         mRecommendListView = (MyListView) view.findViewById(R.id.lv_recommend);
         mRecommendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,11 +103,8 @@ public class NoPayFragment extends AbstractFragment {
         //刚开始请求第一页
         pageNo = 1;
         requestData(pageNo);
-
-
         return view;
     }
-
 
     //请求数据
     private void requestData(int pageNo) {
@@ -126,6 +122,14 @@ public class NoPayFragment extends AbstractFragment {
     }
 
     /**
+     * 获取负责填充数据的Adapter
+     * @return
+     */
+    public NoPayOrderAdapter getNoPayCourseAdapter() {
+        return noPayCourseAdapter;
+    }
+
+    /**
      * 学生：请求已购买未付款的订单Action
      */
     public class StudentRequestNoPayOrderAction extends AsyncTask<String, Integer, String> {
@@ -135,15 +139,13 @@ public class NoPayFragment extends AbstractFragment {
             this.pageNo = pageNo;
         }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            shapeLoadingDialog.show();
-        }
-
+        /**
+         * 发送请求
+         * @param params
+         * @return
+         */
         @Override
         protected String doInBackground(String... params) {
-
             return GetSpecificStateOrderController.execute(
                     OrderStateEnum.未付款.toString(),
                     pageNo+""
@@ -153,38 +155,35 @@ public class NoPayFragment extends AbstractFragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //log.d(this, result);
             if (result != null) {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
 
-
-                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
-                    }.getType();
-                    List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
-                    //存储学生信息DTO
-                    GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
-
-                    rewardList.clear();
-                    courseList.clear();
-                    for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
-                        switch (dto.getOrderDTO().getCourseTypeEnum()) {
-                            case 学生悬赏: {
-                                rewardList.add(dto);
-                            }
-                            break;
-                            case 老师课程: {
-                                courseList.add(dto);
-                            }
-                            break;
-                        }
-                    }
-
                     String resultFlag = jsonObject.getString("result");
                     if (resultFlag.equals("success")) {
+                        //请求成功
+                        java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<OrderBuyCourseAsStudentDTO>>() {
+                        }.getType();
+                        //从JSON转换数据
+                        List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = new Gson().fromJson(jsonObject.getString("orderList"), type);
+                        rewardList.clear();
+                        courseList.clear();
+                        //根据不同类型，加到不同的list中
+                        for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
+                            switch (dto.getOrderDTO().getCourseTypeEnum()) {
+                                case 学生悬赏: {
+                                    rewardList.add(dto);
+                                }
+                                break;
+                                case 老师课程: {
+                                    courseList.add(dto);
+                                }
+                                break;
+                            }
+                        }
 
                         //构建未付款订单的adapter，并设置数据
-                        NoPayOrderAdapter noPayCourseAdapter  = new NoPayOrderAdapter(courseList, mContext);
+                        noPayCourseAdapter  = new NoPayOrderAdapter(courseList, mContext);
                         //ListView设置adapter
                         mCourseListView.setAdapter(noPayCourseAdapter);
 
@@ -196,7 +195,6 @@ public class NoPayFragment extends AbstractFragment {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();
@@ -226,15 +224,13 @@ public class NoPayFragment extends AbstractFragment {
             this.pageNo = pageNo;
         }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            shapeLoadingDialog.show();
-        }
-
+        /**
+         * 发送请求
+         * @param params
+         * @return
+         */
         @Override
         protected String doInBackground(String... params) {
-
             getOrderBuyCourseAsTeacherByOrderStatesController = new GetOrderBuyCourseAsTeacherByOrderStatesController();
             getOrderBuyCourseAsTeacherByOrderStatesController.setPageNo(pageNo+"");
             getOrderBuyCourseAsTeacherByOrderStatesController.setOrderStateEnum(OrderStateEnum.未付款.toString());
@@ -243,18 +239,21 @@ public class NoPayFragment extends AbstractFragment {
 
         }
 
+        /**
+         * 获取结果
+         * @param result
+         */
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //log.d(this, result);
             String resultFlag = getOrderBuyCourseAsTeacherByOrderStatesController.getResult();
             if (resultFlag.equals("success")) {
                 try {
-                    //存储所有我拥有的悬赏信息DTO
+                    //获取所有我拥有的悬赏信息DTO
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList();
-
                     rewardList.clear();
                     courseList.clear();
+                    //不同的类型，放置在不同的
                     for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
                         switch (dto.getOrderDTO().getCourseTypeEnum()) {
                             case 学生悬赏: {
@@ -267,22 +266,13 @@ public class NoPayFragment extends AbstractFragment {
                             break;
                         }
                     }
+                    //构建未付款订单的adapter，并设置数据
+                    noPayCourseAdapter  = new NoPayOrderAdapter(courseList, mContext);
+                    //ListView设置adapter
+                    mCourseListView.setAdapter(noPayCourseAdapter);
 
-                    Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
-                    if (resultFlag.equals("success")) {
-//                        Toast.makeText(mContext, "获取未上课成功！", Toast.LENGTH_SHORT).show();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                MyListViewNoClassCourseAdapter myListViewNoClassCourseAdapter = new MyListViewNoClassCourseAdapter(mContext);
-                                mCourseListView.setAdapter(myListViewNoClassCourseAdapter);
-                                myListViewNoClassCourseAdapter.setData(courseList);
-
-                            }
-                        }, 1000);
-                    }
                 } catch (Exception e) {
-//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();

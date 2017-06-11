@@ -29,8 +29,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/edittext_search"
-                android:drawableStart="?android:attr/actionModeWebSearchDrawable"
-                android:drawableEnd="@mipmap/ic_clear"
+                android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
+                android:drawableRight="@mipmap/ic_clear"
                 android:drawableTint="@color/white"
                 android:ems="20"
                 android:hint="请输入关键字"
@@ -102,7 +102,8 @@
                 android:id="@android:id/tabhost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone" >
+                android:visibility="gone"
+                >
 
                 <FrameLayout
                     android:id="@android:id/tabcontent"

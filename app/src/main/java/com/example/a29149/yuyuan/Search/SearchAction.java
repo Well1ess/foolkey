@@ -2,13 +2,9 @@ package com.example.a29149.yuyuan.Search;
 
 import android.os.AsyncTask;
 
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter;
 import com.example.a29149.yuyuan.Util.Const;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.controller.search.SearchRewardController;
-
-import org.json.JSONObject;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by 张丽华 on 2017/5/6.
@@ -27,12 +23,16 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
     //关键字
     private String keyValue;
 
+    //填充数据的适配器
+    private RewardListAdapter rewardListAdapter;
+
     private SearchRewardController searchRewardController = new SearchRewardController();
 
     private SearchActivity searchActivity;
 
-    public SearchAction(SearchActivity searchActivity) {
+    public SearchAction(SearchActivity searchActivity, RewardListAdapter adapter) {
         this.searchActivity = searchActivity;
+        this.rewardListAdapter = adapter;
     }
 
 
@@ -84,9 +84,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                 case "course":
                     break;
                 case "reward":
-                    GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().clear();
-                    GlobalUtil.getInstance().setRewardWithStudentSTCDTOs(searchRewardController.getRewardWithStudentSTCDTOList());
-                    searchActivity.getResult(new GetSearchResultEvent("reward", true, keyValue));
+                    rewardListAdapter.setData(searchRewardController.getRewardWithStudentSTCDTOList());
                     break;
                 case "article":
                     break;
@@ -100,8 +98,8 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                 case "course":
                     break;
                 case "reward":
-                    EventBus.getDefault().post(new GetSearchResultEvent(mCondition, true, keyValue));
-                    searchActivity.getResult(new GetSearchResultEvent("reward", true, keyValue));
+                    rewardListAdapter.getDataList().addAll(searchRewardController.getRewardWithStudentSTCDTOList());
+                    rewardListAdapter.updateList();
                     break;
                 case "article":
                     break;

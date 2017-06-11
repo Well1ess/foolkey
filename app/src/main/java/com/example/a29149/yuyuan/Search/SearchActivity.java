@@ -20,6 +20,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.Fragment.ArticleSearchFragment;
@@ -32,7 +33,6 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.MyEditText;
-import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -237,8 +237,8 @@ public class SearchActivity extends AbstractAppCompatActivity {
     //搜索方法
     private void search(String keyValue) {
         //TODO:网络传输, page恒为1
-        SearchAction searchAction = new SearchAction(this);
-        searchAction.execute(condition, "1", keyValue);
+//        SearchAction searchAction = new SearchAction(this, getSupportFragmentManager().findFragmentByTag( mFragmentTabHost.getCurrentTabTag() ));
+//        searchAction.execute(condition, "1", keyValue);
     }
 
     public void getResult(GetSearchResultEvent searchResultEvent) {

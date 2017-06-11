@@ -19,7 +19,6 @@ import com.example.a29149.yuyuan.Search.SearchAction;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
 
@@ -64,7 +63,6 @@ public class RewardSearchFragment extends AbstractFragment {
         //list初始化
         mListAdapter = new RewardListAdapter(getContext());
         //设置adapter
-        mRewardList.setAdapter(mListAdapter);
         mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,7 +77,7 @@ public class RewardSearchFragment extends AbstractFragment {
             @Override
             public void setLoad() {
                 //TODO:网络传输
-                SearchAction searchAction = new SearchAction((SearchActivity) getActivity());
+                SearchAction searchAction = new SearchAction((SearchActivity) getActivity(), mListAdapter);
                 searchAction.execute("reward", pageNo+"", keyValue);
                 pageNo++;
             }
@@ -99,8 +97,7 @@ public class RewardSearchFragment extends AbstractFragment {
                         //由于是刷新，所以首先清空所有数据
 
                         pageNo = 1;
-                        GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().clear();
-                        SearchAction searchAction = new SearchAction((SearchActivity) getActivity());
+                        SearchAction searchAction = new SearchAction((SearchActivity) getActivity(), mListAdapter);
                         searchAction.execute("reward", pageNo + "", keyValue);
                         pageNo++;
                     }

@@ -158,4 +158,7 @@ public class RewardListAdapter extends BaseAdapter {
         }
     }
 
+    public List<RewardWithStudentSTCDTO> getDataList() {
+        return rewardWithStudentSTCDTOList;
+    }
 }

@@ -47,23 +47,15 @@ public class RewardDiscoveryFragment extends AbstractFragment {
     //上划到底部动态更新的List
     @ViewInject(R.id.content)
     private DynamicListView mRewardList;
+
+    //填充数据的Adapter
     private RewardListAdapter mListAdapter;
-
-
-//    @ViewInject(R.id.content)
-//    private RecyclerView recyclerView;
-//    private RewardRecyclerViewAdapter recyclerViewAdapter;
 
     //记录请求的页数
     int pageNo = 1;
 
     public RewardDiscoveryFragment() {
-
-    }
-
-    public static RewardDiscoveryFragment newInstance() {
-        RewardDiscoveryFragment fragment = new RewardDiscoveryFragment();
-        return fragment;
+        super();
     }
 
     @Override
@@ -86,7 +78,6 @@ public class RewardDiscoveryFragment extends AbstractFragment {
 
             //Adapter初始化
             mListAdapter = new RewardListAdapter(getContext());
-            //给listView设置adapter
 
             //给每个item设置点击监听器
             mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,6 +95,7 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                 }
             });
             //设置列表动态加载
+            //ListView其实并不关心数据，它只需要设置一个Adapter就可以了，数据应该都放置在Adapter里
             mRewardList.setOnLoadingListener(new DynamicListView.onLoadingListener() {
                 @Override
                 public void setLoad() {

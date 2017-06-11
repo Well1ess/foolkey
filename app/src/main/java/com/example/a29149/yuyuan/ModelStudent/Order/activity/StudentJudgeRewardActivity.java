@@ -46,10 +46,8 @@ public class StudentJudgeRewardActivity extends AbstractActivity implements View
 
     private OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO; //要评价的订单
 
-
     @ViewInject(R.id.iv_photo)
     private ImageView photo; //照片
-
 
     @ViewInject(R.id.tv_nickedName)
     private TextView mNickedName; //昵称
@@ -78,7 +76,6 @@ public class StudentJudgeRewardActivity extends AbstractActivity implements View
         setContentView(R.layout.activity_judge_teacher);
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
-
         initView();
     }
 
@@ -116,7 +113,6 @@ public class StudentJudgeRewardActivity extends AbstractActivity implements View
                 score = rating;
             }
         });
-
     }
 
     //点击监听器
@@ -134,7 +130,6 @@ public class StudentJudgeRewardActivity extends AbstractActivity implements View
             default:
                 break;
         }
-
     }
 
     /**
@@ -148,7 +143,6 @@ public class StudentJudgeRewardActivity extends AbstractActivity implements View
         {
             new CommentRewardAction(score + "").execute();
         }
-
     }
 
     /**
@@ -170,8 +164,6 @@ public class StudentJudgeRewardActivity extends AbstractActivity implements View
                     orderBuyCourseAsStudentDTO.getOrderDTO().getId() + "",
                     score
             );
-
-
         }
 
         @Override
@@ -202,7 +194,6 @@ public class StudentJudgeRewardActivity extends AbstractActivity implements View
             } else {
                 Toast.makeText(StudentJudgeRewardActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
             }
-
         }
 
         @Override

@@ -30,7 +30,7 @@ import java.util.List;
  * Email:ml1995@mail.ustc.edu.cn
  * 已完成订单的课程listView的Adapter
  */
-
+@Deprecated
 public class MyListViewFinishCourseAdapter extends BaseAdapter {
 
     private Context mContext;

@@ -33,7 +33,7 @@ import java.util.List;
  * Email:ml1995@mail.ustc.edu.cn
  * 悬赏未评价listView的Adapter
  */
-
+@Deprecated
 public class MyListViewNoCommentRewardAdapter extends BaseAdapter {
     private static final String TAG = "MyListViewNoCommentRewa";
 

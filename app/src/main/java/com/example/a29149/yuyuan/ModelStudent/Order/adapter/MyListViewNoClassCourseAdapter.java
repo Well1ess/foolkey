@@ -32,7 +32,7 @@ import java.util.List;
  * Email:ml1995@mail.ustc.edu.cn
  * 课程而未上课listView的Adapter
  */
-
+@Deprecated
 public class MyListViewNoClassCourseAdapter extends BaseAdapter implements OnClickListener{
     private Context mContext;
 

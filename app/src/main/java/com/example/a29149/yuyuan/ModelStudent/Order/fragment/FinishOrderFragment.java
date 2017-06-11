@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +17,7 @@ import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.Enum.OrderStateEnum;
 import com.example.a29149.yuyuan.ModelStudent.Order.activity.OrderInfoActivity;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewFinishCourseAdapter;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewFinishRewardAdapter;
-import com.example.a29149.yuyuan.ModelStudent.Order.adapter.MyListViewRecommandAdapter;
+import com.example.a29149.yuyuan.ModelStudent.Order.adapter.FinishedOrderAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Order.view.MyListView;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
@@ -55,6 +52,11 @@ public class FinishOrderFragment extends AbstractFragment {
 
     private List<OrderBuyCourseAsStudentDTO> rewardList = new ArrayList();//悬赏列表
     private List<OrderBuyCourseAsStudentDTO> courseList = new ArrayList();//课程列表
+
+    //课程的Adapter
+    private FinishedOrderAdapter courseAdapter;
+    //悬赏的Adapter
+    private FinishedOrderAdapter rewardAdapter;
 
     public ShapeLoadingDialog shapeLoadingDialog;
 
@@ -131,43 +133,7 @@ public class FinishOrderFragment extends AbstractFragment {
         });
 
 
-        MyListViewRecommandAdapter myListViewRecommandAdapter = new MyListViewRecommandAdapter(mContext);
-        mRecommand.setAdapter(myListViewRecommandAdapter);
         return view;
-    }
-
-/*    @Override
-    public void onResume() {
-        super.onResume();
-        pageNo = 1;
-        shapeLoadingDialog.show();
-        loadData(pageNo);
-    }*/
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && GlobalUtil.getInstance().getFragmentFresh()) {
-            //相当于Fragment的onResume
-            //在这里处理加载数据等操作
-            //用全局的方式实现回调
-            shapeLoadingDialog.show();
-            pageNo = 1;
-            loadData(pageNo);
-            GlobalUtil.getInstance().setFragmentFresh(false);
-        } else {
-            //相当于Fragment的onPause
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (GlobalUtil.getInstance().getFragmentFresh()){
-
-        }else {
-            //不刷新页面，不执行
-        }
     }
 
 
@@ -249,32 +215,22 @@ public class FinishOrderFragment extends AbstractFragment {
                         }
                     }
 
-                    GlobalUtil.getInstance().setOrderRewardList(rewardList);
-                    GlobalUtil.getInstance().setOrderCourseList(courseList);
-
-
-                    Log.i("malei", orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
 //                        Toast.makeText(mContext, "获取已完成订单成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-
-                                MyListViewFinishRewardAdapter myListViewFinishRewardAdapter = new MyListViewFinishRewardAdapter(mContext);
-                                myListViewFinishRewardAdapter.setData(rewardList);
-                                mReward.setAdapter(myListViewFinishRewardAdapter);
-
-                                MyListViewFinishCourseAdapter myListViewFinishCourseAdapter = new MyListViewFinishCourseAdapter(mContext);
-                                myListViewFinishCourseAdapter.setData(courseList);
-                                mCourse.setAdapter(myListViewFinishCourseAdapter);
-
-
-
+                                //课程的Adapter构建
+                                courseAdapter = new FinishedOrderAdapter(courseList, mContext);
+                                mCourse.setAdapter( courseAdapter );
+                                //悬赏的Adapter构建
+                                rewardAdapter = new FinishedOrderAdapter( rewardList, mContext );
+                                mReward.setAdapter( rewardAdapter );
                             }
                         }, 1000);
                     }
                 } catch (Exception e) {
-//                    Toast.makeText(mContext, "返回结果为fail！", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();
@@ -307,7 +263,6 @@ public class FinishOrderFragment extends AbstractFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            shapeLoadingDialog.show();
         }
 
         @Override
@@ -330,8 +285,6 @@ public class FinishOrderFragment extends AbstractFragment {
                 try {
                     //存储所有我拥有的悬赏信息DTO
                     List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs = getOrderBuyCourseAsTeacherByOrderStatesController.getOrderList();
-                    GlobalUtil.getInstance().setOrderBuyCourseAsStudentDTOs(orderBuyCourseAsStudentDTOs);
-
                     rewardList.clear();
                     courseList.clear();
                     for (OrderBuyCourseAsStudentDTO dto : orderBuyCourseAsStudentDTOs) {
@@ -346,31 +299,23 @@ public class FinishOrderFragment extends AbstractFragment {
                             break;
                         }
                     }
-
-                    GlobalUtil.getInstance().setOrderRewardList(rewardList);
-                    GlobalUtil.getInstance().setOrderCourseList(courseList);
-
                     Log.i("malei",orderBuyCourseAsStudentDTOs.toString());
                     if (resultFlag.equals("success")) {
 //                        Toast.makeText(mContext, "获取已完成订单成功！", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-
-
-                                MyListViewFinishRewardAdapter myListViewFinishRewardAdapter = new MyListViewFinishRewardAdapter(mContext);
-                                myListViewFinishRewardAdapter.setData(rewardList);
-                                mReward.setAdapter(myListViewFinishRewardAdapter);
-
-                                MyListViewFinishCourseAdapter myListViewFinishCourseAdapter = new MyListViewFinishCourseAdapter(mContext);
-                                myListViewFinishCourseAdapter.setData(courseList);
-                                mCourse.setAdapter(myListViewFinishCourseAdapter);
-
+                                //课程的Adapter构建
+                                courseAdapter = new FinishedOrderAdapter(courseList, mContext);
+                                mCourse.setAdapter( courseAdapter );
+                                //悬赏的Adapter构建
+                                rewardAdapter = new FinishedOrderAdapter( rewardList, mContext );
+                                mReward.setAdapter( rewardAdapter );
                             }
                         }, 1000);
                     }
                 } catch (Exception e) {
-//                    Toast.makeText(mContext, "返回结果为fai", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
                 finally {
                     shapeLoadingDialog.dismiss();

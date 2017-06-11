@@ -130,7 +130,6 @@ public class RewardDiscoveryFragment extends AbstractFragment {
             getReward.execute();
         }
         return view;
-
     }
 
 
@@ -163,9 +162,7 @@ public class RewardDiscoveryFragment extends AbstractFragment {
 
         @Override
         protected String doInBackground(String... params) {
-
             return GetPopularController.execute(pageNo + "");
-
         }
 
         @Override
@@ -193,20 +190,11 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                             mRewardList.onLoadFinish();
                         }
 
-                        //如果分页请求结果为空，说明没有请求到下一页，设置页码为当前页
-//                        if (courseStudentDTOS.size() != 0) {
-//                            setPageNo(pageNo + 1);
-//                        }
-
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-//                                rewardListAdapter.setData(allRewardWithStudentSTCDTOS);
-
-                                //pageNo++;
                                 mListAdapter.notifyDataSetChanged();
                                 MainStudentActivity.shapeLoadingDialog.dismiss();
-
                             }
                         }, 1000);
 

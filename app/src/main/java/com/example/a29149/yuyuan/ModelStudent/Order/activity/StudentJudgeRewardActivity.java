@@ -3,7 +3,6 @@ package com.example.a29149.yuyuan.ModelStudent.Order.activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,7 +22,6 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.Const;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
@@ -167,7 +165,6 @@ public class StudentJudgeRewardActivity extends AbstractActivity implements View
 
         @Override
         protected String doInBackground(String... params) {
-            Log.i("malei", GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().toString());
             return JudgeTeacherController.execute(
                     //GlobalUtil.getInstance().getOrderBuyCourseAsStudentDTOs().get(position).getOrderDTO().getId() + "",
                     orderBuyCourseAsStudentDTO.getOrderDTO().getId() + "",

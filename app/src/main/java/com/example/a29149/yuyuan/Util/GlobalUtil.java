@@ -2,16 +2,13 @@ package com.example.a29149.yuyuan.Util;
 
 import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
-import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.CouponDTO;
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
-import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsStudentDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyCourseAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.OrderBuyRewardAsTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
-import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
@@ -36,8 +33,7 @@ public class GlobalUtil {
         }
 
     }
-    //fragment刷新的标志，默认不刷新，因为现在不会写回调。
-    public static boolean fragmentFresh = false;
+
 
     private GlobalUtil() {
         technicTagEnum = TechnicTagEnum.Java;
@@ -84,21 +80,14 @@ public class GlobalUtil {
 
     //申请悬赏信息DTO和老师信息DTO
     private List<ApplicationRewardWithTeacherSTCDTO> applicationRewardWithTeacherSTCDTOs;
-    //老师所有信息DTO
-    private TeacherAllInfoDTO teacherAllInfoDTO;
 
     //老师界面的课程所有信息
     private List<OrderBuyCourseAsTeacherSTCDTO> orderBuyCourseAsTeacherSTCDTOs;
-
-    //未评价订单
-    private List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs;
 
 
     //悬赏和学生信息
     private List<OrderBuyRewardAsTeacherSTCDTO> orderBuyRewardAsTeacherSTCDTOs;
 
-    //申请悬赏的DTO
-    private ApplicationStudentRewardDTO applicationStudentRewardDTO;
     //学生发布的悬赏列表
     private List<RewardDTO> rewardDTOList;
     //学生信息
@@ -111,32 +100,16 @@ public class GlobalUtil {
     private String[] rewardChooseContent = new String[8];
     //用户记录发布课程时填写的信息
     private String[] courseChooseContent = new String[7];
-    //搜索用的List
-    private List<Object> rewardList;
-    private List<Object> articleList;
-    private List<Object> teacherList;
-    private List<Object> questionList;
-
-    public void addRewardWithStudentSTCDTOs(List<RewardWithStudentSTCDTO> searchRewardWithStudentSTCDTOs) {
-        this.rewardWithStudentSTCDTOs.addAll(searchRewardWithStudentSTCDTOs);
-    }
 
     //老师UI——课程
     private List<String> teacherUIScore;
-
-
-    //订单悬赏列表
-    private List<OrderBuyCourseAsStudentDTO> orderRewardList;
-    //订单课程列表
-    private List<OrderBuyCourseAsStudentDTO> orderCourseList;
-
 
     //腾讯SCO签名
     private String sign;
 
 
     //当前用户角色：老师，学生
-    private String userRole = "student";
+    private String userRole = RoleEnum.student.toString();
 
     //用来做图片上传成功与否的标记位
     private boolean uploadPhotoFlag = false;
@@ -150,50 +123,7 @@ public class GlobalUtil {
         return teacherUIScore;
     }
 
-    public void setTeacherUIScore(List<String> teacherUIScore) {
-        this.teacherUIScore = teacherUIScore;
-    }
 
-
-    public List<Object> getRewardList() {
-        if (rewardList == null)
-            rewardList = new ArrayList<>();
-        return rewardList;
-    }
-
-    public void setRewardList(List<Object> rewardList) {
-        this.rewardList = rewardList;
-    }
-
-    public List<Object> getArticleList() {
-        if (articleList == null)
-            articleList = new ArrayList<>();
-        return articleList;
-    }
-
-    public void setArticleList(List<Object> articleList) {
-        this.articleList = articleList;
-    }
-
-    public List<Object> getTeacherList() {
-        if (teacherList == null)
-            teacherList = new ArrayList<>();
-        return teacherList;
-    }
-
-    public void setTeacherList(List<Object> teacherList) {
-        this.teacherList = teacherList;
-    }
-
-    public List<Object> getQuestionList() {
-        if (questionList == null)
-            questionList = new ArrayList<>();
-        return questionList;
-    }
-
-    public void setQuestionList(List<Object> questionList) {
-        this.questionList = questionList;
-    }
 
     public List<String> getContent() {
         if (content == null)
@@ -315,22 +245,6 @@ public class GlobalUtil {
     }
 
 
-    public List<CourseTeacherPopularDTO> getCourseTeacherPopularDTOs() {
-        return courseTeacherPopularDTOs;
-    }
-
-    public void setCourseTeacherPopularDTOs(List<CourseTeacherPopularDTO> courseTeacherPopularDTOs) {
-        this.courseTeacherPopularDTOs = courseTeacherPopularDTOs;
-    }
-
-    public List<RewardDTO> getRewardDTOList() {
-        return rewardDTOList;
-    }
-
-    public void setRewardDTOList(List<RewardDTO> rewardDTOList) {
-        this.rewardDTOList = rewardDTOList;
-    }
-
     public List<ApplicationStudentRewardAsStudentSTCDTO> getApplicationStudentRewardAsStudentSTCDTOs() {
         if (applicationRewardWithTeacherSTCDTOs == null)
             applicationRewardWithTeacherSTCDTOs = new ArrayList<>();
@@ -349,32 +263,6 @@ public class GlobalUtil {
         this.rewardDTO = rewardDTO;
     }
 
-    public List<ApplicationRewardWithTeacherSTCDTO> getApplicationRewardWithTeacherSTCDTOs() {
-        return applicationRewardWithTeacherSTCDTOs;
-    }
-
-    public void setApplicationRewardWithTeacherSTCDTOs(List<ApplicationRewardWithTeacherSTCDTO> applicationRewardWithTeacherSTCDTOs) {
-        this.applicationRewardWithTeacherSTCDTOs = applicationRewardWithTeacherSTCDTOs;
-    }
-
-
-    public TeacherAllInfoDTO getTeacherAllInfoDTO() {
-        return teacherAllInfoDTO;
-    }
-
-    public void setTeacherAllInfoDTO(TeacherAllInfoDTO teacherAllInfoDTO) {
-        this.teacherAllInfoDTO = teacherAllInfoDTO;
-    }
-
-
-    public ApplicationStudentRewardDTO getApplicationStudentRewardDTO() {
-        return applicationStudentRewardDTO;
-    }
-
-    public void setApplicationStudentRewardDTO(ApplicationStudentRewardDTO applicationStudentRewardDTO) {
-        this.applicationStudentRewardDTO = applicationStudentRewardDTO;
-    }
-
 
     public List<OrderBuyCourseAsTeacherSTCDTO> getOrderBuyCourseAsTeacherSTCDTOs() {
         return orderBuyCourseAsTeacherSTCDTOs;
@@ -385,28 +273,12 @@ public class GlobalUtil {
     }
 
 
-    public List<OrderBuyCourseAsStudentDTO> getOrderBuyCourseAsStudentDTOs() {
-        return orderBuyCourseAsStudentDTOs;
-    }
-
-    public void setOrderBuyCourseAsStudentDTOs(List<OrderBuyCourseAsStudentDTO> orderBuyCourseAsStudentDTOs) {
-        this.orderBuyCourseAsStudentDTOs = orderBuyCourseAsStudentDTOs;
-    }
-
     public List<OrderBuyRewardAsTeacherSTCDTO> getOrderBuyRewardAsTeacherSTCDTOs() {
         return orderBuyRewardAsTeacherSTCDTOs;
     }
 
     public void setOrderBuyRewardAsTeacherSTCDTOs(List<OrderBuyRewardAsTeacherSTCDTO> orderBuyRewardAsTeacherSTCDTOs) {
         this.orderBuyRewardAsTeacherSTCDTOs = orderBuyRewardAsTeacherSTCDTOs;
-    }
-
-    public static HashMap<TechnicTagEnum, List> getIndexContentMap() {
-        return indexContentMap;
-    }
-
-    public static void setIndexContentMap(HashMap<TechnicTagEnum, List> indexContentMap) {
-        GlobalUtil.indexContentMap = indexContentMap;
     }
 
 
@@ -440,24 +312,6 @@ public class GlobalUtil {
         this.userRole = role.toString();
     }
 
-
-
-    public List<OrderBuyCourseAsStudentDTO> getOrderRewardList() {
-        return orderRewardList;
-    }
-
-    public void setOrderRewardList(List<OrderBuyCourseAsStudentDTO> orderRewardList) {
-        this.orderRewardList = orderRewardList;
-    }
-
-    public List<OrderBuyCourseAsStudentDTO> getOrderCourseList() {
-        return orderCourseList;
-    }
-
-    public void setOrderCourseList(List<OrderBuyCourseAsStudentDTO> orderCourseList) {
-        this.orderCourseList = orderCourseList;
-    }
-
     public boolean isUploadPhotoFlag() {
         return uploadPhotoFlag;
     }
@@ -471,13 +325,6 @@ public class GlobalUtil {
         globalUtil = null;
     }
 
-    public  boolean getFragmentFresh() {
-        return fragmentFresh;
-    }
-
-    public  void setFragmentFresh(boolean fragmentFresh) {
-        GlobalUtil.fragmentFresh = fragmentFresh;
-    }
 }
 
 

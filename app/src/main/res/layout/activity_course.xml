@@ -162,7 +162,7 @@
                             <TextView
                                 android:textColor="@color/colorPrimary"
                                 android:layout_alignTop="@id/teacher"
-                                android:id="@+id/tv_nickedName"
+                                android:id="@+id/tv_evaluateScore"
                                 android:layout_toRightOf="@id/teacher"
                                 android:layout_marginRight="20dp"
                                 android:layout_width="wrap_content"

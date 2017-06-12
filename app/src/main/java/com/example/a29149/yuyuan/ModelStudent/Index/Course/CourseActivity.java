@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.a29149.yuyuan.DTO.CourseTeacherDTO;
 import com.example.a29149.yuyuan.OriginIndex.OriginIndexActivity;
 import com.example.a29149.yuyuan.R;
@@ -17,7 +18,6 @@ import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 
 public class CourseActivity extends AbstractAppCompatActivity {
 
@@ -42,7 +42,7 @@ public class CourseActivity extends AbstractAppCompatActivity {
     private TextView mCourseEvaluation;
 
     //教师个人评价
-    @ViewInject(R.id.tv_nickedName)
+    @ViewInject(R.id.tv_evaluateScore)
     private TextView mTeacherEvaluation;
 
     //教师教授的人数

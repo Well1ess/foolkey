@@ -91,32 +91,7 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
             }
         });
 
-        //TODO 并没有执行
-        /**
-         * 搜索的回调，在这里处理ListView，Adapter，与数据的关系
-         * 在别的地方只需要做Action.execute即可
-         * 因为搜索的Action总是会调用这个方法
-         * 所以不需要重复设值
-         * @Author:        geyao
-         * @Date:          2017/6/12
-         * @Description:
-         */
-        searchAction.setAfterResult(new SearchAction.AfterResult() {
-            @Override
-            public void handleResult(List data) {
-                //判空处理
-                if (data == null){
-                    data = new ArrayList();
-                }
-                Log.d(TAG, "handleResult: 104");
-                //TODO 把搜索到的结果不加判断地直接赋值
-                dataList = data;
-                //先设置数据
-                mListAdapter.setData(dataList);
-                //绑定Adapter与ListView
-                mRewardList.setAdapter(mListAdapter);
-            }
-        });
+
 
         //设置列表动态加载
         mRewardList.setOnLoadingListener(new DynamicListView.onLoadingListener() {
@@ -186,6 +161,40 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
      * @param keyValue  关键字
      */
     public void search(String pageNo, String keyValue){
+        //新建Action
+        SearchActivity searchActivity = (SearchActivity) AppManager.getActivity(SearchActivity.class);
+        searchAction = new SearchAction(searchActivity);
+
+
+        //TODO 并没有执行
+        /**
+         * 搜索的回调，在这里处理ListView，Adapter，与数据的关系
+         * 在别的地方只需要做Action.execute即可
+         * 因为搜索的Action总是会调用这个方法
+         * 所以不需要重复设值
+         * @Author:        geyao
+         * @Date:          2017/6/12
+         * @Description:
+         */
+        searchAction.setAfterResult(new SearchAction.AfterResult() {
+            @Override
+            public void handleResult(List data) {
+                //判空处理
+                //执行顺序2
+                if (data == null){
+                    data = new ArrayList();
+                }
+                Log.d(TAG, "handleResult: 186 " + data.size());
+                //TODO 把搜索到的结果不加判断地直接赋值
+                dataList = data;
+                //先设置数据
+                mListAdapter.setData(data);
+                //绑定Adapter与ListView
+                mRewardList.setAdapter(mListAdapter);
+            }
+        });
+
+        //执行顺序 1
         searchAction.execute("reward", pageNo + "", keyValue);
     }
 }

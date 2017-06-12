@@ -152,6 +152,9 @@
             </LinearLayout>
 
 
+
+
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/vp_content_pager"
                 android:layout_width="match_parent"
@@ -170,6 +173,9 @@
                     android:layout_height="0dp"
                     android:layout_weight="0" />
             </com.example.a29149.yuyuan.AbstractObject.YYFragmentTabHost>
+
+
+
 
         </LinearLayout>
     </LinearLayout>

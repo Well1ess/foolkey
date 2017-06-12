@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.CourseTeacherPopularDTO;
@@ -232,14 +231,14 @@ public class ClassesFragment extends AbstractFragment {
                         }, 1000);
 
                     } else {
-                        Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
             }
         }
 

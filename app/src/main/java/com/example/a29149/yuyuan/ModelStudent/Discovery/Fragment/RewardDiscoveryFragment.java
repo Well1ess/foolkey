@@ -184,19 +184,20 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                         if (pageNo == 1) {
                             setAllRewardWithStudentSTCDTOS(courseStudentDTOS);
                             //TODO
-                            mListAdapter.addDataLst(courseStudentDTOS);
+                            mListAdapter.setData(courseStudentDTOS);
                             //绑定listView与Adapter
                             mRewardList.setAdapter(mListAdapter);
                         } else if (pageNo > 1) {
+                            //TODO 这样其实并不能保证数据不重复
                             allRewardWithStudentSTCDTOS.addAll(courseStudentDTOS);
-                            mListAdapter.addDataLst(courseStudentDTOS);
+                            mListAdapter.addExtinctDataList(courseStudentDTOS, false);
                             mRewardList.onLoadFinish();
                         }
 
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                mListAdapter.notifyDataSetChanged();
+//                                mListAdapter.notifyDataSetChanged();
                                 MainStudentActivity.shapeLoadingDialog.dismiss();
                             }
                         }, 1000);

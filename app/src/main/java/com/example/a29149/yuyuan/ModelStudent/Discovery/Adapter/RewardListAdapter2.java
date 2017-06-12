@@ -17,7 +17,6 @@ import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.ModelStudent.Me.info.StudentInfoActivity;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
@@ -27,7 +26,7 @@ import java.util.List;
  * Created by 张丽华 on 2017/4/26.
  * Description:发现界面的悬赏列表适配器,改造数据源
  */
-//TODO 这里获取数据依然要依靠全局变量
+@Deprecated
 public class RewardListAdapter2 extends BaseAdapter {
 
     private static final String TAG = "RewardListAdapter";

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -94,6 +95,8 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
      * @time 2017/6/10 15:15
      */
     public boolean addDataLst(List<T> newData) {
+        if (newData == null)
+            return false;
         if (dataList == null) {
             dataList = newData;
             notifyDataSetChanged();
@@ -102,6 +105,69 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
             boolean result = dataList.addAll(newData);
             notifyDataSetChanged();
             return result;
+        }
+    }
+
+    /**
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   向数据源中添加之前不存在的数据
+     * @param newData
+     * @param head 如果是true，头插，否则尾插
+     * @return
+     */
+    public boolean addExtinctDataList(List<T> newData, boolean head){
+        if (dataList == null) { // 源list为空
+            if (newData != null) {
+                dataList = newData;
+                return true;
+            }else {
+                dataList = new ArrayList<>();
+                return true;
+            }
+        }else {
+            //源List不为空
+            //目标list为空
+            if (newData == null)
+                return true;
+            //目标list不为空
+            else {
+                for (T data : newData){
+                    if (!dataList.contains(data)){
+                        //源数据不含目标数据
+                        if (head) // 头插
+                            dataList.add(0, data);
+                        else { // 尾插
+                            dataList.add(data);
+                        }
+                    }
+
+                }
+                return true;
+            }
+        }
+    }
+
+    /**
+     * 往头部添加数据
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   往头部添加数据
+     * @param newData
+     * @return
+     */
+    public boolean addDateListToHead(List<T> newData){
+        if (newData == null)
+            return false;
+        if (dataList == null) {
+            dataList = newData;
+            notifyDataSetChanged();
+            return true;
+        } else {
+            for (T data : newData){
+                dataList.add(0, data);
+            }
+            return true;
         }
     }
 
@@ -116,7 +182,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
     public boolean addData(int position, T data) {
         if (data == null)
             return false;
-        this.dataList.add(position, data);
+        addData(position, data);
         notifyDataSetChanged();
         return true;
     }
@@ -154,7 +220,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
      * @author 29149
      * @time 2017/6/10 15:16
      */
-    public void resetData() {
+    public void clearData() {
         if (dataList != null) {
             dataList.clear();
             notifyDataSetChanged();
@@ -168,7 +234,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
      * @time 2017/6/10 15:16
      */
 
-    public void resetData(List<T> data) {
+    public void setData(List<T> data) {
         if (data != null) {
             this.dataList = data;
             notifyDataSetChanged();

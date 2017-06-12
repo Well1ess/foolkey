@@ -29,7 +29,7 @@ import java.util.List;
  * Created by 张丽华 on 2017/4/26.
  * Description:发现界面的悬赏列表适配器
  */
-
+@Deprecated
 public class RewardListAdapter extends BaseAdapter {
 
     private static final String TAG = "RewardListAdapter";

@@ -22,6 +22,7 @@ import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,6 +90,39 @@ public class RewardAdapter extends YYBaseAdapter<RewardWithStudentSTCDTO> {
         return view;
     }
 
+    /**
+     * 添加数据的时候，检测是否已经存在
+     * @param data 目标数据
+     * @return
+     */
+    @Override
+    public boolean addData(RewardWithStudentSTCDTO data) {
+        if (dataList == null)
+            dataList = new ArrayList<>();
+        return addData(dataList.size(), data);
+    }
+
+
+    /**
+     * 向指定位置添加数据
+     * 要求不为空
+     * @param position 位置
+     * @param data     目标数据
+     * @return
+     */
+    @Override
+    public boolean addData(int position, RewardWithStudentSTCDTO data) {
+        if (dataList == null || data == null){
+            dataList = new ArrayList<>();
+            return false;
+        }
+        if (dataList.contains(data))
+            return false;
+        else {
+            dataList.add(data);
+            return true;
+        }
+    }
 
     //使用ViewHolder来提高效率
     private static class ViewHolder {
@@ -105,6 +139,5 @@ public class RewardAdapter extends YYBaseAdapter<RewardWithStudentSTCDTO> {
             label = (TextView) view.findViewById(R.id.tv_technicTagEnum);
             studentKind = (TextView) view.findViewById(R.id.tv_nickedName);
         }
-
     }
 }

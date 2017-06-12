@@ -27,7 +27,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.Fragment.ArticleSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.CourseSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.QASearchFragment;
-import com.example.a29149.yuyuan.Search.Fragment.RewardSearchFragment;
+import com.example.a29149.yuyuan.Search.Fragment.RewardSearchFragment2;
 import com.example.a29149.yuyuan.Search.Fragment.TeacherSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.YYSearchBaseFragment;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -148,7 +148,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                 .setIndicator("4");
 
         mFragmentTabHost.addTab(tabSpec0, CourseSearchFragment.class, null);
-        mFragmentTabHost.addTab(tabSpec1, RewardSearchFragment.class, null);
+        mFragmentTabHost.addTab(tabSpec1, RewardSearchFragment2.class, null);
         mFragmentTabHost.addTab(tabSpec2, TeacherSearchFragment.class, null);
         mFragmentTabHost.addTab(tabSpec3, QASearchFragment.class, null);
         mFragmentTabHost.addTab(tabSpec4, ArticleSearchFragment.class, null);
@@ -202,7 +202,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
         //添加fragment，这个顺序修改时，记得修改下面的各种get方法
         fragmentList.clear();
         fragmentList.add(new CourseSearchFragment());
-        fragmentList.add(new RewardSearchFragment());
+        fragmentList.add(new RewardSearchFragment2());
         fragmentList.add(new TeacherSearchFragment());
         fragmentList.add(new QASearchFragment());
         fragmentList.add(new ArticleSearchFragment());
@@ -442,8 +442,8 @@ public class SearchActivity extends AbstractAppCompatActivity {
      * 获取搜索悬赏的fragment
      * @return
      */
-    public RewardSearchFragment getRewardSearchFragment(){
-        return (RewardSearchFragment) fragmentList.get(1);
+    public RewardSearchFragment2 getRewardSearchFragment(){
+        return (RewardSearchFragment2) fragmentList.get(1);
     }
 
 }

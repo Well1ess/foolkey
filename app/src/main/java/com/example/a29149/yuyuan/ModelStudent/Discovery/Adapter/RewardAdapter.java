@@ -5,14 +5,14 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.YYBaseAdapter;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
@@ -22,53 +22,29 @@ import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 张丽华 on 2017/4/26.
- * Description:发现界面的悬赏列表适配器
+ * 悬赏展示的Adapter
+ * 继承自YYBaseAdapter
+ * Created by geyao on 2017/6/12.
  */
 
-public class RewardListAdapter extends BaseAdapter {
-
-    private static final String TAG = "RewardListAdapter";
-
-    private Context mContext;
+public class RewardAdapter extends YYBaseAdapter<RewardWithStudentSTCDTO> {
+    private static final String TAG = "RewardAdapter";
 
     private RequestManager glide;
 
-    //悬赏列表
-    private List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOList;
-
-    public RewardListAdapter(Context context) {
-        this.mContext = context;
+    public RewardAdapter(List<RewardWithStudentSTCDTO> dataList, Context context) {
+        super(dataList, context);
     }
 
-    /**
-     * 刷新列表
-     */
-    public void updateList() {
-        this.notifyDataSetChanged();
+    public RewardAdapter(Context mContext) {
+        super(mContext);
     }
 
     @Override
-    public int getCount() {
-        return rewardWithStudentSTCDTOList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return rewardWithStudentSTCDTOList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View createView(int position, View convertView, LayoutInflater layoutInflater) {
         ViewHolder viewHolder;
         View view;
         if (convertView == null) {
@@ -80,8 +56,8 @@ public class RewardListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         //获取当前的reward
-        RewardDTO rewardDTO = rewardWithStudentSTCDTOList.get(position).getRewardDTO();
-        final StudentDTO studentDTO = rewardWithStudentSTCDTOList.get(position).getStudentDTO();
+        RewardDTO rewardDTO = getDataList().get(position).getRewardDTO();
+        final StudentDTO studentDTO = getDataList().get(position).getStudentDTO();
         //设置数据
         viewHolder.title.setText(StringUtil.subString(rewardDTO.getTopic(), 60));
         viewHolder.money.setText(rewardDTO.getPrice() + "");
@@ -113,6 +89,7 @@ public class RewardListAdapter extends BaseAdapter {
         return view;
     }
 
+
     //使用ViewHolder来提高效率
     private static class ViewHolder {
         public TextView title;
@@ -129,18 +106,5 @@ public class RewardListAdapter extends BaseAdapter {
             studentKind = (TextView) view.findViewById(R.id.tv_nickedName);
         }
 
-    }
-
-    //设置列表数据
-    public void setData(List<RewardWithStudentSTCDTO> rewardWithStudentSTCDTOList) {
-        if (rewardWithStudentSTCDTOList != null) {
-            this.rewardWithStudentSTCDTOList = rewardWithStudentSTCDTOList;
-        } else {
-            this.rewardWithStudentSTCDTOList = new ArrayList<>();
-        }
-    }
-
-    public List<RewardWithStudentSTCDTO> getDataList() {
-        return rewardWithStudentSTCDTOList;
     }
 }

@@ -16,7 +16,7 @@ import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
-import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
@@ -49,7 +49,7 @@ public class RewardDiscoveryFragment extends AbstractFragment {
     private DynamicListView mRewardList;
 
     //填充数据的Adapter
-    private RewardListAdapter mListAdapter;
+    private RewardAdapter mListAdapter;
 
     //记录请求的页数
     int pageNo = 1;
@@ -76,9 +76,6 @@ public class RewardDiscoveryFragment extends AbstractFragment {
             AnnotationUtil.injectViews(this, view);
             AnnotationUtil.setClickListener(this, view);
 
-            //Adapter初始化
-            mListAdapter = new RewardListAdapter(getContext());
-
             //给每个item设置点击监听器
             mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -94,6 +91,9 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                     startActivity( intent );
                 }
             });
+
+            //新建Adapter，注意，此时的Adapter并没有数据
+            mListAdapter = new RewardAdapter(mContext);
             //设置列表动态加载
             //ListView其实并不关心数据，它只需要设置一个Adapter就可以了，数据应该都放置在Adapter里
             mRewardList.setOnLoadingListener(new DynamicListView.onLoadingListener() {
@@ -138,7 +138,7 @@ public class RewardDiscoveryFragment extends AbstractFragment {
      */
     public void updateRewardList() {
         //调用adapter的notifyDateChanged方法
-        mListAdapter.updateList();
+        //TODO
     }
 
     @Override
@@ -183,10 +183,13 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                         //若>1则表示分页存取
                         if (pageNo == 1) {
                             setAllRewardWithStudentSTCDTOS(courseStudentDTOS);
-                            mListAdapter.setData(allRewardWithStudentSTCDTOS);
+                            //TODO
+                            mListAdapter.addDataLst(courseStudentDTOS);
+                            //绑定listView与Adapter
                             mRewardList.setAdapter(mListAdapter);
                         } else if (pageNo > 1) {
                             allRewardWithStudentSTCDTOS.addAll(courseStudentDTOS);
+                            mListAdapter.addDataLst(courseStudentDTOS);
                             mRewardList.onLoadFinish();
                         }
 

@@ -34,6 +34,14 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
         layoutInflater = LayoutInflater.from(context);
     }
 
+    /**
+     * 构造函数
+     * @param mContext 上下文
+     */
+    public YYBaseAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
+
     @Override
     public int getCount() {
         return dataList.size();

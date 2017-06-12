@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -428,17 +427,19 @@
             <RadioButton
                 android:id="@+id/rb_left"
                 style="@style/RadioButton.Menu"
-                android:text="联系老师"/>
+                android:text="左边"
+                android:visibility="gone"
+                />
             <RadioButton
                 android:id="@+id/rb_center"
-                android:visibility="gone"
                 style="@style/RadioButton.Menu"
-                android:text="联系老师"/>
+                android:visibility="gone"
+                android:text="中间"/>
             <RadioButton
                 android:id="@+id/rb_right"
-                android:visibility="gone"
                 style="@style/RadioButton.Menu"
-                android:text="联系老师"/>
+                android:visibility="gone"
+                android:text="右边"/>
 
         </RadioGroup>
     </RelativeLayout>

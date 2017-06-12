@@ -100,6 +100,7 @@ public class OrderInfoActivity extends AbstractActivity implements View.OnClickL
     @ViewInject(R.id.iv_photo)
     private ImageView photo; //头像
 
+    //加载图片
     private RequestManager glide;
 
 
@@ -116,6 +117,9 @@ public class OrderInfoActivity extends AbstractActivity implements View.OnClickL
         mOrderBuyCourseAsStudentDTO = ( OrderBuyCourseAsStudentDTO )intent.getSerializableExtra("DTO");
         //给UI填充数据
         initData();
+
+        //设置按钮
+        initButton(mOrderBuyCourseAsStudentDTO);
     }
 
     /**
@@ -167,6 +171,109 @@ public class OrderInfoActivity extends AbstractActivity implements View.OnClickL
                 .transform(new GlideCircleTransform(this))
                 .into(photo);
 
+    }
+
+    /**
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   针对不同状态的订单，修改他们的按钮状态
+     * @param orderBuyCourseAsStudentDTO
+     */
+    private void initButton(OrderBuyCourseAsStudentDTO orderBuyCourseAsStudentDTO){
+        switch (orderBuyCourseAsStudentDTO.getOrderDTO().getOrderStateEnum()){
+            case 未付款:buttonNoPay();
+                break;
+            case 已付款: buttonNoClass();
+                break;
+            case 申请退款:
+                break;
+            case 同意退款:
+                break;
+            case 退款完成:
+                break;
+            case 取消课程:
+                break;
+            case 同意上课:buttonNoClass();
+                break;
+            case 上课中: buttonNoClass();
+                break;
+            case 结束上课:buttonNoComment();
+                break;
+            case 已评价:buttonFinished();
+                break;
+            case 已回答:
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   为未付款订单设置按钮状态
+     */
+    private void buttonNoPay(){
+        //左边按钮
+        mLeftButton.setText("取消订单");
+        mLeftButton.setVisibility(View.VISIBLE);
+        //中间按钮
+        mCenterButton.setText("联系对方");
+        mCenterButton.setVisibility(View.VISIBLE);
+        //左边按钮
+        mRightButton.setText("立即付款");
+        mRightButton.setVisibility(View.VISIBLE);
+
+    }
+
+    /**
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   未上课订单的按钮
+     */
+    private void buttonNoClass(){
+        //左边按钮
+        mLeftButton.setText("取消订单");
+        mLeftButton.setVisibility(View.VISIBLE);
+        //中间按钮
+        mCenterButton.setText("联系对方");
+        mCenterButton.setVisibility(View.VISIBLE);
+        //左边按钮
+        mRightButton.setText("提醒上课");
+        mRightButton.setVisibility(View.VISIBLE);
+    }
+    /**
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   未评价订单的按钮
+     */
+    private void buttonNoComment(){
+        //左边按钮
+        mLeftButton.setText("申请退款");
+        mLeftButton.setVisibility(View.VISIBLE);
+        //中间按钮
+        mCenterButton.setText("联系对方");
+        mCenterButton.setVisibility(View.VISIBLE);
+        //左边按钮
+        mRightButton.setText("立即评价");
+        mRightButton.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   已完成订单的展示
+     */
+    private void buttonFinished(){
+        //左边按钮
+        mLeftButton.setText("");
+        mLeftButton.setVisibility(View.GONE);
+        //中间按钮
+        mCenterButton.setText("联系对方");
+        mCenterButton.setVisibility(View.VISIBLE);
+        //左边按钮
+        mRightButton.setText("");
+        mRightButton.setVisibility(View.GONE);
     }
 
     /**

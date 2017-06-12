@@ -20,7 +20,7 @@ public class FinishedOrderAdapter extends YYOrderAdapter {
      * @param context
      */
     public FinishedOrderAdapter(List<OrderBuyCourseAsStudentDTO> data, Context context) {
-        super(data, context, true, "发起维权");
+        super(data, context, false, "发起维权");
     }
 
 

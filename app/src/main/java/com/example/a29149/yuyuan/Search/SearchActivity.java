@@ -41,7 +41,19 @@ import java.util.List;
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_FIRST_TAG;
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_SECOND_TAG;
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_THIRD_TAG;
+//FIXME 搜索依然会崩溃
 
+/**
+ * @Author:        geyao
+ * @Date:          2017/6/12
+ * @Description:   搜索的Activity，这里我的思路是，搜索这个指令可以通过2个地方下达
+ *                      一个是Activity中键盘上的搜索按钮，一个是Fragment里面的下拉刷新
+ *                      那么显然，这2处都应该加判断
+ *                      有5个Fragment，共同继承一个YYSearchBaseFragment基类，包含一个搜索的抽象方法
+ *                      Activity要调用这个方法来实现搜索——网络交互
+ *                      因为不同Fragment要获取不同的数据，填充不同的Adapter
+ *                      每个也有自己的下拉刷新事件
+ */
 public class SearchActivity extends AbstractAppCompatActivity {
     private static final String TAG = "SearchActivity";
     public static final String SEARCH_OF_FIRST_TAG = "course";
@@ -232,6 +244,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     return true;
 
                 } else {
+
                     return false;
                 }
             }
@@ -243,7 +256,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
         //TODO:网络传输, page恒为1
         //获取当前的Fragment
         Log.d(TAG, "search: 245" + condition);
-        YYSearchBaseFragment currentFragment = (YYSearchBaseFragment) getSupportFragmentManager().findFragmentByTag(condition);
+        YYSearchBaseFragment currentFragment = (YYSearchBaseFragment) getSupportFragmentManager().findFragmentByTag(mFragmentTabHost.getCurrentTabTag());
         //调用Fragment进行更新
         currentFragment.search("1", keyValue);
     }

@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class YYBaseAdapter<T> extends BaseAdapter {
 
     //保存数据
-    protected List<T> dataList;
+    protected List<T> dataList = new ArrayList<>();
     //上下文
     protected Context mContext;
     //加载布局

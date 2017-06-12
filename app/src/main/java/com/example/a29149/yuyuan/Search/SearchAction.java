@@ -2,9 +2,11 @@ package com.example.a29149.yuyuan.Search;
 
 import android.os.AsyncTask;
 
-import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.controller.search.SearchRewardController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 张丽华 on 2017/5/6.
@@ -25,16 +27,19 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
     //关键字
     private String keyValue;
 
-    //填充数据的适配器
-    private RewardListAdapter rewardListAdapter;
 
     private SearchRewardController searchRewardController = new SearchRewardController();
 
     private SearchActivity searchActivity;
 
-    public SearchAction(SearchActivity searchActivity, RewardListAdapter adapter) {
+    //回调接口，由各个Fragment去实现
+    private AfterResult afterResult;
+
+    //存放搜索结果
+    private List dataList = new ArrayList();
+
+    public SearchAction(SearchActivity searchActivity) {
         this.searchActivity = searchActivity;
-        this.rewardListAdapter = adapter;
     }
 
 
@@ -75,6 +80,33 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
     }
 
     /**
+     * 回调接口
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   用来处理搜索到结果后的ListView与Adapter的绑定
+     */
+    public interface AfterResult{
+        /**
+         * @Author:        geyao
+         * @Date:          2017/6/12
+         * @Description:   将搜索到的数据作为参数传进去
+         * @param data
+         */
+        public void handleResult(List data);
+
+    }
+
+    /**
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   回调的设值函数
+     * @param afterResult
+     */
+    public void setAfterResult(AfterResult afterResult) {
+        this.afterResult = afterResult;
+    }
+
+    /**
      * 将输入分类注入
      *
      * @return‘
@@ -86,9 +118,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                 case "course":
                     break;
                 case "reward":
-
-                    rewardListAdapter.setData(searchRewardController.getRewardWithStudentSTCDTOList());
-
+                    afterResult.handleResult( searchRewardController.getRewardWithStudentSTCDTOList() );
                     break;
                 case "article":
                     break;
@@ -102,8 +132,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                 case "course":
                     break;
                 case "reward":
-                    rewardListAdapter.getDataList().addAll(searchRewardController.getRewardWithStudentSTCDTOList());
-                    rewardListAdapter.updateList();
+                    afterResult.handleResult( searchRewardController.getRewardWithStudentSTCDTOList() );
                     break;
                 case "article":
                     break;

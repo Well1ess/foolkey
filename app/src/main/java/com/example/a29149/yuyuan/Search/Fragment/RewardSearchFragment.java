@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
+import com.example.a29149.yuyuan.AbstractObject.YYBaseAdapter;
+import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
-import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardListAdapter;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.RewardDiscoveryFragment;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.GetSearchResultEvent;
@@ -21,6 +23,9 @@ import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RewardSearchFragment extends AbstractFragment {
 
@@ -32,7 +37,14 @@ public class RewardSearchFragment extends AbstractFragment {
     @ViewInject(R.id.content)
     private DynamicListView mRewardList;
 
-    private RewardListAdapter mListAdapter;
+    //Adapter
+    private RewardAdapter mListAdapter;
+
+    //搜索的异步任务
+    private SearchAction searchAction = new SearchAction((SearchActivity) getActivity());
+
+    //搜索到的结果集合
+    private List<RewardWithStudentSTCDTO> dataList = new ArrayList<>();
 
     //记录请求的页数
     int pageNo = 1;
@@ -60,9 +72,10 @@ public class RewardSearchFragment extends AbstractFragment {
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);
 
-        //list初始化
-        mListAdapter = new RewardListAdapter(getContext());
         //设置adapter
+        mListAdapter = new RewardAdapter(getContext());
+        mRewardList.setAdapter( mListAdapter );
+        //list初始化
         mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,12 +85,30 @@ public class RewardSearchFragment extends AbstractFragment {
             }
         });
 
+        /**
+         * 搜索的回调，在这里处理ListView，Adapter，与数据的关系
+         */
+        searchAction.setAfterResult(new SearchAction.AfterResult() {
+            @Override
+            public void handleResult(List data) {
+                //判空处理
+                if (data == null){
+                    data = new ArrayList();
+                }
+                //TODO 把搜索到的结果不加判断地直接赋值
+                dataList = data;
+                //先设置数据
+                mListAdapter.setData(dataList);
+                //再设置绑定
+                mRewardList.setAdapter(mListAdapter);
+            }
+        });
+
         //设置列表动态加载
         mRewardList.setOnLoadingListener(new DynamicListView.onLoadingListener() {
             @Override
             public void setLoad() {
                 //TODO:网络传输
-                SearchAction searchAction = new SearchAction((SearchActivity) getActivity(), mListAdapter);
                 searchAction.execute("reward", pageNo+"", keyValue);
                 pageNo++;
             }
@@ -97,8 +128,8 @@ public class RewardSearchFragment extends AbstractFragment {
                         //由于是刷新，所以首先清空所有数据
 
                         pageNo = 1;
-                        SearchAction searchAction = new SearchAction((SearchActivity) getActivity(), mListAdapter);
                         searchAction.execute("reward", pageNo + "", keyValue);
+
                         pageNo++;
                     }
                 });
@@ -137,7 +168,7 @@ public class RewardSearchFragment extends AbstractFragment {
      * 获取Adapter
      * @return
      */
-    public RewardListAdapter getmListAdapter() {
+    public YYBaseAdapter<RewardWithStudentSTCDTO> getmListAdapter() {
         return mListAdapter;
     }
 

@@ -237,8 +237,8 @@ public class SearchActivity extends AbstractAppCompatActivity {
     //搜索方法
     private void search(String keyValue) {
         //TODO:网络传输, page恒为1
-//        SearchAction searchAction = new SearchAction(this, getSupportFragmentManager().findFragmentByTag( mFragmentTabHost.getCurrentTabTag() ));
-//        searchAction.execute(condition, "1", keyValue);
+        SearchAction searchAction = new SearchAction(this);
+        searchAction.execute(condition, "1", keyValue);
     }
 
     public void getResult(GetSearchResultEvent searchResultEvent) {

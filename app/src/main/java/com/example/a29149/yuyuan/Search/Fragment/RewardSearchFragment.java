@@ -82,10 +82,11 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
         //list初始化
         mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            //TODO 这里的数据传输没有解决
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent toRewardActivity = new Intent(getActivity(), RewardActivity.class);
-                toRewardActivity.putExtra("position", position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("DTO", dataList.get(position));
+                toRewardActivity.putExtras(bundle);
                 startActivity(toRewardActivity);
             }
         });

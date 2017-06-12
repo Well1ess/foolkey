@@ -226,6 +226,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 //FIXME 再次点击搜索按钮时，会崩溃
+
                 //增加动作判断否则会调用两次
                 if (keyCode == KeyEvent.KEYCODE_ENTER
                         && event.getAction() == KeyEvent.ACTION_UP) {

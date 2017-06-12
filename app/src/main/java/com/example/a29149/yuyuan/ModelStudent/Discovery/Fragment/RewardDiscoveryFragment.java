@@ -92,6 +92,7 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                 }
             });
 
+
             //新建Adapter，注意，此时的Adapter并没有数据
             mListAdapter = new RewardAdapter(mContext);
             //设置列表动态加载

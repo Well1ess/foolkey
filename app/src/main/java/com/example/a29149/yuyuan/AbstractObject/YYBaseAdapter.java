@@ -240,7 +240,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
     public void setData(List<T> data) {
         if (data != null) {
             this.dataList = data;
-            Log.d(TAG, "setData: 241"+data.toString());
+            Log.d(TAG, "setData: 241 " +  data.size() );
             notifyDataSetChanged();
         }
     }

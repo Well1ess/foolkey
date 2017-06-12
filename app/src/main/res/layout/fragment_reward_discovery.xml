@@ -1,8 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a29149.yuyuan.ModelStudent.Index.Fragment.ClassesFragment">
+
+    >
 
     <LinearLayout
         android:layout_gravity="center_horizontal"
@@ -33,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+
         >
 
         <com.example.a29149.yuyuan.Widget.DynamicListView
@@ -45,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"
+
             android:divider="@drawable/divider_reward_list"
             android:dividerHeight="1sp"
             >

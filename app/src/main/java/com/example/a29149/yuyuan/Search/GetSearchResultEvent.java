@@ -4,7 +4,7 @@ package com.example.a29149.yuyuan.Search;
  * Created by 张丽华 on 2017/5/6.
  * Description:
  */
-
+@Deprecated
 public class GetSearchResultEvent {
     private String condition;
     private boolean result;

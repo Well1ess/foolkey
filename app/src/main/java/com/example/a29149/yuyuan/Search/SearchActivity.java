@@ -225,7 +225,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
         mKeyValue.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-
+                //FIXME 再次点击搜索按钮时，会崩溃
                 //增加动作判断否则会调用两次
                 if (keyCode == KeyEvent.KEYCODE_ENTER
                         && event.getAction() == KeyEvent.ACTION_UP) {
@@ -261,21 +261,21 @@ public class SearchActivity extends AbstractAppCompatActivity {
         currentFragment.search("1", keyValue);
     }
 
-    public void getResult(GetSearchResultEvent searchResultEvent) {
-        switch (searchResultEvent.getCondition()) {
-            case "course":
-                break;
-            case "reward":
-                ((RewardSearchFragment)fragmentList.get(1)).getResult(searchResultEvent);
-                break;
-            case "article":
-                break;
-            case "teacher":
-                break;
-            case "question":
-                break;
-        }
-    }
+//    public void getResult(GetSearchResultEvent searchResultEvent) {
+//        switch (searchResultEvent.getCondition()) {
+//            case "course":
+//                break;
+//            case "reward":
+//                ((RewardSearchFragment)fragmentList.get(1)).getResult(searchResultEvent);
+//                break;
+//            case "article":
+//                break;
+//            case "teacher":
+//                break;
+//            case "question":
+//                break;
+//        }
+//    }
     //对子菜单进行初始化
     private void initSubMenu() {
         mSearchSubMenu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

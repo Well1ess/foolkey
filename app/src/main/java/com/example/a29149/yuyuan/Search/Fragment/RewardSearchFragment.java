@@ -3,6 +3,7 @@ package com.example.a29149.yuyuan.Search.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.example.a29149.yuyuan.Search.SearchAction;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
 
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RewardSearchFragment extends YYSearchBaseFragment {
-
+    private static final String TAG = "RewardSearchFragment";
     //下拉刷新的Layout
     @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideLayout;
@@ -39,7 +41,7 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
     private RewardAdapter mListAdapter;
 
     //搜索的异步任务
-    private SearchAction searchAction = new SearchAction((SearchActivity) getActivity());
+    private SearchAction searchAction ;
 
     //搜索到的结果集合
     private List<RewardWithStudentSTCDTO> dataList = new ArrayList<>();
@@ -69,10 +71,14 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
         View view = inflater.inflate(R.layout.fragment_reward_discovery, container, false);
         AnnotationUtil.injectViews(this, view);
         AnnotationUtil.setClickListener(this, view);
+        Log.d(TAG, "onCreateView: 73");
 
-        //设置adapter
+        //新建Action
+        SearchActivity searchActivity = (SearchActivity) AppManager.getActivity(SearchActivity.class);
+        searchAction = new SearchAction(searchActivity);
+
+        //新建adapter
         mListAdapter = new RewardAdapter(getContext());
-        mRewardList.setAdapter( mListAdapter );
         //list初始化
         mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -84,6 +90,7 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
             }
         });
 
+        //TODO 并没有执行
         /**
          * 搜索的回调，在这里处理ListView，Adapter，与数据的关系
          * 在别的地方只需要做Action.execute即可
@@ -100,11 +107,13 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
                 if (data == null){
                     data = new ArrayList();
                 }
+                Log.d(TAG, "handleResult: 104");
                 //TODO 把搜索到的结果不加判断地直接赋值
                 dataList = data;
                 //先设置数据
                 mListAdapter.setData(dataList);
-
+                //绑定Adapter与ListView
+                mRewardList.setAdapter(mListAdapter);
             }
         });
 
@@ -135,9 +144,11 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
                         pageNo++;
                     }
                 });
-
         return view;
     }
+
+
+
 
     /**
      * 更新 搜索界面 的信息显示

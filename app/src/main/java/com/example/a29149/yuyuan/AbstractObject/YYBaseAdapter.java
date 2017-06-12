@@ -1,6 +1,7 @@
 package com.example.a29149.yuyuan.AbstractObject;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
     protected Context mContext;
     //加载布局
     protected LayoutInflater layoutInflater;
+
+    private static final String TAG = "YYBaseAdapter";
 
     /**
      * @param dataList    数据
@@ -237,6 +240,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
     public void setData(List<T> data) {
         if (data != null) {
             this.dataList = data;
+            Log.d(TAG, "setData: 241"+data.toString());
             notifyDataSetChanged();
         }
     }

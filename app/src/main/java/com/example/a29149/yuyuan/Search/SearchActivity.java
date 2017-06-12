@@ -5,7 +5,6 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -21,6 +20,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
 import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
+import com.example.a29149.yuyuan.AbstractObject.YYFragmentTabHost;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.Fragment.ArticleSearchFragment;
@@ -99,7 +99,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
 
     //容器
     @ViewInject(android.R.id.tabhost)
-    private FragmentTabHost mFragmentTabHost;
+    private YYFragmentTabHost mFragmentTabHost;
 
     private List<Fragment> fragmentList = new ArrayList<>();
 

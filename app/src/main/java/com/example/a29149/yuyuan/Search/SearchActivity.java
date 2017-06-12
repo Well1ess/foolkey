@@ -233,6 +233,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     String searchContext = mKeyValue.getText().toString().trim();
 
                     if (TextUtils.isEmpty(searchContext)) {
+                        Log.d(TAG, "onKey: 236");
                         Toast.makeText(SearchActivity.this, "关键字不能为空", Toast.LENGTH_SHORT).show();
                     } else {
                         // 先隐藏键盘

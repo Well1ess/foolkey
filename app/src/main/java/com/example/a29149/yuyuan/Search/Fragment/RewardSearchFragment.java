@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
+import com.example.a29149.yuyuan.DTO.StudentDTO;
+import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
@@ -96,6 +99,25 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
                     startActivity( intent );
                 }
             });
+
+            //TODO FIXME 这样写死，是有数据的，应该还是数据没有set进去 而且搜索以后，没有刷新
+            RewardWithStudentSTCDTO rewardWithStudentSTCDTO = new RewardWithStudentSTCDTO();
+            RewardDTO rewardDTO = new RewardDTO();
+            StudentDTO studentDTO = new StudentDTO();
+
+            rewardDTO.setTopic(" 11");
+            rewardDTO.setPrice(11.0);
+            rewardDTO.setTechnicTagEnum(TechnicTagEnum.Android);
+            studentDTO.setNickedName("  ");
+
+            rewardWithStudentSTCDTO.setRewardDTO( rewardDTO );
+            rewardWithStudentSTCDTO.setStudentDTO(studentDTO);
+
+
+            dataList.add( rewardWithStudentSTCDTO );
+            mListAdapter.setData(dataList);
+            mRewardList.setAdapter(mListAdapter);
+
 
 
 
@@ -194,9 +216,10 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
                 //TODO 把搜索到的结果不加判断地直接赋值
                 dataList = data;
                 //先设置数据
-                mListAdapter.setData(data);
+                RewardAdapter mListAdapter1 = new RewardAdapter(mContext);
+                mListAdapter1.setData(data);
                 //绑定Adapter与ListView
-                mRewardList.setAdapter(mListAdapter);
+                mRewardList.setAdapter(mListAdapter1);
             }
         });
 

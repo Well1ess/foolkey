@@ -133,4 +133,19 @@ public class RewardSearchFragment extends AbstractFragment {
         }
     }
 
+    /**
+     * 获取Adapter
+     * @return
+     */
+    public RewardListAdapter getmListAdapter() {
+        return mListAdapter;
+    }
+
+    /**
+     * 获取ListView
+     * @return
+     */
+    public DynamicListView getmRewardList() {
+        return mRewardList;
+    }
 }

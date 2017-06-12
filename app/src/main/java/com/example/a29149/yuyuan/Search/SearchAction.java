@@ -13,6 +13,8 @@ import com.example.a29149.yuyuan.controller.search.SearchRewardController;
  * pageNo,
  * keyWord,
  * 明文传输
+ *
+ * //TODO 应当在构造函数中就指定listView与Adapter，这要求Adapter都继承自YYBaseAdapter
  */
 
 public class SearchAction extends AsyncTask<String, Integer, String> {
@@ -84,7 +86,9 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                 case "course":
                     break;
                 case "reward":
+
                     rewardListAdapter.setData(searchRewardController.getRewardWithStudentSTCDTOList());
+
                     break;
                 case "article":
                     break;

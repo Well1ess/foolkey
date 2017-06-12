@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -28,10 +29,10 @@ import com.example.a29149.yuyuan.Search.Fragment.CourseSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.QASearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.RewardSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.TeacherSearchFragment;
+import com.example.a29149.yuyuan.Search.Fragment.YYSearchBaseFragment;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.OnClick;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Widget.MyEditText;
 
 import java.util.ArrayList;
@@ -42,12 +43,12 @@ import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_SECOND_
 import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_THIRD_TAG;
 
 public class SearchActivity extends AbstractAppCompatActivity {
-
-    public static final String SEARCH_OF_FIRST_TAG = "first";
-    public static final String SEARCH_OF_SECOND_TAG = "second";
-    public static final String SEARCH_OF_THIRD_TAG = "third";
-    public static final String SEARCH_OF_FOUR_TAG = "four";
-    public static final String SEARCH_OF_FIFTH_TAG = "fifth";
+    private static final String TAG = "SearchActivity";
+    public static final String SEARCH_OF_FIRST_TAG = "course";
+    public static final String SEARCH_OF_SECOND_TAG = "reward";
+    public static final String SEARCH_OF_THIRD_TAG = "teacher";
+    public static final String SEARCH_OF_FOUR_TAG = "question";
+    public static final String SEARCH_OF_FIFTH_TAG = "article";
 
     @ViewInject(R.id.et_search)
     private MyEditText mKeyValue;
@@ -101,7 +102,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
     @ViewInject(android.R.id.tabhost)
     private YYFragmentTabHost mFragmentTabHost;
 
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private List<YYSearchBaseFragment> fragmentList = new ArrayList<>();
 
     private int screenWidth = 0;
 
@@ -110,18 +111,19 @@ public class SearchActivity extends AbstractAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //绑定UI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        //注解式绑定
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
+        //处理状态栏
         MainStudentActivity.MIUISetStatusBarLightMode(getWindow(), true);
-
-        //放置数据冗余
-        GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().clear();
 
         //FragmentTabHost初始化
         mFragmentTabHost.setup(this, getSupportFragmentManager(), R.id.vp_content_pager);
 
+        //TabHost添加各个子Fragment
         TabSpec tabSpec0 = mFragmentTabHost.newTabSpec(SEARCH_OF_FIRST_TAG)
                 .setIndicator("0");
         TabSpec tabSpec1 = mFragmentTabHost.newTabSpec(SEARCH_OF_SECOND_TAG)
@@ -139,30 +141,31 @@ public class SearchActivity extends AbstractAppCompatActivity {
         mFragmentTabHost.addTab(tabSpec3, QASearchFragment.class, null);
         mFragmentTabHost.addTab(tabSpec4, ArticleSearchFragment.class, null);
 
+        //当前标签改变时的回调函数
         mSearchMainMenu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
+            //FIXME 这里的标签没有弄懂
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rb_search_course:
-                        mFragmentTabHost.setCurrentTabByTag(SHOW_OF_FIRST_TAG);
-                        condition = "course";
+                        mFragmentTabHost.setCurrentTab(0);
+                        condition = SHOW_OF_FIRST_TAG;
                         break;
                     case R.id.rb_search_reward:
-                        mFragmentTabHost.setCurrentTabByTag(SHOW_OF_SECOND_TAG);
-                        condition = "reward";
+                        mFragmentTabHost.setCurrentTab(1);
+                        condition = SHOW_OF_SECOND_TAG;
                         break;
                     case R.id.rb_search_teacher:
-                        mFragmentTabHost.setCurrentTabByTag(SHOW_OF_THIRD_TAG);
-                        condition = "teacher";
+                        mFragmentTabHost.setCurrentTab(2);
+                        condition = SHOW_OF_THIRD_TAG;
                         break;
                     case R.id.rb_search_QA:
                         mFragmentTabHost.setCurrentTabByTag(SEARCH_OF_FOUR_TAG);
-                        condition = "question";
+                        condition = SEARCH_OF_FOUR_TAG;
                         break;
                     case R.id.rb_search_article:
                         mFragmentTabHost.setCurrentTabByTag(SEARCH_OF_FIFTH_TAG);
-                        condition = "article";
+                        condition = SEARCH_OF_FIFTH_TAG;
                         break;
                     default:
                         break;
@@ -179,10 +182,10 @@ public class SearchActivity extends AbstractAppCompatActivity {
                 mContent.setCurrentItem(position);
             }
         });
-
+        //一开始默认在搜索课程界面处理
         mFragmentTabHost.setCurrentTab(0);
         mSearchCourse.setTextColor(getResources().getColor(R.color.orange));
-        condition = "course";
+        condition = SHOW_OF_FIRST_TAG;
 
         //添加fragment，这个顺序修改时，记得修改下面的各种get方法
         fragmentList.clear();
@@ -192,12 +195,13 @@ public class SearchActivity extends AbstractAppCompatActivity {
         fragmentList.add(new QASearchFragment());
         fragmentList.add(new ArticleSearchFragment());
 
+        //绑定
         mContent.setAdapter(new MenuAdapter(getSupportFragmentManager()));
         mContent.setOffscreenPageLimit(5);
         mContent.setOnPageChangeListener(new ViewPagerListener());
         initTabLine();
 
-        //默认选中第一个
+        //默认选中第一个筛选条件
         mCurrentTarget = mSearchTargetMultiple;
         mSearchTargetMultiple.setTextColor(getResources().getColor(R.color.orange));
         initSubMenu();
@@ -237,8 +241,11 @@ public class SearchActivity extends AbstractAppCompatActivity {
     //搜索方法
     private void search(String keyValue) {
         //TODO:网络传输, page恒为1
-        SearchAction searchAction = new SearchAction(this);
-        searchAction.execute(condition, "1", keyValue);
+        //获取当前的Fragment
+        Log.d(TAG, "search: 245" + condition);
+        YYSearchBaseFragment currentFragment = (YYSearchBaseFragment) getSupportFragmentManager().findFragmentByTag(condition);
+        //调用Fragment进行更新
+        currentFragment.search("1", keyValue);
     }
 
     public void getResult(GetSearchResultEvent searchResultEvent) {
@@ -366,14 +373,17 @@ public class SearchActivity extends AbstractAppCompatActivity {
             mTabLine.setLayoutParams(cp);
         }
 
+        //FIXME 进不来了
         @Override
         public void onPageSelected(int index) {
+            Log.d(TAG, "onPageSelected: 378 " + index);
             if (index == 0) {
                 mSearchCourse.setChecked(true);
                 if (mCurrentRB != mSearchCourse) {
                     mSearchCourse.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchCourse;
+                    condition = SEARCH_OF_FIRST_TAG;
                 }
 
             } else if (index == 1) {
@@ -382,6 +392,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mSearchReward.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchReward;
+                    condition = SEARCH_OF_SECOND_TAG;
                 }
             } else if (index == 2) {
                 mSearchTeacher.setChecked(true);
@@ -389,6 +400,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mSearchTeacher.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchTeacher;
+                    condition = SEARCH_OF_THIRD_TAG;
                 }
             } else if (index == 3) {
                 mSearchQA.setChecked(true);
@@ -396,6 +408,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mSearchQA.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchQA;
+                    condition = SEARCH_OF_FOUR_TAG;
                 }
             } else if (index == 4) {
                 mSearchArticle.setChecked(true);
@@ -403,6 +416,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mSearchArticle.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchArticle;
+                    condition = SEARCH_OF_FIFTH_TAG;
                 }
             }
             mFragmentTabHost.setCurrentTab(index);

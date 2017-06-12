@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.ArticleActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.ArticleListAdapter;
@@ -25,7 +24,7 @@ import de.greenrobot.event.Subscribe;
 import de.greenrobot.event.ThreadMode;
 
 
-public class ArticleSearchFragment extends AbstractFragment {
+public class ArticleSearchFragment extends YYSearchBaseFragment {
 
     //页数
     int pageNo = 2;
@@ -131,4 +130,16 @@ public class ArticleSearchFragment extends AbstractFragment {
         super.onDetach();
     }
 
+    /**
+     * @param pageNo
+     * @param keyValue
+     *
+     * @Author: geyao
+     * @Date: 2017/6/12
+     * @Description: 搜索的抽象方法，由SearchActivity调用
+     */
+    @Override
+    public void search(String pageNo, String keyValue) {
+
+    }
 }

@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
-import com.example.a29149.yuyuan.AbstractObject.YYBaseAdapter;
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
@@ -27,7 +25,7 @@ import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RewardSearchFragment extends AbstractFragment {
+public class RewardSearchFragment extends YYSearchBaseFragment {
 
     //下拉刷新的Layout
     @ViewInject(R.id.srl_slide_layout)
@@ -78,6 +76,7 @@ public class RewardSearchFragment extends AbstractFragment {
         //list初始化
         mRewardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+            //TODO 这里的数据传输没有解决
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent toRewardActivity = new Intent(getActivity(), RewardActivity.class);
                 toRewardActivity.putExtra("position", position);
@@ -87,6 +86,12 @@ public class RewardSearchFragment extends AbstractFragment {
 
         /**
          * 搜索的回调，在这里处理ListView，Adapter，与数据的关系
+         * 在别的地方只需要做Action.execute即可
+         * 因为搜索的Action总是会调用这个方法
+         * 所以不需要重复设值
+         * @Author:        geyao
+         * @Date:          2017/6/12
+         * @Description:
          */
         searchAction.setAfterResult(new SearchAction.AfterResult() {
             @Override
@@ -99,8 +104,7 @@ public class RewardSearchFragment extends AbstractFragment {
                 dataList = data;
                 //先设置数据
                 mListAdapter.setData(dataList);
-                //再设置绑定
-                mRewardList.setAdapter(mListAdapter);
+
             }
         });
 
@@ -109,7 +113,7 @@ public class RewardSearchFragment extends AbstractFragment {
             @Override
             public void setLoad() {
                 //TODO:网络传输
-                searchAction.execute("reward", pageNo+"", keyValue);
+                search(  pageNo+"", keyValue);
                 pageNo++;
             }
         });
@@ -126,10 +130,8 @@ public class RewardSearchFragment extends AbstractFragment {
                             MainStudentActivity.shapeLoadingDialog.show();
                         }
                         //由于是刷新，所以首先清空所有数据
-
                         pageNo = 1;
-                        searchAction.execute("reward", pageNo + "", keyValue);
-
+                        search( pageNo + "", keyValue);
                         pageNo++;
                     }
                 });
@@ -165,18 +167,13 @@ public class RewardSearchFragment extends AbstractFragment {
     }
 
     /**
-     * 获取Adapter
-     * @return
+     * @Author:        geyao
+     * @Date:          2017/6/12
+     * @Description:   搜索，由外部调用
+     * @param pageNo    页码
+     * @param keyValue  关键字
      */
-    public YYBaseAdapter<RewardWithStudentSTCDTO> getmListAdapter() {
-        return mListAdapter;
-    }
-
-    /**
-     * 获取ListView
-     * @return
-     */
-    public DynamicListView getmRewardList() {
-        return mRewardList;
+    public void search(String pageNo, String keyValue){
+        searchAction.execute("reward", pageNo + "", keyValue);
     }
 }

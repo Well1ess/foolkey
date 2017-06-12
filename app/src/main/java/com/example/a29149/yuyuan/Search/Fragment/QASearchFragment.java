@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.R;
 
-public class QASearchFragment extends AbstractFragment {
+public class QASearchFragment extends YYSearchBaseFragment {
 
     public QASearchFragment() {
         super();
@@ -43,4 +42,16 @@ public class QASearchFragment extends AbstractFragment {
         super.onDetach();
     }
 
+    /**
+     * @param pageNo
+     * @param keyValue
+     *
+     * @Author: geyao
+     * @Date: 2017/6/12
+     * @Description: 搜索的抽象方法，由SearchActivity调用
+     */
+    @Override
+    public void search(String pageNo, String keyValue) {
+
+    }
 }

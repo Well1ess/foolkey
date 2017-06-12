@@ -421,6 +421,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         }
         if (searchActivity != null) {
             //搜索的列表更新
+            //TODO 耦合
             searchActivity.getRewardSearchFragment().updateSearchRewardList();
         }
     }

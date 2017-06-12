@@ -169,6 +169,7 @@ public class ClassesFragment extends AbstractFragment {
         super.onDetach();
     }
 
+
     public class GetHotCourseAction extends AsyncTask<String, Integer, String> {
 
         int pageNo;
@@ -191,7 +192,6 @@ public class ClassesFragment extends AbstractFragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-//            log.d(this, result);
             if (result != null) {
                 try {
 
@@ -235,6 +235,7 @@ public class ClassesFragment extends AbstractFragment {
                         Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     Toast.makeText(getActivity(), "网络连接失败！", Toast.LENGTH_SHORT).show();
                 }
             } else {

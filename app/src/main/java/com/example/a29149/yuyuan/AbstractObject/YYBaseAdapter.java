@@ -123,16 +123,19 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
         if (dataList == null) { // 源list为空
             if (newData != null) {
                 dataList = newData;
+                notifyDataSetChanged();
                 return true;
             }else {
                 dataList = new ArrayList<>();
+                notifyDataSetChanged();
                 return true;
             }
         }else {
             //源List不为空
             //目标list为空
-            if (newData == null)
+            if (newData == null) {
                 return true;
+            }
             //目标list不为空
             else {
                 for (T data : newData){
@@ -146,6 +149,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
                     }
 
                 }
+                notifyDataSetChanged();
                 return true;
             }
         }

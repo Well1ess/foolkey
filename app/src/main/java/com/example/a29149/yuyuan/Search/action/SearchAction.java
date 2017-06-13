@@ -82,9 +82,10 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
          * @Author:        geyao
          * @Date:          2017/6/12
          * @Description:   将搜索到的数据作为参数传进去
-         * @param data
+         * @param data 搜索结果
+         * @param pageNo 页码
          */
-        public void handleResult(List data);
+        public void handleResult(int pageNo, List data);
 
     }
 
@@ -98,6 +99,8 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
         this.afterResult = afterResult;
     }
 
+    //FIXME 这里的搜索获取更多，还没有做
+
     /**
      * 将输入分类注入
      *
@@ -105,12 +108,13 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
      */
 
     private void injectDataToGlobe() {
-        if (Integer.parseInt(mPageNo) == 1) {
+        int page = Integer.parseInt(mPageNo);
+        if (page == 1) {
             switch (mCondition) {
                 case FILTER1:
                     break;
                 case FILTER2:
-                    afterResult.handleResult( searchRewardController.getRewardWithStudentSTCDTOList() );
+                    afterResult.handleResult( page, searchRewardController.getRewardWithStudentSTCDTOList() );
                     break;
                 case FILTER3:
                     break;
@@ -124,7 +128,7 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                 case FILTER1:
                     break;
                 case FILTER2:
-                    afterResult.handleResult( searchRewardController.getRewardWithStudentSTCDTOList() );
+                    afterResult.handleResult( page, searchRewardController.getRewardWithStudentSTCDTOList() );
                     break;
                 case FILTER3:
                     break;

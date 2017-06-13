@@ -72,6 +72,7 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
                     //TODO:网络传输，这里就算没有结果，也不会消失转转转的动画
                     //上滑获取更多的关键词，从SearchActivity获取，这里设置为""
                     search(  pageNo+"", "");
+                    //pageNo加1
                     pageNo++;
                 }
             });
@@ -90,6 +91,7 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
                             pageNo = 1;
                             //下拉刷新的关键词，从SearchActivity获取，这里设置为""
                             search( pageNo + "", "");
+                            //pageNo加1
                             pageNo++;
                         }
                     });
@@ -125,7 +127,7 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
      * @param pageNo    页码
      * @param keyValue  关键字
      */
-    public void search(String pageNo, String keyValue){
+    public void search(final String pageNo, String keyValue){
         //每个异步任务，都只能使用一次
         searchAction = new SearchAction();
 
@@ -139,17 +141,27 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
          * @Description:
          */
         searchAction.setAfterResult(new SearchAction.AfterResult() {
+            //执行顺序2
             @Override
-            public void handleResult(List data) {
-                //判空处理
-                //执行顺序2
-                if (data == null){
-                    data = new ArrayList();
+            public void handleResult(int page, List data) {
+                if (page == 1) { //搜索第一页
+                    //判空处理
+                    if (data == null) {
+                        data = new ArrayList();
+                    }
+                    //TODO 把搜索到的结果不加判断地直接赋值
+                    dataList = data;
+                    //设置数据
+                    mListAdapter.setData(data);
+                }else { // 搜索第二页
+                    if (data == null || data.size() == 0){ //没有新数据返回
+                        return;
+                    }else {
+                        //有新数据，加到最后面
+                        mListAdapter.addExtinctDataList(data, false);
+                        dataList = mListAdapter.getDataList();
+                    }
                 }
-                //TODO 把搜索到的结果不加判断地直接赋值
-                dataList = data;
-                //设置数据
-                mListAdapter.setData(data);
 
             }
         });

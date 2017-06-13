@@ -27,7 +27,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.Fragment.ArticleSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.CourseSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.QASearchFragment;
-import com.example.a29149.yuyuan.Search.Fragment.RewardSearchFragment2;
+import com.example.a29149.yuyuan.Search.Fragment.RewardSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.TeacherSearchFragment;
 import com.example.a29149.yuyuan.Search.Fragment.YYSearchBaseFragment;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -114,7 +114,13 @@ public class SearchActivity extends AbstractAppCompatActivity {
     @ViewInject(android.R.id.tabhost)
     private YYFragmentTabHost mFragmentTabHost;
 
+    //引用各个Fragment
     private List<YYSearchBaseFragment> fragmentList = new ArrayList<>();
+    private RewardSearchFragment rewardSearchFragment = new RewardSearchFragment();
+    private CourseSearchFragment courseSearchFragment = new CourseSearchFragment();
+    private TeacherSearchFragment teacherSearchFragment = new TeacherSearchFragment();
+    private QASearchFragment qaSearchFragment = new QASearchFragment();
+    private ArticleSearchFragment articleSearchFragment = new ArticleSearchFragment();
 
     private int screenWidth = 0;
 
@@ -148,7 +154,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                 .setIndicator("4");
 
         mFragmentTabHost.addTab(tabSpec0, CourseSearchFragment.class, null);
-        mFragmentTabHost.addTab(tabSpec1, RewardSearchFragment2.class, null);
+        mFragmentTabHost.addTab(tabSpec1, RewardSearchFragment.class, null);
         mFragmentTabHost.addTab(tabSpec2, TeacherSearchFragment.class, null);
         mFragmentTabHost.addTab(tabSpec3, QASearchFragment.class, null);
         mFragmentTabHost.addTab(tabSpec4, ArticleSearchFragment.class, null);
@@ -172,16 +178,17 @@ public class SearchActivity extends AbstractAppCompatActivity {
                         condition = SHOW_OF_THIRD_TAG;
                         break;
                     case R.id.rb_search_QA:
-                        mFragmentTabHost.setCurrentTabByTag(SEARCH_OF_FOUR_TAG);
+                        mFragmentTabHost.setCurrentTab(3);
                         condition = SEARCH_OF_FOUR_TAG;
                         break;
                     case R.id.rb_search_article:
-                        mFragmentTabHost.setCurrentTabByTag(SEARCH_OF_FIFTH_TAG);
+                        mFragmentTabHost.setCurrentTab(4);
                         condition = SEARCH_OF_FIFTH_TAG;
                         break;
                     default:
                         break;
                 }
+                Log.d(TAG, "onCheckedChanged: 192 " + condition);
             }
         });
 
@@ -201,11 +208,11 @@ public class SearchActivity extends AbstractAppCompatActivity {
 
         //添加fragment，这个顺序修改时，记得修改下面的各种get方法
         fragmentList.clear();
-        fragmentList.add(new CourseSearchFragment());
-        fragmentList.add(new RewardSearchFragment2());
-        fragmentList.add(new TeacherSearchFragment());
-        fragmentList.add(new QASearchFragment());
-        fragmentList.add(new ArticleSearchFragment());
+        fragmentList.add(courseSearchFragment);
+        fragmentList.add( rewardSearchFragment );
+        fragmentList.add(teacherSearchFragment);
+        fragmentList.add(qaSearchFragment);
+        fragmentList.add(articleSearchFragment);
 
         //绑定
         mContent.setAdapter(new MenuAdapter(getSupportFragmentManager()));
@@ -260,7 +267,8 @@ public class SearchActivity extends AbstractAppCompatActivity {
         Log.d(TAG, "search: 245" + condition);
         YYSearchBaseFragment currentFragment = (YYSearchBaseFragment) getSupportFragmentManager().findFragmentByTag(mFragmentTabHost.getCurrentTabTag());
         //调用Fragment进行更新
-        currentFragment.search("1", keyValue);
+        rewardSearchFragment.search("1", keyValue);
+        Log.d(TAG, "search: 271 " + currentFragment.equals( rewardSearchFragment ));
     }
 
 //    public void getResult(GetSearchResultEvent searchResultEvent) {
@@ -391,7 +399,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
         //FIXME 进不来了
         @Override
         public void onPageSelected(int index) {
-            Log.d(TAG, "onPageSelected: 378 " + index);
+            Log.d(TAG, "onPageSelected: 378 " + condition);
             if (index == 0) {
                 mSearchCourse.setChecked(true);
                 if (mCurrentRB != mSearchCourse) {
@@ -442,8 +450,8 @@ public class SearchActivity extends AbstractAppCompatActivity {
      * 获取搜索悬赏的fragment
      * @return
      */
-    public RewardSearchFragment2 getRewardSearchFragment(){
-        return (RewardSearchFragment2) fragmentList.get(1);
+    public RewardSearchFragment getRewardSearchFragment(){
+        return (RewardSearchFragment) fragmentList.get(1);
     }
 
 }

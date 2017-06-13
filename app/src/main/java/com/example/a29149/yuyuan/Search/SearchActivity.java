@@ -121,6 +121,8 @@ public class SearchActivity extends AbstractAppCompatActivity {
     private TeacherSearchFragment teacherSearchFragment = new TeacherSearchFragment();
     private QASearchFragment qaSearchFragment = new QASearchFragment();
     private ArticleSearchFragment articleSearchFragment = new ArticleSearchFragment();
+    //暂存当前的Fragment
+    private YYSearchBaseFragment currentFragment;
 
     private int screenWidth = 0;
 
@@ -168,22 +170,27 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     case R.id.rb_search_course:
                         mFragmentTabHost.setCurrentTab(0);
                         condition = SHOW_OF_FIRST_TAG;
+                        currentFragment = courseSearchFragment;
                         break;
                     case R.id.rb_search_reward:
                         mFragmentTabHost.setCurrentTab(1);
                         condition = SHOW_OF_SECOND_TAG;
+                        currentFragment = rewardSearchFragment;
                         break;
                     case R.id.rb_search_teacher:
                         mFragmentTabHost.setCurrentTab(2);
                         condition = SHOW_OF_THIRD_TAG;
+                        currentFragment = teacherSearchFragment;
                         break;
                     case R.id.rb_search_QA:
                         mFragmentTabHost.setCurrentTab(3);
                         condition = SEARCH_OF_FOUR_TAG;
+                        currentFragment = qaSearchFragment;
                         break;
                     case R.id.rb_search_article:
                         mFragmentTabHost.setCurrentTab(4);
                         condition = SEARCH_OF_FIFTH_TAG;
+                        currentFragment = articleSearchFragment;
                         break;
                     default:
                         break;
@@ -206,6 +213,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
         mSearchCourse.setTextColor(getResources().getColor(R.color.orange));
         condition = SHOW_OF_FIRST_TAG;
 
+
         //添加fragment，这个顺序修改时，记得修改下面的各种get方法
         fragmentList.clear();
         fragmentList.add(courseSearchFragment);
@@ -213,6 +221,8 @@ public class SearchActivity extends AbstractAppCompatActivity {
         fragmentList.add(teacherSearchFragment);
         fragmentList.add(qaSearchFragment);
         fragmentList.add(articleSearchFragment);
+        //当前Fragment为搜索课程
+        currentFragment = courseSearchFragment;
 
         //绑定
         mContent.setAdapter(new MenuAdapter(getSupportFragmentManager()));
@@ -265,10 +275,11 @@ public class SearchActivity extends AbstractAppCompatActivity {
         //TODO:网络传输, page恒为1
         //获取当前的Fragment
         Log.d(TAG, "search: 245" + condition);
-        YYSearchBaseFragment currentFragment = (YYSearchBaseFragment) getSupportFragmentManager().findFragmentByTag(mFragmentTabHost.getCurrentTabTag());
-        //调用Fragment进行更新
-        rewardSearchFragment.search("1", keyValue);
-        Log.d(TAG, "search: 271 " + currentFragment.equals( rewardSearchFragment ));
+//        YYSearchBaseFragment currentFragment = (YYSearchBaseFragment) getSupportFragmentManager().findFragmentByTag(mFragmentTabHost.getCurrentTabTag());
+        //调用Fragment进行更新\
+        currentFragment.search("1", keyValue);
+//        rewardSearchFragment.search("1", keyValue);
+//        Log.d(TAG, "search: 271 " + currentFragment.equals( rewardSearchFragment ));
     }
 
 //    public void getResult(GetSearchResultEvent searchResultEvent) {
@@ -407,6 +418,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchCourse;
                     condition = SEARCH_OF_FIRST_TAG;
+                    currentFragment = courseSearchFragment;
                 }
 
             } else if (index == 1) {
@@ -416,6 +428,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchReward;
                     condition = SEARCH_OF_SECOND_TAG;
+                    currentFragment = rewardSearchFragment;
                 }
             } else if (index == 2) {
                 mSearchTeacher.setChecked(true);
@@ -424,6 +437,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchTeacher;
                     condition = SEARCH_OF_THIRD_TAG;
+                    currentFragment = teacherSearchFragment;
                 }
             } else if (index == 3) {
                 mSearchQA.setChecked(true);
@@ -432,6 +446,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchQA;
                     condition = SEARCH_OF_FOUR_TAG;
+                    currentFragment = qaSearchFragment;
                 }
             } else if (index == 4) {
                 mSearchArticle.setChecked(true);
@@ -440,6 +455,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchArticle;
                     condition = SEARCH_OF_FIFTH_TAG;
+                    currentFragment = articleSearchFragment;
                 }
             }
             mFragmentTabHost.setCurrentTab(index);

@@ -126,6 +126,11 @@ public class SearchActivity extends AbstractAppCompatActivity {
     //暂存当前的Fragment
     private YYSearchBaseFragment currentFragment;
 
+    //初始化
+    {
+
+    }
+
     private int screenWidth = 0;
 
     @Override
@@ -221,6 +226,18 @@ public class SearchActivity extends AbstractAppCompatActivity {
         //当前Fragment为搜索课程
         currentFragment = courseSearchFragment;
 
+        //为每个子Fragment注册回调事件
+        for (YYSearchBaseFragment yySearchBaseFragment : fragmentList){
+            yySearchBaseFragment.setOnTypeListener(new YYSearchBaseFragment.OnTypeListener() {
+                @Override
+                public String getKeyWord() {
+                    //获取输入框的文字
+                    return mKeyValue.getText().toString().trim();
+                }
+            });
+        }
+
+
         //绑定
         mContent.setAdapter(new MenuAdapter(getSupportFragmentManager()));
         mContent.setOffscreenPageLimit(5);
@@ -260,6 +277,8 @@ public class SearchActivity extends AbstractAppCompatActivity {
                 }
             }
         });
+
+
     }
 
     //搜索方法

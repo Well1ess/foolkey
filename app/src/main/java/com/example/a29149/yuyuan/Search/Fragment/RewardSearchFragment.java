@@ -14,7 +14,6 @@ import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Search.GetSearchResultEvent;
 import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Search.action.SearchAction;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -147,18 +146,6 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
         super.onAttach(context);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    public void getResult(GetSearchResultEvent searchResultEvent) {
-        keyValue = searchResultEvent.getKeyValue();
-        if (searchResultEvent.isResult()) {
-            mListAdapter.notifyDataSetChanged();
-            pageNo++;
-        }
-    }
 
     /**
      * @Author:        geyao
@@ -187,7 +174,6 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
                 if (data == null){
                     data = new ArrayList();
                 }
-                Log.d(TAG, "handleResult: 186 " + data.size());
                 //TODO 把搜索到的结果不加判断地直接赋值
                 dataList = data;
                 //设置数据
@@ -195,6 +181,9 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
 
             }
         });
+
+        if (keyValue == null || keyValue.equals(""))
+            keyValue = onTypeListener.getKeyWord();
 
         //执行顺序 1
         searchAction.execute("reward", pageNo + "", keyValue);

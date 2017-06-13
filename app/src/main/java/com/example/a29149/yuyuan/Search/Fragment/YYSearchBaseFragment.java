@@ -17,4 +17,15 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
      * @param keyValue
      */
     public abstract void search(String pageNo, String keyValue);
+
+    //获取搜索框输入的回调函数
+    public interface OnTypeListener{
+        public String getKeyWord();
+    }
+
+    protected OnTypeListener onTypeListener;
+
+    public void setOnTypeListener(OnTypeListener onTypeListener){
+        this.onTypeListener = onTypeListener;
+    }
 }

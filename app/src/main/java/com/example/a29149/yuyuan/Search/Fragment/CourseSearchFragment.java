@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
+import com.example.a29149.yuyuan.Search.action.SearchAction;
 
 public class CourseSearchFragment extends YYSearchBaseFragment {
 
@@ -39,5 +40,8 @@ public class CourseSearchFragment extends YYSearchBaseFragment {
                 startActivity( intent );
             }
         });
+
+        //设定搜索条件
+        condition = SearchAction.FILTER1;
     }
 }

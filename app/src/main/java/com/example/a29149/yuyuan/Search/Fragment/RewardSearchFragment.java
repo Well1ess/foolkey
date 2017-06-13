@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
+import com.example.a29149.yuyuan.Search.action.SearchAction;
+
 //FIXME TODO 自习对比了代码，依然不会显示数据
 public class RewardSearchFragment extends YYSearchBaseFragment {
     private static final String TAG = "RewardSearchFragment";
@@ -38,6 +40,9 @@ public class RewardSearchFragment extends YYSearchBaseFragment {
                 startActivity( intent );
             }
         });
+
+        //设定搜索条件
+        condition = SearchAction.FILTER2;
     }
 
 }

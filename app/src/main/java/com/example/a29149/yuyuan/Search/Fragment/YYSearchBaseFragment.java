@@ -12,7 +12,6 @@ import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.AbstractObject.YYBaseAdapter;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Search.action.SearchAction;
 import com.example.a29149.yuyuan.Widget.DynamicListView;
 import com.example.a29149.yuyuan.Widget.SlideRefreshLayout;
@@ -49,8 +48,8 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
     //记录请求的页数
     int pageNo = 1;
 
-    //搜索的关键字
-    String keyValue;
+    //搜索条件，由子类Fragment指定
+    protected String condition;
 
 
     @Override
@@ -71,7 +70,8 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
                 @Override
                 public void setLoad() {
                     //TODO:网络传输，这里就算没有结果，也不会消失转转转的动画
-                    search(  pageNo+"", keyValue);
+                    //上滑获取更多的关键词，从SearchActivity获取，这里设置为""
+                    search(  pageNo+"", "");
                     pageNo++;
                 }
             });
@@ -88,12 +88,11 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
                             }
                             //由于是刷新，所以首先清空所有数据
                             pageNo = 1;
-                            search( pageNo + "", keyValue);
+                            //下拉刷新的关键词，从SearchActivity获取，这里设置为""
+                            search( pageNo + "", "");
                             pageNo++;
                         }
                     });
-
-
             //绑定Adapter与ListView
             listView.setAdapter(mListAdapter);
         }
@@ -105,7 +104,7 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
      * 各个子类自己的构造方法
      * @Author:        geyao
      * @Date:          2017/6/13
-     * @Description: 需要新建Adapter，设定listView的点击事件
+     * @Description: 需要新建Adapter，设定listView的点击事件，设定自己的关键字
      */
     protected abstract void init();
 
@@ -127,7 +126,8 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
      * @param keyValue  关键字
      */
     public void search(String pageNo, String keyValue){
-        searchAction = new SearchAction( (SearchActivity) getActivity());
+        //每个异步任务，都只能使用一次
+        searchAction = new SearchAction();
 
         /**
          * 搜索的回调，在这里处理ListView，Adapter，与数据的关系
@@ -154,22 +154,15 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
             }
         });
 
+        //如果不知道指定关键字，则再会去Activity中问一次输入框，如果依然没有，则会搜索""
         if (keyValue == null || keyValue.equals(""))
             keyValue = onTypeListener.getKeyWord();
 
         //执行顺序 1
-        searchAction.execute("reward", pageNo + "", keyValue);
+        //条件由子类设定，页码由父类管理，keyValue从Activity中获取
+        searchAction.execute(condition, pageNo + "", keyValue);
     }
 
-
-    /**
-     * @Author:        geyao
-     * @Date:          2017/6/12
-     * @Description:   搜索的抽象方法，由SearchActivity调用
-     * @param pageNo
-     * @param keyValue
-     */
-//    public abstract void search(String pageNo, String keyValue);
 
     /**
      * @Author:        geyao

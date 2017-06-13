@@ -2,11 +2,9 @@ package com.example.a29149.yuyuan.Search.action;
 
 import android.os.AsyncTask;
 
-import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.controller.search.SearchRewardController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,24 +23,17 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
     private String mPageNo;
     //用于暂存当前搜索的是什么
     private String mCondition;
-    //关键字
-    private String keyValue;
-
-
+    //进行搜索的Controller
     private SearchRewardController searchRewardController = new SearchRewardController();
-
-    private SearchActivity searchActivity;
-
     //回调接口，由各个Fragment去实现
     private AfterResult afterResult;
 
-    //存放搜索结果
-    private List dataList = new ArrayList();
-
-    public SearchAction(SearchActivity searchActivity) {
-        this.searchActivity = searchActivity;
-    }
-
+    //搜索条件们
+    public static final String FILTER1 = "course";
+    public static final String FILTER2 = "reward";
+    public static final String FILTER3 = "article";
+    public static final String FILTER4 = "teacher";
+    public static final String FILTER5 = "question";
 
     @Override
     protected String doInBackground(String... params) {
@@ -50,21 +41,21 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
         mCondition = params[0];
         mPageNo = params[1];
         switch (mCondition) {
-            case "course":
+            case FILTER1:
                 //TODO
                 break;
-            case "reward":
+            case FILTER2:
                 searchRewardController.setKeyWord(params[2]);
                 searchRewardController.setPageNo(params[1]);
                 searchRewardController.execute();
                 return searchRewardController.getResult();
-            case "article":
+            case FILTER3:
                 //TODO
                 break;
-            case "teacher":
+            case FILTER4:
                 //TODO
                 break;
-            case "question":
+            case FILTER5:
                 //TODO
                 break;
         }
@@ -116,30 +107,30 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
     private void injectDataToGlobe() {
         if (Integer.parseInt(mPageNo) == 1) {
             switch (mCondition) {
-                case "course":
+                case FILTER1:
                     break;
-                case "reward":
+                case FILTER2:
                     afterResult.handleResult( searchRewardController.getRewardWithStudentSTCDTOList() );
                     break;
-                case "article":
+                case FILTER3:
                     break;
-                case "teacher":
+                case FILTER4:
                     break;
-                case "question":
+                case FILTER5:
                     break;
             }
         } else {
             switch (mCondition) {
-                case "course":
+                case FILTER1:
                     break;
-                case "reward":
+                case FILTER2:
                     afterResult.handleResult( searchRewardController.getRewardWithStudentSTCDTOList() );
                     break;
-                case "article":
+                case FILTER3:
                     break;
-                case "teacher":
+                case FILTER4:
                     break;
-                case "question":
+                case FILTER5:
                     break;
             }
         }

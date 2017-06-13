@@ -1,7 +1,8 @@
-package com.example.a29149.yuyuan.Search;
+package com.example.a29149.yuyuan.Search.action;
 
 import android.os.AsyncTask;
 
+import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.controller.search.SearchRewardController;
 

@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -37,10 +36,6 @@ import com.example.a29149.yuyuan.Widget.MyEditText;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_FIRST_TAG;
-import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_SECOND_TAG;
-import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_THIRD_TAG;
 //FIXME 搜索依然会崩溃
 
 /**
@@ -53,6 +48,8 @@ import static com.example.a29149.yuyuan.Main.MainStudentActivity.SHOW_OF_THIRD_T
  *                      Activity要调用这个方法来实现搜索——网络交互
  *                      因为不同Fragment要获取不同的数据，填充不同的Adapter
  *                      每个也有自己的下拉刷新事件
+ *                      这些Fragment都要继承YYSearchBaseFragment
+ *                      Activity应该提供一个获取当前关键字的方法
  */
 public class SearchActivity extends AbstractAppCompatActivity {
     private static final String TAG = "SearchActivity";
@@ -116,18 +113,20 @@ public class SearchActivity extends AbstractAppCompatActivity {
 
     //引用各个Fragment
     private List<YYSearchBaseFragment> fragmentList = new ArrayList<>();
+    //搜索悬赏的Fragment
     private RewardSearchFragment rewardSearchFragment = new RewardSearchFragment();
+    //搜索课程的Fragment
     private CourseSearchFragment courseSearchFragment = new CourseSearchFragment();
+    //搜索老师的Fragment
     private TeacherSearchFragment teacherSearchFragment = new TeacherSearchFragment();
+    //搜索问题的Fragment
     private QASearchFragment qaSearchFragment = new QASearchFragment();
+    //搜索文章的Fragment
     private ArticleSearchFragment articleSearchFragment = new ArticleSearchFragment();
     //暂存当前的Fragment
     private YYSearchBaseFragment currentFragment;
 
     private int screenWidth = 0;
-
-    //当前搜索什么
-    private String condition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,33 +168,32 @@ public class SearchActivity extends AbstractAppCompatActivity {
                 switch (checkedId) {
                     case R.id.rb_search_course:
                         mFragmentTabHost.setCurrentTab(0);
-                        condition = SHOW_OF_FIRST_TAG;
+                        //设定当前的Fragment
                         currentFragment = courseSearchFragment;
                         break;
                     case R.id.rb_search_reward:
                         mFragmentTabHost.setCurrentTab(1);
-                        condition = SHOW_OF_SECOND_TAG;
+                        //设定当前的Fragment
                         currentFragment = rewardSearchFragment;
                         break;
                     case R.id.rb_search_teacher:
                         mFragmentTabHost.setCurrentTab(2);
-                        condition = SHOW_OF_THIRD_TAG;
+                        //设定当前的Fragment
                         currentFragment = teacherSearchFragment;
                         break;
                     case R.id.rb_search_QA:
                         mFragmentTabHost.setCurrentTab(3);
-                        condition = SEARCH_OF_FOUR_TAG;
+                        //设定当前的Fragment
                         currentFragment = qaSearchFragment;
                         break;
                     case R.id.rb_search_article:
                         mFragmentTabHost.setCurrentTab(4);
-                        condition = SEARCH_OF_FIFTH_TAG;
+                        //设定当前的Fragment
                         currentFragment = articleSearchFragment;
                         break;
                     default:
                         break;
                 }
-                Log.d(TAG, "onCheckedChanged: 192 " + condition);
             }
         });
 
@@ -211,7 +209,6 @@ public class SearchActivity extends AbstractAppCompatActivity {
         //一开始默认在搜索课程界面处理
         mFragmentTabHost.setCurrentTab(0);
         mSearchCourse.setTextColor(getResources().getColor(R.color.orange));
-        condition = SHOW_OF_FIRST_TAG;
 
 
         //添加fragment，这个顺序修改时，记得修改下面的各种get方法
@@ -243,14 +240,11 @@ public class SearchActivity extends AbstractAppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 //FIXME 再次点击搜索按钮时，会崩溃
-
                 //增加动作判断否则会调用两次
                 if (keyCode == KeyEvent.KEYCODE_ENTER
                         && event.getAction() == KeyEvent.ACTION_UP) {
                     String searchContext = mKeyValue.getText().toString().trim();
-
                     if (TextUtils.isEmpty(searchContext)) {
-                        Log.d(TAG, "onKey: 236");
                         Toast.makeText(SearchActivity.this, "关键字不能为空", Toast.LENGTH_SHORT).show();
                     } else {
                         // 先隐藏键盘
@@ -261,9 +255,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                         search(searchContext);
                     }
                     return true;
-
                 } else {
-
                     return false;
                 }
             }
@@ -272,31 +264,11 @@ public class SearchActivity extends AbstractAppCompatActivity {
 
     //搜索方法
     private void search(String keyValue) {
-        //TODO:网络传输, page恒为1
-        //获取当前的Fragment
-        Log.d(TAG, "search: 245" + condition);
-//        YYSearchBaseFragment currentFragment = (YYSearchBaseFragment) getSupportFragmentManager().findFragmentByTag(mFragmentTabHost.getCurrentTabTag());
-        //调用Fragment进行更新\
+        //在Activity里面进行的搜索，page恒为1
+        //获取当前的Fragment，进行网络传输
         currentFragment.search("1", keyValue);
-//        rewardSearchFragment.search("1", keyValue);
-//        Log.d(TAG, "search: 271 " + currentFragment.equals( rewardSearchFragment ));
     }
 
-//    public void getResult(GetSearchResultEvent searchResultEvent) {
-//        switch (searchResultEvent.getCondition()) {
-//            case "course":
-//                break;
-//            case "reward":
-//                ((RewardSearchFragment)fragmentList.get(1)).getResult(searchResultEvent);
-//                break;
-//            case "article":
-//                break;
-//            case "teacher":
-//                break;
-//            case "question":
-//                break;
-//        }
-//    }
     //对子菜单进行初始化
     private void initSubMenu() {
         mSearchSubMenu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -407,17 +379,15 @@ public class SearchActivity extends AbstractAppCompatActivity {
             mTabLine.setLayoutParams(cp);
         }
 
-        //FIXME 进不来了
         @Override
         public void onPageSelected(int index) {
-            Log.d(TAG, "onPageSelected: 378 " + condition);
             if (index == 0) {
                 mSearchCourse.setChecked(true);
                 if (mCurrentRB != mSearchCourse) {
                     mSearchCourse.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchCourse;
-                    condition = SEARCH_OF_FIRST_TAG;
+                    //缓存当前Fragment
                     currentFragment = courseSearchFragment;
                 }
 
@@ -427,7 +397,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mSearchReward.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchReward;
-                    condition = SEARCH_OF_SECOND_TAG;
+                    //缓存当前Fragment
                     currentFragment = rewardSearchFragment;
                 }
             } else if (index == 2) {
@@ -436,7 +406,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mSearchTeacher.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchTeacher;
-                    condition = SEARCH_OF_THIRD_TAG;
+                    //缓存当前Fragment
                     currentFragment = teacherSearchFragment;
                 }
             } else if (index == 3) {
@@ -445,7 +415,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mSearchQA.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchQA;
-                    condition = SEARCH_OF_FOUR_TAG;
+                    //缓存当前Fragment
                     currentFragment = qaSearchFragment;
                 }
             } else if (index == 4) {
@@ -454,7 +424,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                     mSearchArticle.setTextColor(getResources().getColor(R.color.orange));
                     mCurrentRB.setTextColor(getResources().getColor(R.color.colorPrimary));
                     mCurrentRB = mSearchArticle;
-                    condition = SEARCH_OF_FIFTH_TAG;
+                    //缓存当前Fragment
                     currentFragment = articleSearchFragment;
                 }
             }
@@ -467,7 +437,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
      * @return
      */
     public RewardSearchFragment getRewardSearchFragment(){
-        return (RewardSearchFragment) fragmentList.get(1);
+        return rewardSearchFragment;
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.a29149.yuyuan.Search.Fragment;
 import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 
 /**
+ * 搜索的Fragment都要继承这个抽象类
  * Created by geyao on 2017/6/12.
  */
 

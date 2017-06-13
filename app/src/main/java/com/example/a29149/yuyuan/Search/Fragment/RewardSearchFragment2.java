@@ -24,7 +24,7 @@ import com.example.a29149.yuyuan.controller.search.SearchRewardController;
 import java.util.ArrayList;
 import java.util.List;
 
-//FIXME TODO 自习对比了代码，依然不会显示数据
+@Deprecated
 public class RewardSearchFragment2 extends YYSearchBaseFragment {
     private static final String TAG = "RewardSearchFragment2";
     //下拉刷新的Layout

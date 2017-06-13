@@ -8,9 +8,9 @@ import com.example.a29149.yuyuan.Util.Const;
  * @Author:        geyao
  * @Date:          2017/6/12
  * @Description:   不使用回调完成搜索
- * //TODO 应当在构造函数中就指定listView与Adapter，这要求Adapter都继承自YYBaseAdapter
+ * 应当在构造函数中就指定listView与Adapter，这要求Adapter都继承自YYBaseAdapter
  */
-
+@Deprecated
 public abstract class YYAbstractSearchAction extends AsyncTask<String, Integer, String> {
     //用于暂存当前请求的是第几页，如果为1，则表示要clear List
     protected String mPageNo = "1";

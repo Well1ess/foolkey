@@ -131,6 +131,8 @@ public abstract class YYSearchBaseFragment extends AbstractFragment {
         //每个异步任务，都只能使用一次
         searchAction = new SearchAction();
 
+
+
         /**
          * 搜索的回调，在这里处理ListView，Adapter，与数据的关系
          * 在别的地方只需要做Action.execute即可

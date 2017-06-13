@@ -2,6 +2,7 @@ package com.example.a29149.yuyuan.Search.action;
 
 import android.os.AsyncTask;
 
+import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.controller.search.SearchRewardController;
 
@@ -137,6 +138,10 @@ public class SearchAction extends AsyncTask<String, Integer, String> {
                 case FILTER5:
                     break;
             }
+        }
+        //解决从搜索返回主页面，跳跳跳动画的问题
+        if (MainStudentActivity.shapeLoadingDialog != null) {
+            MainStudentActivity.shapeLoadingDialog.dismiss();
         }
     }
 

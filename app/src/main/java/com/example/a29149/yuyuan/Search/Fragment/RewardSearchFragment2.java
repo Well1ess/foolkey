@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Deprecated
-public class RewardSearchFragment2 extends YYSearchBaseFragment {
+public abstract class RewardSearchFragment2 extends YYSearchBaseFragment {
     private static final String TAG = "RewardSearchFragment2";
     //下拉刷新的Layout
     @ViewInject(R.id.srl_slide_layout)

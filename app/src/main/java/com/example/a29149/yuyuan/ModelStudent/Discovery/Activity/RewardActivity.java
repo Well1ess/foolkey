@@ -362,14 +362,12 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     updateDate();
                     //更新发现的listView里的数据
                     //这一步交给RewardModifyActivity来做了
-
                 }
                 break;
                 default:
                     break;
             }
         } else { //操作失败
-
         }
     }
 
@@ -426,7 +424,6 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<StudentDTO>() {
                     }.getType();
                     StudentDTO studentDTO = new Gson().fromJson(jsonObject.getString("studentDTO"), type);
-                    //// TODO: 2017/6/11 全局变量
                     //存储学生信息DTO
                     GlobalUtil.getInstance().setStudentDTO(studentDTO);
                     //获取老师信息DTO
@@ -435,13 +432,9 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     TeacherDTO teacherDTO = new Gson().fromJson(jsonObject.getString("teacherDTO"), type1);
                     Log.i("malei", jsonObject.getString("teacherDTO"));
                     if (teacherDTO != null) {
-                        //// TODO: 2017/6/11 全局变量
                         //存储老师DTO
                         GlobalUtil.getInstance().setTeacherDTO(teacherDTO);
-                        Log.i("geyao  ", "认证后存储老师DTO了嘛？ " + this.getClass());
                     }
-
-
                     if (resultFlag.equals("success")) {
                         //认证成功之后，就接单
                         Toast.makeText(RewardActivity.this, "申请成功，立即为您接单", Toast.LENGTH_SHORT).show();

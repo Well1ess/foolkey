@@ -78,11 +78,12 @@
                 android:textSize="15sp"
                 android:textColor="@color/grey555"
                 android:layout_gravity="center"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:background="@null"
+                android:gravity="center"
                 />
 
             <View
@@ -95,11 +96,13 @@
             <EditText
                 android:id="@+id/et_description"
                 android:layout_margin="18dp"
+                android:padding="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/grey"
                 android:text="我大大苏打法发士大夫看见哈撒可怜见科技哈了开机速度发货可怜见可怜见啊哈岁的凯莉分解和看了觉得是"
+                android:textSize="12sp"
                 android:background="@null"
                 />
 

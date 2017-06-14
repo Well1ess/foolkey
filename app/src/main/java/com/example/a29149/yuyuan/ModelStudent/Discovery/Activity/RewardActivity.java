@@ -260,15 +260,11 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
 
     //老师申请接单悬赏
     private void applyRewardTeacher() {
-        //验证身份
+        //验证登陆者的身份
         TeacherDTO teacherDTO = GlobalUtil.getInstance().getTeacherDTO();
 
         if (teacherDTO != null) {
-            Log.i("malei", teacherDTO.toString());
             VerifyStateEnum verifyState = teacherDTO.getVerifyState();
-            Log.i("malei", verifyState.toString());
-            Log.i("malei", teacherDTO.toString());
-            Log.i("malei", verifyState.toString());
             //如果是已认证老师或者是认证中的老师，则直接接单
             if (verifyState.compareTo(VerifyStateEnum.processing) == 0
                     || verifyState.compareTo(VerifyStateEnum.verified) == 0) {
@@ -279,7 +275,6 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                 verifyConfirm.getDialog().show();
             }
         } else {
-            Log.i("malei", "teacherDTO是空的");
             //不是已认证老师，跳转到申请认证页面
 //        Toast.makeText(this, "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
             verifyConfirm.setMsg("还不是老师哦\n \n 立即申请吧 ^_^");
@@ -303,21 +298,12 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
             //包含接单和悬赏2种操作
             case R.id.tv_applyOrder: {
                 if (mOrder.getText().equals("修改悬赏")) {  //自己的悬赏，就是修改悬赏资料
-                    Log.i("malei", mOrder.getText() + "");
                     Intent modifyIntent = new Intent(this, RewardModifyActivity.class);
-                    modifyIntent.putExtra("position", position);
-                    modifyIntent.putExtra("topic", rewardDTO.getTopic());
-                    modifyIntent.putExtra("description", rewardDTO.getDescription());
-                    modifyIntent.putExtra("technicTagEnum", rewardDTO.getTechnicTagEnum().toString());
-                    modifyIntent.putExtra("price", rewardDTO.getPrice() + "");
-                    modifyIntent.putExtra("courseTimeDayEnum", rewardDTO.getCourseTimeDayEnum().toString());
-                    modifyIntent.putExtra("studentBaseEnum", rewardDTO.getStudentBaseEnum().toString());
-                    modifyIntent.putExtra("teachMethodEnum", rewardDTO.getTeachMethodEnum().toString());
-                    modifyIntent.putExtra("teacherRequirementEnum", rewardDTO.getTeacherRequirementEnum().toString());
-                    modifyIntent.putExtra("rewardId", rewardDTO.getId() + "");
+                    Bundle bundle = new Bundle();
+                    //直接将DTO放在bundle里
+                    bundle.putSerializable("DTO", rewardDTO);
+                    modifyIntent.putExtras( bundle );
                     startActivityForResult(modifyIntent, Const.FROM_REWARD_TO_MODIFY);
-
-
                 } else {    //他人的悬赏，接单
                     displayInfo.setMsg("您确定要此单吗？\n \n 点击 接单 将发送申请");
                     //接单的逻辑，写在了对话框的逻辑里
@@ -368,6 +354,8 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
             switch (requestCode) {
                 //修改悬赏成功后
                 case Const.FROM_REWARD_TO_MODIFY: {
+                    //获取新的rewardDTO
+                    this.rewardDTO = (RewardDTO) data.getSerializableExtra("DTO");
                     //更新本页数据
                     updateDate();
                     //更新发现的listView里的数据
@@ -430,9 +418,6 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
      * 刷新本页面显示的信息，修改了悬赏信息以后就可能用到
      */
     private void updateDate() {
-        //// TODO: 2017/6/11 这里还是全局变量 
-        //重新获取一次rewardDTO，不然可能不会重新获取
-        rewardDTO = GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get(position).getRewardDTO();
         //设置价格
         mRewardPrice.setText(rewardDTO.getPrice() + "");
         //设置标题

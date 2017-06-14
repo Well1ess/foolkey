@@ -2,6 +2,7 @@ package com.example.a29149.yuyuan.ModelStudent.Me.Reward;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,6 +31,8 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import static com.example.a29149.yuyuan.Enum.CourseTimeDayEnum.工作日;
+
 /**
  * 修改个人悬赏信息
  * Created by GR on 2017/5/26.
@@ -39,17 +42,19 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
     private static final String TAG = "RewardModifyActivity";
     private RewardDTO mRewardDTO;//悬赏信息
 
-    private String topic; //悬赏标题
-    private String description; //悬赏描述
-    private String technicTagEnum; // 悬赏的领域
-    private String price; // 悬赏的价格
-    private String courseTimeDayEnum; // 悬赏需要的上课时间
-    private String studentBaseEnum; //学生基础
-    private String teachMethodEnum; //授课方法
-    private String teacherRequirementEnum; //对老师的要求
-    private String rewardId; // 悬赏的id
+//    private String topic; //悬赏标题
+//    private String description; //悬赏描述
+//    private String technicTagEnum; // 悬赏的领域
+//    private String price; // 悬赏的价格
+//    private String courseTimeDayEnum; // 悬赏需要的上课时间
+//    private String studentBaseEnum; //学生基础
+//    private String teachMethodEnum; //授课方法
+//    private String teacherRequirementEnum; //对老师的要求
+//    private String rewardId; // 悬赏的id
 
-    private int position; // listView里的位置
+    private RewardDTO rewardDTO; // 悬赏的DTO
+
+//    private int position; // listView里的位置
 
 //    0-topic
 //    1-technicTag
@@ -134,16 +139,8 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
         AnnotationUtil.injectViews(this);
         AnnotationUtil.setClickListener(this);
 
-        position = getIntent().getIntExtra("position", 0);
-        topic = getIntent().getStringExtra("topic");
-        description = getIntent().getStringExtra("description");
-        technicTagEnum = getIntent().getStringExtra("technicTagEnum");
-        price = getIntent().getStringExtra("price");
-        courseTimeDayEnum = getIntent().getStringExtra("courseTimeDayEnum");
-        studentBaseEnum = getIntent().getStringExtra("studentBaseEnum");
-        teachMethodEnum = getIntent().getStringExtra("teachMethodEnum");
-        teacherRequirementEnum = getIntent().getStringExtra("teacherRequirementEnum");
-        rewardId = getIntent().getStringExtra("rewardId");
+        rewardDTO = ( RewardDTO ) getIntent().getSerializableExtra("DTO");
+
 
         mSubmit.setOnClickListener(this);
         mReturn.setOnClickListener(this);
@@ -169,27 +166,27 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
     private void initData() {
 
         //展示
-        mTopic.setText(topic);
-        mDescription.setText(description);
-        mTechnicTag.setText(technicTagEnum);
-        mRewardPrice.setText(price);
+        mTopic.setText(rewardDTO.getTopic());
+        mDescription.setText(rewardDTO.getDescription());
+        mTechnicTag.setText(rewardDTO.getTechnicTagEnum().toString() + "");
+        mRewardPrice.setText(rewardDTO.getPrice() + "");
 
         //教学时间
 //        String courseTimeEnumStr = mRewardDTO.getCourseTimeDayEnum().toString();
-        switch (courseTimeDayEnum) {
-            case "工作日": {
+        switch (rewardDTO.getCourseTimeDayEnum()) {
+            case 工作日                    : {
                 mWorkday.setChecked(true);
                 mHoliday.setChecked(false);
                 mEveryday.setChecked(false);
             }
             break;
-            case "节假日": {
+            case 节假日: {
                 mWorkday.setChecked(false);
                 mHoliday.setChecked(true);
                 mEveryday.setChecked(false);
             }
             break;
-            case "不限": {
+            case 不限: {
                 mWorkday.setChecked(false);
                 mHoliday.setChecked(false);
                 mEveryday.setChecked(true);
@@ -201,20 +198,20 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
         //学生基础
 //        StudentBaseEnum.
 //        String studentBaseEnumStr = mRewardDTO.getStudentBaseEnum().toString();
-        switch (studentBaseEnum) {
-            case "小白": {
+        switch (rewardDTO.getStudentBaseEnum()) {
+            case 小白: {
                 mWhiteman.setChecked(true);
                 mLittleman.setChecked(false);
                 mMuchman.setChecked(false);
             }
             break;
-            case "入门": {
+            case 入门: {
                 mWhiteman.setChecked(false);
                 mLittleman.setChecked(true);
                 mMuchman.setChecked(false);
             }
             break;
-            case "熟练": {
+            case 熟练: {
                 mWhiteman.setChecked(false);
                 mLittleman.setChecked(false);
                 mMuchman.setChecked(true);
@@ -226,20 +223,20 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
 
         //教学方式
 //        String teachMethodEnumStr = mRewardDTO.getTeachMethodEnum().toString();
-        switch (teachMethodEnum) {
-            case "线上": {
+        switch (rewardDTO.getTeachMethodEnum()) {
+            case 线上: {
                 mOnline.setChecked(true);
                 mOffline.setChecked(false);
                 mOnAndOff.setChecked(false);
             }
             break;
-            case "线下": {
+            case 线下: {
                 mOnline.setChecked(false);
                 mOffline.setChecked(true);
                 mOnAndOff.setChecked(false);
             }
             break;
-            case "不限": {
+            case 不限: {
                 mOnline.setChecked(false);
                 mOffline.setChecked(false);
                 mOnAndOff.setChecked(true);
@@ -251,13 +248,13 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
 
         //老师要求
 //        String teacherRequirementEnumStr = mRewardDTO.getTeacherRequirementEnum().toString();
-        switch (teacherRequirementEnum) {
-            case "认证老师": {
+        switch (rewardDTO.getTeacherRequirementEnum()) {
+            case 认证老师: {
                 mOnlyTeacher.setChecked(true);
                 mEverybody.setChecked(false);
             }
             break;
-            case "不限": {
+            case 不限: {
                 mOnlyTeacher.setChecked(false);
                 mEverybody.setChecked(true);
             }
@@ -509,7 +506,7 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
 
             return
                     UpdateController.execute(
-                            rewardId,
+                            rewardDTO.getId() + "",
                             mChooseContent[1],
                             mChooseContent[0],
                             mChooseContent[2],
@@ -539,10 +536,13 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
                         }.getType();
                         RewardDTO rewardDTO = new Gson().fromJson(jsonObject.getString("courseStudentDTO"), type);
                         //更新到缓存
-                        GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().get( position ).setRewardDTO( rewardDTO );
+                        Intent intent = new Intent();
+                        //把从网络获取到的rewardDTO返回到上一个DTO
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("DTO", rewardDTO);
+                        intent.putExtras(bundle);
                         //通知结果
-                        setResult(RESULT_OK);
-                        Log.d(TAG, "onPostExecute: 545 " + position);
+                        setResult(RESULT_OK, intent);
                         finish();
                         return;
                         //发布成功后跳转到首页面

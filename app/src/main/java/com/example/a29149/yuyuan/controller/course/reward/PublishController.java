@@ -1,5 +1,6 @@
 package com.example.a29149.yuyuan.controller.course.reward;
 
+import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.controller.AbstractController;
 
@@ -15,25 +16,18 @@ public class PublishController extends AbstractController {
     private static String url = address + "/aes/reward/publish";
 
     public static String execute(
-            String technicTagEnum,
-            String topic,
-            String description,
-            String price,
-            String courseTimeDayEnum,
-            String teachMethodEnum,
-            String teachRequirementEnum,
-            String studentBaseEnum
+            RewardDTO rewardDTO
     ){
         try {
             JSONObject jsonObject = getJSON();
-            jsonObject.put("technicTagEnum", technicTagEnum);
-            jsonObject.put("topic", topic);
-            jsonObject.put("description", description);
-            jsonObject.put("price", price);
-            jsonObject.put("courseTimeDayEnum", courseTimeDayEnum);
-            jsonObject.put("teachMethodEnum", teachMethodEnum);
-            jsonObject.put("teachRequirementEnum", teachRequirementEnum);
-            jsonObject.put("studentBaseEnum", studentBaseEnum);
+            jsonObject.put("technicTagEnum", rewardDTO.getTechnicTagEnum().toString());
+            jsonObject.put("topic", rewardDTO.getTopic());
+            jsonObject.put("description", rewardDTO.getDescription());
+            jsonObject.put("price", rewardDTO.getPrice());
+            jsonObject.put("courseTimeDayEnum", rewardDTO.getCourseTimeDayEnum());
+            jsonObject.put("teachMethodEnum", rewardDTO.getTeachMethodEnum());
+            jsonObject.put("teachRequirementEnum", rewardDTO.getTeacherRequirementEnum());
+            jsonObject.put("studentBaseEnum", rewardDTO.getStudentBaseEnum());
             return HttpSender.send( url, jsonObject);
         }catch (Exception e){
             return failJSON(e);

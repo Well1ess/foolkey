@@ -209,7 +209,7 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
         rewardDTO.setTeachMethodEnum(TeachMethodEnum.valueOf(teachMethodEnumStr));
         rewardDTO.setTeacherRequirementEnum(TeacherRequirementEnum.valueOf(teachRequirementEnumStr));
 
-        new PublishRewardAction().execute();
+        new PublishRewardAction(rewardDTO).execute();
     }
 
 
@@ -302,52 +302,18 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
      */
     public class PublishRewardAction extends AsyncTask<String, Integer, String> {
 
+        private RewardDTO rewardDTO;
+
+        public PublishRewardAction(RewardDTO rewardDTO) {
+            super();
+            this.rewardDTO = rewardDTO;
+        }
 
         @Override
         protected String doInBackground(String... params) {
 
-            //默认选择
-            String courseTimeDayEnumStr;
-            if ( rewardChooseContent[4] != null && !rewardChooseContent[4].equals(""))
-                ;
-            else
-                rewardChooseContent[4] = "不限";
-            courseTimeDayEnumStr = rewardChooseContent[4];
-
-            String studentBaseEnumStr;
-            if ( rewardChooseContent[5] != null && !rewardChooseContent[5].equals(""))
-                ;
-            else
-                rewardChooseContent[5] = "小白";
-            studentBaseEnumStr = rewardChooseContent[5];
-
-            String teachMethodEnumStr;
-            if ( rewardChooseContent[6] != null && !rewardChooseContent[6].equals(""))
-                ;
-            else
-                rewardChooseContent[6] = "不限";
-            teachMethodEnumStr = rewardChooseContent[6];
-
-            String teachRequirementEnumStr;
-            if ( rewardChooseContent[7] != null && !rewardChooseContent[7].equals(""))
-                ;
-            else
-                rewardChooseContent[7] = "不限";
-            teachRequirementEnumStr = rewardChooseContent[7];
-
-            for (String str : rewardChooseContent){
-                Log.d(TAG, "doInBackground: 298 " + str);
-            }
-
             return PublishController.execute(
-                    rewardChooseContent[0],
-                    rewardChooseContent[1],
-                    rewardChooseContent[2],
-                    rewardChooseContent[3],
-                    courseTimeDayEnumStr,
-                    teachMethodEnumStr,
-                    teachRequirementEnumStr,
-                    studentBaseEnumStr
+                    rewardDTO
             );
         }
 

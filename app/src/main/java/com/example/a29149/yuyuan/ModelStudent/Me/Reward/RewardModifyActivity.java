@@ -20,7 +20,9 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.AdapterManager;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.Const;
@@ -544,10 +546,9 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
                         //通知结果
                         setResult(RESULT_OK, intent);
                         finish();
+                        //更新各个Adapter里面的数据
+                        AdapterManager.getInstance().updateDate(RewardAdapter.class, rewardDTO);
                         return;
-                        //发布成功后跳转到首页面
-//                        Intent toMainActivity = new Intent(RewardModifyActivity.this, MainStudentActivity.class);
-//                        startActivity(toMainActivity);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -254,7 +254,37 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
         }
     }
 
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/14
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:
+     *                  获取数据列表
+     * @return
+     */
     public List<T> getDataList(){
         return dataList;
     }
+
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/14
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  更新某个data，需要重写AbstractDTO的equals方法
+     *
+     * @param abstractDTO
+     */
+    public void updateData(AbstractDTO abstractDTO){
+        for (T dto : getDataList()){
+            if (dto.equals(abstractDTO)){
+                int index = getDataList().indexOf(dto);
+                getDataList().set(index, (T) abstractDTO) ;
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+
 }

@@ -34,6 +34,8 @@ public class RewardDTO extends CourseAbstract{
                 '}';
     }
 
+
+
     public TeacherRequirementEnum getTeacherRequirementEnum() {
         return teacherRequirementEnum;
     }

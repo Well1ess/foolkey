@@ -3,6 +3,7 @@ package com.example.a29149.yuyuan.Util;
 import android.app.Activity;
 import android.content.Context;
 
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.AbstractObject.YYBaseAdapter;
 
 import java.util.Stack;
@@ -75,5 +76,36 @@ public class AdapterManager {
         }
     }
 
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/14
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  更新某种Adapter的某个DTO
+     *               由子类的Adapter执行
+     * @param cls    需要更新的Adapter类型
+     * @param newDTO 新的Adapter
+     */
+    public void updateDate(Class<?> cls, AbstractDTO newDTO){
+        for (YYBaseAdapter adapter : adapterStack){
+            if (adapter.getClass().equals(cls)) {
+                adapter.updateData(newDTO);
+            }
+        }
+    }
+
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/14
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  删除某种Adapter的某个DTO，由子类去实现
+     *
+     * @param cls    需要更新的Adapter类型
+     * @param oldDTO 要删除的DTO
+     */
+    public void removeDate(Class<?> cls, AbstractDTO oldDTO){
+
+    }
 
 }

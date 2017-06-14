@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.AbstractObject.YYBaseAdapter;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
@@ -102,6 +103,23 @@ public class RewardAdapter extends YYBaseAdapter<RewardWithStudentSTCDTO> {
         return addData(dataList.size(), data);
     }
 
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/14
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  悬赏适配器用来更新某个特定悬赏的函数，只要id一致就会更换
+     * @param rewardDTO
+     */
+    @Override
+    public void updateData(AbstractDTO rewardDTO) {
+        for (RewardWithStudentSTCDTO dto : getDataList()){
+            if (dto.getRewardDTO().getId().equals( ((RewardDTO)rewardDTO).getId() ) ){
+                dto.setRewardDTO( (RewardDTO) rewardDTO );
+            }
+        }
+        notifyDataSetChanged();
+    }
 
     /**
      * 向指定位置添加数据

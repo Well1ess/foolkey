@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.example.a29149.yuyuan.Util.AdapterManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
         this.dataList = dataList;
         mContext = context;
         layoutInflater = LayoutInflater.from(context);
+        AdapterManager.getInstance().addAdapter(this);
     }
 
     /**
@@ -44,6 +47,8 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
      */
     public YYBaseAdapter(Context mContext) {
         this.mContext = mContext;
+        layoutInflater = LayoutInflater.from(mContext);
+        AdapterManager.getInstance().addAdapter(this);
     }
 
     @Override

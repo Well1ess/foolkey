@@ -131,7 +131,7 @@ public class AdapterManager {
     public void addData(Class<?> cls, AbstractDTO dto, boolean headFlag){
         for (YYBaseAdapter adapter : adapterStack ) {
             if (adapter.getClass().equals(cls)) {
-                Log.d(TAG, "addData: 132 " + dto);
+                Log.d(TAG, "addData: 132 " + headFlag);
                 if (headFlag){
                     adapter.addData(0, dto);
                 }else {

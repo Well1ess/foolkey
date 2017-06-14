@@ -132,14 +132,15 @@ public class RewardAdapter extends YYBaseAdapter<RewardWithStudentSTCDTO> {
      */
     @Override
     public boolean addData(int position, RewardWithStudentSTCDTO data) {
-        if (dataList == null || data == null){
-            dataList = new ArrayList<>();
+        if (data == null)
             return false;
+        if ( getDataList() == null ){
+            setData(new ArrayList<RewardWithStudentSTCDTO>());
         }
         if (dataList.contains(data))
             return false;
         else {
-            dataList.add(data);
+            dataList.add(position, data);
             notifyDataSetChanged();
             return true;
         }

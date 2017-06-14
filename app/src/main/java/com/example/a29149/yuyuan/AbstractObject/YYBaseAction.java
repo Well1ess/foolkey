@@ -7,13 +7,22 @@ import com.example.a29149.yuyuan.controller.AbstractControllerTemplate;
 
 /**
  * 愚猿通用的异步网络通讯任务模板
+ * action的基类，它的这里的T，由子类Action，决定
+ * 子类action和子类controller 1对1 配套使用，共同决定指定一个相同的T
+ * Activity在使用的时候，要写回调函数，在指定类型的时候，传进来的类也要与T相同
+ *
+ * Author:       geyao
+ * Date:         2017/6/14
+ * Email:        gy2016@mail.ustc.edu.cn
+ * Description:
+ *
  * Created by geyao on 2017/6/14.
  */
 
-public abstract class YYBaseAction extends AsyncTask {
+public abstract class YYBaseAction<T> extends AsyncTask {
 
     //执行网络通讯的action
-    protected YYBaseController controller;
+    protected YYBaseController<T> controller;
 
     /**
      *
@@ -38,7 +47,6 @@ public abstract class YYBaseAction extends AsyncTask {
      */
     @Override
     protected Object doInBackground(Object[] objects) {
-        onAsyncTask.beforeAction(controller);
         return controller.execute();
     }
 
@@ -46,15 +54,15 @@ public abstract class YYBaseAction extends AsyncTask {
     protected void onPostExecute(Object o) {
         //网络异常
         if (o == null){
-            onAsyncTask.onNull(controller);
+            onAsyncTask.onNull();
         }else {
             //成功处理
             if (controller.getResult().equals(Const.SUCCESS)) {
-                onAsyncTask.onSuccess(controller);
+                onAsyncTask.onSuccess( controller.getDTO());
             }
             //失败处理
             if (controller.getResult().equals(Const.FAIL)) {
-                onAsyncTask.onFail(controller);
+                onAsyncTask.onFail();
             }
         }
     }
@@ -65,22 +73,21 @@ public abstract class YYBaseAction extends AsyncTask {
      * Date:         2017/6/14
      * Email:        gy2016@mail.ustc.edu.cn
      * Description:  回调接口
+     *               这里的类型要和子类action设置的泛型保持一致
      */
-    public interface OnAsyncTask{
-        //进行网络传输前的操作，一般在这里，对controller赋参数
-        public Object beforeAction(YYBaseController controller);
+    public interface OnAsyncTask<T>{
         //返回成功时，做的处理
-        public void onSuccess(YYBaseController controller);
+        public void onSuccess(T data);
         //返回失败时，做的处理
-        public void onFail(YYBaseController controller);
+        public void onFail();
         //网络异常时，做的处理
-        public void onNull(YYBaseController controller);
+        public void onNull();
 
     }
 
-    private OnAsyncTask onAsyncTask;
+    private OnAsyncTask<T> onAsyncTask;
 
-    public void setOnAsyncTask(OnAsyncTask onAsyncTask){
+    public void setOnAsyncTask(OnAsyncTask<T> onAsyncTask){
         this.onAsyncTask = onAsyncTask;
     }
 }

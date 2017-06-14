@@ -1,5 +1,7 @@
 package com.example.a29149.yuyuan.AbstractObject;
 
+import android.util.Log;
+
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.HttpSender;
 import com.example.a29149.yuyuan.controller.AbstractController;
@@ -9,11 +11,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * controller的基类，它的这里的T，由2个地方指定，子类Controller，子类Action，他们的T应当是一致的
  * Created by geyao on 2017/6/14.
  */
 
-public abstract class YYBaseController extends AbstractController {
-
+public abstract class YYBaseController<T> extends AbstractController {
+    private static final String TAG = "YYBaseController";
     protected JSONObject jsonObject;
 
     protected String url = address ;
@@ -29,7 +32,6 @@ public abstract class YYBaseController extends AbstractController {
             handle();
             //发送数据
             String s = HttpSender.send(url, jsonObject);
-
             //把后台传来的数据String转为JSON
             jsonObject = new JSONObject(s);
             String resultFlag = jsonObject.getString("result");
@@ -92,7 +94,7 @@ public abstract class YYBaseController extends AbstractController {
      * Description:  获取controller返回的DTO结果
      * @return
      */
-    public abstract Object getDTO();
+    public abstract T getDTO();
 
     /**
      *

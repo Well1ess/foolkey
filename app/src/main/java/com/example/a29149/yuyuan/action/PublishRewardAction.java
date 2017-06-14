@@ -3,13 +3,14 @@ package com.example.a29149.yuyuan.action;
 import com.example.a29149.yuyuan.AbstractObject.YYBaseAction;
 import com.example.a29149.yuyuan.AbstractObject.YYBaseController;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
+import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.controller.course.reward.PublishRewardController;
 
 /**
  * Created by geyao on 2017/6/14.
  */
 
-public class PublishRewardAction extends YYBaseAction {
+public class PublishRewardAction extends YYBaseAction<RewardWithStudentSTCDTO> {
 
     /**
      *

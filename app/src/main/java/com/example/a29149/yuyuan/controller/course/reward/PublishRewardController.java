@@ -16,7 +16,7 @@ import org.json.JSONObject;
  * Created by geyao on 2017/6/14.
  */
 
-public class PublishRewardController extends YYBaseController {
+public class PublishRewardController extends YYBaseController<RewardWithStudentSTCDTO> {
 
     //需要的参数
     private RewardDTO rewardDTO;
@@ -28,6 +28,7 @@ public class PublishRewardController extends YYBaseController {
     public PublishRewardController(RewardDTO rewardDTO) {
         super();
         this.rewardDTO = rewardDTO;
+
     }
 
     /**
@@ -88,8 +89,7 @@ public class PublishRewardController extends YYBaseController {
      * @return
      */
     @Override
-    public Object getDTO() {
+    public RewardWithStudentSTCDTO getDTO() {
         return rewardWithStudentSTCDTO;
     }
-
 }

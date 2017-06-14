@@ -214,29 +214,22 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
         //新建异步任务，传输悬赏对象
         publishRewardAction = new PublishRewardAction(rewardDTO);
         //注册回调函数
-        publishRewardAction.setOnAsyncTask(new YYBaseAction.OnAsyncTask() {
-            //发送请求前
+        publishRewardAction.setOnAsyncTask(new YYBaseAction.OnAsyncTask<RewardWithStudentSTCDTO>() {
             @Override
-            public Object beforeAction(YYBaseController controller) {
-                return null;
-            }
-            //请求成功
-            @Override
-            public void onSuccess(YYBaseController controller) {
-                Toast.makeText(PublishRewardOptionsStudentActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
-                //保存在缓存，注意，这里必须指定true才会插入到第一来
-                AdapterManager.getInstance().addData(RewardAdapter.class, (RewardWithStudentSTCDTO)controller.getDTO(), true);
+            public void onSuccess(RewardWithStudentSTCDTO data) {
+                Toast.makeText(PublishRewardOptionsStudentActivity.this, "发布成功", Toast.LENGTH_SHORT);
+                AdapterManager.getInstance().addData(RewardAdapter.class, data, true);
                 finish();
             }
-            //失败的处理
+
             @Override
-            public void onFail(YYBaseController controller) {
-                Toast.makeText(PublishRewardOptionsStudentActivity.this, "服务器繁忙，请稍后再试T_T", Toast.LENGTH_SHORT).show();
+            public void onFail() {
+
             }
-            //无响应的处理
+
             @Override
-            public void onNull(YYBaseController controller) {
-                Toast.makeText(PublishRewardOptionsStudentActivity.this, "请检查网络连接T_T", Toast.LENGTH_SHORT).show();
+            public void onNull() {
+
             }
         });
         publishRewardAction.execute();

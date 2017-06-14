@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.AbstractObject.YYBaseAction;
+import com.example.a29149.yuyuan.AbstractObject.YYBaseController;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.Enum.CourseTimeDayEnum;
@@ -26,6 +28,7 @@ import com.example.a29149.yuyuan.Util.AdapterManager;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
+import com.example.a29149.yuyuan.action.PublishRewardAction;
 import com.example.a29149.yuyuan.controller.course.reward.PublishController;
 import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.example.a29149.yuyuan.controller.course.reward.PublishRewardController;
@@ -58,6 +61,8 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
     private CheckBox mOnAndOff;//不限
 
     private String[] rewardChooseContent = new String[8] ;//保存用户填写的信息，初始化默认值
+    //发布悬赏的异步任务
+    private PublishRewardAction publishRewardAction;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -206,8 +211,37 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
         rewardDTO.setTeachMethodEnum(TeachMethodEnum.valueOf(teachMethodEnumStr));
         rewardDTO.setTeacherRequirementEnum(TeacherRequirementEnum.valueOf(teachRequirementEnumStr));
 
-        new PublishRewardAction(rewardDTO).execute();
+        //新建异步任务，传输悬赏对象
+        publishRewardAction = new PublishRewardAction(rewardDTO);
+        //注册回调函数
+        publishRewardAction.setOnAsyncTask(new YYBaseAction.OnAsyncTask() {
+            //发送请求前
+            @Override
+            public Object beforeAction(YYBaseController controller) {
+                return null;
+            }
+            //请求成功
+            @Override
+            public void onSuccess(YYBaseController controller) {
+                Toast.makeText(PublishRewardOptionsStudentActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                //保存在缓存，注意，这里必须指定true才会插入到第一来
+                AdapterManager.getInstance().addData(RewardAdapter.class, (RewardWithStudentSTCDTO)controller.getDTO(), true);
+                finish();
+            }
+            //失败的处理
+            @Override
+            public void onFail(YYBaseController controller) {
+                Toast.makeText(PublishRewardOptionsStudentActivity.this, "服务器繁忙，请稍后再试T_T", Toast.LENGTH_SHORT).show();
+            }
+            //无响应的处理
+            @Override
+            public void onNull(YYBaseController controller) {
+                Toast.makeText(PublishRewardOptionsStudentActivity.this, "请检查网络连接T_T", Toast.LENGTH_SHORT).show();
+            }
+        });
+        publishRewardAction.execute();
     }
+
 
 
     //选择了工作日
@@ -293,82 +327,4 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
         //mWorkday.setTextColor(Integer.parseInt("9ccc65"));
         mOnlyTeacher.setChecked(false);
     }
-
-    /**
-     * 发布悬赏请求Action
-     */
-    public class PublishRewardAction extends AsyncTask<String, Integer, String> {
-
-        private RewardDTO rewardDTO;
-
-        public PublishRewardAction(RewardDTO rewardDTO) {
-            super();
-            this.rewardDTO = rewardDTO;
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-//            return PublishController.execute(
-//                    rewardDTO
-//            );
-            PublishRewardController rewardController = new PublishRewardController(rewardDTO);
-            return rewardController.execute();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            log.d(this, result);
-            if (result != null) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String resultFlag = jsonObject.getString("result");
-                    if (resultFlag.equals("success")) {
-                        Toast.makeText(PublishRewardOptionsStudentActivity.this, "发布成功！", Toast.LENGTH_SHORT).show();
-                        //发布成功后跳转到首页面
-//                        Intent toMainActivity = new Intent(PublishRewardOptionsStudentActivity.this, MainStudentActivity.class);
-//                        startActivity(toMainActivity);
-                        try {
-                            //关闭前2个activity
-//                            AppManager.getActivity(PublishRewardDescribeStudentActivity.class).finish();
-//                            AppManager.getActivity(PublishRewardPriceStudentActivity.class).finish();
-                        }catch (NullPointerException e){
-                            //就算空指针，也没什么
-                        }
-
-                        //更新可能存在的ListView，但事实证明，下面这样并不管用
-                        try{
-                            //获取返回的rewardDTO
-                            java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<RewardDTO>() {
-                            }.getType();
-                            RewardDTO rewardDTO = new Gson().fromJson(jsonObject.getString("courseStudentDTO"), type);
-                            //封装进缓存
-                            RewardWithStudentSTCDTO rewardWithStudentSTCDTO = new RewardWithStudentSTCDTO();
-                            rewardWithStudentSTCDTO.setRewardDTO(rewardDTO);
-                            rewardWithStudentSTCDTO.setStudentDTO( GlobalUtil.getInstance().getStudentDTO() );
-                            //保存在缓存，注意，这里必须指定true才会插入到第一来
-                            AdapterManager.getInstance().addData(RewardAdapter.class, rewardWithStudentSTCDTO, true);
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                        //关闭自己
-                        finish();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(PublishRewardOptionsStudentActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(PublishRewardOptionsStudentActivity.this, "网络连接失败！", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
-    }
-
 }

@@ -80,15 +80,16 @@ public class PublishRewardController extends YYBaseController {
     }
 
     /**
-     *
      * Author:       geyao
      * Date:         2017/6/14
      * Email:        gy2016@mail.ustc.edu.cn
-     * Description:  获取结果
+     * Description:  获取controller返回的DTO结果
      *
      * @return
      */
-    public RewardWithStudentSTCDTO getRewardWithStudentSTCDTO() {
+    @Override
+    public Object getDTO() {
         return rewardWithStudentSTCDTO;
     }
+
 }

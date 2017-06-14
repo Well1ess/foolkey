@@ -21,11 +21,9 @@ public abstract class YYBaseAction extends AsyncTask {
      * Date:         2017/6/14
      * Email:        gy2016@mail.ustc.edu.cn
      * Description:  构造函数，每个子类都应该重新实现它
-     *
-     * @param controller
      */
-    protected YYBaseAction(YYBaseController controller){
-        this.controller = controller;
+    protected YYBaseAction(){
+        super();
     }
 
 
@@ -68,7 +66,7 @@ public abstract class YYBaseAction extends AsyncTask {
      * Email:        gy2016@mail.ustc.edu.cn
      * Description:  回调接口
      */
-    private interface OnAsyncTask{
+    public interface OnAsyncTask{
         //进行网络传输前的操作，一般在这里，对controller赋参数
         public Object beforeAction(YYBaseController controller);
         //返回成功时，做的处理
@@ -77,6 +75,7 @@ public abstract class YYBaseAction extends AsyncTask {
         public void onFail(YYBaseController controller);
         //网络异常时，做的处理
         public void onNull(YYBaseController controller);
+
     }
 
     private OnAsyncTask onAsyncTask;

@@ -36,13 +36,14 @@ public abstract class YYBaseController extends AbstractController {
             if(resultFlag == null){
                 this.result = resultFlag = Const.FAIL;
             }else {
-                if (resultFlag.equals(Const.SUCCESS))
+                if (resultFlag.equals(Const.SUCCESS)) {
                     this.result = Const.SUCCESS;
+                    //根据返回的结果标志进行不同的操作
+                    afterHandle(s);
+                }
                 else
                     this.result = Const.FAIL;
             }
-            //根据返回的结果标志进行不同的操作
-            afterHandle(s);
             return s;
         }catch (Exception e){
             e.printStackTrace();
@@ -58,7 +59,7 @@ public abstract class YYBaseController extends AbstractController {
      * Description:  在这里给url加上具体的链接，在jsonObject放置数据
      * @throws JSONException
      */
-    public abstract void handle() throws JSONException;
+    protected abstract void handle() throws JSONException;
 
 
     /**
@@ -66,7 +67,7 @@ public abstract class YYBaseController extends AbstractController {
      * Author:       geyao
      * Date:         2017/6/14
      * Email:        gy2016@mail.ustc.edu.cn
-     * Description:  具体的Controller做自己的操作
+     * Description:  具体的Controller做自己的操作，只做成功的处理，不需要考虑失败
      * @param s 后台返回的原始String
      */
     protected abstract void afterHandle(String s);
@@ -81,5 +82,17 @@ public abstract class YYBaseController extends AbstractController {
      */
     public String getResult() {
         return result;
+    }
+
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/14
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  设定结果
+     * @param result
+     */
+    protected void setResult(String result){
+        this.result = result;
     }
 }

@@ -51,7 +51,7 @@
             <TextView
                 android:id="@+id/tv_go"
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textColor="@color/white"
                 android:text="发 布"
                 android:textSize="16sp"

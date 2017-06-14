@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * 发布悬赏
  * Created by geyao on 2017/5/21.
  */
-
+@Deprecated
 public class PublishController extends AbstractController {
 
     private static String url = address + "/aes/reward/publish";

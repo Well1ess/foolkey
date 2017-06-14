@@ -28,6 +28,7 @@ import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.controller.course.reward.PublishController;
 import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
+import com.example.a29149.yuyuan.controller.course.reward.PublishRewardController;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -68,10 +69,6 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
         rewardChooseContent[1] = getIntent().getStringExtra("title");
         rewardChooseContent[2] = getIntent().getStringExtra("description");
         rewardChooseContent[3] = getIntent().getStringExtra("price");
-
-        for (String str : rewardChooseContent){
-            Log.d(TAG, "doInBackground: 68 " + str);
-        }
 
         initView();
 
@@ -312,9 +309,11 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
         @Override
         protected String doInBackground(String... params) {
 
-            return PublishController.execute(
-                    rewardDTO
-            );
+//            return PublishController.execute(
+//                    rewardDTO
+//            );
+            PublishRewardController rewardController = new PublishRewardController(rewardDTO);
+            return rewardController.execute();
         }
 
         @Override

@@ -7,6 +7,12 @@ import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.controller.course.reward.PublishRewardController;
 
 /**
+ * 发布悬赏的异步任务
+ *
+ * Author:       geyao
+ * Date:         2017/6/14
+ * Email:        gy2016@mail.ustc.edu.cn
+ * Description:
  * Created by geyao on 2017/6/14.
  */
 

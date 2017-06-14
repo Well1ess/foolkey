@@ -221,15 +221,13 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
                 AdapterManager.getInstance().addData(RewardAdapter.class, data, true);
                 finish();
             }
-
             @Override
             public void onFail() {
-
+                Toast.makeText(PublishRewardOptionsStudentActivity.this, "服务器繁忙，请稍后再试T_T", Toast.LENGTH_SHORT);
             }
-
             @Override
             public void onNull() {
-
+                Toast.makeText(PublishRewardOptionsStudentActivity.this, "网络异常，请检查连接T_T", Toast.LENGTH_SHORT);
             }
         });
         publishRewardAction.execute();

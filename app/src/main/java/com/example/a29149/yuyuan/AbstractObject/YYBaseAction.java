@@ -8,7 +8,7 @@ import com.example.a29149.yuyuan.controller.AbstractControllerTemplate;
 /**
  * 愚猿通用的异步网络通讯任务模板
  * action的基类，它的这里的T，由子类Action，决定
- * 子类action和子类controller 1对1 配套使用，共同决定指定一个相同的T
+ * 子类action和子类controller 1对1 配套使用，共同指定一个相同的T
  * Activity在使用的时候，要写回调函数，在指定类型的时候，传进来的类也要与T相同
  *
  * Author:       geyao

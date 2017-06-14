@@ -17,14 +17,17 @@ import org.json.JSONObject;
 
 public abstract class YYBaseController<T> extends AbstractController {
     private static final String TAG = "YYBaseController";
+
+    //用于传输数据的JSON对象，在handle()函数里，放置参数
     protected JSONObject jsonObject;
 
+    //URL，在handle()函数里，要 url += "/example";
     protected String url = address ;
 
     //结果
     private String result = Const.FAIL;
 
-
+    //模板方法，获取json对象，发送请求，接收结果
     public final String execute(){
         try {
             jsonObject = getJSON();
@@ -48,6 +51,7 @@ public abstract class YYBaseController<T> extends AbstractController {
             }
             return s;
         }catch (Exception e){
+            this.result = Const.FAIL;
             e.printStackTrace();
             return failJSON();
         }
@@ -70,7 +74,7 @@ public abstract class YYBaseController<T> extends AbstractController {
      * Date:         2017/6/14
      * Email:        gy2016@mail.ustc.edu.cn
      * Description:  具体的Controller做自己的操作，只做成功的处理，不需要考虑失败
-     * @param s 后台返回的原始String
+     * @param s 后台返回的原始String，大多为JSON
      */
     protected abstract void afterHandle(String s);
 

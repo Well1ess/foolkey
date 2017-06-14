@@ -2,6 +2,7 @@ package com.example.a29149.yuyuan.Util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
 import com.example.a29149.yuyuan.AbstractObject.YYBaseAdapter;
@@ -17,6 +18,7 @@ import java.util.Stack;
  */
 
 public class AdapterManager {
+    private static final String TAG = "AdapterManager";
     private static Stack<YYBaseAdapter> adapterStack = new Stack<>();
     private static volatile AdapterManager instance;
 
@@ -111,6 +113,7 @@ public class AdapterManager {
                 adapter.remove( oldDTO );
             }
         }
+
     }
 
     /**
@@ -128,6 +131,7 @@ public class AdapterManager {
     public void addData(Class<?> cls, AbstractDTO dto, boolean headFlag){
         for (YYBaseAdapter adapter : adapterStack ) {
             if (adapter.getClass().equals(cls)) {
+                Log.d(TAG, "addData: 132 " + dto);
                 if (headFlag){
                     adapter.addData(0, dto);
                 }else {

@@ -179,6 +179,7 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
             for (T data : newData){
                 dataList.add(0, data);
             }
+            notifyDataSetChanged();
             return true;
         }
     }
@@ -194,7 +195,10 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
     public boolean addData(int position, T data) {
         if (data == null)
             return false;
-        addData(position, data);
+        if ( getDataList() == null ){
+            setData(new ArrayList<T>());
+        }
+        this.dataList.add(position, data);
         notifyDataSetChanged();
         return true;
     }

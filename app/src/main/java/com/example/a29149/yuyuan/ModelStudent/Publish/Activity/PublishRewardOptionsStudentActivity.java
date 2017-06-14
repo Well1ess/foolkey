@@ -331,9 +331,8 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
                             RewardWithStudentSTCDTO rewardWithStudentSTCDTO = new RewardWithStudentSTCDTO();
                             rewardWithStudentSTCDTO.setRewardDTO(rewardDTO);
                             rewardWithStudentSTCDTO.setStudentDTO( GlobalUtil.getInstance().getStudentDTO() );
-                            //保存在缓存，注意，这里必须指定0才会插入到第一来
+                            //保存在缓存，注意，这里必须指定true才会插入到第一来
                             AdapterManager.getInstance().addData(RewardAdapter.class, rewardWithStudentSTCDTO, true);
-
                         }catch (Exception e){
                             e.printStackTrace();
                         }

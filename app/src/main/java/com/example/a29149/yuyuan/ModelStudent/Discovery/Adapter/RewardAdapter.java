@@ -100,7 +100,9 @@ public class RewardAdapter extends YYBaseAdapter<RewardWithStudentSTCDTO> {
     public boolean addData(RewardWithStudentSTCDTO data) {
         if (dataList == null)
             dataList = new ArrayList<>();
-        return addData(dataList.size(), data);
+        boolean result = addData(dataList.size(), data);
+        notifyDataSetChanged();
+        return result;
     }
 
     /**
@@ -138,9 +140,12 @@ public class RewardAdapter extends YYBaseAdapter<RewardWithStudentSTCDTO> {
             return false;
         else {
             dataList.add(data);
+            notifyDataSetChanged();
             return true;
         }
     }
+
+
 
     //使用ViewHolder来提高效率
     private static class ViewHolder {

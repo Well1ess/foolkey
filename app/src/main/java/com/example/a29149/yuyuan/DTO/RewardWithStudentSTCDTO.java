@@ -11,6 +11,34 @@ public class RewardWithStudentSTCDTO  extends AbstractDTO {
     private StudentDTO studentDTO;
     private RewardDTO rewardDTO;
 
+    @Override
+    public String toString() {
+        return "RewardWithStudentSTCDTO{" +
+                "studentDTO=" + studentDTO +
+                ", rewardDTO=" + rewardDTO +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        try {
+            RewardWithStudentSTCDTO dto = (RewardWithStudentSTCDTO) o;
+            if (this.getRewardDTO().getId().equals( dto.getRewardDTO().getId() ))
+                return true;
+        }catch (Exception e){
+            //
+        }
+        return false;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = studentDTO != null ? studentDTO.hashCode() : 0;
+        result = 31 * result + (rewardDTO != null ? rewardDTO.hashCode() : 0);
+        return result;
+    }
+
     public StudentDTO getStudentDTO() {
         return studentDTO;
     }

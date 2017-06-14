@@ -373,48 +373,6 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         }
     }
 
-    /**
-     * 刷新fragment里界面显示list
-     * 增删 reward 的时候就可能用到
-     */
-    public static void updateRewardList() {
-        //首先获取2个activity
-        //学生的
-        MainStudentActivity mainStudentActivity =
-                (MainStudentActivity) AppManager.getActivity(MainStudentActivity.class);
-        //老师的
-        MainTeacherActivity mainTeacherActivity =
-                (MainTeacherActivity) AppManager.getActivity(MainTeacherActivity.class);
-        //搜索的
-        SearchActivity searchActivity =
-                (SearchActivity) AppManager.getActivity(SearchActivity.class);
-
-        //针对不同的activity采取不同的行为
-        if (mainStudentActivity != null) {
-            //学生activity可更新，则获取DiscoveryMainFragment
-            DiscoveryMainFragment discoveryMainFragment =
-                    mainStudentActivity.getDiscoveryMainFragment();
-            //如果从首页，直接搜索的话，此时activity是有的，但这下面这个fragment会出现数组越界异常
-            try {
-                //获取子fragment
-                RewardDiscoveryFragment fragment = discoveryMainFragment.getRewardDiscoveryFragment();
-                //调用更新方法
-                fragment.updateRewardList();
-            } catch (RuntimeException e) {
-                //FIXME
-            }
-
-        }
-        if (mainTeacherActivity != null) {
-            //老师activity可更新
-            //TODO
-        }
-        if (searchActivity != null) {
-            //搜索的列表更新
-            //TODO 耦合
-            searchActivity.getRewardSearchFragment().updateSearchRewardList();
-        }
-    }
 
     /**
      * 刷新本页面显示的信息，修改了悬赏信息以后就可能用到
@@ -556,6 +514,13 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
         }
     }
 
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/14
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  删除某个悬赏
+     */
     public class DeleteRewardAction extends AsyncTask<String, String, String> {
 
         private DeleteController deleteController = new DeleteController();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -12,6 +13,11 @@ import android.widget.Toast;
 
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
+import com.example.a29149.yuyuan.Enum.CourseTimeDayEnum;
+import com.example.a29149.yuyuan.Enum.StudentBaseEnum;
+import com.example.a29149.yuyuan.Enum.TeachMethodEnum;
+import com.example.a29149.yuyuan.Enum.TeacherRequirementEnum;
+import com.example.a29149.yuyuan.Enum.TechnicTagEnum;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
@@ -33,7 +39,7 @@ import org.json.JSONObject;
  */
 
 public class PublishRewardOptionsStudentActivity extends AbstractActivity implements View.OnClickListener {
-
+    private static final String TAG = "PublishRewardOptionsStu";
     private ImageView mReturn;
     private TextView mGo;
 
@@ -50,14 +56,25 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
     private CheckBox mOffLine;//线下
     private CheckBox mOnAndOff;//不限
 
-    private String[] rewardChooseContent ;//保存用户填写的信息，初始化默认值
+    private String[] rewardChooseContent = new String[8] ;//保存用户填写的信息，初始化默认值
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options_reward);
+
+        //从上一个Activity获取信息
+        rewardChooseContent[0] = getIntent().getStringExtra("tag");
+        rewardChooseContent[1] = getIntent().getStringExtra("title");
+        rewardChooseContent[2] = getIntent().getStringExtra("description");
+        rewardChooseContent[3] = getIntent().getStringExtra("price");
+
+        for (String str : rewardChooseContent){
+            Log.d(TAG, "doInBackground: 68 " + str);
+        }
+
         initView();
-        rewardChooseContent = GlobalUtil.getInstance().getRewardChooseContent();
+
         //rewardChooseContent = new String[]{"","","","","不限","小白","不限","不限"};
     }
 
@@ -142,12 +159,56 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
     }
 
 
-
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/14
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  发布按钮
+     */
     private void goNext() {
-        //提交用户的信息
-        GlobalUtil.getInstance().setRewardChooseContent(rewardChooseContent);
-        //Log.i("malei",rewardChooseContent.toString());
         //发布到服务器
+        //新建RewardDTO
+        RewardDTO rewardDTO = new RewardDTO();
+        rewardDTO.setTopic( rewardChooseContent[1] );
+        rewardDTO.setTechnicTagEnum(TechnicTagEnum.valueOf( rewardChooseContent[0] ) );
+        rewardDTO.setDescription( rewardChooseContent[2] );
+        rewardDTO.setPrice( Double.parseDouble( rewardChooseContent[3] ) );
+
+        //默认选择
+        String courseTimeDayEnumStr;
+        if ( rewardChooseContent[4] != null && !rewardChooseContent[4].equals(""))
+            ;
+        else
+            rewardChooseContent[4] = "不限";
+        courseTimeDayEnumStr = rewardChooseContent[4];
+
+        String studentBaseEnumStr;
+        if ( rewardChooseContent[5] != null && !rewardChooseContent[5].equals(""))
+            ;
+        else
+            rewardChooseContent[5] = "小白";
+        studentBaseEnumStr = rewardChooseContent[5];
+
+        String teachMethodEnumStr;
+        if ( rewardChooseContent[6] != null && !rewardChooseContent[6].equals(""))
+            ;
+        else
+            rewardChooseContent[6] = "不限";
+        teachMethodEnumStr = rewardChooseContent[6];
+
+        String teachRequirementEnumStr;
+        if ( rewardChooseContent[7] != null && !rewardChooseContent[7].equals(""))
+            ;
+        else
+            rewardChooseContent[7] = "不限";
+        teachRequirementEnumStr = rewardChooseContent[7];
+
+        rewardDTO.setCourseTimeDayEnum(CourseTimeDayEnum.valueOf(courseTimeDayEnumStr));
+        rewardDTO.setStudentBaseEnum(StudentBaseEnum.valueOf(studentBaseEnumStr));
+        rewardDTO.setTeachMethodEnum(TeachMethodEnum.valueOf(teachMethodEnumStr));
+        rewardDTO.setTeacherRequirementEnum(TeacherRequirementEnum.valueOf(teachRequirementEnumStr));
+
         new PublishRewardAction().execute();
     }
 
@@ -241,58 +302,48 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
      */
     public class PublishRewardAction extends AsyncTask<String, Integer, String> {
 
-        private  String[] mChooseContent;
-
-        public PublishRewardAction() {
-            super();
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mChooseContent = GlobalUtil.getInstance().getRewardChooseContent();
-           /* for (String temp : mChooseContent) {
-                Log.i("malei", temp);
-            }*/
-        }
 
         @Override
         protected String doInBackground(String... params) {
 
             //默认选择
             String courseTimeDayEnumStr;
-            if ( mChooseContent[4] != null && !mChooseContent[4].equals(""))
+            if ( rewardChooseContent[4] != null && !rewardChooseContent[4].equals(""))
                 ;
             else
-                mChooseContent[4] = "不限";
-            courseTimeDayEnumStr = mChooseContent[4];
+                rewardChooseContent[4] = "不限";
+            courseTimeDayEnumStr = rewardChooseContent[4];
 
             String studentBaseEnumStr;
-            if ( mChooseContent[5] != null && !mChooseContent[5].equals(""))
+            if ( rewardChooseContent[5] != null && !rewardChooseContent[5].equals(""))
                 ;
             else
-                mChooseContent[5] = "小白";
-            studentBaseEnumStr = mChooseContent[5];
+                rewardChooseContent[5] = "小白";
+            studentBaseEnumStr = rewardChooseContent[5];
 
             String teachMethodEnumStr;
-            if ( mChooseContent[6] != null && !mChooseContent[6].equals(""))
+            if ( rewardChooseContent[6] != null && !rewardChooseContent[6].equals(""))
                 ;
             else
-                mChooseContent[6] = "不限";
-            teachMethodEnumStr = mChooseContent[6];
+                rewardChooseContent[6] = "不限";
+            teachMethodEnumStr = rewardChooseContent[6];
 
             String teachRequirementEnumStr;
-            if ( mChooseContent[7] != null && !mChooseContent[7].equals(""))
+            if ( rewardChooseContent[7] != null && !rewardChooseContent[7].equals(""))
                 ;
             else
-                mChooseContent[7] = "不限";
-            teachRequirementEnumStr = mChooseContent[7];
+                rewardChooseContent[7] = "不限";
+            teachRequirementEnumStr = rewardChooseContent[7];
+
+            for (String str : rewardChooseContent){
+                Log.d(TAG, "doInBackground: 298 " + str);
+            }
 
             return PublishController.execute(
-                    mChooseContent[1],
-                    mChooseContent[0],
-                    mChooseContent[2],
-                    mChooseContent[3],
+                    rewardChooseContent[0],
+                    rewardChooseContent[1],
+                    rewardChooseContent[2],
+                    rewardChooseContent[3],
                     courseTimeDayEnumStr,
                     teachMethodEnumStr,
                     teachRequirementEnumStr,
@@ -315,8 +366,8 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
 //                        startActivity(toMainActivity);
                         try {
                             //关闭前2个activity
-                            AppManager.getActivity(PublishRewardDescribeStudentActivity.class).finish();
-                            AppManager.getActivity(PublishRewardPriceStudentActivity.class).finish();
+//                            AppManager.getActivity(PublishRewardDescribeStudentActivity.class).finish();
+//                            AppManager.getActivity(PublishRewardPriceStudentActivity.class).finish();
                         }catch (NullPointerException e){
                             //就算空指针，也没什么
                         }

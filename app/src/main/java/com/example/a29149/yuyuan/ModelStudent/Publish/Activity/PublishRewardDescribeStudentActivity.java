@@ -20,6 +20,7 @@ import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
+import com.example.a29149.yuyuan.Util.StringUtil;
 
 /**
  * Created by MaLei on 2017/5/8.
@@ -35,6 +36,7 @@ public class PublishRewardDescribeStudentActivity extends AbstractActivity imple
     private EditText mRewardTitle;//悬赏标题
     private EditText mRewardContent;//悬赏标题
     private  TextView mTag;//悬赏标签
+    private String tag; // 悬赏的标签
     private String[] rewardChooseContent;//保存用户填写的信息
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,15 +80,19 @@ public class PublishRewardDescribeStudentActivity extends AbstractActivity imple
 
     private void goNext() {
         //提交用户的信息
-        if (TextUtils.isEmpty(mRewardTitle.getText()) || TextUtils.isEmpty(mRewardContent.getText()))
+        if (TextUtils.isEmpty(mRewardTitle.getText())
+                || TextUtils.isEmpty(mRewardContent.getText())
+                || "请选择内容标签".equals(mTag.getText().toString())
+                )
             Toast.makeText(this, "请填写悬赏信息", Toast.LENGTH_SHORT).show();
         else
         {
-            rewardChooseContent[0] = mRewardTitle.getText().toString();
-            rewardChooseContent[2] = mRewardContent.getText().toString();
-            GlobalUtil.getInstance().setRewardChooseContent(rewardChooseContent);
             Intent intent = new Intent(PublishRewardDescribeStudentActivity.this, PublishRewardPriceStudentActivity.class);
+            intent.putExtra("title", mRewardTitle.getText() + "");
+            intent.putExtra("description", mRewardContent.getText() + "" );
+            intent.putExtra("tag", tag);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -112,7 +118,7 @@ public class PublishRewardDescribeStudentActivity extends AbstractActivity imple
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mTag.setText("标签："+Const.REWARD_TAG[which]);
-                        rewardChooseContent[1] = Const.REWARD_TAG[which];
+                        tag = Const.REWARD_TAG[which];
                         dialog.dismiss();
                     }
                 }).create();

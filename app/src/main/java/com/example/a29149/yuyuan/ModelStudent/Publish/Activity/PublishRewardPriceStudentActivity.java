@@ -63,13 +63,17 @@ public class PublishRewardPriceStudentActivity extends AbstractActivity implemen
     private void goNext() {
         //提交用户的信息
         if (TextUtils.isEmpty(mRewardPrice.getText()))
-            Toast.makeText(this, "请填写悬赏信息", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请填写价格", Toast.LENGTH_SHORT).show();
         else
         {
-            rewardChooseContent[3] = mRewardPrice.getText().toString();
-            GlobalUtil.getInstance().setRewardChooseContent(rewardChooseContent);
             Intent intent = new Intent(PublishRewardPriceStudentActivity.this, PublishRewardOptionsStudentActivity.class);
+            intent.putExtra("price", mRewardPrice.getText() + "");
+            intent.putExtra("title", getIntent().getStringExtra("title") + "");
+            intent.putExtra("description", getIntent().getStringExtra("description") + "");
+            intent.putExtra("tag", getIntent().getStringExtra("tag") + "");
+
             startActivity(intent);
+            finish();
         }
     }
 

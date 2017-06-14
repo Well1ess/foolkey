@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +31,6 @@ import com.example.a29149.yuyuan.AbstractObject.AbstractActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
-
-import static com.example.a29149.yuyuan.Enum.CourseTimeDayEnum.工作日;
 
 /**
  * 修改个人悬赏信息
@@ -547,7 +544,7 @@ public class RewardModifyActivity extends AbstractActivity implements View.OnCli
                         setResult(RESULT_OK, intent);
                         finish();
                         //更新各个Adapter里面的数据
-                        AdapterManager.getInstance().updateDate(RewardAdapter.class, rewardDTO);
+                        AdapterManager.getInstance().updateData(RewardAdapter.class, rewardDTO);
                         return;
                     }
                 } catch (Exception e) {

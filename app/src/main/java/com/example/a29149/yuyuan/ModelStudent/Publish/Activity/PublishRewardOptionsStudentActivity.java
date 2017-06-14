@@ -14,7 +14,9 @@ import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.RewardWithStudentSTCDTO;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Activity.RewardActivity;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.AdapterManager;
 import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
@@ -330,9 +332,8 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
                             rewardWithStudentSTCDTO.setRewardDTO(rewardDTO);
                             rewardWithStudentSTCDTO.setStudentDTO( GlobalUtil.getInstance().getStudentDTO() );
                             //保存在缓存，注意，这里必须指定0才会插入到第一来
-                            GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().add( 0, rewardWithStudentSTCDTO );
-                            //更新列表
-                            RewardActivity.updateRewardList();
+                            AdapterManager.getInstance().addData(RewardAdapter.class, rewardWithStudentSTCDTO, true);
+
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -340,6 +341,7 @@ public class PublishRewardOptionsStudentActivity extends AbstractActivity implem
                         finish();
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     Toast.makeText(PublishRewardOptionsStudentActivity.this, "返回结果为fail！", Toast.LENGTH_SHORT).show();
                 }
             } else {

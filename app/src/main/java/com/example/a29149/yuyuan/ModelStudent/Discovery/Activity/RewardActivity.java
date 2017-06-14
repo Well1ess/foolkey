@@ -26,12 +26,14 @@ import com.example.a29149.yuyuan.Enum.RewardStateEnum;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.Main.MainTeacherActivity;
+import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.RewardDiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.info.StudentInfoActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Search.SearchActivity;
+import com.example.a29149.yuyuan.Util.AdapterManager;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.AppManager;
@@ -359,8 +361,8 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     //更新本页数据
                     updateDate();
                     //更新发现的listView里的数据
-                    //搜索的ListView不会在这里更新
-                    updateRewardList();
+                    //这一步交给RewardModifyActivity来做了
+
                 }
                 break;
                 default:
@@ -573,11 +575,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     if ("success".equals(jsonObject.getString("result"))) {
                         Toast.makeText(RewardActivity.this, "删除成功", Toast.LENGTH_SHORT);
                         //更新数据
-                        //TODO 这里依然是用全局变量处理悬赏
-                        GlobalUtil.getInstance().getRewardWithStudentSTCDTOs().remove(position);
-                        //刷新界面显示
-                        updateRewardList();
-
+                        AdapterManager.getInstance().removeDate(RewardAdapter.class, rewardWithStudentSTCDTO);
                         finish();
                         return;
                     }

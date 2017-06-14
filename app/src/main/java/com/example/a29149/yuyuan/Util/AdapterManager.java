@@ -68,7 +68,7 @@ public class AdapterManager {
      *
      * @param cls 要更新的Adapter类
      */
-    public void updateDate(Class<?> cls) {
+    public void updateData(Class<?> cls) {
         for (YYBaseAdapter adapter : adapterStack){
             if (adapter.getClass().equals(cls)) {
                 adapter.notifyDataSetChanged();
@@ -86,10 +86,11 @@ public class AdapterManager {
      * @param cls    需要更新的Adapter类型
      * @param newDTO 新的Adapter
      */
-    public void updateDate(Class<?> cls, AbstractDTO newDTO){
+    public void updateData(Class<?> cls, AbstractDTO newDTO){
         for (YYBaseAdapter adapter : adapterStack){
             if (adapter.getClass().equals(cls)) {
                 adapter.updateData(newDTO);
+                //adapter.notifyDataSetChanged(); 这一步移交给Adapter做了
             }
         }
     }
@@ -105,7 +106,35 @@ public class AdapterManager {
      * @param oldDTO 要删除的DTO
      */
     public void removeDate(Class<?> cls, AbstractDTO oldDTO){
+        for (YYBaseAdapter adapter : adapterStack) {
+            if (adapter.getClass().equals(cls)) {
+                adapter.remove( oldDTO );
+            }
+        }
+    }
 
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/14
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  添加某个dto，不管原list里有没有这个dto
+     * @param cls    要更改的Adapter
+     * @param dto    要添加的dto
+     * @param headFlag
+     *               true：添加到首
+     *               false：添加到尾
+     */
+    public void addData(Class<?> cls, AbstractDTO dto, boolean headFlag){
+        for (YYBaseAdapter adapter : adapterStack ) {
+            if (adapter.getClass().equals(cls)) {
+                if (headFlag){
+                    adapter.addData(0, dto);
+                }else {
+                    adapter.addData( dto );
+                }
+            }
+        }
     }
 
 }

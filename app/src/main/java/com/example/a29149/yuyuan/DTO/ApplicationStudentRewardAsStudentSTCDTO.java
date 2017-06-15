@@ -13,7 +13,7 @@ public class ApplicationStudentRewardAsStudentSTCDTO  extends AbstractDTO {
 
     //悬赏DTO
     private RewardDTO rewardDTO;
-    //老师申请的DTOS
+    //老师申请的DTO
     private List<ApplicationRewardWithTeacherSTCDTO> applicationRewardWithTeacherSTCDTOS;
 
     @Override

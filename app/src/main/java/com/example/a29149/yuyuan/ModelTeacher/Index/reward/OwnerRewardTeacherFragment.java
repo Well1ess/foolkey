@@ -68,6 +68,9 @@ public class OwnerRewardTeacherFragment extends Fragment {
     private void applyReward() {
         new ApplyRewardAction(1).execute();
     }
+
+
+
     /**
      * 获取老师的悬赏请求Action
      */

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.AbstractObject.YYBaseAction;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
@@ -15,6 +16,7 @@ import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.shapeloading.ShapeLoadingDialog;
+import com.example.a29149.yuyuan.action.GetRewardApplicationAction;
 import com.example.a29149.yuyuan.controller.course.reward.GetWithApplicationController;
 import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.google.gson.Gson;
@@ -37,9 +39,16 @@ public class OwnerRewardActivity extends AbstractAppCompatActivity {
     private ListView mRewardList;
 
     //适配器
-    private OwnerRewardListAdapter mAdapter;
+    private OwnerRewardListAdapter mAdapter = new OwnerRewardListAdapter(OwnerRewardActivity.this);
 
+    //加载动画
     public static ShapeLoadingDialog shapeLoadingDialog;
+
+    //加载动画
+    private GetRewardApplicationAction action;
+
+    //页码
+    private int pageNo = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,9 @@ public class OwnerRewardActivity extends AbstractAppCompatActivity {
         shapeLoadingDialog.setLoadingText("加载中...");
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
         shapeLoadingDialog.show();
+
+        //绑定listView与adapter
+        mRewardList.setAdapter( mAdapter );
 
         loadData();
 
@@ -75,9 +87,33 @@ public class OwnerRewardActivity extends AbstractAppCompatActivity {
         this.finish();
     }
 
-    //查看我发布的悬赏
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/15
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  执行网络请求
+     */
     private void applyReward() {
-        new ApplyRewardAction(1).execute();
+//        new ApplyRewardAction(1).execute();
+        action = new GetRewardApplicationAction( pageNo );
+        action.setOnAsyncTask(new YYBaseAction.OnAsyncTask<List<ApplicationStudentRewardAsStudentSTCDTO>>() {
+            @Override
+            public void onSuccess(List<ApplicationStudentRewardAsStudentSTCDTO> data) {
+                Toast.makeText(OwnerRewardActivity.this, SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFail() {
+                Toast.makeText(OwnerRewardActivity.this, FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNull() {
+                Toast.makeText(OwnerRewardActivity.this, NULL_MESSAGE, Toast.LENGTH_SHORT).show();
+            }
+        });
+        action.execute();
     }
     /**
      * 获取我的悬赏请求Action

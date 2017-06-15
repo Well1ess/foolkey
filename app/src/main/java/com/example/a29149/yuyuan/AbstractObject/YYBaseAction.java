@@ -76,6 +76,14 @@ public abstract class YYBaseAction<T> extends AsyncTask {
      *               这里的类型要和子类action设置的泛型保持一致
      */
     public interface OnAsyncTask<T>{
+
+
+        public static final String FAIL_MESSAGE = "服务器繁忙，请稍后再试T_T";
+
+        public static final String NULL_MESSAGE = "网络连接失败T_T";
+
+        public static final String SUCCESS_MESSAGE = "请求成功";
+
         //返回成功时，做的处理
         public void onSuccess(T data);
         //返回失败时，做的处理

@@ -28,7 +28,7 @@ import java.util.List;
  * Email:ml1995@mail.ustc.edu.cn
  * 学生申请认证老师
  */
-
+@Deprecated
 public class ApplyAuthenticationTeacherActivity extends AbstractActivity implements View.OnClickListener {
 
     private Button mApply;//学生点击申请认证老师

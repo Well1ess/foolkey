@@ -9,7 +9,7 @@ import org.json.JSONObject;
  * 拒绝某位老师的申请
  * Created by geyao on 2017/5/21.
  */
-
+@Deprecated
 public class RefuseController extends AbstractController {
 
     private static String url = address + "/aes/reward/refuse";

@@ -98,7 +98,7 @@ public class AccessOrderActivity extends AbstractAppCompatActivity {
     private void initView(){
         Intent intent = getIntent();
         String courseTopic = intent.getStringExtra("courseTopic");
-        String teacherName = intent.getStringExtra("teacherName");
+        String teacherName = intent.getStringExtra("mNickedName");
         String courseDescription = intent.getStringExtra("courseDescription");
 
         mCourseTopic.setText(courseTopic);

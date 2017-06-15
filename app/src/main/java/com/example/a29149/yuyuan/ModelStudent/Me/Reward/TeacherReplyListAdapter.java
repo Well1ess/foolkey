@@ -21,7 +21,7 @@ import java.util.List;
  * Created by Administrator on 2016/12/26 0026.
  * GridView的适配器，即申请该条悬赏的老师信息适配器
  */
-
+@Deprecated
 public class TeacherReplyListAdapter extends BaseAdapter
 {
 
@@ -78,7 +78,7 @@ public class TeacherReplyListAdapter extends BaseAdapter
                 .transform(new GlideCircleTransform(mContext))
                 .into(myViewHolder.tv);
 
-//        myViewHolder.tv.setText(applicationRewardWithTeacherSTCDTOList.get(position).getTeacherAllInfoDTO().getNickedName());
+//        myViewHolder.mPhoto.setText(applicationRewardWithTeacherSTCDTOList.get(position).getTeacherAllInfoDTO().getNickedName());
         myViewHolder.teacherName.setText(applicationRewardWithTeacherSTCDTOList.get(position).getTeacherAllInfoDTO().getNickedName());
         return convertView;
     }

@@ -47,7 +47,12 @@ public abstract class YYBaseAction<T> extends AsyncTask {
      */
     @Override
     protected Object doInBackground(Object[] objects) {
-        return controller.execute();
+        try {
+            return controller.execute();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

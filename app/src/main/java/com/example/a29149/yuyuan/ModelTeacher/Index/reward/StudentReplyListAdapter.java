@@ -91,7 +91,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
         {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
-        //myViewHolder.tv.setText(orderBuyCourseWithStudentAsTeacherSTCDTOs.get(position).getTeacherAllInfoDTO().getNickedName());
+        //myViewHolder.mPhoto.setText(orderBuyCourseWithStudentAsTeacherSTCDTOs.get(position).getTeacherAllInfoDTO().getNickedName());
         mStudentDTO = orderBuyCourseWithStudentAsTeacherSTCDTOs.get(position).getStudentDTO();
         mOrderBuyCourseDTO = orderBuyCourseWithStudentAsTeacherSTCDTOs.get(position).getOrderBuyCourseDTO();
         Log.i("malei", mOrderBuyCourseDTO.getOrderStateEnum()+"");

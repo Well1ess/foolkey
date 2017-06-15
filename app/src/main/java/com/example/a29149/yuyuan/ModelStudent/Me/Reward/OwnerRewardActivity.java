@@ -39,12 +39,12 @@ public class OwnerRewardActivity extends AbstractAppCompatActivity {
     private ListView mRewardList;
 
     //适配器
-    private OwnerRewardListAdapter mAdapter = new OwnerRewardListAdapter(OwnerRewardActivity.this);
+    private RewardApplicationAdapter mAdapter;
 
     //加载动画
     public static ShapeLoadingDialog shapeLoadingDialog;
 
-    //加载动画
+    //执行网络通讯的action
     private GetRewardApplicationAction action;
 
     //页码
@@ -62,23 +62,18 @@ public class OwnerRewardActivity extends AbstractAppCompatActivity {
         shapeLoadingDialog.setCanceledOnTouchOutside(false);
         shapeLoadingDialog.show();
 
+        //Adapter的新建可能不能放在声明时定义
+        mAdapter = new RewardApplicationAdapter(OwnerRewardActivity.this);
+
         //绑定listView与adapter
         mRewardList.setAdapter( mAdapter );
 
         loadData();
-
-//        AppManager.getInstance().addActivity(this);
-
-
     }
 
     private void loadData()
     {
-        //如果没有进行加载
-        if (shapeLoadingDialog != null) {
-            shapeLoadingDialog.show();
-            applyReward();
-        }
+        applyReward();
     }
 
     @OnClick(R.id.tv_return)
@@ -95,106 +90,36 @@ public class OwnerRewardActivity extends AbstractAppCompatActivity {
      * Description:  执行网络请求
      */
     private void applyReward() {
-//        new ApplyRewardAction(1).execute();
+        //每次都要新建任务
         action = new GetRewardApplicationAction( pageNo );
+
+        //给任务设置结果回调
         action.setOnAsyncTask(new YYBaseAction.OnAsyncTask<List<ApplicationStudentRewardAsStudentSTCDTO>>() {
             @Override
             public void onSuccess(List<ApplicationStudentRewardAsStudentSTCDTO> data) {
                 Toast.makeText(OwnerRewardActivity.this, SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show();
+                //设置数据
+                mAdapter.setData(data);
+                //TODO FIXME 这里没有分页展示！
+                //跳跳跳动画消失
+                shapeLoadingDialog.dismiss();
             }
 
             @Override
             public void onFail() {
                 Toast.makeText(OwnerRewardActivity.this, FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
+                //跳跳跳动画消失
+                shapeLoadingDialog.dismiss();
             }
 
             @Override
             public void onNull() {
                 Toast.makeText(OwnerRewardActivity.this, NULL_MESSAGE, Toast.LENGTH_SHORT).show();
+                //跳跳跳动画消失
+                shapeLoadingDialog.dismiss();
             }
         });
         action.execute();
-    }
-    /**
-     * 获取我的悬赏请求Action
-     */
-    public class ApplyRewardAction extends AsyncTask<String, Integer, String> {
 
-        int pageNo;
-
-        public ApplyRewardAction(int pageNo) {
-            super();
-            this.pageNo = pageNo;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            //只会获取我的未解决的悬赏，内含部分申请的老师
-            return GetWithApplicationController.execute( pageNo + "");
-
-
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            log.d(this, result);
-            if (result != null) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String resultFlag = jsonObject.getString("result");
-
-                    //存储所有我拥有的悬赏信息DTO
-                    java.lang.reflect.Type type = new com.google.gson.reflect.TypeToken<List<ApplicationStudentRewardAsStudentSTCDTO>>() {
-                    }.getType();
-                    List < ApplicationStudentRewardAsStudentSTCDTO > applicationStudentRewardAsStudentSTCDTOs;
-                    try {
-                         applicationStudentRewardAsStudentSTCDTOs = new Gson().fromJson(jsonObject.getString("applicationStudentRewardAsStudentSTCDTOS"), type);
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                        applicationStudentRewardAsStudentSTCDTOs = new ArrayList<>();
-                    }
-
-                    GlobalUtil.getInstance().setApplicationStudentRewardAsStudentSTCDTOs(applicationStudentRewardAsStudentSTCDTOs);
-
-                    if (resultFlag.equals("success")) {
-//                        Toast.makeText(OwnerRewardActivity.this, "获取悬赏成功！", Toast.LENGTH_SHORT).show();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                mAdapter = new OwnerRewardListAdapter(OwnerRewardActivity.this);
-                                mRewardList.setAdapter(mAdapter);
-                                shapeLoadingDialog.dismiss();
-
-                            }
-                        }, 1000);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(OwnerRewardActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(OwnerRewardActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
     }
 }

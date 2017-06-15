@@ -15,7 +15,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
+import com.example.a29149.yuyuan.AbstractObject.YYBaseAction;
+import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
+import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
+import com.example.a29149.yuyuan.DTO.CourseAbstract;
 import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
@@ -24,13 +29,16 @@ import com.example.a29149.yuyuan.Enum.SexTagEnum;
 import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.AdapterManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
+import com.example.a29149.yuyuan.action.AcceptRewardApplicationAction;
+import com.example.a29149.yuyuan.action.RejectRewardApplicationAction;
+import com.example.a29149.yuyuan.business_object.PriceCaculator;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.a29149.yuyuan.controller.course.reward.AcceptController;
 import com.example.a29149.yuyuan.controller.course.reward.RefuseController;
-import com.example.a29149.yuyuan.AbstractObject.AbstractAppCompatActivity;
 import com.example.resource.util.image.GlideCircleTransform;
 
 import org.json.JSONObject;
@@ -39,17 +47,23 @@ import org.json.JSONObject;
  * Created by MaLei on 2017/5/11.
  * Email:ml1995@mail.ustc.edu.cn
  * 申请悬赏的老师主页
+ *
+ * Author:       geyao
+ * Date:         2017/6/15
+ * Email:        gy2016@mail.ustc.edu.cn
+ * Description:  进行了修改，现在要在intent中放置很多信息 teacherAllInfoDTO applicationStudentRewardDTO courseDTO
+ *
  */
-@Deprecated
-public class TeacherIndexActivity extends AbstractAppCompatActivity implements View.OnClickListener {
 
+public class TeacherInfoActivity extends AbstractAppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "TeacherInfoActivity";
     private TextView mDescription;//老师简介
     private TextView mTitle;//标题
     private TextView mInfo;//老师的slogan
     private TextView mTeacherSex;//老师的性别
     private TextView mTeacherOrganization;//老师所属组织
     private TextView mTeacherEducation;//老师学历
-    private TextView mFlollowNum;//关注老师人数
+    private TextView mFollowNum;//关注老师人数
     private TextView mCourseNum;//老师授课次数
     private TextView mTeacheringTime;//老师授课时长
     private CheckBox mTeacherState;//老师认证状态
@@ -58,22 +72,38 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
     private TextView mTeacherGithub;//老师Github账户url
     private TextView mTeacherIndex;//老师主页
     private TextView mTeacherEmail;//老师邮箱
+    private TextView mPrestige; // 老师的声望
 
+    //从intent中获取
     private TeacherAllInfoDTO mTeacherAllInfoDTO;//老师信息
     private StudentDTO mStudentDTO;//学生信息
     private ApplicationStudentRewardDTO applicationStudentRewardDTO;//申请信息
-    private RewardDTO mRewardDTO;//悬赏信息DTO
+    //这是adapter传过来要用的,单个老师的信息
+    private ApplicationRewardWithTeacherSTCDTO applicationRewardWithTeacherSTCDTO;
+    //这是整个悬赏下面的DTO
+    private ApplicationStudentRewardAsStudentSTCDTO applicationStudentRewardAsStudentSTCDTO;
+
+    private CourseAbstract mRewardDTO;//悬赏信息DTO
     private RadioButton mRewardAgree;//同意该老师申请
     private RadioButton mRewardDisagree;//不同意该老师申请
     private ImageButton mReturn;//返回
 
 
     //显示选项的对话框
+    //余额不足
     private WarningDisplayDialog.Builder displayInfo;
+    //同意确认
     private WarningDisplayDialog.Builder displayInfo1;
+    //拒绝确认
+    private WarningDisplayDialog.Builder rejectDisplayInfo;
 
 
     private ImageView mTeacherPhoto;
+
+    //拒绝申请的异步任务
+    private RejectRewardApplicationAction rejectRewardApplicationAction;
+    //接受申请的异步任务
+    private AcceptRewardApplicationAction acceptRewardApplicationAction;
 
     private RequestManager glide;
 
@@ -81,22 +111,25 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_info);
+        //获取
         Intent intent = getIntent();
-        String positionIn = intent.getStringExtra("positionIn");//gridview的position
-        Log.i("malei",positionIn+"");
-        Integer posiIn = Integer.parseInt(positionIn);
-        String positionOut = intent.getStringExtra("positionOut");//listview的position
-        Log.i("malei",positionOut+"");
-        Integer posiOut = Integer.parseInt(positionOut);
-        mTeacherAllInfoDTO = GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(posiOut)
-                .getApplicationRewardWithTeacherSTCDTOS().get(posiIn).getTeacherAllInfoDTO();
+        //获取整个悬赏下所有的信息，这一步的获取是为了成功后删除某个悬赏，使用的时候，记得判空
+        applicationStudentRewardAsStudentSTCDTO = (ApplicationStudentRewardAsStudentSTCDTO) intent.getSerializableExtra("parentDTO");
+        //获取悬赏信息
+        mRewardDTO = (CourseAbstract) intent.getSerializableExtra("courseDTO");
+        //如果这个activity是由adapter传过来，则需要获取adapter的item的数据
+        applicationRewardWithTeacherSTCDTO =
+                (ApplicationRewardWithTeacherSTCDTO) intent.getSerializableExtra("DTO");
+        //获取教师所有的信息
+//        mTeacherAllInfoDTO = (TeacherAllInfoDTO) intent.getSerializableExtra("teacherAllInfoDTO");
+        mTeacherAllInfoDTO = applicationRewardWithTeacherSTCDTO.getTeacherAllInfoDTO();
+        //获取一些申请的信息
+//        applicationStudentRewardDTO = (ApplicationStudentRewardDTO) intent.getSerializableExtra("applicationStudentRewardDTO");
+        applicationStudentRewardDTO = applicationRewardWithTeacherSTCDTO.getApplicationStudentRewardDTO();
 
-        applicationStudentRewardDTO = GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(posiOut)
-                .getApplicationRewardWithTeacherSTCDTOS().get(posiIn).getApplicationStudentRewardDTO();
-
-        mRewardDTO = GlobalUtil.getInstance().getApplicationStudentRewardAsStudentSTCDTOs().get(posiOut).getRewardDTO();
+        //获取登陆者的信息
         mStudentDTO = GlobalUtil.getInstance().getStudentDTO();
-        Log.i("malei",mTeacherAllInfoDTO.toString());
+
         //余额不足提示
         displayInfo = new WarningDisplayDialog.Builder(this);
         displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
@@ -109,14 +142,56 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                Intent toRechargeActivity = new Intent(TeacherIndexActivity.this, RechargeActivity.class);
+                Intent toRechargeActivity = new Intent(TeacherInfoActivity.this, RechargeActivity.class);
                 startActivity(toRechargeActivity);
-                //这里其实不该finish，目前的问题是充值完了，也没有刷新，fake
-                finish();
             }
         });
         displayInfo.create();
-        //显示确认接单
+
+        //拒绝申请
+        rejectDisplayInfo = new WarningDisplayDialog.Builder(this);
+        rejectDisplayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        rejectDisplayInfo.setPositiveButton("拒绝申请", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //新建一个拒绝的异步任务
+                rejectRewardApplicationAction = new RejectRewardApplicationAction(applicationStudentRewardDTO.getId() + "");
+                rejectRewardApplicationAction.setOnAsyncTask(new YYBaseAction.OnAsyncTask<Object>() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        //拒绝成功
+                        //拒绝成功时，从该课程下面，删去老师的头像
+                        //TODO 从Adapter中删除这个申请元素
+                        //FIXME 这里总是出错，服务器也有问题
+                        AdapterManager.getInstance().removeDate(TeacherApplicationAdapter.class, applicationRewardWithTeacherSTCDTO );
+                        finish();
+                    }
+
+                    @Override
+                    public void onFail() {
+                        //拒绝失败
+                        Toast.makeText(TeacherInfoActivity.this, FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNull() {
+                        //无网络
+                        Toast.makeText(TeacherInfoActivity.this, NULL_MESSAGE, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //执行
+                rejectRewardApplicationAction.execute();
+            }
+        });
+        rejectDisplayInfo.create();
+
+
+        //接受申请
         displayInfo1 = new WarningDisplayDialog.Builder(this);
         displayInfo1.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
             @Override
@@ -124,10 +199,44 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
                 dialog.dismiss();
             }
         });
+        //点击同意接单
         displayInfo1.setPositiveButton("同      意", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new AgreeApplyRewardAction().execute();
+                //这里做了接收申请的工作
+                //FIXME 这里的价格没有经过运算
+                acceptRewardApplicationAction = new AcceptRewardApplicationAction(
+                        applicationStudentRewardDTO.getId() + "",
+                        "",
+                        PriceCaculator.getRewardPrice(mRewardDTO, null) + ""
+                );
+                //设定返回的动作
+                acceptRewardApplicationAction.setOnAsyncTask(new YYBaseAction.OnAsyncTask<Object>() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        //同意请求
+                        Toast.makeText(TeacherInfoActivity.this, SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show();
+                        //同意申请，就会整个移除这个悬赏item的显示
+                        //FIXME 并没有移除
+                        if (applicationStudentRewardAsStudentSTCDTO != null){
+                            AdapterManager.getInstance().removeDate(RewardApplicationAdapter.class, applicationStudentRewardAsStudentSTCDTO);
+                        }
+                        //应该是做result处理
+                        finish();
+                    }
+
+                    @Override
+                    public void onFail() {
+                        Toast.makeText(TeacherInfoActivity.this, FAIL_MESSAGE, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNull() {
+                        Toast.makeText(TeacherInfoActivity.this, NULL_MESSAGE, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //进行网络传输
+                acceptRewardApplicationAction.execute();
                 dialog.dismiss();
             }
         });
@@ -138,6 +247,7 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
     }
 
     private void initData() {
+
         String description = mTeacherAllInfoDTO.getDescription()+"";
         mDescription.setText(description);
         mTitle.setText(mTeacherAllInfoDTO.getNickedName()+"的主页");
@@ -147,8 +257,8 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
         else
             mTeacherSex.setText("女");
         mTeacherOrganization.setText(mTeacherAllInfoDTO.getOrganization());
-        mTeacherEducation.setText("硕士");//后台服务器没提供该字段
-        mFlollowNum.setText(mTeacherAllInfoDTO.getFollowerNumber()+"");
+        mTeacherEducation.setText("学历");//后台服务器没提供该字段
+        mFollowNum.setText(mTeacherAllInfoDTO.getFollowerNumber()+"");
         mCourseNum.setText(mTeacherAllInfoDTO.getTeachingNumber()+"");
         mTeacheringTime.setText(mTeacherAllInfoDTO.getTeachingTime()+"");
         if (mTeacherAllInfoDTO.getRoleEnum().compareTo(RoleEnum.teacher)==0)
@@ -161,6 +271,7 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
         mTeacherGithub.setText(mTeacherAllInfoDTO.getGithubUrl());
         mTeacherIndex.setText(mTeacherAllInfoDTO.getBlogUrl());
         mTeacherEmail.setText(mTeacherAllInfoDTO.getEmail());
+        mPrestige.setText(mTeacherAllInfoDTO.getPrestige() + "");
 
         //填充头像
         glide = Glide.with(this);
@@ -168,6 +279,7 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
                 .error(R.drawable.photo_placeholder1)
                 .transform(new GlideCircleTransform( this ))
                 .into( mTeacherPhoto );
+
     }
 
     private void initView() {
@@ -177,7 +289,7 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
         mTeacherSex = (TextView) findViewById(R.id.tv_teacherSex);
         mTeacherOrganization = (TextView) findViewById(R.id.tv_teacherOriganization);
         mTeacherEducation = (TextView) findViewById(R.id.tv_teacherEducation);
-        mFlollowNum = (TextView) findViewById(R.id.tv_followNum);
+        mFollowNum = (TextView) findViewById(R.id.tv_followNum);
         mCourseNum = (TextView) findViewById(R.id.tv_courseNum);
         mTeacheringTime = (TextView) findViewById(R.id.tv_teachingTime);
         mTeacherState = (CheckBox) findViewById(R.id.cb_teacherState);
@@ -187,7 +299,7 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
         mTeacherIndex = (TextView) findViewById(R.id.tv_teacherIndex);
         mTeacherEmail = (TextView) findViewById(R.id.tv_email);
         mTeacherPhoto = (ImageView)findViewById(R.id.iv_photo);
-
+        mPrestige = (TextView)findViewById(R.id.tv_prestige);
 
 
         mRewardAgree = (RadioButton) findViewById(R.id.rb_main_menu_agree);
@@ -208,8 +320,8 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
             case R.id.rb_main_menu_agree:
                 agreeApplyReward();
                 break;
-            case R.id.rb_main_menu_disagree:
-                new DisagreeApplyRewardAction().execute();
+            case R.id.rb_main_menu_disagree://点击拒绝按钮
+                rejectApplication();
                 break;
             case R.id.ib_return:
                 this.finish();
@@ -228,125 +340,19 @@ public class TeacherIndexActivity extends AbstractAppCompatActivity implements V
         }else{
             displayInfo1.setMsg("是 否 确 认？\n \n ");
             displayInfo1.getDialog().show();
-
-        }
-
-    }
-
-
-    /**
-     * 拒绝申请悬赏请求Action
-     */
-    @Deprecated
-    public class DisagreeApplyRewardAction extends AsyncTask<String, Integer, String> {
-
-
-        public DisagreeApplyRewardAction() {
-            super();
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            return RefuseController.execute(applicationStudentRewardDTO.getId() + "");
-
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            log.d(this, result);
-            if (result != null) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String resultFlag = jsonObject.getString("result");
-
-                    if (resultFlag.equals("success")) {
-                        Toast.makeText(TeacherIndexActivity.this, "拒绝申请成功！", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(TeacherIndexActivity.this,OwnerRewardActivity.class);
-                        TeacherIndexActivity.this.startActivity(intent);
-                        finish();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(TeacherIndexActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(TeacherIndexActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
         }
     }
 
     /**
-     * 同意申请悬赏请求Action
+     *
+     * Author:       geyao
+     * Date:         2017/6/15
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  拒绝申请
+     *
      */
-    @Deprecated
-    public class AgreeApplyRewardAction extends AsyncTask<String, Integer, String> {
-
-
-        public AgreeApplyRewardAction() {
-            super();
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            System.out.println();
-            System.out.println(this.getClass() + "这里的优惠券Id依然是写死的！\n");
-            return AcceptController.execute(
-                    applicationStudentRewardDTO.getId()+"",
-                    "", // 这里原本应该是优惠券的Id
-                    mRewardDTO.getPrice() + ""
-            );
-
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            log.d(this, result);
-            if (result != null) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    String resultFlag = jsonObject.getString("result");
-
-                    if (resultFlag.equals("success")) {
-                        Toast.makeText(TeacherIndexActivity.this, "同意申请悬赏成功！", Toast.LENGTH_SHORT).show();
-                        mStudentDTO.setVirtualCurrency( mStudentDTO.getVirtualCurrency() - mRewardDTO.getPrice() );
-                        Intent intent = new Intent(TeacherIndexActivity.this,MainStudentActivity.class);
-                        TeacherIndexActivity.this.startActivity(intent);
-                        finish();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(TeacherIndexActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(TeacherIndexActivity.this, "网络连接失败T_T", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-        }
+    private void rejectApplication(){
+        rejectDisplayInfo.setMsg("确认拒绝对方的上课申请吗？");
+        rejectDisplayInfo.getDialog().show();
     }
-
 }

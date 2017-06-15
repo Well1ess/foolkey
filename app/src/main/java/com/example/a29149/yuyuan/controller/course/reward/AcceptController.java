@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * 需要付款
  * Created by geyao on 2017/5/21.
  */
-
+@Deprecated
 public class AcceptController extends AbstractController {
 
     private static String url = address + "/aes/acceptRewardApplication";

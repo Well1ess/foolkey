@@ -25,7 +25,7 @@ import java.util.List;
  * Created by 张丽华 on 2017/5/10.
  * Description:我的悬赏的适配器
  */
-
+@Deprecated
 public class OwnerRewardListAdapter extends BaseAdapter {
 
     private Context mContext;
@@ -94,7 +94,7 @@ public class OwnerRewardListAdapter extends BaseAdapter {
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int positionIn, long id) {
-                    Intent intent = new Intent(mContext,TeacherIndexActivity.class);
+                    Intent intent = new Intent(mContext,TeacherInfoActivity.class);
                     intent.putExtra("positionIn",positionIn+"");//gridView的position
                     Log.i("malei",positionIn+"InOwner");
                     intent.putExtra("positionOut",position+"");//gridView的position

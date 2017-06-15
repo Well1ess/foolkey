@@ -369,11 +369,13 @@
             <RadioButton
                 android:id="@+id/rb_main_menu_agree"
                 style="@style/RadioButton.Menu"
+                android:clickable="true"
                 android:text="同意"/>
 
             <RadioButton
                 android:id="@+id/rb_main_menu_disagree"
                 style="@style/RadioButton.Menu"
+                android:clickable="true"
                 android:text="拒绝"/>
 
         </RadioGroup>

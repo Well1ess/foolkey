@@ -24,19 +24,13 @@ import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherDTO;
 import com.example.a29149.yuyuan.Enum.RewardStateEnum;
 import com.example.a29149.yuyuan.Enum.VerifyStateEnum;
-import com.example.a29149.yuyuan.Main.MainStudentActivity;
-import com.example.a29149.yuyuan.Main.MainTeacherActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Adapter.RewardAdapter;
-import com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment;
-import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.RewardDiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Me.Reward.RewardModifyActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.info.StudentInfoActivity;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Search.SearchActivity;
 import com.example.a29149.yuyuan.Util.AdapterManager;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
-import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.Const;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
 import com.example.a29149.yuyuan.Util.log;
@@ -533,7 +527,7 @@ public class RewardActivity extends AbstractAppCompatActivity implements View.On
                     if ("success".equals(jsonObject.getString("result"))) {
                         Toast.makeText(RewardActivity.this, "删除成功", Toast.LENGTH_SHORT);
                         //更新数据
-                        AdapterManager.getInstance().removeDate(RewardAdapter.class, rewardWithStudentSTCDTO);
+                        AdapterManager.getInstance().removeData(RewardAdapter.class, rewardWithStudentSTCDTO);
                         finish();
                         return;
                     }

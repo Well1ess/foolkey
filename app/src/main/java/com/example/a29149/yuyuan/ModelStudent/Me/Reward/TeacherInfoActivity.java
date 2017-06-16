@@ -2,9 +2,7 @@ package com.example.a29149.yuyuan.ModelStudent.Me.Reward;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -21,27 +19,20 @@ import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardDTO;
 import com.example.a29149.yuyuan.DTO.CourseAbstract;
-import com.example.a29149.yuyuan.DTO.RewardDTO;
 import com.example.a29149.yuyuan.DTO.StudentDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.Enum.RoleEnum;
 import com.example.a29149.yuyuan.Enum.SexTagEnum;
-import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Me.Recharge.RechargeActivity;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.AdapterManager;
 import com.example.a29149.yuyuan.Util.GlobalUtil;
-import com.example.a29149.yuyuan.Util.log;
 import com.example.a29149.yuyuan.Widget.Dialog.WarningDisplayDialog;
 import com.example.a29149.yuyuan.action.AcceptRewardApplicationAction;
 import com.example.a29149.yuyuan.action.RejectRewardApplicationAction;
 import com.example.a29149.yuyuan.business_object.PriceCaculator;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
-import com.example.a29149.yuyuan.controller.course.reward.AcceptController;
-import com.example.a29149.yuyuan.controller.course.reward.RefuseController;
 import com.example.resource.util.image.GlideCircleTransform;
-
-import org.json.JSONObject;
 
 /**
  * Created by MaLei on 2017/5/11.
@@ -168,7 +159,7 @@ public class TeacherInfoActivity extends AbstractAppCompatActivity implements Vi
                         //拒绝成功时，从该课程下面，删去老师的头像
                         //TODO 从Adapter中删除这个申请元素
                         //FIXME 这里总是出错，服务器也有问题
-                        AdapterManager.getInstance().removeDate(TeacherApplicationAdapter.class, applicationRewardWithTeacherSTCDTO );
+                        AdapterManager.getInstance().removeData(TeacherApplicationAdapter.class, applicationRewardWithTeacherSTCDTO );
                         finish();
                     }
 
@@ -217,9 +208,9 @@ public class TeacherInfoActivity extends AbstractAppCompatActivity implements Vi
                         //同意请求
                         Toast.makeText(TeacherInfoActivity.this, SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show();
                         //同意申请，就会整个移除这个悬赏item的显示
-                        //FIXME 并没有移除
+                        //FIXME 并没有移除，需要在原Activity中将listView与Adapter重新绑定一次
                         if (applicationStudentRewardAsStudentSTCDTO != null){
-                            AdapterManager.getInstance().removeDate(RewardApplicationAdapter.class, applicationStudentRewardAsStudentSTCDTO);
+                            AdapterManager.getInstance().removeData(RewardApplicationAdapter.class, applicationStudentRewardAsStudentSTCDTO);
                         }
                         //应该是做result处理
                         finish();

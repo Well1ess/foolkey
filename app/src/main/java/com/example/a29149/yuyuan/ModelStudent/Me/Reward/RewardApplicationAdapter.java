@@ -29,7 +29,6 @@ import java.util.List;
  * Description:  每个悬赏的填充，但是具体的老师头像的填充，由其他Adapter来做
  * Created by geyao on 2017/6/15.
  */
-//TODO 等待依赖的2个Adapter和Activity完成
 public class RewardApplicationAdapter extends YYBaseAdapter<ApplicationStudentRewardAsStudentSTCDTO> {
     private static final String TAG = "RewardApplicationAdapte";
 
@@ -59,7 +58,6 @@ public class RewardApplicationAdapter extends YYBaseAdapter<ApplicationStudentRe
     @Override
     public View createView(final int position, View convertView, LayoutInflater layoutInflater) {
         if (convertView == null){
-            //FIXME 这里似乎有问题，我改过，原本不是这样写的
             convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_owner_reward, null);
             //获取申请的老师信息和申请信息
             final List<ApplicationRewardWithTeacherSTCDTO> applicationRewardWithTeacherSTCDTOList;
@@ -69,7 +67,6 @@ public class RewardApplicationAdapter extends YYBaseAdapter<ApplicationStudentRe
             else
                 applicationRewardWithTeacherSTCDTOList = getDataList().get(position).getApplicationRewardWithTeacherSTCDTOS();
             //定义一个新的Adapter
-            //TODO 下面这个Adapter改好了
             final TeacherApplicationAdapter teacherApplicationAdapter =
                     new TeacherApplicationAdapter(applicationRewardWithTeacherSTCDTOList, mContext);
 

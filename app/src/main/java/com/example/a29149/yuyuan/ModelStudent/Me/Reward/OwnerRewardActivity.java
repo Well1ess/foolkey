@@ -120,6 +120,20 @@ public class OwnerRewardActivity extends AbstractAppCompatActivity {
             }
         });
         action.execute();
+    }
 
+
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/16
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  回到本页面时，把listView与Adapter重新绑定一次，并通知数据改变，否则，数据不会有变化
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRewardList.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 }

@@ -2,6 +2,7 @@ package com.example.a29149.yuyuan.Util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
@@ -107,7 +108,7 @@ public class AdapterManager {
      * @param cls    需要更新的Adapter类型
      * @param oldDTO 要删除的DTO
      */
-    public void removeDate(Class<?> cls, AbstractDTO oldDTO){
+    public void removeData(Class<?> cls, AbstractDTO oldDTO){
         for (YYBaseAdapter adapter : adapterStack) {
             if (adapter.getClass().equals(cls)) {
                 adapter.remove( oldDTO );
@@ -131,7 +132,6 @@ public class AdapterManager {
     public void addData(Class<?> cls, AbstractDTO dto, boolean headFlag){
         for (YYBaseAdapter adapter : adapterStack ) {
             if (adapter.getClass().equals(cls)) {
-                Log.d(TAG, "addData: 132 " + headFlag);
                 if (headFlag){
                     adapter.addData(0, dto);
                 }else {
@@ -139,6 +139,25 @@ public class AdapterManager {
                 }
             }
         }
+    }
+
+    /**
+     *
+     * Author:       geyao
+     * Date:         2017/6/16
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  获取盏中第一个目标adapter
+     * @param cls    目标Adapter
+     * @return
+     */
+    @Nullable
+    public YYBaseAdapter getAdapter(Class<?> cls){
+        for (YYBaseAdapter adapter : adapterStack){
+            if (adapter.getClass().equals(cls)) {
+                return adapter;
+            }
+        }
+        return null;
     }
 
 }

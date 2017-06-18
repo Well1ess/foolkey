@@ -57,7 +57,7 @@ public class IndexMainFragment extends AbstractFragment {
     @ViewInject(R.id.android)
     private TextView mSlideClassAndroid;
 
-    @ViewInject(R.id.ios)
+    @ViewInject(R.id.iOS)
     private TextView mSlideClassIOS;
 
     @ViewInject(R.id.mysql)
@@ -159,7 +159,7 @@ public class IndexMainFragment extends AbstractFragment {
         return view;
     }
 
-    @OnClick({R.id.java, R.id.c, R.id.python, R.id.js, R.id.php, R.id.ios,
+    @OnClick({R.id.java, R.id.c, R.id.python, R.id.js, R.id.php, R.id.iOS,
             R.id.android, R.id.h5, R.id.mysql, R.id.font, R.id.below, R.id.other})
     public void setSlideClassClickListener(View view) {
         TextView textView = (TextView) view;
@@ -186,7 +186,7 @@ public class IndexMainFragment extends AbstractFragment {
                 case R.id.android:
                     mClassPager.setCurrentItem(6);
                     break;
-                case R.id.ios:
+                case R.id.iOS:
                     mClassPager.setCurrentItem(7);
                     break;
                 case R.id.mysql:

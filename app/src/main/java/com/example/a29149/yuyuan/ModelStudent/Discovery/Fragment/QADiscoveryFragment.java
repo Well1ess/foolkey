@@ -33,6 +33,8 @@ import java.util.List;
 
 public class QADiscoveryFragment extends Fragment {
 
+    private View view;
+
     //下拉刷新的Layout
     @ViewInject(R.id.srl_slide_layout)
     private SlideRefreshLayout mSlideLayout;
@@ -66,45 +68,47 @@ public class QADiscoveryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_qadiscovery, container, false);
-        AnnotationUtil.setClickListener(this, view);
-        AnnotationUtil.injectViews(this, view);
+        if(view == null) {
 
-        //初始化listview
-        mQAListAdapter = new QAListAdapter(getContext());
-        mDynamicListView.setAdapter(mQAListAdapter);
-        mDynamicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent toCourseActivity = new Intent(getActivity(), QAActivity.class);
-                startActivity(toCourseActivity);
-            }
-        });
+            view = inflater.inflate(R.layout.fragment_qadiscovery, container, false);
+            AnnotationUtil.setClickListener(this, view);
+            AnnotationUtil.injectViews(this, view);
 
-        //设置动态加载
-        mDynamicListView.setOnLoadingListener(new DynamicListView.onLoadingListener() {
-            @Override
-            public void setLoad() {
+            //初始化listview
+            mQAListAdapter = new QAListAdapter(getContext());
+            mDynamicListView.setAdapter(mQAListAdapter);
+            mDynamicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent toCourseActivity = new Intent(getActivity(), QAActivity.class);
+                    startActivity(toCourseActivity);
+                }
+            });
 
-                mDynamicListView.onLoadFinish();
-            }
-        });
+            //设置动态加载
+            mDynamicListView.setOnLoadingListener(new DynamicListView.onLoadingListener() {
+                @Override
+                public void setLoad() {
 
-        //设置列表下拉时的刷新
-        mSlideLayout.setRotateView(view.findViewById(R.id.iv_refresh));
-        mSlideLayout.setOnSlideRefreshListener(
-                new SlideRefreshLayout.onSlideRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        //TODO:网络通信
-                        //获取主页的热门课程
-                        if (MainStudentActivity.shapeLoadingDialog != null) {
-                            MainStudentActivity.shapeLoadingDialog.show();
+                    mDynamicListView.onLoadFinish();
+                }
+            });
+
+            //设置列表下拉时的刷新
+            mSlideLayout.setRotateView(view.findViewById(R.id.iv_refresh));
+            mSlideLayout.setOnSlideRefreshListener(
+                    new SlideRefreshLayout.onSlideRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            //TODO:网络通信
+                            //获取主页的热门课程
+                            if (MainStudentActivity.shapeLoadingDialog != null) {
+                                MainStudentActivity.shapeLoadingDialog.show();
+                            }
+                            //由于是刷新，所以首先清空所有数据
                         }
-                        //由于是刷新，所以首先清空所有数据
-                    }
-                });
-
+                    });
+        }
         return view;
     }
 

@@ -116,7 +116,12 @@ public class SettingActivity extends AbstractAppCompatActivity {
                 //更改用户角色
                 GlobalUtil.getInstance().setUserRole(RoleEnum.teacher);
                 Intent intent = new Intent( SettingActivity.this,MainTeacherActivity.class);
+                Toast.makeText(this, "老师界面", Toast.LENGTH_LONG).show();
                 startActivity(intent);
+                //结束掉学生的整个activity
+                if(AppManager.getActivity(MainStudentActivity.class)!=null) {
+                    AppManager.getInstance().finishActivity(AppManager.getActivity(MainStudentActivity.class));
+                }
             }
             else
             {
@@ -146,8 +151,10 @@ public class SettingActivity extends AbstractAppCompatActivity {
         Intent toStudent = new Intent(SettingActivity.this, MainStudentActivity.class);
         Toast.makeText(this, "已经切换回学生了哦", Toast.LENGTH_LONG).show();
         startActivity(toStudent);
-
-        finish();
+        //结束掉老师的整个activity
+        if(AppManager.getActivity(MainTeacherActivity.class)!=null) {
+            AppManager.getInstance().finishActivity(AppManager.getActivity(MainTeacherActivity.class));
+        }
     }
 
 

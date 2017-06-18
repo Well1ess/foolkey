@@ -84,7 +84,7 @@
                 style="@style/TextView.SlideMenu"
                 android:text="Android" />
             <TextView
-                android:id="@+id/ios"
+                android:id="@+id/iOS"
                 style="@style/TextView.SlideMenu"
                 android:text="iOS" />
             <TextView

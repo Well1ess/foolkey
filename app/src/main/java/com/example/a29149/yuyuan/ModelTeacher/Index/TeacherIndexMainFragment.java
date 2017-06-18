@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
+import com.example.a29149.yuyuan.AbstractObject.YYFragmentTabHost;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.QADiscoveryFragment;
 import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.ModelTeacher.Index.adapter.MenuViewPagerAdapter;
@@ -28,11 +30,12 @@ import static com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFrag
 
 /**
  * 老师界面主页面
- *
  */
 
 
 public class TeacherIndexMainFragment extends Fragment {
+
+    private static final String TAG = "TeacherIndexMainFragmen";
 
     public static final String TEACHER_SCORE_OF_FIRST_TAG = "first";
     public static final String TEACHER_SCORE_OF_SECOND_TAG = "second";
@@ -54,7 +57,7 @@ public class TeacherIndexMainFragment extends Fragment {
 
     //容器
     @ViewInject(android.R.id.tabhost)
-    private FragmentTabHost mFragmentTabHost;
+    private YYFragmentTabHost mFragmentTabHost;
 
     @ViewInject(R.id.vp_content_pager)
     private ViewPager mContentViewPager;
@@ -214,7 +217,7 @@ public class TeacherIndexMainFragment extends Fragment {
                     //TODO:网络通信
 
                 }
-            }  else if (index == 0) {
+            } else if (index == 0) {
                 mSearchScore.setChecked(true);
                 if (mCurrentRB != mSearchScore) {
                     mSearchScore.setTextColor(getResources().getColor(R.color.orange));

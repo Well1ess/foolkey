@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -119,6 +120,7 @@ public class MainStudentActivity extends AbstractAppCompatActivity {
         //初始化按钮与fragment绑定关系
         initRadioGroupListener();
         //一开始的时候展示的是首页
+        Log.d(TAG, "onCreate: 首页！！");
         switchFragment(R.id.main_tab_fragment, indexMainFragment);
         //悬赏页面的控件初始化
         mPublishRewardStudent = (TextView) findViewById(R.id.tv_xuanshang);

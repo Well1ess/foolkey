@@ -17,6 +17,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a29149.yuyuan.AbstractObject.YYFragmentTabHost;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment;
 import com.example.a29149.yuyuan.ModelStudent.Me.MeMainFragment;
 import com.example.a29149.yuyuan.ModelStudent.Order.fragment.OrderFragment;
@@ -47,7 +48,7 @@ public class MainTeacherActivity extends AbstractAppCompatActivity {
     public static final String SHOW_OF_FIFTH_TAG = "fifth";
 
     @ViewInject(android.R.id.tabhost)
-    private FragmentTabHost mFragmentTabHost;
+    private YYFragmentTabHost mFragmentTabHost;
 
     @ViewInject(R.id.rg_tab_main_menu)
     private RadioGroup mMainMenu;

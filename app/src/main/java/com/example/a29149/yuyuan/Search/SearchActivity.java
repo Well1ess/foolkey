@@ -69,7 +69,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
     @ViewInject(R.id.rb_search_course)
     private RadioButton mSearchCourse;
 
-    @ViewInject(R.id.rb_search_reward)
+    @ViewInject(R.id.rb_owner_reward_teacher)
     private RadioButton mSearchReward;
 
     @ViewInject(R.id.rb_search_teacher)
@@ -176,7 +176,7 @@ public class SearchActivity extends AbstractAppCompatActivity {
                         //设定当前的Fragment
                         currentFragment = courseSearchFragment;
                         break;
-                    case R.id.rb_search_reward:
+                    case R.id.rb_owner_reward_teacher:
                         mFragmentTabHost.setCurrentTab(1);
                         //设定当前的Fragment
                         currentFragment = rewardSearchFragment;

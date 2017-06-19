@@ -21,7 +21,6 @@ import android.widget.TabHost.TabSpec;
 
 import com.example.a29149.yuyuan.AbstractObject.AbstractFragment;
 import com.example.a29149.yuyuan.AbstractObject.YYFragmentTabHost;
-import com.example.a29149.yuyuan.Main.MainStudentActivity;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.ArticleDiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.QADiscoveryFragment;
 import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.RewardDiscoveryFragment;
@@ -45,7 +44,7 @@ public class DiscoveryMainFragment extends AbstractFragment {
     @ViewInject(R.id.rg_discovery_main_menu)
     private RadioGroup mMainMenu;
 
-    @ViewInject(R.id.rb_search_reward)
+    @ViewInject(R.id.rb_owner_reward_teacher)
     private RadioButton mSearchReward;
 
     @ViewInject(R.id.rb_search_QA)
@@ -112,7 +111,7 @@ public class DiscoveryMainFragment extends AbstractFragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.rb_search_reward:
+                    case R.id.rb_owner_reward_teacher:
 //                        MainStudentActivity.shapeLoadingDialog.show();
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_FIRST_TAG);
                         break;

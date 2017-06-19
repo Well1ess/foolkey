@@ -71,7 +71,7 @@ public class RewardDiscoveryFragment extends AbstractFragment {
         mContext = getContext();
         if (view == null) {
             //把跳跳跳动画放在这里，目的是第一次创建view时，才会执行动画
-            MainStudentActivity.shapeLoadingDialog.show();
+//            MainStudentActivity.shapeLoadingDialog.show();
             view = inflater.inflate(R.layout.fragment_reward_discovery, container, false);
             AnnotationUtil.injectViews(this, view);
             AnnotationUtil.setClickListener(this, view);
@@ -115,7 +115,7 @@ public class RewardDiscoveryFragment extends AbstractFragment {
                             //TODO:网络通信
                             //获取主页的热门课程
                             if (MainStudentActivity.shapeLoadingDialog != null) {
-                                MainStudentActivity.shapeLoadingDialog.show();
+//                                MainStudentActivity.shapeLoadingDialog.show();
                             }
                             //由于是刷新，所以首先清空所有数据
                             pageNo = 1;

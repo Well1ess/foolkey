@@ -54,12 +54,12 @@
                     android:elevation="1dp">
 
                     <RadioButton
-                        android:id="@+id/rb_search_score"
+                        android:id="@+id/rb_owner_course_teacher"
                         android:text="我发布的课程"
                         style="@style/RadioButton.SearchMenu" />
 
                     <RadioButton
-                        android:id="@+id/rb_search_reward"
+                        android:id="@+id/rb_owner_reward_teacher"
                         android:text="我接受的悬赏"
                         style="@style/RadioButton.SearchMenu"  />
                 </RadioGroup>

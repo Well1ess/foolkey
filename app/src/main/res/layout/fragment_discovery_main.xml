@@ -69,7 +69,7 @@
                     android:elevation="1dp">
 
                     <RadioButton
-                        android:id="@+id/rb_search_reward"
+                        android:id="@+id/rb_owner_reward_teacher"
                         android:text="悬 赏"
                         style="@style/RadioButton.SearchMenu" />
 

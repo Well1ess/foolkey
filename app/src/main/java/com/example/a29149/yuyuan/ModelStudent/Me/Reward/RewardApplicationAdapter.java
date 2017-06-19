@@ -5,18 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a29149.yuyuan.AbstractObject.UserPhotoAdapter;
 import com.example.a29149.yuyuan.AbstractObject.YYBaseAdapter;
 import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
 import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.R;
-import com.example.a29149.yuyuan.Util.GlobalUtil;
 
 import java.util.ArrayList;
 import java.util.List;

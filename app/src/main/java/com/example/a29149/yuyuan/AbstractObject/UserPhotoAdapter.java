@@ -88,11 +88,13 @@ public abstract class UserPhotoAdapter<T> extends YYBaseAdapter<T>{
 
         public ImageView mPhoto;
         public TextView mNickedName;
+        public TextView mPrestige;
 
         public PhotoViewHolder(View view)
         {
             mPhoto = (ImageView) view.findViewById(R.id.iv_photo);
             mNickedName = (TextView) view.findViewById(R.id.tv_teacherName);
+            mPrestige = (TextView) view.findViewById(R.id.tv_prestige);
         }
     }
 }

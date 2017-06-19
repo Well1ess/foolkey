@@ -38,6 +38,7 @@ import java.util.List;
  */
 
 public class StudentReplyListAdapter extends BaseAdapter implements View.OnClickListener {
+    private static final String TAG = "StudentReplyListAdapter";
 
     private static Context mContext;
     private List<OrderBuyCourseWithStudentAsTeacherSTCDTO> orderBuyCourseWithStudentAsTeacherSTCDTOs;
@@ -45,18 +46,16 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
     private OrderBuyCourseDTO mOrderBuyCourseDTO; //订单信息
     //点击开始或取消时的警告
     private WarningDisplayDialog.Builder mDisplayDialog;
-    private   MyViewHolder myViewHolder = null;
+    private MyViewHolder myViewHolder = null;
     //图片加载
     private RequestManager glide;
 
-    public StudentReplyListAdapter(Context context, List<OrderBuyCourseWithStudentAsTeacherSTCDTO> strings)
-    {
+    public StudentReplyListAdapter(Context context, List<OrderBuyCourseWithStudentAsTeacherSTCDTO> strings) {
         this.mContext = context;
         this.orderBuyCourseWithStudentAsTeacherSTCDTOs = strings;
     }
 
-    public void update()
-    {
+    public void update() {
         this.notifyDataSetInvalidated();
         this.notifyDataSetChanged();
     }
@@ -79,33 +78,33 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if (convertView == null)
-        {
+        if (convertView == null) {
             convertView = LayoutInflater
                     .from(mContext)
                     .inflate(R.layout.gridview_student_state_item_layout, parent, false);
             myViewHolder = new MyViewHolder(convertView);
             convertView.setTag(myViewHolder);
-        }
-        else
-        {
+        } else {
             myViewHolder = (MyViewHolder) convertView.getTag();
         }
         //myViewHolder.mPhoto.setText(orderBuyCourseWithStudentAsTeacherSTCDTOs.get(position).getTeacherAllInfoDTO().getNickedName());
         mStudentDTO = orderBuyCourseWithStudentAsTeacherSTCDTOs.get(position).getStudentDTO();
         mOrderBuyCourseDTO = orderBuyCourseWithStudentAsTeacherSTCDTOs.get(position).getOrderBuyCourseDTO();
-        Log.i("malei", mOrderBuyCourseDTO.getOrderStateEnum()+"");
-        String stateStudent = mOrderBuyCourseDTO.getOrderStateEnum()+"";
+        Log.i("malei", mOrderBuyCourseDTO.getOrderStateEnum() + "");
+        String stateStudent = mOrderBuyCourseDTO.getOrderStateEnum() + "";
+        Log.d(TAG, "getView: " + stateStudent);
         if (stateStudent.equals("同意上课"))
             stateStudent = "开始上课";
-        else if(stateStudent.equals("上课中"))
+        else if (stateStudent.equals("上课中"))
             stateStudent = "点击下课";
+        else if (stateStudent.equals("结束上课"))
+            stateStudent = "已完成";
         myViewHolder.state.setText(stateStudent);
         myViewHolder.tv.setOnClickListener(this);
         glide = Glide.with(mContext);
         glide.load(PictureInfoBO.getOnlinePhoto(mStudentDTO.getUserName()))
                 .error(R.drawable.photo_placeholder1)
-                .transform(new GlideCircleTransform( mContext ))
+                .transform(new GlideCircleTransform(mContext))
                 .into(myViewHolder.tv);
         mDisplayDialog = new WarningDisplayDialog.Builder(mContext);
         mDisplayDialog.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
@@ -119,9 +118,10 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
             public void onClick(DialogInterface dialog, int which) {
                 if (mOrderBuyCourseDTO.getOrderStateEnum().compareTo(OrderStateEnum.同意上课) == 0)
                     new startClassAction().execute();
-                else if(mOrderBuyCourseDTO.getOrderStateEnum().compareTo( OrderStateEnum.上课中 ) == 0 )
+                else if (mOrderBuyCourseDTO.getOrderStateEnum().compareTo(OrderStateEnum.上课中) == 0)
                     new endClassAction().execute();
-                //Toast.makeText(mContext, "确定", Toast.LENGTH_SHORT).show();
+                else if (mOrderBuyCourseDTO.getOrderStateEnum().compareTo(OrderStateEnum.结束上课) == 0)
+                    ;
                 dialog.dismiss();
             }
         });
@@ -132,8 +132,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        switch (id)
-        {
+        switch (id) {
             case R.id.sqi_photo:
                 startOrEndClass();
                 break;
@@ -145,9 +144,8 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
 
     private void startOrEndClass() {
         String s = myViewHolder.state.getText().toString();
-        Log.i("malei",s);
-        switch (s)
-        {
+        Log.i("malei", s);
+        switch (s) {
             case "开始上课":
                 mDisplayDialog.setMsg("是否开始上课？再次点击后下课！");
                 mDisplayDialog.getDialog().show();
@@ -156,7 +154,10 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
                 mDisplayDialog.setMsg("是否下课？点击后完成课程！");
                 mDisplayDialog.getDialog().show();
                 break;
-
+            case "已完成":
+                mDisplayDialog.setMsg("已经下课了。可以去订单里面查看！");
+                mDisplayDialog.getDialog().show();
+                break;
         }
 
     }
@@ -166,8 +167,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
         ImageView tv;
         TextView state;
 
-        public MyViewHolder(View view)
-        {
+        public MyViewHolder(View view) {
             tv = (ImageView) view.findViewById(R.id.sqi_photo);
             state = (TextView) view.findViewById(R.id.tv_state);
         }
@@ -210,6 +210,7 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
 
                         Toast.makeText(mContext, "开始上课成功！", Toast.LENGTH_SHORT).show();
                         myViewHolder.state.setText("点击下课");
+                        update();
                         mOrderBuyCourseDTO.setOrderStateEnum(OrderStateEnum.上课中);
 
                     }
@@ -266,10 +267,10 @@ public class StudentReplyListAdapter extends BaseAdapter implements View.OnClick
 
                         Toast.makeText(mContext, "下课成功！", Toast.LENGTH_SHORT).show();
                         mOrderBuyCourseDTO.setOrderStateEnum(OrderStateEnum.结束上课);
-                        myViewHolder.state.setText("完成");
+                        myViewHolder.state.setText("已完成");
                         update();
-                        Intent intent = new Intent(mContext,TeacherIndexMainFragment.class);
-                        mContext.startActivity(intent);
+//                        Intent intent = new Intent(mContext,TeacherIndexMainFragment.class);
+//                        mContext.startActivity(intent);
 
                     }
                 } catch (Exception e) {

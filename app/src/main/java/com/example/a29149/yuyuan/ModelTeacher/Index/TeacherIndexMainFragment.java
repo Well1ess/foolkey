@@ -3,10 +3,8 @@ package com.example.a29149.yuyuan.ModelTeacher.Index;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +16,15 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.example.a29149.yuyuan.AbstractObject.YYFragmentTabHost;
-import com.example.a29149.yuyuan.ModelStudent.Discovery.Fragment.QADiscoveryFragment;
-import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.ModelTeacher.Index.adapter.MenuViewPagerAdapter;
-import com.example.a29149.yuyuan.ModelTeacher.TeacherMain.Score.Fragment.TeacherScoreFragment;
+import com.example.a29149.yuyuan.ModelTeacher.Index.course.OwnerCourseTeacherFragment;
+import com.example.a29149.yuyuan.ModelTeacher.Index.reward.OwnerRewardTeacherFragment;
+import com.example.a29149.yuyuan.R;
 import com.example.a29149.yuyuan.Util.Annotation.AnnotationUtil;
 import com.example.a29149.yuyuan.Util.Annotation.ViewInject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment.DISCOVERY_OF_FIRST_TAG;
 import static com.example.a29149.yuyuan.ModelStudent.Discovery.DiscoveryMainFragment.DISCOVERY_OF_SECOND_TAG;
@@ -37,17 +38,17 @@ public class TeacherIndexMainFragment extends Fragment {
 
     private static final String TAG = "TeacherIndexMainFragmen";
 
-    public static final String TEACHER_SCORE_OF_FIRST_TAG = "first";
-    public static final String TEACHER_SCORE_OF_SECOND_TAG = "second";
+    public static final String TEACHER_MAIN_OF_FIRST_TAG = "first";
+    public static final String TEACHER_MAIN_OF_SECOND_TAG = "second";
 
     //按钮组
     @ViewInject(R.id.rg_discovery_main_menu)
     private RadioGroup mMainMenu;
 
-    @ViewInject(R.id.rb_search_reward)
+    @ViewInject(R.id.rb_owner_reward_teacher)
     private RadioButton mSearchReward;
 
-    @ViewInject(R.id.rb_search_score)
+    @ViewInject(R.id.rb_owner_course_teacher)
     private RadioButton mSearchScore;
 
 
@@ -62,7 +63,7 @@ public class TeacherIndexMainFragment extends Fragment {
     @ViewInject(R.id.vp_content_pager)
     private ViewPager mContentViewPager;
 
-    //private List<Fragment> fragmentList = new ArrayList<>();
+    private List<Fragment> fragmentList = new ArrayList<>();
 
     private int screenWidth = 0;
 
@@ -93,23 +94,24 @@ public class TeacherIndexMainFragment extends Fragment {
         //FragmentTabHost初始化
         mFragmentTabHost.setup(getContext(), getChildFragmentManager(), R.id.vp_content_pager);
 
-        TabSpec tabSpec0 = mFragmentTabHost.newTabSpec(TEACHER_SCORE_OF_FIRST_TAG)
+        TabSpec tabSpec0 = mFragmentTabHost.newTabSpec(TEACHER_MAIN_OF_FIRST_TAG)
                 .setIndicator("0");
-        TabSpec tabSpec1 = mFragmentTabHost.newTabSpec(TEACHER_SCORE_OF_SECOND_TAG)
+        TabSpec tabSpec1 = mFragmentTabHost.newTabSpec(TEACHER_MAIN_OF_SECOND_TAG)
                 .setIndicator("1");
 
-        mFragmentTabHost.addTab(tabSpec0, TeacherScoreFragment.class, null);
-        mFragmentTabHost.addTab(tabSpec1, QADiscoveryFragment.class, null);
+        mFragmentTabHost.addTab(tabSpec0, OwnerCourseTeacherFragment.class, null);
+        mFragmentTabHost.addTab(tabSpec1, OwnerRewardTeacherFragment.class, null);
+        //OwnerCourseTeacherFragment
+        //OwnerRewardTeacherFragment
 
         mMainMenu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.rb_search_score:
+                    case R.id.rb_owner_course_teacher:
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_FIRST_TAG);
                         break;
-                    case R.id.rb_search_reward:
+                    case R.id.rb_owner_reward_teacher:
                         mFragmentTabHost.setCurrentTabByTag(DISCOVERY_OF_SECOND_TAG);
                         break;
                     default:
@@ -130,9 +132,9 @@ public class TeacherIndexMainFragment extends Fragment {
         mFragmentTabHost.setCurrentTab(0);
         mSearchScore.setTextColor(getResources().getColor(R.color.orange));
 
-//        fragmentList.clear();
-//        fragmentList.add(new TeacherScoreFragment());
-//        fragmentList.add(new QADiscoveryFragment());
+        fragmentList.clear();
+        fragmentList.add(new OwnerCourseTeacherFragment());
+        fragmentList.add(new OwnerRewardTeacherFragment());
 
         mContentViewPager.setAdapter(new MenuViewPagerAdapter(getChildFragmentManager()));
         mContentViewPager.setOffscreenPageLimit(2);

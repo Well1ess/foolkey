@@ -26,7 +26,7 @@ import java.util.List;
  */
 
 public class OwnerRewardListAdapter extends BaseAdapter {
-
+    private static final String TAG = "OwnerRewardListAdapter";
     private Context mContext;
 
     //用于保存每个列表是否展开
@@ -89,6 +89,7 @@ public class OwnerRewardListAdapter extends BaseAdapter {
                     intent.putExtra("positionOut",position+"");//gridView的position
                     Log.i("malei",position+"OutOwner");//listview的position
                     mContext.startActivity(intent);*/
+                    Log.d(TAG, "onItemClick: caonimei");
                 }
             });
 

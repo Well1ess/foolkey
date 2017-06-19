@@ -58,9 +58,9 @@ public class OwnerRewardTeacherFragment extends Fragment {
     private void loadData()
     {
         //如果没有进行加载
-        if (shapeLoadingDialog != null) {
+//        if (shapeLoadingDialog != null) {
             applyReward();
-        }
+//        }
     }
 
 
@@ -86,7 +86,7 @@ public class OwnerRewardTeacherFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            shapeLoadingDialog.show();
+//            shapeLoadingDialog.show();
         }
 
         @Override

@@ -50,10 +50,10 @@ public class OwnerCourseTeacherFragment extends Fragment {
 
         mCourseList = (ListView) view.findViewById(R.id.lv_course_list);
 
-        shapeLoadingDialog = new ShapeLoadingDialog(getContext());
-        shapeLoadingDialog.setLoadingText("加载中...");
-        shapeLoadingDialog.setCanceledOnTouchOutside(false);
-        shapeLoadingDialog.show();
+//        shapeLoadingDialog = new ShapeLoadingDialog(getContext());
+//        shapeLoadingDialog.setLoadingText("加载中...");
+//        shapeLoadingDialog.setCanceledOnTouchOutside(false);
+//        shapeLoadingDialog.show();
 
         loadData();
 
@@ -64,7 +64,7 @@ public class OwnerCourseTeacherFragment extends Fragment {
     {
         //如果没有进行加载
         if (shapeLoadingDialog != null) {
-            shapeLoadingDialog.show();
+//            shapeLoadingDialog.show();
             applyCourse();
         }
     }

@@ -114,10 +114,10 @@ public class RewardAdapter extends YYBaseAdapter<RewardWithStudentSTCDTO> {
      * @param rewardDTO
      */
     @Override
-    public void updateData(AbstractDTO rewardDTO) {
+    public void updateData(RewardWithStudentSTCDTO rewardDTO) {
         for (RewardWithStudentSTCDTO dto : getDataList()){
-            if (dto.getRewardDTO().getId().equals( ((RewardDTO)rewardDTO).getId() ) ){
-                dto.setRewardDTO( (RewardDTO) rewardDTO );
+            if (dto.getRewardDTO().getId().equals( rewardDTO.getRewardDTO().getId() ) ){
+                dto.setRewardDTO( rewardDTO.getRewardDTO() );
             }
         }
         notifyDataSetChanged();

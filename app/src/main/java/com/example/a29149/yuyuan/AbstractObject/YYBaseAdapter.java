@@ -16,7 +16,7 @@ import java.util.List;
  * Created by 张丽华 on 2017/6/10.
  * Description: 所以Adapter的基类
  */
-public abstract class YYBaseAdapter<T> extends BaseAdapter {
+public abstract class YYBaseAdapter<T extends AbstractDTO> extends BaseAdapter implements YYAdapter<T> {
 
     //保存数据
     protected List<T> dataList = new ArrayList<>();
@@ -280,15 +280,25 @@ public abstract class YYBaseAdapter<T> extends BaseAdapter {
      *
      * @param abstractDTO
      */
-    public void updateData(AbstractDTO abstractDTO){
+    public void updateData(T abstractDTO){
         for (T dto : getDataList()){
             if (dto.equals(abstractDTO)){
                 int index = getDataList().indexOf(dto);
-                getDataList().set(index, (T) abstractDTO) ;
+                getDataList().set(index, abstractDTO) ;
             }
         }
         notifyDataSetChanged();
     }
 
 
+    /**
+     * Author:       geyao
+     * Date:         2017/6/23 下午2:46
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  通知数据更新
+     */
+    @Override
+    public void update() {
+        notifyDataSetChanged();
+    }
 }

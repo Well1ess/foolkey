@@ -20,7 +20,7 @@ import java.util.List;
  *               它所展示的数据，有studentDTO即可
  */
 
-public abstract class UserPhotoAdapter<T> extends YYBaseAdapter<T>{
+public abstract class UserPhotoAdapter<T extends AbstractDTO> extends YYBaseAdapter<T>{
 
     //图片加载器
     protected RequestManager glide;

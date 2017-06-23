@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.a29149.yuyuan.AbstractObject.AbstractDTO;
+import com.example.a29149.yuyuan.AbstractObject.YYAdapter;
 import com.example.a29149.yuyuan.AbstractObject.YYBaseAdapter;
 
 import java.util.Stack;
@@ -20,7 +21,7 @@ import java.util.Stack;
 
 public class AdapterManager {
     private static final String TAG = "AdapterManager";
-    private static Stack<YYBaseAdapter> adapterStack = new Stack<>();
+    private static Stack<YYAdapter> adapterStack = new Stack<>();
     private static volatile AdapterManager instance;
 
     private AdapterManager() {
@@ -41,7 +42,7 @@ public class AdapterManager {
     /**
      * 添加Activity到堆栈
      */
-    public void addAdapter(YYBaseAdapter adapter) {
+    public void addAdapter(YYAdapter adapter) {
         if (adapterStack == null) {
             adapterStack = new Stack<>();
         }
@@ -56,7 +57,7 @@ public class AdapterManager {
      * @param cls 要移除的Adapter类
      */
     public void removeAdapter(Class<?> cls) {
-        for (YYBaseAdapter adapter : adapterStack) {
+        for (YYAdapter adapter : adapterStack) {
             if (adapter.getClass().equals(cls)) {
                 adapterStack.remove(adapter);
             }
@@ -72,9 +73,9 @@ public class AdapterManager {
      * @param cls 要更新的Adapter类
      */
     public void updateData(Class<?> cls) {
-        for (YYBaseAdapter adapter : adapterStack){
+        for (YYAdapter adapter : adapterStack){
             if (adapter.getClass().equals(cls)) {
-                adapter.notifyDataSetChanged();
+                adapter.update();
             }
         }
     }
@@ -90,7 +91,7 @@ public class AdapterManager {
      * @param newDTO 新的Adapter
      */
     public void updateData(Class<?> cls, AbstractDTO newDTO){
-        for (YYBaseAdapter adapter : adapterStack){
+        for (YYAdapter adapter : adapterStack){
             if (adapter.getClass().equals(cls)) {
                 adapter.updateData(newDTO);
                 //adapter.notifyDataSetChanged(); 这一步移交给Adapter做了
@@ -109,7 +110,7 @@ public class AdapterManager {
      * @param oldDTO 要删除的DTO
      */
     public void removeData(Class<?> cls, AbstractDTO oldDTO){
-        for (YYBaseAdapter adapter : adapterStack) {
+        for (YYAdapter adapter : adapterStack) {
             if (adapter.getClass().equals(cls)) {
                 adapter.remove( oldDTO );
             }
@@ -130,7 +131,7 @@ public class AdapterManager {
      *               false：添加到尾
      */
     public void addData(Class<?> cls, AbstractDTO dto, boolean headFlag){
-        for (YYBaseAdapter adapter : adapterStack ) {
+        for (YYAdapter adapter : adapterStack ) {
             if (adapter.getClass().equals(cls)) {
                 if (headFlag){
                     adapter.addData(0, dto);
@@ -151,8 +152,8 @@ public class AdapterManager {
      * @return
      */
     @Nullable
-    public YYBaseAdapter getAdapter(Class<?> cls){
-        for (YYBaseAdapter adapter : adapterStack){
+    public YYAdapter getAdapter(Class<?> cls){
+        for (YYAdapter adapter : adapterStack){
             if (adapter.getClass().equals(cls)) {
                 return adapter;
             }

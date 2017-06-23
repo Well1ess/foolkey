@@ -50,14 +50,16 @@ public class SettingActivity extends AbstractAppCompatActivity {
         AnnotationUtil.injectViews(this);
 
 
-
+        //对话框的创建
         displayInfo = new WarningDisplayDialog.Builder( this );
+        //设定负面按键
         displayInfo.setNegativeButton("取      消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
+        //设定正面按键
         displayInfo.setPositiveButton("确      定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -68,6 +70,7 @@ public class SettingActivity extends AbstractAppCompatActivity {
                 startActivity(intent);
             }
         });
+        //创建
         displayInfo.create();
 
 
@@ -125,9 +128,9 @@ public class SettingActivity extends AbstractAppCompatActivity {
             }
             else
             {
-                //Toast.makeText(getContext(), "抱歉，您现在不是已认证老师，请先认证！", Toast.LENGTH_SHORT).show();
+                //设定说明信息
                 displayInfo.setMsg("抱歉，您现在不是已认证老师，请先认证？\n \n 点击 确定 申请认证");
-
+                //显示
                 displayInfo.getDialog().show();
 
             }

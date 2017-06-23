@@ -67,6 +67,7 @@ public class RewardApplicationAdapter extends YYBaseAdapter<ApplicationStudentRe
             final TeacherApplicationAdapter teacherApplicationAdapter =
                     new TeacherApplicationAdapter(applicationRewardWithTeacherSTCDTOList, mContext);
 
+            //TODO 修改为recycleView的步骤，adapter修改为adapter专有的，viewHolder修改，layOutManager做水平
             final GridView gridView = (GridView) convertView.findViewById(R.id.gv_apply_user_head);
             gridView.setAdapter(teacherApplicationAdapter);
             //点击申请接单的老师的头像，跳转到老师的详细信息中

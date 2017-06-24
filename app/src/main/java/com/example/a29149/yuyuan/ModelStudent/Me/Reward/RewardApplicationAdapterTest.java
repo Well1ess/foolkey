@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -75,7 +76,7 @@ public class RewardApplicationAdapterTest extends YYBaseAdapter<ApplicationStude
             //TODO 修改为recycleView的步骤，adapter修改为adapter专有的，viewHolder修改，layOutManager做水平
             final RecyclerView gridView = (RecyclerView) convertView.findViewById(R.id.gv_apply_user_head);
             gridView.setHasFixedSize(true);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
+            YYLayoutManager layoutManager = new YYLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
 
             gridView.setLayoutManager( layoutManager );
             gridView.setAdapter(teacherApplicationAdapter);

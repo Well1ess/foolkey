@@ -8,8 +8,6 @@ android:background="@null"
 android:gravity="center"
 android:elevation="2dp"
 
-
-
 xmlns:android="http://schemas.android.com/apk/res/android">
 
 

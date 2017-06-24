@@ -146,5 +146,8 @@ public class TeacherApplicationAdapterTest extends YYRecycleViewBaseAdapter<Appl
             //长按点击事件
             return false;
         }
+
+
+
     }
 }

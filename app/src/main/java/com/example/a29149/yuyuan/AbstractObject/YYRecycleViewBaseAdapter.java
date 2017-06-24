@@ -300,18 +300,27 @@ public abstract class YYRecycleViewBaseAdapter<T extends AbstractDTO>
      * Email:        gy2016@mail.ustc.edu.cn
      * Description:  更新某个data，需要重写AbstractDTO的equals方法
      *
-     * @param abstractDTO
+     * @param newData
      */
     @Override
-    public void updateData(AbstractDTO abstractDTO){
+    public void updateData(T newData){
         for (T dto : getDataList()){
-            if (dto.equals(abstractDTO)){
+            if (dto.equals(newData)){
                 int index = getDataList().indexOf(dto);
-                getDataList().set(index, (T) abstractDTO) ;
+                getDataList().set(index, newData) ;
             }
         }
         notifyDataSetChanged();
     }
 
-
+    /**
+     * Author:       geyao
+     * Date:         2017/6/23 下午2:46
+     * Email:        gy2016@mail.ustc.edu.cn
+     * Description:  通知数据更新
+     */
+    @Override
+    public void update() {
+        notifyDataSetChanged();
+    }
 }

@@ -75,8 +75,8 @@ public class TeacherApplicationAdapterTest extends YYRecycleViewBaseAdapter<Appl
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gridview_reply_item_layout, null);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                view.setLayoutParams(lp);
+//        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                view.setLayoutParams(lp);
         return new PersonViewHolder(view);
     }
 
@@ -89,13 +89,16 @@ public class TeacherApplicationAdapterTest extends YYRecycleViewBaseAdapter<Appl
         PersonViewHolder viewHolder = (PersonViewHolder) holder;
         //绑定数据
         viewHolder.mNickedName.setText(StringUtil.subString(teacherAllInfoDTO.getNickedName(), 8));
-        viewHolder.mPrestige.setText( teacherAllInfoDTO.getPrestige() );
+        viewHolder.mPrestige.setText( teacherAllInfoDTO.getPrestige() + "" );
 
+        //加载图片
         glide = Glide.with(mContext);
         glide.load( PictureInfoBO.getOnlinePhoto(teacherAllInfoDTO.getUserName() ) )
                 .placeholder(R.drawable.place_holder_grey)
                 .transform(new GlideCircleTransform(mContext))
                 .into(viewHolder.mPhoto);
+
+        //TODO 点击头像跳转的注入信息
     }
 
     /**

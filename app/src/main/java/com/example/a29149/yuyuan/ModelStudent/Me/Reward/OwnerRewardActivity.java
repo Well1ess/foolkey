@@ -39,7 +39,7 @@ public class OwnerRewardActivity extends AbstractAppCompatActivity {
     private ListView mRewardList;
 
     //适配器
-    private RewardApplicationAdapter mAdapter;
+    private RewardApplicationAdapterTest mAdapter;
 
     //加载动画
     public static ShapeLoadingDialog shapeLoadingDialog;
@@ -63,7 +63,7 @@ public class OwnerRewardActivity extends AbstractAppCompatActivity {
         shapeLoadingDialog.show();
 
         //Adapter的新建可能不能放在声明时定义
-        mAdapter = new RewardApplicationAdapter(OwnerRewardActivity.this);
+        mAdapter = new RewardApplicationAdapterTest(OwnerRewardActivity.this);
 
         //绑定listView与adapter
         mRewardList.setAdapter( mAdapter );

@@ -83,7 +83,7 @@ public abstract class UserPhotoAdapter<T extends AbstractDTO> extends YYBaseAdap
      * Email:        gy2016@mail.ustc.edu.cn
      * Description:  ViewHolder提升效率
      */
-    protected static class PhotoViewHolder
+    public static class PhotoViewHolder
     {
 
         public ImageView mPhoto;

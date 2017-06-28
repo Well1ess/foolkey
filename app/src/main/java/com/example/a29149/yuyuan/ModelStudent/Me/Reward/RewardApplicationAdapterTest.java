@@ -74,12 +74,12 @@ public class RewardApplicationAdapterTest extends YYBaseAdapter<ApplicationStude
                     new TeacherApplicationAdapterTest(applicationRewardWithTeacherSTCDTOList, mContext, getDataList().get(position));
 
             //TODO 修改为recycleView的步骤，adapter修改为adapter专有的，viewHolder修改，layOutManager做水平
-            final RecyclerView gridView = (RecyclerView) convertView.findViewById(R.id.gv_apply_user_head);
-            gridView.setHasFixedSize(true);
+            final RecyclerView recyclerView = (RecyclerView) convertView.findViewById(R.id.gv_apply_user_head);
+            recyclerView.setHasFixedSize(true);
             YYLayoutManager layoutManager = new YYLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
 
-            gridView.setLayoutManager( layoutManager );
-            gridView.setAdapter(teacherApplicationAdapter);
+            recyclerView.setLayoutManager( layoutManager );
+            recyclerView.setAdapter(teacherApplicationAdapter);
             //点击申请接单的老师的头像，跳转到老师的详细信息中
 //            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //                @Override

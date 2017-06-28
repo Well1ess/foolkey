@@ -72,11 +72,13 @@ public class OwnerRewardListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_owner_reward, null);
+            //TODO 原本这里与学生界面查看申请是一样都，但学生的改成了recycle View，这里还没改，于是就把布局文件复制了一份
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_teacher_reward, null);
             //获取申请的老师信息和申请信息
             orderBuyCourseWithStudentAsTeacherSTCDTOs = list.get(position).getOrderBuyCourseWithStudentAsTeacherSTCDTOS();
             Log.i("malei",orderBuyCourseWithStudentAsTeacherSTCDTOs.get(0).getOrderBuyCourseDTO().toString());
             StudentReplyListAdapter studentReplyListAdapter = new StudentReplyListAdapter(mContext, orderBuyCourseWithStudentAsTeacherSTCDTOs);
+            //TODO 这里改成 recycleView
             final GridView gridView = (GridView) convertView.findViewById(R.id.gv_apply_user_head);
             gridView.setAdapter(studentReplyListAdapter);
             //点击申请接单的老师的头像，跳转到老师的详细信息中

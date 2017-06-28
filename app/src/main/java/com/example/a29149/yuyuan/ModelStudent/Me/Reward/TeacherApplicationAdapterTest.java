@@ -1,6 +1,10 @@
 package com.example.a29149.yuyuan.ModelStudent.Me.Reward;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,18 +13,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.a29149.yuyuan.AbstractObject.UserPhotoAdapter;
 import com.example.a29149.yuyuan.AbstractObject.YYRecycleViewBaseAdapter;
 import com.example.a29149.yuyuan.DTO.ApplicationRewardWithTeacherSTCDTO;
+import com.example.a29149.yuyuan.DTO.ApplicationStudentRewardAsStudentSTCDTO;
 import com.example.a29149.yuyuan.DTO.TeacherAllInfoDTO;
 import com.example.a29149.yuyuan.R;
+import com.example.a29149.yuyuan.Util.AppManager;
 import com.example.a29149.yuyuan.Util.StringUtil;
 import com.example.a29149.yuyuan.business_object.com.PictureInfoBO;
 import com.example.resource.util.image.GlideCircleTransform;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +47,9 @@ public class TeacherApplicationAdapterTest extends YYRecycleViewBaseAdapter<Appl
     //图片加载器
     private RequestManager glide;
 
+    //包括了课程信息，申请信息等
+    private ApplicationStudentRewardAsStudentSTCDTO applicationStudentRewardAsStudentSTCDTO;
+
 
     /**
      * @param dataList 数据
@@ -50,6 +61,23 @@ public class TeacherApplicationAdapterTest extends YYRecycleViewBaseAdapter<Appl
      */
     public TeacherApplicationAdapterTest(List<ApplicationRewardWithTeacherSTCDTO> dataList, Context context) {
         super(dataList, context);
+    }
+
+
+    /**
+     * @param dataList 数据
+     * @param context  上下文
+     * @param applicationStudentRewardAsStudentSTCDTO 包含了课程信息，与各个申请的信息，要传到下一个activity里面去
+     *
+     * @discription 构造函数
+     * @author 29149
+     * @time 2017/6/10 15:12
+     */
+    public TeacherApplicationAdapterTest(List<ApplicationRewardWithTeacherSTCDTO> dataList,
+                                         Context context,
+                                         ApplicationStudentRewardAsStudentSTCDTO applicationStudentRewardAsStudentSTCDTO) {
+        super(dataList, context);
+        this.applicationStudentRewardAsStudentSTCDTO = applicationStudentRewardAsStudentSTCDTO;
     }
 
     /**
@@ -82,7 +110,7 @@ public class TeacherApplicationAdapterTest extends YYRecycleViewBaseAdapter<Appl
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //获取老师信息
         TeacherAllInfoDTO teacherAllInfoDTO = getDataList().get(position).getTeacherAllInfoDTO();
         //转换为本类的viewHolder
@@ -99,6 +127,23 @@ public class TeacherApplicationAdapterTest extends YYRecycleViewBaseAdapter<Appl
                 .into(viewHolder.mPhoto);
 
         //TODO 点击头像跳转的注入信息
+        viewHolder.mPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //新建意图跳转到老师信息页面，决定是否接收
+                Intent intent = new Intent(mContext,TeacherInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("parentDTO", applicationStudentRewardAsStudentSTCDTO);
+                bundle.putSerializable("courseDTO", applicationStudentRewardAsStudentSTCDTO.getRewardDTO());
+                //放置单个老师申请的信息
+                bundle.putSerializable("DTO", getDataList().get(position));
+                intent.putExtras( bundle );
+                mContext.startActivity(intent);
+                //FIXME recycleView不能被很好地刷新，只好关闭掉本 activity
+                AppManager.getActivity(OwnerRewardActivity.class).finish();
+                AppManager.getInstance().removeActivity(OwnerRewardActivity.class);
+            }
+        });
     }
 
     /**
@@ -132,6 +177,7 @@ public class TeacherApplicationAdapterTest extends YYRecycleViewBaseAdapter<Appl
         @Override
         public void onClick(View v) {
             //这里可以设置点击事件
+            Toast.makeText(mContext, "点击事件", Toast.LENGTH_SHORT).show();
         }
 
         /**
@@ -144,7 +190,8 @@ public class TeacherApplicationAdapterTest extends YYRecycleViewBaseAdapter<Appl
         @Override
         public boolean onLongClick(View v) {
             //长按点击事件
-            return false;
+            Toast.makeText(mContext, "长按事件", Toast.LENGTH_SHORT).show();
+            return true;
         }
 
 

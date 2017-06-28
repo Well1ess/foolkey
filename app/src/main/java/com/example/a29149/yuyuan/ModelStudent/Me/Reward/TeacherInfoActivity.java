@@ -158,8 +158,7 @@ public class TeacherInfoActivity extends AbstractAppCompatActivity implements Vi
                         //拒绝成功
                         //拒绝成功时，从该课程下面，删去老师的头像
                         //TODO 从Adapter中删除这个申请元素
-                        //FIXME 这里总是出错，服务器也有问题
-                        AdapterManager.getInstance().removeData(TeacherApplicationAdapter.class, applicationRewardWithTeacherSTCDTO );
+                        AdapterManager.getInstance().removeData(TeacherApplicationAdapterTest.class, applicationRewardWithTeacherSTCDTO );
                         finish();
                     }
 
@@ -210,7 +209,7 @@ public class TeacherInfoActivity extends AbstractAppCompatActivity implements Vi
                         //同意申请，就会整个移除这个悬赏item的显示
                         //FIXME 并没有移除，需要在原Activity中将listView与Adapter重新绑定一次
                         if (applicationStudentRewardAsStudentSTCDTO != null){
-                            AdapterManager.getInstance().removeData(RewardApplicationAdapter.class, applicationStudentRewardAsStudentSTCDTO);
+                            AdapterManager.getInstance().removeData(RewardApplicationAdapterTest.class, applicationStudentRewardAsStudentSTCDTO);
                         }
                         //应该是做result处理
                         finish();

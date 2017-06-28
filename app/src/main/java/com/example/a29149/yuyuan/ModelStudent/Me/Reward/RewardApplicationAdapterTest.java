@@ -71,7 +71,7 @@ public class RewardApplicationAdapterTest extends YYBaseAdapter<ApplicationStude
                 applicationRewardWithTeacherSTCDTOList = getDataList().get(position).getApplicationRewardWithTeacherSTCDTOS();
             //定义一个新的Adapter
             final TeacherApplicationAdapterTest teacherApplicationAdapter =
-                    new TeacherApplicationAdapterTest(applicationRewardWithTeacherSTCDTOList, mContext);
+                    new TeacherApplicationAdapterTest(applicationRewardWithTeacherSTCDTOList, mContext, getDataList().get(position));
 
             //TODO 修改为recycleView的步骤，adapter修改为adapter专有的，viewHolder修改，layOutManager做水平
             final RecyclerView gridView = (RecyclerView) convertView.findViewById(R.id.gv_apply_user_head);
@@ -134,4 +134,6 @@ public class RewardApplicationAdapterTest extends YYBaseAdapter<ApplicationStude
     public boolean remove(ApplicationStudentRewardAsStudentSTCDTO data) {
         return super.remove(data);
     }
+
+
 }

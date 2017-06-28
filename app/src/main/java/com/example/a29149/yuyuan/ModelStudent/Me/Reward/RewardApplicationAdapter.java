@@ -26,6 +26,7 @@ import java.util.List;
  * Description:  每个悬赏的填充，但是具体的老师头像的填充，由其他Adapter来做
  * Created by geyao on 2017/6/15.
  */
+@Deprecated
 public class RewardApplicationAdapter extends YYBaseAdapter<ApplicationStudentRewardAsStudentSTCDTO> {
     private static final String TAG = "RewardApplicationAdapte";
 

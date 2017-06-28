@@ -20,7 +20,7 @@ import java.util.List;
  * 此处用来，学生查看老师对其悬赏的申请，一个老师就是一个头像
  * Created by geyao on 2017/6/15.
  */
-
+@Deprecated
 public class TeacherApplicationAdapter extends UserPhotoAdapter<ApplicationRewardWithTeacherSTCDTO> {
 
     /**

@@ -69,7 +69,7 @@ public class RewardAdapter extends YYBaseAdapter<RewardWithStudentSTCDTO> {
         //加载图片
         glide = Glide.with(mContext);
         glide.load(PictureInfoBO.getOnlinePhoto(studentDTO.getUserName()))
-                .error(R.drawable.photo_placeholder1)
+                .placeholder(R.drawable.place_holder_grey)
                 .transform(new GlideCircleTransform(mContext))
                 .into(viewHolder.head);
         //头像设置跳转个人界面的监听器
